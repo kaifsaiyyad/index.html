@@ -61,6 +61,11 @@ font-size:15px;
 background:white;
 }
 
+input:focus,select:focus{
+outline:none;
+border-color:#176b3a;
+}
+
 button{
 width:100%;
 height:48px;
@@ -73,10 +78,36 @@ font-weight:bold;
 margin-top:18px;
 }
 
+button:active{
+transform:scale(.99);
+}
+
 .small{
 font-size:11px;
 color:#777;
 margin-top:5px;
+}
+
+.error{
+display:none;
+background:#ffecec;
+color:#b00020;
+border:1px solid #ffb3b3;
+padding:10px;
+border-radius:8px;
+font-size:13px;
+margin-top:12px;
+}
+
+.success{
+display:none;
+background:#eaf8ee;
+color:#176b3a;
+border:1px solid #a8d8b5;
+padding:10px;
+border-radius:8px;
+font-size:13px;
+margin-top:12px;
 }
 
 .cards{
@@ -194,16 +225,16 @@ page-break-inside:avoid;
 <label>Farmer Photo</label>
 <input type="file" id="photo" accept="image/*">
 
-<label>Farmer Name</label>
+<label>Farmer Name *</label>
 <input type="text" id="name" placeholder="Enter farmer name">
 
-<label>Father / Husband Name</label>
+<label>Father / Husband Name *</label>
 <input type="text" id="father" placeholder="Enter name">
 
 <label>Date of Birth</label>
 <input type="date" id="dob">
 
-<label>Gender</label>
+<label>Gender *</label>
 <select id="gender">
 <option value="">Select Gender</option>
 <option>Male</option>
@@ -211,7 +242,7 @@ page-break-inside:avoid;
 <option>Other</option>
 </select>
 
-<label>Mobile Number</label>
+<label>Mobile Number *</label>
 <input
 id="mobile"
 type="tel"
@@ -220,9 +251,9 @@ maxlength="10"
 placeholder="Enter 10 digit mobile number"
 oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10)"
 >
-<div class="small">Maximum 10 digits</div>
+<div class="small">Exactly 10 digits required</div>
 
-<label>Aadhaar Number</label>
+<label>Aadhaar Number *</label>
 <input
 id="aadhaar"
 type="tel"
@@ -231,9 +262,9 @@ maxlength="12"
 placeholder="Enter 12 digit Aadhaar number"
 oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,12)"
 >
-<div class="small">Only last 4 digits will appear on the card</div>
+<div class="small">12 digits required. Only last 4 digits appear on card.</div>
 
-<label>Farmer ID</label>
+<label>Farmer ID *</label>
 <input
 id="farmerId"
 type="tel"
@@ -242,26 +273,23 @@ maxlength="11"
 placeholder="Enter 11 digit Farmer ID"
 oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,11)"
 >
-<div class="small">Maximum 11 digits</div>
+<div class="small">Exactly 11 digits required</div>
 
-<!-- STATE TEXT BOX -->
-<label>State</label>
+<label>State *</label>
 <input
 id="state"
 type="text"
 placeholder="Enter State"
 >
 
-<!-- DISTRICT TEXT BOX -->
-<label>District</label>
+<label>District *</label>
 <input
 id="district"
 type="text"
 placeholder="Enter District"
 >
 
-<!-- VILLAGE TEXT BOX -->
-<label>Village</label>
+<label>Village *</label>
 <input
 id="village"
 type="text"
@@ -269,10 +297,21 @@ placeholder="Enter Village"
 >
 
 <label>Survey / Gat Number</label>
-<input type="text" id="survey" placeholder="Enter Survey / Gat Number">
+<input
+type="text"
+id="survey"
+placeholder="Enter Survey / Gat Number"
+>
 
 <label>Land Area</label>
-<input type="text" id="area" placeholder="Example: 2.50 Acre">
+<input
+type="text"
+id="area"
+placeholder="Example: 2.50 Acre"
+>
+
+<div id="errorBox" class="error"></div>
+<div id="successBox" class="success"></div>
 
 <button onclick="generateCard()">
 Generate Farmer Card
@@ -393,70 +432,184 @@ Kisan Seva Tools • Personal Farmer Information Card
 
 function generateCard(){
 
+const name =
+document.getElementById("name").value.trim();
+
+const father =
+document.getElementById("father").value.trim();
+
+const gender =
+document.getElementById("gender").value;
+
+const mobile =
+document.getElementById("mobile").value.trim();
+
 const aadhaar =
-document.getElementById("aadhaar").value;
+document.getElementById("aadhaar").value.trim();
+
+const farmerId =
+document.getElementById("farmerId").value.trim();
+
+const state =
+document.getElementById("state").value.trim();
+
+const district =
+document.getElementById("district").value.trim();
+
+const village =
+document.getElementById("village").value.trim();
+
+const errorBox =
+document.getElementById("errorBox");
+
+const successBox =
+document.getElementById("successBox");
+
+errorBox.style.display="none";
+successBox.style.display="none";
+
+/* VALIDATION */
+
+if(name===""){
+errorBox.textContent="❌ Farmer Name भरना जरूरी है.";
+errorBox.style.display="block";
+return;
+}
+
+if(father===""){
+errorBox.textContent="❌ Father / Husband Name भरना जरूरी है.";
+errorBox.style.display="block";
+return;
+}
+
+if(gender===""){
+errorBox.textContent="❌ Gender select करें.";
+errorBox.style.display="block";
+return;
+}
+
+if(!/^[0-9]{10}$/.test(mobile)){
+errorBox.textContent="❌ Mobile Number exactly 10 digits का होना चाहिए.";
+errorBox.style.display="block";
+return;
+}
+
+if(!/^[0-9]{12}$/.test(aadhaar)){
+errorBox.textContent="❌ Aadhaar Number exactly 12 digits का होना चाहिए.";
+errorBox.style.display="block";
+return;
+}
+
+if(!/^[0-9]{11}$/.test(farmerId)){
+errorBox.textContent="❌ Farmer ID exactly 11 digits का होना चाहिए.";
+errorBox.style.display="block";
+return;
+}
+
+if(state===""){
+errorBox.textContent="❌ State भरना जरूरी है.";
+errorBox.style.display="block";
+return;
+}
+
+if(district===""){
+errorBox.textContent="❌ District भरना जरूरी है.";
+errorBox.style.display="block";
+return;
+}
+
+if(village===""){
+errorBox.textContent="❌ Village भरना जरूरी है.";
+errorBox.style.display="block";
+return;
+}
+
+
+/* CARD DATA */
 
 document.getElementById("outName").textContent =
-document.getElementById("name").value || "—";
+name;
 
 document.getElementById("outFather").textContent =
-document.getElementById("father").value || "—";
+father;
 
 document.getElementById("outDob").textContent =
 document.getElementById("dob").value || "—";
 
 document.getElementById("outGender").textContent =
-document.getElementById("gender").value || "—";
+gender;
 
 document.getElementById("outMobile").textContent =
-document.getElementById("mobile").value || "—";
+mobile;
 
 document.getElementById("outFarmerId").textContent =
-document.getElementById("farmerId").value || "—";
+farmerId;
 
 
-/* Aadhaar: only last 4 digits */
-
-if(aadhaar.length === 12){
+/* MASK AADHAAR */
 
 document.getElementById("outAadhaar").textContent =
 "XXXX-XXXX-" + aadhaar.slice(-4);
 
-}else{
 
-document.getElementById("outAadhaar").textContent =
-"XXXX-XXXX-XXXX";
-
-}
-
-
-/* State */
+/* LOCATION */
 
 document.getElementById("outState").textContent =
-document.getElementById("state").value || "—";
-
-
-/* District */
+state;
 
 document.getElementById("outDistrict").textContent =
-document.getElementById("district").value || "—";
-
-
-/* Village */
+district;
 
 document.getElementById("outVillage").textContent =
-document.getElementById("village").value || "—";
+village;
 
 
-/* Land information */
+/* LAND */
 
 document.getElementById("outSurvey").textContent =
-document.getElementById("survey").value || "—";
+document.getElementById("survey").value.trim() || "—";
 
 document.getElementById("outArea").textContent =
-document.getElementById("area").value || "—";
+document.getElementById("area").value.trim() || "—";
+
+
+/* SUCCESS */
+
+successBox.textContent =
+"✅ Farmer Card successfully generated.";
+
+successBox.style.display="block";
 
 }
 
 
-/* Photo */
+/* PHOTO */
+
+document.getElementById("photo").addEventListener(
+"change",
+function(){
+
+const file = this.files[0];
+
+if(file){
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+
+document.getElementById("cardPhoto").src =
+e.target.result;
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+}
+);
+
+</script>
+
+</body>
+</html>
