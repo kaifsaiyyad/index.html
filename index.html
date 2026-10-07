@@ -3,213 +3,178 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Kisan Seva Tools - Farmer Card Maker</title>
+<title>Kisan Seva Tools - Farmer Card</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  font-family:Arial,sans-serif;
-  background:#f3f7f3;
-  color:#222;
+font-family:Arial,sans-serif;
+background:#f2f6f2;
+color:#222;
 }
 
 header{
-  background:#176b3a;
-  color:white;
-  text-align:center;
-  padding:22px 15px;
+background:#176b3a;
+color:white;
+text-align:center;
+padding:18px 12px;
 }
 
-header h1{
-  font-size:27px;
-}
-
-header p{
-  margin-top:6px;
-  font-size:14px;
-}
+header h1{font-size:25px}
+header p{font-size:13px;margin-top:5px}
 
 .container{
-  max-width:900px;
-  margin:auto;
-  padding:20px 15px;
+max-width:650px;
+margin:auto;
+padding:15px;
 }
 
 .box{
-  background:white;
-  padding:20px;
-  border-radius:14px;
-  margin-bottom:20px;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
+background:white;
+padding:18px;
+border-radius:14px;
+margin-bottom:18px;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
 h2{
-  color:#176b3a;
-  margin-bottom:18px;
+color:#176b3a;
+margin-bottom:15px;
+font-size:21px;
 }
 
 label{
-  display:block;
-  font-weight:bold;
-  margin-top:14px;
-  margin-bottom:6px;
+display:block;
+font-weight:bold;
+font-size:14px;
+margin:13px 0 6px;
 }
 
 input,select{
-  width:100%;
-  padding:12px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:15px;
+width:100%;
+height:46px;
+padding:10px 12px;
+border:1px solid #bbb;
+border-radius:8px;
+font-size:15px;
+background:white;
 }
 
 button{
-  border:0;
-  border-radius:8px;
-  padding:13px 18px;
-  font-weight:bold;
-  font-size:15px;
-  cursor:pointer;
+width:100%;
+height:48px;
+border:0;
+border-radius:8px;
+background:#176b3a;
+color:white;
+font-size:16px;
+font-weight:bold;
+margin-top:18px;
 }
 
-.generate{
-  width:100%;
-  margin-top:20px;
-  background:#176b3a;
-  color:white;
+.small{
+font-size:11px;
+color:#777;
+margin-top:5px;
 }
 
 .cards{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:25px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:20px;
 }
 
+/* Aadhaar-card proportion */
 .card{
-  width:360px;
-  min-height:225px;
-  background:white;
-  border:1px solid #ccc;
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 4px 15px rgba(0,0,0,.15);
+width:min(100%,430px);
+aspect-ratio:85.6/53.98;
+background:white;
+border:1px solid #ccc;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 3px 12px rgba(0,0,0,.15);
 }
 
-.card-header{
-  background:#176b3a;
-  color:white;
-  text-align:center;
-  padding:12px;
+.cardHead{
+background:#176b3a;
+color:white;
+text-align:center;
+padding:9px;
 }
 
-.card-header h3{
-  font-size:18px;
-}
+.cardHead h3{font-size:16px}
+.cardHead p{font-size:9px;margin-top:2px}
 
-.card-header p{
-  font-size:10px;
-  margin-top:4px;
-}
+.cardBody{padding:10px}
 
-.card-body{
-  padding:13px;
-}
-
-.front{
-  display:flex;
-  gap:12px;
+.frontRow{
+display:flex;
+gap:10px;
 }
 
 .photo{
-  width:85px;
-  height:105px;
-  object-fit:cover;
-  border:1px solid #aaa;
-  border-radius:6px;
-  background:#eee;
+width:72px;
+height:88px;
+object-fit:cover;
+border:1px solid #aaa;
+border-radius:5px;
+background:#eee;
 }
 
 .info{
-  font-size:11px;
-  line-height:1.7;
+font-size:9px;
+line-height:1.65;
 }
 
-.info b{
-  color:#176b3a;
-}
+.info b{color:#176b3a}
 
 .address{
-  font-size:11px;
-  line-height:1.8;
+font-size:9px;
+line-height:1.65;
 }
 
 table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:10px;
-  font-size:10px;
+width:100%;
+border-collapse:collapse;
+font-size:8px;
+margin-top:7px;
 }
 
 th,td{
-  border:1px solid #aaa;
-  padding:6px 3px;
-  text-align:center;
+border:1px solid #aaa;
+padding:4px 2px;
+text-align:center;
+}
+
+.footer{
+font-size:7px;
+color:#777;
+text-align:center;
+margin-top:5px;
 }
 
 .notice{
-  margin-top:12px;
-  padding:8px;
-  background:#fff8d8;
-  border-radius:6px;
-  font-size:9px;
-  text-align:center;
-  color:#555;
-}
-
-.card-footer{
-  text-align:center;
-  font-size:8px;
-  color:#777;
-  margin-top:10px;
-}
-
-.print{
-  width:100%;
-  background:#176b3a;
-  color:white;
-  margin-top:20px;
-}
-
-@media(max-width:400px){
-  .card{
-    width:100%;
-  }
+font-size:7px;
+color:#777;
+text-align:center;
+margin-top:5px;
 }
 
 @media print{
-  header,.form-box,.print{
-    display:none;
-  }
+header,.formBox,.printBtn{
+display:none!important;
+}
 
-  body{
-    background:white;
-  }
+body{background:white}
 
-  .container{
-    padding:0;
-  }
+.container{padding:0}
 
-  .card{
-    box-shadow:none;
-    page-break-inside:avoid;
-  }
+.card{
+box-shadow:none;
+page-break-inside:avoid;
+}
 }
 </style>
 </head>
@@ -217,15 +182,15 @@ th,td{
 <body>
 
 <header>
-  <h1>🌾 Kisan Seva Tools</h1>
-  <p>Farmer Digital Services & Tools</p>
+<h1>🌾 Kisan Seva Tools</h1>
+<p>Personal Farmer Information Card</p>
 </header>
 
 <div class="container">
 
-<div class="box form-box">
+<div class="box formBox">
 
-<h2>🪪 Farmer Information Card</h2>
+<h2>🪪 Create Farmer Card</h2>
 
 <label>Farmer Photo</label>
 <input type="file" id="photo" accept="image/*">
@@ -248,34 +213,104 @@ th,td{
 </select>
 
 <label>Mobile Number</label>
-<input type="tel" id="mobile" placeholder="Enter mobile number">
+<input
+id="mobile"
+type="tel"
+inputmode="numeric"
+maxlength="10"
+placeholder="Enter 10 digit mobile number"
+oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10)"
+>
+<div class="small">Maximum 10 digits</div>
+
+<label>Aadhaar Number</label>
+<input
+id="aadhaar"
+type="tel"
+inputmode="numeric"
+maxlength="12"
+placeholder="Enter 12 digit Aadhaar number"
+oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,12)"
+>
+<div class="small">Only last 4 digits will appear on the card</div>
 
 <label>Farmer ID</label>
-<input type="text" id="farmerId" placeholder="Enter Farmer ID">
-
-<label>Address</label>
-<input type="text" id="address" placeholder="Enter address">
+<input
+id="farmerId"
+type="tel"
+inputmode="numeric"
+maxlength="11"
+placeholder="Enter 11 digit Farmer ID"
+oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,11)"
+>
+<div class="small">Maximum 11 digits</div>
 
 <label>State</label>
-<input type="text" id="state" placeholder="Enter state">
+<select id="state" onchange="stateChanged()">
+<option value="">Select State / UT</option>
+
+<option>Andhra Pradesh</option>
+<option>Arunachal Pradesh</option>
+<option>Assam</option>
+<option>Bihar</option>
+<option>Chhattisgarh</option>
+<option>Goa</option>
+<option>Gujarat</option>
+<option>Haryana</option>
+<option>Himachal Pradesh</option>
+<option>Jharkhand</option>
+<option>Karnataka</option>
+<option>Kerala</option>
+<option>Madhya Pradesh</option>
+<option>Maharashtra</option>
+<option>Manipur</option>
+<option>Meghalaya</option>
+<option>Mizoram</option>
+<option>Nagaland</option>
+<option>Odisha</option>
+<option>Punjab</option>
+<option>Rajasthan</option>
+<option>Sikkim</option>
+<option>Tamil Nadu</option>
+<option>Telangana</option>
+<option>Tripura</option>
+<option>Uttar Pradesh</option>
+<option>Uttarakhand</option>
+<option>West Bengal</option>
+
+<option>Andaman and Nicobar Islands</option>
+<option>Chandigarh</option>
+<option>Dadra and Nagar Haveli and Daman and Diu</option>
+<option>Delhi</option>
+<option>Jammu and Kashmir</option>
+<option>Ladakh</option>
+<option>Lakshadweep</option>
+<option>Puducherry</option>
+
+</select>
 
 <label>District</label>
-<input type="text" id="district" placeholder="Enter district">
+<select id="district" onchange="districtChanged()" disabled>
+<option value="">First select State</option>
+</select>
 
 <label>Village</label>
-<input type="text" id="village" placeholder="Enter village">
+<select id="village" disabled>
+<option value="">First select District</option>
+</select>
 
 <label>Survey / Gat Number</label>
-<input type="text" id="survey" placeholder="Enter survey / gat number">
+<input type="text" id="survey" placeholder="Enter Survey / Gat Number">
 
 <label>Land Area</label>
 <input type="text" id="area" placeholder="Example: 2.50 Acre">
 
-<button class="generate" onclick="generateCard()">
+<button onclick="generateCard()">
 Generate Farmer Card
 </button>
 
 </div>
+
 
 <div class="box">
 
@@ -283,23 +318,20 @@ Generate Farmer Card
 
 <div class="cards">
 
-<!-- FRONT CARD -->
+<!-- FRONT -->
 
 <div class="card">
 
-<div class="card-header">
+<div class="cardHead">
 <h3>🌾 FARMER INFORMATION CARD</h3>
 <p>PERSONAL USE</p>
 </div>
 
-<div class="card-body">
+<div class="cardBody">
 
-<div class="front">
+<div class="frontRow">
 
-<img id="cardPhoto"
-class="photo"
-src=""
-alt="Photo">
+<img id="cardPhoto" class="photo" alt="Photo">
 
 <div class="info">
 
@@ -313,6 +345,8 @@ alt="Photo">
 
 <div><b>Mobile:</b> <span id="outMobile">—</span></div>
 
+<div><b>Aadhaar:</b> <span id="outAadhaar">XXXX-XXXX-XXXX</span></div>
+
 <div><b>Farmer ID:</b> <span id="outFarmerId">—</span></div>
 
 </div>
@@ -323,7 +357,7 @@ alt="Photo">
 Personal-use information card. Not a Government-issued ID.
 </div>
 
-<div class="card-footer">
+<div class="footer">
 Kisan Seva Tools
 </div>
 
@@ -332,20 +366,18 @@ Kisan Seva Tools
 </div>
 
 
-<!-- BACK CARD -->
+<!-- BACK -->
 
 <div class="card">
 
-<div class="card-header">
+<div class="cardHead">
 <h3>🌾 FARMER INFORMATION CARD</h3>
 <p>ADDRESS & LAND INFORMATION</p>
 </div>
 
-<div class="card-body">
+<div class="cardBody">
 
 <div class="address">
-
-<div><b>Address:</b> <span id="outAddress">—</span></div>
 
 <div><b>State:</b> <span id="outState">—</span></div>
 
@@ -369,13 +401,8 @@ Kisan Seva Tools
 
 </table>
 
-<div class="notice">
-This card is for personal information use only.
-It is not issued, verified or authorized by any Government department.
-</div>
-
-<div class="card-footer">
-Kisan Seva Tools
+<div class="footer">
+Kisan Seva Tools • Personal Farmer Information Card
 </div>
 
 </div>
@@ -384,7 +411,7 @@ Kisan Seva Tools
 
 </div>
 
-<button class="print" onclick="window.print()">
+<button class="printBtn" onclick="window.print()">
 🖨️ Print / Save as PDF
 </button>
 
@@ -392,44 +419,133 @@ Kisan Seva Tools
 
 </div>
 
+
 <script>
+
+/* Maharashtra district list for immediate use.
+   Full India district/village data should be connected
+   through the LGD data source rather than hard-coded. */
+
+const districts = {
+
+"Maharashtra":[
+"Ahmednagar","Akola","Amravati","Aurangabad",
+"Beed","Bhandara","Buldhana","Chandrapur",
+"Dhule","Gadchiroli","Gondia","Hingoli",
+"Jalgaon","Jalna","Kolhapur","Latur",
+"Mumbai City","Mumbai Suburban","Nagpur",
+"Nanded","Nandurbar","Nashik","Osmanabad",
+"Palghar","Parbhani","Pune","Raigad",
+"Ratnagiri","Sangli","Satara","Sindhudurg",
+"Solapur","Thane","Wardha","Washim","Yavatmal"
+]
+
+};
+
+function stateChanged(){
+
+const state=document.getElementById("state").value;
+const district=document.getElementById("district");
+const village=document.getElementById("village");
+
+district.innerHTML='<option value="">Select District</option>';
+village.innerHTML='<option value="">First select District</option>';
+
+district.disabled=true;
+village.disabled=true;
+
+if(districts[state]){
+
+districts[state].forEach(function(d){
+
+const option=document.createElement("option");
+
+option.value=d;
+option.textContent=d;
+
+district.appendChild(option);
+
+});
+
+district.disabled=false;
+}
+
+}
+
+function districtChanged(){
+
+const district=document.getElementById("district").value;
+const village=document.getElementById("village");
+
+village.innerHTML='<option value="">Select Village</option>';
+
+if(!district){
+village.disabled=true;
+return;
+}
+
+/*
+Village data is intentionally not fabricated.
+When LGD/API data is connected, villages for the
+selected district will be loaded here.
+*/
+
+const option=document.createElement("option");
+option.textContent="Village data connection required";
+option.disabled=true;
+village.appendChild(option);
+
+village.disabled=false;
+
+}
 
 function generateCard(){
 
-document.getElementById("outName").textContent =
+const aadhaar=document.getElementById("aadhaar").value;
+
+document.getElementById("outName").textContent=
 document.getElementById("name").value || "—";
 
-document.getElementById("outFather").textContent =
+document.getElementById("outFather").textContent=
 document.getElementById("father").value || "—";
 
-document.getElementById("outDob").textContent =
+document.getElementById("outDob").textContent=
 document.getElementById("dob").value || "—";
 
-document.getElementById("outGender").textContent =
+document.getElementById("outGender").textContent=
 document.getElementById("gender").value || "—";
 
-document.getElementById("outMobile").textContent =
+document.getElementById("outMobile").textContent=
 document.getElementById("mobile").value || "—";
 
-document.getElementById("outFarmerId").textContent =
+document.getElementById("outFarmerId").textContent=
 document.getElementById("farmerId").value || "—";
 
-document.getElementById("outAddress").textContent =
-document.getElementById("address").value || "—";
+if(aadhaar.length===12){
 
-document.getElementById("outState").textContent =
+document.getElementById("outAadhaar").textContent=
+"XXXX-XXXX-"+aadhaar.slice(-4);
+
+}else{
+
+document.getElementById("outAadhaar").textContent=
+"XXXX-XXXX-XXXX";
+
+}
+
+document.getElementById("outState").textContent=
 document.getElementById("state").value || "—";
 
-document.getElementById("outDistrict").textContent =
+document.getElementById("outDistrict").textContent=
 document.getElementById("district").value || "—";
 
-document.getElementById("outVillage").textContent =
+document.getElementById("outVillage").textContent=
 document.getElementById("village").value || "—";
 
-document.getElementById("outSurvey").textContent =
+document.getElementById("outSurvey").textContent=
 document.getElementById("survey").value || "—";
 
-document.getElementById("outArea").textContent =
+document.getElementById("outArea").textContent=
 document.getElementById("area").value || "—";
 
 }
