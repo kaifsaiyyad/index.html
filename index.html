@@ -10,458 +10,671 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+}
 
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#edf3ee;
-color:#222;
-padding:20px;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#edf3ee;
+  color:#222;
+  padding:20px;
 }
 
 .container{
-max-width:1050px;
-margin:auto;
+  max-width:1050px;
+  margin:auto;
 }
 
 h1{
-text-align:center;
-color:#176b35;
-margin:5px 0;
+  text-align:center;
+  margin:4px 0;
+  color:#126b35;
+  font-size:30px;
 }
 
 .subtitle{
-text-align:center;
-color:#666;
-margin-bottom:20px;
+  text-align:center;
+  color:#666;
+  margin-bottom:20px;
 }
 
 .form{
-background:#fff;
-padding:20px;
-border-radius:14px;
-box-shadow:0 3px 15px #0002;
+  background:#fff;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 4px 18px rgba(0,0,0,.10);
 }
 
 .grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
 .field{
-display:flex;
-flex-direction:column;
+  display:flex;
+  flex-direction:column;
 }
 
 .field label{
-font-weight:bold;
-margin-bottom:5px;
+  font-weight:bold;
+  margin-bottom:5px;
 }
 
 .field input,
 .field select{
-padding:10px;
-border:1px solid #bbb;
-border-radius:7px;
-font-size:15px;
+  width:100%;
+  padding:10px;
+  border:1px solid #bbb;
+  border-radius:8px;
+  font-size:15px;
+  background:#fff;
 }
 
 .designs{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin:18px 0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:18px 0;
 }
 
 button{
-border:0;
-border-radius:8px;
-padding:11px 16px;
-font-weight:bold;
-cursor:pointer;
+  border:0;
+  border-radius:8px;
+  padding:11px 16px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.green{background:#23743c;color:white}
-.leaf{background:#559b5b;color:white}
-.blue{background:#2676b5;color:white}
-.gold{background:#b48a29;color:white}
+.green{
+  background:#23743c;
+  color:#fff;
+}
+
+.leaf{
+  background:#579d5d;
+  color:#fff;
+}
+
+.blue{
+  background:#2678b7;
+  color:#fff;
+}
+
+.gold{
+  background:#b4892b;
+  color:#fff;
+}
 
 .actions{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
 }
 
-.generate{background:#176b35;color:white}
-.pdf{background:#c62828;color:white}
-.print{background:#333;color:white}
+.generate{
+  background:#126b35;
+  color:#fff;
+}
+
+.pdf{
+  background:#c62828;
+  color:#fff;
+}
+
+.print{
+  background:#333;
+  color:#fff;
+}
 
 .message{
-display:none;
-padding:10px;
-margin:12px 0;
-border-radius:7px;
+  display:none;
+  padding:10px;
+  margin:12px 0;
+  border-radius:7px;
+  font-weight:bold;
 }
 
 .ok{
-display:block;
-background:#dff5e4;
-color:#146b2d;
+  display:block;
+  background:#dff5e4;
+  color:#146b2d;
 }
 
 .err{
-display:block;
-background:#ffe0e0;
-color:#a00000;
+  display:block;
+  background:#ffe0e0;
+  color:#a00000;
 }
 
-/* =========================
+
+/* =========================================================
    A4 SHEET
-========================= */
+========================================================= */
 
 #a4{
-width:210mm;
-min-height:297mm;
-background:white;
-margin:30px auto;
-padding:18mm;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:12mm;
+  width:210mm;
+  min-height:297mm;
+  background:#fff;
+  margin:30px auto;
+  padding:18mm;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14mm;
+  box-shadow:0 4px 20px rgba(0,0,0,.12);
 }
 
-/* =========================
-   SMALL REAL CARD
-========================= */
+
+/* =========================================================
+   STANDARD ID CARD
+========================================================= */
 
 .card{
-width:86mm;
-height:54mm;
-position:relative;
-overflow:hidden;
-flex:none;
-border-radius:5mm;
-background:linear-gradient(135deg,#ffffff,#f4faf5);
-border:1mm solid #176b35;
-box-shadow:0 2mm 5mm #0003;
+  width:85.6mm;
+  height:54mm;
+  position:relative;
+  overflow:hidden;
+  flex:none;
+  border-radius:4.5mm;
+  background:
+    linear-gradient(135deg,#ffffff 0%,#f4faf5 55%,#eaf5ec 100%);
+  border:0.8mm solid #126b35;
+  box-shadow:0 2mm 5mm rgba(0,0,0,.20);
 }
 
+
+/* Outer decorative frame */
 .card:before{
-content:"";
-position:absolute;
-inset:2mm;
-border:0.45mm solid #70a97d;
-border-radius:3.5mm;
-pointer-events:none;
+  content:"";
+  position:absolute;
+  inset:1.7mm;
+  border:0.35mm solid #78a982;
+  border-radius:3.1mm;
+  pointer-events:none;
+  z-index:1;
 }
 
+/* Decorative circle */
 .card:after{
-content:"";
-position:absolute;
-width:32mm;
-height:32mm;
-right:-12mm;
-top:-12mm;
-border-radius:50%;
-background:#176b3512;
-pointer-events:none;
+  content:"";
+  position:absolute;
+  width:34mm;
+  height:34mm;
+  right:-15mm;
+  top:-15mm;
+  border-radius:50%;
+  background:rgba(18,107,53,.07);
+  border:1mm solid rgba(18,107,53,.06);
+  pointer-events:none;
+  z-index:0;
 }
 
-/* =========================
-   CARD TITLE
-========================= */
+
+/* =========================================================
+   TOP DECORATIVE STRIP
+========================================================= */
+
+.topStrip{
+  position:relative;
+  z-index:3;
+  height:7.2mm;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5mm;
+  background:linear-gradient(90deg,#126b35,#2a8b50);
+  color:#fff;
+  font-size:5.4px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.topStrip span:last-child{
+  opacity:.9;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
 
 .title{
-position:relative;
-z-index:2;
-text-align:center;
-padding-top:4mm;
+  position:relative;
+  z-index:3;
+  text-align:center;
+  padding-top:2mm;
 }
 
 .title h2{
-margin:0;
-font-size:14px;
-letter-spacing:1px;
-color:#176b35;
+  margin:0;
+  color:#126b35;
+  font-size:13px;
+  line-height:1;
+  letter-spacing:1px;
+  font-weight:900;
 }
 
 .title small{
-display:block;
-margin-top:1mm;
-font-size:6.5px;
-letter-spacing:2px;
-font-weight:bold;
-color:#777;
+  display:block;
+  margin-top:1mm;
+  color:#666;
+  font-size:5.8px;
+  letter-spacing:2px;
+  font-weight:bold;
 }
 
-/* =========================
+
+/* =========================================================
    FRONT
-========================= */
+========================================================= */
 
 .frontbody{
-position:relative;
-z-index:2;
-display:flex;
-height:40mm;
-padding:4mm 6mm;
+  position:relative;
+  z-index:3;
+  display:flex;
+  height:36mm;
+  padding:3.2mm 5mm 2mm;
 }
 
 .photoBox{
-width:27mm;
-display:flex;
-align-items:center;
-justify-content:center;
+  width:23mm;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding-top:1mm;
 }
 
 .photo{
-width:21mm;
-height:27mm;
-object-fit:cover;
-border-radius:2mm;
-border:0.7mm solid #176b35;
-background:#eee;
+  width:20mm;
+  height:25mm;
+  object-fit:cover;
+  border-radius:2mm;
+  border:0.65mm solid #126b35;
+  background:#eeeeee;
+  display:block;
 }
 
 .details{
-padding-left:4mm;
-flex:1;
-min-width:0;
+  flex:1;
+  min-width:0;
+  padding-left:3.5mm;
 }
 
 .row{
-font-size:7.5px;
-margin:2.1mm 0;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
+  font-size:7px;
+  line-height:1.1;
+  margin:1.8mm 0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .row b{
-color:#176b35;
+  color:#126b35;
 }
 
 .farmerID{
-display:inline-block;
-background:#176b35;
-color:white;
-font-size:8.5px;
-font-weight:bold;
-padding:1.7mm 2.5mm;
-border-radius:1.8mm;
-margin-top:1mm;
-letter-spacing:.3px;
+  display:inline-block;
+  margin-top:0.7mm;
+  padding:1.5mm 2.4mm;
+  border-radius:1.6mm;
+  background:#126b35;
+  color:#fff;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.4px;
 }
 
 .note{
-font-size:4.7px;
-color:#777;
-margin-top:1.5mm;
+  margin-top:1.4mm;
+  font-size:4.6px;
+  color:#777;
+  font-weight:bold;
 }
 
-/* =========================
+
+/* =========================================================
    BACK
-========================= */
+========================================================= */
 
 .backbody{
-position:relative;
-z-index:2;
-display:flex;
-height:40mm;
-padding:4mm 6mm;
+  position:relative;
+  z-index:3;
+  display:flex;
+  height:36mm;
+  padding:3.2mm 5mm 2mm;
 }
 
 .backInfo{
-flex:1;
-min-width:0;
-padding-right:3mm;
+  flex:1;
+  min-width:0;
+  padding-right:3mm;
 }
 
 .backInfo h3{
-color:#176b35;
-margin:0 0 3mm;
-font-size:9px;
+  margin:0 0 2.3mm;
+  font-size:8.6px;
+  color:#126b35;
 }
 
 .info{
-font-size:7.2px;
-margin:2mm 0;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
+  margin:1.5mm 0;
+  font-size:6.8px;
+  line-height:1.05;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .info b{
-color:#176b35;
+  color:#126b35;
 }
 
-/* =========================
-   QR - RIGHT SIDE
-========================= */
+
+/* =========================================================
+   QR RIGHT SIDE
+========================================================= */
 
 .qrArea{
-width:27mm;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-flex:none;
+  width:26mm;
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  flex-direction:column;
+  padding-top:0.5mm;
+}
+
+.qrLabel{
+  color:#126b35;
+  font-size:5.5px;
+  font-weight:900;
+  letter-spacing:.6px;
+  margin-bottom:1mm;
 }
 
 .qrFrame{
-width:24mm;
-height:24mm;
-background:#fff;
-border:0.7mm solid #176b35;
-border-radius:2mm;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:1mm;
+  width:23.5mm;
+  height:23.5mm;
+  background:#fff;
+  border:0.65mm solid #126b35;
+  border-radius:2mm;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1mm;
+  box-shadow:0 .5mm 1mm rgba(0,0,0,.08);
 }
 
 #qrcode{
-width:20.5mm;
-height:20.5mm;
-display:flex;
-align-items:center;
-justify-content:center;
+  width:20.2mm;
+  height:20.2mm;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 #qrcode img,
 #qrcode canvas{
-width:20.5mm!important;
-height:20.5mm!important;
-display:block;
+  display:block !important;
+  width:20.2mm !important;
+  height:20.2mm !important;
 }
 
-.qrText{
-font-weight:bold;
-color:#176b35;
-margin-top:1mm;
-font-size:5.5px;
+.qrBottom{
+  margin-top:1mm;
+  font-size:4.7px;
+  color:#777;
+  text-align:center;
+  font-weight:bold;
 }
+
+
+/* =========================================================
+   DISCLAIMER
+========================================================= */
 
 .disclaimer{
-position:absolute;
-z-index:3;
-bottom:1.8mm;
-left:2mm;
-right:2mm;
-text-align:center;
-font-size:4.2px;
-color:#777;
+  position:absolute;
+  z-index:4;
+  left:4mm;
+  right:4mm;
+  bottom:1.6mm;
+  text-align:center;
+  font-size:4px;
+  color:#777;
+  font-weight:bold;
 }
 
-/* =========================
-   DESIGNS
-========================= */
+
+/* =========================================================
+   SMALL DECORATIVE CORNERS
+========================================================= */
+
+.corner{
+  position:absolute;
+  width:7mm;
+  height:7mm;
+  z-index:2;
+  pointer-events:none;
+}
+
+.corner.tl{
+  left:2.8mm;
+  top:9mm;
+  border-left:.8mm solid #126b35;
+  border-top:.8mm solid #126b35;
+  border-radius:1.5mm 0 0 0;
+}
+
+.corner.tr{
+  right:2.8mm;
+  top:9mm;
+  border-right:.8mm solid #126b35;
+  border-top:.8mm solid #126b35;
+  border-radius:0 1.5mm 0 0;
+}
+
+.corner.bl{
+  left:2.8mm;
+  bottom:5.2mm;
+  border-left:.8mm solid #126b35;
+  border-bottom:.8mm solid #126b35;
+  border-radius:0 0 0 1.5mm;
+}
+
+.corner.br{
+  right:2.8mm;
+  bottom:5.2mm;
+  border-right:.8mm solid #126b35;
+  border-bottom:.8mm solid #126b35;
+  border-radius:0 0 1.5mm 0;
+}
+
+
+/* =========================================================
+   THEMES
+========================================================= */
 
 .theme-leaf{
-border-color:#559b5b;
+  border-color:#579d5d;
 }
 
-.theme-leaf:before{
-border-color:#8abb8e;
+.theme-leaf .topStrip{
+  background:linear-gradient(90deg,#579d5d,#7dbb80);
 }
 
 .theme-leaf .title h2,
 .theme-leaf .row b,
 .theme-leaf .info b,
 .theme-leaf .backInfo h3,
-.theme-leaf .qrText{
-color:#559b5b;
+.theme-leaf .qrLabel{
+  color:#579d5d;
 }
 
 .theme-leaf .farmerID{
-background:#559b5b;
+  background:#579d5d;
 }
+
+.theme-leaf .photo{
+  border-color:#579d5d;
+}
+
+.theme-leaf .qrFrame{
+  border-color:#579d5d;
+}
+
+.theme-leaf .corner{
+  border-color:#579d5d;
+}
+
 
 .theme-blue{
-border-color:#2676b5;
+  border-color:#2678b7;
+  background:
+    linear-gradient(135deg,#fff 0%,#f1f7fc 55%,#e7f1fa 100%);
 }
 
-.theme-blue:before{
-border-color:#82b6dd;
+.theme-blue .topStrip{
+  background:linear-gradient(90deg,#2678b7,#4e91c2);
 }
 
 .theme-blue .title h2,
 .theme-blue .row b,
 .theme-blue .info b,
 .theme-blue .backInfo h3,
-.theme-blue .qrText{
-color:#2676b5;
+.theme-blue .qrLabel{
+  color:#2678b7;
 }
 
 .theme-blue .farmerID{
-background:#2676b5;
+  background:#2678b7;
 }
+
+.theme-blue .photo{
+  border-color:#2678b7;
+}
+
+.theme-blue .qrFrame{
+  border-color:#2678b7;
+}
+
+.theme-blue .corner{
+  border-color:#2678b7;
+}
+
 
 .theme-gold{
-border-color:#b48a29;
+  border-color:#b4892b;
+  background:
+    linear-gradient(135deg,#fff,#fbf8ef 55%,#f6efdb);
 }
 
-.theme-gold:before{
-border-color:#d6bb72;
+.theme-gold .topStrip{
+  background:linear-gradient(90deg,#9c761d,#c59b3b);
 }
 
 .theme-gold .title h2,
 .theme-gold .row b,
 .theme-gold .info b,
 .theme-gold .backInfo h3,
-.theme-gold .qrText{
-color:#9b741b;
+.theme-gold .qrLabel{
+  color:#9c761d;
 }
 
 .theme-gold .farmerID{
-background:#b48a29;
+  background:#b4892b;
 }
 
-/* =========================
+.theme-gold .photo{
+  border-color:#b4892b;
+}
+
+.theme-gold .qrFrame{
+  border-color:#b4892b;
+}
+
+.theme-gold .corner{
+  border-color:#b4892b;
+}
+
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
-@media(max-width:600px){
+@media(max-width:700px){
 
-body{
-padding:10px;
+  body{
+    padding:10px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  #a4{
+    width:210mm;
+    min-width:210mm;
+    transform:none;
+    transform-origin:top left;
+    margin-left:0;
+    margin-right:0;
+  }
+
+  .previewWrap{
+    width:100%;
+    overflow-x:auto;
+    padding-bottom:10px;
+  }
 }
 
-.grid{
-grid-template-columns:1fr;
-}
 
-#a4{
-transform:scale(.75);
-transform-origin:top center;
-margin-bottom:-70mm;
-}
-}
-
-/* =========================
+/* =========================================================
    PRINT
-========================= */
+========================================================= */
+
+@page{
+  size:A4 portrait;
+  margin:0;
+}
 
 @media print{
 
-body{
-padding:0;
-background:white;
-}
+  body{
+    margin:0;
+    padding:0;
+    background:#fff;
+  }
 
-.form,
-h1,
-.subtitle{
-display:none!important;
-}
+  .form,
+  h1,
+  .subtitle{
+    display:none !important;
+  }
 
-#a4{
-margin:0;
-box-shadow:none;
-}
+  .previewWrap{
+    width:auto;
+    overflow:visible;
+    padding:0;
+  }
 
+  #a4{
+    width:210mm;
+    min-width:210mm;
+    min-height:297mm;
+    margin:0;
+    padding:18mm;
+    box-shadow:none;
+    background:#fff;
+  }
 }
 </style>
 </head>
@@ -472,10 +685,6 @@ box-shadow:none;
 
 <h1>Kisan Seva Tools</h1>
 <div class="subtitle">Farmer Personal ID Card Generator</div>
-
-<!-- =========================
-     FORM
-========================= -->
 
 <div class="form">
 
@@ -581,15 +790,25 @@ box-shadow:none;
 </div>
 
 
-<!-- =========================
-     A4 + CARDS
-========================= -->
+<div class="previewWrap">
 
 <div id="a4">
 
-<!-- FRONT CARD -->
+<!-- =====================================================
+     FRONT CARD
+===================================================== -->
 
 <div id="front" class="card">
+
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
+
+<div class="topStrip">
+<span>FARMER SERVICES</span>
+<span>PERSONAL USE</span>
+</div>
 
 <div class="title">
 <h2>FARMER ID CARD</h2>
@@ -629,30 +848,41 @@ FARMER ID: <span id="cID">—</span>
 </div>
 
 <div class="note">
-Personal-use card • Not a Government ID
+Personal-use identification card
+</div>
+
+</div>
 </div>
 
 </div>
 
-</div>
 
-</div>
-
-
-<!-- BACK CARD -->
+<!-- =====================================================
+     BACK CARD
+===================================================== -->
 
 <div id="back" class="card">
 
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
+
+<div class="topStrip">
+<span>FARMER INFORMATION</span>
+<span>KISAN SEVA TOOLS</span>
+</div>
+
 <div class="title">
 <h2>FARMER INFORMATION</h2>
-<small>KISAN SEVA TOOLS</small>
+<small>LAND &amp; FARM DETAILS</small>
 </div>
 
 <div class="backbody">
 
 <div class="backInfo">
 
-<h3>Farmer & Land Details</h3>
+<h3>Farmer &amp; Land Details</h3>
 
 <div class="info">
 <b>State:</b> <span id="cState">—</span>
@@ -680,16 +910,16 @@ Personal-use card • Not a Government ID
 
 </div>
 
-<!-- QR RIGHT SIDE -->
-
 <div class="qrArea">
+
+<div class="qrLabel">SCAN FARMER ID</div>
 
 <div class="qrFrame">
 <div id="qrcode"></div>
 </div>
 
-<div class="qrText">
-SCAN FARMER ID
+<div class="qrBottom">
+Farmer ID QR
 </div>
 
 </div>
@@ -712,216 +942,225 @@ Personal-use card created by Kisan Seva Tools. Not issued by any government depa
 let currentTheme="classic";
 
 
-/* =========================
-   DESIGN
-========================= */
+/* =====================================================
+   THEME
+===================================================== */
 
 function setTheme(theme){
 
-currentTheme=theme;
+  currentTheme=theme;
 
-document.getElementById("front").className="card";
-document.getElementById("back").className="card";
+  const front=document.getElementById("front");
+  const back=document.getElementById("back");
 
-if(theme==="leaf"){
-document.getElementById("front").classList.add("theme-leaf");
-document.getElementById("back").classList.add("theme-leaf");
+  front.className="card";
+  back.className="card";
+
+  if(theme==="leaf"){
+    front.classList.add("theme-leaf");
+    back.classList.add("theme-leaf");
+  }
+
+  if(theme==="blue"){
+    front.classList.add("theme-blue");
+    back.classList.add("theme-blue");
+  }
+
+  if(theme==="gold"){
+    front.classList.add("theme-gold");
+    back.classList.add("theme-gold");
+  }
 }
 
-if(theme==="blue"){
-document.getElementById("front").classList.add("theme-blue");
-document.getElementById("back").classList.add("theme-blue");
-}
 
-if(theme==="gold"){
-document.getElementById("front").classList.add("theme-gold");
-document.getElementById("back").classList.add("theme-gold");
-}
-
-}
-
-
-/* =========================
+/* =====================================================
    MESSAGE
-========================= */
+===================================================== */
 
 function showMessage(text,error=false){
 
-const msg=document.getElementById("msg");
+  const msg=document.getElementById("msg");
 
-msg.textContent=text;
-msg.className="message "+(error?"err":"ok");
-
+  msg.textContent=text;
+  msg.className="message "+(error ? "err":"ok");
 }
 
 
-/* =========================
+/* =====================================================
    GENERATE CARD
-========================= */
+===================================================== */
 
 function generateCard(){
 
-const name=document.getElementById("name").value.trim();
-const father=document.getElementById("father").value.trim();
-const mobile=document.getElementById("mobile").value.trim();
-const aadhaar=document.getElementById("aadhaar").value.trim();
-const farmerId=document.getElementById("farmerId").value.trim();
+  const name=document.getElementById("name").value.trim();
+  const father=document.getElementById("father").value.trim();
+  const mobile=document.getElementById("mobile").value.trim();
+  const aadhaar=document.getElementById("aadhaar").value.trim();
+  const farmerId=document.getElementById("farmerId").value.trim();
 
-if(!name){
-showMessage("Please enter Farmer Name",true);
-return;
+  if(!name){
+    showMessage("Please enter Farmer Name",true);
+    return;
+  }
+
+  if(!father){
+    showMessage("Please enter Father / Husband Name",true);
+    return;
+  }
+
+  if(!/^\d{10}$/.test(mobile)){
+    showMessage("Mobile number must be exactly 10 digits",true);
+    return;
+  }
+
+  if(!/^\d{12}$/.test(aadhaar)){
+    showMessage("Aadhaar number must be exactly 12 digits",true);
+    return;
+  }
+
+  if(!/^\d{11}$/.test(farmerId)){
+    showMessage("Farmer ID must be exactly 11 digits",true);
+    return;
+  }
+
+
+  /* FRONT */
+
+  document.getElementById("cName").textContent=name;
+
+  document.getElementById("cFather").textContent=father;
+
+  document.getElementById("cDob").textContent=
+    document.getElementById("dob").value || "—";
+
+  document.getElementById("cGender").textContent=
+    document.getElementById("gender").value || "—";
+
+  document.getElementById("cMobile").textContent=mobile;
+
+  document.getElementById("cID").textContent=farmerId;
+
+
+  /* BACK */
+
+  document.getElementById("cState").textContent=
+    document.getElementById("state").value || "—";
+
+  document.getElementById("cDistrict").textContent=
+    document.getElementById("district").value || "—";
+
+  document.getElementById("cVillage").textContent=
+    document.getElementById("village").value || "—";
+
+  document.getElementById("cSurvey").textContent=
+    document.getElementById("survey").value || "—";
+
+  document.getElementById("cLand").textContent=
+    document.getElementById("land").value || "—";
+
+  document.getElementById("cAadhaar").textContent=
+    aadhaar.slice(-4);
+
+
+  /* PHOTO */
+
+  const file=document.getElementById("photo").files[0];
+
+  if(file){
+
+    const reader=new FileReader();
+
+    reader.onload=function(e){
+      document.getElementById("cardPhoto").src=e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+
+  }else{
+
+    document.getElementById("cardPhoto").src="";
+  }
+
+
+  /* QR */
+
+  const qr=document.getElementById("qrcode");
+
+  qr.innerHTML="";
+
+  const village=
+    document.getElementById("village").value.trim() || "—";
+
+  const qrText=
+    "Kisan Seva Tools\n"+
+    "Personal Farmer ID Card\n"+
+    "Farmer ID: "+farmerId+"\n"+
+    "Name: "+name+"\n"+
+    "Village: "+village;
+
+  new QRCode(qr,{
+    text:qrText,
+    width:150,
+    height:150,
+    correctLevel:QRCode.CorrectLevel.M
+  });
+
+
+  showMessage("Farmer ID Card generated successfully.");
 }
 
-if(!father){
-showMessage("Please enter Father / Husband Name",true);
-return;
-}
 
-if(!/^\d{10}$/.test(mobile)){
-showMessage("Mobile number must be exactly 10 digits",true);
-return;
-}
-
-if(!/^\d{12}$/.test(aadhaar)){
-showMessage("Aadhaar number must be exactly 12 digits",true);
-return;
-}
-
-if(!/^\d{11}$/.test(farmerId)){
-showMessage("Farmer ID must be exactly 11 digits",true);
-return;
-}
-
-
-/* FRONT */
-
-document.getElementById("cName").textContent=name;
-document.getElementById("cFather").textContent=father;
-
-document.getElementById("cDob").textContent=
-document.getElementById("dob").value || "—";
-
-document.getElementById("cGender").textContent=
-document.getElementById("gender").value || "—";
-
-document.getElementById("cMobile").textContent=mobile;
-document.getElementById("cID").textContent=farmerId;
-
-
-/* BACK */
-
-document.getElementById("cState").textContent=
-document.getElementById("state").value || "—";
-
-document.getElementById("cDistrict").textContent=
-document.getElementById("district").value || "—";
-
-document.getElementById("cVillage").textContent=
-document.getElementById("village").value || "—";
-
-document.getElementById("cSurvey").textContent=
-document.getElementById("survey").value || "—";
-
-document.getElementById("cLand").textContent=
-document.getElementById("land").value || "—";
-
-document.getElementById("cAadhaar").textContent=
-aadhaar.slice(-4);
-
-
-/* PHOTO */
-
-const file=document.getElementById("photo").files[0];
-
-if(file){
-
-const reader=new FileReader();
-
-reader.onload=function(e){
-
-document.getElementById("cardPhoto").src=e.target.result;
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-
-/* QR */
-
-const qr=document.getElementById("qrcode");
-
-qr.innerHTML="";
-
-const qrText=
-"Kisan Seva Tools\n"+
-"Personal Farmer ID Card\n"+
-"Farmer ID: "+farmerId+"\n"+
-"Name: "+name+"\n"+
-"Village: "+
-(document.getElementById("village").value || "—");
-
-new QRCode(qr,{
-text:qrText,
-width:150,
-height:150,
-correctLevel:QRCode.CorrectLevel.M
-});
-
-
-showMessage("Farmer ID Card generated successfully.");
-
-}
-
-
-/* =========================
+/* =====================================================
    PDF
-========================= */
+===================================================== */
 
 async function downloadPDF(){
 
-try{
+  try{
 
-showMessage("Creating A4 PDF...");
+    showMessage("Creating A4 PDF...");
 
-const element=document.getElementById("a4");
+    const element=document.getElementById("a4");
 
-const canvas=await html2canvas(element,{
-scale:2,
-backgroundColor:"#ffffff",
-useCORS:true
-});
+    const canvas=await html2canvas(element,{
+      scale:3,
+      backgroundColor:"#ffffff",
+      useCORS:true,
+      logging:false
+    });
 
-const image=canvas.toDataURL("image/jpeg",0.95);
+    const image=canvas.toDataURL("image/jpeg",0.96);
 
-const {jsPDF}=window.jspdf;
+    const {jsPDF}=window.jspdf;
 
-const pdf=new jsPDF({
-orientation:"portrait",
-unit:"mm",
-format:"a4"
-});
+    const pdf=new jsPDF({
+      orientation:"portrait",
+      unit:"mm",
+      format:"a4"
+    });
 
-pdf.addImage(
-image,
-"JPEG",
-0,
-0,
-210,
-297
-);
+    pdf.addImage(
+      image,
+      "JPEG",
+      0,
+      0,
+      210,
+      297
+    );
 
-pdf.save("Kisan-Seva-Farmer-ID-Card.pdf");
+    pdf.save("Kisan-Seva-Farmer-ID-Card.pdf");
 
-showMessage("A4 PDF downloaded successfully.");
+    showMessage("A4 PDF downloaded successfully.");
 
-}catch(error){
+  }catch(error){
 
-showMessage("PDF could not be created. Please try again.",true);
+    showMessage(
+      "PDF could not be created. Please try again.",
+      true
+    );
 
-}
-
+    console.error(error);
+  }
 }
 
 </script>
