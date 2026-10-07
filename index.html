@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Kisan Seva Tools - Farmer Card</title>
 
+<!-- QR -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<!-- PDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
@@ -21,6 +25,8 @@ body{
   background:#eef7ee;
   color:#222;
 }
+
+/* HEADER */
 
 header{
   background:#176b35;
@@ -39,11 +45,15 @@ header p{
   font-size:13px;
 }
 
+/* CONTAINER */
+
 .container{
   max-width:700px;
   margin:auto;
   padding:15px;
 }
+
+/* FORM */
 
 .form-box{
   background:white;
@@ -102,7 +112,6 @@ button{
   border-radius:7px;
   background:#ffe4e4;
   color:#a00000;
-  font-size:14px;
 }
 
 .success{
@@ -112,10 +121,9 @@ button{
   border-radius:7px;
   background:#e4f7e8;
   color:#176b35;
-  font-size:14px;
 }
 
-/* CARD PREVIEW */
+/* PREVIEW */
 
 .preview-title{
   text-align:center;
@@ -123,18 +131,22 @@ button{
   margin:25px 0 10px;
 }
 
-#pdfArea{
-  background:white;
-  padding:10px;
+/* NORMAL PREVIEW */
+
+#cardPreview{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
 }
 
 /* CARD */
 
 .card{
-  width:100%;
-  max-width:440px;
-  aspect-ratio:85.6/53.98;
-  margin:20px auto;
+  width:440px;
+  height:277px;
+  flex-shrink:0;
   background:white;
   border:2px solid #176b35;
   border-radius:12px;
@@ -190,6 +202,7 @@ button{
 .details{
   font-size:10px;
   line-height:1.65;
+  overflow:hidden;
 }
 
 .details b{
@@ -316,7 +329,15 @@ button{
 
 /* MOBILE */
 
-@media(max-width:420px){
+@media(max-width:920px){
+
+  #cardPreview{
+    flex-direction:column;
+  }
+
+}
+
+@media(max-width:480px){
 
   .container{
     padding:10px;
@@ -327,7 +348,9 @@ button{
   }
 
   .card{
-    border-radius:8px;
+    width:100%;
+    height:auto;
+    aspect-ratio:85.6 / 53.98;
   }
 
   .card-top h3{
@@ -363,11 +386,17 @@ button{
     width:62px !important;
     height:62px !important;
   }
+
 }
 
 /* PRINT */
 
 @media print{
+
+  @page{
+    size:A4 landscape;
+    margin:0;
+  }
 
   body{
     background:white;
@@ -383,55 +412,126 @@ button{
   .container{
     max-width:none;
     padding:0;
+    margin:0;
   }
 
-  #pdfArea{
-    padding:0;
+  #cardPreview{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    gap:20px;
+    width:100%;
+    height:210mm;
+    align-items:flex-start;
+    justify-content:center;
+    padding-top:20mm;
   }
 
   .card{
-    box-shadow:none;
-    page-break-inside:avoid;
+    width:85.6mm;
+    height:53.98mm;
+    margin:0;
+    border-radius:3mm;
+    flex-shrink:0;
   }
+
+}
+
+/* PDF AREA */
+
+#pdfSheet{
+  position:absolute;
+  left:-10000px;
+  top:0;
+  width:1123px;
+  height:794px;
+  background:white;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  gap:25px;
+  padding-top:240px;
+}
+
+#pdfSheet .card{
+  width:440px;
+  height:277px;
+  margin:0;
+  flex-shrink:0;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <header>
-  <h1>🌾 KISAN SEVA TOOLS</h1>
-  <p>Farmer Digital Services & Tools</p>
+
+<h1>🌾 KISAN SEVA TOOLS</h1>
+
+<p>Farmer Digital Services & Tools</p>
+
 </header>
 
+
 <div class="container">
+
+<!-- FORM -->
 
 <div class="form-box">
 
 <h2>🌾 Farmer Information Card</h2>
 
+
 <label>Farmer Photo</label>
-<input type="file" id="photo" accept="image/*">
+
+<input
+type="file"
+id="photo"
+accept="image/*">
+
 
 <label>Full Name *</label>
-<input type="text" id="name" placeholder="Enter farmer name">
+
+<input
+type="text"
+id="name"
+placeholder="Enter farmer name">
+
 
 <label>Father / Husband Name *</label>
-<input type="text" id="father" placeholder="Enter father or husband name">
+
+<input
+type="text"
+id="father"
+placeholder="Enter father or husband name">
+
 
 <label>Date of Birth</label>
-<input type="date" id="dob">
+
+<input
+type="date"
+id="dob">
+
 
 <label>Gender *</label>
+
 <select id="gender">
+
 <option value="">Select Gender</option>
+
 <option value="Male">Male</option>
+
 <option value="Female">Female</option>
+
 <option value="Other">Other</option>
+
 </select>
 
+
 <label>Mobile Number *</label>
+
 <input
 type="tel"
 id="mobile"
@@ -439,7 +539,9 @@ maxlength="10"
 inputmode="numeric"
 placeholder="10 digit mobile number">
 
+
 <label>Aadhaar Number *</label>
+
 <input
 type="tel"
 id="aadhaar"
@@ -447,7 +549,9 @@ maxlength="12"
 inputmode="numeric"
 placeholder="12 digit Aadhaar number">
 
+
 <label>Farmer ID *</label>
+
 <input
 type="tel"
 id="farmerId"
@@ -455,39 +559,72 @@ maxlength="11"
 inputmode="numeric"
 placeholder="11 digit Farmer ID">
 
+
 <label>State *</label>
-<input type="text" id="state" placeholder="Enter state">
+
+<input
+type="text"
+id="state"
+placeholder="Enter state">
+
 
 <label>District *</label>
-<input type="text" id="district" placeholder="Enter district">
+
+<input
+type="text"
+id="district"
+placeholder="Enter district">
+
 
 <label>Village *</label>
-<input type="text" id="village" placeholder="Enter village">
+
+<input
+type="text"
+id="village"
+placeholder="Enter village">
+
 
 <label>Survey / Gat Number</label>
-<input type="text" id="survey" placeholder="Optional">
+
+<input
+type="text"
+id="survey"
+placeholder="Optional">
+
 
 <label>Land Area</label>
-<input type="text" id="area" placeholder="Example: 2.50 Acre">
+
+<input
+type="text"
+id="area"
+placeholder="Example: 2.50 Acre">
+
 
 <div id="errorBox" class="error"></div>
 
 <div id="successBox" class="success"></div>
 
+
 <button onclick="generateCard()">
 🌾 Generate Farmer Card
 </button>
 
+
 <button
 class="pdf-button no-print"
 onclick="downloadPDF()">
-📥 Download Farmer Card PDF
+
+📥 Download A4 PDF
+
 </button>
+
 
 <button
 class="print-button no-print"
 onclick="window.print()">
+
 🖨️ Print / Save as PDF
+
 </button>
 
 </div>
@@ -498,16 +635,27 @@ Generated Farmer Card
 </h2>
 
 
-<div id="pdfArea">
+<!-- NORMAL PREVIEW -->
 
-<!-- FRONT CARD -->
+<div id="cardPreview">
+
+
+<!-- FRONT -->
 
 <div class="card front">
 
 <div class="card-top">
-<h3>🌾 FARMER INFORMATION CARD</h3>
-<small>PERSONAL USE • KISAN SEVA TOOLS</small>
+
+<h3>
+🌾 FARMER INFORMATION CARD
+</h3>
+
+<small>
+PERSONAL USE • KISAN SEVA TOOLS
+</small>
+
 </div>
+
 
 <div class="front-main">
 
@@ -519,6 +667,7 @@ alt="Farmer Photo"
 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='98'%3E%3Crect width='100%25' height='100%25' fill='%23eeeeee'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' fill='%23777777' font-size='10'%3EPhoto%3C/text%3E%3C/svg%3E">
 
 </div>
+
 
 <div class="details">
 
@@ -556,46 +705,67 @@ src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' hei
 
 </div>
 
+
 <div class="farmer-id">
+
 FARMER ID:
 <span id="outFarmerId">—</span>
+
 </div>
+
 
 <div class="front-note">
+
 Personal information card • Not a Government ID
-</div>
 
 </div>
 
+</div>
 
-<!-- BACK CARD -->
+
+<!-- BACK -->
 
 <div class="card back">
 
 <div class="back-title">
+
 🌾 FARMER INFORMATION CARD
+
 </div>
+
 
 <div class="back-info">
 
 <div class="info-grid">
 
 <div class="info">
+
 <b>STATE</b>
+
 <span id="outState">—</span>
+
 </div>
 
+
 <div class="info">
+
 <b>DISTRICT</b>
+
 <span id="outDistrict">—</span>
+
 </div>
+
 
 <div class="info">
+
 <b>VILLAGE</b>
+
 <span id="outVillage">—</span>
+
 </div>
 
 </div>
+
 
 <div class="land">
 
@@ -603,20 +773,34 @@ Personal information card • Not a Government ID
 LAND INFORMATION
 </div>
 
+
 <div class="land-row">
-<span>Survey / Gat No.</span>
+
+<span>
+Survey / Gat No.
+</span>
+
 <strong id="outSurvey">—</strong>
+
 </div>
+
 
 <div class="land-row">
-<span>Land Area</span>
+
+<span>
+Land Area
+</span>
+
 <strong id="outArea">—</strong>
-</div>
 
 </div>
 
 </div>
 
+</div>
+
+
+<!-- QR -->
 
 <div class="qr-box">
 
@@ -632,6 +816,14 @@ Scan to view card information
 
 </div>
 
+
+<!-- HIDDEN A4 PDF SHEET -->
+
+<div id="pdfSheet">
+
+</div>
+
+
 </div>
 
 
@@ -641,136 +833,198 @@ Scan to view card information
 
 function showError(message){
 
-const box=document.getElementById("errorBox");
+const box =
+document.getElementById("errorBox");
 
-box.textContent=message;
+box.textContent = message;
 
-box.style.display="block";
+box.style.display = "block";
 
 }
 
 
-/* GENERATE CARD */
+/* GENERATE */
 
 function generateCard(){
 
-const name=
+const name =
 document.getElementById("name").value.trim();
 
-const father=
+const father =
 document.getElementById("father").value.trim();
 
-const gender=
+const gender =
 document.getElementById("gender").value;
 
-const mobile=
+const mobile =
 document.getElementById("mobile").value.trim();
 
-const aadhaar=
+const aadhaar =
 document.getElementById("aadhaar").value.trim();
 
-const farmerId=
+const farmerId =
 document.getElementById("farmerId").value.trim();
 
-const state=
+const state =
 document.getElementById("state").value.trim();
 
-const district=
+const district =
 document.getElementById("district").value.trim();
 
-const village=
+const village =
 document.getElementById("village").value.trim();
 
-const errorBox=
+
+const errorBox =
 document.getElementById("errorBox");
 
-const successBox=
+const successBox =
 document.getElementById("successBox");
 
+
 errorBox.style.display="none";
+
 successBox.style.display="none";
 
 
 if(name===""){
+
 showError("Please enter farmer name.");
+
 return;
+
 }
+
 
 if(father===""){
+
 showError("Please enter Father / Husband name.");
+
 return;
+
 }
+
 
 if(gender===""){
+
 showError("Please select gender.");
+
 return;
+
 }
+
 
 if(!/^[0-9]{10}$/.test(mobile)){
-showError("Mobile number must be exactly 10 digits.");
+
+showError(
+"Mobile number must be exactly 10 digits."
+);
+
 return;
+
 }
+
 
 if(!/^[0-9]{12}$/.test(aadhaar)){
-showError("Aadhaar number must be exactly 12 digits.");
+
+showError(
+"Aadhaar number must be exactly 12 digits."
+);
+
 return;
+
 }
+
 
 if(!/^[0-9]{11}$/.test(farmerId)){
-showError("Farmer ID must be exactly 11 digits.");
+
+showError(
+"Farmer ID must be exactly 11 digits."
+);
+
 return;
+
 }
+
 
 if(state===""){
+
 showError("Please enter state.");
+
 return;
+
 }
+
 
 if(district===""){
+
 showError("Please enter district.");
+
 return;
+
 }
+
 
 if(village===""){
+
 showError("Please enter village.");
+
 return;
+
 }
 
 
-/* CARD DATA */
+/* DATA */
 
-document.getElementById("outName").textContent=name;
+document.getElementById("outName")
+.textContent=name;
 
-document.getElementById("outFather").textContent=father;
+document.getElementById("outFather")
+.textContent=father;
 
-document.getElementById("outDob").textContent=
+document.getElementById("outDob")
+.textContent=
 document.getElementById("dob").value || "—";
 
-document.getElementById("outGender").textContent=gender;
+document.getElementById("outGender")
+.textContent=gender;
 
-document.getElementById("outMobile").textContent=mobile;
+document.getElementById("outMobile")
+.textContent=mobile;
 
-document.getElementById("outAadhaar").textContent=
+
+/* MASK AADHAAR */
+
+document.getElementById("outAadhaar")
+.textContent=
 "XXXX-XXXX-"+aadhaar.slice(-4);
 
-document.getElementById("outFarmerId").textContent=farmerId;
 
-document.getElementById("outState").textContent=state;
+document.getElementById("outFarmerId")
+.textContent=farmerId;
 
-document.getElementById("outDistrict").textContent=district;
+document.getElementById("outState")
+.textContent=state;
 
-document.getElementById("outVillage").textContent=village;
+document.getElementById("outDistrict")
+.textContent=district;
 
-document.getElementById("outSurvey").textContent=
+document.getElementById("outVillage")
+.textContent=village;
+
+document.getElementById("outSurvey")
+.textContent=
 document.getElementById("survey").value.trim() || "—";
 
-document.getElementById("outArea").textContent=
+document.getElementById("outArea")
+.textContent=
 document.getElementById("area").value.trim() || "—";
 
 
 /* QR */
 
 const qrData=
+
 "KISAN SEVA TOOLS\n"+
 "Personal Farmer Information Card\n"+
 "Farmer ID: "+farmerId+"\n"+
@@ -780,24 +1034,26 @@ const qrData=
 "Village: "+village;
 
 
-const qr=document.getElementById("qrcode");
+const qr =
+document.getElementById("qrcode");
 
 qr.innerHTML="";
+
 
 if(typeof QRCode!=="undefined"){
 
 new QRCode(qr,{
+
 text:qrData,
+
 width:72,
+
 height:72,
-correctLevel:QRCode.CorrectLevel.M
+
+correctLevel:
+QRCode.CorrectLevel.M
+
 });
-
-}
-else{
-
-qr.innerHTML=
-"<span style='font-size:8px'>QR unavailable</span>";
 
 }
 
@@ -822,12 +1078,13 @@ if(!file){
 return;
 }
 
-const reader=new FileReader();
+const reader=
+new FileReader();
 
-reader.onload=function(event){
+reader.onload=function(e){
 
-document.getElementById("cardPhoto").src=
-event.target.result;
+document.getElementById("cardPhoto")
+.src=e.target.result;
 
 };
 
@@ -836,23 +1093,29 @@ reader.readAsDataURL(file);
 });
 
 
-/* DOWNLOAD PDF */
+/* PDF */
 
 function downloadPDF(){
 
-const name=
-document.getElementById("name").value.trim();
+const name =
+document.getElementById("name")
+.value.trim();
 
-const farmerId=
-document.getElementById("farmerId").value.trim();
+const farmerId =
+document.getElementById("farmerId")
+.value.trim();
+
 
 if(name==="" || farmerId===""){
 
-alert("पहले Farmer Card Generate करो.");
+alert(
+"पहले Farmer Card Generate करो."
+);
 
 return;
 
 }
+
 
 if(typeof html2pdf==="undefined"){
 
@@ -864,46 +1127,170 @@ return;
 
 }
 
-const element=
-document.getElementById("pdfArea");
 
-const safeName=
-name.replace(/[^a-zA-Z0-9]/g,"-");
+/* PDF SHEET */
+
+const sheet =
+document.getElementById("pdfSheet");
+
+sheet.innerHTML="";
+
+
+/* FRONT CLONE */
+
+const front =
+document.querySelector(".front")
+.cloneNode(true);
+
+
+/* BACK CLONE */
+
+const back =
+document.querySelector(".back")
+.cloneNode(true);
+
+
+/*
+Important:
+QR canvas/image is copied
+again into PDF sheet.
+*/
+
+const originalQR =
+document.querySelector("#qrcode");
+
+const newQR =
+back.querySelector("#qrcode");
+
+newQR.innerHTML="";
+
+
+if(originalQR){
+
+const qrImage =
+originalQR.querySelector("img");
+
+const qrCanvas =
+originalQR.querySelector("canvas");
+
+
+if(qrImage){
+
+const img =
+document.createElement("img");
+
+img.src=qrImage.src;
+
+img.style.width="72px";
+
+img.style.height="72px";
+
+newQR.appendChild(img);
+
+}
+
+else if(qrCanvas){
+
+const img =
+document.createElement("img");
+
+img.src=qrCanvas.toDataURL("image/png");
+
+img.style.width="72px";
+
+img.style.height="72px";
+
+newQR.appendChild(img);
+
+}
+
+}
+
+
+/* ADD CARDS */
+
+sheet.appendChild(front);
+
+sheet.appendChild(back);
+
+
+/* FILE NAME */
+
+const safeName =
+name.replace(
+/[^a-zA-Z0-9]/g,
+"-"
+);
+
+
+/* OPTIONS */
 
 const options={
 
-margin:8,
+margin:0,
 
 filename:
 "Kisan-Seva-Farmer-Card-"+safeName+".pdf",
 
 image:{
 type:"jpeg",
-quality:0.95
+quality:1
 },
 
 html2canvas:{
+
 scale:2,
+
 useCORS:true,
-backgroundColor:"#ffffff"
+
+allowTaint:true,
+
+backgroundColor:"#ffffff",
+
+width:1123,
+
+height:794,
+
+scrollX:0,
+
+scrollY:0
+
 },
 
 jsPDF:{
+
 unit:"mm",
+
 format:"a4",
-orientation:"portrait"
+
+orientation:"landscape",
+
+compress:true
+
 },
 
 pagebreak:{
-mode:["css","legacy"]
+mode:"avoid-all"
 }
 
 };
 
+
+/* CREATE PDF */
+
 html2pdf()
+
 .set(options)
-.from(element)
-.save();
+
+.from(sheet)
+
+.save()
+
+.then(function(){
+
+sheet.innerHTML="";
+
+});
 
 }
 
