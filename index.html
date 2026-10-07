@@ -86,7 +86,6 @@ align-items:center;
 gap:20px;
 }
 
-/* Aadhaar-card proportion */
 .card{
 width:min(100%,430px);
 aspect-ratio:85.6/53.98;
@@ -245,59 +244,29 @@ oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,11)"
 >
 <div class="small">Maximum 11 digits</div>
 
+<!-- STATE TEXT BOX -->
 <label>State</label>
-<select id="state" onchange="stateChanged()">
-<option value="">Select State / UT</option>
+<input
+id="state"
+type="text"
+placeholder="Enter State"
+>
 
-<option>Andhra Pradesh</option>
-<option>Arunachal Pradesh</option>
-<option>Assam</option>
-<option>Bihar</option>
-<option>Chhattisgarh</option>
-<option>Goa</option>
-<option>Gujarat</option>
-<option>Haryana</option>
-<option>Himachal Pradesh</option>
-<option>Jharkhand</option>
-<option>Karnataka</option>
-<option>Kerala</option>
-<option>Madhya Pradesh</option>
-<option>Maharashtra</option>
-<option>Manipur</option>
-<option>Meghalaya</option>
-<option>Mizoram</option>
-<option>Nagaland</option>
-<option>Odisha</option>
-<option>Punjab</option>
-<option>Rajasthan</option>
-<option>Sikkim</option>
-<option>Tamil Nadu</option>
-<option>Telangana</option>
-<option>Tripura</option>
-<option>Uttar Pradesh</option>
-<option>Uttarakhand</option>
-<option>West Bengal</option>
-
-<option>Andaman and Nicobar Islands</option>
-<option>Chandigarh</option>
-<option>Dadra and Nagar Haveli and Daman and Diu</option>
-<option>Delhi</option>
-<option>Jammu and Kashmir</option>
-<option>Ladakh</option>
-<option>Lakshadweep</option>
-<option>Puducherry</option>
-
-</select>
-
+<!-- DISTRICT TEXT BOX -->
 <label>District</label>
-<select id="district" onchange="districtChanged()" disabled>
-<option value="">First select State</option>
-</select>
+<input
+id="district"
+type="text"
+placeholder="Enter District"
+>
 
+<!-- VILLAGE TEXT BOX -->
 <label>Village</label>
-<select id="village" disabled>
-<option value="">First select District</option>
-</select>
+<input
+id="village"
+type="text"
+placeholder="Enter Village"
+>
 
 <label>Survey / Gat Number</label>
 <input type="text" id="survey" placeholder="Enter Survey / Gat Number">
@@ -422,168 +391,72 @@ Kisan Seva Tools • Personal Farmer Information Card
 
 <script>
 
-/* Maharashtra district list for immediate use.
-   Full India district/village data should be connected
-   through the LGD data source rather than hard-coded. */
-
-const districts = {
-
-"Maharashtra":[
-"Ahmednagar","Akola","Amravati","Aurangabad",
-"Beed","Bhandara","Buldhana","Chandrapur",
-"Dhule","Gadchiroli","Gondia","Hingoli",
-"Jalgaon","Jalna","Kolhapur","Latur",
-"Mumbai City","Mumbai Suburban","Nagpur",
-"Nanded","Nandurbar","Nashik","Osmanabad",
-"Palghar","Parbhani","Pune","Raigad",
-"Ratnagiri","Sangli","Satara","Sindhudurg",
-"Solapur","Thane","Wardha","Washim","Yavatmal"
-]
-
-};
-
-function stateChanged(){
-
-const state=document.getElementById("state").value;
-const district=document.getElementById("district");
-const village=document.getElementById("village");
-
-district.innerHTML='<option value="">Select District</option>';
-village.innerHTML='<option value="">First select District</option>';
-
-district.disabled=true;
-village.disabled=true;
-
-if(districts[state]){
-
-districts[state].forEach(function(d){
-
-const option=document.createElement("option");
-
-option.value=d;
-option.textContent=d;
-
-district.appendChild(option);
-
-});
-
-district.disabled=false;
-}
-
-}
-
-function districtChanged(){
-
-const district=document.getElementById("district").value;
-const village=document.getElementById("village");
-
-village.innerHTML='<option value="">Select Village</option>';
-
-if(!district){
-village.disabled=true;
-return;
-}
-
-/*
-Village data is intentionally not fabricated.
-When LGD/API data is connected, villages for the
-selected district will be loaded here.
-*/
-
-const option=document.createElement("option");
-option.textContent="Village data connection required";
-option.disabled=true;
-village.appendChild(option);
-
-village.disabled=false;
-
-}
-
 function generateCard(){
 
-const aadhaar=document.getElementById("aadhaar").value;
+const aadhaar =
+document.getElementById("aadhaar").value;
 
-document.getElementById("outName").textContent=
+document.getElementById("outName").textContent =
 document.getElementById("name").value || "—";
 
-document.getElementById("outFather").textContent=
+document.getElementById("outFather").textContent =
 document.getElementById("father").value || "—";
 
-document.getElementById("outDob").textContent=
+document.getElementById("outDob").textContent =
 document.getElementById("dob").value || "—";
 
-document.getElementById("outGender").textContent=
+document.getElementById("outGender").textContent =
 document.getElementById("gender").value || "—";
 
-document.getElementById("outMobile").textContent=
+document.getElementById("outMobile").textContent =
 document.getElementById("mobile").value || "—";
 
-document.getElementById("outFarmerId").textContent=
+document.getElementById("outFarmerId").textContent =
 document.getElementById("farmerId").value || "—";
 
-if(aadhaar.length===12){
 
-document.getElementById("outAadhaar").textContent=
-"XXXX-XXXX-"+aadhaar.slice(-4);
+/* Aadhaar: only last 4 digits */
+
+if(aadhaar.length === 12){
+
+document.getElementById("outAadhaar").textContent =
+"XXXX-XXXX-" + aadhaar.slice(-4);
 
 }else{
 
-document.getElementById("outAadhaar").textContent=
+document.getElementById("outAadhaar").textContent =
 "XXXX-XXXX-XXXX";
 
 }
 
-document.getElementById("outState").textContent=
+
+/* State */
+
+document.getElementById("outState").textContent =
 document.getElementById("state").value || "—";
 
-document.getElementById("outDistrict").textContent=
+
+/* District */
+
+document.getElementById("outDistrict").textContent =
 document.getElementById("district").value || "—";
 
-document.getElementById("outVillage").textContent=
+
+/* Village */
+
+document.getElementById("outVillage").textContent =
 document.getElementById("village").value || "—";
 
-document.getElementById("outSurvey").textContent=
+
+/* Land information */
+
+document.getElementById("outSurvey").textContent =
 document.getElementById("survey").value || "—";
 
-document.getElementById("outArea").textContent=
+document.getElementById("outArea").textContent =
 document.getElementById("area").value || "—";
 
 }
 
-document.getElementById("photo").addEventListener("change",function(){
 
-const file=this.files[0];
-
-if(file){
-
-const reader=new FileReader();
-
-reader.onload=function(e){
-
-document.getElementById("cardPhoto").src=e.target.result;
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-});
-<div class="field">
-  <label>State</label>
-  <input id="state" type="text" placeholder="Enter State">
-</div>
-
-<div class="field">
-  <label>District</label>
-  <input id="district" type="text" placeholder="Enter District">
-</div>
-
-<div class="field">
-  <label>Village</label>
-  <input id="village" type="text" placeholder="Enter Village">
-</div>
-</script>
-
-</body>
-</html>
+/* Photo */
