@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Kisan Seva Tools - Farmer ID Card</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -13,449 +13,394 @@
 *{box-sizing:border-box}
 
 body{
-    margin:0;
-    padding:20px;
-    font-family:Arial,sans-serif;
-    background:#eef3ee;
-    color:#222;
+margin:0;
+font-family:Arial,sans-serif;
+background:#edf3ee;
+color:#222;
+padding:20px;
 }
 
 .container{
-    max-width:1100px;
-    margin:auto;
+max-width:1050px;
+margin:auto;
 }
 
 h1{
-    text-align:center;
-    margin:5px 0;
-    color:#176b35;
+text-align:center;
+color:#176b35;
+margin:5px 0;
 }
 
 .subtitle{
-    text-align:center;
-    color:#666;
-    margin-bottom:20px;
+text-align:center;
+color:#666;
+margin-bottom:20px;
 }
 
-.form-box{
-    background:white;
-    padding:20px;
-    border-radius:14px;
-    box-shadow:0 3px 15px #0002;
+.form{
+background:#fff;
+padding:20px;
+border-radius:14px;
+box-shadow:0 3px 15px #0002;
 }
 
 .grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
 }
 
 .field{
-    display:flex;
-    flex-direction:column;
+display:flex;
+flex-direction:column;
 }
 
 .field label{
-    font-weight:bold;
-    margin-bottom:5px;
+font-weight:bold;
+margin-bottom:5px;
 }
 
-.field input,
-.field select{
-    padding:11px;
-    border:1px solid #bbb;
-    border-radius:8px;
-    font-size:15px;
-}
-
-.full{
-    grid-column:1/-1;
+.field input,.field select{
+padding:10px;
+border:1px solid #bbb;
+border-radius:7px;
+font-size:15px;
 }
 
 .designs{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin:20px 0;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin:18px 0;
 }
 
-.designs button,
-.action-btn{
-    border:0;
-    padding:11px 16px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
+button{
+border:0;
+border-radius:8px;
+padding:11px 16px;
+font-weight:bold;
+cursor:pointer;
 }
 
-.design1{background:#287a3d;color:white}
-.design2{background:#4c9a55;color:white}
-.design3{background:#2877b8;color:white}
-.design4{background:#b78a24;color:white}
+.green{background:#23743c;color:#fff}
+.leaf{background:#559b5b;color:#fff}
+.blue{background:#2676b5;color:#fff}
+.gold{background:#b48a29;color:#fff}
 
-.action{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-top:20px;
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
 }
 
-.generate{
-    background:#176b35;
-    color:white;
-}
-
-.pdf{
-    background:#c62828;
-    color:white;
-}
-
-.print{
-    background:#333;
-    color:white;
-}
+.generate{background:#176b35;color:#fff}
+.pdf{background:#c62828;color:#fff}
+.print{background:#333;color:#fff}
 
 .message{
-    padding:10px;
-    border-radius:7px;
-    margin-top:12px;
-    display:none;
+display:none;
+padding:10px;
+margin:12px 0;
+border-radius:7px;
 }
 
-.success{
-    background:#d9f5df;
-    color:#146c2e;
+.ok{
+display:block;
+background:#dff5e4;
+color:#146b2d;
 }
 
-.error{
-    background:#ffe0e0;
-    color:#a30000;
+.err{
+display:block;
+background:#ffe0e0;
+color:#a00000;
 }
 
-/* CARD AREA */
+/* A4 */
 
-.preview{
-    margin-top:30px;
+#a4{
+width:1123px;
+height:794px;
+background:#fff;
+margin:30px auto;
+padding:30px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
 }
 
-.a4{
-    width:1123px;
-    min-height:794px;
-    margin:20px auto;
-    background:white;
-    padding:28px;
-    display:flex;
-    flex-direction:column;
-    gap:24px;
-}
+/* CARD */
 
 .card{
-    position:relative;
-    width:100%;
-    height:350px;
-    border-radius:22px;
-    overflow:hidden;
-    background:white;
-    border:5px solid #176b35;
-    box-shadow:0 4px 15px #0003;
+width:100%;
+height:350px;
+position:relative;
+overflow:hidden;
+border-radius:24px;
+background:linear-gradient(135deg,#fff,#f5faf5);
+border:5px solid #176b35;
+box-shadow:0 5px 18px #0003;
 }
 
-.card:before{
-    content:"";
-    position:absolute;
-    inset:9px;
-    border:2px solid #176b35;
-    border-radius:16px;
-    pointer-events:none;
+.card::before{
+content:"";
+position:absolute;
+inset:9px;
+border:2px solid #70a97d;
+border-radius:17px;
+pointer-events:none;
 }
 
-.corner{
-    position:absolute;
-    width:45px;
-    height:45px;
-    border-color:#176b35;
-    border-style:solid;
-    z-index:2;
+.card::after{
+content:"";
+position:absolute;
+width:180px;
+height:180px;
+right:-70px;
+top:-70px;
+border-radius:50%;
+background:#176b3515;
 }
 
-.c1{
-    top:0;
-    left:0;
-    border-width:0 3px 3px 0;
+.title{
+position:relative;
+z-index:2;
+text-align:center;
+padding-top:20px;
 }
 
-.c2{
-    top:0;
-    right:0;
-    border-width:0 0 3px 3px;
+.title h2{
+margin:0;
+font-size:34px;
+letter-spacing:2px;
+color:#176b35;
 }
 
-.c3{
-    bottom:0;
-    left:0;
-    border-width:3px 3px 0 0;
+.title small{
+display:block;
+margin-top:4px;
+font-size:14px;
+letter-spacing:4px;
+font-weight:bold;
+color:#777;
 }
 
-.c4{
-    bottom:0;
-    right:0;
-    border-width:3px 0 0 3px;
+.frontbody{
+position:relative;
+z-index:2;
+display:flex;
+height:255px;
+padding:20px 42px;
 }
 
-.card-header{
-    position:relative;
-    z-index:3;
-    text-align:center;
-    padding-top:22px;
-}
-
-.card-main-title{
-    font-size:34px;
-    font-weight:900;
-    letter-spacing:2px;
-    color:#176b35;
-}
-
-.card-brand{
-    font-size:15px;
-    font-weight:bold;
-    letter-spacing:3px;
-    color:#777;
-    margin-top:2px;
-}
-
-.card-body{
-    position:relative;
-    z-index:3;
-    display:flex;
-    height:250px;
-    padding:12px 30px 25px;
-}
-
-.photo-area{
-    width:180px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.photoBox{
+width:175px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .photo{
-    width:135px;
-    height:160px;
-    border:3px solid #176b35;
-    border-radius:12px;
-    object-fit:cover;
-    background:#eee;
+width:125px;
+height:150px;
+object-fit:cover;
+border-radius:12px;
+border:4px solid #176b35;
+background:#eee;
 }
 
 .details{
-    flex:1;
-    padding:5px 20px;
+padding:3px 20px;
+flex:1;
 }
 
-.detail{
-    margin:8px 0;
-    font-size:17px;
+.row{
+font-size:17px;
+margin:9px 0;
 }
 
-.detail b{
-    color:#176b35;
+.row b{
+color:#176b35;
 }
 
-.farmer-id{
-    margin-top:15px;
-    display:inline-block;
-    padding:9px 18px;
-    border-radius:9px;
-    background:#176b35;
-    color:white;
-    font-size:21px;
-    font-weight:bold;
+.farmerID{
+display:inline-block;
+background:#176b35;
+color:white;
+font-size:20px;
+font-weight:bold;
+padding:9px 17px;
+border-radius:9px;
+margin-top:8px;
+letter-spacing:1px;
 }
 
-.personal{
-    font-size:11px;
-    color:#777;
-    margin-top:10px;
+.note{
+font-size:10px;
+color:#777;
+margin-top:9px;
 }
 
-/* BACK CARD */
+/* BACK */
 
-.back-card{
-    display:flex;
-    flex-direction:column;
+.backbody{
+position:relative;
+z-index:2;
+display:flex;
+height:260px;
+padding:20px 45px;
 }
 
-.back-content{
-    position:relative;
-    z-index:3;
-    flex:1;
-    display:flex;
-    padding:20px 35px 30px;
-    min-height:260px;
+.backInfo{
+flex:1;
+padding-right:30px;
 }
 
-.back-info{
-    flex:1;
-    padding-right:25px;
+.backInfo h3{
+color:#176b35;
+margin:4px 0 18px;
+font-size:21px;
 }
 
-.back-info h3{
-    color:#176b35;
-    margin-top:5px;
+.info{
+font-size:17px;
+margin:12px 0;
 }
 
-.info-line{
-    margin:12px 0;
-    font-size:17px;
+.info b{
+color:#176b35;
 }
 
-.qr-side{
-    width:230px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    padding:5px;
+/* QR RIGHT */
+
+.qrArea{
+width:235px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
 }
 
-.qr-box{
-    width:185px;
-    height:185px;
-    padding:10px;
-    background:white;
-    border:4px solid #176b35;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.qrFrame{
+width:190px;
+height:190px;
+background:#fff;
+border:4px solid #176b35;
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:10px;
 }
 
 #qrcode{
-    width:155px;
-    height:155px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+width:160px;
+height:160px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 #qrcode img,
 #qrcode canvas{
-    width:155px !important;
-    height:155px !important;
+width:160px!important;
+height:160px!important;
 }
 
-.qr-title{
-    margin-top:8px;
-    font-weight:bold;
-    color:#176b35;
-    font-size:14px;
+.qrText{
+font-weight:bold;
+color:#176b35;
+margin-top:7px;
+font-size:13px;
 }
 
 .disclaimer{
-    position:absolute;
-    bottom:12px;
-    left:0;
-    right:0;
-    text-align:center;
-    font-size:10px;
-    color:#777;
-    z-index:4;
+position:absolute;
+z-index:3;
+bottom:12px;
+left:0;
+right:0;
+text-align:center;
+font-size:10px;
+color:#777;
 }
 
-/* DESIGNS */
+/* THEMES */
 
-.card.design-leaf{
-    border-color:#3d8b40;
+.theme-leaf{
+border-color:#559b5b;
 }
 
-.card.design-leaf:before{
-    border-color:#6cae70;
+.theme-leaf::before{
+border-color:#8abb8e;
 }
 
-.card.design-leaf .card-main-title,
-.card.design-leaf .detail b,
-.card.design-leaf .back-info h3,
-.card.design-leaf .qr-title{
-    color:#3d8b40;
+.theme-leaf .title h2,
+.theme-leaf .row b,
+.theme-leaf .info b,
+.theme-leaf .backInfo h3,
+.theme-leaf .qrText{
+color:#559b5b;
 }
 
-.card.design-leaf .farmer-id{
-    background:#3d8b40;
+.theme-leaf .farmerID{
+background:#559b5b;
 }
 
-.card.design-blue{
-    border-color:#2877b8;
+.theme-blue{
+border-color:#2676b5;
 }
 
-.card.design-blue:before{
-    border-color:#73acd6;
+.theme-blue::before{
+border-color:#82b6dd;
 }
 
-.card.design-blue .card-main-title,
-.card.design-blue .detail b,
-.card.design-blue .back-info h3,
-.card.design-blue .qr-title{
-    color:#2877b8;
+.theme-blue .title h2,
+.theme-blue .row b,
+.theme-blue .info b,
+.theme-blue .backInfo h3,
+.theme-blue .qrText{
+color:#2676b5;
 }
 
-.card.design-blue .farmer-id{
-    background:#2877b8;
+.theme-blue .farmerID{
+background:#2676b5;
 }
 
-.card.design-gold{
-    border-color:#b78a24;
+.theme-gold{
+border-color:#b48a29;
 }
 
-.card.design-gold:before{
-    border-color:#d9b85c;
+.theme-gold::before{
+border-color:#d6bb72;
 }
 
-.card.design-gold .card-main-title,
-.card.design-gold .detail b,
-.card.design-gold .back-info h3,
-.card.design-gold .qr-title{
-    color:#9a7115;
+.theme-gold .title h2,
+.theme-gold .row b,
+.theme-gold .info b,
+.theme-gold .backInfo h3,
+.theme-gold .qrText{
+color:#9b741b;
 }
 
-.card.design-gold .farmer-id{
-    background:#b78a24;
+.theme-gold .farmerID{
+background:#b48a29;
 }
 
 @media(max-width:800px){
-    .grid{
-        grid-template-columns:1fr;
-    }
+.grid{grid-template-columns:1fr}
 
-    .a4{
-        transform-origin:top left;
-        transform:scale(.55);
-        margin-bottom:-300px;
-    }
+#a4{
+transform:scale(.55);
+transform-origin:top left;
+margin-bottom:-330px;
+}
 }
 
 @media print{
-    body{
-        background:white;
-        padding:0;
-    }
-
-    .form-box,
-    h1,
-    .subtitle,
-    .action,
-    .designs{
-        display:none !important;
-    }
-
-    .preview{
-        margin:0;
-    }
-
-    .a4{
-        margin:0;
-        box-shadow:none;
-    }
+body{padding:0;background:#fff}
+.form,h1,.subtitle{display:none}
+#a4{margin:0}
 }
 </style>
 </head>
@@ -467,23 +412,23 @@ h1{
 <h1>Kisan Seva Tools</h1>
 <div class="subtitle">Farmer Personal ID Card Generator</div>
 
-<div class="form-box">
+<div class="form">
 
 <div class="grid">
 
 <div class="field">
 <label>Farmer Photo</label>
-<input type="file" id="photo" accept="image/*">
+<input id="photo" type="file" accept="image/*">
 </div>
 
 <div class="field">
 <label>Farmer Name</label>
-<input id="name" type="text" placeholder="Enter farmer name">
+<input id="name" placeholder="Farmer name">
 </div>
 
 <div class="field">
 <label>Father / Husband Name</label>
-<input id="father" type="text" placeholder="Enter name">
+<input id="father" placeholder="Father / Husband name">
 </div>
 
 <div class="field">
@@ -503,17 +448,17 @@ h1{
 
 <div class="field">
 <label>Mobile Number</label>
-<input id="mobile" type="text" maxlength="10" placeholder="10 digit mobile">
+<input id="mobile" maxlength="10" placeholder="10 digit mobile">
 </div>
 
 <div class="field">
 <label>Aadhaar Number</label>
-<input id="aadhaar" type="text" maxlength="12" placeholder="12 digit Aadhaar">
+<input id="aadhaar" maxlength="12" placeholder="12 digit Aadhaar">
 </div>
 
 <div class="field">
 <label>Farmer ID</label>
-<input id="farmerId" type="text" maxlength="11" placeholder="11 digit Farmer ID">
+<input id="farmerId" maxlength="11" placeholder="11 digit Farmer ID">
 </div>
 
 <div class="field">
@@ -531,166 +476,159 @@ h1{
 
 <div class="field">
 <label>District</label>
-<input id="district" type="text" placeholder="District">
+<input id="district" placeholder="District">
 </div>
 
 <div class="field">
 <label>Village</label>
-<input id="village" type="text" placeholder="Village">
+<input id="village" placeholder="Village">
 </div>
 
 <div class="field">
 <label>Survey / Gat Number</label>
-<input id="survey" type="text" placeholder="Survey / Gat Number">
+<input id="survey" placeholder="Survey / Gat Number">
 </div>
 
 <div class="field">
 <label>Land Area</label>
-<input id="land" type="text" placeholder="Example: 2.5 Acre">
+<input id="land" placeholder="Example: 2 Acre">
 </div>
 
 </div>
 
-<h3>Select Card Design</h3>
+<h3>Card Design</h3>
 
 <div class="designs">
-<button class="design1" onclick="setDesign('classic')">🌿 Classic Green</button>
-<button class="design2" onclick="setDesign('leaf')">🍃 Leaf Design</button>
-<button class="design3" onclick="setDesign('blue')">🔵 Blue Clean</button>
-<button class="design4" onclick="setDesign('gold')">🏅 Premium Gold</button>
+<button class="green" onclick="theme('classic')">🌿 Classic Green</button>
+<button class="leaf" onclick="theme('leaf')">🍃 Leaf</button>
+<button class="blue" onclick="theme('blue')">🔵 Blue</button>
+<button class="gold" onclick="theme('gold')">🏅 Gold</button>
 </div>
 
-<div id="message" class="message"></div>
+<div id="msg" class="message"></div>
 
-<div class="action">
-<button class="action-btn generate" onclick="generateCard()">Generate Farmer Card</button>
-<button class="action-btn pdf" onclick="downloadPDF()">Download A4 PDF</button>
-<button class="action-btn print" onclick="window.print()">Print</button>
+<div class="actions">
+<button class="generate" onclick="generate()">Generate Card</button>
+<button class="pdf" onclick="pdf()">Download A4 PDF</button>
+<button class="print" onclick="window.print()">Print</button>
 </div>
 
 </div>
 
-<div class="preview">
 
-<div id="a4" class="a4">
+<!-- CARD SHEET -->
 
-<!-- FRONT -->
+<div id="a4">
 
-<div id="frontCard" class="card">
+<!-- FRONT CARD -->
 
-<div class="corner c1"></div>
-<div class="corner c2"></div>
-<div class="corner c3"></div>
-<div class="corner c4"></div>
+<div id="front" class="card">
 
-<div class="card-header">
-<div class="card-main-title">FARMER ID CARD</div>
-<div class="card-brand">KISAN SEVA TOOLS</div>
+<div class="title">
+<h2>FARMER ID CARD</h2>
+<small>KISAN SEVA TOOLS</small>
 </div>
 
-<div class="card-body">
+<div class="frontbody">
 
-<div class="photo-area">
-<img id="cardPhoto" class="photo" src="" alt="Photo">
+<div class="photoBox">
+<img id="cardPhoto" class="photo" alt="Farmer Photo">
 </div>
 
 <div class="details">
 
-<div class="detail">
-<b>Name:</b> <span id="cardName">—</span>
+<div class="row">
+<b>Name:</b> <span id="cName">—</span>
 </div>
 
-<div class="detail">
-<b>Father / Husband:</b> <span id="cardFather">—</span>
+<div class="row">
+<b>Father / Husband:</b> <span id="cFather">—</span>
 </div>
 
-<div class="detail">
-<b>DOB:</b> <span id="cardDob">—</span>
+<div class="row">
+<b>Date of Birth:</b> <span id="cDob">—</span>
 </div>
 
-<div class="detail">
-<b>Gender:</b> <span id="cardGender">—</span>
+<div class="row">
+<b>Gender:</b> <span id="cGender">—</span>
 </div>
 
-<div class="detail">
-<b>Mobile:</b> <span id="cardMobile">—</span>
+<div class="row">
+<b>Mobile:</b> <span id="cMobile">—</span>
 </div>
 
-<div class="farmer-id">
-FARMER ID: <span id="cardFarmerId">—</span>
+<div class="farmerID">
+FARMER ID: <span id="cID">—</span>
 </div>
 
-<div class="personal">
-Personal-use Farmer Identification Card — Not a Government ID
-</div>
-
-</div>
+<div class="note">
+Personal-use card • Not a Government ID
 </div>
 
 </div>
-
-<!-- BACK -->
-
-<div id="backCard" class="card back-card">
-
-<div class="corner c1"></div>
-<div class="corner c2"></div>
-<div class="corner c3"></div>
-<div class="corner c4"></div>
-
-<div class="card-header">
-<div class="card-main-title">FARMER INFORMATION</div>
-<div class="card-brand">KISAN SEVA TOOLS</div>
-</div>
-
-<div class="back-content">
-
-<div class="back-info">
-
-<h3>Farmer Details</h3>
-
-<div class="info-line">
-<b>State:</b> <span id="cardState">—</span>
-</div>
-
-<div class="info-line">
-<b>District:</b> <span id="cardDistrict">—</span>
-</div>
-
-<div class="info-line">
-<b>Village:</b> <span id="cardVillage">—</span>
-</div>
-
-<div class="info-line">
-<b>Survey / Gat:</b> <span id="cardSurvey">—</span>
-</div>
-
-<div class="info-line">
-<b>Land Area:</b> <span id="cardLand">—</span>
-</div>
-
-<div class="info-line">
-<b>Aadhaar:</b> XXXX-XXXX-<span id="cardAadhaar">----</span>
 </div>
 
 </div>
 
-<!-- QR FIXED RIGHT SIDE -->
 
-<div class="qr-side">
+<!-- BACK CARD -->
 
-<div class="qr-box">
+<div id="back" class="card">
+
+<div class="title">
+<h2>FARMER INFORMATION</h2>
+<small>KISAN SEVA TOOLS</small>
+</div>
+
+<div class="backbody">
+
+<div class="backInfo">
+
+<h3>Farmer & Land Details</h3>
+
+<div class="info">
+<b>State:</b> <span id="cState">—</span>
+</div>
+
+<div class="info">
+<b>District:</b> <span id="cDistrict">—</span>
+</div>
+
+<div class="info">
+<b>Village:</b> <span id="cVillage">—</span>
+</div>
+
+<div class="info">
+<b>Survey / Gat:</b> <span id="cSurvey">—</span>
+</div>
+
+<div class="info">
+<b>Land Area:</b> <span id="cLand">—</span>
+</div>
+
+<div class="info">
+<b>Aadhaar:</b> XXXX-XXXX-<span id="cAadhaar">----</span>
+</div>
+
+</div>
+
+
+<!-- QR RIGHT SIDE -->
+
+<div class="qrArea">
+
+<div class="qrFrame">
 <div id="qrcode"></div>
 </div>
 
-<div class="qr-title">SCAN FARMER ID</div>
+<div class="qrText">SCAN FARMER ID</div>
 
 </div>
 
 </div>
 
 <div class="disclaimer">
-This is a personal-use card created by Kisan Seva Tools. It is not issued by any government department.
+Personal-use card created by Kisan Seva Tools. Not issued by any government department.
 </div>
 
 </div>
@@ -698,192 +636,166 @@ This is a personal-use card created by Kisan Seva Tools. It is not issued by any
 </div>
 
 </div>
+
 
 <script>
 
-let selectedDesign = "classic";
+let currentTheme="classic";
 
-function setDesign(design){
+function theme(t){
 
-selectedDesign = design;
+currentTheme=t;
 
-const front = document.getElementById("frontCard");
-const back = document.getElementById("backCard");
+document.getElementById("front").className="card";
+document.getElementById("back").className="card";
 
-front.classList.remove(
-"design-leaf",
-"design-blue",
-"design-gold"
-);
-
-back.classList.remove(
-"design-leaf",
-"design-blue",
-"design-gold"
-);
-
-if(design==="leaf"){
-front.classList.add("design-leaf");
-back.classList.add("design-leaf");
+if(t==="leaf"){
+document.getElementById("front").classList.add("theme-leaf");
+document.getElementById("back").classList.add("theme-leaf");
 }
 
-if(design==="blue"){
-front.classList.add("design-blue");
-back.classList.add("design-blue");
+if(t==="blue"){
+document.getElementById("front").classList.add("theme-blue");
+document.getElementById("back").classList.add("theme-blue");
 }
 
-if(design==="gold"){
-front.classList.add("design-gold");
-back.classList.add("design-gold");
+if(t==="gold"){
+document.getElementById("front").classList.add("theme-gold");
+document.getElementById("back").classList.add("theme-gold");
 }
 
 }
 
-function showMessage(text,type){
+function message(text,error=false){
 
-const box=document.getElementById("message");
+let m=document.getElementById("msg");
 
-box.textContent=text;
-box.className="message "+type;
-box.style.display="block";
+m.textContent=text;
+m.className="message "+(error?"err":"ok");
 
 }
 
-function generateCard(){
+function generate(){
 
-const name=document.getElementById("name").value.trim();
-const father=document.getElementById("father").value.trim();
-const dob=document.getElementById("dob").value;
-const gender=document.getElementById("gender").value;
-const mobile=document.getElementById("mobile").value.trim();
-const aadhaar=document.getElementById("aadhaar").value.trim();
-const farmerId=document.getElementById("farmerId").value.trim();
+let name=document.getElementById("name").value.trim();
+let father=document.getElementById("father").value.trim();
+let mobile=document.getElementById("mobile").value.trim();
+let aadhaar=document.getElementById("aadhaar").value.trim();
+let farmerId=document.getElementById("farmerId").value.trim();
 
 if(!name){
-showMessage("Please enter Farmer Name","error");
+message("Enter Farmer Name",true);
 return;
 }
 
 if(!father){
-showMessage("Please enter Father / Husband Name","error");
+message("Enter Father / Husband Name",true);
 return;
 }
 
 if(!/^\d{10}$/.test(mobile)){
-showMessage("Mobile number must contain exactly 10 digits","error");
+message("Mobile must be exactly 10 digits",true);
 return;
 }
 
 if(!/^\d{12}$/.test(aadhaar)){
-showMessage("Aadhaar number must contain exactly 12 digits","error");
+message("Aadhaar must be exactly 12 digits",true);
 return;
 }
 
 if(!/^\d{11}$/.test(farmerId)){
-showMessage("Farmer ID must contain exactly 11 digits","error");
+message("Farmer ID must be exactly 11 digits",true);
 return;
 }
 
-document.getElementById("cardName").textContent=name;
-document.getElementById("cardFather").textContent=father;
-document.getElementById("cardDob").textContent=dob || "—";
-document.getElementById("cardGender").textContent=gender || "—";
-document.getElementById("cardMobile").textContent=mobile;
-document.getElementById("cardFarmerId").textContent=farmerId;
+document.getElementById("cName").textContent=name;
+document.getElementById("cFather").textContent=father;
+document.getElementById("cDob").textContent=document.getElementById("dob").value||"—";
+document.getElementById("cGender").textContent=document.getElementById("gender").value||"—";
+document.getElementById("cMobile").textContent=mobile;
+document.getElementById("cID").textContent=farmerId;
 
-document.getElementById("cardState").textContent=
-document.getElementById("state").value || "—";
+document.getElementById("cState").textContent=document.getElementById("state").value||"—";
+document.getElementById("cDistrict").textContent=document.getElementById("district").value||"—";
+document.getElementById("cVillage").textContent=document.getElementById("village").value||"—";
+document.getElementById("cSurvey").textContent=document.getElementById("survey").value||"—";
+document.getElementById("cLand").textContent=document.getElementById("land").value||"—";
 
-document.getElementById("cardDistrict").textContent=
-document.getElementById("district").value || "—";
+document.getElementById("cAadhaar").textContent=aadhaar.slice(-4);
 
-document.getElementById("cardVillage").textContent=
-document.getElementById("village").value || "—";
 
-document.getElementById("cardSurvey").textContent=
-document.getElementById("survey").value || "—";
+/* PHOTO */
 
-document.getElementById("cardLand").textContent=
-document.getElementById("land").value || "—";
+let file=document.getElementById("photo").files[0];
 
-document.getElementById("cardAadhaar").textContent=
-aadhaar.slice(-4);
+if(file){
 
-/* QR ONLY USES FARMER ID + BASIC NON-SENSITIVE DATA */
-
-const qrData =
-"Kisan Seva Tools\n"+
-"Personal Farmer ID Card\n"+
-"Farmer ID: "+farmerId+"\n"+
-"Name: "+name+"\n"+
-"Village: "+(document.getElementById("village").value || "—");
-
-document.getElementById("qrcode").innerHTML="";
-
-new QRCode(document.getElementById("qrcode"),{
-text:qrData,
-width:155,
-height:155,
-correctLevel:QRCode.CorrectLevel.M
-});
-
-const photoInput=document.getElementById("photo");
-
-if(photoInput.files && photoInput.files[0]){
-
-const reader=new FileReader();
+let reader=new FileReader();
 
 reader.onload=function(e){
 document.getElementById("cardPhoto").src=e.target.result;
 };
 
-reader.readAsDataURL(photoInput.files[0]);
+reader.readAsDataURL(file);
 
 }
 
-showMessage("Farmer ID Card generated successfully","success");
 
-}
+/* QR */
 
-async function downloadPDF(){
+let qr=document.getElementById("qrcode");
 
-const element=document.getElementById("a4");
+qr.innerHTML="";
 
-showMessage("Preparing A4 PDF...","success");
+let qrText=
+"Kisan Seva Tools\n"+
+"Personal Farmer ID Card\n"+
+"Farmer ID: "+farmerId+"\n"+
+"Name: "+name+"\n"+
+"Village: "+(document.getElementById("village").value||"—");
 
-const canvas=await html2canvas(element,{
-scale:2,
-useCORS:true,
-backgroundColor:"#ffffff"
+new QRCode(qr,{
+text:qrText,
+width:160,
+height:160,
+correctLevel:QRCode.CorrectLevel.M
 });
 
-const imgData=canvas.toDataURL("image/jpeg",0.95);
+message("Farmer ID Card generated successfully.");
 
-const {jsPDF}=window.jspdf;
+}
 
-const pdf=new jsPDF({
+async function pdf(){
+
+message("Creating A4 PDF...");
+
+let element=document.getElementById("a4");
+
+let canvas=await html2canvas(element,{
+scale:2,
+backgroundColor:"#ffffff",
+useCORS:true
+});
+
+let image=canvas.toDataURL("image/jpeg",0.95);
+
+let jsPDF=window.jspdf.jsPDF;
+
+let doc=new jsPDF({
 orientation:"landscape",
 unit:"mm",
 format:"a4"
 });
 
-const pageWidth=297;
-const pageHeight=210;
+doc.addImage(image,"JPEG",0,0,297,210);
 
-pdf.addImage(
-imgData,
-"JPEG",
-0,
-0,
-pageWidth,
-pageHeight
-);
+doc.save("Kisan-Seva-Farmer-ID-Card.pdf");
 
-pdf.save("Farmer-ID-Card.pdf");
+message("PDF downloaded successfully.");
 
 }
 
 </script>
 
 </body>
- </html>
+    </html>
