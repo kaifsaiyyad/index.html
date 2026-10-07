@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kisan Seva Tools - Farmer Card Maker</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f3f7f3;
+  color:#222;
+}
+
+header{
+  background:#176b3a;
+  color:white;
+  text-align:center;
+  padding:22px 15px;
+}
+
+header h1{
+  font-size:27px;
+}
+
+header p{
+  margin-top:6px;
+  font-size:14px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px 15px;
+}
+
+.box{
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  margin-bottom:20px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+h2{
+  color:#176b3a;
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-top:14px;
+  margin-bottom:6px;
+}
+
+input,select{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:15px;
+}
+
+button{
+  border:0;
+  border-radius:8px;
+  padding:13px 18px;
+  font-weight:bold;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.generate{
+  width:100%;
+  margin-top:20px;
+  background:#176b3a;
+  color:white;
+}
+
+.cards{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:25px;
+}
+
+.card{
+  width:360px;
+  min-height:225px;
+  background:white;
+  border:1px solid #ccc;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+.card-header{
+  background:#176b3a;
+  color:white;
+  text-align:center;
+  padding:12px;
+}
+
+.card-header h3{
+  font-size:18px;
+}
+
+.card-header p{
+  font-size:10px;
+  margin-top:4px;
+}
+
+.card-body{
+  padding:13px;
+}
+
+.front{
+  display:flex;
+  gap:12px;
+}
+
+.photo{
+  width:85px;
+  height:105px;
+  object-fit:cover;
+  border:1px solid #aaa;
+  border-radius:6px;
+  background:#eee;
+}
+
+.info{
+  font-size:11px;
+  line-height:1.7;
+}
+
+.info b{
+  color:#176b3a;
+}
+
+.address{
+  font-size:11px;
+  line-height:1.8;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+  font-size:10px;
+}
+
+th,td{
+  border:1px solid #aaa;
+  padding:6px 3px;
+  text-align:center;
+}
+
+.notice{
+  margin-top:12px;
+  padding:8px;
+  background:#fff8d8;
+  border-radius:6px;
+  font-size:9px;
+  text-align:center;
+  color:#555;
+}
+
+.card-footer{
+  text-align:center;
+  font-size:8px;
+  color:#777;
+  margin-top:10px;
+}
+
+.print{
+  width:100%;
+  background:#176b3a;
+  color:white;
+  margin-top:20px;
+}
+
+@media(max-width:400px){
+  .card{
+    width:100%;
+  }
+}
+
+@media print{
+  header,.form-box,.print{
+    display:none;
+  }
+
+  body{
+    background:white;
+  }
+
+  .container{
+    padding:0;
+  }
+
+  .card{
+    box-shadow:none;
+    page-break-inside:avoid;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🌾 Kisan Seva Tools</h1>
+  <p>Farmer Digital Services & Tools</p>
+</header>
+
+<div class="container">
+
+<div class="box form-box">
+
+<h2>🪪 Farmer Information Card</h2>
+
+<label>Farmer Photo</label>
+<input type="file" id="photo" accept="image/*">
+
+<label>Farmer Name</label>
+<input type="text" id="name" placeholder="Enter farmer name">
+
+<label>Father / Husband Name</label>
+<input type="text" id="father" placeholder="Enter name">
+
+<label>Date of Birth</label>
+<input type="date" id="dob">
+
+<label>Gender</label>
+<select id="gender">
+<option value="">Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+
+<label>Mobile Number</label>
+<input type="tel" id="mobile" placeholder="Enter mobile number">
+
+<label>Farmer ID</label>
+<input type="text" id="farmerId" placeholder="Enter Farmer ID">
+
+<label>Address</label>
+<input type="text" id="address" placeholder="Enter address">
+
+<label>State</label>
+<input type="text" id="state" placeholder="Enter state">
+
+<label>District</label>
+<input type="text" id="district" placeholder="Enter district">
+
+<label>Village</label>
+<input type="text" id="village" placeholder="Enter village">
+
+<label>Survey / Gat Number</label>
+<input type="text" id="survey" placeholder="Enter survey / gat number">
+
+<label>Land Area</label>
+<input type="text" id="area" placeholder="Example: 2.50 Acre">
+
+<button class="generate" onclick="generateCard()">
+Generate Farmer Card
+</button>
+
+</div>
+
+<div class="box">
+
+<h2>Card Preview</h2>
+
+<div class="cards">
+
+<!-- FRONT CARD -->
+
+<div class="card">
+
+<div class="card-header">
+<h3>🌾 FARMER INFORMATION CARD</h3>
+<p>PERSONAL USE</p>
+</div>
+
+<div class="card-body">
+
+<div class="front">
+
+<img id="cardPhoto"
+class="photo"
+src=""
+alt="Photo">
+
+<div class="info">
+
+<div><b>Name:</b> <span id="outName">—</span></div>
+
+<div><b>S/O:</b> <span id="outFather">—</span></div>
+
+<div><b>DOB:</b> <span id="outDob">—</span></div>
+
+<div><b>Gender:</b> <span id="outGender">—</span></div>
+
+<div><b>Mobile:</b> <span id="outMobile">—</span></div>
+
+<div><b>Farmer ID:</b> <span id="outFarmerId">—</span></div>
+
+</div>
+
+</div>
+
+<div class="notice">
+Personal-use information card. Not a Government-issued ID.
+</div>
+
+<div class="card-footer">
+Kisan Seva Tools
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BACK CARD -->
+
+<div class="card">
+
+<div class="card-header">
+<h3>🌾 FARMER INFORMATION CARD</h3>
+<p>ADDRESS & LAND INFORMATION</p>
+</div>
+
+<div class="card-body">
+
+<div class="address">
+
+<div><b>Address:</b> <span id="outAddress">—</span></div>
+
+<div><b>State:</b> <span id="outState">—</span></div>
+
+<div><b>District:</b> <span id="outDistrict">—</span></div>
+
+<div><b>Village:</b> <span id="outVillage">—</span></div>
+
+</div>
+
+<table>
+
+<tr>
+<th>Survey / Gat No.</th>
+<th>Land Area</th>
+</tr>
+
+<tr>
+<td id="outSurvey">—</td>
+<td id="outArea">—</td>
+</tr>
+
+</table>
+
+<div class="notice">
+This card is for personal information use only.
+It is not issued, verified or authorized by any Government department.
+</div>
+
+<div class="card-footer">
+Kisan Seva Tools
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<button class="print" onclick="window.print()">
+🖨️ Print / Save as PDF
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function generateCard(){
+
+document.getElementById("outName").textContent =
+document.getElementById("name").value || "—";
+
+document.getElementById("outFather").textContent =
+document.getElementById("father").value || "—";
+
+document.getElementById("outDob").textContent =
+document.getElementById("dob").value || "—";
+
+document.getElementById("outGender").textContent =
+document.getElementById("gender").value || "—";
+
+document.getElementById("outMobile").textContent =
+document.getElementById("mobile").value || "—";
+
+document.getElementById("outFarmerId").textContent =
+document.getElementById("farmerId").value || "—";
+
+document.getElementById("outAddress").textContent =
+document.getElementById("address").value || "—";
+
+document.getElementById("outState").textContent =
+document.getElementById("state").value || "—";
+
+document.getElementById("outDistrict").textContent =
+document.getElementById("district").value || "—";
+
+document.getElementById("outVillage").textContent =
+document.getElementById("village").value || "—";
+
+document.getElementById("outSurvey").textContent =
+document.getElementById("survey").value || "—";
+
+document.getElementById("outArea").textContent =
+document.getElementById("area").value || "—";
+
+}
+
+document.getElementById("photo").addEventListener("change",function(){
+
+const file=this.files[0];
+
+if(file){
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+document.getElementById("cardPhoto").src=e.target.result;
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
