@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Farmer Services - Kisan Seva Tools</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f1f6f2;
+color:#183b28;
+}
+
+.header{
+background:#176b3a;
+color:white;
+text-align:center;
+padding:25px 15px;
+}
+
+.header h1{margin:5px 0}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px 15px 40px;
+}
+
+.back{
+display:inline-block;
+background:white;
+color:#176b3a;
+padding:10px 15px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.title{
+text-align:center;
+margin:25px 0;
+}
+
+.title h2{color:#176b3a}
+
+.services{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+.card{
+background:white;
+padding:22px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 3px 12px #0002;
+}
+
+.icon{font-size:40px}
+
+.card h3{
+color:#176b3a;
+}
+
+.card p{
+color:#666;
+font-size:14px;
+line-height:1.5;
+}
+
+button{
+background:#176b3a;
+color:white;
+border:0;
+padding:10px 18px;
+border-radius:7px;
+font-weight:bold;
+}
+
+.notice{
+margin-top:20px;
+background:#fff8df;
+padding:15px;
+border-radius:10px;
+font-size:13px;
+}
+
+.footer{
+background:#176b3a;
+color:white;
+text-align:center;
+padding:18px;
+font-size:12px;
+margin-top:20px;
+}
+
+@media(max-width:600px){
+.services{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<div style="font-size:38px">🌱</div>
+<h1>Kisan Seva Tools</h1>
+<p>Farmer Digital Services</p>
+</div>
+
+<div class="container">
+
+<a class="back" href="Home.html">← Back to Home</a>
+
+<div class="title">
+<h2>Farmer Services</h2>
+<p>Useful digital tools for farmers</p>
+</div>
+
+<div class="services">
+
+<div class="card">
+<div class="icon">🌾</div>
+<h3>Farmer ID Card</h3>
+<p>Create your personal-use Farmer ID Card.</p>
+<button onclick="location.href='index.html'">
+Open
+</button>
+</div>
+
+<div class="card">
+<div class="icon">📝</div>
+<h3>Farmer Registration</h3>
+<p>Register farmer information for card creation.</p>
+<button onclick="location.href='index.html'">
+Register
+</button>
+</div>
+
+<div class="card">
+<div class="icon">📄</div>
+<h3>Document Help</h3>
+<p>Document-related digital services will be added soon.</p>
+<button onclick="soon()">Coming Soon</button>
+</div>
+
+<div class="card">
+<div class="icon">🌱</div>
+<h3>More Services</h3>
+<p>Additional farmer tools will be added in future.</p>
+<button onclick="soon()">Coming Soon</button>
+</div>
+
+</div>
+
+<div class="notice">
+<b>Important:</b><br>
+These are personal digital tools. This website is not a government website
+and does not issue government documents.
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 Kisan Seva Tools • Personal Use
+</div>
+
+<script>
+function soon(){
+alert("This service will be available soon.");
+}
+</script>
+
+</body>
+</html>
