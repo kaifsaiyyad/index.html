@@ -61,6 +61,48 @@ color:#555;
 font-size:14px;
 }
 
+/* WALLET */
+
+.wallet{
+background:#176b3a;
+color:white;
+border-radius:16px;
+padding:20px;
+margin-bottom:20px;
+box-shadow:0 3px 15px #0002;
+}
+
+.wallet-title{
+font-size:18px;
+font-weight:bold;
+margin-bottom:8px;
+}
+
+.balance{
+font-size:32px;
+font-weight:bold;
+margin:5px 0 15px;
+}
+
+.wallet-info{
+font-size:13px;
+line-height:1.6;
+}
+
+.wallet-button{
+display:inline-block;
+margin-top:12px;
+background:white;
+color:#176b3a;
+border:0;
+padding:10px 18px;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* SERVICES */
+
 .services{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -101,6 +143,44 @@ color:white;
 padding:10px 18px;
 border-radius:7px;
 font-weight:bold;
+cursor:pointer;
+}
+
+/* CHARGES */
+
+.charges{
+background:white;
+border-radius:15px;
+padding:20px;
+margin-top:20px;
+box-shadow:0 3px 12px #0002;
+}
+
+.charges h3{
+margin-top:0;
+color:#176b3a;
+}
+
+.charge-row{
+display:flex;
+justify-content:space-between;
+padding:11px 4px;
+border-bottom:1px solid #eee;
+font-size:14px;
+}
+
+.charge-row:last-child{
+border-bottom:0;
+}
+
+.paid{
+font-weight:bold;
+color:#c56b00;
+}
+
+.free{
+font-weight:bold;
+color:#16833b;
 }
 
 .notice{
@@ -123,6 +203,7 @@ font-size:12px;
 }
 
 @media(max-width:600px){
+
 .services{
 grid-template-columns:1fr;
 }
@@ -130,6 +211,11 @@ grid-template-columns:1fr;
 .header h1{
 font-size:24px;
 }
+
+.balance{
+font-size:28px;
+}
+
 }
 </style>
 </head>
@@ -158,7 +244,34 @@ Simple digital tools and services for farmers.
 
 </div>
 
+
+<!-- COMMON WALLET -->
+
+<div class="wallet">
+
+<div class="wallet-title">
+💰 My Balance
+</div>
+
+<div class="balance" id="balance">
+₹0
+</div>
+
+<div class="wallet-info">
+This is your common Kisan Seva Tools balance.
+</div>
+
+<button class="wallet-button" onclick="openWallet()">
+View Wallet
+</button>
+
+</div>
+
+
+<!-- SERVICES -->
+
 <div class="services">
+
 
 <!-- FARMER ID CARD -->
 
@@ -170,6 +283,8 @@ Simple digital tools and services for farmers.
 
 <p>
 Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.
+<br><br>
+<b>Download Charge: ₹10</b>
 </p>
 
 <button onclick="location.href='index.html'">
@@ -189,6 +304,8 @@ Open Farmer Card
 
 <p>
 Register farmer details and save registration information.
+<br><br>
+<b class="free">FREE</b>
 </p>
 
 <button onclick="location.href='index.html'">
@@ -208,6 +325,9 @@ Register Now
 
 <p>
 Printing and Xerox service information.
+<br><br>
+<b>Photo Print: ₹5</b><br>
+<span class="free">Other services: FREE</span>
 </p>
 
 <button onclick="location.href='Print.html'">
@@ -227,6 +347,8 @@ Open Service
 
 <p>
 Useful PDF and document services.
+<br><br>
+<b class="free">FREE</b>
 </p>
 
 <button onclick="location.href='PDF.html'">
@@ -246,6 +368,8 @@ Open Service
 
 <p>
 Useful farmer-related digital services and tools.
+<br><br>
+<b class="free">FREE</b>
 </p>
 
 <button onclick="location.href='Farmer-Services.html'">
@@ -265,12 +389,58 @@ Open Service
 
 <p>
 Contact information and help section.
+<br><br>
+<b class="free">FREE</b>
 </p>
 
 <button onclick="location.href='Contact.html'">
 Contact
 </button>
 
+</div>
+
+</div>
+
+
+<!-- SERVICE CHARGES -->
+
+<div class="charges">
+
+<h3>💳 Service Charges</h3>
+
+<div class="charge-row">
+<span>🌾 Farmer Card Download</span>
+<span class="paid">₹10</span>
+</div>
+
+<div class="charge-row">
+<span>🖨️ Photo Print</span>
+<span class="paid">₹5</span>
+</div>
+
+<div class="charge-row">
+<span>📋 Farmer Registration</span>
+<span class="free">FREE</span>
+</div>
+
+<div class="charge-row">
+<span>📄 PDF Services</span>
+<span class="free">FREE</span>
+</div>
+
+<div class="charge-row">
+<span>📑 Xerox</span>
+<span class="free">FREE</span>
+</div>
+
+<div class="charge-row">
+<span>🌱 Farmer Services</span>
+<span class="free">FREE</span>
+</div>
+
+<div class="charge-row">
+<span>📞 Contact / Help</span>
+<span class="free">FREE</span>
 </div>
 
 </div>
@@ -284,6 +454,14 @@ Kisan Seva Tools is a personal digital service website.
 Farmer ID Cards created through this website are
 <b>not government-issued documents</b>.
 
+<br><br>
+
+<b>Payment Note:</b><br>
+
+Farmer Card Download = ₹10<br>
+Photo Print = ₹5<br>
+All other listed services = FREE.
+
 </div>
 
 </div>
@@ -294,6 +472,32 @@ Farmer ID Cards created through this website are
 © 2026 Kisan Seva Tools • Personal Use
 
 </div>
+
+
+<script>
+
+/* COMMON BALANCE */
+
+let balance = Number(
+localStorage.getItem("kst_balance") || 0
+);
+
+function showBalance(){
+
+document.getElementById("balance").innerText =
+"₹" + balance;
+
+}
+
+function openWallet(){
+
+location.href="Wallet.html";
+
+}
+
+showBalance();
+
+</script>
 
 </body>
 </html>
