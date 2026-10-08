@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kisan Seva Tools - Home</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f1f6f2;
+  color:#183b28;
+}
+
+.header{
+  background:#176b3a;
+  color:white;
+  text-align:center;
+  padding:28px 15px;
+}
+
+.logo{
+  font-size:42px;
+}
+
+.header h1{
+  margin:5px 0;
+  font-size:28px;
+}
+
+.header p{
+  margin:8px 0 0;
+  font-size:14px;
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:20px 15px 40px;
+}
+
+.welcome{
+  background:white;
+  border-radius:16px;
+  padding:22px;
+  text-align:center;
+  box-shadow:0 3px 15px #0002;
+  margin-bottom:20px;
+}
+
+.welcome h2{
+  margin:0 0 8px;
+  color:#176b3a;
+}
+
+.welcome p{
+  margin:0;
+  color:#555;
+  font-size:14px;
+}
+
+.services{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.service{
+  background:white;
+  border-radius:15px;
+  padding:22px 16px;
+  text-align:center;
+  box-shadow:0 3px 12px #0002;
+  border:1px solid #e1e8e3;
+}
+
+.icon{
+  font-size:38px;
+  margin-bottom:8px;
+}
+
+.service h3{
+  margin:5px 0 7px;
+  color:#176b3a;
+  font-size:18px;
+}
+
+.service p{
+  margin:0 0 15px;
+  color:#666;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.service button{
+  border:0;
+  background:#176b3a;
+  color:white;
+  padding:10px 18px;
+  border-radius:7px;
+  font-weight:bold;
+}
+
+.notice{
+  margin-top:20px;
+  background:#fff8df;
+  border-left:5px solid #d19b00;
+  border-radius:10px;
+  padding:15px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.footer{
+  margin-top:30px;
+  background:#176b3a;
+  color:white;
+  text-align:center;
+  padding:18px;
+  font-size:12px;
+}
+
+@media(max-width:600px){
+  .services{
+    grid-template-columns:1fr;
+  }
+
+  .header h1{
+    font-size:24px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="logo">🌾</div>
+  <h1>Kisan Seva Tools</h1>
+  <p>Farmer Services & Digital Tools</p>
+</div>
+
+<div class="container">
+
+  <div class="welcome">
+    <h2>Welcome to Kisan Seva Tools</h2>
+    <p>Simple digital tools and services for farmers.</p>
+  </div>
+
+  <div class="services">
+
+    <div class="service">
+      <div class="icon">🌾</div>
+      <h3>Farmer ID Card</h3>
+      <p>Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.</p>
+      <button onclick="openFarmerCard()">Open Farmer Card</button>
+    </div>
+
+    <div class="service">
+      <div class="icon">📝</div>
+      <h3>Farmer Registration</h3>
+      <p>Register farmer details and save registration information.</p>
+      <button onclick="openFarmerCard()">Register Now</button>
+    </div>
+
+    <div class="service">
+      <div class="icon">🖨️</div>
+      <h3>Print / Xerox</h3>
+      <p>Printing and Xerox service information will be available here.</p>
+      <button onclick="comingSoon()">Open Service</button>
+    </div>
+
+    <div class="service">
+      <div class="icon">📄</div>
+      <h3>PDF Services</h3>
+      <p>Useful PDF and document services for farmers and customers.</p>
+      <button onclick="comingSoon()">Open Service</button>
+    </div>
+
+    <div class="service">
+      <div class="icon">🌱</div>
+      <h3>Farmer Services</h3>
+      <p>Useful farmer-related digital services and tools.</p>
+      <button onclick="comingSoon()">Open Service</button>
+    </div>
+
+    <div class="service">
+      <div class="icon">📞</div>
+      <h3>Contact / Help</h3>
+      <p>Contact information and help section will be added here.</p>
+      <button onclick="comingSoon()">Contact</button>
+    </div>
+
+  </div>
+
+  <div class="notice">
+    <b>Important:</b><br>
+    Kisan Seva Tools is a personal digital service website.
+    Farmer ID Cards created through this website are
+    <b>not government-issued documents</b>.
+  </div>
+
+</div>
+
+<div class="footer">
+  © 2026 Kisan Seva Tools • Personal Use
+</div>
+
+<script>
+function openFarmerCard(){
+  window.location.href = "index.html";
+}
+
+function comingSoon(){
+  alert("This service will be available soon.");
+}
+</script>
+
+</body>
+</html>
