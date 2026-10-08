@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kisan Seva Tools - Wallet</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7f5;
+  color:#222;
+}
+header{
+  background:#176b3a;
+  color:white;
+  text-align:center;
+  padding:22px 15px;
+}
+header h1{margin:0;font-size:25px}
+header p{margin:6px 0 0;font-size:14px}
+
+.container{
+  max-width:600px;
+  margin:20px auto;
+  padding:15px;
+}
+
+.balance{
+  background:#176b3a;
+  color:white;
+  border-radius:15px;
+  padding:22px;
+  text-align:center;
+  box-shadow:0 4px 12px #0002;
+}
+.balance small{font-size:14px}
+.balance h2{
+  font-size:35px;
+  margin:8px 0;
+}
+
+.card{
+  background:white;
+  border-radius:14px;
+  padding:18px;
+  margin-top:18px;
+  box-shadow:0 3px 10px #0001;
+}
+
+.card h3{
+  margin-top:0;
+  color:#176b3a;
+}
+
+.service{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 5px;
+  border-bottom:1px solid #eee;
+}
+.service:last-child{border-bottom:0}
+
+.price{
+  font-weight:bold;
+}
+.paid{color:#d35400}
+.free{color:#16833b}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:10px;
+  padding:14px;
+  margin-top:10px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.add{
+  background:#176b3a;
+  color:white;
+}
+
+.back{
+  background:#eee;
+  color:#222;
+}
+
+.notice{
+  background:#fff8df;
+  border-left:5px solid #e0a500;
+  padding:12px;
+  margin-top:18px;
+  font-size:13px;
+}
+
+footer{
+  text-align:center;
+  padding:25px 10px;
+  font-size:12px;
+  color:#666;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🌾 Kisan Seva Tools</h1>
+  <p>Wallet & Service Charges</p>
+</header>
+
+<div class="container">
+
+  <div class="balance">
+    <small>My Balance</small>
+    <h2 id="balance">₹0</h2>
+    <small>Available Wallet Balance</small>
+  </div>
+
+  <div class="card">
+    <h3>💰 Wallet</h3>
+
+    <p>
+      Wallet का उपयोग paid services के लिए किया जा सकता है।
+    </p>
+
+    <button class="add" onclick="addBalance()">
+      ➕ Add Balance
+    </button>
+  </div>
+
+  <div class="card">
+    <h3>💳 Service Charges</h3>
+
+    <div class="service">
+      <span>🌾 Farmer Card Download</span>
+      <span class="price paid">₹10</span>
+    </div>
+
+    <div class="service">
+      <span>🖨️ Photo Print</span>
+      <span class="price paid">₹5</span>
+    </div>
+
+    <div class="service">
+      <span>📄 PDF Services</span>
+      <span class="price free">FREE</span>
+    </div>
+
+    <div class="service">
+      <span>📋 Farmer Registration</span>
+      <span class="price free">FREE</span>
+    </div>
+
+    <div class="service">
+      <span>📑 Xerox</span>
+      <span class="price free">FREE</span>
+    </div>
+
+    <div class="service">
+      <span>🖨️ Normal Printing</span>
+      <span class="price free">FREE</span>
+    </div>
+
+    <div class="service">
+      <span>👨‍🌾 Farmer Services</span>
+      <span class="price free">FREE</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📜 Transaction History</h3>
+    <div id="history">
+      <p style="color:#777">No transactions yet.</p>
+    </div>
+  </div>
+
+  <div class="notice">
+    ⚠️ अभी यह wallet demo/local version है। इसमें वास्तविक पैसे जमा नहीं होते।
+    Actual payment gateway बाद में secure backend के साथ जोड़ा जाएगा।
+  </div>
+
+  <button class="back" onclick="location.href='Home.html'">
+    ← Back to Home
+  </button>
+
+</div>
+
+<footer>
+  Kisan Seva Tools • Personal Digital Service Website<br>
+  Farmer ID Card is not a government-issued document.
+</footer>
+
+<script>
+
+let balance = Number(localStorage.getItem("kst_balance") || 0);
+let history = JSON.parse(
+  localStorage.getItem("kst_history") || "[]"
+);
+
+function showBalance(){
+  document.getElementById("balance").innerText =
+    "₹" + balance;
+}
+
+function showHistory(){
+
+  const box = document.getElementById("history");
+
+  if(history.length === 0){
+    box.innerHTML =
+      '<p style="color:#777">No transactions yet.</p>';
+    return;
+  }
+
+  box.innerHTML = history.map(item => `
+    <div style="
+      padding:10px 0;
+      border-bottom:1px solid #eee;
+    ">
+      <b>${item.service}</b><br>
+      <small>${item.date}</small>
+      <span style="float:right;font-weight:bold">
+        ${item.amount > 0 ? "+" : ""}₹${item.amount}
+      </span>
+    </div>
+  `).join("");
+}
+
+function addBalance(){
+
+  alert(
+    "Actual Add Balance / Online Payment अभी setup नहीं है.\n\n" +
+    "Next step में secure payment system connect किया जाएगा."
+  );
+}
+
+function deduct(amount, service){
+
+  if(balance < amount){
+    alert(
+      "Insufficient Balance!\n\n" +
+      "Required: ₹" + amount +
+      "\nAvailable: ₹" + balance
+    );
+    return false;
+  }
+
+  balance -= amount;
+
+  history.unshift({
+    service: service,
+    amount: -amount,
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("kst_balance", balance);
+  localStorage.setItem("kst_history", JSON.stringify(history));
+
+  showBalance();
+  showHistory();
+
+  return true;
+}
+
+showBalance();
+showHistory();
+
+</script>
+
+</body>
+</html>
