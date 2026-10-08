@@ -121,11 +121,6 @@ button{
   color:#222;
 }
 
-
-/* ==================================================
-   A4 PREVIEW
-================================================== */
-
 .preview-title{
   text-align:center;
   color:#176b3a;
@@ -144,11 +139,6 @@ button{
   box-shadow:0 3px 20px #0002;
 }
 
-
-/* ==================================================
-   TWO CARD LAYOUT
-================================================== */
-
 .cards-row{
   width:100%;
   display:flex;
@@ -157,66 +147,36 @@ button{
   gap:8mm;
 }
 
-
-/* ==================================================
-   FARMER CARD
-================================================== */
-
 .card{
   width:85.6mm;
   height:54mm;
   flex:0 0 85.6mm;
-
   position:relative;
   overflow:hidden;
-
   background:#fff;
-
   border-radius:4mm;
-
   box-shadow:0 2mm 5mm #0003;
-
-  page-break-inside:avoid;
 }
-
-
-/* Main outer frame */
 
 .card::before{
   content:"";
   position:absolute;
   inset:1.5mm;
-
   border:0.65mm solid #176b3a;
-
   border-radius:3mm;
-
   z-index:10;
-
   pointer-events:none;
 }
-
-
-/* Inner frame */
 
 .card::after{
   content:"";
   position:absolute;
   inset:3.5mm;
-
   border:0.22mm solid #5d9974;
-
   border-radius:2.2mm;
-
   z-index:10;
-
   pointer-events:none;
 }
-
-
-/* ==================================================
-   DECORATIVE CORNERS
-================================================== */
 
 .corner{
   position:absolute;
@@ -228,47 +188,34 @@ button{
 .tl{
   left:1.5mm;
   top:1.5mm;
-
   border-left:1.2mm solid #176b3a;
   border-top:1.2mm solid #176b3a;
-
   border-radius:2.5mm 0 0 0;
 }
 
 .tr{
   right:1.5mm;
   top:1.5mm;
-
   border-right:1.2mm solid #176b3a;
   border-top:1.2mm solid #176b3a;
-
   border-radius:0 2.5mm 0 0;
 }
 
 .bl{
   left:1.5mm;
   bottom:1.5mm;
-
   border-left:1.2mm solid #176b3a;
   border-bottom:1.2mm solid #176b3a;
-
   border-radius:0 0 0 2.5mm;
 }
 
 .br{
   right:1.5mm;
   bottom:1.5mm;
-
   border-right:1.2mm solid #176b3a;
   border-bottom:1.2mm solid #176b3a;
-
   border-radius:0 0 2.5mm 0;
 }
-
-
-/* ==================================================
-   OUTER DECORATION
-================================================== */
 
 .leaf{
   position:absolute;
@@ -282,10 +229,8 @@ button{
   height:10mm;
   left:-4mm;
   bottom:1mm;
-
   border:1mm solid #176b3a;
   border-radius:100% 0 100% 0;
-
   transform:rotate(25deg);
 }
 
@@ -294,10 +239,8 @@ button{
   height:9mm;
   left:2mm;
   bottom:-3mm;
-
   border:0.8mm solid #176b3a;
   border-radius:100% 0 100% 0;
-
   transform:rotate(-25deg);
 }
 
@@ -306,10 +249,8 @@ button{
   height:10mm;
   right:-4mm;
   top:3mm;
-
   border:1mm solid #176b3a;
   border-radius:0 100% 0 100%;
-
   transform:rotate(25deg);
 }
 
@@ -318,31 +259,19 @@ button{
   height:8mm;
   right:3mm;
   top:0;
-
   border:.8mm solid #176b3a;
   border-radius:0 100% 0 100%;
-
   transform:rotate(-20deg);
 }
 
-
-/* ==================================================
-   TOP BAR
-================================================== */
-
 .card-top{
   height:8mm;
-
   background:#176b3a;
-
   color:#fff;
-
   display:flex;
   align-items:center;
   justify-content:space-between;
-
   padding:0 6mm;
-
   position:relative;
   z-index:4;
 }
@@ -353,89 +282,56 @@ button{
   letter-spacing:.25mm;
 }
 
-
-/* ==================================================
-   FRONT CARD
-================================================== */
-
 .front-title{
   position:relative;
   z-index:4;
-
   text-align:center;
-
   margin-top:2.3mm;
 }
 
 .front-title h2{
   margin:0;
-
   color:#176b3a;
-
   font-size:4.2mm;
-
   letter-spacing:.15mm;
 }
 
 .front-title small{
   display:block;
-
   margin-top:.6mm;
-
   color:#555;
-
   font-size:1.45mm;
-
   font-weight:bold;
-
   letter-spacing:.75mm;
 }
-
 
 .front-content{
   position:relative;
   z-index:4;
-
   display:flex;
-
   gap:3.5mm;
-
   padding:3mm 7mm 0;
 }
-
-
-/* Photo */
 
 .photo{
   width:23mm;
   height:27mm;
-
   flex:0 0 23mm;
-
   background:#f5f5f5;
-
   border:.65mm solid #176b3a;
-
   border-radius:2mm;
-
   overflow:hidden;
 }
 
 .photo img{
   width:100%;
   height:100%;
-
   object-fit:cover;
 }
 
-
-/* Details */
-
 .details{
   font-size:2.15mm;
-
   line-height:1.7;
-
   padding-top:.2mm;
 }
 
@@ -443,78 +339,46 @@ button{
   color:#176b3a;
 }
 
-
-/* Farmer ID */
-
 .farmer-id{
   margin-top:1.3mm;
-
   display:inline-block;
-
   padding:1.2mm 2.8mm;
-
   background:#176b3a;
-
   color:#fff;
-
   border-radius:1.5mm;
-
   font-size:2mm;
-
   font-weight:bold;
 }
-
-
-/* ==================================================
-   BACK CARD
-================================================== */
 
 .back-title{
   position:relative;
   z-index:4;
-
   text-align:center;
-
   margin-top:2.8mm;
-
   color:#176b3a;
-
   font-size:4mm;
-
   font-weight:bold;
 }
 
 .back-sub{
   position:relative;
   z-index:4;
-
   text-align:center;
-
   margin-top:.5mm;
-
   color:#666;
-
   font-size:1.35mm;
-
   letter-spacing:.7mm;
 }
-
 
 .back-content{
   position:relative;
   z-index:4;
-
   padding:3mm 6mm;
 }
 
-
-/* Details box */
-
 .land-details{
   width:57%;
-
   font-size:2mm;
-
   line-height:1.85;
 }
 
@@ -522,34 +386,22 @@ button{
   color:#176b3a;
 }
 
-
-/* QR */
-
 .qr-box{
   position:absolute;
-
   right:6.5mm;
   top:2.5mm;
-
   width:24mm;
-
   text-align:center;
 }
 
 .qr{
   width:23mm;
   height:23mm;
-
   background:#fff;
-
   border:.65mm solid #176b3a;
-
   border-radius:2mm;
-
   padding:1.2mm;
-
   display:flex;
-
   justify-content:center;
   align-items:center;
 }
@@ -561,41 +413,21 @@ button{
 
 .qr-label{
   margin-top:.7mm;
-
   font-size:1.25mm;
-
   color:#555;
-
   font-weight:bold;
 }
 
-
-/* ==================================================
-   DISCLAIMER
-================================================== */
-
 .disclaimer{
   position:absolute;
-
   bottom:2.4mm;
-
   left:0;
-
   width:100%;
-
   text-align:center;
-
   color:#666;
-
   font-size:1.15mm;
-
   z-index:30;
 }
-
-
-/* ==================================================
-   THEMES
-================================================== */
 
 .theme-blue .card-top,
 .theme-blue .farmer-id{
@@ -636,11 +468,6 @@ button{
   border-color:#77a984;
 }
 
-
-/* ==================================================
-   MOBILE
-================================================== */
-
 @media(max-width:600px){
 
   .grid{
@@ -660,11 +487,6 @@ button{
     margin-right:10px;
   }
 }
-
-
-/* ==================================================
-   PRINT
-================================================== */
 
 @media print{
 
@@ -687,15 +509,12 @@ button{
   .a4{
     width:210mm;
     height:297mm;
-
     margin:0;
-
     box-shadow:none;
   }
 }
 </style>
 </head>
-
 
 <body>
 
@@ -703,7 +522,6 @@ button{
   <h1>🌾 Kisan Seva Tools</h1>
   <p>Farmer ID Card Maker — Personal Use</p>
 </header>
-
 
 <div class="container">
 
@@ -817,7 +635,6 @@ button{
 
 </div>
 
-
 <div class="buttons">
 
 <button class="generate" onclick="generateCard()">
@@ -836,24 +653,13 @@ Print
 
 </div>
 
-
 <h2 class="preview-title">
 Card Preview
 </h2>
 
-
-<!-- ==================================================
-     A4
-================================================== -->
-
 <div class="a4" id="printArea">
 
 <div class="cards-row">
-
-
-<!-- ==================================================
-     FRONT CARD
-================================================== -->
 
 <div class="card theme-green" id="frontCard">
 
@@ -867,15 +673,12 @@ Card Preview
 <div class="leaf leaf3"></div>
 <div class="leaf leaf4"></div>
 
-
 <div class="card-top">
 
 <span>FARMER SERVICES</span>
-
 <span>PERSONAL USE</span>
 
 </div>
-
 
 <div class="front-title">
 
@@ -885,7 +688,6 @@ Card Preview
 
 </div>
 
-
 <div class="front-content">
 
 <div class="photo">
@@ -893,7 +695,6 @@ Card Preview
 <img id="photoPreview" alt="Farmer Photo">
 
 </div>
-
 
 <div class="details">
 
@@ -922,7 +723,6 @@ Card Preview
 <span id="outMobile">—</span>
 </div>
 
-
 <div class="farmer-id">
 
 FARMER ID:
@@ -934,18 +734,11 @@ FARMER ID:
 
 </div>
 
-
 <div class="disclaimer">
 Personal-use identification card • Not a government-issued document
 </div>
 
 </div>
-
-
-
-<!-- ==================================================
-     BACK CARD
-================================================== -->
 
 <div class="card theme-green" id="backCard">
 
@@ -959,15 +752,12 @@ Personal-use identification card • Not a government-issued document
 <div class="leaf leaf3"></div>
 <div class="leaf leaf4"></div>
 
-
 <div class="card-top">
 
 <span>FARMER INFORMATION</span>
-
 <span>KISAN SEVA TOOLS</span>
 
 </div>
-
 
 <div class="back-title">
 FARMER INFORMATION
@@ -976,7 +766,6 @@ FARMER INFORMATION
 <div class="back-sub">
 LAND & FARM DETAILS
 </div>
-
 
 <div class="back-content">
 
@@ -1015,7 +804,6 @@ XXXX-XXXX-
 
 </div>
 
-
 <div class="qr-box">
 
 <div class="qr" id="qrcode"></div>
@@ -1028,7 +816,6 @@ SCAN FARMER ID
 
 </div>
 
-
 <div class="disclaimer">
 Personal-use card created by Kisan Seva Tools. Not issued by any government department.
 </div>
@@ -1039,19 +826,122 @@ Personal-use card created by Kisan Seva Tools. Not issued by any government depa
 
 </div>
 
-
 </div>
-
 
 <script>
 
-
 /* ==================================================
-   GOOGLE SHEET
+   GOOGLE FORM → GOOGLE SHEET
 ================================================== */
 
-const GOOGLE_SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbzT0mP6htkurKvmA56nR_WDZdl8ykFA0oC-nYKfms9ugQuZyOPiTicMrrXuTfnBPZhM/exec";
+const GOOGLE_FORM_ACTION =
+"https://docs.google.com/forms/d/e/1FAIpQLSfB7hBMzqUJIsP_mPBcx282iPJuWtWG3ZJiIu0HjKpt7IOeUg/formResponse";
+
+
+function saveToGoogleSheet(data){
+
+  return new Promise(function(resolve){
+
+    const iframe =
+    document.createElement("iframe");
+
+    iframe.name =
+    "googleFormFrame";
+
+    iframe.style.display =
+    "none";
+
+    document.body.appendChild(iframe);
+
+    const form =
+    document.createElement("form");
+
+    form.action =
+    GOOGLE_FORM_ACTION;
+
+    form.method =
+    "POST";
+
+    form.target =
+    "googleFormFrame";
+
+    form.style.display =
+    "none";
+
+    const fields = {
+
+      "entry.428979561":
+      data.farmerId,
+
+      "entry.213763443":
+      data.name,
+
+      "entry.983920133":
+      data.dob,
+
+      "entry.1979623317":
+      data.father,
+
+      "entry.1819960862":
+      data.gender,
+
+      "entry.96409797":
+      data.mobile,
+
+      "entry.206266362":
+      data.aadhaarLast4,
+
+      "entry.1299371114":
+      data.state,
+
+      "entry.809659863":
+      data.district,
+
+      "entry.2083588227":
+      data.village,
+
+      "entry.726569329":
+      data.survey,
+
+      "entry.1351760005":
+      data.landArea
+
+    };
+
+    Object.keys(fields).forEach(function(name){
+
+      const input =
+      document.createElement("input");
+
+      input.type =
+      "hidden";
+
+      input.name =
+      name;
+
+      input.value =
+      fields[name] || "";
+
+      form.appendChild(input);
+
+    });
+
+    document.body.appendChild(form);
+
+    form.submit();
+
+    setTimeout(function(){
+
+      form.remove();
+      iframe.remove();
+
+      resolve();
+
+    },1000);
+
+  });
+
+}
 
 
 /* ==================================================
@@ -1145,7 +1035,7 @@ document.getElementById("photo")
     return;
   }
 
-  const reader=
+  const reader =
   new FileReader();
 
   reader.onload=function(e){
@@ -1211,6 +1101,14 @@ async function generateCard(){
   }
 
 
+  if(!name){
+
+    alert("Please enter Farmer Name.");
+
+    return;
+  }
+
+
   if(!/^\d{10}$/.test(mobile)){
 
     alert("Mobile number must contain exactly 10 digits.");
@@ -1222,6 +1120,14 @@ async function generateCard(){
   if(!/^\d{12}$/.test(aadhaar)){
 
     alert("Aadhaar number must contain exactly 12 digits.");
+
+    return;
+  }
+
+
+  if(!gender){
+
+    alert("Please select Gender.");
 
     return;
   }
@@ -1245,7 +1151,6 @@ async function generateCard(){
   document.getElementById("outFarmerId")
   .textContent=farmerId;
 
-
   document.getElementById("outState")
   .textContent=state || "—";
 
@@ -1262,13 +1167,16 @@ async function generateCard(){
   .textContent=landArea || "—";
 
 
-  /* Only last 4 Aadhaar digits */
+  /* ONLY LAST 4 AADHAAR DIGITS */
 
   document.getElementById("outAadhaar")
   .textContent=aadhaar.slice(-4);
 
 
-  /* QR */
+  /* ==================================================
+     QR
+     NO AADHAAR / MOBILE IN QR
+  ================================================== */
 
   const qr =
   document.getElementById("qrcode");
@@ -1297,7 +1205,9 @@ Village: ${village}`;
   });
 
 
-  /* Save data */
+  /* ==================================================
+     SAVE TO GOOGLE FORM → GOOGLE SHEET
+  ================================================== */
 
   await saveToGoogleSheet({
 
@@ -1329,48 +1239,9 @@ Village: ${village}`;
   });
 
 
-  alert("Farmer ID Card generated successfully.");
-
-}
-
-
-/* ==================================================
-   GOOGLE SHEET SAVE
-================================================== */
-
-async function saveToGoogleSheet(data){
-
-  try{
-
-    await fetch(
-
-      GOOGLE_SCRIPT_URL,
-
-      {
-
-        method:"POST",
-
-        mode:"no-cors",
-
-        headers:{
-          "Content-Type":
-          "text/plain;charset=utf-8"
-        },
-
-        body:JSON.stringify(data)
-
-      }
-
-    );
-
-  }catch(error){
-
-    console.log(
-      "Google Sheet error:",
-      error
-    );
-
-  }
+  alert(
+    "Farmer ID Card generated successfully.\n\nData saved to Google Sheet."
+  );
 
 }
 
@@ -1384,7 +1255,6 @@ async function savePDF(){
   const {jsPDF} =
   window.jspdf;
 
-
   const pdf =
   new jsPDF({
 
@@ -1396,10 +1266,8 @@ async function savePDF(){
 
   });
 
-
   const area =
   document.getElementById("printArea");
-
 
   const canvas =
   await html2canvas(
@@ -1418,10 +1286,8 @@ async function savePDF(){
 
   );
 
-
   const image =
   canvas.toDataURL("image/png");
-
 
   pdf.addImage(
 
@@ -1438,7 +1304,6 @@ async function savePDF(){
     297
 
   );
-
 
   pdf.save(
     "Farmer-ID-Card.pdf"
