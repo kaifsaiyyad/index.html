@@ -239,7 +239,7 @@ button{
   height:9mm;
   left:2mm;
   bottom:-3mm;
-  border:0.8mm solid #176b3a;
+  border:.8mm solid #176b3a;
   border-radius:100% 0 100% 0;
   transform:rotate(-25deg);
 }
@@ -642,11 +642,11 @@ Generate Farmer Card
 </button>
 
 <button class="pdf" onclick="savePDF()">
-A4 PDF
+A4 PDF — ₹10
 </button>
 
 <button class="print" onclick="window.print()">
-Print
+Print — FREE
 </button>
 
 </div>
@@ -829,6 +829,81 @@ Personal-use card created by Kisan Seva Tools. Not issued by any government depa
 </div>
 
 <script>
+
+/* ==================================================
+   COMMON WALLET
+================================================== */
+
+let balance = Number(
+  localStorage.getItem("kst_balance") || 0
+);
+
+function getBalance(){
+
+  return Number(
+    localStorage.getItem("kst_balance") || 0
+  );
+
+}
+
+
+function addTransaction(service,amount){
+
+  let history = JSON.parse(
+    localStorage.getItem("kst_history") || "[]"
+  );
+
+  history.unshift({
+
+    service:service,
+
+    amount:-amount,
+
+    date:new Date().toLocaleString()
+
+  });
+
+  localStorage.setItem(
+    "kst_history",
+    JSON.stringify(history)
+  );
+
+}
+
+
+function payFromWallet(amount,service){
+
+  let currentBalance = getBalance();
+
+  if(currentBalance < amount){
+
+    alert(
+      "Insufficient Wallet Balance.\n\n" +
+      "Required: ₹" + amount + "\n" +
+      "Available: ₹" + currentBalance + "\n\n" +
+      "Please add balance first."
+    );
+
+    return false;
+
+  }
+
+  currentBalance -= amount;
+
+  localStorage.setItem(
+    "kst_balance",
+    currentBalance
+  );
+
+  addTransaction(
+    service,
+    amount
+  );
+
+  return true;
+
+}
+
 
 /* ==================================================
    GOOGLE FORM → GOOGLE SHEET
@@ -1052,6 +1127,7 @@ document.getElementById("photo")
 
 /* ==================================================
    GENERATE CARD
+   FREE
 ================================================== */
 
 async function generateCard(){
@@ -1240,74 +1316,159 @@ Village: ${village}`;
 
 
   alert(
-    "Farmer ID Card generated successfully.\n\nData saved to Google Sheet."
+    "Farmer ID Card generated successfully.\n\nData saved to Google Sheet.\n\nPDF Download charge: ₹10."
   );
 
 }
 
 
 /* ==================================================
-   PDF
+   PDF DOWNLOAD
+   CHARGE = ₹10
 ================================================== */
 
 async function savePDF(){
 
-  const {jsPDF} =
-  window.jspdf;
+  /* CHECK WALLET BEFORE DOWNLOAD */
 
-  const pdf =
-  new jsPDF({
+  if(getBalance() < 10){
 
-    orientation:"portrait",
+    alert(
+      "Farmer Card PDF Download charge is ₹10.\n\n" +
+      "Your wallet balance is ₹" +
+      getBalance() +
+      ".\n\n" +
+      "Please add ₹10 or more to your wallet first."
+    );
 
-    unit:"mm",
+    return;
 
-    format:"a4"
+  }
 
-  });
 
-  const area =
-  document.getElementById("printArea");
+  /* ASK CONFIRMATION BEFORE DEDUCTION */
 
-  const canvas =
-  await html2canvas(
-
-    area,
-
-    {
-
-      scale:2,
-
-      useCORS:true,
-
-      backgroundColor:"#ffffff"
-
-    }
-
+  const confirmPayment =
+  confirm(
+    "Farmer Card PDF Download\n\n" +
+    "Charge: ₹10\n" +
+    "Wallet Balance: ₹" + getBalance() +
+    "\n\nContinue?"
   );
 
-  const image =
-  canvas.toDataURL("image/png");
 
-  pdf.addImage(
+  if(!confirmPayment){
 
-    image,
+    return;
 
-    "PNG",
+  }
 
-    0,
 
-    0,
+  /* DEDUCT ₹10 */
 
-    210,
-
-    297
-
+  const paymentSuccessful =
+  payFromWallet(
+    10,
+    "Farmer Card PDF Download"
   );
 
-  pdf.save(
-    "Farmer-ID-Card.pdf"
-  );
+
+  if(!paymentSuccessful){
+
+    return;
+
+  }
+
+
+  try{
+
+    const {jsPDF} =
+    window.jspdf;
+
+    const pdf =
+    new jsPDF({
+
+      orientation:"portrait",
+
+      unit:"mm",
+
+      format:"a4"
+
+    });
+
+    const area =
+    document.getElementById("printArea");
+
+    const canvas =
+    await html2canvas(
+
+      area,
+
+      {
+
+        scale:2,
+
+        useCORS:true,
+
+        backgroundColor:"#ffffff"
+
+      }
+
+    );
+
+    const image =
+    canvas.toDataURL("image/png");
+
+    pdf.addImage(
+
+      image,
+
+      "PNG",
+
+      0,
+
+      0,
+
+      210,
+
+      297
+
+    );
+
+    pdf.save(
+      "Farmer-ID-Card.pdf"
+    );
+
+
+    alert(
+      "PDF downloaded successfully.\n\n₹10 deducted from Wallet."
+    );
+
+  }catch(error){
+
+    /*
+      If PDF creation fails, refund ₹10
+      so the user is not charged for a failed download.
+    */
+
+    let currentBalance =
+    getBalance();
+
+    currentBalance += 10;
+
+    localStorage.setItem(
+      "kst_balance",
+      currentBalance
+    );
+
+
+    alert(
+      "PDF download failed.\n\n₹10 has been returned to your Wallet."
+    );
+
+    console.error(error);
+
+  }
 
 }
 
