@@ -3,8 +3,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kisan Seva Tools - Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kisan Seva Tools - Admin Dashboard</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -16,39 +16,46 @@
     header {
       background: #176b3a;
       color: white;
-      padding: 18px;
+      padding: 20px 12px;
       text-align: center;
     }
     main {
       max-width: 650px;
-      margin: 28px auto;
-      padding: 20px;
+      margin: 24px auto;
+      padding: 12px;
     }
     .card {
       background: white;
       padding: 22px;
+      margin-bottom: 18px;
       border-radius: 12px;
       box-shadow: 0 2px 10px #0001;
-      margin-bottom: 18px;
     }
     input, button {
+      display: block;
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       margin-top: 12px;
       border-radius: 7px;
       font-size: 16px;
     }
     input { border: 1px solid #bbb; }
     button {
-      border: 0;
+      border: none;
       background: #176b3a;
       color: white;
       font-weight: bold;
       cursor: pointer;
     }
+    button:disabled { opacity: .6; }
     .secondary { background: #444; }
-    .hidden { display: none; }
-    #message { overflow-wrap: anywhere; }
+    .hidden { display: none !important; }
+    #message {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      line-height: 1.5;
+    }
+    .note { color: #555; font-size: 14px; }
   </style>
 </head>
 <body>
@@ -61,105 +68,181 @@
     <section class="card" id="loginBox">
       <h3>Admin Login</h3>
       <p>Apne registered Admin email se login karein.</p>
+
       <form id="loginForm">
-        <input id="email" type="email" placeholder="Admin Email" required>
-        <input id="password" type="password" placeholder="Password" required>
-        <button type="submit">Login</button>
+        <input id="email" type="email"
+          placeholder="Admin Email" autocomplete="username" required>
+        <input id="password" type="password"
+          placeholder="Password" autocomplete="current-password" required>
+        <button id="loginBtn" type="submit">Login</button>
       </form>
-      <p id="message" role="status"></p>
+      <p id="message" role="status" aria-live="polite"></p>
     </section>
 
     <section class="card hidden" id="dashboard">
-      <h3>Welcome, Admin!</h3>
-      <p>Login successful.</p>
-      <p>Firebase security verification abhi configure karni baaki hai.</p>
-      <p>Farmer records abhi Google Sheet mein hain; yahan automatic nahi dikhenge.</p>
-      <button class="secondary" id="logoutBtn">Logout</button>
+      <h3>Admin Dashboard</h3>
+      <p id="welcome"></p>
+      <hr>
+      <h4>Dashboard Status</h4>
+      <p>Admin login aur permission verification successful hai.</p>
+      <p class="note">
+        Farmer registrations abhi Google Sheet mein hain.
+        Unhe yahan dikhane ke liye secure Sheet connection banana baaki hai.
+      </p>
+      <button id="logoutBtn" class="secondary" type="button">Logout</button>
     </section>
   </main>
 
   <script type="module">
     import { initializeApp } from
       "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
     import {
-      getAuth, signInWithEmailAndPassword,
-      onAuthStateChanged, signOut
+      getAuth,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
     } from
       "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
     import {
-      getFirestore, doc, getDoc
+      getFirestore,
+      doc,
+      getDoc
     } from
       "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-    // Firebase Console ke Web App config se values bharein.
+    // Firebase Console > Project settings > Your apps > Config
+    // Apne project ki asli values yahan paste karein.
     const firebaseConfig = {
       apiKey: "AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
       authDomain: "kisan-seva-tools.firebaseapp.com",
       projectId: "kisan-seva-tools",
-      appId: "1:900938868284:web:5a5b278506955fc0f48539",
-    }
+      appId: "1:900938868284:web:5a5b278506955fc0f48539"
+    };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
     const loginBox = document.getElementById("loginBox");
     const dashboard = document.getElementById("dashboard");
+    const loginForm = document.getElementById("loginForm");
+    const loginBtn = document.getElementById("loginBtn");
     const message = document.getElementById("message");
+    const welcome = document.getElementById("welcome");
 
-    async function checkAdmin(user) {
-      const adminDoc = await getDoc(doc(db, "admins", user.uid));
-      return adminDoc.exists() && adminDoc.data().role === "admin";
+    let auth;
+    let db;
+    let appReady = false;
+    let checkingUser = false;
+
+    function showError(text) {
+      message.textContent = text;
     }
 
-    onAuthStateChanged(auth, async (user) => {
-      loginBox.classList.remove("hidden");
+    function hideDashboard() {
       dashboard.classList.add("hidden");
+      loginBox.classList.remove("hidden");
+    }
 
-      if (!user) {
-        message.textContent = "";
+    try {
+      const missingConfig = Object.values(firebaseConfig).some(
+        value => !value || value.startsWith("PASTE_")
+      );
+
+      if (missingConfig) {
+        showError("Setup incomplete: Firebase config ki 4 asli values bharo.");
+      } else {
+        const app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+        appReady = true;
+
+        onAuthStateChanged(auth, async (user) => {
+          if (checkingUser) return;
+          checkingUser = true;
+
+          try {
+            hideDashboard();
+
+            if (!user) {
+              loginBtn.disabled = false;
+              loginBtn.textContent = "Login";
+              checkingUser = false;
+              return;
+            }
+
+            showError("Login successful. Admin permission check ho rahi hai...");
+
+            const adminRef = doc(db, "admins", user.uid);
+            const adminSnap = await getDoc(adminRef);
+
+            if (!adminSnap.exists() ||
+                adminSnap.data().role !== "admin") {
+              await signOut(auth);
+              showError(
+                "Admin permission nahi mili. Admin document ID aur Rules check karein."
+              );
+              checkingUser = false;
+              return;
+            }
+
+            loginBox.classList.add("hidden");
+            dashboard.classList.remove("hidden");
+            welcome.textContent = "Logged in: " + user.email;
+          } catch (error) {
+            hideDashboard();
+            showError(
+              "Admin verification error: " +
+              (error.code || "") + "\n" + error.message
+            );
+            if (auth.currentUser) await signOut(auth);
+          } finally {
+            loginBtn.disabled = false;
+            loginBtn.textContent = "Login";
+            checkingUser = false;
+          }
+        });
+      }
+    } catch (error) {
+      showError("Firebase setup error: " + error.message);
+    }
+
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!appReady) {
+        showError("Firebase config sahi tarah fill nahi hai.");
         return;
       }
 
+      loginBtn.disabled = true;
+      loginBtn.textContent = "Logging in...";
+      showError("Firebase login shuru ho raha hai...");
+
       try {
-        if (await checkAdmin(user)) {
-          loginBox.classList.add("hidden");
-          dashboard.classList.remove("hidden");
-        } else {
-          message.textContent = "Is account ko Admin permission nahi hai.";
-          await signOut(auth);
-        }
+        await signInWithEmailAndPassword(
+          auth,
+          document.getElementById("email").value.trim(),
+          document.getElementById("password").value
+        );
+
+        showError("Login successful. Admin permission check ho rahi hai...");
       } catch (error) {
-        message.textContent = "Verification failed. Firebase config aur Rules check karein.";
-        await signOut(auth);
+        showError(
+          "Login error: " + (error.code || "") + "\n" + error.message
+        );
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Login";
       }
     });
 
-    
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  message.textContent = "Login ho raha hai...";
-
-  try {
-    const credential = await signInWithEmailAndPassword(
-      auth,
-      document.getElementById("email").value.trim(),
-      document.getElementById("password").value
-    );
-
-    message.textContent = "Login successful. Admin verify ho raha hai...";
-
-    const allowed = await checkAdmin(credential.user);
-
-    if (allowed) {
-      loginBox.classList.add("hidden");
-      dashboard.classList.remove("hidden");
-      message.textContent = "";
-    } else {
-      message.textContent = "Admin permission nahi mili.";
-      await signOut(auth);
-    }
-  } catch (error) {
-    message.textContent = "Error: " + error.code + " — " + error.message;
-    console.error("Admin login error:", error);
-  }
-});
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        hideDashboard();
+        showError("Logout successful.");
+      } catch (error) {
+        showError("Logout error: " + error.message);
+      }
+    });
+  </script>
+</body>
+</html>
