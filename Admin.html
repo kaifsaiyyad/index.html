@@ -134,23 +134,32 @@
       }
     });
 
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      message.textContent = "Login ho raha hai...";
-      try {
-        await signInWithEmailAndPassword(
-          auth,
-          document.getElementById("email").value.trim(),
-          document.getElementById("password").value
-        );
-      } catch (error) {
-        message.textContent = "Login nahi hua. Email, password aur Firebase config check karein.";
-      }
-    });
+    
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  message.textContent = "Login ho raha hai...";
 
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
+  try {
+    const credential = await signInWithEmailAndPassword(
+      auth,
+      document.getElementById("email").value.trim(),
+      document.getElementById("password").value
+    );
+
+    message.textContent = "Login successful. Admin verify ho raha hai...";
+
+    const allowed = await checkAdmin(credential.user);
+
+    if (allowed) {
+      loginBox.classList.add("hidden");
+      dashboard.classList.remove("hidden");
+      message.textContent = "";
+    } else {
+      message.textContent = "Admin permission nahi mili.";
       await signOut(auth);
-    });
-  </script>
-</body>
-</html>
+    }
+  } catch (error) {
+    message.textContent = "Error: " + error.code + " — " + error.message;
+    console.error("Admin login error:", error);
+  }
+});
