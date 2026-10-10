@@ -6,24 +6,24 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kisan Seva Tools Admin</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f1f5f2;color:#222}
+body{margin:0;font-family:Arial;background:#f1f5f2;color:#222}
 header{background:#176b3a;color:white;padding:20px;text-align:center}
 main{max-width:900px;margin:20px auto;padding:12px}
 .card{background:white;padding:18px;margin:12px 0;border-radius:12px;box-shadow:0 2px 8px #0001}
-input,button{width:100%;padding:12px;margin:7px 0}
-button{background:#176b3a;color:white;border:0;border-radius:6px;font-weight:bold;cursor:pointer}
-button:disabled{opacity:.6}
+input,button{width:100%;padding:12px;margin:7px 0;box-sizing:border-box}
+button{background:#176b3a;color:white;border:0;border-radius:6px;font-weight:bold}
 .hidden{display:none}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
 .stat{background:#e5f3e9;padding:16px;border-radius:8px}
-#msg{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.5}
+#msg{white-space:pre-wrap;overflow-wrap:anywhere}
+.version{font-size:12px;opacity:.9}
 </style>
 </head>
 <body>
 <header>
 <h2>Kisan Seva Tools</h2>
 <div>Admin Dashboard</div>
+<div class="version">ADMIN DIAGNOSTIC VERSION 2</div>
 </header>
 <main>
 <section class="card" id="loginBox">
@@ -33,7 +33,7 @@ button:disabled{opacity:.6}
 <input id="password" type="password" placeholder="Password" required>
 <button id="loginBtn" type="submit">Login</button>
 </form>
-<p id="msg" role="status"></p>
+<p id="msg">Ready to login.</p>
 </section>
 
 <section class="hidden" id="dashboard">
@@ -43,14 +43,14 @@ button:disabled{opacity:.6}
 <button id="logout" type="button">Logout</button>
 </div>
 <div class="grid">
-<div class="stat"><b>Farmer Records</b><p>Google Sheets connection pending</p></div>
+<div class="stat"><b>Farmer Records</b><p>Secure connection pending</p></div>
 <div class="stat"><b>Wallet</b><p>Transaction connection pending</p></div>
 <div class="stat"><b>Earnings</b><p>Verified records pending</p></div>
-<div class="stat"><b>Services</b><p>Service records pending</p></div>
+<div class="stat"><b>Services</b><p>Service connection pending</p></div>
 </div>
 <div class="card">
 <h3>Dashboard Data</h3>
-<p>Admin login successful. Farmer records, transactions and earnings require separate secure data connections.</p>
+<p>Admin login successful. Farmer data and payment records require separate secure connections.</p>
 </div>
 </section>
 </main>
@@ -60,7 +60,8 @@ import {initializeApp}
 from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 
 import {
- getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut
+ getAuth,onAuthStateChanged,
+ signInWithEmailAndPassword,signOut
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
 import {
@@ -79,12 +80,12 @@ const loginBox=document.getElementById("loginBox");
 const dashboard=document.getElementById("dashboard");
 const loginBtn=document.getElementById("loginBtn");
 
-let auth,db,checking=false;
+let auth,db,appReady=false,checking=false;
 
-function showLogin(message=""){
+function showMessage(text){
  loginBox.classList.remove("hidden");
  dashboard.classList.add("hidden");
- msg.textContent=message;
+ msg.textContent=text;
 }
 
 function showDashboard(user){
@@ -94,56 +95,50 @@ function showDashboard(user){
   "Logged in: "+(user.email||"Admin");
 }
 
-async function checkAdmin(user){
+async function verifyAdmin(user){
  if(checking)return;
  checking=true;
 
  try{
-  msg.textContent="Checking admin permission...";
-
+  msg.textContent="Checking Firebase admin access...";
   const ref=doc(db,"admins",user.uid);
   const snap=await getDoc(ref);
 
   if(!snap.exists()){
-   showLogin(
-    "ADMIN CHECK FAILED\n"+
+   showMessage(
+    "ADMIN DOCUMENT NOT FOUND\n"+
     "Project: "+config.projectId+"\n"+
-    "Logged-in email: "+(user.email||"unavailable")+"\n"+
-    "Admin document exists: false\n"+
-    "Expected document path: admins/"+user.uid+"\n"+
-    "Meaning: Firebase could not find this user's admin document."
+    "Email: "+(user.email||"not available")+"\n"+
+    "Document exists: false\n"+
+    "Expected path: admins/"+user.uid+"\n"+
+    "Firebase authenticated this user, but the admin document was not found."
    );
-   await signOut(auth);
    return;
   }
 
   const data=snap.data();
-  const role=typeof data.role==="string"?data.role:"(missing or not a string)";
+  const role=data.role;
 
-  if(role.trim()==="admin"){
+  if(role==="admin"){
    showDashboard(user);
   }else{
-   showLogin(
-    "ADMIN ROLE CHECK FAILED\n"+
+   showMessage(
+    "ADMIN ROLE DOES NOT MATCH\n"+
     "Project: "+config.projectId+"\n"+
-    "Admin document exists: true\n"+
-    "Role found: "+role+"\n"+
+    "Document exists: true\n"+
+    "Role value: "+String(role??"(missing)")+"\n"+
     "Expected role: admin\n"+
     "Document path: admins/"+user.uid
    );
-   await signOut(auth);
   }
 
  }catch(e){
-  showLogin(
-   "FIREBASE ERROR\n"+
+  showMessage(
+   "FIRESTORE ACCESS ERROR\n"+
    "Code: "+(e.code||"unknown")+"\n"+
-   "Message: "+(e.message||"No message")+"\n"+
-   "Project: "+config.projectId+"\n"+
-   "If permission-denied appears, Firestore rules or access must be investigated."
+   "Message: "+(e.message||"No details")+"\n"+
+   "Project: "+config.projectId
   );
-
-  try{await signOut(auth)}catch(_){}
  }finally{
   checking=false;
  }
@@ -153,26 +148,27 @@ try{
  const app=initializeApp(config);
  auth=getAuth(app);
  db=getFirestore(app);
+ appReady=true;
 
- onAuthStateChanged(auth,async user=>{
+ onAuthStateChanged(auth,user=>{
   if(!user){
-   showLogin();
+   showMessage("Ready to login.");
    return;
   }
-  await checkAdmin(user);
+  verifyAdmin(user);
  });
-
 }catch(e){
- showLogin(
-  "FIREBASE SETUP ERROR\n"+
+ showMessage(
+  "FIREBASE INITIALIZATION ERROR\n"+
   (e.code||"")+" "+e.message
  );
 }
 
 document.getElementById("loginForm").addEventListener("submit",async e=>{
  e.preventDefault();
- if(!auth){
-  showLogin("Firebase initialize nahi hua. Page refresh karke dobara try karo.");
+
+ if(!appReady){
+  showMessage("Firebase initialize nahi hua. Error: "+config.projectId);
   return;
  }
 
@@ -185,11 +181,11 @@ document.getElementById("loginForm").addEventListener("submit",async e=>{
    document.getElementById("email").value.trim(),
    document.getElementById("password").value
   );
- }catch(err){
-  showLogin(
+ }catch(e){
+  showMessage(
    "LOGIN ERROR\n"+
-   "Code: "+(err.code||"unknown")+"\n"+
-   "Message: "+err.message
+   "Code: "+(e.code||"unknown")+"\n"+
+   "Message: "+e.message
   );
  }finally{
   loginBtn.disabled=false;
@@ -199,9 +195,9 @@ document.getElementById("loginForm").addEventListener("submit",async e=>{
 document.getElementById("logout").addEventListener("click",async()=>{
  try{
   await signOut(auth);
-  showLogin("Logout successful.");
+  showMessage("Logged out.");
  }catch(e){
-  showLogin("Logout error: "+e.message);
+  showMessage("LOGOUT ERROR: "+e.message);
  }
 });
 </script>
