@@ -1,278 +1,147 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kisan Seva Tools - Wallet</title>
-
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4f7f5;
-  color:#222;
-}
-header{
-  background:#176b3a;
-  color:white;
-  text-align:center;
-  padding:22px 15px;
-}
-header h1{margin:0;font-size:25px}
-header p{margin:6px 0 0;font-size:14px}
-
-.container{
-  max-width:600px;
-  margin:20px auto;
-  padding:15px;
-}
-
-.balance{
-  background:#176b3a;
-  color:white;
-  border-radius:15px;
-  padding:22px;
-  text-align:center;
-  box-shadow:0 4px 12px #0002;
-}
-.balance small{font-size:14px}
-.balance h2{
-  font-size:35px;
-  margin:8px 0;
-}
-
-.card{
-  background:white;
-  border-radius:14px;
-  padding:18px;
-  margin-top:18px;
-  box-shadow:0 3px 10px #0001;
-}
-
-.card h3{
-  margin-top:0;
-  color:#176b3a;
-}
-
-.service{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 5px;
-  border-bottom:1px solid #eee;
-}
-.service:last-child{border-bottom:0}
-
-.price{
-  font-weight:bold;
-}
-.paid{color:#d35400}
-.free{color:#16833b}
-
-button{
-  width:100%;
-  border:0;
-  border-radius:10px;
-  padding:14px;
-  margin-top:10px;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.add{
-  background:#176b3a;
-  color:white;
-}
-
-.back{
-  background:#eee;
-  color:#222;
-}
-
-.notice{
-  background:#fff8df;
-  border-left:5px solid #e0a500;
-  padding:12px;
-  margin-top:18px;
-  font-size:13px;
-}
-
-footer{
-  text-align:center;
-  padding:25px 10px;
-  font-size:12px;
-  color:#666;
-}
+body{font-family:Arial;background:#f1f6f2;margin:0;color:#183b28}
+header{background:#176b3a;color:white;padding:20px;text-align:center}
+main{max-width:600px;margin:20px auto;padding:15px}
+.card{background:white;padding:18px;border-radius:12px;margin:15px 0}
+button,input{width:100%;padding:12px;margin:7px 0;box-sizing:border-box}
+button{background:#176b3a;color:white;border:0;border-radius:7px;font-weight:bold}
+#msg{white-space:pre-wrap;overflow-wrap:anywhere}
 </style>
 </head>
-
 <body>
-
-<header>
-  <h1>🌾 Kisan Seva Tools</h1>
-  <p>Wallet & Service Charges</p>
-</header>
-
-<div class="container">
-
-  <div class="balance">
-    <small>My Balance</small>
-    <h2 id="balance">₹0</h2>
-    <small>Available Wallet Balance</small>
-  </div>
-
-  <div class="card">
-    <h3>💰 Wallet</h3>
-
-    <p>
-      Wallet का उपयोग paid services के लिए किया जा सकता है।
-    </p>
-
-    <button class="add" onclick="addBalance()">
-      ➕ Add Balance
-    </button>
-  </div>
-
-  <div class="card">
-    <h3>💳 Service Charges</h3>
-
-    <div class="service">
-      <span>🌾 Farmer Card Download</span>
-      <span class="price paid">₹10</span>
-    </div>
-
-    <div class="service">
-      <span>🖨️ Photo Print</span>
-      <span class="price paid">₹5</span>
-    </div>
-
-    <div class="service">
-      <span>📄 PDF Services</span>
-      <span class="price free">FREE</span>
-    </div>
-
-    <div class="service">
-      <span>📋 Farmer Registration</span>
-      <span class="price free">FREE</span>
-    </div>
-
-    <div class="service">
-      <span>📑 Xerox</span>
-      <span class="price free">FREE</span>
-    </div>
-
-    <div class="service">
-      <span>🖨️ Normal Printing</span>
-      <span class="price free">FREE</span>
-    </div>
-
-    <div class="service">
-      <span>👨‍🌾 Farmer Services</span>
-      <span class="price free">FREE</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>📜 Transaction History</h3>
-    <div id="history">
-      <p style="color:#777">No transactions yet.</p>
-    </div>
-  </div>
-
-  <div class="notice">
-    ⚠️ अभी यह wallet demo/local version है। इसमें वास्तविक पैसे जमा नहीं होते।
-    Actual payment gateway बाद में secure backend के साथ जोड़ा जाएगा।
-  </div>
-
-  <button class="back" onclick="location.href='Home.html'">
-    ← Back to Home
-  </button>
-
+<header><h2>🌾 Kisan Seva Tools Wallet</h2></header>
+<main>
+<div class="card">
+<h3>Wallet Balance</h3>
+<h2 id="balance">₹—</h2>
+<p id="user">Checking login...</p>
+<button id="login" hidden>Login</button>
 </div>
 
-<footer>
-  Kisan Seva Tools • Personal Digital Service Website<br>
-  Farmer ID Card is not a government-issued document.
-</footer>
+<div class="card">
+<h3>Add Balance Request</h3>
+<label>Amount (₹)</label>
+<input id="amount" type="number" min="1" max="5000" step="1" value="10">
+<button id="request">Create Payment Request</button>
+<p id="msg">Connecting to Firebase...</p>
+</div>
 
-<script>
+<div class="card">
+<h3>Payment Requests</h3>
+<div id="requests">Loading...</div>
+</div>
+<button onclick="location.href='Home.html'">← Home</button>
+</main>
 
-let balance = Number(localStorage.getItem("kst_balance") || 0);
-let history = JSON.parse(
-  localStorage.getItem("kst_history") || "[]"
-);
+<script type="module">
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import {
+ getAuth,onAuthStateChanged,signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+import {
+ getFirestore,collection,addDoc,query,where,orderBy,onSnapshot,
+ doc,getDoc
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-function showBalance(){
-  document.getElementById("balance").innerText =
-    "₹" + balance;
-}
+const config={
+ apiKey:"AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
+ authDomain:"kisan-seva-tools.firebaseapp.com",
+ projectId:"kisan-seva-tools",
+ appId:"1:900938868284:web:5a5b278506955fc0f48539"
+};
 
-function showHistory(){
+const app=initializeApp(config);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const msg=document.getElementById("msg");
+const requestBtn=document.getElementById("request");
+let currentUser=null;
+let stopRequests=null;
 
-  const box = document.getElementById("history");
+onAuthStateChanged(auth,async user=>{
+ currentUser=user;
+ document.getElementById("user").textContent=user
+   ? "Logged in: "+(user.email||"Account")
+   : "Please log in to create a request.";
+ document.getElementById("login").hidden=!!user;
+ requestBtn.disabled=!user;
 
-  if(history.length === 0){
-    box.innerHTML =
-      '<p style="color:#777">No transactions yet.</p>';
-    return;
-  }
+ if(stopRequests){stopRequests();stopRequests=null}
+ if(!user){
+  document.getElementById("balance").textContent="Login required";
+  document.getElementById("requests").textContent="Login to view requests.";
+  return;
+ }
 
-  box.innerHTML = history.map(item => `
-    <div style="
-      padding:10px 0;
-      border-bottom:1px solid #eee;
-    ">
-      <b>${item.service}</b><br>
-      <small>${item.date}</small>
-      <span style="float:right;font-weight:bold">
-        ${item.amount > 0 ? "+" : ""}₹${item.amount}
-      </span>
-    </div>
-  `).join("");
-}
+ try{
+  const wallet=await getDoc(doc(db,"wallets",user.uid));
+  document.getElementById("balance").textContent=
+   wallet.exists() && Number.isFinite(wallet.data().balance)
+    ? "₹"+wallet.data().balance
+    : "₹0 (not yet credited)";
+ }catch(e){
+  document.getElementById("balance").textContent="Unavailable";
+ }
 
-function addBalance(){
-
-  alert(
-    "Actual Add Balance / Online Payment अभी setup नहीं है.\n\n" +
-    "Next step में secure payment system connect किया जाएगा."
-  );
-}
-
-function deduct(amount, service){
-
-  if(balance < amount){
-    alert(
-      "Insufficient Balance!\n\n" +
-      "Required: ₹" + amount +
-      "\nAvailable: ₹" + balance
-    );
-    return false;
-  }
-
-  balance -= amount;
-
-  history.unshift({
-    service: service,
-    amount: -amount,
-    date: new Date().toLocaleString()
+ const q=query(
+  collection(db,"paymentRequests"),
+  where("uid","==",user.uid),
+  orderBy("createdAt","desc")
+ );
+ stopRequests=onSnapshot(q,snap=>{
+  const box=document.getElementById("requests");
+  box.replaceChildren();
+  if(snap.empty){box.textContent="No requests yet.";return}
+  snap.forEach(item=>{
+   const d=item.data();
+   const p=document.createElement("p");
+   p.textContent="₹"+d.amount+" — "+d.status;
+   box.appendChild(p);
   });
+ },e=>{
+  document.getElementById("requests").textContent=
+   "Could not load requests: "+e.message;
+ });
+});
 
-  localStorage.setItem("kst_balance", balance);
-  localStorage.setItem("kst_history", JSON.stringify(history));
+document.getElementById("login").onclick=async()=>{
+ const email=prompt("Account email:");
+ if(!email)return;
+ const password=prompt("Account password:");
+ if(password===null)return;
+ try{
+  await signInWithEmailAndPassword(auth,email.trim(),password);
+ }catch(e){msg.textContent="Login failed: "+e.message}
+};
 
-  showBalance();
-  showHistory();
-
-  return true;
-}
-
-showBalance();
-showHistory();
-
+requestBtn.onclick=async()=>{
+ if(!currentUser){msg.textContent="Please login first.";return}
+ const amount=Number(document.getElementById("amount").value);
+ if(!Number.isInteger(amount)||amount<1||amount>5000){
+  msg.textContent="Enter a whole amount from ₹1 to ₹5000.";
+  return;
+ }
+ requestBtn.disabled=true;
+ try{
+  await addDoc(collection(db,"paymentRequests"),{
+   uid:currentUser.uid,
+   amount,
+   status:"pending",
+   createdAt:new Date()
+  });
+  msg.textContent="Request created. Status: PENDING. Do not treat this as payment confirmation.";
+ }catch(e){
+  msg.textContent="Request failed: "+e.message;
+ }finally{requestBtn.disabled=false}
+};
 </script>
-
 </body>
 </html>
