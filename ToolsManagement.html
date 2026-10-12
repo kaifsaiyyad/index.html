@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools Management - Kisan Seva Tools</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6f3;
+      color: #202820;
+    }
+    header {
+      background: #176b3a;
+      color: white;
+      padding: 18px;
+    }
+    header h1 { margin: 0 0 6px; font-size: 23px; }
+    header p { margin: 0; }
+    main { max-width: 1050px; margin: auto; padding: 18px; }
+    .panel {
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 9px #0000000d;
+    }
+    h2 { margin-top: 0; font-size: 20px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    label { display: block; font-weight: bold; margin-bottom: 6px; }
+    input, select, textarea {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #cbd5cd;
+      border-radius: 7px;
+      font: inherit;
+      margin-bottom: 13px;
+    }
+    textarea { min-height: 75px; resize: vertical; }
+    button, .link-button {
+      border: 0;
+      padding: 10px 14px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      margin: 3px;
+    }
+    .primary { background: #176b3a; color: white; }
+    .secondary { background: #e7eee8; color: #174d2c; }
+    .danger { background: #b42318; color: white; }
+    .muted { color: #59665c; font-size: 14px; }
+    .message { padding: 11px; border-radius: 7px; margin: 10px 0; }
+    .error { background: #fff0ef; color: #a32118; }
+    .success { background: #e8f7ed; color: #176b3a; }
+    .tool {
+      border: 1px solid #e0e6e1;
+      border-radius: 9px;
+      padding: 14px;
+      margin: 10px 0;
+    }
+    .tool h3 { margin: 0 0 8px; }
+    .tool p { margin: 5px 0; overflow-wrap: anywhere; }
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 20px;
+      background: #e5f5e9;
+      color: #176b3a;
+      font-size: 12px;
+    }
+    .inactive { background: #eee; color: #555; }
+    #app { display: none; }
+    @media (max-width: 500px) {
+      main { padding: 10px; }
+      .panel { padding: 13px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Kisan Seva Tools</h1>
+  <p>Tools Management Admin Panel</p>
+</header>
+
+<main>
+  <section class="panel" id="loginPanel">
+    <h2>Admin Login</h2>
+    <p class="muted">Apne existing Firebase Admin account se login karein.</p>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="username" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+      <button class="primary" type="submit">Login</button>
+    </form>
+    <div id="loginMessage" aria-live="polite"></div>
+  </section>
+
+  <div id="app">
+    <section class="panel">
+      <p id="adminInfo" class="muted"></p>
+      <button id="logoutBtn" class="secondary" type="button">Logout</button>
+      <a class="link-button secondary" href="Admin.html">Back to Admin</a>
+    </section>
+
+    <section class="panel">
+      <h2 id="formTitle">Add New Tool</h2>
+      <form id="toolForm">
+        <input id="toolId" type="hidden">
+
+        <div class="grid">
+          <div>
+            <label for="name">Tool Name *</label>
+            <input id="name" maxlength="80" required placeholder="Example: Photo to PDF">
+          </div>
+          <div>
+            <label for="category">Category *</label>
+            <select id="category" required>
+              <option value="Photo & Print">Photo & Print</option>
+              <option value="PDF Tools">PDF Tools</option>
+              <option value="Image Tools">Image Tools</option>
+              <option value="Document Tools">Document Tools</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="price">Price (₹) *</label>
+            <input id="price" type="number" min="0" max="100000" step="0.01" required value="0">
+          </div>
+          <div>
+            <label for="active">Status *</label>
+            <select id="active" required>
+              <option value="true">Active</option>
+              <option value="false">Inactive</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="description">Description</label>
+        <textarea id="description" maxlength="500" placeholder="Tool kya kaam karta hai?"></textarea>
+
+        <label for="page">Tool Page (optional)</label>
+        <input id="page" maxlength="150" placeholder="Example: PhotoToPDF.html">
+
+        <button class="primary" id="saveBtn" type="submit">Save Tool</button>
+        <button class="secondary" id="cancelBtn" type="button" hidden>Cancel Edit</button>
+        <div id="formMessage" aria-live="polite"></div>
+      </form>
+      <p class="muted">Note: Tool Page mein sirf apni website ki file ka naam daalein. Tool ko chalane wala page alag se banana pad sakta hai.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Saved Tools</h2>
+      <p class="muted">Tools yahan Firebase se load honge.</p>
+      <div id="toolList">Loading...</div>
+    </section>
+  </div>
+</main>
+
+<script type="module">
+  import { initializeApp } from
+    "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+  import {
+    getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut
+  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+  import {
+    getFirestore, collection, addDoc, getDoc, doc, updateDoc,
+    deleteDoc, onSnapshot, query, orderBy, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
+    authDomain: "kisan-seva-tools.firebaseapp.com",
+    projectId: "kisan-seva-tools",
+    appId: "1:900938868284:web:5a5b278506955fc0f48539"
+  };
+
+  const appFirebase = initializeApp(firebaseConfig);
+  const auth = getAuth(appFirebase);
+  const db = getFirestore(appFirebase);
+
+  const $ = id => document.getElementById(id);
+  let unsubscribeTools = null;
+  let currentAdmin = null;
+  let toolsCache = [];
+
+  function showMessage(id, message, type = "error") {
+    const el = $(id);
+    el.className = message ? `message ${type}` : "";
+    el.textContent = message;
+  }
+
+  function resetForm() {
+    $("toolForm").reset();
+    $("toolId").value = "";
+    $("price").value = "0";
+    $("active").value = "true";
+    $("formTitle").textContent = "Add New Tool";
+    $("saveBtn").textContent = "Save Tool";
+    $("cancelBtn").hidden = true;
+    showMessage("formMessage", "");
+  }
+
+  $("loginForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    showMessage("loginMessage", "");
+    try {
+      await signInWithEmailAndPassword(
+        auth, $("email").value.trim(), $("password").value
+      );
+    } catch (error) {
+      showMessage("loginMessage", "Login nahi hua. Email/password aur Firebase Auth settings check karein.");
+    }
+  });
+
+  $("logoutBtn").addEventListener("click", async () => {
+    await signOut(auth);
+  });
+
+  $("cancelBtn").addEventListener("click", resetForm);
+
+  onAuthStateChanged(auth, async user => {
+    if (unsubscribeTools) {
+      unsubscribeTools();
+      unsubscribeTools = null;
+    }
+
+    currentAdmin = null;
+    $("app").style.display = "none";
+    $("loginPanel").style.display = "block";
+
+    if (!user) return;
+
+    try {
+      const adminSnap = await getDoc(doc(db, "admins", user.uid));
+      if (!adminSnap.exists() || adminSnap.data().role !== "admin") {
+        showMessage("loginMessage", "Is account ko Admin permission nahi mili hai.");
+        await signOut(auth);
+        return;
+      }
+
+      currentAdmin = user;
+      $("loginPanel").style.display = "none";
+      $("app").style.display = "block";
+      $("adminInfo").textContent = "Logged in: " + (user.email || "Admin");
+
+      const toolsQuery = query(collection(db, "tools"), orderBy("name"));
+      unsubscribeTools = onSnapshot(toolsQuery, snapshot => {
+        toolsCache = snapshot.docs.map(item => ({
+          id: item.id, ...item.data()
+        }));
+        renderTools();
+      }, error => {
+        $("toolList").textContent =
+          "Tools load nahi hue. Firestore Rules aur database check karein.";
+      });
+    } catch (error) {
+      showMessage("loginMessage", "Admin check nahi ho saka. Firebase configuration aur rules check karein.");
+      await signOut(auth);
+    }
+  });
+
+  $("toolForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!currentAdmin) {
+      showMessage("formMessage", "Pehle Admin login karein.");
+      return;
+    }
+
+    const name = $("name").value.trim();
+    const category = $("category").value;
+    const price = Number($("price").value);
+    const description = $("description").value.trim();
+    const page = $("page").value.trim();
+    const active = $("active").value === "true";
+
+    if (!name || !Number.isFinite(price) || price < 0 || price > 100000) {
+      showMessage("formMessage", "Tool ka naam aur sahi price bharein.");
+      return;
+    }
+
+    if (page && (
+      page.includes("/") || page.includes("\\") ||
+      !/^[A-Za-z0-9_-]+\.html$/i.test(page)
+    )) {
+      showMessage("formMessage", "Tool Page mein sirf file name daalein, jaise PhotoToPDF.html.");
+      return;
+    }
+
+    const payload = {
+      name, category, price, description, page, active,
+      updatedAt: serverTimestamp(),
+      updatedBy: currentAdmin.uid
+    };
+
+    const id = $("toolId").value;
+    $("saveBtn").disabled = true;
+
+    try {
+      if (id) {
+        await updateDoc(doc(db, "tools", id), payload);
+        showMessage("formMessage", "Tool update ho gaya.", "success");
+      } else {
+        await addDoc(collection(db, "tools"), {
+          ...payload,
+          createdAt: serverTimestamp(),
+          createdBy: currentAdmin.uid
+        });
+        showMessage("formMessage", "Tool save ho gaya.", "success");
+      }
+      resetForm();
+    } catch (error) {
+      showMessage("formMessage", "Save nahi hua. Internet, Admin permission aur Firestore Rules check karein.");
+    } finally {
+      $("saveBtn").disabled = false;
+    }
+  });
+
+  function renderTools() {
+    const list = $("toolList");
+    list.replaceChildren();
+
+    if (!toolsCache.length) {
+      list.textContent = "Abhi koi tool save nahi hai. Upar form se pehla tool add karein.";
+      return;
+    }
+
+    for (const tool of toolsCache) {
+      const card = document.createElement("article");
+      card.className = "tool";
+
+      const title = document.createElement("h3");
+      title.textContent = tool.name || "Unnamed tool";
+
+      const status = document.createElement("span");
+      status.className = "badge" + (tool.active ? "" : " inactive");
+      status.textContent = tool.active ? "Active" : "Inactive";
+
+      const category = document.createElement("p");
+      category.textContent = "Category: " + (tool.category || "Other");
+
+      const price = document.createElement("p");
+      price.textContent = "Price: ₹" + Number(tool.price || 0).toFixed(2);
+
+      const description = document.createElement("p");
+      description.textContent = tool.description || "No description";
+
+      const page = document.createElement("p");
+      page.textContent = "Page: " + (tool.page || "Not assigned");
+
+      const edit = document.createElement("button");
+      edit.className = "secondary";
+      edit.textContent = "Edit";
+      edit.addEventListener("click", () => {
+        $("toolId").value = tool.id;
+        $("name").value = tool.name || "";
+        $("category").value = tool.category || "Other";
+        $("price").value = Number(tool.price || 0);
+        $("description").value = tool.description || "";
+        $("page").value = tool.page || "";
+        $("active").value = String(tool.active === true);
+        $("formTitle").textContent = "Edit Tool";
+        $("saveBtn").textContent = "Update Tool";
+        $("cancelBtn").hidden = false;
+        $("formTitle").scrollIntoView({ behavior: "smooth" });
+      });
+
+      const toggle = document.createElement("button");
+      toggle.className = "secondary";
+      toggle.textContent = tool.active ? "Deactivate" : "Activate";
+      toggle.addEventListener("click", async () => {
+        if (!currentAdmin) return;
+        try {
+          await updateDoc(doc(db, "tools", tool.id), {
+            active: !tool.active,
+            updatedAt: serverTimestamp(),
+            updatedBy: currentAdmin.uid
+          });
+        } catch (error) {
+          alert("Status change nahi hua. Rules check karein.");
+        }
+      });
+
+      const remove = document.createElement("button");
+      remove.className = "danger";
+      remove.textContent = "Delete";
+      remove.addEventListener("click", async () => {
+        if (!currentAdmin) return;
+        if (!confirm(`"${tool.name}" ko delete karna hai?`)) return;
+        try {
+          await deleteDoc(doc(db, "tools", tool.id));
+        } catch (error) {
+          alert("Delete nahi hua. Rules check karein.");
+        }
+      });
+
+      card.append(title, status, category, price, description, page, edit, toggle, remove);
+      list.append(card);
+    }
+  }
+</script>
+</body>
+</html>
