@@ -1,501 +1,244 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kisan Seva Tools - Admin Dashboard</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      background: #f3f7f3;
-      color: #222;
-    }
-
-    header {
-      background: #176b3a;
-      color: white;
-      text-align: center;
-      padding: 20px 10px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px #00000012;
-      overflow-wrap: anywhere;
-    }
-
-    input, button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 7px;
-      font-size: 16px;
-    }
-
-    input {
-      border: 1px solid #bbb;
-    }
-
-    button {
-      border: none;
-      background: #176b3a;
-      color: white;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #10542c;
-    }
-
-    .logout {
-      background: #b3261e;
-    }
-
-    .message {
-      margin-top: 12px;
-      overflow-wrap: anywhere;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-    }
-
-    .stat {
-      padding: 16px;
-      border-radius: 10px;
-      background: #e8f4eb;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 650px;
-    }
-
-    th, td {
-      padding: 11px;
-      border: 1px solid #ddd;
-      text-align: left;
-      font-size: 14px;
-    }
-
-    th {
-      background: #176b3a;
-      color: white;
-    }
-
-    .pending {
-      color: #9a6700;
-      font-weight: bold;
-    }
-
-    .approved {
-      color: #176b3a;
-      font-weight: bold;
-    }
-
-    .rejected {
-      color: #b3261e;
-      font-weight: bold;
-    }
-
-    .small {
-      font-size: 13px;
-      color: #555;
-    }
-
-    [hidden] {
-      display: none !important;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kisan Seva Tools - Admin Dashboard</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f3f7f3;margin:0;padding:18px;color:#222}
+.container{max-width:1100px;margin:auto}
+header{background:#176b3a;color:white;text-align:center;padding:18px;border-radius:12px}
+.card{background:white;padding:18px;margin:18px 0;border-radius:12px;box-shadow:0 2px 8px #0001}
+input,button{padding:11px;margin-top:8px;border-radius:7px;font-size:15px}
+input{width:100%;border:1px solid #bbb}
+button{border:0;background:#176b3a;color:white;cursor:pointer}
+.logout,.reject{background:#b3261e}
+.approve{background:#176b3a}
+button:disabled{opacity:.5;cursor:not-allowed}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.stat{background:#e8f4eb;padding:12px;border-radius:8px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:750px}
+th,td{padding:10px;border:1px solid #ddd;text-align:left;font-size:13px}
+th{background:#176b3a;color:white}
+.small{font-size:13px;color:#555}
+[hidden]{display:none!important}
+</style>
 </head>
-
 <body>
-  <div class="container">
-    <header>
-      <h1>Kisan Seva Tools</h1>
-      <p>Admin Dashboard</p>
-    </header>
-
-    <section class="card" id="loginSection">
-      <h2>Admin Login</h2>
-
-      <form id="loginForm">
-        <input
-          id="email"
-          type="email"
-          placeholder="Admin Email"
-          autocomplete="username"
-          required
-        >
-
-        <input
-          id="password"
-          type="password"
-          placeholder="Password"
-          autocomplete="current-password"
-          required
-        >
-
-        <button type="submit">Login</button>
-      </form>
-
-      <p id="loginMessage" class="message" role="status"></p>
-    </section>
-
-    <section id="dashboard" hidden>
-      <div class="card">
-        <h2>Welcome, Admin</h2>
-        <p id="adminEmail"></p>
-        <p id="connectionMessage" class="message" role="status">
-          Connecting to payment requests...
-        </p>
-        <button id="logoutButton" class="logout" type="button">
-          Logout
-        </button>
-      </div>
-
-      <div class="stats">
-        <div class="stat">
-          <h3>Payment Requests</h3>
-          <p id="totalRequests">0</p>
-        </div>
-
-        <div class="stat">
-          <h3>Pending</h3>
-          <p id="pendingRequests">0</p>
-        </div>
-
-        <div class="stat">
-          <h3>Approved</h3>
-          <p id="approvedRequests">0</p>
-        </div>
-
-        <div class="stat">
-          <h3>Rejected</h3>
-          <p id="rejectedRequests">0</p>
-        </div>
-      </div>
-
-      <section class="card">
-        <h2>Payment Requests</h2>
-        <p class="small">
-          Live list from Firestore. Verify the actual payment independently
-          before changing a request's status. Changing status does not add
-          money to the user's wallet.
-        </p>
-
-        <p id="requestsMessage" class="message" role="status">
-          Loading requests...
-        </p>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Request ID</th>
-                <th>User UID</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Created At</th>
-              </tr>
-            </thead>
-
-            <tbody id="requestsTable">
-              <tr>
-                <td colspan="5">Loading...</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <div class="card">
-        <h3>Important</h3>
-        <p>
-          This dashboard displays requests only. It is not a payment gateway
-          and does not independently verify payments or transfer money.
-        </p>
-      </div>
-    </section>
-  </div>
-
-  <script type="module">
-    import { initializeApp }
-      from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-
-    import {
-      getAuth,
-      onAuthStateChanged,
-      signInWithEmailAndPassword,
-      signOut
-    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-
-    import {
-      getFirestore,
-      doc,
-      getDoc,
-      collection,
-      query,
-      orderBy,
-      onSnapshot
-    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-
-    const config = {
-      apiKey: "AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
-      authDomain: "kisan-seva-tools.firebaseapp.com",
-      projectId: "kisan-seva-tools",
-      appId: "1:900938868284:web:5a5b278506955fc0f48539"
-    };
-
-    const app = initializeApp(config);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    const loginSection = document.getElementById("loginSection");
-    const dashboard = document.getElementById("dashboard");
-    const loginForm = document.getElementById("loginForm");
-    const loginMessage = document.getElementById("loginMessage");
-    const adminEmail = document.getElementById("adminEmail");
-    const connectionMessage = document.getElementById("connectionMessage");
-    const requestsMessage = document.getElementById("requestsMessage");
-    const requestsTable = document.getElementById("requestsTable");
-
-    let stopRequestsListener = null;
-    let loginInProgress = false;
-
-    function stopListening() {
-      if (stopRequestsListener) {
-        stopRequestsListener();
-        stopRequestsListener = null;
-      }
-    }
-
-    function showMessage(element, message) {
-      element.textContent = message;
-    }
-
-    function formatDate(value) {
-      if (!value) return "Not available";
-
-      try {
-        const date = typeof value.toDate === "function"
-          ? value.toDate()
-          : new Date(value);
-
-        if (Number.isNaN(date.getTime())) {
-          return "Not available";
-        }
-
-        return date.toLocaleString("en-IN");
-      } catch {
-        return "Not available";
-      }
-    }
-
-    function safeCell(value) {
-      const td = document.createElement("td");
-      td.textContent = String(value ?? "—");
-      return td;
-    }
-
-    function updateCounts(requests) {
-      document.getElementById("totalRequests").textContent =
-        requests.length;
-
-      document.getElementById("pendingRequests").textContent =
-        requests.filter(r => r.status === "pending").length;
-
-      document.getElementById("approvedRequests").textContent =
-        requests.filter(r => r.status === "approved").length;
-
-      document.getElementById("rejectedRequests").textContent =
-        requests.filter(r => r.status === "rejected").length;
-    }
-
-    function renderRequests(snapshot) {
-      const rows = document.createDocumentFragment();
-      const requests = [];
-
-      snapshot.forEach(documentSnapshot => {
-        const data = documentSnapshot.data();
-
-        requests.push({
-          id: documentSnapshot.id,
-          uid: data.uid,
-          amount: data.amount,
-          status: data.status,
-          createdAt: data.createdAt
-        });
-
-        const tr = document.createElement("tr");
-
-        tr.appendChild(safeCell(documentSnapshot.id));
-        tr.appendChild(safeCell(data.uid));
-        tr.appendChild(
-          safeCell(
-            typeof data.amount === "number"
-              ? "₹" + data.amount
-              : "Invalid amount"
-          )
-        );
-
-        const statusCell = safeCell(data.status || "unknown");
-        const status = String(data.status || "").toLowerCase();
-
-        if (status === "pending") statusCell.className = "pending";
-        if (status === "approved") statusCell.className = "approved";
-        if (status === "rejected") statusCell.className = "rejected";
-
-        tr.appendChild(statusCell);
-        tr.appendChild(safeCell(formatDate(data.createdAt)));
-
-        rows.appendChild(tr);
-      });
-
-      requestsTable.replaceChildren();
-
-      if (requests.length === 0) {
-        const tr = document.createElement("tr");
-        const td = document.createElement("td");
-        td.colSpan = 5;
-        td.textContent = "No payment requests found.";
-        tr.appendChild(td);
-        rows.appendChild(tr);
-      }
-
-      requestsTable.appendChild(rows);
-      updateCounts(requests);
-
-      showMessage(
-        requestsMessage,
-        "Updated successfully. Requests found: " + requests.length
-      );
-
-      showMessage(connectionMessage, "Connected to payment requests.");
-    }
-
-    function listenToRequests() {
-      stopListening();
-
-      showMessage(requestsMessage, "Loading payment requests...");
-
-      const requestsQuery = query(
-        collection(db, "paymentRequests"),
-        orderBy("createdAt", "desc")
-      );
-
-      stopRequestsListener = onSnapshot(
-        requestsQuery,
-        snapshot => {
-          renderRequests(snapshot);
-        },
-        error => {
-          console.error("Payment requests error:", error);
-
-          showMessage(
-            requestsMessage,
-            "Could not load requests. Check Firestore rules and connection."
-          );
-
-          showMessage(connectionMessage, "Payment request connection failed.");
-        }
-      );
-    }
-
-    loginForm.addEventListener("submit", async event => {
-      event.preventDefault();
-
-      if (loginInProgress) return;
-      loginInProgress = true;
-
-      showMessage(loginMessage, "Checking login...");
-
-      try {
-        await signInWithEmailAndPassword(
-          auth,
-          document.getElementById("email").value.trim(),
-          document.getElementById("password").value
-        );
-      } catch (error) {
-        console.error("Login error:", error);
-        showMessage(loginMessage, "Login failed. Check email, password, and Firebase settings.");
-      } finally {
-        loginInProgress = false;
-      }
-    });
-
-    document.getElementById("logoutButton").addEventListener("click", async () => {
-      stopListening();
-
-      try {
-        await signOut(auth);
-      } catch (error) {
-        console.error("Logout error:", error);
-        showMessage(connectionMessage, "Could not log out. Please try again.");
-      }
-    });
-
-    onAuthStateChanged(auth, async user => {
-      stopListening();
-
-      if (!user) {
-        dashboard.hidden = true;
-        loginSection.hidden = false;
-        adminEmail.textContent = "";
-        return;
-      }
-
-      showMessage(loginMessage, "Checking admin permission...");
-
-      try {
-        const adminDoc = await getDoc(doc(db, "admins", user.uid));
-
-        if (!adminDoc.exists() || adminDoc.data().role !== "admin") {
-          showMessage(loginMessage, "Access denied: this account is not an admin.");
-          await signOut(auth);
-          return;
-        }
-
-        loginSection.hidden = true;
-        dashboard.hidden = false;
-        adminEmail.textContent = "Logged in: " + user.email;
-        showMessage(loginMessage, "");
-
-        listenToRequests();
-      } catch (error) {
-        console.error("Admin check error:", error);
-        showMessage(
-          loginMessage,
-          "Could not verify admin access. Check Firestore rules and connection."
-        );
-      }
-    });
-  </script>
+<div class="container">
+<header><h1>Kisan Seva Tools</h1><p>Admin Dashboard</p></header>
+
+<section class="card" id="loginSection">
+<h2>Admin Login</h2>
+<form id="loginForm">
+<input id="email" type="email" placeholder="Admin Email" required>
+<input id="password" type="password" placeholder="Password" required>
+<button type="submit">Login</button>
+</form>
+<p id="loginMessage" role="status"></p>
+</section>
+
+<section id="dashboard" hidden>
+<div class="card">
+<h2>Welcome, Admin</h2>
+<p id="adminEmail"></p>
+<p id="connectionMessage" role="status">Connecting...</p>
+<button class="logout" id="logoutButton">Logout</button>
+</div>
+
+<div class="stats">
+<div class="stat"><h3>Total Requests</h3><p id="total">0</p></div>
+<div class="stat"><h3>Pending</h3><p id="pending">0</p></div>
+<div class="stat"><h3>Approved</h3><p id="approved">0</p></div>
+<div class="stat"><h3>Rejected</h3><p id="rejected">0</p></div>
+</div>
+
+<div class="card">
+<h2>Payment Requests</h2>
+<p class="small">Verify the actual payment independently before approving. Changing status does not add money to a wallet.</p>
+<p id="requestsMessage" role="status">Loading requests...</p>
+<div class="table-wrap">
+<table>
+<thead><tr>
+<th>Request ID</th><th>User UID</th><th>Amount</th>
+<th>Status</th><th>Created At</th><th>Action</th>
+</tr></thead>
+<tbody id="requestsTable"><tr><td colspan="6">Loading...</td></tr></tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+import {getFirestore,doc,getDoc,collection,query,orderBy,onSnapshot,updateDoc}
+from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+const config={
+apiKey:"AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
+authDomain:"kisan-seva-tools.firebaseapp.com",
+projectId:"kisan-seva-tools",
+appId:"1:900938868284:web:5a5b278506955fc0f48539"
+};
+
+const app=initializeApp(config);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const $=id=>document.getElementById(id);
+let stopListening=null;
+let busy=false;
+
+function stopRequests(){
+if(stopListening){stopListening();stopListening=null;}
+}
+
+function dateText(value){
+try{
+const d=value?.toDate?value.toDate():new Date(value);
+return Number.isNaN(d.getTime())?"—":d.toLocaleString("en-IN");
+}catch{return "—";}
+}
+
+function cell(value){
+const td=document.createElement("td");
+td.textContent=String(value??"—");
+return td;
+}
+
+function render(snapshot){
+const items=[];
+snapshot.forEach(s=>items.push({id:s.id,...s.data()}));
+
+$("total").textContent=items.length;
+$("pending").textContent=items.filter(x=>x.status==="pending").length;
+$("approved").textContent=items.filter(x=>x.status==="approved").length;
+$("rejected").textContent=items.filter(x=>x.status==="rejected").length;
+
+const fragment=document.createDocumentFragment();
+
+if(!items.length){
+const tr=document.createElement("tr");
+const td=cell("No payment requests found.");
+td.colSpan=6;tr.appendChild(td);fragment.appendChild(tr);
+}
+
+for(const item of items){
+const tr=document.createElement("tr");
+tr.appendChild(cell(item.id));
+tr.appendChild(cell(item.uid));
+tr.appendChild(cell(typeof item.amount==="number"?"₹"+item.amount:"Invalid amount"));
+tr.appendChild(cell(item.status));
+tr.appendChild(cell(dateText(item.createdAt)));
+
+const action=cell("");
+if(item.status==="pending"){
+const approve=document.createElement("button");
+approve.textContent="Approve";
+approve.className="approve";
+approve.addEventListener("click",()=>changeStatus(item.id,"approved",approve));
+
+const reject=document.createElement("button");
+reject.textContent="Reject";
+reject.className="reject";
+reject.style.marginLeft="6px";
+reject.addEventListener("click",()=>changeStatus(item.id,"rejected",reject));
+
+action.append(approve,reject);
+}else{
+action.textContent="No action";
+}
+tr.appendChild(action);
+fragment.appendChild(tr);
+}
+
+$("requestsTable").replaceChildren(fragment);
+$("requestsMessage").textContent="Requests found: "+items.length;
+}
+
+async function changeStatus(id,status,button){
+if(busy)return;
+const verb=status==="approved"?"approve":"reject";
+if(!confirm("Are you sure you want to "+verb+" this request?"))return;
+
+busy=true;
+button.disabled=true;
+try{
+const ref=doc(db,"paymentRequests",id);
+const current=await getDoc(ref);
+if(!current.exists()||current.data().status!=="pending"){
+alert("This request is no longer pending. Refresh the dashboard.");
+return;
+}
+await updateDoc(ref,{status});
+alert("Request status updated to "+status+". Wallet balance has not changed.");
+}catch(error){
+console.error(error);
+alert("Could not update status. Check your login and Firestore Rules.");
+}finally{
+busy=false;
+}
+}
+
+$("loginForm").addEventListener("submit",async e=>{
+e.preventDefault();
+$("loginMessage").textContent="Checking login...";
+try{
+await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value);
+}catch(error){
+console.error(error);
+$("loginMessage").textContent="Login failed. Check your email, password and Firebase settings.";
+}
+});
+
+$("logoutButton").addEventListener("click",async()=>{
+stopRequests();
+try{await signOut(auth);}
+catch(error){console.error(error);$("connectionMessage").textContent="Logout failed.";}
+});
+
+onAuthStateChanged(auth,async user=>{
+stopRequests();
+if(!user){
+$("dashboard").hidden=true;
+$("loginSection").hidden=false;
+return;
+}
+try{
+const admin=await getDoc(doc(db,"admins",user.uid));
+if(!admin.exists()||admin.data().role!=="admin"){
+$("loginMessage").textContent="Access denied: this account is not an admin.";
+await signOut(auth);
+return;
+}
+$("loginSection").hidden=true;
+$("dashboard").hidden=false;
+$("adminEmail").textContent="Logged in: "+(user.email||"Admin");
+$("connectionMessage").textContent="Connecting to payment requests...";
+
+stopListening=onSnapshot(
+query(collection(db,"paymentRequests"),orderBy("createdAt","desc")),
+snapshot=>{
+render(snapshot);
+$("connectionMessage").textContent="Connected to payment requests.";
+},
+error=>{
+console.error(error);
+$("requestsMessage").textContent="Unable to load requests. Check Firestore Rules.";
+$("connectionMessage").textContent="Connection failed.";
+}
+);
+}catch(error){
+console.error(error);
+$("loginMessage").textContent="Could not verify admin access. Check Firestore Rules.";
+}
+});
+</script>
 </body>
 </html>
-```
