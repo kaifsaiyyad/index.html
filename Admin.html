@@ -1,205 +1,501 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kisan Seva Tools Admin</title>
-<style>
-body{margin:0;font-family:Arial;background:#f1f5f2;color:#222}
-header{background:#176b3a;color:white;padding:20px;text-align:center}
-main{max-width:900px;margin:20px auto;padding:12px}
-.card{background:white;padding:18px;margin:12px 0;border-radius:12px;box-shadow:0 2px 8px #0001}
-input,button{width:100%;padding:12px;margin:7px 0;box-sizing:border-box}
-button{background:#176b3a;color:white;border:0;border-radius:6px;font-weight:bold}
-.hidden{display:none}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.stat{background:#e5f3e9;padding:16px;border-radius:8px}
-#msg{white-space:pre-wrap;overflow-wrap:anywhere}
-.version{font-size:12px;opacity:.9}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisan Seva Tools - Admin Dashboard</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f3f7f3;
+      color: #222;
+    }
+
+    header {
+      background: #176b3a;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #00000012;
+      overflow-wrap: anywhere;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 7px;
+      font-size: 16px;
+    }
+
+    input {
+      border: 1px solid #bbb;
+    }
+
+    button {
+      border: none;
+      background: #176b3a;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #10542c;
+    }
+
+    .logout {
+      background: #b3261e;
+    }
+
+    .message {
+      margin-top: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 10px;
+      background: #e8f4eb;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+    }
+
+    th, td {
+      padding: 11px;
+      border: 1px solid #ddd;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background: #176b3a;
+      color: white;
+    }
+
+    .pending {
+      color: #9a6700;
+      font-weight: bold;
+    }
+
+    .approved {
+      color: #176b3a;
+      font-weight: bold;
+    }
+
+    .rejected {
+      color: #b3261e;
+      font-weight: bold;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #555;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+  </style>
 </head>
+
 <body>
-<header>
-<h2>Kisan Seva Tools</h2>
-<div>Admin Dashboard</div>
-<div class="version">ADMIN DIAGNOSTIC VERSION 2</div>
-</header>
-<main>
-<section class="card" id="loginBox">
-<h3>Admin Login</h3>
-<form id="loginForm">
-<input id="email" type="email" placeholder="Admin Email" required>
-<input id="password" type="password" placeholder="Password" required>
-<button id="loginBtn" type="submit">Login</button>
-</form>
-<p id="msg">Ready to login.</p>
-</section>
+  <div class="container">
+    <header>
+      <h1>Kisan Seva Tools</h1>
+      <p>Admin Dashboard</p>
+    </header>
 
-<section class="hidden" id="dashboard">
-<div class="card">
-<h3>Welcome Admin</h3>
-<p id="who"></p>
-<button id="logout" type="button">Logout</button>
-</div>
-<div class="grid">
-<div class="stat"><b>Farmer Records</b><p>Secure connection pending</p></div>
-<div class="stat"><b>Wallet</b><p>Transaction connection pending</p></div>
-<div class="stat"><b>Earnings</b><p>Verified records pending</p></div>
-<div class="stat"><b>Services</b><p>Service connection pending</p></div>
-</div>
-<div class="card">
-<h3>Dashboard Data</h3>
-<p>Admin login successful. Farmer data and payment records require separate secure connections.</p>
-</div>
-</section>
-</main>
+    <section class="card" id="loginSection">
+      <h2>Admin Login</h2>
 
-<script type="module">
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+      <form id="loginForm">
+        <input
+          id="email"
+          type="email"
+          placeholder="Admin Email"
+          autocomplete="username"
+          required
+        >
 
-import {
- getAuth,onAuthStateChanged,
- signInWithEmailAndPassword,signOut
-} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+        <input
+          id="password"
+          type="password"
+          placeholder="Password"
+          autocomplete="current-password"
+          required
+        >
 
-import {
- getFirestore,doc,getDoc
-} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+        <button type="submit">Login</button>
+      </form>
 
-const config={
- apiKey:"AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
- authDomain:"kisan-seva-tools.firebaseapp.com",
- projectId:"kisan-seva-tools",
- appId:"1:900938868284:web:5a5b278506955fc0f48539"
-};
+      <p id="loginMessage" class="message" role="status"></p>
+    </section>
 
-const msg=document.getElementById("msg");
-const loginBox=document.getElementById("loginBox");
-const dashboard=document.getElementById("dashboard");
-const loginBtn=document.getElementById("loginBtn");
+    <section id="dashboard" hidden>
+      <div class="card">
+        <h2>Welcome, Admin</h2>
+        <p id="adminEmail"></p>
+        <p id="connectionMessage" class="message" role="status">
+          Connecting to payment requests...
+        </p>
+        <button id="logoutButton" class="logout" type="button">
+          Logout
+        </button>
+      </div>
 
-let auth,db,appReady=false,checking=false;
+      <div class="stats">
+        <div class="stat">
+          <h3>Payment Requests</h3>
+          <p id="totalRequests">0</p>
+        </div>
 
-function showMessage(text){
- loginBox.classList.remove("hidden");
- dashboard.classList.add("hidden");
- msg.textContent=text;
-}
+        <div class="stat">
+          <h3>Pending</h3>
+          <p id="pendingRequests">0</p>
+        </div>
 
-function showDashboard(user){
- loginBox.classList.add("hidden");
- dashboard.classList.remove("hidden");
- document.getElementById("who").textContent=
-  "Logged in: "+(user.email||"Admin");
-}
+        <div class="stat">
+          <h3>Approved</h3>
+          <p id="approvedRequests">0</p>
+        </div>
 
-async function verifyAdmin(user){
- if(checking)return;
- checking=true;
+        <div class="stat">
+          <h3>Rejected</h3>
+          <p id="rejectedRequests">0</p>
+        </div>
+      </div>
 
- try{
-  msg.textContent="Checking Firebase admin access...";
-  const ref=doc(db,"admins",user.uid);
-  const snap=await getDoc(ref);
+      <section class="card">
+        <h2>Payment Requests</h2>
+        <p class="small">
+          Live list from Firestore. Verify the actual payment independently
+          before changing a request's status. Changing status does not add
+          money to the user's wallet.
+        </p>
 
-  if(!snap.exists()){
-   showMessage(
-    "ADMIN DOCUMENT NOT FOUND\n"+
-    "Project: "+config.projectId+"\n"+
-    "Email: "+(user.email||"not available")+"\n"+
-    "Document exists: false\n"+
-    "Expected path: admins/"+user.uid+"\n"+
-    "Firebase authenticated this user, but the admin document was not found."
-   );
-   return;
-  }
+        <p id="requestsMessage" class="message" role="status">
+          Loading requests...
+        </p>
 
-  const data=snap.data();
-  const role=data.role;
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>User UID</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Created At</th>
+              </tr>
+            </thead>
 
-  if(role==="admin"){
-   showDashboard(user);
-  }else{
-   showMessage(
-    "ADMIN ROLE DOES NOT MATCH\n"+
-    "Project: "+config.projectId+"\n"+
-    "Document exists: true\n"+
-    "Role value: "+String(role??"(missing)")+"\n"+
-    "Expected role: admin\n"+
-    "Document path: admins/"+user.uid
-   );
-  }
+            <tbody id="requestsTable">
+              <tr>
+                <td colspan="5">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
- }catch(e){
-  showMessage(
-   "FIRESTORE ACCESS ERROR\n"+
-   "Code: "+(e.code||"unknown")+"\n"+
-   "Message: "+(e.message||"No details")+"\n"+
-   "Project: "+config.projectId
-  );
- }finally{
-  checking=false;
- }
-}
+      <div class="card">
+        <h3>Important</h3>
+        <p>
+          This dashboard displays requests only. It is not a payment gateway
+          and does not independently verify payments or transfer money.
+        </p>
+      </div>
+    </section>
+  </div>
 
-try{
- const app=initializeApp(config);
- auth=getAuth(app);
- db=getFirestore(app);
- appReady=true;
+  <script type="module">
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 
- onAuthStateChanged(auth,user=>{
-  if(!user){
-   showMessage("Ready to login.");
-   return;
-  }
-  verifyAdmin(user);
- });
-}catch(e){
- showMessage(
-  "FIREBASE INITIALIZATION ERROR\n"+
-  (e.code||"")+" "+e.message
- );
-}
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signInWithEmailAndPassword,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-document.getElementById("loginForm").addEventListener("submit",async e=>{
- e.preventDefault();
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      collection,
+      query,
+      orderBy,
+      onSnapshot
+    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
- if(!appReady){
-  showMessage("Firebase initialize nahi hua. Error: "+config.projectId);
-  return;
- }
+    const config = {
+      apiKey: "AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
+      authDomain: "kisan-seva-tools.firebaseapp.com",
+      projectId: "kisan-seva-tools",
+      appId: "1:900938868284:web:5a5b278506955fc0f48539"
+    };
 
- loginBtn.disabled=true;
- msg.textContent="Logging in...";
+    const app = initializeApp(config);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
- try{
-  await signInWithEmailAndPassword(
-   auth,
-   document.getElementById("email").value.trim(),
-   document.getElementById("password").value
-  );
- }catch(e){
-  showMessage(
-   "LOGIN ERROR\n"+
-   "Code: "+(e.code||"unknown")+"\n"+
-   "Message: "+e.message
-  );
- }finally{
-  loginBtn.disabled=false;
- }
-});
+    const loginSection = document.getElementById("loginSection");
+    const dashboard = document.getElementById("dashboard");
+    const loginForm = document.getElementById("loginForm");
+    const loginMessage = document.getElementById("loginMessage");
+    const adminEmail = document.getElementById("adminEmail");
+    const connectionMessage = document.getElementById("connectionMessage");
+    const requestsMessage = document.getElementById("requestsMessage");
+    const requestsTable = document.getElementById("requestsTable");
 
-document.getElementById("logout").addEventListener("click",async()=>{
- try{
-  await signOut(auth);
-  showMessage("Logged out.");
- }catch(e){
-  showMessage("LOGOUT ERROR: "+e.message);
- }
-});
-</script>
+    let stopRequestsListener = null;
+    let loginInProgress = false;
+
+    function stopListening() {
+      if (stopRequestsListener) {
+        stopRequestsListener();
+        stopRequestsListener = null;
+      }
+    }
+
+    function showMessage(element, message) {
+      element.textContent = message;
+    }
+
+    function formatDate(value) {
+      if (!value) return "Not available";
+
+      try {
+        const date = typeof value.toDate === "function"
+          ? value.toDate()
+          : new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+          return "Not available";
+        }
+
+        return date.toLocaleString("en-IN");
+      } catch {
+        return "Not available";
+      }
+    }
+
+    function safeCell(value) {
+      const td = document.createElement("td");
+      td.textContent = String(value ?? "—");
+      return td;
+    }
+
+    function updateCounts(requests) {
+      document.getElementById("totalRequests").textContent =
+        requests.length;
+
+      document.getElementById("pendingRequests").textContent =
+        requests.filter(r => r.status === "pending").length;
+
+      document.getElementById("approvedRequests").textContent =
+        requests.filter(r => r.status === "approved").length;
+
+      document.getElementById("rejectedRequests").textContent =
+        requests.filter(r => r.status === "rejected").length;
+    }
+
+    function renderRequests(snapshot) {
+      const rows = document.createDocumentFragment();
+      const requests = [];
+
+      snapshot.forEach(documentSnapshot => {
+        const data = documentSnapshot.data();
+
+        requests.push({
+          id: documentSnapshot.id,
+          uid: data.uid,
+          amount: data.amount,
+          status: data.status,
+          createdAt: data.createdAt
+        });
+
+        const tr = document.createElement("tr");
+
+        tr.appendChild(safeCell(documentSnapshot.id));
+        tr.appendChild(safeCell(data.uid));
+        tr.appendChild(
+          safeCell(
+            typeof data.amount === "number"
+              ? "₹" + data.amount
+              : "Invalid amount"
+          )
+        );
+
+        const statusCell = safeCell(data.status || "unknown");
+        const status = String(data.status || "").toLowerCase();
+
+        if (status === "pending") statusCell.className = "pending";
+        if (status === "approved") statusCell.className = "approved";
+        if (status === "rejected") statusCell.className = "rejected";
+
+        tr.appendChild(statusCell);
+        tr.appendChild(safeCell(formatDate(data.createdAt)));
+
+        rows.appendChild(tr);
+      });
+
+      requestsTable.replaceChildren();
+
+      if (requests.length === 0) {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = 5;
+        td.textContent = "No payment requests found.";
+        tr.appendChild(td);
+        rows.appendChild(tr);
+      }
+
+      requestsTable.appendChild(rows);
+      updateCounts(requests);
+
+      showMessage(
+        requestsMessage,
+        "Updated successfully. Requests found: " + requests.length
+      );
+
+      showMessage(connectionMessage, "Connected to payment requests.");
+    }
+
+    function listenToRequests() {
+      stopListening();
+
+      showMessage(requestsMessage, "Loading payment requests...");
+
+      const requestsQuery = query(
+        collection(db, "paymentRequests"),
+        orderBy("createdAt", "desc")
+      );
+
+      stopRequestsListener = onSnapshot(
+        requestsQuery,
+        snapshot => {
+          renderRequests(snapshot);
+        },
+        error => {
+          console.error("Payment requests error:", error);
+
+          showMessage(
+            requestsMessage,
+            "Could not load requests. Check Firestore rules and connection."
+          );
+
+          showMessage(connectionMessage, "Payment request connection failed.");
+        }
+      );
+    }
+
+    loginForm.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      if (loginInProgress) return;
+      loginInProgress = true;
+
+      showMessage(loginMessage, "Checking login...");
+
+      try {
+        await signInWithEmailAndPassword(
+          auth,
+          document.getElementById("email").value.trim(),
+          document.getElementById("password").value
+        );
+      } catch (error) {
+        console.error("Login error:", error);
+        showMessage(loginMessage, "Login failed. Check email, password, and Firebase settings.");
+      } finally {
+        loginInProgress = false;
+      }
+    });
+
+    document.getElementById("logoutButton").addEventListener("click", async () => {
+      stopListening();
+
+      try {
+        await signOut(auth);
+      } catch (error) {
+        console.error("Logout error:", error);
+        showMessage(connectionMessage, "Could not log out. Please try again.");
+      }
+    });
+
+    onAuthStateChanged(auth, async user => {
+      stopListening();
+
+      if (!user) {
+        dashboard.hidden = true;
+        loginSection.hidden = false;
+        adminEmail.textContent = "";
+        return;
+      }
+
+      showMessage(loginMessage, "Checking admin permission...");
+
+      try {
+        const adminDoc = await getDoc(doc(db, "admins", user.uid));
+
+        if (!adminDoc.exists() || adminDoc.data().role !== "admin") {
+          showMessage(loginMessage, "Access denied: this account is not an admin.");
+          await signOut(auth);
+          return;
+        }
+
+        loginSection.hidden = true;
+        dashboard.hidden = false;
+        adminEmail.textContent = "Logged in: " + user.email;
+        showMessage(loginMessage, "");
+
+        listenToRequests();
+      } catch (error) {
+        console.error("Admin check error:", error);
+        showMessage(
+          loginMessage,
+          "Could not verify admin access. Check Firestore rules and connection."
+        );
+      }
+    });
+  </script>
 </body>
 </html>
+```
