@@ -1,0 +1,425 @@
+[
+  {
+    "name": "Passport Photo Maker",
+    "category": "Photo Tools",
+    "icon": "🪪",
+    "page": "PassportPhotoMaker.html",
+    "active": true,
+    "price": 0,
+    "description": "Passport Photo Maker utility"
+  },
+  {
+    "name": "Multiple Passport Photos",
+    "category": "Photo Tools",
+    "icon": "🖼️",
+    "page": "MultiplePassportPhotos.html",
+    "active": true,
+    "price": 0,
+    "description": "Multiple Passport Photos utility"
+  },
+  {
+    "name": "Photo Resizer",
+    "category": "Photo Tools",
+    "icon": "📐",
+    "page": "PhotoResizer.html",
+    "active": true,
+    "price": 0,
+    "description": "Photo Resizer utility"
+  },
+  {
+    "name": "Background Remover",
+    "category": "Photo Tools",
+    "icon": "✂️",
+    "page": "BackgroundRemover.html",
+    "active": true,
+    "price": 0,
+    "description": "Background Remover utility"
+  },
+  {
+    "name": "Photo Signature Joiner",
+    "category": "Photo Tools",
+    "icon": "🖊️",
+    "page": "PhotoSignatureJoiner.html",
+    "active": true,
+    "price": 0,
+    "description": "Photo Signature Joiner utility"
+  },
+  {
+    "name": "Thumb Resizer",
+    "category": "Photo Tools",
+    "icon": "👍",
+    "page": "ThumbResizer.html",
+    "active": true,
+    "price": 0,
+    "description": "Thumb Resizer utility"
+  },
+  {
+    "name": "Image Cropper",
+    "category": "Photo Tools",
+    "icon": "✂️",
+    "page": "ImageCropper.html",
+    "active": true,
+    "price": 0,
+    "description": "Image Cropper utility"
+  },
+  {
+    "name": "Image Converter",
+    "category": "Photo Tools",
+    "icon": "🔄",
+    "page": "ImageConverter.html",
+    "active": true,
+    "price": 0,
+    "description": "Image Converter utility"
+  },
+  {
+    "name": "Student ID Card Maker",
+    "category": "ID Card & Print",
+    "icon": "🎓",
+    "page": "StudentIDCardMaker.html",
+    "active": true,
+    "price": 0,
+    "description": "Student ID Card Maker utility"
+  },
+  {
+    "name": "PVC Card Print",
+    "category": "ID Card & Print",
+    "icon": "💳",
+    "page": "PVCCardPrint.html",
+    "active": true,
+    "price": 0,
+    "description": "PVC Card Print utility"
+  },
+  {
+    "name": "Multiple ID Card Print",
+    "category": "ID Card & Print",
+    "icon": "🪪",
+    "page": "MultipleIDCardPrint.html",
+    "active": true,
+    "price": 0,
+    "description": "Multiple ID Card Print utility"
+  },
+  {
+    "name": "JPG to PDF",
+    "category": "PDF Tools",
+    "icon": "📄",
+    "page": "JPGtoPDF.html",
+    "active": true,
+    "price": 0,
+    "description": "JPG to PDF utility"
+  },
+  {
+    "name": "PDF to JPG",
+    "category": "PDF Tools",
+    "icon": "🖼️",
+    "page": "PDFtoJPG.html",
+    "active": true,
+    "price": 0,
+    "description": "PDF to JPG utility"
+  },
+  {
+    "name": "PDF Merge",
+    "category": "PDF Tools",
+    "icon": "📚",
+    "page": "PDFMerge.html",
+    "active": true,
+    "price": 0,
+    "description": "PDF Merge utility"
+  },
+  {
+    "name": "PDF Splitter",
+    "category": "PDF Tools",
+    "icon": "✂️",
+    "page": "PDFSplitter.html",
+    "active": true,
+    "price": 0,
+    "description": "PDF Splitter utility"
+  },
+  {
+    "name": "PDF Compressor",
+    "category": "PDF Tools",
+    "icon": "🗜️",
+    "page": "PDFCompressor.html",
+    "active": true,
+    "price": 0,
+    "description": "PDF Compressor utility"
+  },
+  {
+    "name": "Word to PDF",
+    "category": "PDF Tools",
+    "icon": "📝",
+    "page": "WordtoPDF.html",
+    "active": true,
+    "price": 0,
+    "description": "Word to PDF utility"
+  },
+  {
+    "name": "Add Watermark",
+    "category": "PDF Tools",
+    "icon": "🔖",
+    "page": "AddWatermark.html",
+    "active": true,
+    "price": 0,
+    "description": "Add Watermark utility"
+  },
+  {
+    "name": "Image to PDF",
+    "category": "PDF Tools",
+    "icon": "📷",
+    "page": "ImagetoPDF.html",
+    "active": true,
+    "price": 0,
+    "description": "Image to PDF utility"
+  },
+  {
+    "name": "ID Card PDF Print",
+    "category": "ID Card & Print",
+    "icon": "🪪",
+    "page": "IDCardPDFPrint.html",
+    "active": true,
+    "price": 0,
+    "description": "ID Card PDF Print utility"
+  },
+  {
+    "name": "Mini Documents Album",
+    "category": "ID Card & Print",
+    "icon": "🗂️",
+    "page": "MiniDocumentsAlbum.html",
+    "active": true,
+    "price": 0,
+    "description": "Mini Documents Album utility"
+  },
+  {
+    "name": "Percentage Calculator",
+    "category": "Calculators",
+    "icon": "％",
+    "page": "PercentageCalculator.html",
+    "active": true,
+    "price": 0,
+    "description": "Percentage Calculator utility"
+  },
+  {
+    "name": "GST Calculator",
+    "category": "Calculators",
+    "icon": "🧾",
+    "page": "GSTCalculator.html",
+    "active": true,
+    "price": 0,
+    "description": "GST Calculator utility"
+  },
+  {
+    "name": "Loan EMI Calculator",
+    "category": "Calculators",
+    "icon": "🏦",
+    "page": "LoanEMICalculator.html",
+    "active": true,
+    "price": 0,
+    "description": "Loan EMI Calculator utility"
+  },
+  {
+    "name": "Age Calculator",
+    "category": "Calculators",
+    "icon": "🎂",
+    "page": "AgeCalculator.html",
+    "active": true,
+    "price": 0,
+    "description": "Age Calculator utility"
+  },
+  {
+    "name": "Date Calculator",
+    "category": "Calculators",
+    "icon": "📅",
+    "page": "DateCalculator.html",
+    "active": true,
+    "price": 0,
+    "description": "Date Calculator utility"
+  },
+  {
+    "name": "CGPA Calculator",
+    "category": "Calculators",
+    "icon": "🎓",
+    "page": "CGPACalculator.html",
+    "active": true,
+    "price": 0,
+    "description": "CGPA Calculator utility"
+  },
+  {
+    "name": "Gold & Silver Rate",
+    "category": "Calculators",
+    "icon": "🥇",
+    "page": "GoldSilverRate.html",
+    "active": true,
+    "price": 0,
+    "description": "Gold & Silver Rate utility"
+  },
+  {
+    "name": "Resume/CV Maker",
+    "category": "Document Makers",
+    "icon": "📄",
+    "page": "ResumeCVMaker.html",
+    "active": true,
+    "price": 0,
+    "description": "Resume/CV Maker utility"
+  },
+  {
+    "name": "Biodata Maker",
+    "category": "Document Makers",
+    "icon": "👤",
+    "page": "BiodataMaker.html",
+    "active": true,
+    "price": 0,
+    "description": "Biodata Maker utility"
+  },
+  {
+    "name": "Invoice Generator",
+    "category": "Document Makers",
+    "icon": "🧾",
+    "page": "InvoiceGenerator.html",
+    "active": true,
+    "price": 0,
+    "description": "Invoice Generator utility"
+  },
+  {
+    "name": "Salary Slip Generator",
+    "category": "Document Makers",
+    "icon": "💵",
+    "page": "SalarySlipGenerator.html",
+    "active": true,
+    "price": 0,
+    "description": "Salary Slip Generator utility"
+  },
+  {
+    "name": "Cover Letter",
+    "category": "Document Makers",
+    "icon": "✉️",
+    "page": "CoverLetter.html",
+    "active": true,
+    "price": 0,
+    "description": "Cover Letter utility"
+  },
+  {
+    "name": "Affidavit Format",
+    "category": "Document Makers",
+    "icon": "⚖️",
+    "page": "AffidavitFormat.html",
+    "active": true,
+    "price": 0,
+    "description": "Affidavit Format utility"
+  },
+  {
+    "name": "Agreement Format",
+    "category": "Document Makers",
+    "icon": "🤝",
+    "page": "AgreementFormat.html",
+    "active": true,
+    "price": 0,
+    "description": "Agreement Format utility"
+  },
+  {
+    "name": "Bank Application",
+    "category": "Document Makers",
+    "icon": "🏦",
+    "page": "BankApplication.html",
+    "active": true,
+    "price": 0,
+    "description": "Bank Application utility"
+  },
+  {
+    "name": "CSC Stamp Maker",
+    "category": "CSC & Design",
+    "icon": "🔖",
+    "page": "CSCStampMaker.html",
+    "active": true,
+    "price": 0,
+    "description": "CSC Stamp Maker utility"
+  },
+  {
+    "name": "CSC Rate List Maker",
+    "category": "CSC & Design",
+    "icon": "📋",
+    "page": "CSCRateListMaker.html",
+    "active": true,
+    "price": 0,
+    "description": "CSC Rate List Maker utility"
+  },
+  {
+    "name": "Visiting Card Design",
+    "category": "CSC & Design",
+    "icon": "💼",
+    "page": "VisitingCardDesign.html",
+    "active": true,
+    "price": 0,
+    "description": "Visiting Card Design utility"
+  },
+  {
+    "name": "QR Code Generator",
+    "category": "CSC & Design",
+    "icon": "🔳",
+    "page": "QRCodeGenerator.html",
+    "active": true,
+    "price": 0,
+    "description": "QR Code Generator utility"
+  },
+  {
+    "name": "Typing Test",
+    "category": "CSC & Design",
+    "icon": "⌨️",
+    "page": "TypingTest.html",
+    "active": true,
+    "price": 0,
+    "description": "Typing Test utility"
+  },
+  {
+    "name": "AI Passport Photo",
+    "category": "AI Tools",
+    "icon": "🤖",
+    "page": "AIPassportPhoto.html",
+    "active": true,
+    "price": 0,
+    "description": "AI Passport Photo utility"
+  },
+  {
+    "name": "AI Biodata",
+    "category": "AI Tools",
+    "icon": "✨",
+    "page": "AIBiodata.html",
+    "active": true,
+    "price": 0,
+    "description": "AI Biodata utility"
+  },
+  {
+    "name": "AI Poster Maker",
+    "category": "AI Tools",
+    "icon": "🎨",
+    "page": "AIPosterMaker.html",
+    "active": true,
+    "price": 0,
+    "description": "AI Poster Maker utility"
+  },
+  {
+    "name": "AI Invitation Maker",
+    "category": "AI Tools",
+    "icon": "💌",
+    "page": "AIInvitationMaker.html",
+    "active": true,
+    "price": 0,
+    "description": "AI Invitation Maker utility"
+  },
+  {
+    "name": "Mobile Cam Scanner",
+    "category": "ID Card & Print",
+    "icon": "📷",
+    "page": "MobileCamScanner.html",
+    "active": true,
+    "price": 0,
+    "description": "Mobile Cam Scanner utility"
+  },
+  {
+    "name": "WhatsApp Image Print",
+    "category": "ID Card & Print",
+    "icon": "💬",
+    "page": "WhatsAppImagePrint.html",
+    "active": true,
+    "price": 0,
+    "description": "WhatsApp Image Print utility"
+  }
+]

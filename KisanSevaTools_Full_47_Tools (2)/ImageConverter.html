@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Image Converter | Kisan Seva Tools</title><style>
+:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
+header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
+main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
+h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
+label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
+button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
+button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
+@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
+</style></head><body><header><a href="Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Image Converter</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: Photo Tools • Icon: 🔄</div></section><section class="panel"><label>Select image/file</label><input id="file" type="file" accept="image/*" multiple><div id="preview"></div><label>Output format</label><select id="fmt"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WEBP</option></select><button onclick="convertImg()">Convert & Download</button></section><section class="panel"><h2>Preview / output</h2><div id="out"></div></section>
+<script>
+const fi=document.querySelector('#file');
+if(fi)fi.addEventListener('change',()=>{let p=document.querySelector('#preview');if(!p)return;p.innerHTML='';[...fi.files].forEach(f=>{if(f.type.startsWith('image/')){let im=document.createElement('img');im.className='preview';im.style.maxWidth='160px';im.style.margin='6px';im.src=URL.createObjectURL(f);p.appendChild(im)}})});
+function loadImgs(){return Promise.all([...document.querySelector('#file').files].map(f=>new Promise((res,rej)=>{let im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=URL.createObjectURL(f)})))}
+function dl(canvas,name='output.png',type='image/png'){let a=document.createElement('a');a.href=canvas.toDataURL(type,.92);a.download=name;a.click()}
+function resizeImg(){loadImgs().then(([im])=>{let c=document.createElement('canvas');c.width=+document.querySelector('#w').value;c.height=+document.querySelector('#h').value;c.getContext('2d').drawImage(im,0,0,c.width,c.height);document.querySelector('#out').replaceChildren(c);dl(c,'resized.png')})}
+function convertImg(){loadImgs().then(([im])=>{let c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);let t=document.querySelector('#fmt').value;dl(c,'converted.'+(t==='image/jpeg'?'jpg':t==='image/png'?'png':'webp'),t)})}
+function cropImg(){loadImgs().then(([im])=>{let s=Math.min(im.naturalWidth,im.naturalHeight),c=document.createElement('canvas');c.width=s;c.height=s;c.getContext('2d').drawImage(im,(im.naturalWidth-s)/2,(im.naturalHeight-s)/2,s,s,0,0,s,s);document.querySelector('#out').replaceChildren(c);dl(c,'crop.png')})}
+function makeSheet(){loadImgs().then(([im])=>{let n=+document.querySelector('#copies').value,c=document.createElement('canvas');c.width=1240;c.height=1754;let x=c.getContext('2d');x.fillStyle='white';x.fillRect(0,0,c.width,c.height);let cols=2,rows=Math.ceil(n/cols),cw=560,ch= Math.min(700,1600/rows);for(let i=0;i<n;i++)x.drawImage(im,30+(i%cols)*610,30+Math.floor(i/cols)*ch,cw,ch*.8);document.querySelector('#out').replaceChildren(c);dl(c,'A4-photo-sheet.png')})}
+function makePhoto(){let v=document.querySelector('#size').value;document.querySelector('#copies').value='4';makeSheet()}
+function joinImages(){loadImgs().then(ims=>{let w=Math.max(...ims.map(i=>i.naturalWidth)),h=ims.reduce((s,i)=>s+i.naturalHeight,0),c=document.createElement('canvas');c.width=w;c.height=h;let y=0;ims.forEach(i=>{c.getContext('2d').drawImage(i,0,y);y+=i.naturalHeight});document.querySelector('#out').replaceChildren(c);dl(c,'joined.png')})}
+</script>
+</main></body></html>
