@@ -1,503 +1,260 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
 <title>Kisan Seva Tools - Home</title>
 
 <style>
 *{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:Arial,Helvetica,sans-serif;
-background:#f1f6f2;
-color:#183b28;
-}
-
-.header{
-background:#176b3a;
-color:white;
-text-align:center;
-padding:28px 15px;
-}
-
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f1f6f2;color:#183b28}
+.header{background:#176b3a;color:white;text-align:center;padding:28px 15px}
 .logo{font-size:42px}
-
-.header h1{
-margin:5px 0;
-font-size:28px;
-}
-
-.header p{
-margin:8px 0 0;
-font-size:14px;
-}
-
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px 15px 40px;
-}
-
-.welcome{
-background:white;
-border-radius:16px;
-padding:22px;
-text-align:center;
-box-shadow:0 3px 15px #0002;
-margin-bottom:20px;
-}
-
-.welcome h2{
-margin:0 0 8px;
-color:#176b3a;
-}
-
-.welcome p{
-margin:0;
-color:#555;
-font-size:14px;
-}
-
-/* WALLET */
-
-.wallet{
-background:#176b3a;
-color:white;
-border-radius:16px;
-padding:20px;
-margin-bottom:20px;
-box-shadow:0 3px 15px #0002;
-}
-
-.wallet-title{
-font-size:18px;
-font-weight:bold;
-margin-bottom:8px;
-}
-
-.balance{
-font-size:32px;
-font-weight:bold;
-margin:5px 0 15px;
-}
-
-.wallet-info{
-font-size:13px;
-line-height:1.6;
-}
-
-.wallet-button{
-display:inline-block;
-margin-top:12px;
-background:white;
-color:#176b3a;
-border:0;
-padding:10px 18px;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-}
-
-/* SERVICES */
-
-.services{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:15px;
-}
-
-.service{
-background:white;
-border-radius:15px;
-padding:22px 16px;
-text-align:center;
-box-shadow:0 3px 12px #0002;
-border:1px solid #e1e8e3;
-}
-
-.service .icon{
-font-size:38px;
-margin-bottom:8px;
-}
-
-.service h3{
-margin:5px 0 7px;
-color:#176b3a;
-font-size:18px;
-}
-
-.service p{
-margin:0 0 15px;
-color:#666;
-font-size:13px;
-line-height:1.5;
-}
-
-.service button{
-border:0;
-background:#176b3a;
-color:white;
-padding:10px 18px;
-border-radius:7px;
-font-weight:bold;
-cursor:pointer;
-}
-
-/* CHARGES */
-
-.charges{
-background:white;
-border-radius:15px;
-padding:20px;
-margin-top:20px;
-box-shadow:0 3px 12px #0002;
-}
-
-.charges h3{
-margin-top:0;
-color:#176b3a;
-}
-
-.charge-row{
-display:flex;
-justify-content:space-between;
-padding:11px 4px;
-border-bottom:1px solid #eee;
-font-size:14px;
-}
-
-.charge-row:last-child{
-border-bottom:0;
-}
-
-.paid{
-font-weight:bold;
-color:#c56b00;
-}
-
-.free{
-font-weight:bold;
-color:#16833b;
-}
-
-.notice{
-margin-top:20px;
-background:#fff8df;
-border-left:5px solid #d19b00;
-border-radius:10px;
-padding:15px;
-font-size:13px;
-line-height:1.5;
-}
-
-.footer{
-margin-top:30px;
-background:#176b3a;
-color:white;
-text-align:center;
-padding:18px;
-font-size:12px;
-}
-
+.header h1{margin:5px 0;font-size:28px}
+.header p{margin:8px 0 0;font-size:14px}
+.container{max-width:1000px;margin:auto;padding:20px 15px 40px}
+.welcome{background:white;border-radius:16px;padding:22px;text-align:center;box-shadow:0 3px 15px #0002;margin-bottom:20px}
+.welcome h2{margin:0 0 8px;color:#176b3a}
+.welcome p{margin:0;color:#555;font-size:14px}
+.wallet{background:#176b3a;color:white;border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:0 3px 15px #0002}
+.wallet-title{font-size:18px;font-weight:bold;margin-bottom:8px}
+.balance{font-size:32px;font-weight:bold;margin:5px 0 15px}
+.wallet-info{font-size:13px;line-height:1.6}
+.wallet-button{display:inline-block;margin-top:12px;background:white;color:#176b3a;border:0;padding:10px 18px;border-radius:8px;font-weight:bold;cursor:pointer}
+.section-title{color:#176b3a;margin:28px 0 14px;font-size:22px}
+.services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.service{background:white;border-radius:15px;padding:22px 16px;text-align:center;box-shadow:0 3px 12px #0002;border:1px solid #e1e8e3;min-width:0}
+.service .icon{font-size:38px;margin-bottom:8px}
+.service h3{margin:5px 0 7px;color:#176b3a;font-size:18px;overflow-wrap:anywhere}
+.service p{margin:0 0 15px;color:#666;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+.service button{border:0;background:#176b3a;color:white;padding:10px 18px;border-radius:7px;font-weight:bold;cursor:pointer}
+.service button:disabled{background:#999;cursor:not-allowed}
+.paid{font-weight:bold;color:#c56b00}
+.free{font-weight:bold;color:#16833b}
+.status-message{background:white;padding:16px;border-radius:10px;color:#555;line-height:1.5;grid-column:1/-1}
+.charges{background:white;border-radius:15px;padding:20px;margin-top:20px;box-shadow:0 3px 12px #0002}
+.charges h3{margin-top:0;color:#176b3a}
+.charge-row{display:flex;justify-content:space-between;gap:12px;padding:11px 4px;border-bottom:1px solid #eee;font-size:14px}
+.charge-row:last-child{border-bottom:0}
+.notice{margin-top:20px;background:#fff8df;border-left:5px solid #d19b00;border-radius:10px;padding:15px;font-size:13px;line-height:1.5}
+.footer{margin-top:30px;background:#176b3a;color:white;text-align:center;padding:18px;font-size:12px}
 @media(max-width:600px){
-
-.services{
-grid-template-columns:1fr;
-}
-
-.header h1{
-font-size:24px;
-}
-
-.balance{
-font-size:28px;
-}
-
+.services{grid-template-columns:1fr}
+.header h1{font-size:24px}
+.balance{font-size:28px}
 }
 </style>
 </head>
 
 <body>
-
 <div class="header">
-
-<div class="logo">🌾</div>
-
-<h1>Kisan Seva Tools</h1>
-
-<p>Farmer Services & Digital Tools</p>
-
+  <div class="logo">🌾</div>
+  <h1>Kisan Seva Tools</h1>
+  <p>Farmer Services &amp; Digital Tools</p>
 </div>
 
 <div class="container">
+  <div class="welcome">
+    <h2>Welcome to Kisan Seva Tools</h2>
+    <p>Simple digital tools and services for farmers.</p>
+  </div>
 
-<div class="welcome">
+  <div class="wallet">
+    <div class="wallet-title">💰 My Balance</div>
+    <div class="balance" id="balance">₹0</div>
+    <div class="wallet-info">Your displayed balance is for reference. Pending payment requests do not add money automatically.</div>
+    <button class="wallet-button" id="walletButton" type="button">View Wallet</button>
+  </div>
 
-<h2>Welcome to Kisan Seva Tools</h2>
+  <h2 class="section-title">🌾 Farmer &amp; General Services</h2>
+  <div class="services">
+    <div class="service">
+      <div class="icon">🌾</div>
+      <h3>Farmer ID Card</h3>
+      <p>Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.<br><br><b>Download Charge: ₹10</b></p>
+      <button type="button" data-page="index.html">Open Farmer Card</button>
+    </div>
 
-<p>
-Simple digital tools and services for farmers.
-</p>
+    <div class="service">
+      <div class="icon">📝</div>
+      <h3>Farmer Registration</h3>
+      <p>Register farmer details and save registration information.<br><br><b class="free">FREE</b></p>
+      <button type="button" data-page="index.html">Register Now</button>
+    </div>
 
+    <div class="service">
+      <div class="icon">🖨️</div>
+      <h3>Print / Xerox</h3>
+      <p>Printing and Xerox service information.<br><br><b>Photo Print: ₹5</b><br><span class="free">Other services: FREE</span></p>
+      <button type="button" data-page="Print.html">Open Service</button>
+    </div>
+
+    <div class="service">
+      <div class="icon">📄</div>
+      <h3>PDF Services</h3>
+      <p>Useful PDF and document services.<br><br><b class="free">FREE</b></p>
+      <button type="button" data-page="PDF.html">Open Service</button>
+    </div>
+
+    <div class="service">
+      <div class="icon">🌱</div>
+      <h3>Farmer Services</h3>
+      <p>Useful farmer-related digital services and tools.<br><br><b class="free">FREE</b></p>
+      <button type="button" data-page="Farmer-Services.html">Open Service</button>
+    </div>
+
+    <div class="service">
+      <div class="icon">📞</div>
+      <h3>Contact / Help</h3>
+      <p>Contact information and help section.<br><br><b class="free">FREE</b></p>
+      <button type="button" data-page="Contact.html">Contact</button>
+    </div>
+  </div>
+
+  <h2 class="section-title">🧰 Available Digital Tools</h2>
+  <div class="services" id="dynamicTools">
+    <div class="status-message">Loading available tools…</div>
+  </div>
+
+  <div class="charges">
+    <h3>💳 Service Charges</h3>
+    <div class="charge-row"><span>🌾 Farmer Card Download</span><span class="paid">₹10</span></div>
+    <div class="charge-row"><span>🖨️ Photo Print</span><span class="paid">₹5</span></div>
+    <div class="charge-row"><span>📋 Farmer Registration</span><span class="free">FREE</span></div>
+    <div class="charge-row"><span>📄 PDF Services</span><span class="free">FREE</span></div>
+    <div class="charge-row"><span>📑 Xerox</span><span class="free">FREE</span></div>
+    <div class="charge-row"><span>🌱 Farmer Services</span><span class="free">FREE</span></div>
+    <div class="charge-row"><span>📞 Contact / Help</span><span class="free">FREE</span></div>
+  </div>
+
+  <div class="notice">
+    <b>Important:</b><br>
+    Kisan Seva Tools is a personal digital service website. Farmer ID Cards created through this website are <b>not government-issued documents</b>.
+    <br><br>
+    <b>Payment Note:</b><br>
+    Prices shown here are informational. A listed price does not mean payment processing or wallet credit is active.
+  </div>
 </div>
 
-
-<!-- COMMON WALLET -->
-
-<div class="wallet">
-
-<div class="wallet-title">
-💰 My Balance
-</div>
-
-<div class="balance" id="balance">
-₹0
-</div>
-
-<div class="wallet-info">
-This is your common Kisan Seva Tools balance.
-</div>
-
-<button class="wallet-button" onclick="openWallet()">
-View Wallet
-</button>
-
-</div>
-
-
-<!-- SERVICES -->
-
-<div class="services">
-
-
-<!-- FARMER ID CARD -->
-
-<div class="service">
-
-<div class="icon">🌾</div>
-
-<h3>Farmer ID Card</h3>
-
-<p>
-Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.
-<br><br>
-<b>Download Charge: ₹10</b>
-</p>
-
-<button onclick="location.href='index.html'">
-Open Farmer Card
-</button>
-
-</div>
-
-
-<!-- FARMER REGISTRATION -->
-
-<div class="service">
-
-<div class="icon">📝</div>
-
-<h3>Farmer Registration</h3>
-
-<p>
-Register farmer details and save registration information.
-<br><br>
-<b class="free">FREE</b>
-</p>
-
-<button onclick="location.href='index.html'">
-Register Now
-</button>
-
-</div>
-
-
-<!-- PRINT -->
-
-<div class="service">
-
-<div class="icon">🖨️</div>
-
-<h3>Print / Xerox</h3>
-
-<p>
-Printing and Xerox service information.
-<br><br>
-<b>Photo Print: ₹5</b><br>
-<span class="free">Other services: FREE</span>
-</p>
-
-<button onclick="location.href='Print.html'">
-Open Service
-</button>
-
-</div>
-
-
-<!-- PDF -->
-
-<div class="service">
-
-<div class="icon">📄</div>
-
-<h3>PDF Services</h3>
-
-<p>
-Useful PDF and document services.
-<br><br>
-<b class="free">FREE</b>
-</p>
-
-<button onclick="location.href='PDF.html'">
-Open Service
-</button>
-
-</div>
-
-
-<!-- FARMER SERVICES -->
-
-<div class="service">
-
-<div class="icon">🌱</div>
-
-<h3>Farmer Services</h3>
-
-<p>
-Useful farmer-related digital services and tools.
-<br><br>
-<b class="free">FREE</b>
-</p>
-
-<button onclick="location.href='Farmer-Services.html'">
-Open Service
-</button>
-
-</div>
-
-
-<!-- CONTACT -->
-
-<div class="service">
-
-<div class="icon">📞</div>
-
-<h3>Contact / Help</h3>
-
-<p>
-Contact information and help section.
-<br><br>
-<b class="free">FREE</b>
-</p>
-
-<button onclick="location.href='Contact.html'">
-Contact
-</button>
-
-</div>
-
-</div>
-
-
-<!-- SERVICE CHARGES -->
-
-<div class="charges">
-
-<h3>💳 Service Charges</h3>
-
-<div class="charge-row">
-<span>🌾 Farmer Card Download</span>
-<span class="paid">₹10</span>
-</div>
-
-<div class="charge-row">
-<span>🖨️ Photo Print</span>
-<span class="paid">₹5</span>
-</div>
-
-<div class="charge-row">
-<span>📋 Farmer Registration</span>
-<span class="free">FREE</span>
-</div>
-
-<div class="charge-row">
-<span>📄 PDF Services</span>
-<span class="free">FREE</span>
-</div>
-
-<div class="charge-row">
-<span>📑 Xerox</span>
-<span class="free">FREE</span>
-</div>
-
-<div class="charge-row">
-<span>🌱 Farmer Services</span>
-<span class="free">FREE</span>
-</div>
-
-<div class="charge-row">
-<span>📞 Contact / Help</span>
-<span class="free">FREE</span>
-</div>
-
-</div>
-
-
-<div class="notice">
-
-<b>Important:</b><br>
-
-Kisan Seva Tools is a personal digital service website.
-Farmer ID Cards created through this website are
-<b>not government-issued documents</b>.
-
-<br><br>
-
-<b>Payment Note:</b><br>
-
-Farmer Card Download = ₹10<br>
-Photo Print = ₹5<br>
-All other listed services = FREE.
-
-</div>
-
-</div>
-
-
-<div class="footer">
-
-© 2026 Kisan Seva Tools • Personal Use
-
-</div>
-
-
-<script>
-
-/* COMMON BALANCE */
-
-let balance = Number(
-localStorage.getItem("kst_balance") || 0
+<div class="footer">© 2026 Kisan Seva Tools • Personal Use</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import {
+  getFirestore, collection, onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
+  authDomain: "kisan-seva-tools.firebaseapp.com",
+  projectId: "kisan-seva-tools",
+  appId: "1:900938868284:web:5a5b278506955fc0f48539"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document.getElementById("walletButton").addEventListener("click", () => {
+  window.location.href = "Wallet.html";
+});
+
+document.querySelectorAll("[data-page]").forEach(button => {
+  button.addEventListener("click", () => {
+    window.location.href = button.dataset.page;
+  });
+});
+
+// Existing local balance display; this is not a verified wallet balance.
+const localBalance = Number(localStorage.getItem("kst_balance") || 0);
+document.getElementById("balance").textContent =
+  "₹" + (Number.isFinite(localBalance) && localBalance >= 0 ? localBalance : 0);
+
+const toolsContainer = document.getElementById("dynamicTools");
+
+function showMessage(message) {
+  toolsContainer.replaceChildren();
+  const box = document.createElement("div");
+  box.className = "status-message";
+  box.textContent = message;
+  toolsContainer.appendChild(box);
+}
+
+function addTextElement(parent, tag, text) {
+  const element = document.createElement(tag);
+  element.textContent = text;
+  parent.appendChild(element);
+  return element;
+}
+
+onSnapshot(
+  collection(db, "tools"),
+  snapshot => {
+    toolsContainer.replaceChildren();
+
+    const activeTools = snapshot.docs
+      .map(documentSnapshot => ({
+        id: documentSnapshot.id,
+        ...documentSnapshot.data()
+      }))
+      .filter(tool => tool.active === true)
+      .sort((a, b) =>
+        String(a.name || "").localeCompare(String(b.name || ""))
+      );
+
+    if (activeTools.length === 0) {
+      showMessage("Abhi koi active digital tool available nahi hai. Please baad mein check karein.");
+      return;
+    }
+
+    activeTools.forEach(tool => {
+      const card = document.createElement("div");
+      card.className = "service";
+
+      addTextElement(card, "div", "🧰").className = "icon";
+      addTextElement(card, "h3", String(tool.name || "Digital Tool"));
+      addTextElement(card, "p", String(tool.description || "Digital service"));
+
+      const category = addTextElement(
+        card, "p", "Category: " + String(tool.category || "General")
+      );
+      category.style.fontWeight = "bold";
+
+      const price = Number(tool.price);
+      const priceText = Number.isFinite(price) && price >= 0
+        ? (price === 0 ? "FREE" : "Price: ₹" + price)
+        : "Price: Contact for details";
+
+      const priceElement = addTextElement(card, "p", priceText);
+      priceElement.className =
+        Number.isFinite(price) && price === 0 ? "free" : "paid";
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = "Open Tool";
+
+      // Only open a simple local HTML filename, not an arbitrary URL.
+      const page = String(tool.page || "").trim();
+      if (/^[a-zA-Z0-9_-]+\.html$/.test(page)) {
+        button.addEventListener("click", () => {
+          window.location.href = page;
+        });
+      } else {
+        button.disabled = true;
+        button.title = "Is tool ka page abhi connect nahi hua hai.";
+        button.textContent = "Page Not Connected";
+      }
+
+      card.appendChild(button);
+      toolsContainer.appendChild(card);
+    });
+  },
+  error => {
+    console.error("Tools loading error:", error);
+    showMessage("Tools load nahi ho rahe. Firebase connection aur Firestore rules check karein.");
+  }
 );
-
-function showBalance(){
-
-document.getElementById("balance").innerText =
-"₹" + balance;
-
-}
-
-function openWallet(){
-
-location.href="Wallet.html";
-
-}
-
-showBalance();
-
 </script>
-
 </body>
 </html>
+```
