@@ -1,11 +1,10 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Kisan Seva Tools - Home</title>
-
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f1f6f2;color:#183b28}
@@ -46,7 +45,6 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f1f6f2;color:#1
 }
 </style>
 </head>
-
 <body>
 <div class="header">
   <div class="logo">🌾</div>
@@ -75,35 +73,30 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f1f6f2;color:#1
       <p>Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.<br><br><b>Download Charge: ₹10</b></p>
       <button type="button" data-page="index.html">Open Farmer Card</button>
     </div>
-
     <div class="service">
       <div class="icon">📝</div>
       <h3>Farmer Registration</h3>
       <p>Register farmer details and save registration information.<br><br><b class="free">FREE</b></p>
       <button type="button" data-page="index.html">Register Now</button>
     </div>
-
     <div class="service">
       <div class="icon">🖨️</div>
       <h3>Print / Xerox</h3>
       <p>Printing and Xerox service information.<br><br><b>Photo Print: ₹5</b><br><span class="free">Other services: FREE</span></p>
       <button type="button" data-page="Print.html">Open Service</button>
     </div>
-
     <div class="service">
       <div class="icon">📄</div>
       <h3>PDF Services</h3>
       <p>Useful PDF and document services.<br><br><b class="free">FREE</b></p>
       <button type="button" data-page="PDF.html">Open Service</button>
     </div>
-
     <div class="service">
       <div class="icon">🌱</div>
       <h3>Farmer Services</h3>
       <p>Useful farmer-related digital services and tools.<br><br><b class="free">FREE</b></p>
       <button type="button" data-page="Farmer-Services.html">Open Service</button>
     </div>
-
     <div class="service">
       <div class="icon">📞</div>
       <h3>Contact / Help</h3>
@@ -155,6 +148,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// All 47 tool HTML files are inside this folder.
+const TOOLS_FOLDER = "KisanSevaTools_Full_47_Tools%20%282%29/";
+
+function toolUrl(filename) {
+  const page = String(filename || "").trim();
+
+  // Allow only a simple HTML filename.
+  if (!/^[a-zA-Z0-9_-]+\.html$/.test(page)) {
+    return null;
+  }
+
+  return TOOLS_FOLDER + page;
+}
+
 document.getElementById("walletButton").addEventListener("click", () => {
   window.location.href = "Wallet.html";
 });
@@ -165,7 +172,6 @@ document.querySelectorAll("[data-page]").forEach(button => {
   });
 });
 
-// Existing local balance display; this is not a verified wallet balance.
 const localBalance = Number(localStorage.getItem("kst_balance") || 0);
 document.getElementById("balance").textContent =
   "₹" + (Number.isFinite(localBalance) && localBalance >= 0 ? localBalance : 0);
@@ -233,15 +239,16 @@ onSnapshot(
       button.type = "button";
       button.textContent = "Open Tool";
 
-      // Only open a simple local HTML filename, not an arbitrary URL.
-      const page = String(tool.page || "").trim();
-      if (/^[a-zA-Z0-9_-]+\.html$/.test(page)) {
+      // FIX: Open the tool inside the correct folder.
+      const destination = toolUrl(tool.page || tool.file);
+
+      if (destination) {
         button.addEventListener("click", () => {
-          window.location.href = page;
+          window.location.href = destination;
         });
       } else {
         button.disabled = true;
-        button.title = "Is tool ka page abhi connect nahi hua hai.";
+        button.title = "Is tool ka valid HTML filename nahi mila.";
         button.textContent = "Page Not Connected";
       }
 
@@ -257,4 +264,3 @@ onSnapshot(
 </script>
 </body>
 </html>
-```
