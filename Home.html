@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,18 +148,48 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// All 47 tool HTML files are inside this folder.
-const TOOLS_FOLDER = "KisanSevaTools_Full_47_Tools%20%282%29/";
+// Folder containing the 47 HTML tool files.
+const TOOLS_FOLDER =
+  "KisanSevaTools_Full_47_Tools%20%282%29/";
 
 function toolUrl(filename) {
   const page = String(filename || "").trim();
 
-  // Allow only a simple HTML filename.
-  if (!/^[a-zA-Z0-9_-]+\.html$/.test(page)) {
-    return null;
+  if (!page) return null;
+
+  // Support a full HTTP/HTTPS URL if intentionally configured.
+  if (/^https?:\/\//i.test(page)) return page;
+
+  // Normal filename, e.g. AIBiodata.html
+  if (/^[A-Za-z0-9_-]+\.html$/i.test(page)) {
+    return TOOLS_FOLDER + encodeURIComponent(page);
   }
 
-  return TOOLS_FOLDER + page;
+  // Full relative path already saved in Firestore.
+  const normalized = page.replace(/\\/g, "/").replace(/^\/+/, "");
+  const folderName = "KisanSevaTools_Full_47_Tools (2)/";
+
+  if (normalized.startsWith(folderName)) {
+    const filenamePart = normalized.slice(folderName.length);
+
+    // Only allow one HTML filename inside the tools folder.
+    if (/^[A-Za-z0-9_-]+\.html$/i.test(filenamePart)) {
+      return TOOLS_FOLDER + encodeURIComponent(filenamePart);
+    }
+  }
+
+  // Also accept the already URL-encoded folder path.
+  const encodedFolder = "KisanSevaTools_Full_47_Tools%20%282%29/";
+
+  if (normalized.startsWith(encodedFolder)) {
+    const filenamePart = normalized.slice(encodedFolder.length);
+
+    if (/^[A-Za-z0-9_-]+\.html$/i.test(filenamePart)) {
+      return encodedFolder + encodeURIComponent(filenamePart);
+    }
+  }
+
+  return null;
 }
 
 document.getElementById("walletButton").addEventListener("click", () => {
@@ -173,16 +203,21 @@ document.querySelectorAll("[data-page]").forEach(button => {
 });
 
 const localBalance = Number(localStorage.getItem("kst_balance") || 0);
+
 document.getElementById("balance").textContent =
-  "₹" + (Number.isFinite(localBalance) && localBalance >= 0 ? localBalance : 0);
+  "₹" + (Number.isFinite(localBalance) && localBalance >= 0
+    ? localBalance
+    : 0);
 
 const toolsContainer = document.getElementById("dynamicTools");
 
 function showMessage(message) {
   toolsContainer.replaceChildren();
+
   const box = document.createElement("div");
   box.className = "status-message";
   box.textContent = message;
+
   toolsContainer.appendChild(box);
 }
 
@@ -209,7 +244,9 @@ onSnapshot(
       );
 
     if (activeTools.length === 0) {
-      showMessage("Abhi koi active digital tool available nahi hai. Please baad mein check karein.");
+      showMessage(
+        "Abhi koi active digital tool available nahi hai. Please baad mein check karein."
+      );
       return;
     }
 
@@ -217,29 +254,36 @@ onSnapshot(
       const card = document.createElement("div");
       card.className = "service";
 
-      addTextElement(card, "div", "🧰").className = "icon";
+      addTextElement(card, "div", tool.icon || "🧰").className = "icon";
       addTextElement(card, "h3", String(tool.name || "Digital Tool"));
-      addTextElement(card, "p", String(tool.description || "Digital service"));
+      addTextElement(
+        card,
+        "p",
+        String(tool.description || "Digital service")
+      );
 
       const category = addTextElement(
-        card, "p", "Category: " + String(tool.category || "General")
+        card,
+        "p",
+        "Category: " + String(tool.category || "General")
       );
       category.style.fontWeight = "bold";
 
       const price = Number(tool.price);
-      const priceText = Number.isFinite(price) && price >= 0
+      const validPrice = Number.isFinite(price) && price >= 0;
+
+      const priceText = validPrice
         ? (price === 0 ? "FREE" : "Price: ₹" + price)
         : "Price: Contact for details";
 
       const priceElement = addTextElement(card, "p", priceText);
       priceElement.className =
-        Number.isFinite(price) && price === 0 ? "free" : "paid";
+        validPrice && price === 0 ? "free" : "paid";
 
       const button = document.createElement("button");
       button.type = "button";
       button.textContent = "Open Tool";
 
-      // FIX: Open the tool inside the correct folder.
       const destination = toolUrl(tool.page || tool.file);
 
       if (destination) {
@@ -248,8 +292,9 @@ onSnapshot(
         });
       } else {
         button.disabled = true;
-        button.title = "Is tool ka valid HTML filename nahi mila.";
         button.textContent = "Page Not Connected";
+        button.title =
+          "Tools Management mein is tool ka sahi HTML filename save karein.";
       }
 
       card.appendChild(button);
@@ -258,9 +303,12 @@ onSnapshot(
   },
   error => {
     console.error("Tools loading error:", error);
-    showMessage("Tools load nahi ho rahe. Firebase connection aur Firestore rules check karein.");
+    showMessage(
+      "Tools load nahi ho rahe. Internet connection, Firebase configuration aur Firestore rules check karein."
+    );
   }
 );
 </script>
 </body>
 </html>
+```
