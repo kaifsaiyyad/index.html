@@ -3,571 +3,706 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tools Management - Kisan Seva Tools</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#176b3a">
+<title>Tools Management | Kisan Seva Tools</title>
+
 <style>
+:root{
+  --green:#176b3a;
+  --dark:#104b2a;
+  --light:#eaf5ed;
+  --bg:#f4f8f5;
+  --text:#183b28;
+  --muted:#68766d;
+  --border:#dce8df;
+  --red:#b42318;
+  --orange:#a85a00;
+}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6f3;color:#202820}
-header{background:#176b3a;color:white;padding:18px}
-header h1{margin:0 0 6px;font-size:23px}
-main{max-width:1050px;margin:auto;padding:18px}
-.panel{background:white;padding:18px;border-radius:12px;margin-bottom:18px;box-shadow:0 2px 9px #0000000d}
-h2{margin-top:0;font-size:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-label{display:block;font-weight:bold;margin-bottom:6px}
-input,select,textarea{width:100%;padding:11px;border:1px solid #cbd5cd;border-radius:7px;font:inherit;margin-bottom:13px}
-textarea{min-height:75px;resize:vertical}
-button,.link-button{border:0;padding:10px 14px;border-radius:7px;cursor:pointer;font-weight:bold;text-decoration:none;display:inline-block;margin:3px}
-button:disabled{opacity:.55;cursor:not-allowed}
-.primary{background:#176b3a;color:white}
-.secondary{background:#e7eee8;color:#174d2c}
-.danger{background:#b42318;color:white}
-.muted{color:#59665c;font-size:14px}
-.message{padding:11px;border-radius:7px;margin:10px 0;overflow-wrap:anywhere}
-.error{background:#fff0ef;color:#a32118}
-.success{background:#e8f7ed;color:#176b3a}
-.tool-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
-.tool{border:1px solid #e0e6e1;border-radius:12px;padding:15px;background:#fff;min-width:0}
-.thumb{height:100px;border-radius:10px;background:#eaf5ed;display:flex;align-items:center;justify-content:center;font-size:52px;margin-bottom:12px}
-.tool h3{margin:5px 0 8px;overflow-wrap:anywhere}
-.tool p{margin:6px 0;overflow-wrap:anywhere}
-.badge{display:inline-block;padding:4px 8px;border-radius:20px;background:#e5f5e9;color:#176b3a;font-size:12px}
-.inactive{background:#eee;color:#555}
-.price{font-weight:bold;color:#176b3a}
-#app{display:none}
-@media(max-width:500px){main{padding:10px}.panel{padding:13px}}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.topbar{
+  background:var(--dark);
+  color:#fff;
+  padding:10px 5%;
+  font-size:13px;
+}
+header{
+  background:linear-gradient(120deg,#176b3a,#21854b);
+  color:white;
+  padding:25px 5%;
+}
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{
+  width:52px;height:52px;
+  display:grid;place-items:center;
+  background:#ffffff20;
+  border-radius:15px;
+  font-size:29px;
+}
+.brand h1{margin:0;font-size:23px}
+.brand p{margin:4px 0 0;font-size:13px;color:#e0f1e5}
+.nav{display:flex;gap:8px;flex-wrap:wrap}
+.nav a{
+  color:white;text-decoration:none;
+  border:1px solid #ffffff55;
+  padding:9px 12px;border-radius:8px;
+  font-size:13px;
+}
+.container{max-width:1200px;margin:auto;padding:25px 18px 45px}
+.panel{
+  background:white;border:1px solid var(--border);
+  border-radius:16px;padding:22px;
+  margin-bottom:18px;
+  box-shadow:0 5px 20px #173d2508;
+}
+.panel h2{font-size:19px;margin:0 0 7px}
+.subtext{font-size:13px;color:var(--muted);margin:0 0 18px}
+label{display:block;font-size:13px;font-weight:bold;margin-bottom:6px}
+input,select,textarea{
+  width:100%;padding:11px 12px;
+  border:1px solid #cedbd1;border-radius:9px;
+  background:white;color:var(--text);
+  outline:none;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px #176b3a18;
+}
+textarea{min-height:85px;resize:vertical}
+.field{margin-bottom:15px;min-width:0}
+.grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 16px;
+}
+.full{grid-column:1/-1}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  border:0;border-radius:9px;padding:11px 15px;
+  background:var(--green);color:white;font-weight:bold;
+  font-size:13px;
+}
+.btn:hover{background:var(--dark)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.secondary{background:var(--light);color:var(--green)}
+.btn.danger{background:#fff0ef;color:var(--red)}
+.btn.warning{background:#fff4df;color:var(--orange)}
+.actions{display:flex;gap:9px;flex-wrap:wrap}
+.hidden{display:none!important}
+.message{
+  display:none;margin:0 0 16px;padding:12px 14px;
+  border-radius:9px;font-size:13px;line-height:1.5;
+  overflow-wrap:anywhere;
+}
+.message.show{display:block}
+.message.error{background:#fff0ef;color:var(--red)}
+.message.success{background:#eaf8ee;color:#176b3a}
+.message.info{background:#eef5ff;color:#244d83}
+.stats{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:13px;margin-bottom:18px;
+}
+.stat{
+  background:white;border:1px solid var(--border);
+  border-radius:13px;padding:17px;
+}
+.stat span{display:block;font-size:12px;color:var(--muted)}
+.stat strong{display:block;font-size:27px;margin-top:5px;color:var(--green)}
+.toolbar{
+  display:grid;grid-template-columns:2fr 1fr;
+  gap:12px;margin-bottom:18px;
+}
+.tool-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.tool-card{
+  background:white;border:1px solid var(--border);
+  border-radius:14px;padding:17px;min-width:0;
+}
+.tool-top{display:flex;align-items:flex-start;gap:12px}
+.tool-icon{
+  display:grid;place-items:center;flex-shrink:0;
+  width:46px;height:46px;border-radius:12px;
+  background:var(--light);font-size:25px;
+}
+.tool-card h3{margin:2px 0 5px;font-size:16px;overflow-wrap:anywhere}
+.tool-card p{font-size:13px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}
+.tag{
+  display:inline-block;padding:4px 8px;border-radius:30px;
+  font-size:11px;font-weight:bold;background:#edf1ee;
+  color:#4b5b50;margin:3px 4px 3px 0;
+}
+.tag.active{background:#e4f7e9;color:#176b3a}
+.tag.inactive{background:#fff0ef;color:var(--red)}
+.tool-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
+.tool-actions .btn{padding:9px 10px}
+.empty{
+  background:white;border:1px dashed #cddbd0;
+  border-radius:12px;padding:25px;text-align:center;
+  color:var(--muted);font-size:13px;grid-column:1/-1;
+}
+footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
+@media(max-width:850px){.tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){
+  .container{padding:16px 12px 30px}
+  .panel{padding:16px}
+  .grid,.toolbar{grid-template-columns:1fr}
+  .tool-grid{grid-template-columns:1fr}
+  .stats{gap:8px}
+  .stat{padding:12px}
+  .stat strong{font-size:22px}
+  .brand h1{font-size:20px}
+}
 </style>
 </head>
+
 <body>
+<div class="topbar">🌱 Kisan Seva Tools · Administration</div>
+
 <header>
-<h1>Kisan Seva Tools</h1>
-<p>Tools Management Admin Panel</p>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="logo">🧰</div>
+      <div>
+        <h1>Tools Management</h1>
+        <p>Manage digital tools and their availability</p>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="Home.html">Home</a>
+      <a href="Admin.html">Admin Panel</a>
+    </nav>
+  </div>
 </header>
 
-<main>
-<section class="panel" id="loginPanel">
-<h2>Admin Login</h2>
-<p class="muted">Apne existing Firebase Admin account se login karein.</p>
-<form id="loginForm">
-<label for="email">Email</label>
-<input id="email" type="email" autocomplete="username" required>
-<label for="password">Password</label>
-<input id="password" type="password" autocomplete="current-password" required>
-<button class="primary" type="submit">Login</button>
-</form>
-<div id="loginMessage" aria-live="polite"></div>
-</section>
+<main class="container">
+  <div id="message" class="message" role="status"></div>
 
-<div id="app">
-<section class="panel">
-<p id="adminInfo" class="muted"></p>
-<button id="logoutBtn" class="secondary" type="button">Logout</button>
-<a class="link-button secondary" href="Admin.html">Back to Admin</a>
-</section>
+  <section id="loginPanel" class="panel">
+    <h2>🔐 Administrator Login</h2>
+    <p class="subtext">Sign in with your authorized Firebase administrator account.</p>
+    <form id="loginForm">
+      <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" type="email" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+      </div>
+      <button class="btn" id="loginButton" type="submit">Sign in</button>
+    </form>
+  </section>
 
-<section class="panel">
-<h2>Bulk Import Tools</h2>
-<p class="muted">
-Pehle tools-catalog.json ko isi repository ke root folder mein upload aur commit karein.
-Import existing tool ke matching name/page ko skip karega.
-Import ke dauran page band na karein.
-</p>
-<button class="primary" id="bulkImportBtn" type="button">Import Tools from Catalog</button>
-<div id="bulkImportMessage" aria-live="polite"></div>
-</section>
+  <div id="appPanel" class="hidden">
+    <section class="panel">
+      <div class="header-inner" style="color:var(--text);padding:0">
+        <div>
+          <h2 id="formTitle">➕ Add a Digital Tool</h2>
+          <p class="subtext" style="margin:6px 0 0">Add or update a tool displayed on the Home page.</p>
+        </div>
+        <button class="btn secondary" id="resetButton" type="button">Clear form</button>
+      </div>
 
-<section class="panel">
-<h2 id="formTitle">Add New Tool</h2>
-<form id="toolForm">
-<input id="toolId" type="hidden">
-<div class="grid">
-<div>
-<label for="name">Tool Name *</label>
-<input id="name" maxlength="80" required placeholder="Example: Photo to PDF">
-</div>
-<div>
-<label for="category">Category *</label>
-<select id="category" required>
-<option>Photo Tools</option>
-<option>PDF Tools</option>
-<option>Image Tools</option>
-<option>ID Card Tools</option>
-<option>Calculators</option>
-<option>Document Makers</option>
-<option>AI Tools</option>
-<option>Print Tools</option>
-<option>Farmer Services</option>
-<option>Other</option>
-</select>
-</div>
-<div>
-<label for="icon">Tool Thumbnail Icon *</label>
-<select id="icon" required>
-<option value="📸">📸 Photo Tools</option>
-<option value="🪪">🪪 ID Card Tools</option>
-<option value="📄">📄 PDF Tools</option>
-<option value="🖼️">🖼️ Image Tools</option>
-<option value="🧮">🧮 Calculators</option>
-<option value="📝">📝 Document Makers</option>
-<option value="🤖">🤖 AI Tools</option>
-<option value="🖨️">🖨️ Print Tools</option>
-<option value="🌾">🌾 Farmer Services</option>
-<option value="🔧">🔧 Other Tools</option>
-</select>
-</div>
-<div>
-<label for="price">Price (₹) *</label>
-<input id="price" type="number" min="0" max="100000" step="0.01" required value="0">
-</div>
-<div>
-<label for="active">Status *</label>
-<select id="active" required>
-<option value="true">Active</option>
-<option value="false">Inactive</option>
-</select>
-</div>
-</div>
+      <form id="toolForm" style="margin-top:22px">
+        <input id="toolId" type="hidden">
 
-<label for="description">Description</label>
-<textarea id="description" maxlength="500" placeholder="Tool kya kaam karta hai?"></textarea>
-<label for="page">Tool Page (optional)</label>
-<input id="page" maxlength="150" placeholder="Example: PhotoToPDF.html">
+        <div class="grid">
+          <div class="field">
+            <label for="toolName">Tool name *</label>
+            <input id="toolName" maxlength="100" required placeholder="Example: Farmer Card Maker">
+          </div>
 
-<button class="primary" id="saveBtn" type="submit">Save Tool</button>
-<button class="secondary" id="cancelBtn" type="button" hidden>Cancel Edit</button>
-<div id="formMessage" aria-live="polite"></div>
-</form>
-<p class="muted">Note: Icon emoji hai. Actual function ke liye us tool ka HTML page bhi hona chahiye.</p>
-</section>
+          <div class="field">
+            <label for="toolIcon">Icon / Emoji</label>
+            <input id="toolIcon" maxlength="20" placeholder="🌾">
+          </div>
 
-<section class="panel">
-<h2>Saved Tools</h2>
-<div class="grid">
-<div>
-<label for="filterCategory">Filter by category</label>
-<select id="filterCategory">
-<option value="all">All Categories</option>
-<option>Photo Tools</option>
-<option>PDF Tools</option>
-<option>Image Tools</option>
-<option>ID Card Tools</option>
-<option>Calculators</option>
-<option>Document Makers</option>
-<option>AI Tools</option>
-<option>Print Tools</option>
-<option>Farmer Services</option>
-<option>Other</option>
-</select>
-</div>
-<div>
-<label for="filterStatus">Filter by status</label>
-<select id="filterStatus">
-<option value="all">All Statuses</option>
-<option value="active">Active</option>
-<option value="inactive">Inactive</option>
-</select>
-</div>
-</div>
-<div id="toolList" class="tool-list">Loading...</div>
-</section>
-</div>
+          <div class="field">
+            <label for="toolCategory">Category *</label>
+            <input id="toolCategory" maxlength="60" required placeholder="Example: Farmer Services">
+          </div>
+
+          <div class="field">
+            <label for="toolPrice">Price (₹)</label>
+            <input id="toolPrice" type="number" min="0" step="0.01" value="0">
+          </div>
+
+          <div class="field full">
+            <label for="toolDescription">Description</label>
+            <textarea id="toolDescription" maxlength="500" placeholder="Explain what this tool does"></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="toolPage">HTML filename *</label>
+            <input id="toolPage" maxlength="180" required placeholder="Example: AIBiodata.html">
+            <small style="color:var(--muted);font-size:12px">
+              Enter the exact HTML filename from the tools folder, not a display name.
+            </small>
+          </div>
+
+          <div class="field">
+            <label for="toolActive">Availability</label>
+            <select id="toolActive">
+              <option value="true">Active — show on Home</option>
+              <option value="false">Inactive — hide on Home</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="saveButton" type="submit">Save tool</button>
+          <button class="btn secondary hidden" id="cancelEdit" type="button">Cancel edit</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="stats">
+      <div class="stat"><span>Total tools</span><strong id="totalCount">0</strong></div>
+      <div class="stat"><span>Active tools</span><strong id="activeCount">0</strong></div>
+      <div class="stat"><span>Inactive tools</span><strong id="inactiveCount">0</strong></div>
+    </section>
+
+    <section class="panel">
+      <h2>📦 Import Tools Catalog</h2>
+      <p class="subtext">
+        Imports tools from tools-catalog.json in the repository root.
+        Existing tools with the same name and page are skipped.
+      </p>
+      <button class="btn secondary" id="importButton" type="button">Import catalog</button>
+    </section>
+
+    <section class="panel">
+      <h2>🗂️ Your Digital Tools</h2>
+      <p class="subtext">Search tools, filter by status, or edit their details.</p>
+      <div class="toolbar">
+        <input id="searchInput" placeholder="Search name, category or filename…">
+        <select id="statusFilter">
+          <option value="all">All tools</option>
+          <option value="active">Active only</option>
+          <option value="inactive">Inactive only</option>
+        </select>
+      </div>
+      <div id="toolList" class="tool-grid">
+        <div class="empty">Loading tools…</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="actions">
+        <button class="btn danger" id="logoutButton" type="button">Sign out</button>
+      </div>
+    </section>
+  </div>
 </main>
 
+<footer>© 2026 Kisan Seva Tools · Authorized administration only</footer>
+
 <script type="module">
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import {
-getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut
+  getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-
 import {
-getFirestore,collection,addDoc,getDoc,doc,updateDoc,
-deleteDoc,onSnapshot,query,orderBy,serverTimestamp
+  getFirestore,collection,addDoc,getDoc,doc,updateDoc,
+  deleteDoc,onSnapshot,serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
 const firebaseConfig={
-apiKey:"AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
-authDomain:"kisan-seva-tools.firebaseapp.com",
-projectId:"kisan-seva-tools",
-appId:"1:900938868284:web:5a5b278506955fc0f48539"
+  apiKey:"AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
+  authDomain:"kisan-seva-tools.firebaseapp.com",
+  projectId:"kisan-seva-tools",
+  appId:"1:900938868284:web:5a5b278506955fc0f48539"
 };
 
-const firebaseApp=initializeApp(firebaseConfig);
-const auth=getAuth(firebaseApp);
-const db=getFirestore(firebaseApp);
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
 const $=id=>document.getElementById(id);
-
-let currentAdmin=null;
+let tools=[];
 let unsubscribeTools=null;
-let toolsCache=[];
-let importRunning=false;
+let editingId=null;
+let busy=false;
 
-function message(id,text,type="error"){
-const el=$(id);
-el.className=text?"message "+type:"";
-el.textContent=text;
+function showMessage(text,type="info"){
+  const box=$("message");
+  box.textContent=text;
+  box.className="message show "+type;
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function resetForm(){
-$("toolForm").reset();
-$("toolId").value="";
-$("price").value="0";
-$("active").value="true";
-$("icon").value="📸";
-$("formTitle").textContent="Add New Tool";
-$("saveBtn").textContent="Save Tool";
-$("cancelBtn").hidden=true;
-message("formMessage","");
+function clearMessage(){
+  $("message").className="message";
+  $("message").textContent="";
+}
+
+function setBusy(value){
+  busy=value;
+  $("saveButton").disabled=value;
+  $("loginButton").disabled=value;
+  $("importButton").disabled=value;
 }
 
 function validPage(page){
-return !page||/^[A-Za-z0-9_-]+\.html$/i.test(page);
+  return /^[A-Za-z0-9_-]+\.html$/i.test(String(page||"").trim());
 }
 
-function normalizeCategory(value){
-const aliases={
-"ID Card & Print":"Print Tools",
-"ID Card and Print":"Print Tools",
-"CSC & Design":"Other",
-"CSC and Design":"Other",
-"Document Maker":"Document Makers",
-"Calculator":"Calculators",
-"Photo Tool":"Photo Tools",
-"PDF Tool":"PDF Tools"
-};
-const v=String(value||"Other").trim();
-const allowed=[
-"Photo Tools","PDF Tools","Image Tools","ID Card Tools",
-"Calculators","Document Makers","AI Tools","Print Tools",
-"Farmer Services","Other"
-];
-const mapped=aliases[v]||v;
-return allowed.includes(mapped)?mapped:"Other";
+function resetForm(){
+  editingId=null;
+  $("toolForm").reset();
+  $("toolId").value="";
+  $("toolPrice").value="0";
+  $("toolIcon").value="🧰";
+  $("toolActive").value="true";
+  $("formTitle").textContent="➕ Add a Digital Tool";
+  $("saveButton").textContent="Save tool";
+  $("cancelEdit").classList.add("hidden");
 }
 
-function iconForCategory(category){
-const map={
-"Photo Tools":"📸","PDF Tools":"📄","Image Tools":"🖼️",
-"ID Card Tools":"🪪","Calculators":"🧮",
-"Document Makers":"📝","AI Tools":"🤖",
-"Print Tools":"🖨️","Farmer Services":"🌾","Other":"🔧"
-};
-return map[category]||"🔧";
+function startEdit(tool){
+  editingId=tool.id;
+  $("toolId").value=tool.id;
+  $("toolName").value=tool.name||"";
+  $("toolIcon").value=tool.icon||"🧰";
+  $("toolCategory").value=tool.category||"General";
+  $("toolPrice").value=Number.isFinite(Number(tool.price))?tool.price:0;
+  $("toolDescription").value=tool.description||"";
+  $("toolPage").value=tool.page||tool.file||"";
+  $("toolActive").value=tool.active===true?"true":"false";
+  $("formTitle").textContent="✏️ Edit Digital Tool";
+  $("saveButton").textContent="Update tool";
+  $("cancelEdit").classList.remove("hidden");
+  $("toolName").focus();
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-$("loginForm").addEventListener("submit",async e=>{
-e.preventDefault();
-message("loginMessage","");
-try{
-await signInWithEmailAndPassword(
-auth,$("email").value.trim(),$("password").value
-);
-}catch(error){
-message("loginMessage","Login nahi hua. Email/password aur Firebase Auth settings check karein.");
-}
-});
-
-$("logoutBtn").addEventListener("click",async()=>{
-await signOut(auth);
-});
-
-$("cancelBtn").addEventListener("click",resetForm);
-$("filterCategory").addEventListener("change",renderTools);
-$("filterStatus").addEventListener("change",renderTools);
-
-onAuthStateChanged(auth,async user=>{
-if(unsubscribeTools){
-unsubscribeTools();
-unsubscribeTools=null;
-}
-currentAdmin=null;
-$("app").style.display="none";
-$("loginPanel").style.display="block";
-if(!user)return;
-
-try{
-const adminSnap=await getDoc(doc(db,"admins",user.uid));
-if(!adminSnap.exists()||adminSnap.data().role!=="admin"){
-message("loginMessage","Is account ko Admin permission nahi mili hai.");
-await signOut(auth);
-return;
+function updateStats(){
+  $("totalCount").textContent=tools.length;
+  $("activeCount").textContent=tools.filter(t=>t.active===true).length;
+  $("inactiveCount").textContent=tools.filter(t=>t.active!==true).length;
 }
 
-currentAdmin=user;
-$("loginPanel").style.display="none";
-$("app").style.display="block";
-$("adminInfo").textContent="Logged in: "+(user.email||"Admin");
-
-unsubscribeTools=onSnapshot(
-query(collection(db,"tools"),orderBy("name")),
-snapshot=>{
-toolsCache=snapshot.docs.map(item=>({id:item.id,...item.data()}));
-renderTools();
-},
-error=>{
-$("toolList").textContent="Tools load nahi hue. Firestore Rules aur database check karein.";
-}
-);
-}catch(error){
-message("loginMessage","Admin check nahi ho saka. Firebase configuration aur rules check karein.");
-await signOut(auth);
-}
-});
-
-$("toolForm").addEventListener("submit",async e=>{
-e.preventDefault();
-if(!currentAdmin){
-message("formMessage","Pehle Admin login karein.");
-return;
+function element(tag,className,text){
+  const el=document.createElement(tag);
+  if(className)el.className=className;
+  if(text!==undefined)el.textContent=text;
+  return el;
 }
 
-const name=$("name").value.trim();
-const category=$("category").value;
-const icon=$("icon").value;
-const price=Number($("price").value);
-const description=$("description").value.trim();
-const page=$("page").value.trim();
-const active=$("active").value==="true";
-
-if(!name||!Number.isFinite(price)||price<0||price>100000){
-message("formMessage","Tool ka naam aur sahi price bharein.");
-return;
+function makeButton(text,className,callback){
+  const button=element("button","btn "+className,text);
+  button.type="button";
+  button.addEventListener("click",callback);
+  return button;
 }
-if(!validPage(page)){
-message("formMessage","Sirf file name daalein, jaise PhotoToPDF.html.");
-return;
-}
-
-const payload={
-name,category,icon,price,description,page,active,
-updatedAt:serverTimestamp(),
-updatedBy:currentAdmin.uid
-};
-
-const id=$("toolId").value;
-$("saveBtn").disabled=true;
-
-try{
-if(id){
-await updateDoc(doc(db,"tools",id),payload);
-}else{
-await addDoc(collection(db,"tools"),{
-...payload,
-createdAt:serverTimestamp(),
-createdBy:currentAdmin.uid
-});
-}
-resetForm();
-message("formMessage",id?"Tool update ho gaya.":"Tool save ho gaya.","success");
-}catch(error){
-message("formMessage","Save nahi hua. Firestore Rules aur Admin permission check karein.");
-}finally{
-$("saveBtn").disabled=false;
-}
-});
-
-$("bulkImportBtn").addEventListener("click",async()=>{
-if(!currentAdmin){
-message("bulkImportMessage","Pehle Admin login karein.");
-return;
-}
-if(importRunning)return;
-if(!confirm("Catalog se tools import karein? Existing matching name/page wale tools skip honge."))return;
-
-importRunning=true;
-const btn=$("bulkImportBtn");
-btn.disabled=true;
-let added=0,skipped=0,failed=0;
-
-try{
-message("bulkImportMessage","Catalog load ho raha hai...","success");
-const response=await fetch("./tools-catalog.json?cache="+Date.now(),{cache:"no-store"});
-if(!response.ok){
-throw new Error("tools-catalog.json nahi mili. File ko repository ke root mein upload aur commit karein.");
-}
-
-const catalog=await response.json();
-const items=Array.isArray(catalog)?catalog:
-(Array.isArray(catalog.tools)?catalog.tools:null);
-
-if(!items||items.length===0){
-throw new Error("Catalog ka format galat hai ya file khali hai.");
-}
-
-const knownNames=new Set(
-toolsCache.map(t=>String(t.name||"").trim().toLowerCase()).filter(Boolean)
-);
-const knownPages=new Set(
-toolsCache.map(t=>String(t.page||"").trim().toLowerCase()).filter(Boolean)
-);
-
-for(const item of items){
-const name=String(item.name||item.title||"").trim();
-const page=String(item.page||item.file||"").trim();
-
-if(!name||!page||!validPage(page)){
-skipped++;
-continue;
-}
-
-const nameKey=name.toLowerCase();
-const pageKey=page.toLowerCase();
-
-if(knownNames.has(nameKey)||knownPages.has(pageKey)){
-skipped++;
-continue;
-}
-
-const category=normalizeCategory(item.category);
-const icon=String(item.icon||iconForCategory(category));
-const price=Number(item.price??0);
-const active=item.active===undefined?true:item.active===true;
-const description=String(item.description||"").slice(0,500);
-
-try{
-await addDoc(collection(db,"tools"),{
-name,
-category,
-icon,
-price:Number.isFinite(price)&&price>=0?price:0,
-description,
-page,
-active,
-createdAt:serverTimestamp(),
-updatedAt:serverTimestamp(),
-createdBy:currentAdmin.uid,
-updatedBy:currentAdmin.uid
-});
-
-knownNames.add(nameKey);
-knownPages.add(pageKey);
-added++;
-
-message(
-"bulkImportMessage",
-"Import chal raha hai... "+added+" add hue, "+skipped+" skip hue, "+failed+" fail hue.",
-"success"
-);
-}catch(error){
-failed++;
-}
-}
-
-message(
-"bulkImportMessage",
-"Import complete. Added: "+added+", Skipped: "+skipped+", Failed: "+failed+". Failed tools ke liye Firestore Rules/connection check karein.",
-failed?"error":"success"
-);
-
-}catch(error){
-message("bulkImportMessage","Import nahi hua: "+error.message);
-}finally{
-importRunning=false;
-btn.disabled=false;
-}
-});
 
 function renderTools(){
-const list=$("toolList");
-list.replaceChildren();
+  updateStats();
+  const list=$("toolList");
+  list.replaceChildren();
 
-const categoryFilter=$("filterCategory").value;
-const statusFilter=$("filterStatus").value;
+  const search=$("searchInput").value.trim().toLowerCase();
+  const status=$("statusFilter").value;
 
-const filtered=toolsCache.filter(tool=>{
-const categoryMatch=categoryFilter==="all"||tool.category===categoryFilter;
-const statusMatch=statusFilter==="all"||
-(statusFilter==="active"&&tool.active===true)||
-(statusFilter==="inactive"&&tool.active!==true);
-return categoryMatch&&statusMatch;
-});
+  const filtered=tools.filter(t=>{
+    const searchable=[t.name,t.category,t.description,t.page,t.file]
+      .join(" ").toLowerCase();
 
-if(!filtered.length){
-list.textContent="Is filter mein koi tool nahi mila.";
-return;
+    if(search&&!searchable.includes(search))return false;
+    if(status==="active"&&t.active!==true)return false;
+    if(status==="inactive"&&t.active===true)return false;
+    return true;
+  }).sort((a,b)=>String(a.name||"").localeCompare(String(b.name||"")));
+
+  if(!filtered.length){
+    list.appendChild(element("div","empty",
+      tools.length?"No matching tools found.":"No tools found. Add a tool or import the catalog."));
+    return;
+  }
+
+  filtered.forEach(tool=>{
+    const card=element("article","tool-card");
+    const top=element("div","tool-top");
+    top.appendChild(element("div","tool-icon",tool.icon||"🧰"));
+
+    const info=element("div","");
+    info.appendChild(element("h3","",tool.name||"Unnamed tool"));
+    info.appendChild(element("span","tag",tool.category||"General"));
+    info.appendChild(element("span",
+      "tag "+(tool.active===true?"active":"inactive"),
+      tool.active===true?"ACTIVE":"INACTIVE"));
+    top.appendChild(info);
+    card.appendChild(top);
+
+    card.appendChild(element("p","",tool.description||"No description provided."));
+    card.appendChild(element("p","", "Page: "+String(tool.page||tool.file||"Not set")));
+    const price=Number(tool.price);
+    card.appendChild(element("p","",Number.isFinite(price)&&price>=0
+      ?"Price: ₹"+price:"Price not set"));
+
+    const actions=element("div","tool-actions");
+    actions.appendChild(makeButton("Edit","secondary",()=>startEdit(tool)));
+
+    actions.appendChild(makeButton(
+      tool.active===true?"Deactivate":"Activate",
+      "warning",
+      ()=>changeActive(tool)
+    ));
+
+    actions.appendChild(makeButton("Delete","danger",()=>removeTool(tool)));
+    card.appendChild(actions);
+    list.appendChild(card);
+  });
 }
 
-for(const tool of filtered){
-const card=document.createElement("article");
-card.className="tool";
+async function changeActive(tool){
+  if(busy)return;
+  try{
+    await updateDoc(doc(db,"tools",tool.id),{
+      active:tool.active!==true,
+      updatedAt:serverTimestamp()
+    });
+    showMessage("Tool availability updated.","success");
+  }catch(error){
+    console.error(error);
+    showMessage("Could not update tool. Check Firestore permissions.","error");
+  }
+}
 
-const thumb=document.createElement("div");
-thumb.className="thumb";
-thumb.textContent=tool.icon||"🔧";
-thumb.setAttribute("aria-label","Tool icon");
+async function removeTool(tool){
+  if(busy)return;
+  const confirmed=confirm(
+    'Delete "'+(tool.name||"this tool")+'"? This cannot be undone.'
+  );
+  if(!confirmed)return;
 
-const title=document.createElement("h3");
-title.textContent=tool.name||"Unnamed Tool";
+  try{
+    await deleteDoc(doc(db,"tools",tool.id));
+    if(editingId===tool.id)resetForm();
+    showMessage("Tool deleted.","success");
+  }catch(error){
+    console.error(error);
+    showMessage("Could not delete tool. Check Firestore permissions.","error");
+  }
+}
 
-const status=document.createElement("span");
-status.className="badge"+(tool.active?"":" inactive");
-status.textContent=tool.active?"Active":"Inactive";
-
-const category=document.createElement("p");
-category.textContent="Category: "+(tool.category||"Other");
-
-const price=document.createElement("p");
-price.className="price";
-price.textContent="Price: ₹"+Number(tool.price||0).toFixed(2);
-
-const description=document.createElement("p");
-description.textContent=tool.description||"No description";
-
-const page=document.createElement("p");
-page.textContent="Page: "+(tool.page||"Not assigned");
-
-const edit=document.createElement("button");
-edit.className="secondary";
-edit.textContent="Edit";
-edit.addEventListener("click",()=>{
-$("toolId").value=tool.id;
-$("name").value=tool.name||"";
-$("category").value=normalizeCategory(tool.category);
-$("icon").value=tool.icon||"🔧";
-$("price").value=Number(tool.price||0);
-$("description").value=tool.description||"";
-$("page").value=tool.page||"";
-$("active").value=String(tool.active===true);
-$("formTitle").textContent="Edit Tool";
-$("saveBtn").textContent="Update Tool";
-$("cancelBtn").hidden=false;
-$("formTitle").scrollIntoView({behavior:"smooth"});
+$("loginForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  clearMessage();
+  setBusy(true);
+  try{
+    await signInWithEmailAndPassword(
+      auth,$("email").value.trim(),$("password").value
+    );
+  }catch(error){
+    console.error(error);
+    showMessage("Login failed. Check your email, password and Firebase Authentication settings.","error");
+  }finally{
+    setBusy(false);
+  }
 });
 
-const toggle=document.createElement("button");
-toggle.className="secondary";
-toggle.textContent=tool.active?"Deactivate":"Activate";
-toggle.addEventListener("click",async()=>{
-if(!currentAdmin)return;
-try{
-await updateDoc(doc(db,"tools",tool.id),{
-active:!tool.active,
-updatedAt:serverTimestamp(),
-updatedBy:currentAdmin.uid
-});
-}catch(error){
-alert("Status change nahi hua. Firestore Rules check karein.");
-}
+onAuthStateChanged(auth,async user=>{
+  if(unsubscribeTools){
+    unsubscribeTools();
+    unsubscribeTools=null;
+  }
+
+  $("loginPanel").classList.remove("hidden");
+  $("appPanel").classList.add("hidden");
+
+  if(!user)return;
+
+  try{
+    const adminSnap=await getDoc(doc(db,"admins",user.uid));
+
+    if(!adminSnap.exists()||adminSnap.data().role!=="admin"){
+      await signOut(auth);
+      showMessage("Access denied. This account is not authorized as an administrator.","error");
+      return;
+    }
+
+    $("loginPanel").classList.add("hidden");
+    $("appPanel").classList.remove("hidden");
+    clearMessage();
+
+    unsubscribeTools=onSnapshot(collection(db,"tools"),snapshot=>{
+      tools=snapshot.docs.map(d=>({id:d.id,...d.data()}));
+      renderTools();
+    },error=>{
+      console.error(error);
+      showMessage("Unable to load tools. Check Firestore rules and internet connection.","error");
+    });
+
+  }catch(error){
+    console.error(error);
+    showMessage("Admin verification failed. Check the admins collection and Firestore rules.","error");
+    await signOut(auth);
+  }
 });
 
-const remove=document.createElement("button");
-remove.className="danger";
-remove.textContent="Delete";
-remove.addEventListener("click",async()=>{
-if(!currentAdmin)return;
-if(!confirm('"'+(tool.name||"Tool")+'" ko delete karna hai?'))return;
-try{
-await deleteDoc(doc(db,"tools",tool.id));
-}catch(error){
-alert("Delete nahi hua. Firestore Rules check karein.");
-}
+$("toolForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  if(busy)return;
+  clearMessage();
+
+  const name=$("toolName").value.trim();
+  const icon=$("toolIcon").value.trim()||"🧰";
+  const category=$("toolCategory").value.trim()||"General";
+  const description=$("toolDescription").value.trim();
+  const page=$("toolPage").value.trim();
+  const price=Number($("toolPrice").value);
+  const active=$("toolActive").value==="true";
+
+  if(!name){
+    showMessage("Enter a tool name.","error");
+    return;
+  }
+  if(!validPage(page)){
+    showMessage("Enter a simple HTML filename, for example AIBiodata.html. Do not enter a folder path.","error");
+    return;
+  }
+  if(!Number.isFinite(price)||price<0){
+    showMessage("Enter a valid non-negative price.","error");
+    return;
+  }
+
+  const duplicate=tools.find(t=>
+    t.id!==editingId&&
+    String(t.page||t.file||"").toLowerCase()===page.toLowerCase()
+  );
+  if(duplicate&&!confirm("Another tool already uses this filename. Save anyway?"))return;
+
+  const data={
+    name,icon,category,description,page,price,active,
+    updatedAt:serverTimestamp()
+  };
+
+  setBusy(true);
+  try{
+    if(editingId){
+      await updateDoc(doc(db,"tools",editingId),data);
+      showMessage("Tool updated successfully.","success");
+    }else{
+      data.createdAt=serverTimestamp();
+      await addDoc(collection(db,"tools"),data);
+      showMessage("Tool added successfully.","success");
+    }
+    resetForm();
+  }catch(error){
+    console.error(error);
+    showMessage("Could not save the tool. Check Firestore rules and your admin access.","error");
+  }finally{
+    setBusy(false);
+  }
 });
 
-card.append(thumb,title,status,category,price,description,page,edit,toggle,remove);
-list.append(card);
-}
-}
+$("resetButton").addEventListener("click",()=>{
+  resetForm();
+  clearMessage();
+});
+$("cancelEdit").addEventListener("click",resetForm);
+$("searchInput").addEventListener("input",renderTools);
+$("statusFilter").addEventListener("change",renderTools);
+
+$("logoutButton").addEventListener("click",async()=>{
+  try{
+    await signOut(auth);
+    showMessage("Signed out successfully.","success");
+  }catch(error){
+    console.error(error);
+    showMessage("Could not sign out. Try again.","error");
+  }
+});
+
+$("importButton").addEventListener("click",async()=>{
+  if(busy)return;
+  const confirmed=confirm(
+    "Import tools-catalog.json from the website root? Existing tools with matching name and page will be skipped."
+  );
+  if(!confirmed)return;
+
+  setBusy(true);
+  try{
+    const response=await fetch("tools-catalog.json",{cache:"no-store"});
+    if(!response.ok)throw new Error("Catalog HTTP status: "+response.status);
+
+    const catalog=await response.json();
+    if(!Array.isArray(catalog))throw new Error("Catalog must be a JSON array.");
+
+    let added=0,skipped=0;
+
+    for(const item of catalog){
+      const name=String(item.name||"").trim();
+      const page=String(item.page||item.file||"").trim();
+
+      if(!name||!validPage(page)){
+        skipped++;
+        continue;
+      }
+
+      const exists=tools.some(t=>
+        String(t.name||"").toLowerCase()===name.toLowerCase()&&
+        String(t.page||t.file||"").toLowerCase()===page.toLowerCase()
+      );
+
+      if(exists){
+        skipped++;
+        continue;
+      }
+
+      const rawPrice=item.price===undefined?0:Number(item.price);
+      const price=Number.isFinite(rawPrice)&&rawPrice>=0?rawPrice:0;
+
+      await addDoc(collection(db,"tools"),{
+        name,
+        page,
+        file:page,
+        icon:String(item.icon||"🧰"),
+        category:String(item.category||"General"),
+        description:String(item.description||""),
+        price,
+        active:item.active===undefined?true:item.active===true,
+        createdAt:serverTimestamp(),
+        updatedAt:serverTimestamp()
+      });
+      added++;
+    }
+
+    showMessage(
+      "Import finished. Added: "+added+"; skipped: "+skipped+".",
+      "success"
+    );
+  }catch(error){
+    console.error(error);
+    showMessage(
+      "Import failed. Check that tools-catalog.json exists at the repository root, contains a JSON array, and Firestore allows writes.",
+      "error"
+    );
+  }finally{
+    setBusy(false);
+  }
+});
+
+resetForm();
 </script>
 </body>
 </html>
