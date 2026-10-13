@@ -1,13 +1,10 @@
-**File:** `ToolsManagement.html`
 
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tools Management - Kisan Seva Tools</title>
-
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f3f6f3;color:#202820}
@@ -21,17 +18,18 @@ label{display:block;font-weight:bold;margin-bottom:6px}
 input,select,textarea{width:100%;padding:11px;border:1px solid #cbd5cd;border-radius:7px;font:inherit;margin-bottom:13px}
 textarea{min-height:75px;resize:vertical}
 button,.link-button{border:0;padding:10px 14px;border-radius:7px;cursor:pointer;font-weight:bold;text-decoration:none;display:inline-block;margin:3px}
+button:disabled{opacity:.55;cursor:not-allowed}
 .primary{background:#176b3a;color:white}
 .secondary{background:#e7eee8;color:#174d2c}
 .danger{background:#b42318;color:white}
 .muted{color:#59665c;font-size:14px}
-.message{padding:11px;border-radius:7px;margin:10px 0}
+.message{padding:11px;border-radius:7px;margin:10px 0;overflow-wrap:anywhere}
 .error{background:#fff0ef;color:#a32118}
 .success{background:#e8f7ed;color:#176b3a}
 .tool-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
-.tool{border:1px solid #e0e6e1;border-radius:12px;padding:15px;background:#fff}
+.tool{border:1px solid #e0e6e1;border-radius:12px;padding:15px;background:#fff;min-width:0}
 .thumb{height:100px;border-radius:10px;background:#eaf5ed;display:flex;align-items:center;justify-content:center;font-size:52px;margin-bottom:12px}
-.tool h3{margin:5px 0 8px}
+.tool h3{margin:5px 0 8px;overflow-wrap:anywhere}
 .tool p{margin:6px 0;overflow-wrap:anywhere}
 .badge{display:inline-block;padding:4px 8px;border-radius:20px;background:#e5f5e9;color:#176b3a;font-size:12px}
 .inactive{background:#eee;color:#555}
@@ -40,7 +38,6 @@ button,.link-button{border:0;padding:10px 14px;border-radius:7px;cursor:pointer;
 @media(max-width:500px){main{padding:10px}.panel{padding:13px}}
 </style>
 </head>
-
 <body>
 <header>
 <h1>Kisan Seva Tools</h1>
@@ -69,17 +66,25 @@ button,.link-button{border:0;padding:10px 14px;border-radius:7px;cursor:pointer;
 </section>
 
 <section class="panel">
-<h2 id="formTitle">Add New Tool</h2>
+<h2>Bulk Import Tools</h2>
+<p class="muted">
+Pehle tools-catalog.json ko isi repository ke root folder mein upload aur commit karein.
+Import existing tool ke matching name/page ko skip karega.
+Import ke dauran page band na karein.
+</p>
+<button class="primary" id="bulkImportBtn" type="button">Import Tools from Catalog</button>
+<div id="bulkImportMessage" aria-live="polite"></div>
+</section>
 
+<section class="panel">
+<h2 id="formTitle">Add New Tool</h2>
 <form id="toolForm">
 <input id="toolId" type="hidden">
-
 <div class="grid">
 <div>
 <label for="name">Tool Name *</label>
 <input id="name" maxlength="80" required placeholder="Example: Photo to PDF">
 </div>
-
 <div>
 <label for="category">Category *</label>
 <select id="category" required>
@@ -95,7 +100,6 @@ button,.link-button{border:0;padding:10px 14px;border-radius:7px;cursor:pointer;
 <option>Other</option>
 </select>
 </div>
-
 <div>
 <label for="icon">Tool Thumbnail Icon *</label>
 <select id="icon" required>
@@ -111,12 +115,10 @@ button,.link-button{border:0;padding:10px 14px;border-radius:7px;cursor:pointer;
 <option value="🔧">🔧 Other Tools</option>
 </select>
 </div>
-
 <div>
 <label for="price">Price (₹) *</label>
 <input id="price" type="number" min="0" max="100000" step="0.01" required value="0">
 </div>
-
 <div>
 <label for="active">Status *</label>
 <select id="active" required>
@@ -128,7 +130,6 @@ button,.link-button{border:0;padding:10px 14px;border-radius:7px;cursor:pointer;
 
 <label for="description">Description</label>
 <textarea id="description" maxlength="500" placeholder="Tool kya kaam karta hai?"></textarea>
-
 <label for="page">Tool Page (optional)</label>
 <input id="page" maxlength="150" placeholder="Example: PhotoToPDF.html">
 
@@ -136,8 +137,7 @@ button,.link-button{border:0;padding:10px 14px;border-radius:7px;cursor:pointer;
 <button class="secondary" id="cancelBtn" type="button" hidden>Cancel Edit</button>
 <div id="formMessage" aria-live="polite"></div>
 </form>
-
-<p class="muted">Note: Icon ek built-in illustration hai. Tool ka actual function chalane ke liye uska page bhi banana hoga.</p>
+<p class="muted">Note: Icon emoji hai. Actual function ke liye us tool ka HTML page bhi hona chahiye.</p>
 </section>
 
 <section class="panel">
@@ -201,6 +201,7 @@ const $=id=>document.getElementById(id);
 let currentAdmin=null;
 let unsubscribeTools=null;
 let toolsCache=[];
+let importRunning=false;
 
 function message(id,text,type="error"){
 const el=$(id);
@@ -218,6 +219,41 @@ $("formTitle").textContent="Add New Tool";
 $("saveBtn").textContent="Save Tool";
 $("cancelBtn").hidden=true;
 message("formMessage","");
+}
+
+function validPage(page){
+return !page||/^[A-Za-z0-9_-]+\.html$/i.test(page);
+}
+
+function normalizeCategory(value){
+const aliases={
+"ID Card & Print":"Print Tools",
+"ID Card and Print":"Print Tools",
+"CSC & Design":"Other",
+"CSC and Design":"Other",
+"Document Maker":"Document Makers",
+"Calculator":"Calculators",
+"Photo Tool":"Photo Tools",
+"PDF Tool":"PDF Tools"
+};
+const v=String(value||"Other").trim();
+const allowed=[
+"Photo Tools","PDF Tools","Image Tools","ID Card Tools",
+"Calculators","Document Makers","AI Tools","Print Tools",
+"Farmer Services","Other"
+];
+const mapped=aliases[v]||v;
+return allowed.includes(mapped)?mapped:"Other";
+}
+
+function iconForCategory(category){
+const map={
+"Photo Tools":"📸","PDF Tools":"📄","Image Tools":"🖼️",
+"ID Card Tools":"🪪","Calculators":"🧮",
+"Document Makers":"📝","AI Tools":"🤖",
+"Print Tools":"🖨️","Farmer Services":"🌾","Other":"🔧"
+};
+return map[category]||"🔧";
 }
 
 $("loginForm").addEventListener("submit",async e=>{
@@ -298,9 +334,7 @@ if(!name||!Number.isFinite(price)||price<0||price>100000){
 message("formMessage","Tool ka naam aur sahi price bharein.");
 return;
 }
-
-if(page&&(page.includes("/")||page.includes("\\")||
-!/^[A-Za-z0-9_-]+\.html$/i.test(page))){
+if(!validPage(page)){
 message("formMessage","Sirf file name daalein, jaise PhotoToPDF.html.");
 return;
 }
@@ -330,6 +364,107 @@ message("formMessage",id?"Tool update ho gaya.":"Tool save ho gaya.","success");
 message("formMessage","Save nahi hua. Firestore Rules aur Admin permission check karein.");
 }finally{
 $("saveBtn").disabled=false;
+}
+});
+
+$("bulkImportBtn").addEventListener("click",async()=>{
+if(!currentAdmin){
+message("bulkImportMessage","Pehle Admin login karein.");
+return;
+}
+if(importRunning)return;
+if(!confirm("Catalog se tools import karein? Existing matching name/page wale tools skip honge."))return;
+
+importRunning=true;
+const btn=$("bulkImportBtn");
+btn.disabled=true;
+let added=0,skipped=0,failed=0;
+
+try{
+message("bulkImportMessage","Catalog load ho raha hai...","success");
+const response=await fetch("./tools-catalog.json?cache="+Date.now(),{cache:"no-store"});
+if(!response.ok){
+throw new Error("tools-catalog.json nahi mili. File ko repository ke root mein upload aur commit karein.");
+}
+
+const catalog=await response.json();
+const items=Array.isArray(catalog)?catalog:
+(Array.isArray(catalog.tools)?catalog.tools:null);
+
+if(!items||items.length===0){
+throw new Error("Catalog ka format galat hai ya file khali hai.");
+}
+
+const knownNames=new Set(
+toolsCache.map(t=>String(t.name||"").trim().toLowerCase()).filter(Boolean)
+);
+const knownPages=new Set(
+toolsCache.map(t=>String(t.page||"").trim().toLowerCase()).filter(Boolean)
+);
+
+for(const item of items){
+const name=String(item.name||item.title||"").trim();
+const page=String(item.page||item.file||"").trim();
+
+if(!name||!page||!validPage(page)){
+skipped++;
+continue;
+}
+
+const nameKey=name.toLowerCase();
+const pageKey=page.toLowerCase();
+
+if(knownNames.has(nameKey)||knownPages.has(pageKey)){
+skipped++;
+continue;
+}
+
+const category=normalizeCategory(item.category);
+const icon=String(item.icon||iconForCategory(category));
+const price=Number(item.price??0);
+const active=item.active===undefined?true:item.active===true;
+const description=String(item.description||"").slice(0,500);
+
+try{
+await addDoc(collection(db,"tools"),{
+name,
+category,
+icon,
+price:Number.isFinite(price)&&price>=0?price:0,
+description,
+page,
+active,
+createdAt:serverTimestamp(),
+updatedAt:serverTimestamp(),
+createdBy:currentAdmin.uid,
+updatedBy:currentAdmin.uid
+});
+
+knownNames.add(nameKey);
+knownPages.add(pageKey);
+added++;
+
+message(
+"bulkImportMessage",
+"Import chal raha hai... "+added+" add hue, "+skipped+" skip hue, "+failed+" fail hue.",
+"success"
+);
+}catch(error){
+failed++;
+}
+}
+
+message(
+"bulkImportMessage",
+"Import complete. Added: "+added+", Skipped: "+skipped+", Failed: "+failed+". Failed tools ke liye Firestore Rules/connection check karein.",
+failed?"error":"success"
+);
+
+}catch(error){
+message("bulkImportMessage","Import nahi hua: "+error.message);
+}finally{
+importRunning=false;
+btn.disabled=false;
 }
 });
 
@@ -388,7 +523,7 @@ edit.textContent="Edit";
 edit.addEventListener("click",()=>{
 $("toolId").value=tool.id;
 $("name").value=tool.name||"";
-$("category").value=tool.category||"Other";
+$("category").value=normalizeCategory(tool.category);
 $("icon").value=tool.icon||"🔧";
 $("price").value=Number(tool.price||0);
 $("description").value=tool.description||"";
@@ -436,10 +571,3 @@ list.append(card);
 </script>
 </body>
 </html>
-```
-
-**Commit message:**
-
-`Update Tools Management with thumbnails and category filters`
-
-**Ek zaroori check:** tumhare current Firestore rules mein `tools` collection par admin write permission honi chahiye. Agar save karte waqt permission error aaye, rules ko bina check kiye badalna mat. Aur Home page par naye icons dikhane ke liye `Home.html` ko bhi update karna hoga. Ye code thumbnails ke liye emoji use karta hai, actual photo files nahi. 
