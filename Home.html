@@ -6,274 +6,902 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#176b3a">
 <title>Kisan Seva Tools | Home</title>
+
 <style>
-:root{--g:#176b3a;--gd:#104b2a;--p:#eaf5ed;--bg:#f4f8f5;--ink:#183b28;--muted:#617066;--line:#dce8df}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
-.topbar{background:var(--gd);color:#e8f6ec;text-align:center;padding:8px;font-size:12px}
-.header{background:linear-gradient(120deg,#176b3a,#21854b);color:white;padding:24px 18px 42px}
-.nav,.hero,.container{max-width:1120px;margin:auto}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:12px}
-.brand-icon{display:grid;place-items:center;width:50px;height:50px;border-radius:15px;background:#ffffff20;font-size:29px}
-.brand h1{font-size:22px;margin:0}
-.brand p{margin:2px 0 0;color:#d7efdf;font-size:13px}
-.nav-links{display:flex;gap:8px;flex-wrap:wrap}
-.nav-links a{font-size:13px;text-decoration:none;padding:9px 12px;border:1px solid #ffffff55;border-radius:9px;color:white}
-.hero{margin-top:28px;display:grid;grid-template-columns:1.5fr .8fr;align-items:center;gap:24px}
-.hero h2{font-size:clamp(28px,4vw,42px);line-height:1.12;margin:0 0 12px}
-.hero p{max-width:620px;color:#e0f1e5;margin:0;font-size:15px}
-.hero-side{background:#ffffff17;border:1px solid #ffffff35;padding:20px;border-radius:18px}
-.hero-side strong{display:block;margin-bottom:5px}
-.hero-side span{font-size:13px;color:#e0f1e5}
-.container{margin-top:-18px;padding:0 18px 40px;position:relative}
-.welcome,.wallet{background:white;border:1px solid var(--line);padding:20px 22px;border-radius:16px;box-shadow:0 6px 24px #173d250b}
-.welcome{display:flex;justify-content:space-between;align-items:center;gap:18px}
-.welcome h2{font-size:18px;margin:0 0 4px;color:var(--g)}
-.welcome p{margin:0;font-size:13px;color:var(--muted)}
-.wallet{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:16px}
-.wallet-label{font-size:13px;color:var(--muted);font-weight:bold}
-.balance{font-size:29px;font-weight:800;color:var(--g);margin:2px 0}
-.wallet-info{font-size:12px;color:var(--muted)}
-.button{display:inline-flex;align-items:center;justify-content:center;border:0;background:var(--g);color:white;text-decoration:none;padding:11px 15px;border-radius:9px;font-weight:bold;font-size:13px;cursor:pointer}
-.button:hover{background:var(--gd)}
-.button.light{background:var(--p);color:var(--g)}
-.button:disabled{background:#9ca8a0;cursor:not-allowed}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:30px 0 14px}
-.section-head h2{font-size:21px;margin:0}
-.section-head p{font-size:12px;color:var(--muted);margin:3px 0 0}
-.services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.service{background:white;border:1px solid var(--line);border-radius:15px;padding:19px;min-width:0;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
-.service:hover{transform:translateY(-2px);box-shadow:0 9px 25px #173d2510}
-.icon{display:grid;place-items:center;width:52px;height:52px;background:var(--p);border-radius:14px;font-size:28px;margin-bottom:13px}
-.service h3{font-size:16px;margin:0 0 7px;overflow-wrap:anywhere}
-.service p{font-size:13px;color:var(--muted);margin:0 0 14px;flex:1;overflow-wrap:anywhere}
-.service .button{align-self:flex-start}
-.paid{font-weight:800;color:#a85a00}
-.free{font-weight:800;color:#16833b}
-.status-message{background:white;border:1px dashed #cddbd0;padding:17px;border-radius:12px;color:var(--muted);font-size:13px;grid-column:1/-1}
-.charges{background:white;border:1px solid var(--line);border-radius:15px;padding:20px;margin-top:24px}
-.charges h3{margin:0 0 10px;font-size:17px}
-.charge-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
-.charge-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #edf1ee;font-size:13px}
-.notice{margin-top:18px;background:#fff8e5;border:1px solid #f2dfaa;border-left:4px solid #d19b00;border-radius:12px;padding:15px;font-size:12px;color:#6d561c}
-.footer{background:#103e24;color:#dceee1;text-align:center;padding:24px 18px;font-size:12px}
-.footer strong{display:block;font-size:14px;color:white;margin-bottom:4px}
-@media(max-width:800px){.hero{grid-template-columns:1fr}.hero-side{display:none}.services{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){.hero{margin-top:22px}.welcome,.wallet{align-items:flex-start;flex-direction:column}.services,.charge-grid{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.container{padding-left:12px;padding-right:12px}.service{padding:16px}.nav{align-items:flex-start;flex-direction:column}}
+:root {
+  --g:#176b3a;
+  --gd:#104b2a;
+  --p:#eaf5ed;
+  --bg:#f4f8f5;
+  --ink:#183b28;
+  --muted:#617066;
+  --line:#dce8df;
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.5;
+}
+
+.topbar {
+  background:var(--gd);
+  color:#e8f6ec;
+  text-align:center;
+  padding:8px;
+  font-size:12px;
+}
+
+.header {
+  background:linear-gradient(120deg,#176b3a,#21854b);
+  color:white;
+  padding:24px 18px 42px;
+}
+
+.nav,.hero,.container {
+  max-width:1120px;
+  margin:auto;
+}
+
+.nav {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand-icon {
+  display:grid;
+  place-items:center;
+  width:50px;
+  height:50px;
+  border-radius:15px;
+  background:#ffffff20;
+  font-size:29px;
+}
+
+.brand h1 {
+  font-size:22px;
+  margin:0;
+}
+
+.brand p {
+  margin:2px 0 0;
+  color:#d7efdf;
+  font-size:13px;
+}
+
+.nav-links {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.nav-links a {
+  font-size:13px;
+  text-decoration:none;
+  padding:9px 12px;
+  border:1px solid #ffffff55;
+  border-radius:9px;
+  color:white;
+}
+
+.nav-links a:hover {
+  background:#ffffff20;
+}
+
+.hero {
+  margin-top:28px;
+  display:grid;
+  grid-template-columns:1.5fr .8fr;
+  align-items:center;
+  gap:24px;
+}
+
+.hero h2 {
+  font-size:clamp(28px,4vw,42px);
+  line-height:1.12;
+  margin:0 0 12px;
+}
+
+.hero p {
+  max-width:620px;
+  color:#e0f1e5;
+  margin:0;
+  font-size:15px;
+}
+
+.hero-side {
+  background:#ffffff17;
+  border:1px solid #ffffff35;
+  padding:20px;
+  border-radius:18px;
+}
+
+.hero-side strong {
+  display:block;
+  margin-bottom:5px;
+}
+
+.hero-side span {
+  font-size:13px;
+  color:#e0f1e5;
+}
+
+.container {
+  margin-top:-18px;
+  padding:0 18px 40px;
+  position:relative;
+}
+
+.welcome,.wallet {
+  background:white;
+  border:1px solid var(--line);
+  padding:20px 22px;
+  border-radius:16px;
+  box-shadow:0 6px 24px #173d250b;
+}
+
+.welcome {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+}
+
+.welcome h2 {
+  font-size:18px;
+  margin:0 0 4px;
+  color:var(--g);
+}
+
+.welcome p {
+  margin:0;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.wallet {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  margin-top:16px;
+}
+
+.wallet-label {
+  font-size:13px;
+  color:var(--muted);
+  font-weight:bold;
+}
+
+.balance {
+  font-size:29px;
+  font-weight:800;
+  color:var(--g);
+  margin:2px 0;
+}
+
+.wallet-info {
+  font-size:12px;
+  color:var(--muted);
+}
+
+.button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:0;
+  background:var(--g);
+  color:white;
+  text-decoration:none;
+  padding:11px 15px;
+  border-radius:9px;
+  font-weight:bold;
+  font-size:13px;
+  cursor:pointer;
+}
+
+.button:hover { background:var(--gd); }
+
+.button.light {
+  background:var(--p);
+  color:var(--g);
+}
+
+.button:disabled {
+  background:#9ca8a0;
+  cursor:not-allowed;
+}
+
+.section-head {
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:15px;
+  margin:30px 0 14px;
+}
+
+.section-head h2 {
+  font-size:21px;
+  margin:0;
+}
+
+.section-head p {
+  font-size:12px;
+  color:var(--muted);
+  margin:3px 0 0;
+}
+
+.services {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+
+.service {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:19px;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  transition:transform .15s,box-shadow .15s;
+}
+
+.service:hover {
+  transform:translateY(-2px);
+  box-shadow:0 9px 25px #173d2510;
+}
+
+.icon {
+  display:grid;
+  place-items:center;
+  width:52px;
+  height:52px;
+  background:var(--p);
+  border-radius:14px;
+  font-size:28px;
+  margin-bottom:13px;
+}
+
+.service h3 {
+  font-size:16px;
+  margin:0 0 7px;
+  overflow-wrap:anywhere;
+}
+
+.service p {
+  font-size:13px;
+  color:var(--muted);
+  margin:0 0 14px;
+  flex:1;
+  overflow-wrap:anywhere;
+}
+
+.service .button {
+  align-self:flex-start;
+}
+
+.paid {
+  font-weight:800;
+  color:#a85a00;
+}
+
+.free {
+  font-weight:800;
+  color:#16833b;
+}
+
+.status-message {
+  background:white;
+  border:1px dashed #cddbd0;
+  padding:17px;
+  border-radius:12px;
+  color:var(--muted);
+  font-size:13px;
+  grid-column:1/-1;
+}
+
+/* Search and category filters */
+.tool-controls {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:16px;
+  margin-bottom:16px;
+}
+
+.tool-search {
+  display:block;
+  width:100%;
+  padding:13px 14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:white;
+  color:var(--ink);
+  font-size:15px;
+  outline:none;
+}
+
+.tool-search:focus {
+  border-color:var(--g);
+  box-shadow:0 0 0 3px #176b3a18;
+}
+
+.tool-categories {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:13px;
+}
+
+.category-chip {
+  border:1px solid var(--line);
+  background:white;
+  color:var(--g);
+  padding:9px 13px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.category-chip:hover {
+  border-color:var(--g);
+}
+
+.category-chip.active {
+  background:var(--g);
+  border-color:var(--g);
+  color:white;
+}
+
+.tool-count {
+  color:var(--muted);
+  font-size:12px;
+  margin:12px 2px 0;
+}
+
+.charges {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:20px;
+  margin-top:24px;
+}
+
+.charges h3 {
+  margin:0 0 10px;
+  font-size:17px;
+}
+
+.charge-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 24px;
+}
+
+.charge-row {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:11px 0;
+  border-bottom:1px solid #edf1ee;
+  font-size:13px;
+}
+
+.notice {
+  margin-top:18px;
+  background:#fff8e5;
+  border:1px solid #f2dfaa;
+  border-left:4px solid #d19b00;
+  border-radius:12px;
+  padding:15px;
+  font-size:12px;
+  color:#6d561c;
+}
+
+.footer {
+  background:#103e24;
+  color:#dceee1;
+  text-align:center;
+  padding:24px 18px;
+  font-size:12px;
+}
+
+.footer strong {
+  display:block;
+  font-size:14px;
+  color:white;
+  margin-bottom:4px;
+}
+
+@media(max-width:800px) {
+  .hero { grid-template-columns:1fr; }
+  .hero-side { display:none; }
+  .services { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+
+@media(max-width:560px) {
+  .hero { margin-top:22px; }
+  .welcome,.wallet {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .services,.charge-grid {
+    grid-template-columns:1fr;
+  }
+  .section-head {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .container {
+    padding-left:12px;
+    padding-right:12px;
+  }
+  .service { padding:16px; }
+  .nav {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .tool-controls { padding:12px; }
+  .category-chip { padding:8px 11px; }
+}
 </style>
 </head>
-<body>
-<div class="topbar">🌱 Digital tools and useful services in one place</div>
-<header class="header">
-<nav class="nav">
-<div class="brand">
-<div class="brand-icon">🌾</div>
-<div><h1>Kisan Seva Tools</h1><p>Farmer Services &amp; Digital Tools</p></div>
-</div>
-<div class="nav-links">
-<a href="Home.html">Home</a>
-<a href="Admin.html">Admin</a>
-<a href="ToolsManagement.html">Tools Management</a>
-</div>
-</nav>
-<div class="hero">
-<div>
-<h2>Simple digital services<br>for everyday needs.</h2>
-<p>Explore farmer services, document tools, PDF utilities and more—all from one easy-to-use page.</p>
-</div>
-<div class="hero-side">
-<strong>🌿 Welcome to Kisan Seva Tools</strong>
-<span>Find a service below and open the tool you need. Available tools are loaded from the connected database.</span>
-</div>
-</div>
-</header>
-<main class="container">
-<section class="welcome">
-<div><h2>Welcome to Kisan Seva Tools</h2><p>Simple digital tools and services for farmers and general users.</p></div>
-<a class="button light" href="#digital-tools">Explore tools ↓</a>
-</section>
-<section class="wallet">
-<div>
-<div class="wallet-label">💰 MY DISPLAYED BALANCE</div>
-<div class="balance" id="balance">₹0</div>
-<div class="wallet-info">For reference only. Pending payment requests do not add money automatically.</div>
-</div>
-<button class="button" id="walletButton" type="button">View Wallet →</button>
-</section>
-<div class="section-head"><div><h2>🌾 Farmer &amp; General Services</h2><p>Quick access to common service pages</p></div></div>
-<section class="services">
-<article class="service">
-<div class="icon">🌾</div><h3>Farmer ID Card</h3>
-<p>Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.<br><br><b class="paid">Download charge: ₹10</b></p>
-<button class="button" data-page="index.html">Open Farmer Card →</button>
-</article>
-<article class="service">
-<div class="icon">📝</div><h3>Farmer Registration</h3>
-<p>Register farmer details and save registration information.<br><br><b class="free">FREE</b></p>
-<button class="button" data-page="index.html">Register Now →</button>
-</article>
-<article class="service">
-<div class="icon">🖨️</div><h3>Print / Xerox</h3>
-<p>Printing and Xerox service information.<br><br><b class="paid">Photo Print: ₹5</b><br><span class="free">Other services: FREE</span></p>
-<button class="button" data-page="Print.html">Open Service →</button>
-</article>
-<article class="service">
-<div class="icon">📄</div><h3>PDF Services</h3>
-<p>Useful PDF and document services.<br><br><b class="free">FREE</b></p>
-<button class="button" data-page="PDF.html">Open Service →</button>
-</article>
-<article class="service">
-<div class="icon">🌱</div><h3>Farmer Services</h3>
-<p>Useful farmer-related digital services and tools.<br><br><b class="free">FREE</b></p>
-<button class="button" data-page="Farmer-Services.html">Open Service →</button>
-</article>
-<article class="service">
-<div class="icon">📞</div><h3>Contact / Help</h3>
-<p>Contact information and help section.<br><br><b class="free">FREE</b></p>
-<button class="button" data-page="Contact.html">Contact →</button>
-</article>
-</section>
-<div class="section-head" id="digital-tools">
-<div><h2>🧰 Available Digital Tools</h2><p>Live list of active tools from Firebase</p></div>
-</div>
-<section class="services" id="dynamicTools">
-<div class="status-message">Loading available tools…</div>
-</section>
-<section class="charges">
-<h3>💳 Service Charges</h3>
-<div class="charge-grid">
-<div class="charge-row"><span>🌾 Farmer Card Download</span><span class="paid">₹10</span></div>
-<div class="charge-row"><span>🖨️ Photo Print</span><span class="paid">₹5</span></div>
-<div class="charge-row"><span>📋 Farmer Registration</span><span class="free">FREE</span></div>
-<div class="charge-row"><span>📄 PDF Services</span><span class="free">FREE</span></div>
-<div class="charge-row"><span>📑 Xerox</span><span class="free">FREE</span></div>
-<div class="charge-row"><span>🌱 Farmer Services</span><span class="free">FREE</span></div>
-<div class="charge-row"><span>📞 Contact / Help</span><span class="free">FREE</span></div>
-</div>
-</section>
-<aside class="notice">
-<b>Important:</b> Kisan Seva Tools is a personal digital service website. Farmer ID Cards created here are <b>not government-issued documents</b>.<br><br>
-<b>Payment note:</b> Prices are informational. A listed price does not mean payment processing or wallet credit is active.
-</aside>
-</main>
-<footer class="footer"><strong>🌾 Kisan Seva Tools</strong>© 2026 Kisan Seva Tools • Personal Use</footer>
-<script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-import {getFirestore,collection,onSnapshot} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-const firebaseConfig={
-apiKey:"AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
-authDomain:"kisan-seva-tools.firebaseapp.com",
-projectId:"kisan-seva-tools",
-appId:"1:900938868284:web:5a5b278506955fc0f48539"
+<body>
+<div class="topbar">
+  🌱 Digital tools and useful services in one place
+</div>
+
+<header class="header">
+  <nav class="nav">
+    <div class="brand">
+      <div class="brand-icon">🌾</div>
+      <div>
+        <h1>Kisan Seva Tools</h1>
+        <p>Farmer Services &amp; Digital Tools</p>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="Home.html">Home</a>
+      <a href="Admin.html">Admin</a>
+      <a href="ToolsManagement.html">Tools Management</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div>
+      <h2>Simple digital services<br>for everyday needs.</h2>
+      <p>
+        Explore farmer services, document tools, PDF utilities and more—all
+        from one easy-to-use page.
+      </p>
+    </div>
+
+    <div class="hero-side">
+      <strong>🌿 Welcome to Kisan Seva Tools</strong>
+      <span>
+        Search for a service below and open the tool you need.
+        Available tools load from the connected database.
+      </span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="welcome">
+    <div>
+      <h2>Welcome to Kisan Seva Tools</h2>
+      <p>Simple digital tools and services for farmers and general users.</p>
+    </div>
+    <a class="button light" href="#digital-tools">Explore tools ↓</a>
+  </section>
+
+  <section class="wallet">
+    <div>
+      <div class="wallet-label">💰 MY DISPLAYED BALANCE</div>
+      <div class="balance" id="balance">₹0</div>
+      <div class="wallet-info">
+        For reference only. Pending payment requests do not add money automatically.
+      </div>
+    </div>
+    <button class="button" id="walletButton" type="button">
+      View Wallet →
+    </button>
+  </section>
+
+  <div class="section-head">
+    <div>
+      <h2>🌾 Farmer &amp; General Services</h2>
+      <p>Quick access to common service pages</p>
+    </div>
+  </div>
+
+  <section class="services">
+    <article class="service">
+      <div class="icon">🌾</div>
+      <h3>Farmer ID Card</h3>
+      <p>
+        Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.
+        <br><br><b class="paid">Download charge: ₹10</b>
+      </p>
+      <button class="button" data-page="index.html">Open Farmer Card →</button>
+    </article>
+
+    <article class="service">
+      <div class="icon">📝</div>
+      <h3>Farmer Registration</h3>
+      <p>
+        Register farmer details and save registration information.
+        <br><br><b class="free">FREE</b>
+      </p>
+      <button class="button" data-page="index.html">Register Now →</button>
+    </article>
+
+    <article class="service">
+      <div class="icon">🖨️</div>
+      <h3>Print / Xerox</h3>
+      <p>
+        Printing and Xerox service information.
+        <br><br><b class="paid">Photo Print: ₹5</b>
+        <br><span class="free">Other services: FREE</span>
+      </p>
+      <button class="button" data-page="Print.html">Open Service →</button>
+    </article>
+
+    <article class="service">
+      <div class="icon">📄</div>
+      <h3>PDF Services</h3>
+      <p>Useful PDF and document services.<br><br><b class="free">FREE</b></p>
+      <button class="button" data-page="PDF.html">Open Service →</button>
+    </article>
+
+    <article class="service">
+      <div class="icon">🌱</div>
+      <h3>Farmer Services</h3>
+      <p>
+        Useful farmer-related digital services and tools.
+        <br><br><b class="free">FREE</b>
+      </p>
+      <button class="button" data-page="Farmer-Services.html">Open Service →</button>
+    </article>
+
+    <article class="service">
+      <div class="icon">📞</div>
+      <h3>Contact / Help</h3>
+      <p>Contact information and help section.<br><br><b class="free">FREE</b></p>
+      <button class="button" data-page="Contact.html">Contact →</button>
+    </article>
+  </section>
+
+  <div class="section-head" id="digital-tools">
+    <div>
+      <h2>🧰 Available Digital Tools</h2>
+      <p>Search, filter and open active tools from Firebase</p>
+    </div>
+  </div>
+
+  <div class="tool-controls">
+    <input
+      type="search"
+      id="toolSearch"
+      class="tool-search"
+      placeholder="🔍 Search tools by name, PDF, photo, AI..."
+      aria-label="Search digital tools"
+      autocomplete="off"
+    >
+
+    <div
+      id="toolCategories"
+      class="tool-categories"
+      aria-label="Filter tools by category"
+    ></div>
+
+    <p id="toolCount" class="tool-count">Loading tools...</p>
+  </div>
+
+  <section class="services" id="dynamicTools">
+    <div class="status-message">Loading available tools…</div>
+  </section>
+
+  <section class="charges">
+    <h3>💳 Service Charges</h3>
+    <div class="charge-grid">
+      <div class="charge-row">
+        <span>🌾 Farmer Card Download</span><span class="paid">₹10</span>
+      </div>
+      <div class="charge-row">
+        <span>🖨️ Photo Print</span><span class="paid">₹5</span>
+      </div>
+      <div class="charge-row">
+        <span>📋 Farmer Registration</span><span class="free">FREE</span>
+      </div>
+      <div class="charge-row">
+        <span>📄 PDF Services</span><span class="free">FREE</span>
+      </div>
+      <div class="charge-row">
+        <span>📑 Xerox</span><span class="free">FREE</span>
+      </div>
+      <div class="charge-row">
+        <span>🌱 Farmer Services</span><span class="free">FREE</span>
+      </div>
+      <div class="charge-row">
+        <span>📞 Contact / Help</span><span class="free">FREE</span>
+      </div>
+    </div>
+  </section>
+
+  <aside class="notice">
+    <b>Important:</b> Kisan Seva Tools is a personal digital service website.
+    Farmer ID Cards created here are <b>not government-issued documents</b>.
+    <br><br>
+    <b>Payment note:</b> Prices are informational. A listed price does not mean
+    payment processing or wallet credit is active.
+  </aside>
+</main>
+
+<footer class="footer">
+  <strong>🌾 Kisan Seva Tools</strong>
+  © 2026 Kisan Seva Tools • Personal Use
+</footer>
+
+<script type="module">
+import { initializeApp } from
+  "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import { getFirestore, collection, onSnapshot } from
+  "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
+  authDomain: "kisan-seva-tools.firebaseapp.com",
+  projectId: "kisan-seva-tools",
+  appId: "1:900938868284:web:5a5b278506955fc0f48539"
 };
 
-const app=initializeApp(firebaseConfig);
-const db=getFirestore(app);
-const TOOLS_FOLDER="KisanSevaTools_Full_47_Tools%20%282%29/";
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-function toolUrl(filename){
- const page=String(filename||"").trim();
- if(!page)return null;
- if(/^https?:\/\//i.test(page))return page;
- if(/^[A-Za-z0-9_-]+\.html$/i.test(page))
-  return TOOLS_FOLDER+encodeURIComponent(page);
- const normalized=page.replace(/\\/g,"/").replace(/^\/+/,"");
- for(const folder of [
-  "KisanSevaTools_Full_47_Tools (2)/",
-  "KisanSevaTools_Full_47_Tools%20%282%29/"
- ]){
-  if(normalized.startsWith(folder)){
-   const file=normalized.slice(folder.length);
-   if(/^[A-Za-z0-9_-]+\.html$/i.test(file))
-    return TOOLS_FOLDER+encodeURIComponent(file);
-  }
- }
- return null;
-}
+const TOOLS_FOLDER = "KisanSevaTools_Full_47_Tools%20%282%29/";
 
-document.getElementById("walletButton").addEventListener("click",()=>{
- location.href="Wallet.html";
-});
+function toolUrl(filename) {
+  const page = String(filename || "").trim();
 
-document.querySelectorAll("[data-page]").forEach(button=>{
- button.addEventListener("click",()=>location.href=button.dataset.page);
-});
+  if (!page) return null;
 
-const balance=Number(localStorage.getItem("kst_balance")||0);
-document.getElementById("balance").textContent=
- "₹"+(Number.isFinite(balance)&&balance>=0?balance:0);
+  if (/^https?:\/\//i.test(page)) return page;
 
-const container=document.getElementById("dynamicTools");
-
-function showMessage(text){
- container.replaceChildren();
- const box=document.createElement("div");
- box.className="status-message";
- box.textContent=text;
- container.appendChild(box);
-}
-
-function addText(parent,tag,text){
- const el=document.createElement(tag);
- el.textContent=text;
- parent.appendChild(el);
- return el;
-}
-
-onSnapshot(collection(db,"tools"),snapshot=>{
- container.replaceChildren();
-
- const list=snapshot.docs
-  .map(d=>({id:d.id,...d.data()}))
-  .filter(t=>t.active===true)
-  .sort((a,b)=>String(a.name||"").localeCompare(String(b.name||"")));
-
- if(!list.length){
-  showMessage("Abhi koi active digital tool available nahi hai. Please baad mein check karein.");
-  return;
- }
-
- list.forEach(tool=>{
-  const card=document.createElement("article");
-  card.className="service";
-
-  addText(card,"div",tool.icon||"🧰").className="icon";
-  addText(card,"h3",String(tool.name||"Digital Tool"));
-  addText(card,"p",String(tool.description||"Digital service"));
-
-  const cat=addText(card,"p","Category: "+String(tool.category||"General"));
-  cat.style.fontWeight="bold";
-
-  const price=Number(tool.price);
-  const valid=Number.isFinite(price)&&price>=0;
-  const priceEl=addText(card,"p",
-   valid?(price===0?"FREE":"Price: ₹"+price):"Price: Contact for details");
-  priceEl.className=valid&&price===0?"free":"paid";
-
-  const button=document.createElement("button");
-  button.type="button";
-  button.className="button";
-  button.textContent="Open Tool →";
-
-  const destination=toolUrl(tool.page||tool.file);
-
-  if(destination){
-   button.addEventListener("click",()=>location.href=destination);
-  }else{
-   button.disabled=true;
-   button.textContent="Page Not Connected";
-   button.title="Tools Management mein sahi HTML filename save karein.";
+  if (/^[A-Za-z0-9_-]+\.html$/i.test(page)) {
+    return TOOLS_FOLDER + encodeURIComponent(page);
   }
 
-  card.appendChild(button);
-  container.appendChild(card);
- });
-},error=>{
- console.error(error);
- showMessage("Tools load nahi ho rahe. Internet connection, Firebase configuration aur Firestore rules check karein.");
+  const normalized = page.replace(/\\/g, "/").replace(/^\/+/, "");
+
+  for (const folder of [
+    "KisanSevaTools_Full_47_Tools (2)/",
+    "KisanSevaTools_Full_47_Tools%20%282%29/"
+  ]) {
+    if (normalized.startsWith(folder)) {
+      const file = normalized.slice(folder.length);
+
+      if (/^[A-Za-z0-9_-]+\.html$/i.test(file)) {
+        return TOOLS_FOLDER + encodeURIComponent(file);
+      }
+    }
+  }
+
+  return null;
+}
+
+document.getElementById("walletButton").addEventListener("click", () => {
+  location.href = "Wallet.html";
 });
+
+document.querySelectorAll("[data-page]").forEach(button => {
+  button.addEventListener("click", () => {
+    location.href = button.dataset.page;
+  });
+});
+
+const balance = Number(localStorage.getItem("kst_balance") || 0);
+
+document.getElementById("balance").textContent =
+  "₹" + (Number.isFinite(balance) && balance >= 0 ? balance : 0);
+
+const container = document.getElementById("dynamicTools");
+const searchInput = document.getElementById("toolSearch");
+const categoryBar = document.getElementById("toolCategories");
+const countLabel = document.getElementById("toolCount");
+
+let allTools = [];
+let activeCategory = "All Tools";
+
+function showMessage(message) {
+  container.replaceChildren();
+
+  const box = document.createElement("div");
+  box.className = "status-message";
+  box.textContent = message;
+
+  container.appendChild(box);
+}
+
+function addText(parent, tag, text) {
+  const el = document.createElement(tag);
+  el.textContent = text;
+  parent.appendChild(el);
+  return el;
+}
+
+function getCategory(tool) {
+  return String(tool.category || "General").trim() || "General";
+}
+
+function renderCategories() {
+  categoryBar.replaceChildren();
+
+  const categories = [
+    "All Tools",
+    ...Array.from(new Set(allTools.map(getCategory)))
+      .sort((a, b) => a.localeCompare(b))
+  ];
+
+  categories.forEach(category => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className =
+      "category-chip" +
+      (activeCategory === category ? " active" : "");
+    button.textContent = category;
+
+    button.addEventListener("click", () => {
+      activeCategory = category;
+      renderCategories();
+      renderTools();
+    });
+
+    categoryBar.appendChild(button);
+  });
+}
+
+function renderTools() {
+  const query = searchInput.value.trim().toLowerCase();
+
+  const filtered = allTools.filter(tool => {
+    const category = getCategory(tool);
+
+    const matchesCategory =
+      activeCategory === "All Tools" ||
+      category === activeCategory;
+
+    const searchableText = [
+      tool.name || "",
+      tool.description || "",
+      category
+    ].join(" ").toLowerCase();
+
+    return matchesCategory && searchableText.includes(query);
+  });
+
+  container.replaceChildren();
+
+  countLabel.textContent =
+    `Showing ${filtered.length} of ${allTools.length} active tools`;
+
+  if (!filtered.length) {
+    showMessage(
+      "Koi matching tool nahi mila. Search ya category change karke dekhein."
+    );
+    return;
+  }
+
+  filtered.forEach(tool => {
+    const card = document.createElement("article");
+    card.className = "service";
+
+    addText(card, "div", tool.icon || "🧰").className = "icon";
+    addText(card, "h3", String(tool.name || "Digital Tool"));
+    addText(card, "p", String(tool.description || "Digital service"));
+
+    const categoryLabel = addText(
+      card,
+      "p",
+      "Category: " + getCategory(tool)
+    );
+    categoryLabel.style.fontWeight = "bold";
+
+    const price = Number(tool.price);
+    const validPrice = Number.isFinite(price) && price >= 0;
+
+    const priceEl = addText(
+      card,
+      "p",
+      validPrice
+        ? (price === 0 ? "FREE" : "Price: ₹" + price)
+        : "Price: Contact for details"
+    );
+
+    priceEl.className =
+      validPrice && price === 0 ? "free" : "paid";
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "button";
+    button.textContent = "Open Tool →";
+
+    const destination = toolUrl(tool.page || tool.file);
+
+    if (destination) {
+      button.addEventListener("click", () => {
+        location.href = destination;
+      });
+    } else {
+      button.disabled = true;
+      button.textContent = "Page Not Connected";
+      button.title =
+        "Tools Management mein sahi HTML filename save karein.";
+    }
+
+    card.appendChild(button);
+    container.appendChild(card);
+  });
+}
+
+searchInput.addEventListener("input", renderTools);
+
+onSnapshot(
+  collection(db, "tools"),
+  snapshot => {
+    allTools = snapshot.docs
+      .map(doc => ({ id: doc.id, ...doc.data() }))
+      .filter(tool => tool.active === true)
+      .sort((a, b) =>
+        String(a.name || "").localeCompare(String(b.name || ""))
+      );
+
+    if (!allTools.length) {
+      categoryBar.replaceChildren();
+      countLabel.textContent = "0 active tools";
+      showMessage("Abhi koi active digital tool available nahi hai.");
+      return;
+    }
+
+    if (
+      activeCategory !== "All Tools" &&
+      !allTools.some(tool => getCategory(tool) === activeCategory)
+    ) {
+      activeCategory = "All Tools";
+    }
+
+    renderCategories();
+    renderTools();
+  },
+  error => {
+    console.error("Firebase tools error:", error);
+    categoryBar.replaceChildren();
+    countLabel.textContent = "Tools load nahi ho sake";
+
+    showMessage(
+      "Tools load nahi ho rahe. Internet, Firebase configuration aur Firestore rules check karein."
+    );
+  }
+);
 </script>
 </body>
 </html>
