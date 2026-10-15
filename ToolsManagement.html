@@ -6,98 +6,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#176b3a">
 <title>Tools Management | Kisan Seva Tools</title>
-
 <style>
 :root{
-  --green:#176b3a;
-  --dark:#104b2a;
-  --light:#eaf5ed;
-  --bg:#f4f8f5;
-  --text:#183b28;
-  --muted:#68766d;
-  --border:#dce8df;
-  --red:#b42318;
-  --orange:#a85a00;
+  --green:#176b3a;--dark:#104b2a;--light:#eaf5ed;
+  --bg:#f4f8f5;--text:#183b28;--muted:#68766d;
+  --border:#dce8df;--red:#b42318;--orange:#a85a00
 }
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-.topbar{
-  background:var(--dark);
-  color:#fff;
-  padding:10px 5%;
-  font-size:13px;
-}
-header{
-  background:linear-gradient(120deg,#176b3a,#21854b);
-  color:white;
-  padding:25px 5%;
-}
-.header-inner{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  flex-wrap:wrap;
-}
+.topbar{background:var(--dark);color:#fff;padding:10px 5%;font-size:13px}
+header{background:linear-gradient(120deg,#176b3a,#21854b);color:white;padding:25px 5%}
+.header-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:12px}
-.logo{
-  width:52px;height:52px;
-  display:grid;place-items:center;
-  background:#ffffff20;
-  border-radius:15px;
-  font-size:29px;
-}
+.logo{width:52px;height:52px;display:grid;place-items:center;background:#ffffff20;border-radius:15px;font-size:29px}
 .brand h1{margin:0;font-size:23px}
 .brand p{margin:4px 0 0;font-size:13px;color:#e0f1e5}
 .nav{display:flex;gap:8px;flex-wrap:wrap}
-.nav a{
-  color:white;text-decoration:none;
-  border:1px solid #ffffff55;
-  padding:9px 12px;border-radius:8px;
-  font-size:13px;
-}
+.nav a{color:white;text-decoration:none;border:1px solid #ffffff55;padding:9px 12px;border-radius:8px;font-size:13px}
 .container{max-width:1200px;margin:auto;padding:25px 18px 45px}
-.panel{
-  background:white;border:1px solid var(--border);
-  border-radius:16px;padding:22px;
-  margin-bottom:18px;
-  box-shadow:0 5px 20px #173d2508;
-}
+.panel{background:white;border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:18px;box-shadow:0 5px 20px #173d2508}
 .panel h2{font-size:19px;margin:0 0 7px}
 .subtext{font-size:13px;color:var(--muted);margin:0 0 18px}
 label{display:block;font-size:13px;font-weight:bold;margin-bottom:6px}
-input,select,textarea{
-  width:100%;padding:11px 12px;
-  border:1px solid #cedbd1;border-radius:9px;
-  background:white;color:var(--text);
-  outline:none;
-}
-input:focus,select:focus,textarea:focus{
-  border-color:var(--green);
-  box-shadow:0 0 0 3px #176b3a18;
-}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cedbd1;border-radius:9px;background:white;color:var(--text);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px #176b3a18}
 textarea{min-height:85px;resize:vertical}
 .field{margin-bottom:15px;min-width:0}
-.grid{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:0 16px;
-}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}
 .full{grid-column:1/-1}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  border:0;border-radius:9px;padding:11px 15px;
-  background:var(--green);color:white;font-weight:bold;
-  font-size:13px;
-}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:9px;padding:11px 15px;background:var(--green);color:white;font-weight:bold;font-size:13px}
 .btn:hover{background:var(--dark)}
 .btn:disabled{opacity:.55;cursor:not-allowed}
 .btn.secondary{background:var(--light);color:var(--green)}
@@ -105,85 +44,45 @@ textarea{min-height:85px;resize:vertical}
 .btn.warning{background:#fff4df;color:var(--orange)}
 .actions{display:flex;gap:9px;flex-wrap:wrap}
 .hidden{display:none!important}
-.message{
-  display:none;margin:0 0 16px;padding:12px 14px;
-  border-radius:9px;font-size:13px;line-height:1.5;
-  overflow-wrap:anywhere;
-}
+.message{display:none;margin:0 0 16px;padding:12px 14px;border-radius:9px;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
 .message.show{display:block}
 .message.error{background:#fff0ef;color:var(--red)}
 .message.success{background:#eaf8ee;color:#176b3a}
 .message.info{background:#eef5ff;color:#244d83}
-.stats{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:13px;margin-bottom:18px;
-}
-.stat{
-  background:white;border:1px solid var(--border);
-  border-radius:13px;padding:17px;
-}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-bottom:18px}
+.stat{background:white;border:1px solid var(--border);border-radius:13px;padding:17px}
 .stat span{display:block;font-size:12px;color:var(--muted)}
 .stat strong{display:block;font-size:27px;margin-top:5px;color:var(--green)}
-.toolbar{
-  display:grid;grid-template-columns:2fr 1fr;
-  gap:12px;margin-bottom:18px;
-}
-.tool-grid{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:14px;
-}
-.tool-card{
-  background:white;border:1px solid var(--border);
-  border-radius:14px;padding:17px;min-width:0;
-}
+.toolbar{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:18px}
+.tool-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tool-card{background:white;border:1px solid var(--border);border-radius:14px;padding:17px;min-width:0}
 .tool-top{display:flex;align-items:flex-start;gap:12px}
-.tool-icon{
-  display:grid;place-items:center;flex-shrink:0;
-  width:46px;height:46px;border-radius:12px;
-  background:var(--light);font-size:25px;
-}
+.tool-icon{display:grid;place-items:center;flex-shrink:0;width:46px;height:46px;border-radius:12px;background:var(--light);font-size:25px}
 .tool-card h3{margin:2px 0 5px;font-size:16px;overflow-wrap:anywhere}
 .tool-card p{font-size:13px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}
-.tag{
-  display:inline-block;padding:4px 8px;border-radius:30px;
-  font-size:11px;font-weight:bold;background:#edf1ee;
-  color:#4b5b50;margin:3px 4px 3px 0;
-}
+.tag{display:inline-block;padding:4px 8px;border-radius:30px;font-size:11px;font-weight:bold;background:#edf1ee;color:#4b5b50;margin:3px 4px 3px 0}
 .tag.active{background:#e4f7e9;color:#176b3a}
 .tag.inactive{background:#fff0ef;color:var(--red)}
 .tool-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
 .tool-actions .btn{padding:9px 10px}
-.empty{
-  background:white;border:1px dashed #cddbd0;
-  border-radius:12px;padding:25px;text-align:center;
-  color:var(--muted);font-size:13px;grid-column:1/-1;
-}
+.empty{background:white;border:1px dashed #cddbd0;border-radius:12px;padding:25px;text-align:center;color:var(--muted);font-size:13px;grid-column:1/-1}
 footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
 @media(max-width:850px){.tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){
-  .container{padding:16px 12px 30px}
-  .panel{padding:16px}
-  .grid,.toolbar{grid-template-columns:1fr}
-  .tool-grid{grid-template-columns:1fr}
-  .stats{gap:8px}
-  .stat{padding:12px}
-  .stat strong{font-size:22px}
-  .brand h1{font-size:20px}
+ .container{padding:16px 12px 30px}.panel{padding:16px}
+ .grid,.toolbar{grid-template-columns:1fr}.tool-grid{grid-template-columns:1fr}
+ .stats{gap:8px}.stat{padding:12px}.stat strong{font-size:22px}
+ .brand h1{font-size:20px}
 }
 </style>
 </head>
-
 <body>
 <div class="topbar">🌱 Kisan Seva Tools · Administration</div>
-
 <header>
   <div class="header-inner">
     <div class="brand">
       <div class="logo">🧰</div>
-      <div>
-        <h1>Tools Management</h1>
-        <p>Manage digital tools and their availability</p>
-      </div>
+      <div><h1>Tools Management</h1><p>Manage digital tools and their availability</p></div>
     </div>
     <nav class="nav">
       <a href="Home.html">Home</a>
@@ -193,7 +92,7 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
 </header>
 
 <main class="container">
-  <div id="message" class="message" role="status"></div>
+  <div id="message" class="message" role="status" aria-live="polite"></div>
 
   <section id="loginPanel" class="panel">
     <h2>🔐 Administrator Login</h2>
@@ -223,41 +122,32 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
 
       <form id="toolForm" style="margin-top:22px">
         <input id="toolId" type="hidden">
-
         <div class="grid">
           <div class="field">
             <label for="toolName">Tool name *</label>
             <input id="toolName" maxlength="100" required placeholder="Example: Farmer Card Maker">
           </div>
-
           <div class="field">
             <label for="toolIcon">Icon / Emoji</label>
             <input id="toolIcon" maxlength="20" placeholder="🌾">
           </div>
-
           <div class="field">
             <label for="toolCategory">Category *</label>
             <input id="toolCategory" maxlength="60" required placeholder="Example: Farmer Services">
           </div>
-
           <div class="field">
             <label for="toolPrice">Price (₹)</label>
             <input id="toolPrice" type="number" min="0" step="0.01" value="0">
           </div>
-
           <div class="field full">
             <label for="toolDescription">Description</label>
             <textarea id="toolDescription" maxlength="500" placeholder="Explain what this tool does"></textarea>
           </div>
-
           <div class="field full">
             <label for="toolPage">HTML filename *</label>
             <input id="toolPage" maxlength="180" required placeholder="Example: AIBiodata.html">
-            <small style="color:var(--muted);font-size:12px">
-              Enter the exact HTML filename from the tools folder, not a display name.
-            </small>
+            <small style="color:var(--muted);font-size:12px">Enter the exact HTML filename from the tools folder, not a display name.</small>
           </div>
-
           <div class="field">
             <label for="toolActive">Availability</label>
             <select id="toolActive">
@@ -266,7 +156,6 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
             </select>
           </div>
         </div>
-
         <div class="actions">
           <button class="btn" id="saveButton" type="submit">Save tool</button>
           <button class="btn secondary hidden" id="cancelEdit" type="button">Cancel edit</button>
@@ -281,12 +170,13 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
     </section>
 
     <section class="panel">
-      <h2>📦 Import Tools Catalog</h2>
+      <h2>📦 Sync Tools Catalog</h2>
       <p class="subtext">
-        Imports tools from tools-catalog.json in the repository root.
-        Existing tools with the same name and page are skipped.
+        Reads tools-catalog.json from the repository root. Updates names, categories,
+        icons and descriptions for matching filenames. Existing prices and availability
+        are preserved. Missing catalog entries are added; no tools are deleted.
       </p>
-      <button class="btn secondary" id="importButton" type="button">Import catalog</button>
+      <button class="btn secondary" id="importButton" type="button">Sync 47 Tools Metadata</button>
     </section>
 
     <section class="panel">
@@ -312,7 +202,6 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
     </section>
   </div>
 </main>
-
 <footer>© 2026 Kisan Seva Tools · Authorized administration only</footer>
 
 <script type="module">
@@ -335,8 +224,8 @@ const firebaseConfig={
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
-
 const $=id=>document.getElementById(id);
+
 let tools=[];
 let unsubscribeTools=null;
 let editingId=null;
@@ -348,23 +237,25 @@ function showMessage(text,type="info"){
   box.className="message show "+type;
   window.scrollTo({top:0,behavior:"smooth"});
 }
-
 function clearMessage(){
   $("message").className="message";
   $("message").textContent="";
 }
-
 function setBusy(value){
   busy=value;
   $("saveButton").disabled=value;
   $("loginButton").disabled=value;
   $("importButton").disabled=value;
 }
-
 function validPage(page){
   return /^[A-Za-z0-9_-]+\.html$/i.test(String(page||"").trim());
 }
-
+function pageKey(value){
+  let name=String(value||"").trim().replace(/\\/g,"/");
+  name=name.split("/").pop()||"";
+  try{name=decodeURIComponent(name)}catch{}
+  return name.toLowerCase();
+}
 function resetForm(){
   editingId=null;
   $("toolForm").reset();
@@ -376,7 +267,6 @@ function resetForm(){
   $("saveButton").textContent="Save tool";
   $("cancelEdit").classList.add("hidden");
 }
-
 function startEdit(tool){
   editingId=tool.id;
   $("toolId").value=tool.id;
@@ -393,39 +283,32 @@ function startEdit(tool){
   $("toolName").focus();
   window.scrollTo({top:0,behavior:"smooth"});
 }
-
 function updateStats(){
   $("totalCount").textContent=tools.length;
   $("activeCount").textContent=tools.filter(t=>t.active===true).length;
   $("inactiveCount").textContent=tools.filter(t=>t.active!==true).length;
 }
-
 function element(tag,className,text){
   const el=document.createElement(tag);
   if(className)el.className=className;
   if(text!==undefined)el.textContent=text;
   return el;
 }
-
 function makeButton(text,className,callback){
   const button=element("button","btn "+className,text);
   button.type="button";
   button.addEventListener("click",callback);
   return button;
 }
-
 function renderTools(){
   updateStats();
   const list=$("toolList");
   list.replaceChildren();
-
   const search=$("searchInput").value.trim().toLowerCase();
   const status=$("statusFilter").value;
 
   const filtered=tools.filter(t=>{
-    const searchable=[t.name,t.category,t.description,t.page,t.file]
-      .join(" ").toLowerCase();
-
+    const searchable=[t.name,t.category,t.description,t.page,t.file].join(" ").toLowerCase();
     if(search&&!searchable.includes(search))return false;
     if(status==="active"&&t.active!==true)return false;
     if(status==="inactive"&&t.active===true)return false;
@@ -434,7 +317,7 @@ function renderTools(){
 
   if(!filtered.length){
     list.appendChild(element("div","empty",
-      tools.length?"No matching tools found.":"No tools found. Add a tool or import the catalog."));
+      tools.length?"No matching tools found.":"No tools found. Add a tool or sync the catalog."));
     return;
   }
 
@@ -442,37 +325,25 @@ function renderTools(){
     const card=element("article","tool-card");
     const top=element("div","tool-top");
     top.appendChild(element("div","tool-icon",tool.icon||"🧰"));
-
     const info=element("div","");
     info.appendChild(element("h3","",tool.name||"Unnamed tool"));
     info.appendChild(element("span","tag",tool.category||"General"));
-    info.appendChild(element("span",
-      "tag "+(tool.active===true?"active":"inactive"),
+    info.appendChild(element("span","tag "+(tool.active===true?"active":"inactive"),
       tool.active===true?"ACTIVE":"INACTIVE"));
     top.appendChild(info);
     card.appendChild(top);
-
     card.appendChild(element("p","",tool.description||"No description provided."));
-    card.appendChild(element("p","", "Page: "+String(tool.page||tool.file||"Not set")));
+    card.appendChild(element("p","","Page: "+String(tool.page||tool.file||"Not set")));
     const price=Number(tool.price);
-    card.appendChild(element("p","",Number.isFinite(price)&&price>=0
-      ?"Price: ₹"+price:"Price not set"));
-
+    card.appendChild(element("p","",Number.isFinite(price)&&price>=0?"Price: ₹"+price:"Price not set"));
     const actions=element("div","tool-actions");
     actions.appendChild(makeButton("Edit","secondary",()=>startEdit(tool)));
-
-    actions.appendChild(makeButton(
-      tool.active===true?"Deactivate":"Activate",
-      "warning",
-      ()=>changeActive(tool)
-    ));
-
+    actions.appendChild(makeButton(tool.active===true?"Deactivate":"Activate","warning",()=>changeActive(tool)));
     actions.appendChild(makeButton("Delete","danger",()=>removeTool(tool)));
     card.appendChild(actions);
     list.appendChild(card);
   });
 }
-
 async function changeActive(tool){
   if(busy)return;
   try{
@@ -486,14 +357,9 @@ async function changeActive(tool){
     showMessage("Could not update tool. Check Firestore permissions.","error");
   }
 }
-
 async function removeTool(tool){
   if(busy)return;
-  const confirmed=confirm(
-    'Delete "'+(tool.name||"this tool")+'"? This cannot be undone.'
-  );
-  if(!confirmed)return;
-
+  if(!confirm('Delete "'+(tool.name||"this tool")+'"? This cannot be undone.'))return;
   try{
     await deleteDoc(doc(db,"tools",tool.id));
     if(editingId===tool.id)resetForm();
@@ -509,9 +375,7 @@ $("loginForm").addEventListener("submit",async event=>{
   clearMessage();
   setBusy(true);
   try{
-    await signInWithEmailAndPassword(
-      auth,$("email").value.trim(),$("password").value
-    );
+    await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value);
   }catch(error){
     console.error(error);
     showMessage("Login failed. Check your email, password and Firebase Authentication settings.","error");
@@ -521,25 +385,18 @@ $("loginForm").addEventListener("submit",async event=>{
 });
 
 onAuthStateChanged(auth,async user=>{
-  if(unsubscribeTools){
-    unsubscribeTools();
-    unsubscribeTools=null;
-  }
-
+  if(unsubscribeTools){unsubscribeTools();unsubscribeTools=null;}
   $("loginPanel").classList.remove("hidden");
   $("appPanel").classList.add("hidden");
-
   if(!user)return;
 
   try{
     const adminSnap=await getDoc(doc(db,"admins",user.uid));
-
     if(!adminSnap.exists()||adminSnap.data().role!=="admin"){
       await signOut(auth);
       showMessage("Access denied. This account is not authorized as an administrator.","error");
       return;
     }
-
     $("loginPanel").classList.add("hidden");
     $("appPanel").classList.remove("hidden");
     clearMessage();
@@ -551,7 +408,6 @@ onAuthStateChanged(auth,async user=>{
       console.error(error);
       showMessage("Unable to load tools. Check Firestore rules and internet connection.","error");
     });
-
   }catch(error){
     console.error(error);
     showMessage("Admin verification failed. Check the admins collection and Firestore rules.","error");
@@ -572,10 +428,7 @@ $("toolForm").addEventListener("submit",async event=>{
   const price=Number($("toolPrice").value);
   const active=$("toolActive").value==="true";
 
-  if(!name){
-    showMessage("Enter a tool name.","error");
-    return;
-  }
+  if(!name){showMessage("Enter a tool name.","error");return;}
   if(!validPage(page)){
     showMessage("Enter a simple HTML filename, for example AIBiodata.html. Do not enter a folder path.","error");
     return;
@@ -585,17 +438,11 @@ $("toolForm").addEventListener("submit",async event=>{
     return;
   }
 
-  const duplicate=tools.find(t=>
-    t.id!==editingId&&
-    String(t.page||t.file||"").toLowerCase()===page.toLowerCase()
-  );
+  const duplicate=tools.find(t=>t.id!==editingId&&
+    pageKey(t.page||t.file)===pageKey(page));
   if(duplicate&&!confirm("Another tool already uses this filename. Save anyway?"))return;
 
-  const data={
-    name,icon,category,description,page,price,active,
-    updatedAt:serverTimestamp()
-  };
-
+  const data={name,icon,category,description,page,price,active,updatedAt:serverTimestamp()};
   setBusy(true);
   try{
     if(editingId){
@@ -615,10 +462,7 @@ $("toolForm").addEventListener("submit",async event=>{
   }
 });
 
-$("resetButton").addEventListener("click",()=>{
-  resetForm();
-  clearMessage();
-});
+$("resetButton").addEventListener("click",()=>{resetForm();clearMessage();});
 $("cancelEdit").addEventListener("click",resetForm);
 $("searchInput").addEventListener("input",renderTools);
 $("statusFilter").addEventListener("change",renderTools);
@@ -633,68 +477,97 @@ $("logoutButton").addEventListener("click",async()=>{
   }
 });
 
+/*
+  SAFE CATALOG SYNC:
+  - Updates only name, category, icon, description and updatedAt
+    for existing matching filenames.
+  - Preserves existing price, active/inactive status, document ID
+    and all other existing fields.
+  - Adds missing catalog entries.
+  - Does not delete any tool.
+*/
 $("importButton").addEventListener("click",async()=>{
   if(busy)return;
-  const confirmed=confirm(
-    "Import tools-catalog.json from the website root? Existing tools with matching name and page will be skipped."
-  );
-  if(!confirmed)return;
+
+  if(!confirm(
+    "Sync metadata for 47 catalog tools? Existing prices and active/inactive settings will be preserved. Missing tools may be added. No tools will be deleted."
+  ))return;
 
   setBusy(true);
+  clearMessage();
+
   try{
     const response=await fetch("tools-catalog.json",{cache:"no-store"});
     if(!response.ok)throw new Error("Catalog HTTP status: "+response.status);
 
     const catalog=await response.json();
-    if(!Array.isArray(catalog))throw new Error("Catalog must be a JSON array.");
 
-    let added=0,skipped=0;
-
-    for(const item of catalog){
-      const name=String(item.name||"").trim();
-      const page=String(item.page||item.file||"").trim();
-
-      if(!name||!validPage(page)){
-        skipped++;
-        continue;
-      }
-
-      const exists=tools.some(t=>
-        String(t.name||"").toLowerCase()===name.toLowerCase()&&
-        String(t.page||t.file||"").toLowerCase()===page.toLowerCase()
-      );
-
-      if(exists){
-        skipped++;
-        continue;
-      }
-
-      const rawPrice=item.price===undefined?0:Number(item.price);
-      const price=Number.isFinite(rawPrice)&&rawPrice>=0?rawPrice:0;
-
-      await addDoc(collection(db,"tools"),{
-        name,
-        page,
-        file:page,
-        icon:String(item.icon||"🧰"),
-        category:String(item.category||"General"),
-        description:String(item.description||""),
-        price,
-        active:item.active===undefined?true:item.active===true,
-        createdAt:serverTimestamp(),
-        updatedAt:serverTimestamp()
-      });
-      added++;
+    if(!Array.isArray(catalog)||catalog.length!==47){
+      throw new Error("Expected exactly 47 catalog entries; received "+
+        (Array.isArray(catalog)?catalog.length:"invalid JSON format")+".");
     }
 
-    showMessage(
-      "Import finished. Added: "+added+"; skipped: "+skipped+".",
-      "success"
-    );
+    const seen=new Set();
+    for(let i=0;i<catalog.length;i++){
+      const item=catalog[i];
+      const name=String(item.name||"").trim();
+      const page=String(item.page||item.file||"").trim();
+      if(!name||!validPage(page)){
+        throw new Error("Invalid name or HTML filename at catalog entry "+(i+1)+".");
+      }
+      const key=pageKey(page);
+      if(seen.has(key))throw new Error("Duplicate filename in catalog: "+page);
+      seen.add(key);
+      if(item.price!==undefined&&(!Number.isFinite(Number(item.price))||Number(item.price)<0)){
+        throw new Error("Invalid price in catalog entry: "+name);
+      }
+    }
+
+    let updated=0,added=0;
+    const skipped=[];
+
+    for(const item of catalog){
+      const name=String(item.name).trim();
+      const page=String(item.page||item.file).trim();
+      const existing=tools.find(t=>
+        pageKey(t.page||t.file)===pageKey(page)
+      );
+
+      const metadata={
+        name,
+        category:String(item.category||"General").trim()||"General",
+        icon:String(item.icon||"🧰").trim()||"🧰",
+        description:String(item.description||"").trim(),
+        updatedAt:serverTimestamp()
+      };
+
+      if(existing){
+        await updateDoc(doc(db,"tools",existing.id),metadata);
+        updated++;
+      }else{
+        const data={
+          ...metadata,
+          page,
+          file:page,
+          price:0,
+          active:true,
+          createdAt:serverTimestamp()
+        };
+        await addDoc(collection(db,"tools"),data);
+        added++;
+      }
+    }
+
+    const result="Catalog sync complete. Updated: "+updated+
+      "; added: "+added+"; catalog entries: "+catalog.length+
+      ". Existing prices and availability were preserved.";
+    showMessage(result,"success");
+
   }catch(error){
-    console.error(error);
+    console.error("Catalog sync error:",error);
     showMessage(
-      "Import failed. Check that tools-catalog.json exists at the repository root, contains a JSON array, and Firestore allows writes.",
+      "Sync did not finish successfully: "+(error.message||"Unknown error")+
+      " Some earlier entries may already have updated. Check the catalog and permissions, then run sync again if needed.",
       "error"
     );
   }finally{
