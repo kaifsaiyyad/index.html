@@ -3,8 +3,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#176b3a">
+<meta name="description" content="Kisan Seva Tools - Farmer services, PDF utilities and digital tools in one place.">
 <title>Kisan Seva Tools | Home</title>
 
 <style>
@@ -16,9 +17,18 @@
   --ink:#183b28;
   --muted:#617066;
   --line:#dce8df;
+  --shadow:0 6px 24px #173d250b;
 }
 
-* { box-sizing:border-box; }
+* {
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top:16px;
+  -webkit-text-size-adjust:100%;
+}
 
 body {
   margin:0;
@@ -26,13 +36,29 @@ body {
   background:var(--bg);
   color:var(--ink);
   line-height:1.5;
+  overflow-wrap:break-word;
+}
+
+button,input,a {
+  font:inherit;
+}
+
+button,a {
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline:3px solid #8bc69d;
+  outline-offset:3px;
 }
 
 .topbar {
   background:var(--gd);
   color:#e8f6ec;
   text-align:center;
-  padding:8px;
+  padding:9px 12px;
   font-size:12px;
 }
 
@@ -44,7 +70,8 @@ body {
 
 .nav,.hero,.container {
   max-width:1120px;
-  margin:auto;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .nav {
@@ -59,11 +86,13 @@ body {
   display:flex;
   align-items:center;
   gap:12px;
+  min-width:0;
 }
 
 .brand-icon {
   display:grid;
   place-items:center;
+  flex:0 0 50px;
   width:50px;
   height:50px;
   border-radius:15px;
@@ -73,11 +102,12 @@ body {
 
 .brand h1 {
   font-size:22px;
+  line-height:1.25;
   margin:0;
 }
 
 .brand p {
-  margin:2px 0 0;
+  margin:3px 0 0;
   color:#d7efdf;
   font-size:13px;
 }
@@ -89,12 +119,17 @@ body {
 }
 
 .nav-links a {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
   font-size:13px;
   text-decoration:none;
   padding:9px 12px;
   border:1px solid #ffffff55;
   border-radius:9px;
   color:white;
+  transition:background .15s;
 }
 
 .nav-links a:hover {
@@ -104,7 +139,7 @@ body {
 .hero {
   margin-top:28px;
   display:grid;
-  grid-template-columns:1.5fr .8fr;
+  grid-template-columns:minmax(0,1.5fr) minmax(240px,.8fr);
   align-items:center;
   gap:24px;
 }
@@ -150,7 +185,8 @@ body {
   border:1px solid var(--line);
   padding:20px 22px;
   border-radius:16px;
-  box-shadow:0 6px 24px #173d250b;
+  box-shadow:var(--shadow);
+  min-width:0;
 }
 
 .welcome {
@@ -187,7 +223,7 @@ body {
 }
 
 .balance {
-  font-size:29px;
+  font-size:clamp(25px,4vw,29px);
   font-weight:800;
   color:var(--g);
   margin:2px 0;
@@ -202,6 +238,9 @@ body {
   display:inline-flex;
   align-items:center;
   justify-content:center;
+  gap:6px;
+  min-height:42px;
+  max-width:100%;
   border:0;
   background:var(--g);
   color:white;
@@ -211,18 +250,32 @@ body {
   font-weight:bold;
   font-size:13px;
   cursor:pointer;
+  text-align:center;
+  overflow-wrap:anywhere;
+  transition:background .15s,transform .15s;
 }
 
-.button:hover { background:var(--gd); }
+.button:hover {
+  background:var(--gd);
+}
+
+.button:active {
+  transform:scale(.98);
+}
 
 .button.light {
   background:var(--p);
   color:var(--g);
 }
 
+.button.light:hover {
+  background:#d8ecde;
+}
+
 .button:disabled {
   background:#9ca8a0;
   cursor:not-allowed;
+  transform:none;
 }
 
 .section-head {
@@ -235,19 +288,21 @@ body {
 
 .section-head h2 {
   font-size:21px;
+  line-height:1.3;
   margin:0;
 }
 
 .section-head p {
   font-size:12px;
   color:var(--muted);
-  margin:3px 0 0;
+  margin:4px 0 0;
 }
 
 .services {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:14px;
+  min-width:0;
 }
 
 .service {
@@ -258,6 +313,7 @@ body {
   min-width:0;
   display:flex;
   flex-direction:column;
+  box-shadow:0 2px 8px #173d2505;
   transition:transform .15s,box-shadow .15s;
 }
 
@@ -269,6 +325,7 @@ body {
 .icon {
   display:grid;
   place-items:center;
+  flex:0 0 52px;
   width:52px;
   height:52px;
   background:var(--p);
@@ -279,6 +336,7 @@ body {
 
 .service h3 {
   font-size:16px;
+  line-height:1.35;
   margin:0 0 7px;
   overflow-wrap:anywhere;
 }
@@ -293,6 +351,7 @@ body {
 
 .service .button {
   align-self:flex-start;
+  margin-top:auto;
 }
 
 .paid {
@@ -313,6 +372,7 @@ body {
   color:var(--muted);
   font-size:13px;
   grid-column:1/-1;
+  overflow-wrap:anywhere;
 }
 
 /* Search and category filters */
@@ -322,23 +382,32 @@ body {
   border-radius:15px;
   padding:16px;
   margin-bottom:16px;
+  min-width:0;
 }
 
 .tool-search {
   display:block;
   width:100%;
-  padding:13px 14px;
+  min-width:0;
+  min-height:46px;
+  padding:12px 14px;
   border:1px solid var(--line);
   border-radius:10px;
   background:white;
   color:var(--ink);
-  font-size:15px;
+  font-size:16px;
   outline:none;
+  appearance:none;
 }
 
 .tool-search:focus {
   border-color:var(--g);
   box-shadow:0 0 0 3px #176b3a18;
+}
+
+.tool-search::placeholder {
+  color:#7b887f;
+  opacity:1;
 }
 
 .tool-categories {
@@ -353,10 +422,13 @@ body {
   background:white;
   color:var(--g);
   padding:9px 13px;
+  min-height:38px;
   border-radius:999px;
   font-size:12px;
   font-weight:700;
   cursor:pointer;
+  max-width:100%;
+  overflow-wrap:anywhere;
 }
 
 .category-chip:hover {
@@ -396,11 +468,21 @@ body {
 
 .charge-row {
   display:flex;
+  align-items:flex-start;
   justify-content:space-between;
   gap:12px;
   padding:11px 0;
   border-bottom:1px solid #edf1ee;
   font-size:13px;
+}
+
+.charge-row span:first-child {
+  min-width:0;
+}
+
+.charge-row span:last-child {
+  flex-shrink:0;
+  text-align:right;
 }
 
 .notice {
@@ -429,36 +511,283 @@ body {
   margin-bottom:4px;
 }
 
-@media(max-width:800px) {
-  .hero { grid-template-columns:1fr; }
-  .hero-side { display:none; }
-  .services { grid-template-columns:repeat(2,minmax(0,1fr)); }
+/* Tablet */
+@media (max-width:900px) {
+  .header {
+    padding-top:20px;
+  }
+
+  .hero {
+    grid-template-columns:minmax(0,1fr);
+  }
+
+  .hero-side {
+    display:none;
+  }
+
+  .services {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
 }
 
-@media(max-width:560px) {
-  .hero { margin-top:22px; }
+/* Mobile */
+@media (max-width:600px) {
+  .topbar {
+    font-size:11px;
+    padding:9px 10px;
+  }
+
+  .header {
+    padding:18px 14px 34px;
+  }
+
+  .nav {
+    align-items:stretch;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .brand {
+    gap:10px;
+  }
+
+  .brand-icon {
+    flex-basis:44px;
+    width:44px;
+    height:44px;
+    font-size:25px;
+    border-radius:12px;
+  }
+
+  .brand h1 {
+    font-size:20px;
+  }
+
+  .brand p {
+    font-size:12px;
+  }
+
+  .nav-links {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:7px;
+    width:100%;
+  }
+
+  .nav-links a {
+    min-width:0;
+    min-height:42px;
+    padding:8px 5px;
+    font-size:12px;
+    text-align:center;
+  }
+
+  .hero {
+    margin-top:23px;
+    gap:14px;
+  }
+
+  .hero h2 {
+    font-size:clamp(27px,7vw,35px);
+    margin-bottom:10px;
+  }
+
+  .hero p {
+    font-size:14px;
+  }
+
+  .container {
+    padding:0 12px 28px;
+  }
+
   .welcome,.wallet {
+    padding:16px;
+    align-items:stretch;
+    flex-direction:column;
+    gap:13px;
+    border-radius:13px;
+  }
+
+  .welcome h2 {
+    font-size:17px;
+  }
+
+  .welcome p {
+    font-size:13px;
+  }
+
+  .welcome .button,
+  .wallet .button {
+    width:100%;
+  }
+
+  .wallet {
+    margin-top:12px;
+  }
+
+  .wallet-info {
+    line-height:1.5;
+  }
+
+  .section-head {
+    margin:25px 0 12px;
     align-items:flex-start;
     flex-direction:column;
+    gap:5px;
   }
-  .services,.charge-grid {
+
+  .section-head h2 {
+    font-size:19px;
+  }
+
+  .section-head p {
+    font-size:12px;
+  }
+
+  .services {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+
+  .service {
+    padding:13px;
+    border-radius:12px;
+  }
+
+  .icon {
+    width:43px;
+    height:43px;
+    flex-basis:43px;
+    border-radius:11px;
+    font-size:24px;
+    margin-bottom:10px;
+  }
+
+  .service h3 {
+    font-size:14px;
+    line-height:1.35;
+  }
+
+  .service p {
+    font-size:12px;
+    line-height:1.5;
+    margin-bottom:12px;
+  }
+
+  .service .button {
+    width:100%;
+    min-height:42px;
+    padding:9px 7px;
+    font-size:12px;
+    align-self:stretch;
+  }
+
+  .tool-controls {
+    padding:12px;
+    border-radius:12px;
+    margin-bottom:12px;
+  }
+
+  .tool-search {
+    min-height:46px;
+    padding:12px;
+    font-size:16px;
+  }
+
+  .tool-categories {
+    gap:7px;
+    margin-top:11px;
+  }
+
+  .category-chip {
+    min-height:38px;
+    padding:8px 11px;
+    font-size:12px;
+  }
+
+  .tool-count {
+    line-height:1.5;
+  }
+
+  .charges {
+    margin-top:20px;
+    padding:15px;
+    border-radius:12px;
+  }
+
+  .charges h3 {
+    font-size:16px;
+  }
+
+  .charge-grid {
+    grid-template-columns:minmax(0,1fr);
+  }
+
+  .charge-row {
+    font-size:13px;
+    gap:10px;
+  }
+
+  .notice {
+    padding:13px;
+    line-height:1.6;
+  }
+
+  .footer {
+    padding:22px 12px;
+  }
+}
+
+/* Very narrow phones */
+@media (max-width:360px) {
+  .nav-links {
     grid-template-columns:1fr;
   }
-  .section-head {
-    align-items:flex-start;
-    flex-direction:column;
+
+  .nav-links a {
+    justify-content:center;
   }
-  .container {
-    padding-left:12px;
-    padding-right:12px;
+
+  .services {
+    grid-template-columns:minmax(0,1fr);
   }
-  .service { padding:16px; }
-  .nav {
-    align-items:flex-start;
-    flex-direction:column;
+
+  .service {
+    padding:16px;
   }
-  .tool-controls { padding:12px; }
-  .category-chip { padding:8px 11px; }
+
+  .service h3 {
+    font-size:16px;
+  }
+
+  .service p {
+    font-size:13px;
+  }
+
+  .service .button {
+    width:auto;
+    align-self:flex-start;
+    padding:11px 14px;
+    font-size:13px;
+  }
+
+  .section-head h2 {
+    font-size:18px;
+  }
+}
+
+/* Respect device accessibility settings */
+@media (prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior:auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition:none !important;
+    animation:none !important;
+  }
 }
 </style>
 </head>
@@ -541,7 +870,7 @@ body {
         Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.
         <br><br><b class="paid">Download charge: ₹10</b>
       </p>
-      <button class="button" data-page="index.html">Open Farmer Card →</button>
+      <button class="button" data-page="index.html" type="button">Open Farmer Card →</button>
     </article>
 
     <article class="service">
@@ -551,7 +880,7 @@ body {
         Register farmer details and save registration information.
         <br><br><b class="free">FREE</b>
       </p>
-      <button class="button" data-page="index.html">Register Now →</button>
+      <button class="button" data-page="index.html" type="button">Register Now →</button>
     </article>
 
     <article class="service">
@@ -562,14 +891,14 @@ body {
         <br><br><b class="paid">Photo Print: ₹5</b>
         <br><span class="free">Other services: FREE</span>
       </p>
-      <button class="button" data-page="Print.html">Open Service →</button>
+      <button class="button" data-page="Print.html" type="button">Open Service →</button>
     </article>
 
     <article class="service">
       <div class="icon">📄</div>
       <h3>PDF Services</h3>
       <p>Useful PDF and document services.<br><br><b class="free">FREE</b></p>
-      <button class="button" data-page="PDF.html">Open Service →</button>
+      <button class="button" data-page="PDF.html" type="button">Open Service →</button>
     </article>
 
     <article class="service">
@@ -579,14 +908,14 @@ body {
         Useful farmer-related digital services and tools.
         <br><br><b class="free">FREE</b>
       </p>
-      <button class="button" data-page="Farmer-Services.html">Open Service →</button>
+      <button class="button" data-page="Farmer-Services.html" type="button">Open Service →</button>
     </article>
 
     <article class="service">
       <div class="icon">📞</div>
       <h3>Contact / Help</h3>
       <p>Contact information and help section.<br><br><b class="free">FREE</b></p>
-      <button class="button" data-page="Contact.html">Contact →</button>
+      <button class="button" data-page="Contact.html" type="button">Contact →</button>
     </article>
   </section>
 
@@ -613,10 +942,10 @@ body {
       aria-label="Filter tools by category"
     ></div>
 
-    <p id="toolCount" class="tool-count">Loading tools...</p>
+    <p id="toolCount" class="tool-count" aria-live="polite">Loading tools...</p>
   </div>
 
-  <section class="services" id="dynamicTools">
+  <section class="services" id="dynamicTools" aria-live="polite">
     <div class="status-message">Loading available tools…</div>
   </section>
 
@@ -719,10 +1048,20 @@ document.querySelectorAll("[data-page]").forEach(button => {
   });
 });
 
-const balance = Number(localStorage.getItem("kst_balance") || 0);
+let savedBalance = 0;
+
+try {
+  const storedBalance = Number(localStorage.getItem("kst_balance") || 0);
+  savedBalance =
+    Number.isFinite(storedBalance) && storedBalance >= 0
+      ? storedBalance
+      : 0;
+} catch (error) {
+  console.warn("Local wallet balance is unavailable.", error);
+}
 
 document.getElementById("balance").textContent =
-  "₹" + (Number.isFinite(balance) && balance >= 0 ? balance : 0);
+  "₹" + savedBalance.toLocaleString("en-IN");
 
 const container = document.getElementById("dynamicTools");
 const searchInput = document.getElementById("toolSearch");
@@ -769,6 +1108,10 @@ function renderCategories() {
       "category-chip" +
       (activeCategory === category ? " active" : "");
     button.textContent = category;
+    button.setAttribute(
+      "aria-pressed",
+      String(activeCategory === category)
+    );
 
     button.addEventListener("click", () => {
       activeCategory = category;
@@ -827,13 +1170,20 @@ function renderTools() {
     categoryLabel.style.fontWeight = "bold";
 
     const price = Number(tool.price);
-    const validPrice = Number.isFinite(price) && price >= 0;
+    const validPrice =
+      tool.price !== null &&
+      tool.price !== undefined &&
+      String(tool.price).trim() !== "" &&
+      Number.isFinite(price) &&
+      price >= 0;
 
     const priceEl = addText(
       card,
       "p",
       validPrice
-        ? (price === 0 ? "FREE" : "Price: ₹" + price)
+        ? (price === 0
+            ? "FREE"
+            : "Price: ₹" + price.toLocaleString("en-IN"))
         : "Price: Contact for details"
     );
 
