@@ -17,785 +17,143 @@
   --ink:#183b28;
   --muted:#617066;
   --line:#dce8df;
-  --shadow:0 6px 24px #173d250b;
 }
-
-* {
-  box-sizing:border-box;
-}
-
-html {
-  scroll-behavior:smooth;
-  scroll-padding-top:16px;
-  -webkit-text-size-adjust:100%;
-}
-
-body {
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--ink);
-  line-height:1.5;
-  overflow-wrap:break-word;
-}
-
-button,input,a {
-  font:inherit;
-}
-
-button,a {
-  -webkit-tap-highlight-color:transparent;
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-  outline:3px solid #8bc69d;
-  outline-offset:3px;
-}
-
-.topbar {
-  background:var(--gd);
-  color:#e8f6ec;
-  text-align:center;
-  padding:9px 12px;
-  font-size:12px;
-}
-
-.header {
-  background:linear-gradient(120deg,#176b3a,#21854b);
-  color:white;
-  padding:24px 18px 42px;
-}
-
-.nav,.hero,.container {
-  max-width:1120px;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-.nav {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  flex-wrap:wrap;
-}
-
-.brand {
-  display:flex;
-  align-items:center;
-  gap:12px;
-  min-width:0;
-}
-
-.brand-icon {
-  display:grid;
-  place-items:center;
-  flex:0 0 50px;
-  width:50px;
-  height:50px;
-  border-radius:15px;
-  background:#ffffff20;
-  font-size:29px;
-}
-
-.brand h1 {
-  font-size:22px;
-  line-height:1.25;
-  margin:0;
-}
-
-.brand p {
-  margin:3px 0 0;
-  color:#d7efdf;
-  font-size:13px;
-}
-
-.nav-links {
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.nav-links a {
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:40px;
-  font-size:13px;
-  text-decoration:none;
-  padding:9px 12px;
-  border:1px solid #ffffff55;
-  border-radius:9px;
-  color:white;
-  transition:background .15s;
-}
-
-.nav-links a:hover {
-  background:#ffffff20;
-}
-
-.hero {
-  margin-top:28px;
-  display:grid;
-  grid-template-columns:minmax(0,1.5fr) minmax(240px,.8fr);
-  align-items:center;
-  gap:24px;
-}
-
-.hero h2 {
-  font-size:clamp(28px,4vw,42px);
-  line-height:1.12;
-  margin:0 0 12px;
-}
-
-.hero p {
-  max-width:620px;
-  color:#e0f1e5;
-  margin:0;
-  font-size:15px;
-}
-
-.hero-side {
-  background:#ffffff17;
-  border:1px solid #ffffff35;
-  padding:20px;
-  border-radius:18px;
-}
-
-.hero-side strong {
-  display:block;
-  margin-bottom:5px;
-}
-
-.hero-side span {
-  font-size:13px;
-  color:#e0f1e5;
-}
-
-.container {
-  margin-top:-18px;
-  padding:0 18px 40px;
-  position:relative;
-}
-
-.welcome,.wallet {
-  background:white;
-  border:1px solid var(--line);
-  padding:20px 22px;
-  border-radius:16px;
-  box-shadow:var(--shadow);
-  min-width:0;
-}
-
-.welcome {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:18px;
-}
-
-.welcome h2 {
-  font-size:18px;
-  margin:0 0 4px;
-  color:var(--g);
-}
-
-.welcome p {
-  margin:0;
-  font-size:13px;
-  color:var(--muted);
-}
-
-.wallet {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  margin-top:16px;
-}
-
-.wallet-label {
-  font-size:13px;
-  color:var(--muted);
-  font-weight:bold;
-}
-
-.balance {
-  font-size:clamp(25px,4vw,29px);
-  font-weight:800;
-  color:var(--g);
-  margin:2px 0;
-}
-
-.wallet-info {
-  font-size:12px;
-  color:var(--muted);
-}
-
-.button {
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  min-height:42px;
-  max-width:100%;
-  border:0;
-  background:var(--g);
-  color:white;
-  text-decoration:none;
-  padding:11px 15px;
-  border-radius:9px;
-  font-weight:bold;
-  font-size:13px;
-  cursor:pointer;
-  text-align:center;
-  overflow-wrap:anywhere;
-  transition:background .15s,transform .15s;
-}
-
-.button:hover {
-  background:var(--gd);
-}
-
-.button:active {
-  transform:scale(.98);
-}
-
-.button.light {
-  background:var(--p);
-  color:var(--g);
-}
-
-.button.light:hover {
-  background:#d8ecde;
-}
-
-.button:disabled {
-  background:#9ca8a0;
-  cursor:not-allowed;
-  transform:none;
-}
-
-.section-head {
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  gap:15px;
-  margin:30px 0 14px;
-}
-
-.section-head h2 {
-  font-size:21px;
-  line-height:1.3;
-  margin:0;
-}
-
-.section-head p {
-  font-size:12px;
-  color:var(--muted);
-  margin:4px 0 0;
-}
-
-.services {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:14px;
-  min-width:0;
-}
-
-.service {
-  background:white;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:19px;
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-  box-shadow:0 2px 8px #173d2505;
-  transition:transform .15s,box-shadow .15s;
-}
-
-.service:hover {
-  transform:translateY(-2px);
-  box-shadow:0 9px 25px #173d2510;
-}
-
-.icon {
-  display:grid;
-  place-items:center;
-  flex:0 0 52px;
-  width:52px;
-  height:52px;
-  background:var(--p);
-  border-radius:14px;
-  font-size:28px;
-  margin-bottom:13px;
-}
-
-.service h3 {
-  font-size:16px;
-  line-height:1.35;
-  margin:0 0 7px;
-  overflow-wrap:anywhere;
-}
-
-.service p {
-  font-size:13px;
-  color:var(--muted);
-  margin:0 0 14px;
-  flex:1;
-  overflow-wrap:anywhere;
-}
-
-.service .button {
-  align-self:flex-start;
-  margin-top:auto;
-}
-
-.paid {
-  font-weight:800;
-  color:#a85a00;
-}
-
-.free {
-  font-weight:800;
-  color:#16833b;
-}
-
-.status-message {
-  background:white;
-  border:1px dashed #cddbd0;
-  padding:17px;
-  border-radius:12px;
-  color:var(--muted);
-  font-size:13px;
-  grid-column:1/-1;
-  overflow-wrap:anywhere;
-}
-
-/* Search and category filters */
-.tool-controls {
-  background:white;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:16px;
-  margin-bottom:16px;
-  min-width:0;
-}
-
-.tool-search {
-  display:block;
-  width:100%;
-  min-width:0;
-  min-height:46px;
-  padding:12px 14px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:white;
-  color:var(--ink);
-  font-size:16px;
-  outline:none;
-  appearance:none;
-}
-
-.tool-search:focus {
-  border-color:var(--g);
-  box-shadow:0 0 0 3px #176b3a18;
-}
-
-.tool-search::placeholder {
-  color:#7b887f;
-  opacity:1;
-}
-
-.tool-categories {
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:13px;
-}
-
-.category-chip {
-  border:1px solid var(--line);
-  background:white;
-  color:var(--g);
-  padding:9px 13px;
-  min-height:38px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:700;
-  cursor:pointer;
-  max-width:100%;
-  overflow-wrap:anywhere;
-}
-
-.category-chip:hover {
-  border-color:var(--g);
-}
-
-.category-chip.active {
-  background:var(--g);
-  border-color:var(--g);
-  color:white;
-}
-
-.tool-count {
-  color:var(--muted);
-  font-size:12px;
-  margin:12px 2px 0;
-}
-
-.charges {
-  background:white;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:20px;
-  margin-top:24px;
-}
-
-.charges h3 {
-  margin:0 0 10px;
-  font-size:17px;
-}
-
-.charge-grid {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:0 24px;
-}
-
-.charge-row {
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:12px;
-  padding:11px 0;
-  border-bottom:1px solid #edf1ee;
-  font-size:13px;
-}
-
-.charge-row span:first-child {
-  min-width:0;
-}
-
-.charge-row span:last-child {
-  flex-shrink:0;
-  text-align:right;
-}
-
-.notice {
-  margin-top:18px;
-  background:#fff8e5;
-  border:1px solid #f2dfaa;
-  border-left:4px solid #d19b00;
-  border-radius:12px;
-  padding:15px;
-  font-size:12px;
-  color:#6d561c;
-}
-
-.footer {
-  background:#103e24;
-  color:#dceee1;
-  text-align:center;
-  padding:24px 18px;
-  font-size:12px;
-}
-
-.footer strong {
-  display:block;
-  font-size:14px;
-  color:white;
-  margin-bottom:4px;
-}
-
-/* Tablet */
-@media (max-width:900px) {
-  .header {
-    padding-top:20px;
-  }
-
-  .hero {
-    grid-template-columns:minmax(0,1fr);
-  }
-
-  .hero-side {
-    display:none;
-  }
-
-  .services {
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-}
-
-/* Mobile */
-@media (max-width:600px) {
-  .topbar {
-    font-size:11px;
-    padding:9px 10px;
-  }
-
-  .header {
-    padding:18px 14px 34px;
-  }
-
-  .nav {
-    align-items:stretch;
-    flex-direction:column;
-    gap:14px;
-  }
-
-  .brand {
-    gap:10px;
-  }
-
-  .brand-icon {
-    flex-basis:44px;
-    width:44px;
-    height:44px;
-    font-size:25px;
-    border-radius:12px;
-  }
-
-  .brand h1 {
-    font-size:20px;
-  }
-
-  .brand p {
-    font-size:12px;
-  }
-
-  .nav-links {
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:7px;
-    width:100%;
-  }
-
-  .nav-links a {
-    min-width:0;
-    min-height:42px;
-    padding:8px 5px;
-    font-size:12px;
-    text-align:center;
-  }
-
-  .hero {
-    margin-top:23px;
-    gap:14px;
-  }
-
-  .hero h2 {
-    font-size:clamp(27px,7vw,35px);
-    margin-bottom:10px;
-  }
-
-  .hero p {
-    font-size:14px;
-  }
-
-  .container {
-    padding:0 12px 28px;
-  }
-
-  .welcome,.wallet {
-    padding:16px;
-    align-items:stretch;
-    flex-direction:column;
-    gap:13px;
-    border-radius:13px;
-  }
-
-  .welcome h2 {
-    font-size:17px;
-  }
-
-  .welcome p {
-    font-size:13px;
-  }
-
-  .welcome .button,
-  .wallet .button {
-    width:100%;
-  }
-
-  .wallet {
-    margin-top:12px;
-  }
-
-  .wallet-info {
-    line-height:1.5;
-  }
-
-  .section-head {
-    margin:25px 0 12px;
-    align-items:flex-start;
-    flex-direction:column;
-    gap:5px;
-  }
-
-  .section-head h2 {
-    font-size:19px;
-  }
-
-  .section-head p {
-    font-size:12px;
-  }
-
-  .services {
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
-  }
-
-  .service {
-    padding:13px;
-    border-radius:12px;
-  }
-
-  .icon {
-    width:43px;
-    height:43px;
-    flex-basis:43px;
-    border-radius:11px;
-    font-size:24px;
-    margin-bottom:10px;
-  }
-
-  .service h3 {
-    font-size:14px;
-    line-height:1.35;
-  }
-
-  .service p {
-    font-size:12px;
-    line-height:1.5;
-    margin-bottom:12px;
-  }
-
-  .service .button {
-    width:100%;
-    min-height:42px;
-    padding:9px 7px;
-    font-size:12px;
-    align-self:stretch;
-  }
-
-  .tool-controls {
-    padding:12px;
-    border-radius:12px;
-    margin-bottom:12px;
-  }
-
-  .tool-search {
-    min-height:46px;
-    padding:12px;
-    font-size:16px;
-  }
-
-  .tool-categories {
-    gap:7px;
-    margin-top:11px;
-  }
-
-  .category-chip {
-    min-height:38px;
-    padding:8px 11px;
-    font-size:12px;
-  }
-
-  .tool-count {
-    line-height:1.5;
-  }
-
-  .charges {
-    margin-top:20px;
-    padding:15px;
-    border-radius:12px;
-  }
-
-  .charges h3 {
-    font-size:16px;
-  }
-
-  .charge-grid {
-    grid-template-columns:minmax(0,1fr);
-  }
-
-  .charge-row {
-    font-size:13px;
-    gap:10px;
-  }
-
-  .notice {
-    padding:13px;
-    line-height:1.6;
-  }
-
-  .footer {
-    padding:22px 12px;
-  }
-}
-
-/* Very narrow phones */
-@media (max-width:360px) {
-  .nav-links {
-    grid-template-columns:1fr;
-  }
-
-  .nav-links a {
-    justify-content:center;
-  }
-
-  .services {
-    grid-template-columns:minmax(0,1fr);
-  }
-
-  .service {
-    padding:16px;
-  }
-
-  .service h3 {
-    font-size:16px;
-  }
-
-  .service p {
-    font-size:13px;
-  }
-
-  .service .button {
-    width:auto;
-    align-self:flex-start;
-    padding:11px 14px;
-    font-size:13px;
-  }
-
-  .section-head h2 {
-    font-size:18px;
-  }
-}
-
-/* Respect device accessibility settings */
-@media (prefers-reduced-motion:reduce) {
-  html {
-    scroll-behavior:auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    transition:none !important;
-    animation:none !important;
-  }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:16px; -webkit-text-size-adjust:100%; }
+body { margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; overflow-wrap:break-word; }
+button,input,a { font:inherit; }
+button,a { -webkit-tap-highlight-color:transparent; }
+button:focus-visible,a:focus-visible,input:focus-visible { outline:3px solid #8bc69d; outline-offset:3px; }
+.topbar { background:var(--gd); color:#e8f6ec; text-align:center; padding:9px 12px; font-size:12px; }
+.header { background:linear-gradient(120deg,#176b3a,#21854b); color:white; padding:24px 18px 42px; }
+.nav,.hero,.container { max-width:1120px; margin-left:auto; margin-right:auto; }
+.nav { display:flex; align-items:center; justify-content:space-between; gap:15px; flex-wrap:wrap; }
+.brand { display:flex; align-items:center; gap:12px; min-width:0; }
+.brand-icon { display:grid; place-items:center; flex:0 0 50px; width:50px; height:50px; border-radius:15px; background:#ffffff20; font-size:29px; }
+.brand h1 { font-size:22px; line-height:1.25; margin:0; }
+.brand p { margin:3px 0 0; color:#d7efdf; font-size:13px; }
+.nav-links { display:flex; gap:8px; flex-wrap:wrap; }
+.nav-links a { display:inline-flex; align-items:center; justify-content:center; min-height:40px; font-size:13px; text-decoration:none; padding:9px 12px; border:1px solid #ffffff55; border-radius:9px; color:white; }
+.nav-links a:hover { background:#ffffff20; }
+.hero { margin-top:28px; display:grid; grid-template-columns:minmax(0,1.5fr) minmax(240px,.8fr); align-items:center; gap:24px; }
+.hero h2 { font-size:clamp(28px,4vw,42px); line-height:1.12; margin:0 0 12px; }
+.hero p { max-width:620px; color:#e0f1e5; margin:0; font-size:15px; }
+.hero-side { background:#ffffff17; border:1px solid #ffffff35; padding:20px; border-radius:18px; }
+.hero-side strong { display:block; margin-bottom:5px; }
+.hero-side span { font-size:13px; color:#e0f1e5; }
+.container { margin-top:-18px; padding:0 18px 40px; position:relative; }
+.welcome,.wallet { background:white; border:1px solid var(--line); padding:20px 22px; border-radius:16px; box-shadow:0 6px 24px #173d250b; min-width:0; }
+.welcome { display:flex; justify-content:space-between; align-items:center; gap:18px; }
+.welcome h2 { font-size:18px; margin:0 0 4px; color:var(--g); }
+.welcome p { margin:0; font-size:13px; color:var(--muted); }
+.wallet { display:flex; justify-content:space-between; align-items:center; gap:20px; margin-top:16px; }
+.wallet-label { font-size:13px; color:var(--muted); font-weight:bold; }
+.balance { font-size:clamp(25px,4vw,29px); font-weight:800; color:var(--g); margin:2px 0; }
+.wallet-info { font-size:12px; color:var(--muted); }
+.button { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:42px; max-width:100%; border:0; background:var(--g); color:white; text-decoration:none; padding:11px 15px; border-radius:9px; font-weight:bold; font-size:13px; cursor:pointer; text-align:center; overflow-wrap:anywhere; }
+.button:hover { background:var(--gd); }
+.button.light { background:var(--p); color:var(--g); }
+.button.light:hover { background:#d8ecde; }
+.button:disabled { background:#9ca8a0; cursor:not-allowed; }
+.section-head { display:flex; align-items:end; justify-content:space-between; gap:15px; margin:30px 0 14px; }
+.section-head h2 { font-size:21px; line-height:1.3; margin:0; }
+.section-head p { font-size:12px; color:var(--muted); margin:4px 0 0; }
+.services { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; min-width:0; }
+.service { background:white; border:1px solid var(--line); border-radius:15px; padding:19px; min-width:0; display:flex; flex-direction:column; box-shadow:0 2px 8px #173d2505; }
+.service:hover { box-shadow:0 9px 25px #173d2510; }
+.icon { display:grid; place-items:center; flex:0 0 52px; width:52px; height:52px; background:var(--p); border-radius:14px; font-size:28px; margin-bottom:13px; }
+.tool-thumbnail { display:block; width:100%; max-width:180px; height:120px; flex:0 0 120px; object-fit:cover; object-position:center; background:var(--p); border:1px solid var(--line); border-radius:12px; margin-bottom:13px; }
+.service h3 { font-size:16px; line-height:1.35; margin:0 0 7px; overflow-wrap:anywhere; }
+.service p { font-size:13px; color:var(--muted); margin:0 0 14px; flex:1; overflow-wrap:anywhere; }
+.service .button { align-self:flex-start; margin-top:auto; }
+.paid { font-weight:800; color:#a85a00; }
+.free { font-weight:800; color:#16833b; }
+.status-message { background:white; border:1px dashed #cddbd0; padding:17px; border-radius:12px; color:var(--muted); font-size:13px; grid-column:1/-1; overflow-wrap:anywhere; }
+.tool-controls { background:white; border:1px solid var(--line); border-radius:15px; padding:16px; margin-bottom:16px; min-width:0; }
+.tool-search { display:block; width:100%; min-width:0; min-height:46px; padding:12px 14px; border:1px solid var(--line); border-radius:10px; background:white; color:var(--ink); font-size:16px; }
+.tool-search:focus { border-color:var(--g); box-shadow:0 0 0 3px #176b3a18; }
+.tool-categories { display:flex; flex-wrap:wrap; gap:8px; margin-top:13px; }
+.category-chip { border:1px solid var(--line); background:white; color:var(--g); padding:9px 13px; min-height:38px; border-radius:999px; font-size:12px; font-weight:700; cursor:pointer; max-width:100%; overflow-wrap:anywhere; }
+.category-chip:hover { border-color:var(--g); }
+.category-chip.active { background:var(--g); border-color:var(--g); color:white; }
+.tool-count { color:var(--muted); font-size:12px; margin:12px 2px 0; }
+.charges { background:white; border:1px solid var(--line); border-radius:15px; padding:20px; margin-top:24px; }
+.charges h3 { margin:0 0 10px; font-size:17px; }
+.charge-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 24px; }
+.charge-row { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:11px 0; border-bottom:1px solid #edf1ee; font-size:13px; }
+.charge-row span:first-child { min-width:0; }
+.charge-row span:last-child { flex-shrink:0; text-align:right; }
+.notice { margin-top:18px; background:#fff8e5; border:1px solid #f2dfaa; border-left:4px solid #d19b00; border-radius:12px; padding:15px; font-size:12px; color:#6d561c; }
+.footer { background:#103e24; color:#dceee1; text-align:center; padding:24px 18px; font-size:12px; }
+.footer strong { display:block; font-size:14px; color:white; margin-bottom:4px; }
+
+@media(max-width:900px) {
+  .header { padding-top:20px; }
+  .hero { grid-template-columns:minmax(0,1fr); }
+  .hero-side { display:none; }
+  .services { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:600px) {
+  .topbar { font-size:11px; padding:9px 10px; }
+  .header { padding:18px 14px 34px; }
+  .nav { align-items:stretch; flex-direction:column; gap:14px; }
+  .brand { gap:10px; }
+  .brand-icon { flex-basis:44px; width:44px; height:44px; font-size:25px; border-radius:12px; }
+  .brand h1 { font-size:20px; }
+  .brand p { font-size:12px; }
+  .nav-links { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; width:100%; }
+  .nav-links a { min-width:0; min-height:42px; padding:8px 5px; font-size:12px; text-align:center; }
+  .hero { margin-top:23px; gap:14px; }
+  .hero h2 { font-size:clamp(27px,7vw,35px); margin-bottom:10px; }
+  .hero p { font-size:14px; }
+  .container { padding:0 12px 28px; }
+  .welcome,.wallet { padding:16px; align-items:stretch; flex-direction:column; gap:13px; border-radius:13px; }
+  .welcome h2 { font-size:17px; }
+  .welcome p { font-size:13px; }
+  .welcome .button,.wallet .button { width:100%; }
+  .wallet { margin-top:12px; }
+  .wallet-info { line-height:1.5; }
+  .section-head { margin:25px 0 12px; align-items:flex-start; flex-direction:column; gap:5px; }
+  .section-head h2 { font-size:19px; }
+  .section-head p { font-size:12px; }
+  .services { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  .service { padding:13px; border-radius:12px; }
+  .icon { width:43px; height:43px; flex-basis:43px; border-radius:11px; font-size:24px; margin-bottom:10px; }
+  .tool-thumbnail { max-width:100%; height:100px; flex-basis:100px; }
+  .service h3 { font-size:14px; line-height:1.35; }
+  .service p { font-size:12px; line-height:1.5; margin-bottom:12px; }
+  .service .button { width:100%; min-height:42px; padding:9px 7px; font-size:12px; align-self:stretch; }
+  .tool-controls { padding:12px; border-radius:12px; margin-bottom:12px; }
+  .tool-search { min-height:46px; padding:12px; font-size:16px; }
+  .tool-categories { gap:7px; margin-top:11px; }
+  .category-chip { min-height:38px; padding:8px 11px; font-size:12px; }
+  .tool-count { line-height:1.5; }
+  .charges { margin-top:20px; padding:15px; border-radius:12px; }
+  .charges h3 { font-size:16px; }
+  .charge-grid { grid-template-columns:minmax(0,1fr); }
+  .charge-row { font-size:13px; gap:10px; }
+  .notice { padding:13px; line-height:1.6; }
+  .footer { padding:22px 12px; }
+}
+@media(max-width:360px) {
+  .nav-links { grid-template-columns:1fr; }
+  .nav-links a { justify-content:center; }
+  .services { grid-template-columns:minmax(0,1fr); }
+  .service { padding:16px; }
+  .service h3 { font-size:16px; }
+  .service p { font-size:13px; }
+  .service .button { width:auto; align-self:flex-start; padding:11px 14px; font-size:13px; }
+  .section-head h2 { font-size:18px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  *,*::before,*::after { transition:none !important; animation:none !important; }
 }
 </style>
 </head>
 
 <body>
-<div class="topbar">
-  🌱 Digital tools and useful services in one place
-</div>
+<div class="topbar">🌱 Digital tools and useful services in one place</div>
 
 <header class="header">
   <nav class="nav">
@@ -806,7 +164,6 @@ input:focus-visible {
         <p>Farmer Services &amp; Digital Tools</p>
       </div>
     </div>
-
     <div class="nav-links">
       <a href="Home.html">Home</a>
       <a href="Admin.html">Admin</a>
@@ -817,18 +174,11 @@ input:focus-visible {
   <div class="hero">
     <div>
       <h2>Simple digital services<br>for everyday needs.</h2>
-      <p>
-        Explore farmer services, document tools, PDF utilities and more—all
-        from one easy-to-use page.
-      </p>
+      <p>Explore farmer services, document tools, PDF utilities and more—all from one easy-to-use page.</p>
     </div>
-
     <div class="hero-side">
       <strong>🌿 Welcome to Kisan Seva Tools</strong>
-      <span>
-        Search for a service below and open the tool you need.
-        Available tools load from the connected database.
-      </span>
+      <span>Search for a service below and open the tool you need. Available tools load from the connected database.</span>
     </div>
   </div>
 </header>
@@ -846,13 +196,9 @@ input:focus-visible {
     <div>
       <div class="wallet-label">💰 MY DISPLAYED BALANCE</div>
       <div class="balance" id="balance">₹0</div>
-      <div class="wallet-info">
-        For reference only. Pending payment requests do not add money automatically.
-      </div>
+      <div class="wallet-info">For reference only. Pending payment requests do not add money automatically.</div>
     </div>
-    <button class="button" id="walletButton" type="button">
-      View Wallet →
-    </button>
+    <button class="button" id="walletButton" type="button">View Wallet →</button>
   </section>
 
   <div class="section-head">
@@ -866,51 +212,33 @@ input:focus-visible {
     <article class="service">
       <div class="icon">🌾</div>
       <h3>Farmer ID Card</h3>
-      <p>
-        Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.
-        <br><br><b class="paid">Download charge: ₹10</b>
-      </p>
+      <p>Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.<br><br><b class="paid">Download charge: ₹10</b></p>
       <button class="button" data-page="index.html" type="button">Open Farmer Card →</button>
     </article>
-
     <article class="service">
       <div class="icon">📝</div>
       <h3>Farmer Registration</h3>
-      <p>
-        Register farmer details and save registration information.
-        <br><br><b class="free">FREE</b>
-      </p>
+      <p>Register farmer details and save registration information.<br><br><b class="free">FREE</b></p>
       <button class="button" data-page="index.html" type="button">Register Now →</button>
     </article>
-
     <article class="service">
       <div class="icon">🖨️</div>
       <h3>Print / Xerox</h3>
-      <p>
-        Printing and Xerox service information.
-        <br><br><b class="paid">Photo Print: ₹5</b>
-        <br><span class="free">Other services: FREE</span>
-      </p>
+      <p>Printing and Xerox service information.<br><br><b class="paid">Photo Print: ₹5</b><br><span class="free">Other services: FREE</span></p>
       <button class="button" data-page="Print.html" type="button">Open Service →</button>
     </article>
-
     <article class="service">
       <div class="icon">📄</div>
       <h3>PDF Services</h3>
       <p>Useful PDF and document services.<br><br><b class="free">FREE</b></p>
       <button class="button" data-page="PDF.html" type="button">Open Service →</button>
     </article>
-
     <article class="service">
       <div class="icon">🌱</div>
       <h3>Farmer Services</h3>
-      <p>
-        Useful farmer-related digital services and tools.
-        <br><br><b class="free">FREE</b>
-      </p>
+      <p>Useful farmer-related digital services and tools.<br><br><b class="free">FREE</b></p>
       <button class="button" data-page="Farmer-Services.html" type="button">Open Service →</button>
     </article>
-
     <article class="service">
       <div class="icon">📞</div>
       <h3>Contact / Help</h3>
@@ -927,21 +255,8 @@ input:focus-visible {
   </div>
 
   <div class="tool-controls">
-    <input
-      type="search"
-      id="toolSearch"
-      class="tool-search"
-      placeholder="🔍 Search tools by name, PDF, photo, AI..."
-      aria-label="Search digital tools"
-      autocomplete="off"
-    >
-
-    <div
-      id="toolCategories"
-      class="tool-categories"
-      aria-label="Filter tools by category"
-    ></div>
-
+    <input type="search" id="toolSearch" class="tool-search" placeholder="🔍 Search tools by name, PDF, photo, AI..." aria-label="Search digital tools" autocomplete="off">
+    <div id="toolCategories" class="tool-categories" aria-label="Filter tools by category"></div>
     <p id="toolCount" class="tool-count" aria-live="polite">Loading tools...</p>
   </div>
 
@@ -952,27 +267,13 @@ input:focus-visible {
   <section class="charges">
     <h3>💳 Service Charges</h3>
     <div class="charge-grid">
-      <div class="charge-row">
-        <span>🌾 Farmer Card Download</span><span class="paid">₹10</span>
-      </div>
-      <div class="charge-row">
-        <span>🖨️ Photo Print</span><span class="paid">₹5</span>
-      </div>
-      <div class="charge-row">
-        <span>📋 Farmer Registration</span><span class="free">FREE</span>
-      </div>
-      <div class="charge-row">
-        <span>📄 PDF Services</span><span class="free">FREE</span>
-      </div>
-      <div class="charge-row">
-        <span>📑 Xerox</span><span class="free">FREE</span>
-      </div>
-      <div class="charge-row">
-        <span>🌱 Farmer Services</span><span class="free">FREE</span>
-      </div>
-      <div class="charge-row">
-        <span>📞 Contact / Help</span><span class="free">FREE</span>
-      </div>
+      <div class="charge-row"><span>🌾 Farmer Card Download</span><span class="paid">₹10</span></div>
+      <div class="charge-row"><span>🖨️ Photo Print</span><span class="paid">₹5</span></div>
+      <div class="charge-row"><span>📋 Farmer Registration</span><span class="free">FREE</span></div>
+      <div class="charge-row"><span>📄 PDF Services</span><span class="free">FREE</span></div>
+      <div class="charge-row"><span>📑 Xerox</span><span class="free">FREE</span></div>
+      <div class="charge-row"><span>🌱 Farmer Services</span><span class="free">FREE</span></div>
+      <div class="charge-row"><span>📞 Contact / Help</span><span class="free">FREE</span></div>
     </div>
   </section>
 
@@ -980,8 +281,7 @@ input:focus-visible {
     <b>Important:</b> Kisan Seva Tools is a personal digital service website.
     Farmer ID Cards created here are <b>not government-issued documents</b>.
     <br><br>
-    <b>Payment note:</b> Prices are informational. A listed price does not mean
-    payment processing or wallet credit is active.
+    <b>Payment note:</b> Prices are informational. A listed price does not mean payment processing or wallet credit is active.
   </aside>
 </main>
 
@@ -991,11 +291,8 @@ input:focus-visible {
 </footer>
 
 <script type="module">
-import { initializeApp } from
-  "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-
-import { getFirestore, collection, onSnapshot } from
-  "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
@@ -1011,9 +308,7 @@ const TOOLS_FOLDER = "KisanSevaTools_Full_47_Tools%20%282%29/";
 
 function toolUrl(filename) {
   const page = String(filename || "").trim();
-
   if (!page) return null;
-
   if (/^https?:\/\//i.test(page)) return page;
 
   if (/^[A-Za-z0-9_-]+\.html$/i.test(page)) {
@@ -1021,20 +316,17 @@ function toolUrl(filename) {
   }
 
   const normalized = page.replace(/\\/g, "/").replace(/^\/+/, "");
-
   for (const folder of [
     "KisanSevaTools_Full_47_Tools (2)/",
     "KisanSevaTools_Full_47_Tools%20%282%29/"
   ]) {
     if (normalized.startsWith(folder)) {
       const file = normalized.slice(folder.length);
-
       if (/^[A-Za-z0-9_-]+\.html$/i.test(file)) {
         return TOOLS_FOLDER + encodeURIComponent(file);
       }
     }
   }
-
   return null;
 }
 
@@ -1049,19 +341,13 @@ document.querySelectorAll("[data-page]").forEach(button => {
 });
 
 let savedBalance = 0;
-
 try {
   const storedBalance = Number(localStorage.getItem("kst_balance") || 0);
-  savedBalance =
-    Number.isFinite(storedBalance) && storedBalance >= 0
-      ? storedBalance
-      : 0;
+  savedBalance = Number.isFinite(storedBalance) && storedBalance >= 0 ? storedBalance : 0;
 } catch (error) {
   console.warn("Local wallet balance is unavailable.", error);
 }
-
-document.getElementById("balance").textContent =
-  "₹" + savedBalance.toLocaleString("en-IN");
+document.getElementById("balance").textContent = "₹" + savedBalance.toLocaleString("en-IN");
 
 const container = document.getElementById("dynamicTools");
 const searchInput = document.getElementById("toolSearch");
@@ -1073,11 +359,9 @@ let activeCategory = "All Tools";
 
 function showMessage(message) {
   container.replaceChildren();
-
   const box = document.createElement("div");
   box.className = "status-message";
   box.textContent = message;
-
   container.appendChild(box);
 }
 
@@ -1092,26 +376,45 @@ function getCategory(tool) {
   return String(tool.category || "General").trim() || "General";
 }
 
+/* Supports common thumbnail field names in Firestore */
+function getThumbnailUrl(tool) {
+  const possibleFields = [
+    "thumbnailUrl",
+    "thumbnailURL",
+    "thumbnail_url",
+    "thumbnail",
+    "imageUrl",
+    "imageURL",
+    "image_url",
+    "image",
+    "photoUrl",
+    "photoURL"
+  ];
+
+  for (const field of possibleFields) {
+    const value = tool[field];
+    if (typeof value === "string" && value.trim()) {
+      const url = value.trim();
+      if (/^https?:\/\//i.test(url)) return url;
+    }
+  }
+  return "";
+}
+
 function renderCategories() {
   categoryBar.replaceChildren();
 
   const categories = [
     "All Tools",
-    ...Array.from(new Set(allTools.map(getCategory)))
-      .sort((a, b) => a.localeCompare(b))
+    ...Array.from(new Set(allTools.map(getCategory))).sort((a, b) => a.localeCompare(b))
   ];
 
   categories.forEach(category => {
     const button = document.createElement("button");
     button.type = "button";
-    button.className =
-      "category-chip" +
-      (activeCategory === category ? " active" : "");
+    button.className = "category-chip" + (activeCategory === category ? " active" : "");
     button.textContent = category;
-    button.setAttribute(
-      "aria-pressed",
-      String(activeCategory === category)
-    );
+    button.setAttribute("aria-pressed", String(activeCategory === category));
 
     button.addEventListener("click", () => {
       activeCategory = category;
@@ -1128,29 +431,16 @@ function renderTools() {
 
   const filtered = allTools.filter(tool => {
     const category = getCategory(tool);
-
-    const matchesCategory =
-      activeCategory === "All Tools" ||
-      category === activeCategory;
-
-    const searchableText = [
-      tool.name || "",
-      tool.description || "",
-      category
-    ].join(" ").toLowerCase();
-
+    const matchesCategory = activeCategory === "All Tools" || category === activeCategory;
+    const searchableText = [tool.name || "", tool.description || "", category].join(" ").toLowerCase();
     return matchesCategory && searchableText.includes(query);
   });
 
   container.replaceChildren();
-
-  countLabel.textContent =
-    `Showing ${filtered.length} of ${allTools.length} active tools`;
+  countLabel.textContent = `Showing ${filtered.length} of ${allTools.length} active tools`;
 
   if (!filtered.length) {
-    showMessage(
-      "Koi matching tool nahi mila. Search ya category change karke dekhein."
-    );
+    showMessage("Koi matching tool nahi mila. Search ya category change karke dekhein.");
     return;
   }
 
@@ -1158,15 +448,32 @@ function renderTools() {
     const card = document.createElement("article");
     card.className = "service";
 
-    addText(card, "div", tool.icon || "🧰").className = "icon";
+    const thumbnailUrl = getThumbnailUrl(tool);
+
+    if (thumbnailUrl) {
+      const image = document.createElement("img");
+      image.className = "tool-thumbnail";
+      image.src = thumbnailUrl;
+      image.alt = String(tool.name || "Tool thumbnail");
+      image.loading = "lazy";
+      image.referrerPolicy = "no-referrer";
+
+      image.onerror = () => {
+        const fallback = document.createElement("div");
+        fallback.className = "icon";
+        fallback.textContent = tool.icon || "🧰";
+        image.replaceWith(fallback);
+      };
+
+      card.appendChild(image);
+    } else {
+      addText(card, "div", tool.icon || "🧰").className = "icon";
+    }
+
     addText(card, "h3", String(tool.name || "Digital Tool"));
     addText(card, "p", String(tool.description || "Digital service"));
 
-    const categoryLabel = addText(
-      card,
-      "p",
-      "Category: " + getCategory(tool)
-    );
+    const categoryLabel = addText(card, "p", "Category: " + getCategory(tool));
     categoryLabel.style.fontWeight = "bold";
 
     const price = Number(tool.price);
@@ -1181,14 +488,10 @@ function renderTools() {
       card,
       "p",
       validPrice
-        ? (price === 0
-            ? "FREE"
-            : "Price: ₹" + price.toLocaleString("en-IN"))
+        ? (price === 0 ? "FREE" : "Price: ₹" + price.toLocaleString("en-IN"))
         : "Price: Contact for details"
     );
-
-    priceEl.className =
-      validPrice && price === 0 ? "free" : "paid";
+    priceEl.className = validPrice && price === 0 ? "free" : "paid";
 
     const button = document.createElement("button");
     button.type = "button";
@@ -1204,8 +507,7 @@ function renderTools() {
     } else {
       button.disabled = true;
       button.textContent = "Page Not Connected";
-      button.title =
-        "Tools Management mein sahi HTML filename save karein.";
+      button.title = "Tools Management mein sahi HTML filename save karein.";
     }
 
     card.appendChild(button);
@@ -1221,9 +523,7 @@ onSnapshot(
     allTools = snapshot.docs
       .map(doc => ({ id: doc.id, ...doc.data() }))
       .filter(tool => tool.active === true)
-      .sort((a, b) =>
-        String(a.name || "").localeCompare(String(b.name || ""))
-      );
+      .sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
 
     if (!allTools.length) {
       categoryBar.replaceChildren();
@@ -1232,10 +532,7 @@ onSnapshot(
       return;
     }
 
-    if (
-      activeCategory !== "All Tools" &&
-      !allTools.some(tool => getCategory(tool) === activeCategory)
-    ) {
+    if (activeCategory !== "All Tools" && !allTools.some(tool => getCategory(tool) === activeCategory)) {
       activeCategory = "All Tools";
     }
 
@@ -1246,10 +543,7 @@ onSnapshot(
     console.error("Firebase tools error:", error);
     categoryBar.replaceChildren();
     countLabel.textContent = "Tools load nahi ho sake";
-
-    showMessage(
-      "Tools load nahi ho rahe. Internet, Firebase configuration aur Firestore rules check karein."
-    );
+    showMessage("Tools load nahi ho rahe. Internet, Firebase configuration aur Firestore rules check karein.");
   }
 );
 </script>
