@@ -58,7 +58,8 @@ textarea{min-height:85px;resize:vertical}
 .tool-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .tool-card{background:white;border:1px solid var(--border);border-radius:14px;padding:17px;min-width:0}
 .tool-top{display:flex;align-items:flex-start;gap:12px}
-.tool-icon{display:grid;place-items:center;flex-shrink:0;width:46px;height:46px;border-radius:12px;background:var(--light);font-size:25px}
+.tool-icon{display:grid;place-items:center;flex-shrink:0;width:60px;height:60px;border-radius:12px;background:var(--light);font-size:27px;overflow:hidden}
+.tool-icon img{width:100%;height:100%;object-fit:cover;display:block}
 .tool-card h3{margin:2px 0 5px;font-size:16px;overflow-wrap:anywhere}
 .tool-card p{font-size:13px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}
 .tag{display:inline-block;padding:4px 8px;border-radius:30px;font-size:11px;font-weight:bold;background:#edf1ee;color:#4b5b50;margin:3px 4px 3px 0}
@@ -67,6 +68,23 @@ textarea{min-height:85px;resize:vertical}
 .tool-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
 .tool-actions .btn{padding:9px 10px}
 .empty{background:white;border:1px dashed #cddbd0;border-radius:12px;padding:25px;text-align:center;color:var(--muted);font-size:13px;grid-column:1/-1}
+
+/* THUMBNAIL PREVIEW */
+.thumbnail-preview-box{
+  border:1px dashed #b8cdbd;border-radius:12px;padding:14px;
+  background:#f8fbf8;margin-top:8px
+}
+.thumbnail-preview{
+  display:block;width:100%;max-width:320px;height:180px;
+  object-fit:contain;background:#edf1ee;border-radius:10px;
+  margin:0 auto 10px
+}
+.thumbnail-preview-status{
+  text-align:center;color:var(--muted);font-size:12px;
+  overflow-wrap:anywhere
+}
+.thumbnail-help{display:block;color:var(--muted);font-size:12px;line-height:1.5;margin-top:6px}
+
 footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
 @media(max-width:850px){
   .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -94,7 +112,7 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
       <div class="logo">🧰</div>
       <div>
         <h1>Tools Management</h1>
-        <p>Manage digital tools and their availability</p>
+        <p>Manage tools, thumbnails and availability</p>
       </div>
     </div>
     <nav class="nav">
@@ -129,39 +147,70 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
       <div class="header-inner" style="color:var(--text);padding:0">
         <div>
           <h2 id="formTitle">➕ Add a Digital Tool</h2>
-          <p class="subtext" style="margin:6px 0 0">Add or update a tool displayed on the Home page.</p>
+          <p class="subtext" style="margin:6px 0 0">Add or update a tool and its thumbnail image.</p>
         </div>
         <button class="btn secondary" id="resetButton" type="button">Clear form</button>
       </div>
 
       <form id="toolForm" style="margin-top:22px">
         <input id="toolId" type="hidden">
+
         <div class="grid">
           <div class="field">
             <label for="toolName">Tool name *</label>
             <input id="toolName" maxlength="100" required placeholder="Example: Farmer Card Maker">
           </div>
+
           <div class="field">
-            <label for="toolIcon">Icon / Emoji</label>
+            <label for="toolIcon">Fallback Icon / Emoji</label>
             <input id="toolIcon" maxlength="20" placeholder="🌾">
+            <small class="thumbnail-help">Used if no thumbnail is provided or the image cannot load.</small>
           </div>
+
           <div class="field">
             <label for="toolCategory">Category *</label>
             <input id="toolCategory" maxlength="60" required placeholder="Example: Farmer Services">
           </div>
+
           <div class="field">
             <label for="toolPrice">Price (₹)</label>
             <input id="toolPrice" type="number" min="0" step="0.01" value="0">
           </div>
+
           <div class="field full">
             <label for="toolDescription">Description</label>
             <textarea id="toolDescription" maxlength="500" placeholder="Explain what this tool does"></textarea>
           </div>
+
+          <!-- NEW THUMBNAIL URL FIELD -->
+          <div class="field full">
+            <label for="toolThumbnail">🖼️ Tool Photo / Thumbnail Image URL</label>
+            <input
+              id="toolThumbnail"
+              type="url"
+              maxlength="1500"
+              placeholder="https://example.com/passport-photo-thumbnail.jpg"
+              autocomplete="url"
+            >
+            <small class="thumbnail-help">
+              Paste a direct HTTPS image URL. This image will be saved with this tool.
+              Leave blank to use the fallback emoji.
+            </small>
+
+            <div class="thumbnail-preview-box">
+              <img id="thumbnailPreview" class="thumbnail-preview hidden" alt="Thumbnail preview">
+              <div id="thumbnailPreviewStatus" class="thumbnail-preview-status">
+                Thumbnail preview will appear here.
+              </div>
+            </div>
+          </div>
+
           <div class="field full">
             <label for="toolPage">HTML filename *</label>
             <input id="toolPage" maxlength="180" required placeholder="Example: AIBiodata.html">
-            <small style="color:var(--muted);font-size:12px">Enter the exact HTML filename from the tools folder, not a display name.</small>
+            <small class="thumbnail-help">Enter the exact HTML filename from the tools folder, not a display name.</small>
           </div>
+
           <div class="field">
             <label for="toolActive">Availability</label>
             <select id="toolActive">
@@ -170,6 +219,7 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
             </select>
           </div>
         </div>
+
         <div class="actions">
           <button class="btn" id="saveButton" type="submit">Save tool</button>
           <button class="btn secondary hidden" id="cancelEdit" type="button">Cancel edit</button>
@@ -177,27 +227,13 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
       </form>
     </section>
 
-    <!-- DASHBOARD STATISTICS -->
     <section class="stats">
-      <div class="stat">
-        <span>Total tools</span>
-        <strong id="totalCount">0</strong>
-      </div>
-      <div class="stat">
-        <span>Active tools</span>
-        <strong id="activeCount">0</strong>
-      </div>
-      <div class="stat">
-        <span>Inactive tools</span>
-        <strong id="inactiveCount">0</strong>
-      </div>
-      <div class="stat">
-        <span>Total categories</span>
-        <strong id="categoryCount">0</strong>
-      </div>
+      <div class="stat"><span>Total tools</span><strong id="totalCount">0</strong></div>
+      <div class="stat"><span>Active tools</span><strong id="activeCount">0</strong></div>
+      <div class="stat"><span>Inactive tools</span><strong id="inactiveCount">0</strong></div>
+      <div class="stat"><span>Total categories</span><strong id="categoryCount">0</strong></div>
     </section>
 
-    <!-- CATEGORY SUMMARY -->
     <section class="panel">
       <h2>📊 Category Summary</h2>
       <p class="subtext">See how many tools belong to each category.</p>
@@ -206,21 +242,19 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
       </div>
     </section>
 
-    <!-- CATALOG SYNC -->
     <section class="panel">
       <h2>📦 Sync Tools Catalog</h2>
       <p class="subtext">
         Reads tools-catalog.json from the repository root. Updates names, categories,
-        icons and descriptions for matching filenames. Existing prices and availability
-        are preserved. Missing catalog entries are added; no tools are deleted.
+        icons and descriptions for matching filenames. Existing thumbnails, prices
+        and availability are preserved. Missing catalog entries are added; no tools are deleted.
       </p>
       <button class="btn secondary" id="importButton" type="button">Sync 47 Tools Metadata</button>
     </section>
 
-    <!-- TOOL MANAGEMENT -->
     <section class="panel">
       <h2>🗂️ Your Digital Tools</h2>
-      <p class="subtext">Search tools, filter by status, or edit their details.</p>
+      <p class="subtext">Search tools, preview their thumbnails, and edit their details.</p>
       <div class="toolbar">
         <input id="searchInput" placeholder="Search name, category or filename…">
         <select id="statusFilter">
@@ -301,6 +335,48 @@ function pageKey(value){
   return name.toLowerCase();
 }
 
+/* THUMBNAIL URL CHECK */
+function validThumbnail(value){
+  if(!value)return true;
+  try{
+    const url=new URL(value);
+    return url.protocol==="https:"||url.protocol==="http:";
+  }catch{
+    return false;
+  }
+}
+
+/* LIVE PREVIEW WHILE ENTERING URL */
+function updateThumbnailPreview(){
+  const url=$("toolThumbnail").value.trim();
+  const img=$("thumbnailPreview");
+  const status=$("thumbnailPreviewStatus");
+
+  img.onload=null;
+  img.onerror=null;
+  img.classList.add("hidden");
+  status.textContent="Thumbnail preview will appear here.";
+
+  if(!url)return;
+
+  if(!validThumbnail(url)){
+    status.textContent="Please enter a valid image URL beginning with https://";
+    return;
+  }
+
+  status.textContent="Loading image preview…";
+  img.onload=()=>{
+    img.classList.remove("hidden");
+    status.textContent="Preview loaded successfully.";
+  };
+  img.onerror=()=>{
+    img.classList.add("hidden");
+    status.textContent="Image could not load. Check that the URL points directly to an image.";
+  };
+  img.src=url;
+}
+
+/* CLEAR FORM */
 function resetForm(){
   editingId=null;
   $("toolForm").reset();
@@ -308,11 +384,16 @@ function resetForm(){
   $("toolPrice").value="0";
   $("toolIcon").value="🧰";
   $("toolActive").value="true";
+  $("toolThumbnail").value="";
+  $("thumbnailPreview").removeAttribute("src");
+  $("thumbnailPreview").classList.add("hidden");
+  $("thumbnailPreviewStatus").textContent="Thumbnail preview will appear here.";
   $("formTitle").textContent="➕ Add a Digital Tool";
   $("saveButton").textContent="Save tool";
   $("cancelEdit").classList.add("hidden");
 }
 
+/* EDIT EXISTING TOOL */
 function startEdit(tool){
   editingId=tool.id;
   $("toolId").value=tool.id;
@@ -323,6 +404,11 @@ function startEdit(tool){
   $("toolDescription").value=tool.description||"";
   $("toolPage").value=tool.page||tool.file||"";
   $("toolActive").value=tool.active===true?"true":"false";
+
+  // Load the saved thumbnail URL into the edit form.
+  $("toolThumbnail").value=tool.thumbnail||"";
+  updateThumbnailPreview();
+
   $("formTitle").textContent="✏️ Edit Digital Tool";
   $("saveButton").textContent="Update tool";
   $("cancelEdit").classList.remove("hidden");
@@ -344,26 +430,49 @@ function makeButton(text,className,callback){
   return button;
 }
 
-/* DASHBOARD: live statistics and category counts */
+/* SHOW IMAGE OR FALLBACK EMOJI */
+function makeToolVisual(tool){
+  const visual=element("div","tool-icon");
+  const thumbnail=String(tool.thumbnail||"").trim();
+
+  if(thumbnail&&validThumbnail(thumbnail)){
+    const img=document.createElement("img");
+    img.src=thumbnail;
+    img.alt=(tool.name||"Tool")+" thumbnail";
+    img.loading="lazy";
+    img.referrerPolicy="no-referrer";
+
+    img.addEventListener("error",()=>{
+      visual.replaceChildren();
+      visual.textContent=tool.icon||"🧰";
+      visual.title="Thumbnail could not load";
+    },{once:true});
+
+    visual.appendChild(img);
+  }else{
+    visual.textContent=tool.icon||"🧰";
+  }
+
+  return visual;
+}
+
+/* DASHBOARD STATISTICS */
 function updateStats(){
   $("totalCount").textContent=tools.length;
   $("activeCount").textContent=tools.filter(t=>t.active===true).length;
   $("inactiveCount").textContent=tools.filter(t=>t.active!==true).length;
 
   const categories={};
-
   tools.forEach(tool=>{
     const category=String(tool.category||"General").trim()||"General";
     categories[category]=(categories[category]||0)+1;
   });
 
   $("categoryCount").textContent=Object.keys(categories).length;
-
   const summary=$("categorySummary");
   summary.replaceChildren();
 
-  const sorted=Object.entries(categories)
-    .sort((a,b)=>a[0].localeCompare(b[0]));
+  const sorted=Object.entries(categories).sort((a,b)=>a[0].localeCompare(b[0]));
 
   if(!sorted.length){
     summary.appendChild(element("div","empty","No categories found."));
@@ -378,6 +487,7 @@ function updateStats(){
   });
 }
 
+/* RENDER TOOL CARDS */
 function renderTools(){
   updateStats();
 
@@ -407,13 +517,14 @@ function renderTools(){
     const card=element("article","tool-card");
     const top=element("div","tool-top");
 
-    top.appendChild(element("div","tool-icon",tool.icon||"🧰"));
+    top.appendChild(makeToolVisual(tool));
 
     const info=element("div","");
     info.appendChild(element("h3","",tool.name||"Unnamed tool"));
     info.appendChild(element("span","tag",tool.category||"General"));
     info.appendChild(element("span","tag "+(tool.active===true?"active":"inactive"),
       tool.active===true?"ACTIVE":"INACTIVE"));
+    info.appendChild(element("span","tag",tool.thumbnail?"THUMBNAIL SET":"NO THUMBNAIL"));
 
     top.appendChild(info);
     card.appendChild(top);
@@ -454,7 +565,6 @@ async function changeActive(tool){
 
 async function removeTool(tool){
   if(busy)return;
-
   if(!confirm('Delete "'+(tool.name||"this tool")+'"? This cannot be undone.'))return;
 
   try{
@@ -467,6 +577,7 @@ async function removeTool(tool){
   }
 }
 
+/* ADMIN LOGIN */
 $("loginForm").addEventListener("submit",async event=>{
   event.preventDefault();
   clearMessage();
@@ -487,6 +598,7 @@ $("loginForm").addEventListener("submit",async event=>{
   }
 });
 
+/* CHECK ADMIN ACCESS AND LOAD TOOLS */
 onAuthStateChanged(auth,async user=>{
   if(unsubscribeTools){
     unsubscribeTools();
@@ -503,10 +615,7 @@ onAuthStateChanged(auth,async user=>{
 
     if(!adminSnap.exists()||adminSnap.data().role!=="admin"){
       await signOut(auth);
-      showMessage(
-        "Access denied. This account is not authorized as an administrator.",
-        "error"
-      );
+      showMessage("Access denied. This account is not authorized as an administrator.","error");
       return;
     }
 
@@ -519,21 +628,16 @@ onAuthStateChanged(auth,async user=>{
       renderTools();
     },error=>{
       console.error(error);
-      showMessage(
-        "Unable to load tools. Check Firestore rules and internet connection.",
-        "error"
-      );
+      showMessage("Unable to load tools. Check Firestore rules and internet connection.","error");
     });
   }catch(error){
     console.error(error);
-    showMessage(
-      "Admin verification failed. Check the admins collection and Firestore rules.",
-      "error"
-    );
+    showMessage("Admin verification failed. Check the admins collection and Firestore rules.","error");
     await signOut(auth);
   }
 });
 
+/* SAVE OR UPDATE TOOL INCLUDING THUMBNAIL */
 $("toolForm").addEventListener("submit",async event=>{
   event.preventDefault();
   if(busy)return;
@@ -544,6 +648,7 @@ $("toolForm").addEventListener("submit",async event=>{
   const category=$("toolCategory").value.trim()||"General";
   const description=$("toolDescription").value.trim();
   const page=$("toolPage").value.trim();
+  const thumbnail=$("toolThumbnail").value.trim();
   const price=Number($("toolPrice").value);
   const active=$("toolActive").value==="true";
 
@@ -553,15 +658,17 @@ $("toolForm").addEventListener("submit",async event=>{
   }
 
   if(!validPage(page)){
-    showMessage(
-      "Enter a simple HTML filename, for example AIBiodata.html. Do not enter a folder path.",
-      "error"
-    );
+    showMessage("Enter a simple HTML filename, for example AIBiodata.html. Do not enter a folder path.","error");
     return;
   }
 
   if(!Number.isFinite(price)||price<0){
     showMessage("Enter a valid non-negative price.","error");
+    return;
+  }
+
+  if(!validThumbnail(thumbnail)){
+    showMessage("Thumbnail URL must start with https:// or http://.","error");
     return;
   }
 
@@ -572,7 +679,14 @@ $("toolForm").addEventListener("submit",async event=>{
   if(duplicate&&!confirm("Another tool already uses this filename. Save anyway?"))return;
 
   const data={
-    name,icon,category,description,page,price,active,
+    name,
+    icon,
+    category,
+    description,
+    page,
+    price,
+    active,
+    thumbnail,
     updatedAt:serverTimestamp()
   };
 
@@ -581,24 +695,24 @@ $("toolForm").addEventListener("submit",async event=>{
   try{
     if(editingId){
       await updateDoc(doc(db,"tools",editingId),data);
-      showMessage("Tool updated successfully.","success");
+      showMessage("Tool and thumbnail updated successfully.","success");
     }else{
       data.createdAt=serverTimestamp();
       await addDoc(collection(db,"tools"),data);
-      showMessage("Tool added successfully.","success");
+      showMessage("Tool and thumbnail added successfully.","success");
     }
 
     resetForm();
   }catch(error){
     console.error(error);
-    showMessage(
-      "Could not save the tool. Check Firestore rules and your admin access.",
-      "error"
-    );
+    showMessage("Could not save the tool. Check Firestore rules and your admin access.","error");
   }finally{
     setBusy(false);
   }
 });
+
+/* FORM BUTTONS */
+$("toolThumbnail").addEventListener("input",updateThumbnailPreview);
 
 $("resetButton").addEventListener("click",()=>{
   resetForm();
@@ -622,7 +736,7 @@ $("logoutButton").addEventListener("click",async()=>{
 /*
   SAFE CATALOG SYNC:
   - Updates metadata for matching filenames.
-  - Preserves existing price, active status and document ID.
+  - Preserves existing thumbnail URLs, prices and active status.
   - Adds missing catalog entries.
   - Does not delete tools.
 */
@@ -630,7 +744,7 @@ $("importButton").addEventListener("click",async()=>{
   if(busy)return;
 
   if(!confirm(
-    "Sync metadata for 47 catalog tools? Existing prices and active/inactive settings will be preserved. Missing tools may be added. No tools will be deleted."
+    "Sync metadata for 47 catalog tools? Existing thumbnails, prices and active/inactive settings will be preserved. Missing tools may be added. No tools will be deleted."
   ))return;
 
   setBusy(true);
@@ -660,17 +774,11 @@ $("importButton").addEventListener("click",async()=>{
       const page=String(item.page||item.file||"").trim();
 
       if(!name||!validPage(page)){
-        throw new Error(
-          "Invalid name or HTML filename at catalog entry "+(i+1)+"."
-        );
+        throw new Error("Invalid name or HTML filename at catalog entry "+(i+1)+".");
       }
 
       const key=pageKey(page);
-
-      if(seen.has(key)){
-        throw new Error("Duplicate filename in catalog: "+page);
-      }
-
+      if(seen.has(key))throw new Error("Duplicate filename in catalog: "+page);
       seen.add(key);
 
       if(item.price!==undefined&&
@@ -698,6 +806,7 @@ $("importButton").addEventListener("click",async()=>{
       };
 
       if(existing){
+        // Deliberately do not overwrite the existing thumbnail.
         await updateDoc(doc(db,"tools",existing.id),metadata);
         updated++;
       }else{
@@ -707,6 +816,7 @@ $("importButton").addEventListener("click",async()=>{
           file:page,
           price:0,
           active:true,
+          thumbnail:"",
           createdAt:serverTimestamp()
         };
 
@@ -718,7 +828,7 @@ $("importButton").addEventListener("click",async()=>{
     showMessage(
       "Catalog sync complete. Updated: "+updated+
       "; added: "+added+"; catalog entries: "+catalog.length+
-      ". Existing prices and availability were preserved.",
+      ". Existing thumbnails, prices and availability were preserved.",
       "success"
     );
 
