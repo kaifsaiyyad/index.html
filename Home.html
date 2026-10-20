@@ -442,7 +442,6 @@ $("emailLoginButton").addEventListener("click", async () => {
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
     closeAuth();
-    // Profile storage is separate from authentication; do not keep the login modal open if it fails.
     ensureProfile(result.user).catch(error => {
       console.warn("Could not save user profile after email login:", error);
     });
@@ -494,22 +493,20 @@ $("verifyOtpButton").addEventListener("click", async () => {
   setBusy(true);
   try {
     const result = await confirmationResult.confirm(code);
-
-    // Authentication succeeded. Close the modal before any Firestore write.
     confirmationResult = null;
     closeAuth();
-    await resetRecaptcha();
-
-    // Profile write is best-effort; a Firestore permission error must not block login UI.
+    resetRecaptcha().catch(error => {
+      console.warn("reCAPTCHA reset warning:", error);
+    });
     ensureProfile(
       result.user,
       result.user.displayName || "",
       result.user.phoneNumber || ""
     ).catch(error => {
-      console.warn("Could not save user profile after OTP login:", error);
+      console.warn("Profile save failed after OTP login:", error);
     });
   } catch (error) {
-    console.error("OTP verification failed:", error);
+    console.error("OTP verification error:", error);
     setMessage(friendlyError(error), "error");
   } finally {
     setBusy(false);
@@ -518,7 +515,6 @@ $("verifyOtpButton").addEventListener("click", async () => {
 
 onAuthStateChanged(auth, async user => {
   if (user) {
-    // Keep UI in sync with Firebase: signed-in users should not see the login modal.
     closeAuth();
     $("accountStatus").textContent = "Logged in: " + (user.displayName || user.email || user.phoneNumber || "User");
     $("accountButton").classList.add("hidden");
