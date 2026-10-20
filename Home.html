@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,8 +77,6 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8bc6
 .notice{margin-top:18px;background:#fff8e5;border:1px solid #f2dfaa;border-left:4px solid #d19b00;border-radius:12px;padding:15px;font-size:12px;color:#6d561c}
 .footer{background:#103e24;color:#dceee1;text-align:center;padding:24px 18px;font-size:12px}
 .footer strong{display:block;font-size:14px;color:white;margin-bottom:4px}
-
-/* Account and authentication */
 .account-area{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .account-status{font-size:12px;color:#e0f1e5;overflow-wrap:anywhere}
 .modal-backdrop{position:fixed;inset:0;z-index:1000;background:#071b10b8;display:none;align-items:center;justify-content:center;padding:14px;overflow-y:auto}
@@ -140,7 +137,6 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8bc6
 
 <body>
 <div class="topbar">🌐 CSC Seva Tools • Digital tools and useful services in one place</div>
-
 <header class="header">
 <nav class="nav">
   <div class="brand">
@@ -171,7 +167,6 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8bc6
   <div><h2>Welcome to CSC Seva Tools</h2><p>Simple digital tools and services for everyday users.</p></div>
   <a class="button light" href="#digital-tools">Explore tools ↓</a>
 </section>
-
 <section class="wallet">
   <div>
     <div class="wallet-label">💰 MY DISPLAYED BALANCE</div>
@@ -180,7 +175,6 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8bc6
   </div>
   <button class="button" id="walletButton" type="button">View Wallet →</button>
 </section>
-
 <div class="section-head"><div><h2>🧰 Services</h2><p>Quick access to common service pages</p></div></div>
 <section class="services">
   <article class="service"><div class="icon">🌾</div><h3>Farmer ID Card</h3><p>Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.<br><br><b class="paid">Download charge: ₹10</b></p><button class="button" data-page="index.html" type="button">Open Farmer Card →</button></article>
@@ -190,7 +184,6 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8bc6
   <article class="service"><div class="icon">🌱</div><h3>Farmer Services</h3><p>Useful farmer-related digital services and tools.<br><br><b class="free">FREE</b></p><button class="button" data-page="Farmer-Services.html" type="button">Open Service →</button></article>
   <article class="service"><div class="icon">📞</div><h3>Contact / Help</h3><p>Contact information and help section.<br><br><b class="free">FREE</b></p><button class="button" data-page="Contact.html" type="button">Contact →</button></article>
 </section>
-
 <div class="section-head" id="digital-tools"><div><h2>🧰 Available Digital Tools</h2><p>Search, filter and open active tools from Firebase</p></div></div>
 <div class="tool-controls">
   <input type="search" id="toolSearch" class="tool-search" placeholder="🔍 Search tools by name, PDF, photo, AI..." aria-label="Search digital tools" autocomplete="off">
@@ -198,7 +191,6 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8bc6
   <p id="toolCount" class="tool-count" aria-live="polite">Loading tools...</p>
 </div>
 <section class="services" id="dynamicTools" aria-live="polite"><div class="status-message">Loading available tools…</div></section>
-
 <section class="charges">
   <h3>💳 Service Charges</h3>
   <div class="charge-grid">
@@ -211,24 +203,19 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8bc6
     <div class="charge-row"><span>📞 Contact / Help</span><span class="free">FREE</span></div>
   </div>
 </section>
-
 <aside class="notice"><b>Important:</b> CSC Seva Tools is a personal digital service website. Farmer ID Cards created here are <b>not government-issued documents</b>.<br><br><b>Payment note:</b> Prices are informational. A listed price does not mean payment processing or wallet credit is active.</aside>
 </main>
-
 <footer class="footer"><strong>🌐 CSC Seva Tools</strong>© 2026 CSC Seva Tools • Digital Services</footer>
 
-<!-- Authentication modal -->
 <div class="modal-backdrop" id="authBackdrop" role="dialog" aria-modal="true" aria-labelledby="authTitle">
   <div class="auth-modal">
     <button class="close-modal" id="closeAuth" type="button" aria-label="Close">✕</button>
     <h2 id="authTitle">Your CSC Seva Account</h2>
     <p class="auth-subtitle">Sign up with email or log in using email/password or mobile OTP.</p>
-
     <div class="auth-tabs">
       <button class="auth-tab active" type="button" data-auth-tab="email">Email / Password</button>
       <button class="auth-tab" type="button" data-auth-tab="phone">Mobile OTP</button>
     </div>
-
     <div class="auth-form active" id="emailPanel">
       <label class="field-label" for="fullName">Full name (signup only)</label>
       <input class="auth-input" id="fullName" type="text" maxlength="80" autocomplete="name" placeholder="Enter your full name">
@@ -245,14 +232,11 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8bc6
       </div>
       <p class="auth-small">For signup, phone verification is required to link your mobile number to this account. Use an email address you control.</p>
     </div>
-
     <div class="auth-form" id="phonePanel">
       <label class="field-label" for="loginPhone">Mobile number with country code</label>
       <input class="auth-input" id="loginPhone" type="tel" autocomplete="tel" placeholder="+919876543210">
       <div id="recaptcha-container"></div>
-      <div class="auth-actions">
-        <button class="button" id="sendOtpButton" type="button">Send OTP</button>
-      </div>
+      <div class="auth-actions"><button class="button" id="sendOtpButton" type="button">Send OTP</button></div>
       <div id="otpStep" class="hidden">
         <label class="field-label" for="otpCode">6-digit OTP</label>
         <input class="auth-input" id="otpCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="Enter SMS OTP">
@@ -438,11 +422,18 @@ $("emailLoginButton").addEventListener("click", async () => {
   const email = $("email").value.trim();
   const password = $("password").value;
   if (!email || !password) return setMessage("Enter your email and password.", "error");
+
   setBusy(true);
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
-    await ensureProfile(result.user);
+
+    // Close the login popup immediately after successful authentication.
     closeAuth();
+
+    // Profile saving is separate and must not block the successful login UI.
+    ensureProfile(result.user).catch(error => {
+      console.warn("Could not save user profile after email login:", error);
+    });
   } catch (error) {
     setMessage(friendlyError(error), "error");
   } finally {
@@ -468,6 +459,7 @@ $("sendOtpButton").addEventListener("click", async () => {
   if (auth.currentUser && auth.currentUser.phoneNumber === phone) {
     return setMessage("This phone is already linked to your signed-in account.", "info");
   }
+
   setBusy(true);
   try {
     const verifier = getRecaptcha();
@@ -485,21 +477,32 @@ $("sendOtpButton").addEventListener("click", async () => {
 
 $("verifyOtpButton").addEventListener("click", async () => {
   if (busy) return;
+
   const code = $("otpCode").value.trim();
-  if (!confirmationResult) return setMessage("First request an OTP.", "error");
-  if (!/^\d{6}$/.test(code)) return setMessage("Enter the 6-digit OTP.", "error");
+
+  if (!confirmationResult) {
+    return setMessage("First request an OTP.", "error");
+  }
+
+  if (!/^\d{6}$/.test(code)) {
+    return setMessage("Enter the 6-digit OTP.", "error");
+  }
+
   setBusy(true);
+
   try {
+    // Confirm the OTP with Firebase.
     const result = await confirmationResult.confirm(code);
 
-    // OTP verification succeeded: close the modal immediately.
+    // IMPORTANT: authentication has succeeded. Close the popup immediately.
     confirmationResult = null;
     closeAuth();
 
-    // Cleanup and profile saving must not prevent the modal from closing.
+    // Cleanup and profile save run separately; neither can keep the popup open.
     resetRecaptcha().catch(error => {
-      console.warn("reCAPTCHA cleanup warning:", error);
+      console.warn("Could not reset reCAPTCHA after login:", error);
     });
+
     ensureProfile(
       result.user,
       result.user.displayName || "",
@@ -507,7 +510,9 @@ $("verifyOtpButton").addEventListener("click", async () => {
     ).catch(error => {
       console.warn("Could not save user profile after OTP login:", error);
     });
+
   } catch (error) {
+    console.error("OTP verification error:", error);
     setMessage(friendlyError(error), "error");
   } finally {
     setBusy(false);
@@ -516,16 +521,14 @@ $("verifyOtpButton").addEventListener("click", async () => {
 
 onAuthStateChanged(auth, async user => {
   if (user) {
-    // Firebase confirms an active session; ensure the login modal is not left open.
-    closeAuth();
     $("accountStatus").textContent = "Logged in: " + (user.displayName || user.email || user.phoneNumber || "User");
     $("accountButton").classList.add("hidden");
     $("logoutButton").classList.remove("hidden");
-    try {
-      await ensureProfile(user);
-    } catch (error) {
+
+    // Profile write is best-effort. Permission errors must not interrupt login.
+    ensureProfile(user).catch(error => {
       console.warn("Could not save user profile:", error);
-    }
+    });
   } else {
     $("accountStatus").textContent = "Not logged in";
     $("accountButton").classList.remove("hidden");
@@ -617,14 +620,17 @@ function renderTools() {
   });
   container.replaceChildren();
   countLabel.textContent = `Showing ${filtered.length} of ${allTools.length} active tools`;
+
   if (!filtered.length) {
     showToolMessage("Koi matching tool nahi mila. Search ya category change karke dekhein.");
     return;
   }
+
   filtered.forEach(tool => {
     const card = document.createElement("article");
     card.className = "service";
     const thumbnailUrl = getThumbnailUrl(tool);
+
     if (thumbnailUrl) {
       const image = document.createElement("img");
       image.className = "tool-thumbnail";
@@ -642,25 +648,32 @@ function renderTools() {
     } else {
       addText(card, "div", tool.icon || "🧰").className = "icon";
     }
+
     addText(card, "h3", String(tool.name || "Digital Tool"));
     addText(card, "p", String(tool.description || "Digital service"));
+
     const categoryLabel = addText(card, "p", "Category: " + getCategory(tool));
     categoryLabel.style.fontWeight = "bold";
+
     const price = Number(tool.price);
     const validPrice = tool.price !== null && tool.price !== undefined && String(tool.price).trim() !== "" && Number.isFinite(price) && price >= 0;
     const priceEl = addText(card, "p", validPrice ? (price === 0 ? "FREE" : "Price: ₹" + price.toLocaleString("en-IN")) : "Price: Contact for details");
     priceEl.className = validPrice && price === 0 ? "free" : "paid";
+
     const button = document.createElement("button");
     button.type = "button";
     button.className = "button";
     button.textContent = "Open Tool →";
+
     const destination = toolUrl(tool.page || tool.file);
-    if (destination) button.addEventListener("click", () => { location.href = destination; });
-    else {
+    if (destination) {
+      button.addEventListener("click", () => { location.href = destination; });
+    } else {
       button.disabled = true;
       button.textContent = "Page Not Connected";
       button.title = "Tools Management mein sahi HTML filename save karein.";
     }
+
     card.appendChild(button);
     container.appendChild(card);
   });
@@ -672,12 +685,14 @@ onSnapshot(collection(db, "tools"), snapshot => {
     .map(documentSnapshot => ({ id: documentSnapshot.id, ...documentSnapshot.data() }))
     .filter(tool => tool.active === true)
     .sort((a,b) => String(a.name || "").localeCompare(String(b.name || "")));
+
   if (!allTools.length) {
     categoryBar.replaceChildren();
     countLabel.textContent = "0 active tools";
     showToolMessage("Abhi koi active digital tool available nahi hai.");
     return;
   }
+
   if (activeCategory !== "All Tools" && !allTools.some(tool => getCategory(tool) === activeCategory)) activeCategory = "All Tools";
   renderCategories();
   renderTools();
