@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,23 +67,10 @@ textarea{min-height:85px;resize:vertical}
 .tool-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
 .tool-actions .btn{padding:9px 10px}
 .empty{background:white;border:1px dashed #cddbd0;border-radius:12px;padding:25px;text-align:center;color:var(--muted);font-size:13px;grid-column:1/-1}
-
-/* THUMBNAIL PREVIEW */
-.thumbnail-preview-box{
-  border:1px dashed #b8cdbd;border-radius:12px;padding:14px;
-  background:#f8fbf8;margin-top:8px
-}
-.thumbnail-preview{
-  display:block;width:100%;max-width:320px;height:180px;
-  object-fit:contain;background:#edf1ee;border-radius:10px;
-  margin:0 auto 10px
-}
-.thumbnail-preview-status{
-  text-align:center;color:var(--muted);font-size:12px;
-  overflow-wrap:anywhere
-}
+.thumbnail-preview-box{border:1px dashed #b8cdbd;border-radius:12px;padding:14px;background:#f8fbf8;margin-top:8px}
+.thumbnail-preview{display:block;width:100%;max-width:320px;height:180px;object-fit:contain;background:#edf1ee;border-radius:10px;margin:0 auto 10px}
+.thumbnail-preview-status{text-align:center;color:var(--muted);font-size:12px;overflow-wrap:anywhere}
 .thumbnail-help{display:block;color:var(--muted);font-size:12px;line-height:1.5;margin-top:6px}
-
 footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
 @media(max-width:850px){
   .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -142,7 +128,6 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
   </section>
 
   <div id="appPanel" class="hidden">
-
     <section class="panel">
       <div class="header-inner" style="color:var(--text);padding:0">
         <div>
@@ -154,63 +139,42 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
 
       <form id="toolForm" style="margin-top:22px">
         <input id="toolId" type="hidden">
-
         <div class="grid">
           <div class="field">
             <label for="toolName">Tool name *</label>
             <input id="toolName" maxlength="100" required placeholder="Example: Farmer Card Maker">
           </div>
-
           <div class="field">
             <label for="toolIcon">Fallback Icon / Emoji</label>
             <input id="toolIcon" maxlength="20" placeholder="🌾">
             <small class="thumbnail-help">Used if no thumbnail is provided or the image cannot load.</small>
           </div>
-
           <div class="field">
             <label for="toolCategory">Category *</label>
             <input id="toolCategory" maxlength="60" required placeholder="Example: Farmer Services">
           </div>
-
           <div class="field">
             <label for="toolPrice">Price (₹)</label>
             <input id="toolPrice" type="number" min="0" step="0.01" value="0">
           </div>
-
           <div class="field full">
             <label for="toolDescription">Description</label>
             <textarea id="toolDescription" maxlength="500" placeholder="Explain what this tool does"></textarea>
           </div>
-
-          <!-- NEW THUMBNAIL URL FIELD -->
           <div class="field full">
             <label for="toolThumbnail">🖼️ Tool Photo / Thumbnail Image URL</label>
-            <input
-              id="toolThumbnail"
-              type="url"
-              maxlength="1500"
-              placeholder="https://example.com/passport-photo-thumbnail.jpg"
-              autocomplete="url"
-            >
-            <small class="thumbnail-help">
-              Paste a direct HTTPS image URL. This image will be saved with this tool.
-              Leave blank to use the fallback emoji.
-            </small>
-
+            <input id="toolThumbnail" type="url" maxlength="1500" placeholder="https://example.com/thumbnail.jpg" autocomplete="url">
+            <small class="thumbnail-help">Paste a direct HTTPS image URL. Leave blank to use the fallback emoji.</small>
             <div class="thumbnail-preview-box">
               <img id="thumbnailPreview" class="thumbnail-preview hidden" alt="Thumbnail preview">
-              <div id="thumbnailPreviewStatus" class="thumbnail-preview-status">
-                Thumbnail preview will appear here.
-              </div>
+              <div id="thumbnailPreviewStatus" class="thumbnail-preview-status">Thumbnail preview will appear here.</div>
             </div>
           </div>
-
           <div class="field full">
             <label for="toolPage">HTML filename *</label>
             <input id="toolPage" maxlength="180" required placeholder="Example: AIBiodata.html">
             <small class="thumbnail-help">Enter the exact HTML filename from the tools folder, not a display name.</small>
           </div>
-
           <div class="field">
             <label for="toolActive">Availability</label>
             <select id="toolActive">
@@ -219,7 +183,6 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
             </select>
           </div>
         </div>
-
         <div class="actions">
           <button class="btn" id="saveButton" type="submit">Save tool</button>
           <button class="btn secondary hidden" id="cancelEdit" type="button">Cancel edit</button>
@@ -240,6 +203,12 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
       <div id="categorySummary" class="tool-grid">
         <div class="empty">Loading categories…</div>
       </div>
+    </section>
+
+    <section class="panel">
+      <h2>💾 Download Tools Backup</h2>
+      <p class="subtext">Download a JSON backup of all tools currently loaded from Firestore. This is not a full database backup.</p>
+      <button class="btn secondary" id="exportToolsButton" type="button">Download Tools Backup (JSON)</button>
     </section>
 
     <section class="panel">
@@ -311,31 +280,25 @@ function showMessage(text,type="info"){
   box.className="message show "+type;
   window.scrollTo({top:0,behavior:"smooth"});
 }
-
 function clearMessage(){
   $("message").className="message";
   $("message").textContent="";
 }
-
 function setBusy(value){
   busy=value;
   $("saveButton").disabled=value;
   $("loginButton").disabled=value;
   $("importButton").disabled=value;
 }
-
 function validPage(page){
   return /^[A-Za-z0-9_-]+\.html$/i.test(String(page||"").trim());
 }
-
 function pageKey(value){
   let name=String(value||"").trim().replace(/\\/g,"/");
   name=name.split("/").pop()||"";
   try{name=decodeURIComponent(name)}catch{}
   return name.toLowerCase();
 }
-
-/* THUMBNAIL URL CHECK */
 function validThumbnail(value){
   if(!value)return true;
   try{
@@ -345,25 +308,19 @@ function validThumbnail(value){
     return false;
   }
 }
-
-/* LIVE PREVIEW WHILE ENTERING URL */
 function updateThumbnailPreview(){
   const url=$("toolThumbnail").value.trim();
   const img=$("thumbnailPreview");
   const status=$("thumbnailPreviewStatus");
-
   img.onload=null;
   img.onerror=null;
   img.classList.add("hidden");
   status.textContent="Thumbnail preview will appear here.";
-
   if(!url)return;
-
   if(!validThumbnail(url)){
     status.textContent="Please enter a valid image URL beginning with https://";
     return;
   }
-
   status.textContent="Loading image preview…";
   img.onload=()=>{
     img.classList.remove("hidden");
@@ -375,8 +332,6 @@ function updateThumbnailPreview(){
   };
   img.src=url;
 }
-
-/* CLEAR FORM */
 function resetForm(){
   editingId=null;
   $("toolForm").reset();
@@ -392,8 +347,6 @@ function resetForm(){
   $("saveButton").textContent="Save tool";
   $("cancelEdit").classList.add("hidden");
 }
-
-/* EDIT EXISTING TOOL */
 function startEdit(tool){
   editingId=tool.id;
   $("toolId").value=tool.id;
@@ -404,81 +357,63 @@ function startEdit(tool){
   $("toolDescription").value=tool.description||"";
   $("toolPage").value=tool.page||tool.file||"";
   $("toolActive").value=tool.active===true?"true":"false";
-
-  // Load the saved thumbnail URL into the edit form.
   $("toolThumbnail").value=tool.thumbnail||"";
   updateThumbnailPreview();
-
   $("formTitle").textContent="✏️ Edit Digital Tool";
   $("saveButton").textContent="Update tool";
   $("cancelEdit").classList.remove("hidden");
   $("toolName").focus();
   window.scrollTo({top:0,behavior:"smooth"});
 }
-
 function element(tag,className,text){
   const el=document.createElement(tag);
   if(className)el.className=className;
   if(text!==undefined)el.textContent=text;
   return el;
 }
-
 function makeButton(text,className,callback){
   const button=element("button","btn "+className,text);
   button.type="button";
   button.addEventListener("click",callback);
   return button;
 }
-
-/* SHOW IMAGE OR FALLBACK EMOJI */
 function makeToolVisual(tool){
   const visual=element("div","tool-icon");
   const thumbnail=String(tool.thumbnail||"").trim();
-
   if(thumbnail&&validThumbnail(thumbnail)){
     const img=document.createElement("img");
     img.src=thumbnail;
     img.alt=(tool.name||"Tool")+" thumbnail";
     img.loading="lazy";
     img.referrerPolicy="no-referrer";
-
     img.addEventListener("error",()=>{
       visual.replaceChildren();
       visual.textContent=tool.icon||"🧰";
       visual.title="Thumbnail could not load";
     },{once:true});
-
     visual.appendChild(img);
   }else{
     visual.textContent=tool.icon||"🧰";
   }
-
   return visual;
 }
-
-/* DASHBOARD STATISTICS */
 function updateStats(){
   $("totalCount").textContent=tools.length;
   $("activeCount").textContent=tools.filter(t=>t.active===true).length;
   $("inactiveCount").textContent=tools.filter(t=>t.active!==true).length;
-
   const categories={};
   tools.forEach(tool=>{
     const category=String(tool.category||"General").trim()||"General";
     categories[category]=(categories[category]||0)+1;
   });
-
   $("categoryCount").textContent=Object.keys(categories).length;
   const summary=$("categorySummary");
   summary.replaceChildren();
-
   const sorted=Object.entries(categories).sort((a,b)=>a[0].localeCompare(b[0]));
-
   if(!sorted.length){
     summary.appendChild(element("div","empty","No categories found."));
     return;
   }
-
   sorted.forEach(([name,count])=>{
     const card=element("article","tool-card");
     card.appendChild(element("h3","",name));
@@ -486,75 +421,56 @@ function updateStats(){
     summary.appendChild(card);
   });
 }
-
-/* RENDER TOOL CARDS */
 function renderTools(){
   updateStats();
-
   const list=$("toolList");
   list.replaceChildren();
-
   const search=$("searchInput").value.trim().toLowerCase();
   const status=$("statusFilter").value;
-
   const filtered=tools.filter(t=>{
-    const searchable=[t.name,t.category,t.description,t.page,t.file]
-      .join(" ").toLowerCase();
-
+    const searchable=[t.name,t.category,t.description,t.page,t.file].join(" ").toLowerCase();
     if(search&&!searchable.includes(search))return false;
     if(status==="active"&&t.active!==true)return false;
     if(status==="inactive"&&t.active===true)return false;
     return true;
   }).sort((a,b)=>String(a.name||"").localeCompare(String(b.name||"")));
-
   if(!filtered.length){
     list.appendChild(element("div","empty",
       tools.length?"No matching tools found.":"No tools found. Add a tool or sync the catalog."));
     return;
   }
-
   filtered.forEach(tool=>{
     const card=element("article","tool-card");
     const top=element("div","tool-top");
-
     top.appendChild(makeToolVisual(tool));
-
     const info=element("div","");
     info.appendChild(element("h3","",tool.name||"Unnamed tool"));
     info.appendChild(element("span","tag",tool.category||"General"));
     info.appendChild(element("span","tag "+(tool.active===true?"active":"inactive"),
       tool.active===true?"ACTIVE":"INACTIVE"));
     info.appendChild(element("span","tag",tool.thumbnail?"THUMBNAIL SET":"NO THUMBNAIL"));
-
     top.appendChild(info);
     card.appendChild(top);
     card.appendChild(element("p","",tool.description||"No description provided."));
     card.appendChild(element("p","","Page: "+String(tool.page||tool.file||"Not set")));
-
     const price=Number(tool.price);
     card.appendChild(element("p","",
       Number.isFinite(price)&&price>=0?"Price: ₹"+price:"Price not set"));
-
     const actions=element("div","tool-actions");
     actions.appendChild(makeButton("Edit","secondary",()=>startEdit(tool)));
     actions.appendChild(makeButton(
-      tool.active===true?"Deactivate":"Activate",
-      "warning",()=>changeActive(tool)
+      tool.active===true?"Deactivate":"Activate","warning",()=>changeActive(tool)
     ));
     actions.appendChild(makeButton("Delete","danger",()=>removeTool(tool)));
-
     card.appendChild(actions);
     list.appendChild(card);
   });
 }
-
 async function changeActive(tool){
   if(busy)return;
-
   try{
     await updateDoc(doc(db,"tools",tool.id),{
-      active:tool.active!==true,
-      updatedAt:serverTimestamp()
+      active:tool.active!==true,updatedAt:serverTimestamp()
     });
     showMessage("Tool availability updated.","success");
   }catch(error){
@@ -562,11 +478,9 @@ async function changeActive(tool){
     showMessage("Could not update tool. Check Firestore permissions.","error");
   }
 }
-
 async function removeTool(tool){
   if(busy)return;
   if(!confirm('Delete "'+(tool.name||"this tool")+'"? This cannot be undone.'))return;
-
   try{
     await deleteDoc(doc(db,"tools",tool.id));
     if(editingId===tool.id)resetForm();
@@ -582,47 +496,35 @@ $("loginForm").addEventListener("submit",async event=>{
   event.preventDefault();
   clearMessage();
   setBusy(true);
-
   try{
-    await signInWithEmailAndPassword(
-      auth,$("email").value.trim(),$("password").value
-    );
+    await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value);
   }catch(error){
     console.error(error);
-    showMessage(
-      "Login failed. Check your email, password and Firebase Authentication settings.",
-      "error"
-    );
+    showMessage("Login failed. Check your email, password and Firebase Authentication settings.","error");
   }finally{
     setBusy(false);
   }
 });
 
-/* CHECK ADMIN ACCESS AND LOAD TOOLS */
+/* VERIFY ADMIN AND LOAD TOOLS */
 onAuthStateChanged(auth,async user=>{
   if(unsubscribeTools){
     unsubscribeTools();
     unsubscribeTools=null;
   }
-
   $("loginPanel").classList.remove("hidden");
   $("appPanel").classList.add("hidden");
-
   if(!user)return;
-
   try{
     const adminSnap=await getDoc(doc(db,"admins",user.uid));
-
     if(!adminSnap.exists()||adminSnap.data().role!=="admin"){
       await signOut(auth);
       showMessage("Access denied. This account is not authorized as an administrator.","error");
       return;
     }
-
     $("loginPanel").classList.add("hidden");
     $("appPanel").classList.remove("hidden");
     clearMessage();
-
     unsubscribeTools=onSnapshot(collection(db,"tools"),snapshot=>{
       tools=snapshot.docs.map(d=>({id:d.id,...d.data()}));
       renderTools();
@@ -637,7 +539,48 @@ onAuthStateChanged(auth,async user=>{
   }
 });
 
-/* SAVE OR UPDATE TOOL INCLUDING THUMBNAIL */
+/* DOWNLOAD TOOLS BACKUP */
+$("exportToolsButton").addEventListener("click",()=>{
+  try{
+    if(!auth.currentUser){
+      showMessage("Please sign in as an administrator first.","error");
+      return;
+    }
+    if(!tools.length){
+      showMessage("No tools are loaded. Backup was not created.","error");
+      return;
+    }
+    if(!confirm("Download a JSON backup of all "+tools.length+
+      " currently loaded tools? This does not back up other Firebase collections."))return;
+
+    const backup={
+      backupType:"CSC Seva Tools - Tools Collection",
+      collection:"tools",
+      exportedAt:new Date().toISOString(),
+      documentCount:tools.length,
+      documents:tools.map(tool=>({...tool,id:String(tool.id)}))
+    };
+    const blob=new Blob([JSON.stringify(backup,null,2)],{
+      type:"application/json;charset=utf-8"
+    });
+    const url=URL.createObjectURL(blob);
+    const link=document.createElement("a");
+    link.href=url;
+    link.download="CSC_Seva_Tools_Firestore_Backup_"+
+      new Date().toISOString().slice(0,10)+".json";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    showMessage("Tools JSON backup downloaded. Documents: "+tools.length+
+      ". Store the file safely; this is not a full database backup.","success");
+  }catch(error){
+    console.error("Tools backup error:",error);
+    showMessage("Backup failed. Please check the browser console.","error");
+  }
+});
+
+/* SAVE OR UPDATE TOOL */
 $("toolForm").addEventListener("submit",async event=>{
   event.preventDefault();
   if(busy)return;
@@ -652,46 +595,25 @@ $("toolForm").addEventListener("submit",async event=>{
   const price=Number($("toolPrice").value);
   const active=$("toolActive").value==="true";
 
-  if(!name){
-    showMessage("Enter a tool name.","error");
-    return;
-  }
-
+  if(!name){showMessage("Enter a tool name.","error");return;}
   if(!validPage(page)){
     showMessage("Enter a simple HTML filename, for example AIBiodata.html. Do not enter a folder path.","error");
     return;
   }
-
   if(!Number.isFinite(price)||price<0){
-    showMessage("Enter a valid non-negative price.","error");
-    return;
+    showMessage("Enter a valid non-negative price.","error");return;
   }
-
   if(!validThumbnail(thumbnail)){
-    showMessage("Thumbnail URL must start with https:// or http://.","error");
-    return;
+    showMessage("Thumbnail URL must start with https:// or http://.","error");return;
   }
 
   const duplicate=tools.find(t=>
     t.id!==editingId&&pageKey(t.page||t.file)===pageKey(page)
   );
-
   if(duplicate&&!confirm("Another tool already uses this filename. Save anyway?"))return;
 
-  const data={
-    name,
-    icon,
-    category,
-    description,
-    page,
-    price,
-    active,
-    thumbnail,
-    updatedAt:serverTimestamp()
-  };
-
+  const data={name,icon,category,description,page,price,active,thumbnail,updatedAt:serverTimestamp()};
   setBusy(true);
-
   try{
     if(editingId){
       await updateDoc(doc(db,"tools",editingId),data);
@@ -701,7 +623,6 @@ $("toolForm").addEventListener("submit",async event=>{
       await addDoc(collection(db,"tools"),data);
       showMessage("Tool and thumbnail added successfully.","success");
     }
-
     resetForm();
   }catch(error){
     console.error(error);
@@ -711,14 +632,8 @@ $("toolForm").addEventListener("submit",async event=>{
   }
 });
 
-/* FORM BUTTONS */
 $("toolThumbnail").addEventListener("input",updateThumbnailPreview);
-
-$("resetButton").addEventListener("click",()=>{
-  resetForm();
-  clearMessage();
-});
-
+$("resetButton").addEventListener("click",()=>{resetForm();clearMessage();});
 $("cancelEdit").addEventListener("click",resetForm);
 $("searchInput").addEventListener("input",renderTools);
 $("statusFilter").addEventListener("change",renderTools);
@@ -733,70 +648,38 @@ $("logoutButton").addEventListener("click",async()=>{
   }
 });
 
-/*
-  SAFE CATALOG SYNC:
-  - Updates metadata for matching filenames.
-  - Preserves existing thumbnail URLs, prices and active status.
-  - Adds missing catalog entries.
-  - Does not delete tools.
-*/
+/* SAFE CATALOG SYNC */
 $("importButton").addEventListener("click",async()=>{
   if(busy)return;
-
-  if(!confirm(
-    "Sync metadata for 47 catalog tools? Existing thumbnails, prices and active/inactive settings will be preserved. Missing tools may be added. No tools will be deleted."
-  ))return;
-
+  if(!confirm("Sync metadata for 47 catalog tools? Existing thumbnails, prices and active/inactive settings will be preserved. Missing tools may be added. No tools will be deleted."))return;
   setBusy(true);
   clearMessage();
-
   try{
     const response=await fetch("tools-catalog.json",{cache:"no-store"});
-
-    if(!response.ok){
-      throw new Error("Catalog HTTP status: "+response.status);
-    }
-
+    if(!response.ok)throw new Error("Catalog HTTP status: "+response.status);
     const catalog=await response.json();
-
     if(!Array.isArray(catalog)||catalog.length!==47){
-      throw new Error(
-        "Expected exactly 47 catalog entries; received "+
-        (Array.isArray(catalog)?catalog.length:"invalid JSON format")+"."
-      );
+      throw new Error("Expected exactly 47 catalog entries; received "+
+        (Array.isArray(catalog)?catalog.length:"invalid JSON format")+".");
     }
-
     const seen=new Set();
-
     for(let i=0;i<catalog.length;i++){
       const item=catalog[i];
       const name=String(item.name||"").trim();
       const page=String(item.page||item.file||"").trim();
-
-      if(!name||!validPage(page)){
-        throw new Error("Invalid name or HTML filename at catalog entry "+(i+1)+".");
-      }
-
+      if(!name||!validPage(page))throw new Error("Invalid name or HTML filename at catalog entry "+(i+1)+".");
       const key=pageKey(page);
       if(seen.has(key))throw new Error("Duplicate filename in catalog: "+page);
       seen.add(key);
-
-      if(item.price!==undefined&&
-         (!Number.isFinite(Number(item.price))||Number(item.price)<0)){
+      if(item.price!==undefined&&(!Number.isFinite(Number(item.price))||Number(item.price)<0)){
         throw new Error("Invalid price in catalog entry: "+name);
       }
     }
-
     let updated=0,added=0;
-
     for(const item of catalog){
       const name=String(item.name).trim();
       const page=String(item.page||item.file).trim();
-
-      const existing=tools.find(t=>
-        pageKey(t.page||t.file)===pageKey(page)
-      );
-
+      const existing=tools.find(t=>pageKey(t.page||t.file)===pageKey(page));
       const metadata={
         name,
         category:String(item.category||"General").trim()||"General",
@@ -804,41 +687,24 @@ $("importButton").addEventListener("click",async()=>{
         description:String(item.description||"").trim(),
         updatedAt:serverTimestamp()
       };
-
       if(existing){
-        // Deliberately do not overwrite the existing thumbnail.
         await updateDoc(doc(db,"tools",existing.id),metadata);
         updated++;
       }else{
-        const data={
-          ...metadata,
-          page,
-          file:page,
-          price:0,
-          active:true,
-          thumbnail:"",
+        await addDoc(collection(db,"tools"),{
+          ...metadata,page,file:page,price:0,active:true,thumbnail:"",
           createdAt:serverTimestamp()
-        };
-
-        await addDoc(collection(db,"tools"),data);
+        });
         added++;
       }
     }
-
-    showMessage(
-      "Catalog sync complete. Updated: "+updated+
+    showMessage("Catalog sync complete. Updated: "+updated+
       "; added: "+added+"; catalog entries: "+catalog.length+
-      ". Existing thumbnails, prices and availability were preserved.",
-      "success"
-    );
-
+      ". Existing thumbnails, prices and availability were preserved.","success");
   }catch(error){
     console.error("Catalog sync error:",error);
-    showMessage(
-      "Sync did not finish successfully: "+(error.message||"Unknown error")+
-      " Some earlier entries may already have updated. Check the catalog and permissions, then run sync again if needed.",
-      "error"
-    );
+    showMessage("Sync did not finish successfully: "+(error.message||"Unknown error")+
+      " Some earlier entries may already have updated. Check the catalog and permissions, then run sync again if needed.","error");
   }finally{
     setBusy(false);
   }
