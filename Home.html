@@ -442,6 +442,8 @@ $("emailLoginButton").addEventListener("click", async () => {
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
     closeAuth();
+    // Profile storage is separate from authentication. A profile permission error
+    // must not keep the successful login dialog open.
     ensureProfile(result.user).catch(error => {
       console.warn("Could not save user profile after email login:", error);
     });
@@ -493,17 +495,24 @@ $("verifyOtpButton").addEventListener("click", async () => {
   setBusy(true);
   try {
     const result = await confirmationResult.confirm(code);
+
+    // OTP verification succeeded: close the dialog immediately.
     confirmationResult = null;
     closeAuth();
+
+    // Reset reCAPTCHA without delaying the successful login UI.
     resetRecaptcha().catch(error => {
-      console.warn("reCAPTCHA reset warning:", error);
+      console.warn("Could not reset reCAPTCHA:", error);
     });
+
+    // Save the profile separately. Firestore permission errors must not
+    // prevent the dialog from closing after a successful OTP login.
     ensureProfile(
       result.user,
       result.user.displayName || "",
       result.user.phoneNumber || ""
     ).catch(error => {
-      console.warn("Profile save failed after OTP login:", error);
+      console.warn("Could not save user profile after OTP login:", error);
     });
   } catch (error) {
     console.error("OTP verification error:", error);
@@ -515,6 +524,7 @@ $("verifyOtpButton").addEventListener("click", async () => {
 
 onAuthStateChanged(auth, async user => {
   if (user) {
+    // Keep the modal synchronized with Firebase's real authentication state.
     closeAuth();
     $("accountStatus").textContent = "Logged in: " + (user.displayName || user.email || user.phoneNumber || "User");
     $("accountButton").classList.add("hidden");
