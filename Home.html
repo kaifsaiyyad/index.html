@@ -441,8 +441,13 @@ $("emailLoginButton").addEventListener("click", async () => {
   setBusy(true);
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
-    await ensureProfile(result.user);
+    // Authentication succeeded; close the modal before the optional profile write.
     closeAuth();
+    try {
+      await ensureProfile(result.user);
+    } catch (profileError) {
+      console.warn("Profile save failed after email login:", profileError);
+    }
   } catch (error) {
     setMessage(friendlyError(error), "error");
   } finally {
@@ -476,24 +481,11 @@ $("sendOtpButton").addEventListener("click", async () => {
     $("otpStep").classList.remove("hidden");
     setMessage("OTP sent. Check your SMS and enter the 6-digit code.", "success");
   } catch (error) {
-    console.error("PHONE OTP DEBUG:", {
-      code: error?.code,
-      message: error?.message,
-      name: error?.name,
-      customData: error?.customData
-    });
-
+    console.error("Phone OTP error:", error);
     const errorCode = error?.code || "unknown";
-    const errorMessage = error?.message || "No error message";
-
-    try {
-      await resetRecaptcha();
-    } catch (resetError) {
-      console.error("reCAPTCHA reset error:", resetError);
-    }
-
+    await resetRecaptcha();
     setMessage(
-      "Code: " + errorCode + " | " + errorMessage,
+      "OTP error code: " + errorCode + " â€” " + friendlyError(error),
       "error"
     );
   } finally {
@@ -509,11 +501,24 @@ $("verifyOtpButton").addEventListener("click", async () => {
   setBusy(true);
   try {
     const result = await confirmationResult.confirm(code);
-    await ensureProfile(result.user, result.user.displayName || "", result.user.phoneNumber || "");
+    // OTP verification is the login step. Close the popup immediately after success.
     confirmationResult = null;
     closeAuth();
     await resetRecaptcha();
+
+    // Profile storage is separate. Firestore permission errors must not keep the
+    // successful login popup open or make login appear to have failed.
+    try {
+      await ensureProfile(
+        result.user,
+        result.user.displayName || "",
+        result.user.phoneNumber || ""
+      );
+    } catch (profileError) {
+      console.warn("Profile save failed after OTP login:", profileError);
+    }
   } catch (error) {
+    console.error("OTP verification error:", error);
     setMessage(friendlyError(error), "error");
   } finally {
     setBusy(false);
