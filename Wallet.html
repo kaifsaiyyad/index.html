@@ -12,6 +12,7 @@ main{max-width:600px;margin:20px auto;padding:15px}
 .card{background:white;padding:18px;border-radius:12px;margin:15px 0}
 button,input{width:100%;padding:12px;margin:7px 0;box-sizing:border-box}
 button{background:#176b3a;color:white;border:0;border-radius:7px;font-weight:bold}
+button:disabled{opacity:.5}
 #msg{white-space:pre-wrap;overflow-wrap:anywhere}
 </style>
 </head>
@@ -26,10 +27,10 @@ button{background:#176b3a;color:white;border:0;border-radius:7px;font-weight:bol
 </div>
 
 <div class="card">
-<h3>Add Balance Request</h3>
+<h3>Add Wallet Balance</h3>
 <label>Amount (₹)</label>
 <input id="amount" type="number" min="1" max="5000" step="1" value="10">
-<button id="request">Create Payment Request</button>
+<button id="pay">Pay with Razorpay</button>
 <p id="msg">Connecting to Firebase...</p>
 </div>
 
@@ -40,6 +41,7 @@ button{background:#176b3a;color:white;border:0;border-radius:7px;font-weight:bol
 <button onclick="location.href='Home.html'">← Home</button>
 </main>
 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script type="module">
 import {initializeApp}
 from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
@@ -47,9 +49,11 @@ import {
  getAuth,onAuthStateChanged,signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 import {
- getFirestore,collection,addDoc,query,where,orderBy,onSnapshot,
- doc,getDoc
+ getFirestore,collection,query,where,orderBy,onSnapshot,doc,getDoc
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+import {
+ getFunctions,httpsCallable
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-functions.js";
 
 const config={
  apiKey:"AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
@@ -61,54 +65,57 @@ const config={
 const app=initializeApp(config);
 const auth=getAuth(app);
 const db=getFirestore(app);
+const functions=getFunctions(app,"asia-south1");
+const createOrder=httpsCallable(functions,"createPaymentOrder");
+const verifyPayment=httpsCallable(functions,"verifyPayment");
+
 const msg=document.getElementById("msg");
-const requestBtn=document.getElementById("request");
+const payBtn=document.getElementById("pay");
 let currentUser=null;
 let stopRequests=null;
+let stopWallet=null;
 
 onAuthStateChanged(auth,async user=>{
  currentUser=user;
  document.getElementById("user").textContent=user
-   ? "Logged in: "+(user.email||"Account")
-   : "Please log in to create a request.";
+  ? "Logged in: "+(user.email||"Account")
+  : "Please log in.";
  document.getElementById("login").hidden=!!user;
- requestBtn.disabled=!user;
+ payBtn.disabled=!user;
 
  if(stopRequests){stopRequests();stopRequests=null}
+ if(stopWallet){stopWallet();stopWallet=null}
+
  if(!user){
   document.getElementById("balance").textContent="Login required";
   document.getElementById("requests").textContent="Login to view requests.";
+  msg.textContent="Please log in to recharge.";
   return;
  }
 
- try{
-  const wallet=await getDoc(doc(db,"wallets",user.uid));
+ stopWallet=onSnapshot(doc(db,"wallets",user.uid),snap=>{
+  const balance=snap.exists()?Number(snap.data().balance||0):0;
   document.getElementById("balance").textContent=
-   wallet.exists() && Number.isFinite(wallet.data().balance)
-    ? "₹"+wallet.data().balance
-    : "₹0 (not yet credited)";
- }catch(e){
+   Number.isFinite(balance)?"₹"+balance:"Balance unavailable";
+ },()=>{
   document.getElementById("balance").textContent="Unavailable";
- }
+ });
 
- const q=query(
-  collection(db,"paymentRequests"),
-  where("uid","==",user.uid),
-  orderBy("createdAt","desc")
- );
+ const q=query(collection(db,"paymentRequests"),
+  where("uid","==",user.uid),orderBy("createdAt","desc"));
+
  stopRequests=onSnapshot(q,snap=>{
   const box=document.getElementById("requests");
   box.replaceChildren();
   if(snap.empty){box.textContent="No requests yet.";return}
   snap.forEach(item=>{
-   const d=item.data();
    const p=document.createElement("p");
+   const d=item.data();
    p.textContent="₹"+d.amount+" — "+d.status;
    box.appendChild(p);
   });
- },e=>{
-  document.getElementById("requests").textContent=
-   "Could not load requests: "+e.message;
+ },()=>{
+  document.getElementById("requests").textContent="Could not load requests.";
  });
 });
 
@@ -122,25 +129,73 @@ document.getElementById("login").onclick=async()=>{
  }catch(e){msg.textContent="Login failed: "+e.message}
 };
 
-requestBtn.onclick=async()=>{
- if(!currentUser){msg.textContent="Please login first.";return}
+payBtn.onclick=async()=>{
+ if(!currentUser){msg.textContent="Please log in first.";return}
+ if(typeof Razorpay==="undefined"){
+  msg.textContent="Payment checkout did not load. Check internet and retry.";
+  return;
+ }
+
  const amount=Number(document.getElementById("amount").value);
  if(!Number.isInteger(amount)||amount<1||amount>5000){
   msg.textContent="Enter a whole amount from ₹1 to ₹5000.";
   return;
  }
- requestBtn.disabled=true;
+
+ payBtn.disabled=true;
+ msg.textContent="Creating secure payment order...";
+
  try{
-  await addDoc(collection(db,"paymentRequests"),{
-   uid:currentUser.uid,
-   amount,
-   status:"pending",
-   createdAt:new Date()
+  const result=await createOrder({amount});
+  const order=result.data;
+
+  if(!order.orderId||!order.keyId||order.amount!==amount*100){
+   throw new Error("Invalid order response.");
+  }
+
+  const checkout=new Razorpay({
+   key:order.keyId,
+   amount:order.amount,
+   currency:order.currency,
+   name:"Kisan Seva Tools",
+   description:"Wallet recharge",
+   order_id:order.orderId,
+   prefill:{email:currentUser.email||""},
+   theme:{color:"#176b3a"},
+   handler:async response=>{
+    msg.textContent="Verifying payment with server...";
+    try{
+     await verifyPayment({
+      orderId:response.razorpay_order_id,
+      paymentId:response.razorpay_payment_id,
+      signature:response.razorpay_signature
+     });
+     msg.textContent="Payment verified. Wallet balance is updating.";
+    }catch(e){
+     msg.textContent="Payment submitted but verification is pending. Do not pay again immediately. Check your payment status.";
+    }finally{
+     payBtn.disabled=false;
+    }
+   },
+   modal:{
+    ondismiss:()=>{
+     msg.textContent="Checkout closed. Check payment status before retrying.";
+     payBtn.disabled=false;
+    }
+   }
   });
-  msg.textContent="Request created. Status: PENDING. Do not treat this as payment confirmation.";
+
+  checkout.on("payment.failed",response=>{
+   msg.textContent="Payment failed. Check status before retrying.";
+   payBtn.disabled=false;
+  });
+
+  checkout.open();
  }catch(e){
-  msg.textContent="Request failed: "+e.message;
- }finally{requestBtn.disabled=false}
+  console.error(e);
+  msg.textContent="Payment setup failed: "+(e.message||"Please retry later.");
+  payBtn.disabled=false;
+ }
 };
 </script>
 </body>
