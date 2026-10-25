@@ -1,42 +1,140 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI Biodata | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>AI Biodata</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: AI Tools • Icon: ✨</div></section><section class="panel"><label>Full name</label><textarea rows="2" id="f0" placeholder="Full name"></textarea><label>Date of birth</label><textarea rows="2" id="f1" placeholder="Date of birth"></textarea><label>Address</label><textarea rows="2" id="f2" placeholder="Address"></textarea><label>Education</label><textarea rows="2" id="f3" placeholder="Education"></textarea><label>Occupation</label><textarea rows="2" id="f4" placeholder="Occupation"></textarea><label>Family details</label><textarea rows="2" id="f5" placeholder="Family details"></textarea><button onclick="previewDoc()">Preview document</button><button class="secondary" onclick="window.print()">Print / Save PDF</button><div id="out"></div><script>function previewDoc(){let fs=["Full name", "Date of birth", "Address", "Education", "Occupation", "Family details"],out=document.querySelector("#out");out.innerHTML="<hr><h2>Document preview</h2>"+fs.map((x,i)=>"<p><b>"+x+":</b> "+(document.querySelector("#f"+i).value||"—").replace(/</g,"&lt;")+"</p>").join("")}</script></section></main><script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08745b">
+<title>AI Biodata Maker | CSC Seva Tools</title>
+<style>
+:root{--p:#08745b;--dark:#123e35;--gold:#c9a34d;--bg:#f4f8f5;--line:#dbe7df;--muted:#68786f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#253a30;font-family:Arial,sans-serif}
+header{padding:16px 5%;background:white;border-bottom:1px solid var(--line);font-size:20px;font-weight:800;color:var(--p)}header span{color:var(--dark)}
+.hero{padding:30px 5%;background:linear-gradient(120deg,#123e35,#08745b);color:white}.hero>div{max-width:1150px;margin:auto}
+.hero small{color:#f0d999;letter-spacing:2px;text-transform:uppercase}h1{font-size:clamp(27px,4vw,40px);margin:12px 0}.hero p{line-height:1.7;color:#e2f3e9;max-width:650px}
+main{max-width:1150px;margin:22px auto;padding:0 14px 35px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.card{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 6px 24px #123e3508}
+.head{padding:18px;border-bottom:1px solid var(--line)}.head h2{font-size:17px;margin:0 0 5px}.head p{font-size:11px;color:var(--muted);margin:0;line-height:1.5}
+.body{padding:17px}.field{margin-bottom:13px}label{display:block;font-size:11px;font-weight:700;margin-bottom:7px}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:12px;background:white;color:#253a30}
+textarea{min-height:65px;resize:vertical}input:focus,select:focus,textarea:focus{outline:2px solid #c6eadb;border-color:var(--p)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{border:0;border-radius:8px;padding:11px 14px;font-weight:700;font-size:12px;cursor:pointer}.primary{background:var(--p);color:white}.secondary{background:#e8f5ed;color:var(--p);border:1px solid var(--line)}.gold{background:var(--gold);color:#2b291e}
+.actions{display:flex;flex-wrap:wrap;gap:8px}.actions button{flex:1}
+.preview{padding:25px 22px;min-height:500px;background:#fffdf7;border-top:5px solid var(--gold)}
+.preview h2{text-align:center;color:var(--dark);font-family:Georgia,serif;font-size:26px;margin:0 0 5px}
+.subtitle{text-align:center;color:#96783a;font-size:11px;letter-spacing:2px;text-transform:uppercase}
+.rule{height:1px;background:#dfcc96;margin:18px 0}
+.p-section{margin:16px 0}.p-section h3{font-size:12px;color:var(--p);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #e8e2d1;padding-bottom:6px}
+.pair{display:grid;grid-template-columns:42% 58%;gap:6px;font-size:11px;line-height:1.65;padding:3px 0;overflow-wrap:anywhere}.pair span:first-child{color:#69766c}.pair strong{font-weight:600}
+#photoPreview{width:82px;height:100px;object-fit:cover;border:1px solid #dfcc96;display:none;margin:0 auto 12px}
+.note{font-size:11px;color:var(--muted);line-height:1.6;margin-top:12px}
+footer{text-align:center;padding:20px;background:white;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+@media(max-width:750px){.grid{grid-template-columns:1fr}.hero{padding:25px 17px}main{padding:0 10px 25px}.body{padding:14px}.preview{padding:20px 15px}}
+@media print{header,.hero,.form-card,footer,.preview-actions{display:none!important}main{margin:0;padding:0}.grid{display:block}.card{border:0;box-shadow:none}.preview{border-top:4px solid var(--gold);padding:12mm;min-height:0}}
+</style>
+</head>
+<body>
+<header>CSC <span>Seva Tools</span></header>
+<section class="hero"><div><small>Document tools · Tool 07</small><h1>Personal Biodata Maker</h1><p>Create a neatly formatted personal biodata for applications, records or personal use. Fill in only the details you want to include.</p></div></section>
+<main><div class="grid">
+<section class="card form-card">
+<div class="head"><h2>Enter your details</h2><p>Your preview updates as you type. No account needed.</p></div>
+<div class="body">
+<div class="field"><label for="fullName">Full name</label><input id="fullName" placeholder="Enter full name"></div>
+<div class="two">
+<div class="field"><label for="dob">Date of birth</label><input id="dob" type="date"></div>
+<div class="field"><label for="gender">Gender (optional)</label><select id="gender"><option value="">Not specified</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div>
+</div>
+<div class="two">
+<div class="field"><label for="marital">Marital status</label><select id="marital"><option value="">Not specified</option><option>Single</option><option>Married</option><option>Other</option></select></div>
+<div class="field"><label for="nationality">Nationality</label><input id="nationality" placeholder="e.g. Indian"></div>
+</div>
+<div class="field"><label for="address">Address</label><textarea id="address" placeholder="City, district, state"></textarea></div>
+<div class="two">
+<div class="field"><label for="phone">Phone (optional)</label><input id="phone" type="tel" placeholder="Contact number"></div>
+<div class="field"><label for="email">Email (optional)</label><input id="email" type="email" placeholder="Email address"></div>
+</div>
+<div class="field"><label for="education">Education</label><textarea id="education" placeholder="Qualification, institution and year"></textarea></div>
+<div class="field"><label for="occupation">Occupation / Profession</label><input id="occupation" placeholder="Current occupation"></div>
+<div class="two">
+<div class="field"><label for="father">Father's name (optional)</label><input id="father" placeholder="Father's name"></div>
+<div class="field"><label for="mother">Mother's name (optional)</label><input id="mother" placeholder="Mother's name"></div>
+</div>
+<div class="field"><label for="languages">Languages</label><input id="languages" placeholder="e.g. Marathi, Hindi, English"></div>
+<div class="field"><label for="hobbies">Interests / Hobbies</label><input id="hobbies" placeholder="Optional"></div>
+<div class="field"><label for="photo">Photo (optional)</label><input id="photo" type="file" accept="image/png,image/jpeg,image/webp"></div>
+<div class="field"><label for="extra">Additional information</label><textarea id="extra" placeholder="Any other details you choose to include"></textarea></div>
+<div class="actions"><button class="btn primary" id="print" type="button">Print / Save PDF</button><button class="btn secondary" id="clear" type="button">Clear form</button></div>
+<p class="note">Privacy tip: do not add Aadhaar numbers, bank details or other sensitive information unless absolutely required by the receiving organisation.</p>
+<div id="status" class="note" role="status" aria-live="polite"></div>
+</div>
+</section>
+<section class="card">
+<div class="head"><h2>Live biodata preview</h2><p>Review the details before printing.</p></div>
+<div class="body">
+<article class="preview" id="biodata">
+<img id="photoPreview" alt="Profile photo">
+<h2 id="pName">YOUR NAME</h2><div class="subtitle">Personal Biodata</div><div class="rule"></div>
+<div class="p-section"><h3>Personal information</h3>
+<div class="pair"><span>Date of birth</span><strong id="pDob">—</strong></div>
+<div class="pair"><span>Gender</span><strong id="pGender">—</strong></div>
+<div class="pair"><span>Marital status</span><strong id="pMarital">—</strong></div>
+<div class="pair"><span>Nationality</span><strong id="pNationality">—</strong></div>
+<div class="pair"><span>Address</span><strong id="pAddress">—</strong></div>
+</div>
+<div class="p-section"><h3>Contact information</h3>
+<div class="pair"><span>Phone</span><strong id="pPhone">—</strong></div>
+<div class="pair"><span>Email</span><strong id="pEmail">—</strong></div>
+</div>
+<div class="p-section"><h3>Education & work</h3>
+<div class="pair"><span>Education</span><strong id="pEducation">—</strong></div>
+<div class="pair"><span>Occupation</span><strong id="pOccupation">—</strong></div>
+</div>
+<div class="p-section"><h3>Family information</h3>
+<div class="pair"><span>Father's name</span><strong id="pFather">—</strong></div>
+<div class="pair"><span>Mother's name</span><strong id="pMother">—</strong></div>
+</div>
+<div class="p-section"><h3>Additional details</h3>
+<div class="pair"><span>Languages</span><strong id="pLanguages">—</strong></div>
+<div class="pair"><span>Interests</span><strong id="pHobbies">—</strong></div>
+<div class="pair"><span>Other details</span><strong id="pExtra">—</strong></div>
+</div>
+</article>
+</div>
+</section>
+</div></main>
+<footer>Document creation tools · CSC Seva Tools</footer>
+<script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+const $=id=>document.getElementById(id);
+const pairs={fullName:"pName",dob:"pDob",gender:"pGender",marital:"pMarital",nationality:"pNationality",address:"pAddress",phone:"pPhone",email:"pEmail",education:"pEducation",occupation:"pOccupation",father:"pFather",mother:"pMother",languages:"pLanguages",hobbies:"pHobbies",extra:"pExtra"};
+function update(){
+Object.keys(pairs).forEach(id=>{
+let v=$(id).value.trim();
+if(id==="dob"&&v){const d=new Date(v+"T00:00:00");v=isNaN(d)?"—":d.toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"});}
+$(pairs[id]).textContent=v||"—";
+});
+if(!$("fullName").value.trim())$("pName").textContent="YOUR NAME";
+}
+Object.keys(pairs).forEach(id=>$(id).addEventListener("input",update));
+$("photo").addEventListener("change",e=>{
+const file=e.target.files[0];if(!file)return;
+if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){
+$("status").textContent="Choose a JPG, PNG or WebP photo under 5 MB.";e.target.value="";return;
+}
+const reader=new FileReader();
+reader.onload=()=>{$("photoPreview").src=reader.result;$("photoPreview").style.display="block";};
+reader.readAsDataURL(file);$("status").textContent="";
+});
+$("print").addEventListener("click",()=>window.print());
+$("clear").addEventListener("click",()=>{
+if(!confirm("Clear all biodata fields?"))return;
+document.querySelectorAll(".form-card input:not([type=file]),.form-card textarea").forEach(el=>el.value="");
+document.querySelectorAll(".form-card select").forEach(el=>el.selectedIndex=0);
+$("photo").value="";$("photoPreview").removeAttribute("src");$("photoPreview").style.display="none";$("status").textContent="";update();
+});
+update();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
