@@ -1,42 +1,524 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI Passport Photo | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>AI Passport Photo</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: AI Tools • Icon: 🤖</div></section><section class="panel"><div class="note"><b>Integration required.</b> This tool needs an external service/library or API to do the full job reliably. This starter page is included so the tool can be listed and wired in Admin, but it does not pretend to perform the missing AI/PDF/live-rate processing.</div><p>Do not paste secret API keys into this public HTML page. Use a secure backend or Cloud Function for paid/private API keys.</p><label>Choose file (where applicable)</label><input type="file" id="file"><p id="status" class="muted">Ready. Connect a suitable API/service before enabling this tool for customers.</p><button onclick="document.querySelector('#status').textContent='No external processor is configured yet.'">Check status</button></section></main><script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1257d6">
+<title>AI Passport Photo Maker | CSC Seva Tools</title>
+<style>
+:root{
+  --primary:#1257d6;--dark:#10316b;--light:#edf4ff;
+  --bg:#f5f8ff;--text:#17243b;--muted:#65738a;
+  --border:#dce5f3;--white:#fff;--green:#16835d;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:15px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-size:20px;font-weight:800;color:var(--primary)}
+.brand span{color:var(--dark)}
+.top-note{font-size:12px;color:var(--muted)}
+.hero{background:linear-gradient(125deg,#10316b,#1257d6 65%,#3987ff);color:#fff;padding:32px 5% 38px}
+.hero-inner{max-width:1180px;margin:auto}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:.85}
+.hero h1{font-size:clamp(27px,4vw,42px);margin:12px 0}
+.hero p{max-width:650px;line-height:1.7;margin:0;color:#e3edff}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip{font-size:12px;padding:8px 11px;border:1px solid #ffffff55;background:#ffffff12;border-radius:30px}
+.container{max-width:1180px;margin:25px auto;padding:0 16px 40px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.step{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:13px}
+.step-num{width:30px;height:30px;display:grid;place-items:center;background:var(--light);color:var(--primary);border-radius:9px;font-weight:bold}
+.step b{font-size:13px}.step small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.82fr);gap:20px;align-items:start}
+.panel{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 5px 22px #16396b08}
+.panel-head{padding:18px 20px;border-bottom:1px solid var(--border)}
+.panel-head h2{font-size:18px;margin:0 0 6px}.panel-head p{font-size:12px;color:var(--muted);margin:0;line-height:1.5}
+.panel-body{padding:20px}
+.upload-zone{border:2px dashed #a9c6f8;background:#f7faff;border-radius:13px;padding:24px 15px;text-align:center;transition:.2s}
+.upload-zone.drag{background:#e8f1ff;border-color:var(--primary)}
+.upload-icon{width:50px;height:50px;border-radius:15px;background:#e2edff;color:var(--primary);display:grid;place-items:center;font-size:25px;margin:0 auto 12px}
+.upload-zone h3{font-size:15px;margin:0 0 7px}.upload-zone p{font-size:12px;color:var(--muted);line-height:1.6;margin:0 0 15px}
+.btn{border:0;border-radius:9px;padding:11px 15px;font-weight:700;font-size:13px;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:#0c46b5}
+.btn-light{background:var(--light);color:var(--primary)}
+.btn-outline{background:#fff;border:1px solid var(--border);color:var(--text)}
+.btn-success{background:var(--green);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.field{margin-top:18px}
+.field label{display:block;font-size:12px;font-weight:700;margin-bottom:8px}
+.field select,.field input[type="number"]{width:100%;border:1px solid var(--border);border-radius:9px;background:#fff;padding:11px;color:var(--text);outline:none}
+.field select:focus,.field input:focus{border-color:var(--primary)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.range-row{display:flex;align-items:center;gap:12px}
+.range-row input{width:100%;accent-color:var(--primary)}
+.range-val{font-size:12px;color:var(--primary);font-weight:700;min-width:40px;text-align:right}
+.color-options{display:flex;gap:10px;flex-wrap:wrap}
+.color-dot{width:32px;height:32px;border-radius:50%;border:3px solid white;outline:1px solid #cbd5e1;cursor:pointer}
+.color-dot.active{outline:3px solid var(--primary)}
+.help{font-size:11px;line-height:1.6;color:var(--muted);margin-top:7px}
+.preview-area{background:#eef3fb;padding:22px;display:flex;justify-content:center;align-items:center;min-height:340px}
+.photo-frame{width:210px;height:270px;max-width:100%;background:#fff;overflow:hidden;position:relative;box-shadow:0 5px 20px #10244820;border:1px solid #d6deea;touch-action:pan-y}
+.photo-frame img{width:100%;height:100%;object-fit:cover;display:none;position:absolute;inset:0;transform-origin:center}
+.placeholder{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:18px;color:#8795aa}
+.placeholder .person{font-size:46px;margin-bottom:10px}
+.placeholder strong{font-size:13px;color:#53647c}
+.placeholder span{font-size:11px;line-height:1.5;margin-top:7px}
+.preview-meta{display:flex;justify-content:space-between;gap:10px;padding:13px 18px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)}
+.preview-meta strong{color:var(--text)}
+.preview-controls{padding:16px 20px}
+.preview-controls .field:first-child{margin-top:0}
+.button-stack{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}
+.button-stack .wide{grid-column:1/-1}
+.status{display:none;margin-top:14px;padding:11px 12px;border-radius:9px;font-size:12px;line-height:1.5}
+.status.show{display:block}
+.status.error{background:#fff0f0;color:#a21b1b}
+.status.success{background:#eaf9f1;color:#126b47}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.tip{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px}
+.tip b{font-size:13px}.tip p{font-size:11px;line-height:1.6;color:var(--muted);margin:7px 0 0}
+.footer{text-align:center;color:var(--muted);font-size:11px;padding:22px 15px;border-top:1px solid var(--border);background:#fff}
+.footer b{color:var(--primary)}
+@media(max-width:760px){
+ .topbar{padding:13px 16px}.top-note{display:none}
+ .hero{padding:27px 18px}.container{margin-top:16px;padding:0 12px 25px}
+ .steps{gap:7px}.step{padding:10px 7px;gap:7px}.step small{display:none}.step b{font-size:11px}.step-num{width:26px;height:26px;flex-shrink:0}
+ .workspace{grid-template-columns:1fr;gap:15px}
+ .panel-body{padding:15px}.panel-head{padding:16px}
+ .preview-area{min-height:300px}
+ .tips{grid-template-columns:1fr}
+}
+@media(max-width:380px){.two-col{grid-template-columns:1fr}.button-stack{grid-template-columns:1fr}.button-stack .wide{grid-column:auto}}
+@media print{
+ body{background:white}
+ .topbar,.hero,.steps,.workspace>.panel:first-child,.tips,.footer,.panel-head,.preview-controls,.preview-meta,.upload-zone{display:none!important}
+ .container{margin:0;padding:0}
+ .workspace{display:block}
+ .workspace>.panel:last-child{border:0;box-shadow:none}
+ .preview-area{padding:0;background:white;min-height:0}
+ .photo-frame{box-shadow:none;border:0;width:35mm;height:45mm}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">CSC <span>Seva Tools</span></div>
+  <div class="top-note">Simple tools for everyday document work</div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Photo Studio · Tool 01</div>
+    <h1>AI Passport Photo Maker</h1>
+    <p>Upload a photo, adjust its position, choose a background colour and prepare a passport-style photo for printing.</p>
+    <div class="chips">
+      <span class="chip">✓ Image preview</span>
+      <span class="chip">✓ Position & zoom</span>
+      <span class="chip">✓ Print support</span>
+      <span class="chip">✓ Mobile friendly</span>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div><b>Upload photo</b><small>Choose an image</small></div></div>
+    <div class="step"><div class="step-num">2</div><div><b>Adjust photo</b><small>Size and background</small></div></div>
+    <div class="step"><div class="step-num">3</div><div><b>Export</b><small>Save or print</small></div></div>
+  </div>
+
+  <div class="workspace">
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Photo settings</h2>
+        <p>Upload your image and customise the preview.</p>
+      </div>
+      <div class="panel-body">
+        <div class="upload-zone" id="dropZone">
+          <div class="upload-icon">↑</div>
+          <h3>Upload your photo</h3>
+          <p>JPG, PNG or WebP · Recommended: clear, front-facing photo</p>
+          <button class="btn btn-primary" id="chooseBtn" type="button">Choose photo</button>
+          <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+        </div>
+
+        <div class="field">
+          <label for="sizePreset">Photo format</label>
+          <select id="sizePreset">
+            <option value="35x45">Passport style — 35 × 45 mm</option>
+            <option value="2x2">Square photo — 2 × 2 inches</option>
+            <option value="3.5x4.5">Photo — 3.5 × 4.5 cm</option>
+            <option value="custom">Custom dimensions</option>
+          </select>
+        </div>
+
+        <div class="two-col" id="customSize" hidden>
+          <div class="field">
+            <label for="customW">Width (mm)</label>
+            <input id="customW" type="number" min="10" max="100" value="35">
+          </div>
+          <div class="field">
+            <label for="customH">Height (mm)</label>
+            <input id="customH" type="number" min="10" max="100" value="45">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="zoom">Zoom</label>
+          <div class="range-row">
+            <input id="zoom" type="range" min="100" max="250" value="100">
+            <span class="range-val" id="zoomVal">100%</span>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="horizontal">Horizontal position</label>
+            <div class="range-row">
+              <input id="horizontal" type="range" min="-100" max="100" value="0">
+              <span class="range-val" id="horizontalVal">0</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="vertical">Vertical position</label>
+            <div class="range-row">
+              <input id="vertical" type="range" min="-100" max="100" value="0">
+              <span class="range-val" id="verticalVal">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Background colour</label>
+          <div class="color-options">
+            <button type="button" class="color-dot active" data-color="#ffffff" style="background:#ffffff" aria-label="White background"></button>
+            <button type="button" class="color-dot" data-color="#eaf2ff" style="background:#eaf2ff" aria-label="Light blue background"></button>
+            <button type="button" class="color-dot" data-color="#d9f1ff" style="background:#d9f1ff" aria-label="Sky blue background"></button>
+            <button type="button" class="color-dot" data-color="#e8f5e9" style="background:#e8f5e9" aria-label="Light green background"></button>
+            <button type="button" class="color-dot" data-color="#f2f2f2" style="background:#f2f2f2" aria-label="Light grey background"></button>
+          </div>
+          <p class="help">Background colour changes the space behind transparent areas; it does not automatically remove a photo's existing background.</p>
+        </div>
+
+        <div class="button-stack">
+          <button class="btn btn-outline" id="resetBtn" type="button">↺ Reset settings</button>
+          <button class="btn btn-light" id="clearBtn" type="button">Clear photo</button>
+          <button class="btn btn-primary wide" id="downloadBtn" type="button" disabled>↓ Download photo</button>
+        </div>
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Live photo preview</h2>
+        <p>Your adjustments appear here. Check the crop before saving.</p>
+      </div>
+      <div class="preview-area" id="previewArea">
+        <div class="photo-frame" id="photoFrame">
+          <div class="placeholder" id="placeholder">
+            <div class="person">▧</div>
+            <strong>Your photo appears here</strong>
+            <span>Upload an image to begin</span>
+          </div>
+          <img id="photo" alt="Passport photo preview">
+        </div>
+      </div>
+      <div class="preview-meta">
+        <span>Selected format: <strong id="formatLabel">35 × 45 mm</strong></span>
+        <span id="resolutionLabel">No image</span>
+      </div>
+      <div class="preview-controls">
+        <div class="field">
+          <label for="outputQuality">Download quality</label>
+          <select id="outputQuality">
+            <option value="high">High quality — PNG</option>
+            <option value="jpeg">JPG — smaller file</option>
+          </select>
+        </div>
+        <div class="button-stack">
+          <button class="btn btn-outline" id="printBtn" type="button" disabled>⎙ Print preview</button>
+          <button class="btn btn-success" id="saveBtn" type="button" disabled>↓ Save image</button>
+        </div>
+        <p class="help">This tool prepares a single photo. Exact dimensions and acceptance requirements vary by application or issuing authority.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="tips">
+    <div class="tip"><b>01 · Use clear lighting</b><p>Choose a sharp photo with even lighting and your face clearly visible.</p></div>
+    <div class="tip"><b>02 · Check the crop</b><p>Use zoom and position controls to keep your face within the frame.</p></div>
+    <div class="tip"><b>03 · Verify requirements</b><p>Before submitting, check the photo size and background rules for your specific form.</p></div>
+  </div>
+</main>
+
+<footer class="footer">Made for everyday document work · <b>CSC Seva Tools</b></footer>
+
+<script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  const fileInput = $("fileInput");
+  const dropZone = $("dropZone");
+  const photo = $("photo");
+  const frame = $("photoFrame");
+  const placeholder = $("placeholder");
+  const statusBox = $("status");
+
+  let imageUrl = null;
+  let imageWidth = 0;
+  let imageHeight = 0;
+  let background = "#ffffff";
+  let currentFileName = "passport-photo";
+
+  const presets = {
+    "35x45": {w:35,h:45,label:"35 × 45 mm"},
+    "2x2": {w:50.8,h:50.8,label:"2 × 2 inches"},
+    "3.5x4.5": {w:35,h:45,label:"3.5 × 4.5 cm"}
+  };
+
+  function message(text,type){
+    statusBox.textContent = text;
+    statusBox.className = "status show " + type;
+  }
+
+  function clearMessage(){
+    statusBox.className = "status";
+    statusBox.textContent = "";
+  }
+
+  function dimensions(){
+    const key = $("sizePreset").value;
+    if(key === "custom"){
+      return {
+        w:Math.max(10,Math.min(100,Number($("customW").value)||35)),
+        h:Math.max(10,Math.min(100,Number($("customH").value)||45)),
+        label:($("customW").value||35)+" × "+($("customH").value||45)+" mm"
+      };
+    }
+    return presets[key];
+  }
+
+  function updateFrame(){
+    const d = dimensions();
+    const ratio = d.w / d.h;
+    const maxW = Math.min(250,Math.max(150,frame.parentElement.clientWidth - 45));
+    let w = maxW;
+    let h = w / ratio;
+    if(h > 330){h=330;w=h*ratio;}
+    frame.style.width = w + "px";
+    frame.style.height = h + "px";
+    frame.style.background = background;
+    $("formatLabel").textContent = d.label;
+  }
+
+  function updatePhoto(){
+    const zoom = Number($("zoom").value);
+    const x = Number($("horizontal").value);
+    const y = Number($("vertical").value);
+    photo.style.transform = "translate("+x+"%,"+y+"%) scale("+zoom/100+")";
+    $("zoomVal").textContent = zoom + "%";
+    $("horizontalVal").textContent = x;
+    $("verticalVal").textContent = y;
+  }
+
+  function setImage(file){
+    clearMessage();
+    if(!file) return;
+    if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
+      message("Please select a JPG, PNG or WebP image.","error");
+      return;
+    }
+    if(file.size > 15*1024*1024){
+      message("Image is larger than 15 MB. Please choose a smaller file.","error");
+      return;
+    }
+
+    const newUrl = URL.createObjectURL(file);
+    const testImage = new Image();
+
+    testImage.onload = function(){
+      if(imageUrl) URL.revokeObjectURL(imageUrl);
+      imageUrl = newUrl;
+      imageWidth = testImage.naturalWidth;
+      imageHeight = testImage.naturalHeight;
+      currentFileName = (file.name.replace(/\.[^.]+$/,"") || "passport-photo").replace(/[^a-z0-9_-]/gi,"-");
+
+      photo.src = imageUrl;
+      photo.style.display = "block";
+      placeholder.style.display = "none";
+      $("resolutionLabel").textContent = imageWidth+" × "+imageHeight+" px";
+      $("downloadBtn").disabled = false;
+      $("saveBtn").disabled = false;
+      $("printBtn").disabled = false;
+      updateFrame();
+      updatePhoto();
+      message("Photo loaded successfully. Adjust the crop and review the preview.","success");
+    };
+
+    testImage.onerror = function(){
+      URL.revokeObjectURL(newUrl);
+      message("This image could not be opened. Please try another file.","error");
+    };
+    testImage.src = newUrl;
+  }
+
+  function clearPhoto(){
+    if(imageUrl) URL.revokeObjectURL(imageUrl);
+    imageUrl = null;
+    photo.removeAttribute("src");
+    photo.style.display = "none";
+    placeholder.style.display = "flex";
+    fileInput.value = "";
+    imageWidth = 0;
+    imageHeight = 0;
+    $("resolutionLabel").textContent = "No image";
+    $("downloadBtn").disabled = true;
+    $("saveBtn").disabled = true;
+    $("printBtn").disabled = true;
+    clearMessage();
+  }
+
+  function resetSettings(){
+    $("zoom").value = 100;
+    $("horizontal").value = 0;
+    $("vertical").value = 0;
+    background = "#ffffff";
+    document.querySelectorAll(".color-dot").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.color === background);
+    });
+    updateFrame();
+    updatePhoto();
+    clearMessage();
+  }
+
+  function renderCanvas(){
+    if(!imageUrl) throw new Error("Upload a photo first.");
+
+    const d = dimensions();
+    // Export at approximately 300 DPI.
+    const outW = Math.round(d.w / 25.4 * 300);
+    const outH = Math.round(d.h / 25.4 * 300);
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.min(outW,2000);
+    canvas.height = Math.min(outH,2000);
+    const ctx = canvas.getContext("2d");
+    if(!ctx) throw new Error("Canvas is not supported in this browser.");
+
+    ctx.fillStyle = background;
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    const scale = Math.max(canvas.width/imageWidth,canvas.height/imageHeight) * (Number($("zoom").value)/100);
+    const drawW = imageWidth*scale;
+    const drawH = imageHeight*scale;
+    const offsetX = (canvas.width-drawW)/2 + (Number($("horizontal").value)/100)*canvas.width;
+    const offsetY = (canvas.height-drawH)/2 + (Number($("vertical").value)/100)*canvas.height;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0,0,canvas.width,canvas.height);
+    ctx.clip();
+    ctx.drawImage(photo,offsetX,offsetY,drawW,drawH);
+    ctx.restore();
+    return canvas;
+  }
+
+  function downloadPhoto(){
+    try{
+      const canvas = renderCanvas();
+      const jpg = $("outputQuality").value === "jpeg";
+      const mime = jpg ? "image/jpeg" : "image/png";
+      const link = document.createElement("a");
+      link.download = currentFileName+"-passport-photo."+(jpg?"jpg":"png");
+      link.href = canvas.toDataURL(mime,jpg?0.94:1);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      message("Your photo export has started. Check your Downloads folder.","success");
+    }catch(err){
+      message(err.message || "Could not export the photo.","error");
+    }
+  }
+
+  $("chooseBtn").addEventListener("click",()=>fileInput.click());
+  fileInput.addEventListener("change",e=>setImage(e.target.files[0]));
+
+  ["dragenter","dragover"].forEach(eventName=>{
+    dropZone.addEventListener(eventName,e=>{
+      e.preventDefault();
+      dropZone.classList.add("drag");
+    });
+  });
+  ["dragleave","drop"].forEach(eventName=>{
+    dropZone.addEventListener(eventName,e=>{
+      e.preventDefault();
+      dropZone.classList.remove("drag");
+    });
+  });
+  dropZone.addEventListener("drop",e=>{
+    const file=e.dataTransfer.files[0];
+    if(file) setImage(file);
+  });
+
+  ["zoom","horizontal","vertical"].forEach(id=>{
+    $(id).addEventListener("input",updatePhoto);
+  });
+
+  $("sizePreset").addEventListener("change",()=>{
+    $("customSize").hidden = $("sizePreset").value !== "custom";
+    updateFrame();
+  });
+  ["customW","customH"].forEach(id=>{
+    $(id).addEventListener("input",updateFrame);
+  });
+
+  document.querySelectorAll(".color-dot").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      background=btn.dataset.color;
+      document.querySelectorAll(".color-dot").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      updateFrame();
+      clearMessage();
+    });
+  });
+
+  $("resetBtn").addEventListener("click",resetSettings);
+  $("clearBtn").addEventListener("click",clearPhoto);
+  $("downloadBtn").addEventListener("click",downloadPhoto);
+  $("saveBtn").addEventListener("click",downloadPhoto);
+
+  $("printBtn").addEventListener("click",()=>{
+    if(!imageUrl) return;
+    try{
+      const canvas=renderCanvas();
+      const printUrl=canvas.toDataURL("image/png");
+      const win=window.open("","_blank");
+      if(!win){
+        message("Print window was blocked. Allow pop-ups or use Download photo.","error");
+        return;
+      }
+      win.document.write(
+        '<!DOCTYPE html><html><head><title>Passport Photo Print</title>'+
+        '<meta name="viewport" content="width=device-width, initial-scale=1">'+
+        '<style>@page{margin:10mm}body{margin:0;display:flex;justify-content:center;align-items:flex-start;padding-top:10mm}img{width:'+dimensions().w+'mm;height:'+dimensions().h+'mm;object-fit:fill}'+
+        '@media screen{body{padding:20px}img{max-width:90vw;max-height:75vh;width:auto;height:auto;object-fit:contain}}</style>'+
+        '</head><body><img src="'+printUrl+'" alt="Passport photo">'+
+        '<script>window.onload=function(){setTimeout(function(){window.print()},300)};<\/script>'+
+        '</body></html>'
+      );
+      win.document.close();
+    }catch(err){
+      message(err.message || "Unable to prepare print preview.","error");
+    }
+  });
+
+  window.addEventListener("resize",updateFrame);
+  updateFrame();
+  updatePhoto();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
