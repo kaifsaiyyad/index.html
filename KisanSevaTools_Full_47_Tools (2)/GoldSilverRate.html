@@ -1,42 +1,114 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gold & Silver Rate | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Gold & Silver Rate</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: Calculators • Icon: 🥇</div></section><section class="panel"><div class="note"><b>Integration required.</b> This tool needs an external service/library or API to do the full job reliably. This starter page is included so the tool can be listed and wired in Admin, but it does not pretend to perform the missing AI/PDF/live-rate processing.</div><p>Do not paste secret API keys into this public HTML page. Use a secure backend or Cloud Function for paid/private API keys.</p><label>Choose file (where applicable)</label><input type="file" id="file"><p id="status" class="muted">Ready. Connect a suitable API/service before enabling this tool for customers.</p><button onclick="document.querySelector('#status').textContent='No external processor is configured yet.'">Check status</button></section></main><script>
-(function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#171717">
+<title>Gold & Silver Price Studio | CSC Seva Tools</title>
+<style>
+:root{--bg:#f5f3ee;--ink:#24231f;--muted:#817c70;--line:#e5dfd2;--gold:#b58a3c;--dark:#191916;--white:#fff;--green:#24684b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,Segoe UI,sans-serif}button,input,select{font:inherit}button{cursor:pointer}
+header{background:var(--dark);color:white}.top{max-width:1300px;margin:auto;padding:17px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:900;letter-spacing:1px}.brand small{display:block;color:#c4bba7;font-size:10px;letter-spacing:2px}.tag{border:1px solid #6d634d;border-radius:99px;padding:7px 11px;color:#e7c987;font-size:10px}
+main{max-width:1300px;margin:auto;padding:30px 24px 45px}.hero{display:flex;justify-content:space-between;align-items:end;gap:18px;flex-wrap:wrap;margin-bottom:22px}.kicker{color:var(--gold);font-size:10px;letter-spacing:2px;font-weight:900}h1{font-size:clamp(28px,4vw,43px);line-height:1.1;letter-spacing:-1.5px;margin:7px 0}.sub{color:var(--muted);margin:0;max-width:680px}
+.metagrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:18px}.metalcard{background:var(--dark);color:white;border-radius:16px;padding:20px;position:relative;overflow:hidden}.metalcard.silver{background:#34404a}.metalname{font-size:11px;letter-spacing:2px;color:#d9c38d;font-weight:850}.silver .metalname{color:#dbe7ef}.bigprice{font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:-1px;margin:9px 0}.metalmeta{font-size:11px;color:#c6c1b5}.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:17px;align-items:start}.card{background:white;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 5px 20px #30281908;margin-bottom:17px}.head{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}.head h2{font-size:13px;margin:0}.head p{font-size:10px;color:var(--muted);margin:3px 0 0}.body{padding:17px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:10px;font-weight:850;color:#6d675c;margin-bottom:6px}.field input,.field select{width:100%;height:42px;border:1px solid var(--line);border-radius:9px;padding:9px 10px;background:#fff;color:var(--ink)}.field.full{grid-column:1/-1}.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:10px 13px;font-size:11px;font-weight:850}.primary{background:var(--dark);color:white;border-color:var(--dark)}.goldbtn{background:var(--gold);color:white;border-color:var(--gold)}.row{display:flex;gap:8px;flex-wrap:wrap}.row .btn{flex:1}.result{background:#f8f4e9;border:1px solid #e7d8b8;border-radius:12px;padding:17px}.result small{color:#7c6b4a;font-weight:850;letter-spacing:1px}.result strong{display:block;font-size:29px;margin:5px 0;color:#70501c;overflow-wrap:anywhere}.line{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:11px}.line span{color:var(--muted)}.line:last-child{border-bottom:0}.note{font-size:10px;color:var(--muted);line-height:1.7}.notice{background:#fff8e8;border:1px solid #efdfb7;border-radius:10px;padding:12px;color:#7d6a42;font-size:10px;line-height:1.7}footer{max-width:1300px;margin:auto;padding:18px 24px 26px;border-top:1px solid var(--line);font-size:10px;color:var(--muted)}
+@media(max-width:850px){.layout{grid-template-columns:1fr}}@media(max-width:550px){main,.top,footer{padding-left:13px;padding-right:13px}.metagrid{gap:8px}.metalcard{padding:14px}.bigprice{font-size:23px}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.body{padding:13px}}
+@media print{@page{size:A4;margin:12mm}header,.hero,.no-print,footer{display:none!important}main{padding:0}.layout{display:block}.card{box-shadow:none;break-inside:avoid}.metalcard{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="brand">CSC SEVA TOOLS<small>PRECIOUS METAL PRICE STUDIO</small></div><span class="tag">GOLD · SILVER</span></div></header>
+<main>
+<section class="hero"><div><div class="kicker">Commodity calculator</div><h1>Gold & Silver Studio<span style="color:#b58a3c">.</span></h1><p class="sub">Maintain your own reference rates and estimate metal value by purity, weight, making charges and optional tax.</p></div></section>
+<div class="metagrid">
+ <div class="metalcard"><div class="metalname">24K GOLD · REFERENCE RATE</div><div class="bigprice" id="goldDisplay">₹7,200.00</div><div class="metalmeta">Per gram · Editable sample rate</div></div>
+ <div class="metalcard silver"><div class="metalname">SILVER · REFERENCE RATE</div><div class="bigprice" id="silverDisplay">₹90.00</div><div class="metalmeta">Per gram · Editable sample rate</div></div>
+</div>
+<div class="layout">
+<div>
+<section class="card"><div class="head"><div><h2>01 / Rate book</h2><p>Enter your trusted local reference prices.</p></div></div>
+<div class="body"><div class="grid">
+<div class="field"><label for="goldRate">24K GOLD RATE / GRAM (₹)</label><input id="goldRate" type="number" min="0" max="10000000" step=".01" value="7200"></div>
+<div class="field"><label for="silverRate">SILVER RATE / GRAM (₹)</label><input id="silverRate" type="number" min="0" max="10000000" step=".01" value="90"></div>
+<div class="field full"><label for="rateDate">RATE DATE</label><input id="rateDate" type="date"></div>
+</div><p class="note">These are illustrative starting values, not live market quotes. Replace them before using this calculator for a transaction.</p></div></section>
+<section class="card"><div class="head"><div><h2>02 / Metal valuation</h2><p>Calculate the estimated value of an item.</p></div><span style="color:#b58a3c;font-size:10px;font-weight:900">LIVE MATH</span></div>
+<div class="body"><div class="grid">
+<div class="field"><label for="metal">METAL</label><select id="metal"><option value="gold">Gold</option><option value="silver">Silver</option></select></div>
+<div class="field"><label for="purity">PURITY</label><select id="purity"><option value="100">24K / 999 · 100%</option><option value="91.6" selected>22K · 91.6%</option><option value="83.3">20K · 83.3%</option><option value="75">18K · 75%</option><option value="58.5">14K · 58.5%</option><option value="99.9">Silver 999 · 99.9%</option><option value="92.5">Silver 925 · 92.5%</option><option value="custom">Custom purity</option></select></div>
+<div class="field" id="customPurityField" style="display:none"><label for="customPurity">CUSTOM PURITY (%)</label><input id="customPurity" type="number" min="0" max="100" step=".01" value="90"></div>
+<div class="field"><label for="weight">WEIGHT</label><input id="weight" type="number" min="0" max="1000000" step=".001" value="10"></div>
+<div class="field"><label for="unit">WEIGHT UNIT</label><select id="unit"><option value="g">Gram (g)</option><option value="mg">Milligram (mg)</option><option value="kg">Kilogram (kg)</option><option value="tola">Tola (approx. 11.6638 g)</option></select></div>
+<div class="field"><label for="makingType">MAKING CHARGE TYPE</label><select id="makingType"><option value="amount">Fixed amount (₹)</option><option value="percent">Percentage of metal value</option></select></div>
+<div class="field"><label for="making">MAKING CHARGE</label><input id="making" type="number" min="0" max="10000000" step=".01" value="0"></div>
+<div class="field"><label for="wastage">WASTAGE (%)</label><input id="wastage" type="number" min="0" max="100" step=".01" value="0"></div>
+<div class="field"><label for="gst">GST ESTIMATE (%)</label><select id="gst"><option value="0">0%</option><option value="3">3%</option><option value="5">5%</option><option value="18">18%</option><option value="custom">Custom rate</option></select></div>
+<div class="field full" id="customGSTField" style="display:none"><label for="customGST">CUSTOM GST (%)</label><input id="customGST" type="number" min="0" max="100" step=".01" value="3"></div>
+</div></div></section>
+</div>
+<aside>
+<section class="card"><div class="head"><div><h2>Estimated valuation</h2><p>Calculated from your inputs</p></div></div><div class="body">
+<div class="result"><small>ESTIMATED TOTAL</small><strong id="total">₹0.00</strong><div class="note" id="totalDescription">Before verification</div></div>
+<div class="line"><span>Pure-metal equivalent weight</span><b id="pureWeight">0 g</b></div>
+<div class="line"><span>Base rate per gram</span><b id="baseRate">₹0.00</b></div>
+<div class="line"><span>Metal value</span><b id="metalValue">₹0.00</b></div>
+<div class="line"><span>Wastage amount</span><b id="wastageValue">₹0.00</b></div>
+<div class="line"><span>Making charges</span><b id="makingValue">₹0.00</b></div>
+<div class="line"><span>Taxable subtotal</span><b id="subtotal">₹0.00</b></div>
+<div class="line"><span>GST estimate</span><b id="gstValue">₹0.00</b></div>
+<div class="line"><span>Final estimate</span><b id="finalTotal">₹0.00</b></div>
+<div class="row no-print" style="margin-top:14px"><button class="btn primary" id="print">Print / Save PDF</button><button class="btn goldbtn" id="reset">Reset</button></div>
+</div></section>
+<div class="notice"><b>Important:</b> This is an estimate only. Actual jewellery pricing can depend on verified daily rates, hallmark/purity, stone weight, shop charges, applicable tax rules and other adjustments. Confirm the correct tax treatment before billing.</div>
+</aside>
+</div>
+</main>
+<footer>CSC Seva Tools · Gold & Silver Price Studio · Manually entered rates only</footer>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const date=new Date();date.setMinutes(date.getMinutes()-date.getTimezoneOffset());$('rateDate').value=date.toISOString().slice(0,10);
+const ids=['goldRate','silverRate','metal','purity','customPurity','weight','unit','makingType','making','wastage','gst','customGST'];
+function n(id){const x=Number($(id).value);return Number.isFinite(x)?x:0}
+function valid(id,min,max){const x=n(id);return x>=min&&x<=max}
+function fmt(v){return '₹'+v.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function calculate(){
+ $('goldDisplay').textContent=fmt(Math.max(0,n('goldRate')));
+ $('silverDisplay').textContent=fmt(Math.max(0,n('silverRate')));
+ $('customPurityField').style.display=$('purity').value==='custom'?'':'none';
+ $('customGSTField').style.display=$('gst').value==='custom'?'':'none';
+ let purity=$('purity').value==='custom'?n('customPurity'):n('purity');
+ purity=Math.max(0,Math.min(100,purity));
+ const rawWeight=Math.max(0,n('weight'));
+ const unit=$('unit').value;
+ const grams=rawWeight*(unit==='mg'?.001:unit==='kg'?1000:unit==='tola'?11.6638:1);
+ const base=Math.max(0,$('metal').value==='gold'?n('goldRate'):n('silverRate'));
+ const metalValue=grams*base*(purity/100);
+ const wastagePercent=Math.max(0,Math.min(100,n('wastage')));
+ const wastage=metalValue*wastagePercent/100;
+ const makingInput=Math.max(0,n('making'));
+ const making=$('makingType').value==='percent'?(metalValue+wastage)*makingInput/100:makingInput;
+ const subtotal=metalValue+wastage+making;
+ const taxRate=$('gst').value==='custom'?Math.max(0,Math.min(100,n('customGST'))):n('gst');
+ const tax=subtotal*taxRate/100;
+ const total=subtotal+tax;
+ $('pureWeight').textContent=(grams*purity/100).toLocaleString('en-IN',{maximumFractionDigits:4})+' g';
+ $('baseRate').textContent=fmt(base);
+ $('metalValue').textContent=fmt(metalValue);
+ $('wastageValue').textContent=fmt(wastage);
+ $('makingValue').textContent=fmt(making);
+ $('subtotal').textContent=fmt(subtotal);
+ $('gstValue').textContent=fmt(tax);
+ $('finalTotal').textContent=fmt(total);
+ $('total').textContent=fmt(total);
+ $('totalDescription').textContent=`${grams.toLocaleString('en-IN',{maximumFractionDigits:4})} g gross · ${purity}% purity · ${taxRate}% tax estimate`;
+}
+ids.forEach(id=>{ $(id).addEventListener('input',calculate);$(id).addEventListener('change',calculate);});
+$('print').addEventListener('click',()=>window.print());
+$('reset').addEventListener('click',()=>{
+ if(!confirm('Reset the calculator to its sample values?'))return;
+ $('goldRate').value=7200;$('silverRate').value=90;$('metal').value='gold';$('purity').value='91.6';$('customPurity').value=90;$('weight').value=10;$('unit').value='g';$('makingType').value='amount';$('making').value=0;$('wastage').value=0;$('gst').value='0';$('customGST').value=3;calculate();
+});
+calculate();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
