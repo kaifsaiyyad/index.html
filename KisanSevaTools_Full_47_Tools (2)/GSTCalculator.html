@@ -1,42 +1,393 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GST Calculator | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>GST Calculator</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: Calculators • Icon: 🧾</div></section><section class="panel"><label>Amount (₹)</label><input id="a" type="number" value="1000"><label>GST rate</label><select id="r"><option>5</option><option>12</option><option selected>18</option><option>28</option></select><label>Price includes GST?</label><select id="inc"><option value="no">No, add GST</option><option value="yes">Yes, inclusive</option></select><button onclick="calc()">Calculate</button><h2 id="out"></h2><script>function calc(){const a=Number(document.querySelector('#a').value),rate=Number(document.querySelector('#r').value),inc=document.querySelector('#inc').value,out=document.querySelector('#out');if(!Number.isFinite(a)||a<0||!Number.isFinite(rate)||rate<0||rate>100){out.textContent='Enter a non-negative amount and a GST rate between 0 and 100.';return}const taxRate=rate/100,base=inc==='yes'?a/(1+taxRate):a,tax=inc==='yes'?a-base:a*taxRate,total=inc==='yes'?a:a+tax;out.textContent='Taxable value: ₹'+base.toFixed(2)+' | GST: ₹'+tax.toFixed(2)+' | Total: ₹'+total.toFixed(2)+(inc==='no'?' | CGST (half): ₹'+(tax/2).toFixed(2)+' | SGST (half): ₹'+(tax/2).toFixed(2):'')}</script></section></main><script>
-(function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#172554">
+<title>GST Pro Calculator | CSC Seva Tools</title>
+<meta name="description" content="Calculate GST for multiple products with CGST, SGST, IGST, inclusive and exclusive pricing, discounts, and printable reports.">
+<style>
+:root{--bg:#f4f6fb;--ink:#18243a;--muted:#738099;--line:#e0e6f0;--navy:#172554;--blue:#315eea;--sky:#eaf0ff;--green:#12805c;--greenbg:#e4f7ee;--orange:#b96a21;--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.top{background:var(--navy);color:white}
+.topinner{max-width:1450px;margin:auto;padding:15px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.3px}
+.brandicon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#b8cbff,#6e94ff);color:#172554;display:grid;place-items:center;font-size:21px}
+.brand small{display:block;font-size:10px;letter-spacing:1.2px;color:#b8c7f3;font-weight:600}
+.topbadge{font-size:11px;border:1px solid #ffffff33;padding:7px 11px;border-radius:99px;color:#dbe6ff}
+main{max-width:1450px;margin:auto;padding:29px 24px 45px}
+.hero{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:23px}
+.kicker{font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:1.8px;color:var(--blue)}
+h1{font-size:clamp(28px,4vw,42px);letter-spacing:-1.4px;line-height:1.12;margin:7px 0}
+.subtitle{color:var(--muted);max-width:730px;margin:0}
+.heroNote{font-size:11px;color:var(--muted);max-width:230px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 325px;gap:18px;align-items:start}
+.left,.right{display:grid;gap:17px;min-width:0}
+.card{background:white;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 5px 20px #23385a08}
+.cardhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.cardhead h2{font-size:13px;margin:0}.cardhead p{font-size:11px;color:var(--muted);margin:3px 0 0}
+.cardbody{padding:17px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field{min-width:0}
+.field.full{grid-column:1/-1}
+label{display:block;font-size:11px;font-weight:800;color:#506078;margin-bottom:6px}
+input,select{width:100%;min-width:0;height:42px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);padding:9px 11px}
+input::placeholder{color:#9ca8ba}
+.segment{display:flex;gap:5px;background:#f0f3f9;padding:4px;border-radius:10px}
+.segment button{flex:1;border:0;background:transparent;color:var(--muted);font-size:11px;font-weight:800;border-radius:7px;padding:9px 6px}
+.segment button.active{background:white;color:var(--blue);box-shadow:0 2px 6px #263d6a12}
+.btn{border:1px solid transparent;border-radius:9px;padding:10px 13px;font-size:11px;font-weight:850;transition:.15s}
+.btn:hover{filter:brightness(.97);transform:translateY(-1px)}
+.primary{background:var(--blue);color:white}
+.secondary{background:#fff;border-color:var(--line);color:var(--ink)}
+.darkbtn{background:var(--navy);color:white}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap}
+.btnrow .btn{flex:1}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-bottom:17px}
+.metric{padding:14px;border:1px solid var(--line);background:white;border-radius:13px;min-width:0}
+.metric span{font-size:10px;color:var(--muted);font-weight:750}
+.metric strong{display:block;font-size:clamp(17px,2vw,24px);letter-spacing:-.6px;margin-top:7px;overflow-wrap:anywhere}
+.metric.primarymetric{background:var(--navy);border-color:var(--navy);color:white}
+.metric.primarymetric span{color:#b9c8f5}
+.metric.primarymetric strong{color:white}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;white-space:nowrap}
+th{background:#f7f9fd;color:#718099;text-transform:uppercase;letter-spacing:.5px;font-size:9px;text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}
+td{padding:9px 12px;border-bottom:1px solid #edf0f6;font-size:11px}
+tbody tr:last-child td{border-bottom:0}
+.itemname{min-width:155px}
+.itemname input{min-width:145px}
+.smallinput{height:35px;padding:6px 8px;border-radius:7px;font-size:11px}
+.amount{font-weight:800;font-variant-numeric:tabular-nums}
+.remove{background:#fff1f1;border:1px solid #f4d5d5;color:#ba4545;border-radius:7px;padding:6px 8px;font-size:10px;font-weight:800}
+.tablefoot{padding:13px 16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.tablefoot span{font-size:10px;color:var(--muted)}
+.empty{text-align:center;color:var(--muted);padding:28px}
+.resultbox{background:linear-gradient(145deg,#172554,#253c79);color:white;padding:19px;border-radius:14px}
+.resultbox .small{color:#bac9f7;font-size:10px;letter-spacing:1.3px;font-weight:800}
+.resultbox .grand{font-size:32px;font-weight:900;letter-spacing:-1px;margin:5px 0}
+.resultbox .caption{font-size:10px;color:#c8d4f8}
+.breakrow{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:11px}
+.breakrow:last-child{border-bottom:0}
+.breakrow span{color:var(--muted)}
+.breakrow strong{font-variant-numeric:tabular-nums}
+.breakrow.total{font-size:13px;font-weight:900}
+.breakrow.total span{color:var(--ink)}
+.info{padding:12px;border:1px solid #dce6fb;background:#f3f7ff;border-radius:10px;color:#667899;font-size:10px;line-height:1.65}
+.info b{color:#3153a4}
+.taxbadge{display:inline-block;background:var(--greenbg);color:var(--green);border-radius:99px;padding:4px 8px;font-size:10px;font-weight:850}
+.note{color:var(--muted);font-size:10px;margin:9px 0 0}
+footer{max-width:1450px;margin:auto;border-top:1px solid var(--line);padding:18px 24px 27px;color:var(--muted);font-size:10px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media(max-width:1050px){.layout{grid-template-columns:minmax(0,1fr) 285px}}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){.topinner,main,footer{padding-left:13px;padding-right:13px}.topbadge{display:none}.grid2{grid-template-columns:1fr}.field.full{grid-column:auto}.metrics{gap:7px}.metric{padding:10px}.metric strong{font-size:17px}.cardbody{padding:13px}.cardhead{padding:14px}.heroNote{max-width:none}}
+@media print{
+ @page{size:A4;margin:12mm}
+ body{background:white!important;color:#111!important;font-size:10pt}
+ .top,.hero,.no-print,footer{display:none!important}
+ main{padding:0!important;margin:0!important;max-width:none!important}
+ .layout{display:block!important}
+ .right{margin-top:15px}
+ .card{box-shadow:none!important;border:1px solid #ddd!important;break-inside:avoid}
+ .metrics{grid-template-columns:repeat(3,1fr)}
+ .metric{padding:9px}
+ .metric.primarymetric{background:#e9eefc!important;color:#172554!important}
+ .metric.primarymetric span,.metric.primarymetric strong{color:#172554!important}
+ .tablewrap{overflow:visible!important}
+ table{white-space:normal!important;width:100%!important}
+ th,td{font-size:8pt!important;padding:6px 5px!important}
+ input,select{height:auto!important;padding:0!important;border:0!important;appearance:none;background:transparent!important;color:#111!important}
+ .remove,.itemname input{display:none!important}
+ .itemname:after{content:attr(data-name)}
+ .btnrow{display:none!important}
+}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="topinner">
+  <div class="brand"><div class="brandicon">%</div><div>CSC SEVA TOOLS<small>TAX & BILLING WORKSPACE</small></div></div>
+  <div class="topbadge">GST CALCULATOR · PRO</div>
+ </div>
+</header>
+<main>
+ <section class="hero">
+  <div><div class="kicker">Tax calculation workspace</div>
+   <h1>GST Pro Calculator<span style="color:var(--blue)">.</span></h1>
+   <p class="subtitle">Calculate tax for multiple items, compare inclusive and exclusive pricing, and generate a clean calculation report for your records.</p>
+  </div>
+  <div class="heroNote">Calculation utility only. Verify the applicable GST rate and tax treatment for your transaction.</div>
+ </section>
+
+ <section class="metrics">
+  <div class="metric"><span>TAXABLE VALUE</span><strong id="metricTaxable">₹0.00</strong></div>
+  <div class="metric"><span>TOTAL GST</span><strong id="metricGST">₹0.00</strong></div>
+  <div class="metric primarymetric"><span>FINAL AMOUNT</span><strong id="metricTotal">₹0.00</strong></div>
+ </section>
+
+ <section class="layout">
+  <div class="left">
+   <section class="card">
+    <div class="cardhead"><div><h2>Calculation settings</h2><p>Set the transaction type and pricing method.</p></div><span class="taxbadge">LIVE CALCULATION</span></div>
+    <div class="cardbody">
+     <div class="grid2">
+      <div class="field"><label for="taxMode">TRANSACTION TYPE</label>
+       <select id="taxMode"><option value="intra">Within same state · CGST + SGST</option><option value="inter">Inter-state · IGST</option></select>
+      </div>
+      <div class="field"><label for="rounding">ROUNDING</label>
+       <select id="rounding"><option value="2">2 decimal places</option><option value="0">Whole rupees</option></select>
+      </div>
+      <div class="field full"><label>PRICE TYPE</label>
+       <div class="segment"><button type="button" class="active" data-pricetype="exclusive">GST exclusive</button><button type="button" data-pricetype="inclusive">GST inclusive</button></div>
+      </div>
+     </div>
+     <p class="note" id="modeNote">GST is split equally into CGST and SGST for the selected intra-state calculation.</p>
+    </div>
+   </section>
+
+   <section class="card">
+    <div class="cardhead"><div><h2>Items & tax rates</h2><p>Add products or services to calculate the combined bill.</p></div><button class="btn primary no-print" id="addItem">＋ Add item</button></div>
+    <div class="tablewrap">
+     <table id="itemsTable">
+      <thead><tr><th>Item / service</th><th>Qty</th><th>Price / unit (₹)</th><th>GST %</th><th>Taxable value</th><th>GST amount</th><th class="no-print">Remove</th></tr></thead>
+      <tbody id="itemsBody"></tbody>
+     </table>
+     <div class="empty" id="emptyItems" hidden>No items yet. Add an item to start calculating.</div>
+    </div>
+    <div class="tablefoot"><span id="itemCount">0 items</span><span>Enter your own applicable GST rates.</span></div>
+   </section>
+
+   <section class="card">
+    <div class="cardhead"><div><h2>Discount & adjustments</h2><p>Optional bill-level discount before GST calculation.</p></div></div>
+    <div class="cardbody">
+     <div class="grid2">
+      <div class="field"><label for="discountType">DISCOUNT TYPE</label><select id="discountType"><option value="amount">Fixed amount (₹)</option><option value="percent">Percentage (%)</option></select></div>
+      <div class="field"><label for="discount">DISCOUNT VALUE</label><input id="discount" type="number" min="0" max="100000000" step="0.01" value="0"></div>
+     </div>
+     <p class="note">This calculator allocates the discount proportionally across items before calculating GST. Actual tax treatment can depend on the transaction and applicable rules.</p>
+    </div>
+   </section>
+
+   <section class="card">
+    <div class="cardhead"><div><h2>Calculation report</h2><p>Download or print the current calculation.</p></div></div>
+    <div class="cardbody">
+     <div class="btnrow no-print">
+      <button class="btn primary" id="printReport">Print / Save PDF</button>
+      <button class="btn secondary" id="exportCSV">Download CSV</button>
+      <button class="btn secondary" id="reset">Reset calculator</button>
+     </div>
+     <p class="note">The report is a calculation summary, not a GST-compliant tax invoice. It does not create invoice numbers or verify GST registration.</p>
+    </div>
+   </section>
+  </div>
+
+  <aside class="right">
+   <section class="card">
+    <div class="cardhead"><div><h2>Amount summary</h2><p>Updated as you edit items.</p></div></div>
+    <div class="cardbody">
+     <div class="resultbox"><div class="small">AMOUNT PAYABLE</div><div class="grand" id="grandTotal">₹0.00</div><div class="caption" id="totalCaption">Including calculated GST</div></div>
+     <div class="breakrow"><span>Gross item value</span><strong id="grossValue">₹0.00</strong></div>
+     <div class="breakrow"><span>Discount</span><strong id="discountValue">− ₹0.00</strong></div>
+     <div class="breakrow"><span>Taxable value</span><strong id="taxableValue">₹0.00</strong></div>
+     <div class="breakrow"><span>CGST</span><strong id="cgstValue">₹0.00</strong></div>
+     <div class="breakrow"><span>SGST</span><strong id="sgstValue">₹0.00</strong></div>
+     <div class="breakrow"><span>IGST</span><strong id="igstValue">₹0.00</strong></div>
+     <div class="breakrow"><span>Rounding adjustment</span><strong id="roundValue">₹0.00</strong></div>
+     <div class="breakrow total"><span>Final total</span><strong id="finalValue">₹0.00</strong></div>
+    </div>
+   </section>
+
+   <section class="card">
+    <div class="cardhead"><div><h2>Tax rate reference</h2><p>Common rate options for manual selection.</p></div></div>
+    <div class="cardbody">
+     <div class="breakrow"><span>0%</span><strong>Nil rate</strong></div>
+     <div class="breakrow"><span>5%</span><strong>2.5% + 2.5%</strong></div>
+     <div class="breakrow"><span>12%</span><strong>6% + 6%</strong></div>
+     <div class="breakrow"><span>18%</span><strong>9% + 9%</strong></div>
+     <div class="breakrow"><span>28%</span><strong>14% + 14%</strong></div>
+     <p class="note">For inter-state calculations, the applicable GST is represented as IGST. These are selectable examples, not a determination of the correct rate for your item.</p>
+    </div>
+   </section>
+
+   <section class="info"><b>Important:</b> This tool provides arithmetic estimates. GST rates, exemptions, discounts, place-of-supply rules and rounding requirements may vary. Confirm the applicable treatment with official guidance or a qualified tax professional.</section>
+  </aside>
+ </section>
+</main>
+<footer><span>CSC Seva Tools · GST Pro Calculator</span><span>Browser-based calculation · Not an official tax filing service</span></footer>
+
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+let nextId=1,priceType='exclusive';
+let items=[{id:nextId++,name:'Product / Service 1',qty:1,price:1000,rate:18}];
+function num(v){const n=Number(v);return Number.isFinite(n)?n:0;}
+function clamp(v,min,max){return Math.min(max,Math.max(min,v));}
+function fmt(v){
+ const d=$('rounding').value==='0'?0:2;
+ return '₹'+(Number.isFinite(v)?v:0).toLocaleString('en-IN',{minimumFractionDigits:d,maximumFractionDigits:d});
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function renderRows(){
+ $('itemsBody').innerHTML=items.map(it=>`
+ <tr data-id="${it.id}">
+  <td class="itemname" data-name="${esc(it.name)}"><input class="smallinput" data-field="name" aria-label="Item name" maxlength="100" value="${esc(it.name)}" placeholder="Item name"></td>
+  <td><input class="smallinput" data-field="qty" aria-label="Quantity" type="number" min="0.001" max="1000000" step="any" value="${it.qty}" style="width:76px"></td>
+  <td><input class="smallinput" data-field="price" aria-label="Price per unit" type="number" min="0" max="100000000" step="any" value="${it.price}" style="width:110px"></td>
+  <td><select class="smallinput" data-field="rate" aria-label="GST rate" style="width:78px">${[0,3,5,12,18,28].map(r=>`<option value="${r}" ${Number(it.rate)===r?'selected':''}>${r}%</option>`).join('')}<option value="custom" ${![0,3,5,12,18,28].includes(Number(it.rate))?'selected':''}>Other</option></select></td>
+  <td class="amount" data-cell="taxable">₹0.00</td><td class="amount" data-cell="gst">₹0.00</td>
+  <td class="no-print"><button type="button" class="remove" data-remove="${it.id}" aria-label="Remove item">×</button></td>
+ </tr>`).join('');
+ $('emptyItems').hidden=items.length>0;
+ $('itemsTable').style.display=items.length?'table':'none';
+ $('itemCount').textContent=items.length+' item'+(items.length===1?'':'s');
+ calculate();
+}
+function calculate(){
+ const rawGross=items.reduce((sum,it)=>{
+  const q=clamp(num(it.qty),0,1000000),p=clamp(num(it.price),0,100000000);
+  return sum+q*p;
+ },0);
+ const discountInput=clamp(num($('discount').value),0,100000000);
+ const discount=$('discountType').value==='percent'
+  ?rawGross*clamp(discountInput,0,100)/100
+  :Math.min(discountInput,rawGross);
+ let taxableTotal=0,gstTotal=0,cgst=0,sgst=0,igst=0;
+ const mode=$('taxMode').value;
+ items.forEach(it=>{
+  const gross=clamp(num(it.qty),0,1000000)*clamp(num(it.price),0,100000000);
+  const rate=clamp(num(it.rate),0,100);
+  const share=rawGross>0?discount*gross/rawGross:0;
+  const net=gross-share;
+  let taxable,tax;
+  if(priceType==='inclusive'){
+   taxable=net/(1+rate/100);
+   tax=net-taxable;
+  }else{
+   taxable=net;
+   tax=taxable*rate/100;
+  }
+  taxableTotal+=taxable;gstTotal+=tax;
+  if(mode==='inter')igst+=tax;
+  else{cgst+=tax/2;sgst+=tax/2;}
+  const row=$('itemsBody').querySelector(`tr[data-id="${it.id}"]`);
+  if(row){
+   row.querySelector('[data-cell="taxable"]').textContent=fmt(taxable);
+   row.querySelector('[data-cell="gst"]').textContent=fmt(tax);
+  }
+ });
+ const preRound=taxableTotal+gstTotal;
+ const finalTotal=$('rounding').value==='0'?Math.round(preRound):Math.round(preRound*100)/100;
+ const adjustment=finalTotal-preRound;
+ $('metricTaxable').textContent=fmt(taxableTotal);
+ $('metricGST').textContent=fmt(gstTotal);
+ $('metricTotal').textContent=fmt(finalTotal);
+ $('grandTotal').textContent=fmt(finalTotal);
+ $('grossValue').textContent=fmt(rawGross);
+ $('discountValue').textContent='− '+fmt(discount);
+ $('taxableValue').textContent=fmt(taxableTotal);
+ $('cgstValue').textContent=fmt(cgst);
+ $('sgstValue').textContent=fmt(sgst);
+ $('igstValue').textContent=fmt(igst);
+ $('roundValue').textContent=fmt(adjustment);
+ $('finalValue').textContent=fmt(finalTotal);
+ $('totalCaption').textContent=priceType==='inclusive'?'Input prices include GST':'GST added to taxable value';
+ $('modeNote').textContent=mode==='inter'
+  ?'Inter-state calculation: applicable GST is shown as IGST.'
+  :'Intra-state calculation: GST is split equally into CGST and SGST.';
+}
+$('itemsBody').addEventListener('change',e=>{
+ const field=e.target.dataset.field,row=e.target.closest('tr');
+ if(!field||!row)return;
+ const it=items.find(x=>x.id===Number(row.dataset.id));
+ if(!it)return;
+ let value=e.target.value;
+ if(field==='name'){
+  value=value.trim();
+  if(!value){alert('Item name cannot be empty.');e.target.value=it.name;return;}
+  it.name=value.slice(0,100);
+ }else if(field==='qty'){
+  const n=num(value);
+  if(value===''||n<=0||n>1000000){alert('Quantity must be greater than 0 and no more than 1,000,000.');e.target.value=it.qty;return;}
+  it.qty=n;
+ }else if(field==='price'){
+  const n=num(value);
+  if(value===''||n<0||n>100000000){alert('Enter a price from 0 to 100,000,000.');e.target.value=it.price;return;}
+  it.price=n;
+ }else if(field==='rate'){
+  if(value==='custom'){
+   const answer=prompt('Enter a GST percentage between 0 and 100:',String(it.rate));
+   if(answer===null){e.target.value=it.rate;return;}
+   const n=Number(answer);
+   if(!Number.isFinite(n)||n<0||n>100){alert('Enter a valid GST rate from 0 to 100.');e.target.value=it.rate;return;}
+   it.rate=n;
+  }else it.rate=Number(value);
+ }
+ renderRows();
+});
+$('itemsBody').addEventListener('click',e=>{
+ const btn=e.target.closest('[data-remove]');
+ if(!btn)return;
+ const id=Number(btn.dataset.remove);
+ items=items.filter(it=>it.id!==id);
+ renderRows();
+});
+$('addItem').addEventListener('click',()=>{
+ if(items.length>=100){alert('Maximum 100 items per calculation.');return;}
+ items.push({id:nextId++,name:'New item',qty:1,price:0,rate:18});
+ renderRows();
+ const last=$('itemsBody').querySelector('tr:last-child [data-field="name"]');
+ if(last){last.focus();last.select();}
+});
+document.querySelectorAll('[data-pricetype]').forEach(btn=>btn.addEventListener('click',()=>{
+ priceType=btn.dataset.pricetype;
+ document.querySelectorAll('[data-pricetype]').forEach(b=>b.classList.toggle('active',b===btn));
+ calculate();
+}));
+['taxMode','rounding','discountType','discount'].forEach(id=>{
+ $(id).addEventListener('input',calculate);
+ $(id).addEventListener('change',calculate);
+});
+$('reset').addEventListener('click',()=>{
+ if(!confirm('Reset the calculator and remove all current items?'))return;
+ nextId=1;priceType='exclusive';
+ items=[{id:nextId++,name:'Product / Service 1',qty:1,price:1000,rate:18}];
+ $('taxMode').value='intra';$('rounding').value='2';
+ $('discountType').value='amount';$('discount').value='0';
+ document.querySelectorAll('[data-pricetype]').forEach(b=>b.classList.toggle('active',b.dataset.pricetype==='exclusive'));
+ renderRows();
+});
+function csv(v){return '"'+String(v??'').replace(/"/g,'""')+'"';}
+$('exportCSV').addEventListener('click',()=>{
+ const rows=[['Item','Quantity','Price per unit','GST rate (%)','Gross value','Discount allocated','Taxable value','GST amount','CGST','SGST','IGST','Final amount']];
+ const gross=items.reduce((s,it)=>s+clamp(num(it.qty),0,1000000)*clamp(num(it.price),0,100000000),0);
+ const dIn=clamp(num($('discount').value),0,100000000);
+ const discount=$('discountType').value==='percent'?gross*clamp(dIn,0,100)/100:Math.min(dIn,gross);
+ let total=0;
+ items.forEach(it=>{
+  const g=clamp(num(it.qty),0,1000000)*clamp(num(it.price),0,100000000);
+  const disc=gross?discount*g/gross:0,net=g-disc,r=clamp(num(it.rate),0,100);
+  const taxable=priceType==='inclusive'?net/(1+r/100):net;
+  const tax=priceType==='inclusive'?net-taxable:taxable*r/100;
+  const intra=$('taxMode').value==='intra';
+  const final=taxable+tax;total+=final;
+  rows.push([it.name,it.qty,it.price,r,g,disc,taxable,tax,intra?tax/2:0,intra?tax/2:0,intra?0:tax,final]);
+ });
+ const d=$('rounding').value==='0'?0:2;
+ rows.push(['','','','','','','','','','','','Rounded total: '+(d===0?Math.round(total):Math.round(total*100)/100)]);
+ const blob=new Blob(['\uFEFF'+rows.map(r=>r.map(csv).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='gst-calculation-report.csv';document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1200);
+});
+$('printReport').addEventListener('click',()=>window.print());
+renderRows();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
