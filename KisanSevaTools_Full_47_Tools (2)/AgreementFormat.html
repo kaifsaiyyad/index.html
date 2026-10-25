@@ -1,42 +1,118 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Agreement Format | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Agreement Format</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: Document Makers • Icon: 🤝</div></section><section class="panel"><label>Applicant name</label><textarea rows="2" id="f0" placeholder="Applicant name"></textarea><label>Address</label><textarea rows="2" id="f1" placeholder="Address"></textarea><label>To / Department</label><textarea rows="2" id="f2" placeholder="To / Department"></textarea><label>Subject</label><textarea rows="2" id="f3" placeholder="Subject"></textarea><label>Application details</label><textarea rows="2" id="f4" placeholder="Application details"></textarea><button onclick="previewDoc()">Preview document</button><button class="secondary" onclick="window.print()">Print / Save PDF</button><div id="out"></div><script>function previewDoc(){let fs=["Applicant name", "Address", "To / Department", "Subject", "Application details"],out=document.querySelector("#out");out.innerHTML="<hr><h2>Document preview</h2>"+fs.map((x,i)=>"<p><b>"+x+":</b> "+(document.querySelector("#f"+i).value||"—").replace(/</g,"&lt;")+"</p>").join("")}</script></section></main><script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#475569">
+<title>Agreement Format Maker | CSC Seva Tools</title>
+<style>
+:root{--p:#475569;--dark:#202b3c;--copper:#b56b45;--bg:#f5f6f8;--line:#e0e5ec;--muted:#6b7788}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#263343}
+header{padding:16px 5%;background:white;border-bottom:1px solid var(--line);font-size:20px;font-weight:800;color:var(--p)}header span{color:var(--dark)}
+.hero{padding:30px 5%;background:linear-gradient(120deg,#202b3c,#475569);color:white}.hero>div{max-width:1100px;margin:auto}.hero small{color:#e9b99d;letter-spacing:2px;text-transform:uppercase}
+h1{font-size:clamp(27px,4vw,40px);margin:12px 0}.hero p{max-width:670px;font-size:13px;line-height:1.7;color:#e6ebf2}
+main{max-width:1100px;margin:22px auto;padding:0 14px 35px}.grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px;align-items:start}
+.card{background:white;border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:0 6px 22px #202b3c08}
+.head{padding:18px;border-bottom:1px solid var(--line)}.head h2{font-size:17px;margin:0 0 5px}.head p{font-size:11px;color:var(--muted);line-height:1.5;margin:0}
+.body{padding:17px}.field{margin-bottom:14px}label{display:block;font-size:11px;font-weight:700;margin-bottom:7px}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:12px Arial,sans-serif;color:#263343;background:white}
+textarea{min-height:70px;resize:vertical;line-height:1.5}input:focus,textarea:focus,select:focus{outline:2px solid #dbe3ee;border-color:var(--p)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{border:0;border-radius:8px;padding:11px 14px;font-size:12px;font-weight:700;cursor:pointer}.primary{background:var(--p);color:white}.secondary{background:#eef1f5;color:var(--dark);border:1px solid var(--line)}
+.actions{display:flex;flex-wrap:wrap;gap:8px}.actions button{flex:1}
+.preview-wrap{padding:20px;background:#e9edf2}
+.document{background:white;border-top:5px solid var(--copper);padding:30px 25px;min-height:600px;color:#242b35;font-family:"Times New Roman",serif;overflow-wrap:anywhere}
+.doc-title{text-align:center;font-size:20px;font-weight:bold;letter-spacing:1px;margin:0 0 25px;text-transform:uppercase}
+.doc-body{font-size:13px;line-height:1.9;white-space:pre-wrap;min-height:220px}
+.doc-parties{font-size:13px;line-height:1.8;white-space:pre-wrap;margin-bottom:15px}
+.signatures{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:50px;font-size:12px;line-height:1.7}
+.sign-line{border-top:1px solid #747d87;padding-top:7px}
+.warning{padding:13px;background:#fff7e8;border:1px solid #efdcad;border-radius:9px;color:#725729;font-size:11px;line-height:1.6;margin-top:14px}
+.status{font-size:11px;color:var(--muted);line-height:1.5;margin-top:10px}
+footer{text-align:center;padding:20px;background:white;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+@media(max-width:750px){.grid{grid-template-columns:1fr}.hero{padding:25px 17px}main{padding:0 10px 25px}.body{padding:14px}.preview-wrap{padding:9px}.document{padding:24px 16px;min-height:500px}}
+@media(max-width:380px){.two,.signatures{grid-template-columns:1fr}}
+@media print{header,.hero,.form-card,footer,.preview-head{display:none!important}main{margin:0;padding:0}.grid{display:block}.card{border:0;box-shadow:none}.preview-wrap{padding:0;background:white}.document{border-top:3px solid var(--copper);padding:10mm;min-height:0}}
+</style>
+</head>
+<body>
+<header>CSC <span>Seva Tools</span></header>
+<section class="hero"><div><small>Document formats · Tool 12</small><h1>Agreement Format Maker</h1><p>Prepare a basic agreement draft with party details, terms, effective date and signature areas. Review the complete document before printing.</p></div></section>
+<main><div class="grid">
+<section class="card form-card">
+<div class="head"><h2>Agreement details</h2><p>Enter the parties and the agreed terms in clear language.</p></div>
+<div class="body">
+<div class="field"><label for="type">Agreement type</label><select id="type"><option value="general">General agreement</option><option value="rental">Rental arrangement draft</option><option value="service">Service agreement draft</option><option value="loan">Personal loan agreement draft</option><option value="sale">Sale agreement draft</option></select></div>
+<div class="field"><label for="title">Agreement title</label><input id="title" value="GENERAL AGREEMENT" maxlength="100"></div>
+<div class="field"><label for="partyA">First party — full name / organisation</label><input id="partyA" placeholder="First party's legal name"></div>
+<div class="field"><label for="addressA">First party address</label><textarea id="addressA" placeholder="Full address"></textarea></div>
+<div class="field"><label for="partyB">Second party — full name / organisation</label><input id="partyB" placeholder="Second party's legal name"></div>
+<div class="field"><label for="addressB">Second party address</label><textarea id="addressB" placeholder="Full address"></textarea></div>
+<div class="two">
+<div class="field"><label for="date">Effective date</label><input id="date" type="date"></div>
+<div class="field"><label for="place">Place</label><input id="place" placeholder="City / town"></div>
+</div>
+<div class="field"><label for="subject">Purpose / subject of agreement</label><textarea id="subject" placeholder="Describe the purpose of the agreement"></textarea></div>
+<div class="field"><label for="terms">Terms and conditions</label><textarea id="terms" style="min-height:140px" placeholder="1. Describe the agreed responsibilities.&#10;2. State the payment or delivery terms, if applicable.&#10;3. Explain how changes or disputes will be handled."></textarea></div>
+<div class="field"><label for="duration">Duration / end date (optional)</label><input id="duration" placeholder="e.g. Until 31 December 2026"></div>
+<div class="field"><label for="extra">Additional clauses (optional)</label><textarea id="extra" placeholder="Any other mutually agreed conditions"></textarea></div>
+<div class="actions"><button class="btn primary" id="print" type="button">Print / Save PDF</button><button class="btn secondary" id="reset" type="button">Reset draft</button></div>
+<div class="warning"><strong>Legal notice:</strong> This tool creates a generic draft and does not determine legal enforceability. Agreements may require specific clauses, stamp duty, registration, witnesses or professional review depending on their purpose and applicable law. Obtain advice from a qualified legal professional before signing.</div>
+<div class="status" id="status" role="status" aria-live="polite">Use accurate details and make sure both parties understand all terms.</div>
+</div></section>
+<section class="card">
+<div class="head preview-head"><h2>Agreement preview</h2><p>Print or save this draft as PDF after review.</p></div>
+<div class="preview-wrap"><article class="document">
+<h2 class="doc-title" id="pTitle">GENERAL AGREEMENT</h2>
+<div class="doc-parties" id="pParties">This agreement is made between the parties named below.</div>
+<div class="doc-body" id="pBody"></div>
+<div class="doc-body" id="pExtra" style="min-height:0"></div>
+<div class="signatures">
+<div class="sign-line"><strong>First party</strong><br><span id="pSigA">Name: __________________</span><br>Signature: _______________</div>
+<div class="sign-line"><strong>Second party</strong><br><span id="pSigB">Name: __________________</span><br>Signature: _______________</div>
+<div class="sign-line">Witness 1<br>Name: __________________<br>Signature: _______________</div>
+<div class="sign-line">Witness 2<br>Name: __________________<br>Signature: _______________</div>
+</div>
+</article></div>
+</section>
+</div></main>
+<footer>Document tools · CSC Seva Tools</footer>
+<script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+const $=id=>document.getElementById(id);
+const starter={
+general:"The parties agree to the purpose and terms described in this document. Each party agrees to act in good faith and fulfil the responsibilities expressly agreed between them.",
+rental:"The parties intend to record their rental arrangement, including the property details, rent, deposit, payment dates, maintenance responsibilities and duration. All specific terms should be reviewed and completed before signing.",
+service:"The parties intend to record the services to be provided, expected deliverables, fees, payment schedule, timelines and each party's responsibilities.",
+loan:"The parties intend to record the amount advanced, repayment schedule, applicable interest if any, payment method and agreed consequences of late payment. All financial terms should be clearly stated before signing.",
+sale:"The parties intend to record the item or property being sold, the agreed price, payment arrangements, delivery or possession details and other mutually agreed conditions."
+};
+function fmtDate(v){if(!v)return "[Effective date]";const d=new Date(v+"T00:00:00");return isNaN(d)?"[Effective date]":d.toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"});}
+function update(){
+const a=$("partyA").value.trim()||"[First Party]";
+const b=$("partyB").value.trim()||"[Second Party]";
+$("pTitle").textContent=$("title").value.trim()||"AGREEMENT";
+$("pParties").textContent="This agreement is made on "+fmtDate($("date").value)+" at "+($("place").value.trim()||"[Place]")+".\n\nBetween:\n"+a+( $("addressA").value.trim()?"\nAddress: "+$("addressA").value.trim():"")+"\n(referred to as the First Party)\n\nAnd:\n"+b+($("addressB").value.trim()?"\nAddress: "+$("addressB").value.trim():"")+"\n(referred to as the Second Party).";
+const subject=$("subject").value.trim()||"[Describe the purpose of the agreement]";
+const terms=$("terms").value.trim()||starter[$("type").value];
+const duration=$("duration").value.trim();
+$("pBody").textContent="1. PURPOSE\n"+subject+"\n\n2. TERMS AND CONDITIONS\n"+terms+(duration?"\n\n3. DURATION\n"+duration:"")+"\n\nThe parties confirm that they have read and understood this draft and intend to record their mutual understanding, subject to applicable law and completion of all required formalities.";
+$("pExtra").textContent=$("extra").value.trim()? "\nAdditional clauses:\n"+$("extra").value.trim():"";
+$("pSigA").textContent="Name: "+a;
+$("pSigB").textContent="Name: "+b;
+}
+["title","partyA","addressA","partyB","addressB","date","place","subject","terms","duration","extra"].forEach(id=>$(id).addEventListener("input",update));
+$("type").addEventListener("change",()=>{if(!$("terms").value.trim())update();else update();});
+$("print").addEventListener("click",()=>window.print());
+$("reset").addEventListener("click",()=>{
+if(!confirm("Reset all agreement details?"))return;
+["partyA","addressA","partyB","addressB","place","subject","terms","duration","extra"].forEach(id=>$(id).value="");
+$("date").value=new Date().toLocaleDateString("en-CA");
+$("type").value="general";$("title").value="GENERAL AGREEMENT";update();$("status").textContent="Draft reset.";
+});
+$("date").value=new Date().toLocaleDateString("en-CA");
+update();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
