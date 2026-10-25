@@ -1,42 +1,259 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Loan EMI Calculator | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Loan EMI Calculator</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: Calculators • Icon: 🏦</div></section><section class="panel"><label>Loan amount (₹)</label><input id="p" type="number" value="100000"><label>Annual interest (%)</label><input id="r" type="number" value="10"><label>Tenure (months)</label><input id="n" type="number" value="12"><button onclick="calc()">Calculate EMI</button><h2 id="out"></h2><script>function calc(){const p=Number(document.querySelector('#p').value),annual=Number(document.querySelector('#r').value),n=Number(document.querySelector('#n').value),out=document.querySelector('#out');if(!Number.isFinite(p)||p<=0||!Number.isFinite(annual)||annual<0||!Number.isInteger(n)||n<=0||n>1200){out.textContent='Enter a loan amount above 0, an annual rate of 0 or more, and a term of 1–1200 months.';return}const r=annual/1200,e=r===0?p/n:p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1),total=e*n;out.textContent='Monthly EMI: ₹'+e.toFixed(2)+' | Total repayment: ₹'+total.toFixed(2)+' | Total interest: ₹'+(total-p).toFixed(2)}</script></section></main><script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#c65b22">
+<title>Loan EMI Calculator | CSC Seva Tools</title>
+<style>
+:root{--orange:#c65b22;--dark:#78351b;--cream:#fff8ef;--bg:#fbf6f0;--ink:#30251e;--muted:#796c62;--line:#eddfd2;--green:#28754d}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+button,input{font:inherit}
+.top{background:#fff;border-bottom:1px solid var(--line);padding:15px 5%;display:flex;justify-content:space-between;gap:10px}
+.brand{font-weight:800;color:var(--orange);font-size:19px}.brand span{color:var(--dark)}
+.top small{color:var(--muted);font-size:12px}
+.hero{background:linear-gradient(120deg,#78351b,#c65b22 65%,#ed914d);color:#fff;padding:34px 5%}
+.hero-inner{max-width:1100px;margin:auto}
+.eyebrow{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;opacity:.8}
+h1{font-size:clamp(27px,4vw,40px);margin:12px 0}
+.hero p{line-height:1.7;max-width:650px;color:#fff0e6;font-size:14px}
+.container{max-width:1100px;margin:25px auto;padding:0 16px 35px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 7px 25px #703b1708}
+.head{padding:19px 20px;border-bottom:1px solid var(--line)}
+.head h2{margin:0 0 6px;font-size:18px}.head p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}
+.body{padding:20px}
+.field{margin-bottom:20px}
+.field-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+label{font-weight:700;font-size:13px}
+.value{font-weight:800;color:var(--orange);font-size:14px}
+input[type=range]{width:100%;accent-color:var(--orange);cursor:pointer}
+.range-labels{display:flex;justify-content:space-between;font-size:10px;color:#8e8177;margin-top:5px}
+.number-input{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px;background:#fffcf8;outline:none}
+.number-input:focus{border-color:var(--orange)}
+.unit-wrap{display:flex;align-items:center;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#fffcf8}
+.unit-wrap input{border:0;background:transparent;min-width:0;flex:1;padding:11px;outline:none}
+.unit-wrap span{padding:0 12px;font-size:12px;color:var(--muted)}
+.quick{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.quick button{background:var(--cream);border:1px solid var(--line);color:var(--dark);border-radius:7px;padding:7px 10px;font-size:11px}
+.quick button:hover{border-color:var(--orange)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{border:0;border-radius:9px;padding:12px 15px;font-size:13px;font-weight:700;cursor:pointer}
+.primary{background:var(--orange);color:#fff}.primary:hover{background:#a94819}
+.light{background:var(--cream);border:1px solid var(--line);color:var(--dark)}
+.full{width:100%}
+.result-top{padding:23px;background:var(--cream);border-bottom:1px solid var(--line)}
+.result-top span{font-size:12px;color:var(--muted)}
+.emi{font-size:clamp(30px,4vw,40px);font-weight:800;color:var(--dark);margin:8px 0}
+.result-top p{font-size:11px;color:var(--muted);line-height:1.6;margin:0}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px}
+.metric{border:1px solid var(--line);border-radius:11px;padding:14px;background:#fffdfa}
+.metric span{font-size:11px;color:var(--muted);display:block;margin-bottom:8px}
+.metric strong{font-size:17px;overflow-wrap:anywhere}
+.metric.interest strong{color:var(--orange)}
+.metric.total strong{color:var(--green)}
+.bar-area{padding:0 16px 18px}
+.bar-title{display:flex;justify-content:space-between;gap:8px;font-size:11px;margin-bottom:9px}
+.bar{height:12px;border-radius:10px;background:#eee5dc;overflow:hidden;display:flex}
+.principal-part{height:100%;background:#d97b3c}.interest-part{height:100%;background:#edc99d}
+.legend{display:flex;flex-wrap:wrap;gap:15px;font-size:11px;color:var(--muted);margin-top:10px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px}
+.table-wrap{overflow-x:auto;border-top:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:11px}
+th,td{text-align:right;padding:12px 13px;border-bottom:1px solid #f0e8e0}
+th{background:#fffaf4;color:var(--muted);font-weight:700}
+th:first-child,td:first-child{text-align:left}
+tbody tr:last-child td{border-bottom:0}
+.table-title{padding:16px 18px 8px;font-size:14px;font-weight:800}
+.note{background:#fff8e9;border:1px solid #f2dfba;padding:13px;border-radius:10px;font-size:11px;line-height:1.6;color:#755a31;margin-top:16px}
+.hidden{display:none}
+.footer{text-align:center;padding:20px;color:var(--muted);font-size:11px;background:#fff;border-top:1px solid var(--line)}
+@media(max-width:740px){.grid{grid-template-columns:1fr}.top{padding:14px 16px}.top small{display:none}.hero{padding:27px 18px}.container{margin-top:16px;padding:0 12px 25px}.body{padding:16px}}
+@media print{.top,.hero,.input-card,.footer,.actions,.note{display:none!important}.container{margin:0;padding:0}.grid{display:block}.result-card{border:0;box-shadow:none}.table-wrap{overflow:visible}table{font-size:9px}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="brand">CSC <span>Seva Tools</span></div>
+ <small>Practical calculators for everyday use</small>
+</header>
+<section class="hero">
+ <div class="hero-inner">
+  <div class="eyebrow">Finance tools · Calculator 02</div>
+  <h1>Loan EMI Calculator</h1>
+  <p>Calculate your estimated monthly loan payment, total interest and overall repayment amount in seconds.</p>
+ </div>
+</section>
+
+<main class="container">
+ <div class="grid">
+  <section class="card input-card">
+   <div class="head"><h2>Loan details</h2><p>Change the values below to calculate your estimated EMI.</p></div>
+   <div class="body">
+    <div class="field">
+     <div class="field-top"><label for="amount">Loan amount</label><span class="value" id="amountLabel">₹5,00,000</span></div>
+     <input id="amount" type="range" min="10000" max="10000000" step="5000" value="500000">
+     <div class="range-labels"><span>₹10,000</span><span>₹1 crore</span></div>
+     <div class="quick">
+      <button type="button" data-amount="100000">₹1 lakh</button>
+      <button type="button" data-amount="500000">₹5 lakh</button>
+      <button type="button" data-amount="1000000">₹10 lakh</button>
+      <button type="button" data-amount="2500000">₹25 lakh</button>
+     </div>
+    </div>
+
+    <div class="field">
+     <div class="field-top"><label for="rate">Annual interest rate</label><span class="value" id="rateLabel">9%</span></div>
+     <input id="rate" type="range" min="0" max="30" step="0.1" value="9">
+     <div class="range-labels"><span>0%</span><span>30%</span></div>
+    </div>
+
+    <div class="field">
+     <div class="field-top"><label for="years">Loan tenure</label><span class="value" id="tenureLabel">5 years</span></div>
+     <input id="years" type="range" min="1" max="30" step="1" value="5">
+     <div class="range-labels"><span>1 year</span><span>30 years</span></div>
+    </div>
+
+    <div class="field">
+     <div class="field-top"><label for="months">Additional months</label><span class="value" id="monthsLabel">0 months</span></div>
+     <input id="months" type="range" min="0" max="11" step="1" value="0">
+     <div class="range-labels"><span>0 months</span><span>11 months</span></div>
+    </div>
+
+    <div class="field">
+     <label for="extra">Extra monthly payment (optional)</label>
+     <div class="unit-wrap"><span>₹</span><input id="extra" class="number-input" type="number" min="0" max="10000000" step="500" value="0"></div>
+     <p style="font-size:11px;color:var(--muted);line-height:1.5">Estimates the effect of paying extra toward principal each month. Actual lender treatment may differ.</p>
+    </div>
+
+    <div class="two actions">
+     <button id="reset" class="btn light" type="button">Reset values</button>
+     <button id="print" class="btn primary" type="button">Print summary</button>
+    </div>
+   </div>
+  </section>
+
+  <section class="card result-card">
+   <div class="head"><h2>Your repayment estimate</h2><p>Illustrative calculation based on a standard monthly reducing-balance loan.</p></div>
+   <div class="result-top">
+    <span>Estimated monthly EMI</span>
+    <div class="emi" id="emi">₹10,379</div>
+    <p id="termText">For a 5-year loan at 9% annual interest.</p>
+   </div>
+   <div class="metrics">
+    <div class="metric"><span>Loan principal</span><strong id="principal">₹5,00,000</strong></div>
+    <div class="metric interest"><span>Total interest</span><strong id="interest">₹1,22,740</strong></div>
+    <div class="metric total"><span>Total repayment</span><strong id="total">₹6,22,740</strong></div>
+    <div class="metric"><span>Estimated duration</span><strong id="duration">60 months</strong></div>
+   </div>
+   <div class="bar-area">
+    <div class="bar-title"><span>Principal vs interest</span><strong id="interestPercent">19.7% interest</strong></div>
+    <div class="bar"><div class="principal-part" id="principalBar" style="width:80%"></div><div class="interest-part" id="interestBar" style="width:20%"></div></div>
+    <div class="legend"><span><i class="dot" style="background:#d97b3c"></i>Principal</span><span><i class="dot" style="background:#edc99d"></i>Interest</span></div>
+   </div>
+   <div class="table-title">Repayment schedule</div>
+   <div class="table-wrap">
+    <table>
+     <thead><tr><th>Year</th><th>Paid</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead>
+     <tbody id="schedule"></tbody>
+    </table>
+   </div>
+  </section>
+ </div>
+ <div class="note"><strong>Important:</strong> This is an estimate, not a lender quote. Processing fees, insurance, variable rates, lender rounding, payment dates and other charges are excluded. Confirm the final EMI and terms with your lender.</div>
+</main>
+<footer class="footer">Useful finance tools · <strong>CSC Seva Tools</strong></footer>
+
+<script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+"use strict";
+const $=id=>document.getElementById(id);
+const money=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+const amount=$("amount"),rate=$("rate"),years=$("years"),months=$("months"),extra=$("extra");
+
+function calculate(){
+ const P=Number(amount.value);
+ const annual=Number(rate.value);
+ const r=annual/1200;
+ const term=Number(years.value)*12+Number(months.value);
+ const extraPay=Math.max(0,Number(extra.value)||0);
+
+ $("amountLabel").textContent=money(P);
+ $("rateLabel").textContent=annual.toFixed(1).replace(/\.0$/,"")+"%";
+ $("tenureLabel").textContent=years.value+(Number(years.value)===1?" year":" years");
+ $("monthsLabel").textContent=months.value+(Number(months.value)===1?" month":" months");
+
+ if(term<=0 || P<=0){
+  $("emi").textContent="—";
+  $("schedule").innerHTML="<tr><td colspan='5'>Enter valid loan details.</td></tr>";
+  return;
+ }
+
+ const baseEMI=r===0?P/term:P*r*Math.pow(1+r,term)/(Math.pow(1+r,term)-1);
+ let balance=P,interestTotal=0,principalTotal=0,totalPaid=0,monthCount=0;
+ const yearly=[];
+ let yearPaid=0,yearPrincipal=0,yearInterest=0;
+
+ while(balance>0.005 && monthCount<term){
+  monthCount++;
+  const int=balance*r;
+  let principal=baseEMI-int;
+  let payment=baseEMI;
+
+  if(r===0) principal=baseEMI;
+
+  // Extra payments reduce the remaining principal.
+  principal+=extraPay;
+  if(principal>balance){
+   principal=balance;
+   payment=principal+int;
+  }else{
+   payment=principal+int;
+  }
+
+  balance=Math.max(0,balance-principal);
+  interestTotal+=int;
+  principalTotal+=principal;
+  totalPaid+=payment;
+  yearPaid+=payment;
+  yearPrincipal+=principal;
+  yearInterest+=int;
+
+  if(monthCount%12===0 || balance<=0.005 || monthCount===term){
+   yearly.push({year:Math.ceil(monthCount/12),paid:yearPaid,principal:yearPrincipal,interest:yearInterest,balance:balance});
+   yearPaid=0;yearPrincipal=0;yearInterest=0;
+  }
+ }
+
+ $("emi").textContent=money(baseEMI);
+ $("principal").textContent=money(P);
+ $("interest").textContent=money(interestTotal);
+ $("total").textContent=money(totalPaid);
+ $("duration").textContent=monthCount+" months";
+ $("termText").textContent="At "+annual.toFixed(1).replace(/\.0$/,"")+"% annual interest over the selected tenure"+(extraPay>0?", with extra monthly payments.":".");
+ const principalPct=totalPaid>0?principalTotal/totalPaid*100:100;
+ const interestPct=totalPaid>0?interestTotal/totalPaid*100:0;
+ $("principalBar").style.width=principalPct+"%";
+ $("interestBar").style.width=interestPct+"%";
+ $("interestPercent").textContent=interestPct.toFixed(1)+"% interest";
+
+ $("schedule").innerHTML=yearly.map(y=>
+  "<tr><td>"+y.year+"</td><td>"+money(y.paid)+"</td><td>"+money(y.principal)+"</td><td>"+money(y.interest)+"</td><td>"+money(y.balance)+"</td></tr>"
+ ).join("");
+}
+
+[amount,rate,years,months,extra].forEach(el=>el.addEventListener("input",calculate));
+document.querySelectorAll("[data-amount]").forEach(btn=>{
+ btn.addEventListener("click",()=>{amount.value=btn.dataset.amount;calculate();});
+});
+$("reset").addEventListener("click",()=>{
+ amount.value=500000;rate.value=9;years.value=5;months.value=0;extra.value=0;calculate();
+});
+$("print").addEventListener("click",()=>window.print());
+calculate();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
