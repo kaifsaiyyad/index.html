@@ -1,42 +1,268 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bank Application | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Bank Application</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: Document Makers • Icon: 🏦</div></section><section class="panel"><label>Applicant name</label><textarea rows="2" id="f0" placeholder="Applicant name"></textarea><label>Address</label><textarea rows="2" id="f1" placeholder="Address"></textarea><label>To / Department</label><textarea rows="2" id="f2" placeholder="To / Department"></textarea><label>Subject</label><textarea rows="2" id="f3" placeholder="Subject"></textarea><label>Application details</label><textarea rows="2" id="f4" placeholder="Application details"></textarea><button onclick="previewDoc()">Preview document</button><button class="secondary" onclick="window.print()">Print / Save PDF</button><div id="out"></div><script>function previewDoc(){let fs=["Applicant name", "Address", "To / Department", "Subject", "Application details"],out=document.querySelector("#out");out.innerHTML="<hr><h2>Document preview</h2>"+fs.map((x,i)=>"<p><b>"+x+":</b> "+(document.querySelector("#f"+i).value||"—").replace(/</g,"&lt;")+"</p>").join("")}</script></section></main><script>
-(function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>Bank Application Letter Studio | CSC Seva Tools</title>
+<meta name="description" content="Create, customize, preview, copy and print bank application letters with a professional letter generator.">
+<style>
+:root{--bg:#0b1220;--panel:#121d2e;--panel2:#19263a;--line:#2b3a50;--text:#f3f6fc;--muted:#9eacc1;--accent:#65d6c4;--blue:#83a8ff;--radius:17px}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 5% 0%,#20385a 0,transparent 34%),var(--bg);color:var(--text);font:14px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+header{border-bottom:1px solid #ffffff12;background:#0b1220dd}
+.top{max-width:1400px;margin:auto;padding:15px 23px;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.3px}
+.brandicon{width:43px;height:43px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(140deg,#83a8ff,#65d6c4);color:#0d1725;font-size:22px}
+.brand small{display:block;font-size:10px;color:var(--muted);font-weight:600;letter-spacing:1.2px}
+.tag{border:1px solid #65d6c444;background:#65d6c40c;color:var(--accent);border-radius:99px;padding:7px 11px;font-size:11px;font-weight:800}
+main{max-width:1400px;margin:auto;padding:32px 23px 48px}
+.kicker{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:850}
+h1{font-size:clamp(28px,4vw,43px);line-height:1.13;letter-spacing:-1.3px;margin:8px 0}
+.intro{color:var(--muted);max-width:720px;margin:0}
+.hero{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:25px}
+.heroaside{font-size:11px;color:var(--muted);max-width:240px}
+.layout{display:grid;grid-template-columns:minmax(310px,.9fr) minmax(0,1.1fr);gap:20px;align-items:start}
+.panel{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:linear-gradient(145deg,#152033,#111a29);box-shadow:0 18px 55px #0002}
+.phead{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.phead h2{font-size:14px;margin:0}
+.phead p{font-size:11px;color:var(--muted);margin:3px 0 0}
+.count{font-size:11px;color:var(--accent);font-weight:800}
+.formbody{padding:19px}
+.section{font-size:11px;text-transform:uppercase;letter-spacing:1.1px;color:var(--blue);font-weight:850;margin:4px 0 13px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field{min-width:0;margin-bottom:13px}
+.field.full{grid-column:1/-1}
+label{display:block;font-size:11px;font-weight:750;margin-bottom:6px;color:#dbe5f4}
+input,select,textarea{width:100%;border:1px solid var(--line);background:#0e1726;color:var(--text);border-radius:10px;padding:10px 11px;min-width:0}
+input,select{height:42px}
+textarea{min-height:90px;resize:vertical}
+input::placeholder,textarea::placeholder{color:#687990}
+.help{font-size:10px;color:var(--muted);margin:5px 0 0}
+.btn{border:1px solid transparent;border-radius:10px;padding:10px 13px;font-size:11px;font-weight:850;transition:.16s}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.primary{background:linear-gradient(130deg,#9db7ff,#65d6c4);color:#0c1726}
+.secondary{background:var(--panel2);border-color:var(--line);color:var(--text)}
+.ghost{background:transparent;border-color:var(--line);color:var(--muted)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap}
+.btnrow .btn{flex:1}
+.divider{height:1px;background:var(--line);margin:18px 0}
+.previewpanel{position:sticky;top:14px}
+.previewbar{padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line)}
+.previewbar strong{font-size:12px}
+.live{display:flex;align-items:center;gap:6px;color:var(--accent);font-size:10px}
+.live:before{content:"";width:6px;height:6px;background:var(--accent);border-radius:50%}
+.paperstage{padding:18px;background:#dce2ec;max-height:760px;overflow:auto}
+.paper{width:100%;max-width:780px;min-height:720px;margin:auto;background:white;color:#202939;padding:clamp(23px,4vw,54px);box-shadow:0 10px 30px #17243a25;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.75;overflow-wrap:anywhere}
+.paper .letterhead{display:flex;justify-content:space-between;gap:15px;border-bottom:2px solid #243d5c;padding-bottom:15px;margin-bottom:22px}
+.paper .letterhead b{font-size:18px;letter-spacing:.4px;color:#203a5a}
+.paper .letterhead small{display:block;color:#69778b;font-size:10px}
+.paper .letterdate{text-align:right;font-size:11px;color:#4e5d71}
+.paper .to{margin-bottom:18px}
+.paper .subject{font-weight:700;margin:18px 0 12px}
+.paper .bodycopy{white-space:pre-wrap;min-height:130px}
+.paper .sign{margin-top:32px}
+.paper .footnote{margin-top:35px;padding-top:10px;border-top:1px solid #d7deea;color:#778397;font-size:9px}
+.notice{padding:12px 14px;border:1px solid #83a8ff33;background:#83a8ff0b;border-radius:12px;color:var(--muted);font-size:11px;margin-top:15px}
+.notice b{color:var(--blue)}
+footer{max-width:1400px;margin:auto;padding:18px 23px 28px;border-top:1px solid #ffffff10;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:930px){.layout{grid-template-columns:1fr}.previewpanel{position:static}.paper{min-height:600px}}
+@media(max-width:560px){.top,main,footer{padding-left:14px;padding-right:14px}main{padding-top:24px}.tag{display:none}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.formbody{padding:14px}.paperstage{padding:9px}.paper{padding:22px;min-height:580px;font-size:12px}.paper .letterhead b{font-size:15px}}
+@media print{
+ @page{size:A4;margin:15mm}
+ body{background:#fff!important;color:#000!important}
+ header,main>.hero,.formpanel,footer,.previewbar,.notice{display:none!important}
+ main{padding:0!important;margin:0!important;max-width:none!important}
+ .layout{display:block!important}
+ .previewpanel{position:static!important;border:0!important;box-shadow:none!important;background:white!important}
+ .paperstage{padding:0!important;background:white!important;overflow:visible!important;max-height:none!important}
+ .paper{max-width:none!important;min-height:0!important;width:100%!important;padding:0!important;box-shadow:none!important;font-size:12pt!important;line-height:1.65!important}
+}
+</style>
+</head>
+<body>
+<header><div class="top">
+ <div class="brand"><div class="brandicon">▤</div><div>CSC SEVA TOOLS<small>DOCUMENT STUDIO · BANK LETTERS</small></div></div>
+ <span class="tag">● PRIVATE DRAFT GENERATOR</span>
+</div></header>
+<main>
+ <section class="hero">
+  <div><div class="kicker">Professional document workspace</div>
+   <h1>Bank Application Studio<span style="color:var(--accent)">.</span></h1>
+   <p class="intro">Prepare a neat bank application letter in minutes. Choose a request type, enter your details and review the letter before printing.</p>
+  </div>
+  <div class="heroaside">Create locally in your browser. This page does not submit your application to a bank.</div>
+ </section>
+
+ <section class="layout">
+  <div class="panel formpanel">
+   <div class="phead"><div><h2>Letter details</h2><p>Complete only the information needed</p></div><span class="count">STEP 01</span></div>
+   <div class="formbody">
+    <div class="section">Letter setup</div>
+    <div class="field">
+     <label for="request">Application type</label>
+     <select id="request">
+      <option value="mobile">Mobile number update</option>
+      <option value="address">Address update</option>
+      <option value="statement">Bank statement request</option>
+      <option value="cheque">Cheque book request</option>
+      <option value="atm">Debit card / ATM request</option>
+      <option value="name">Name correction request</option>
+      <option value="close">Account closure request</option>
+      <option value="activate">Account reactivation request</option>
+      <option value="other">Other banking request</option>
+     </select>
+    </div>
+    <div class="fields">
+     <div class="field"><label for="language">Draft language</label>
+      <select id="language"><option value="en">English</option><option value="hi">Hindi</option></select>
+     </div>
+     <div class="field"><label for="date">Application date</label><input id="date" type="date"></div>
+     <div class="field full"><label for="bank">Bank name</label><input id="bank" placeholder="e.g. State Bank of India"></div>
+     <div class="field full"><label for="branch">Branch name / location</label><input id="branch" placeholder="e.g. Main Branch, Yavatmal"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">Applicant information</div>
+    <div class="fields">
+     <div class="field full"><label for="name">Applicant full name *</label><input id="name" placeholder="Enter your name" autocomplete="name"></div>
+     <div class="field"><label for="account">Account number (optional)</label><input id="account" maxlength="4" inputmode="numeric" placeholder="Last 4 digits only"></div>
+     <div class="field"><label for="phone">Contact number (optional)</label><input id="phone" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number"></div>
+     <div class="field full"><label for="address">Address (optional)</label><textarea id="address" rows="2" placeholder="House / village / town / PIN"></textarea></div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">Request information</div>
+    <div class="fields">
+     <div class="field full"><label for="specific">Specific details (optional)</label><input id="specific" placeholder="e.g. period required for statement"></div>
+     <div class="field full"><label for="customSubject">Subject line</label><input id="customSubject" placeholder="Auto-filled from application type"></div>
+     <div class="field full"><label for="customBody">Edit application message</label><textarea id="customBody" rows="7"></textarea><p class="help">You can edit the generated message in your own words.</p></div>
+     <div class="field full"><label for="extra">Additional note (optional)</label><textarea id="extra" rows="2" placeholder="Any other relevant information"></textarea></div>
+    </div>
+    <div class="btnrow">
+     <button class="btn secondary" id="regenerate">Restore template</button>
+     <button class="btn ghost" id="clear">Clear form</button>
+    </div>
+   </div>
+  </div>
+
+  <div>
+   <div class="panel previewpanel">
+    <div class="previewbar"><strong>Live document preview</strong><span class="live">LIVE PREVIEW</span></div>
+    <div class="paperstage"><article class="paper" id="paper">
+     <div class="letterhead"><div><b id="pBank">BANK NAME</b><small id="pBranch">Branch details</small></div><div class="letterdate" id="pDate"></div></div>
+     <div class="to" id="pTo"></div>
+     <div class="subject" id="pSubject"></div>
+     <div id="pSalutation"></div>
+     <div class="bodycopy" id="pBody"></div>
+     <div id="pExtra"></div>
+     <div class="sign" id="pSign"></div>
+     <div class="footnote">Draft prepared using CSC Seva Tools. Check all details and your bank's requirements before submitting.</div>
+    </article></div>
+    <div class="formbody">
+     <div class="btnrow">
+      <button class="btn primary" id="print">Print / Save PDF</button>
+      <button class="btn secondary" id="copy">Copy letter</button>
+      <button class="btn secondary" id="download">Download TXT</button>
+     </div>
+     <div class="notice"><b>Before submitting:</b> Verify the branch address, request details and any documents required by your bank. This is a general draft, not an official bank form.</div>
+    </div>
+   </div>
+  </div>
+ </section>
+</main>
+<footer><span>CSC Seva Tools · Bank Application Studio</span><span>Offline draft creation · No bank submission or approval guarantee</span></footer>
+<script>
+(()=>{
+ const $=id=>document.getElementById(id);
+ const fields=['request','language','date','bank','branch','name','account','phone','address','specific','customSubject','customBody','extra'];
+ const today=new Date();today.setMinutes(today.getMinutes()-today.getTimezoneOffset());
+ $('date').value=today.toISOString().slice(0,10);
+ const templates={
+  mobile:{en:['Request for mobile number update','I request you to update the mobile number registered with my bank account. Please guide me through any verification or documentation required to complete this request.'],hi:['बैंक खाते में मोबाइल नंबर अपडेट करने हेतु आवेदन','सविनय निवेदन है कि मेरे बैंक खाते में पंजीकृत मोबाइल नंबर अपडेट करने की कृपा करें। इस प्रक्रिया के लिए आवश्यक सत्यापन या दस्तावेजों के बारे में मार्गदर्शन प्रदान करें।']},
+  address:{en:['Request for address update','I request you to update my residential address in your bank records. I am willing to provide the required address proof and complete the prescribed verification process.'],hi:['बैंक रिकॉर्ड में पता अपडेट करने हेतु आवेदन','कृपया बैंक रिकॉर्ड में मेरा वर्तमान आवासीय पता अपडेट करने की कृपा करें। आवश्यक पता प्रमाण और निर्धारित सत्यापन प्रक्रिया पूरी करने के लिए मैं तैयार हूँ।']},
+  statement:{en:['Request for bank account statement','I request you to provide an account statement for the period mentioned below, subject to the bank’s applicable process and charges, if any.'],hi:['बैंक खाते का विवरण प्राप्त करने हेतु आवेदन','कृपया नीचे दी गई अवधि के लिए मेरे बैंक खाते का विवरण उपलब्ध कराने की कृपा करें। लागू प्रक्रिया और शुल्क, यदि कोई हों, स्वीकार हैं।']},
+  cheque:{en:['Request for cheque book','I request you to issue a cheque book for my account, subject to the bank’s eligibility requirements and verification process.'],hi:['चेक बुक जारी करने हेतु आवेदन','कृपया बैंक के नियमों और आवश्यक सत्यापन के अधीन मेरे खाते के लिए चेक बुक जारी करने की कृपा करें।']},
+  atm:{en:['Request for debit card / ATM service','I request you to guide me regarding the issue or replacement of a debit card linked to my account. I will complete the required verification and formalities.'],hi:['डेबिट कार्ड / एटीएम सेवा हेतु आवेदन','कृपया मेरे खाते से जुड़े डेबिट कार्ड को जारी करने या बदलने की प्रक्रिया के बारे में मार्गदर्शन प्रदान करें। मैं आवश्यक सत्यापन और औपचारिकताएँ पूरी करूँगा/करूँगी।']},
+  name:{en:['Request for name correction in bank records','I request you to correct my name in the bank records as per the valid supporting documents I can provide. Kindly advise me of the required procedure.'],hi:['बैंक रिकॉर्ड में नाम सुधार हेतु आवेदन','कृपया मेरे वैध सहायक दस्तावेजों के अनुसार बैंक रिकॉर्ड में मेरा नाम सही करने की कृपा करें। आवश्यक प्रक्रिया के बारे में मार्गदर्शन दें।']},
+  close:{en:['Request for bank account closure','I request you to explain the procedure and required documents for closing my bank account. I will complete the prescribed formalities and settle any applicable dues.'],hi:['बैंक खाता बंद करने की प्रक्रिया हेतु आवेदन','कृपया मेरा बैंक खाता बंद करने की प्रक्रिया और आवश्यक दस्तावेजों के बारे में जानकारी प्रदान करें। मैं निर्धारित औपचारिकताएँ पूरी करूँगा/करूँगी और लागू बकाया राशि का निपटारा करूँगा/करूँगी।']},
+  activate:{en:['Request for account reactivation','I request you to review the status of my account and advise me on the process and documents required for reactivation, subject to bank rules and verification.'],hi:['बैंक खाता पुनः सक्रिय करने हेतु आवेदन','कृपया मेरे खाते की स्थिति की जाँच कर पुनः सक्रिय करने की प्रक्रिया और आवश्यक दस्तावेजों के बारे में जानकारी दें। यह बैंक के नियमों और सत्यापन के अधीन होगा।']},
+  other:{en:['Request regarding my bank account','I request your assistance with the banking matter described below. Kindly advise me on the appropriate procedure and any documents required.'],hi:['बैंक खाते से संबंधित अनुरोध','कृपया नीचे बताए गए बैंकिंग विषय में मेरी सहायता करें। उचित प्रक्रिया और आवश्यक दस्तावेजों के बारे में मार्गदर्शन प्रदान करें।']}
+ };
+ function dateText(value){
+  if(!value)return '';
+  const d=new Date(value+'T00:00:00');
+  return isNaN(d)?value:d.toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'});
+ }
+ function selectedTemplate(){
+  const t=templates[$('request').value]||templates.other;
+  return t[$('language').value==='hi'?'hi':'en'];
+ }
+ function restoreTemplate(){
+  const [subject,body]=selectedTemplate();
+  $('customSubject').value=subject;
+  $('customBody').value=body;
+  render();
+ }
+ function val(id){return $(id).value.trim()}
+ function render(){
+  const hi=$('language').value==='hi';
+  const bank=val('bank')||(hi?'बैंक का नाम':'Bank Name');
+  const branch=val('branch')||(hi?'शाखा का नाम':'Branch Name');
+  const name=val('name')||(hi?'आवेदक का नाम':'Applicant Name');
+  $('pBank').textContent=bank.toUpperCase();
+  $('pBranch').textContent=branch;
+  $('pDate').textContent=(hi?'दिनांक: ':'Date: ')+dateText(val('date'));
+  $('pTo').innerHTML=hi?'सेवा में,<br>शाखा प्रबंधक<br>'+esc(bank)+'<br>'+esc(branch):'To,<br>The Branch Manager<br>'+esc(bank)+'<br>'+esc(branch);
+  $('pSubject').textContent=(hi?'विषय: ':'Subject: ')+(val('customSubject')||selectedTemplate()[0]);
+  $('pSalutation').textContent=hi?'महोदय / महोदया,':'Respected Sir/Madam,';
+  const body=val('customBody')||selectedTemplate()[1];
+  const details=[];
+  if(val('specific'))details.push((hi?'विवरण: ':'Details: ')+val('specific'));
+  if(val('account'))details.push((hi?'खाते के अंतिम 4 अंक: ':'Last 4 account digits: ')+val('account'));
+  if(val('phone'))details.push((hi?'संपर्क नंबर: ':'Contact number: ')+val('phone'));
+  if(val('address'))details.push((hi?'पता: ':'Address: ')+val('address'));
+  $('pBody').textContent=body+(details.length?'\n\n'+details.join('\n'):'');
+  $('pExtra').textContent=val('extra')?'\n'+(hi?'अतिरिक्त जानकारी: ':'Additional note: ')+'\n'+val('extra'):'';
+  $('pSign').innerHTML=hi?'धन्यवाद।<br>भवदीय,<br><br><b>'+esc(name)+'</b>':'Thank you.<br>Yours faithfully,<br><br><b>'+esc(name)+'</b>';
+ }
+ function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+ function fullLetter(){
+  const nodes=['pBank','pBranch','pDate','pTo','pSubject','pSalutation','pBody','pExtra','pSign'];
+  return nodes.map(id=>$(id).innerText).filter(Boolean).join('\n\n');
+ }
+ fields.forEach(id=>{
+  $(id).addEventListener('input',()=>{if(id==='request'||id==='language')restoreTemplate();else render();});
+  $(id).addEventListener('change',()=>{if(id==='request'||id==='language')restoreTemplate();else render();});
+ });
+ $('regenerate').addEventListener('click',restoreTemplate);
+ $('clear').addEventListener('click',()=>{
+  if(!confirm('Clear all entered details and restore the default template?'))return;
+  fields.forEach(id=>{if(id==='request')$(id).value='mobile';else if(id==='language')$(id).value='en';else if(id==='date')$(id).value=today.toISOString().slice(0,10);else $(id).value='';});
+  restoreTemplate();
+ });
+ $('print').addEventListener('click',()=>{
+  if(!val('name')){alert('Please enter the applicant name before printing.');$('name').focus();return;}
+  render();window.print();
+ });
+ $('copy').addEventListener('click',async()=>{
+  if(!val('name')){alert('Please enter the applicant name first.');$('name').focus();return;}
+  try{await navigator.clipboard.writeText(fullLetter());alert('Letter copied. You can paste it into another document.');}
+  catch(e){
+   const area=document.createElement('textarea');area.value=fullLetter();document.body.appendChild(area);area.select();
+   const ok=document.execCommand('copy');area.remove();alert(ok?'Letter copied.':'Copy was blocked by the browser. Please select and copy the preview manually.');
+  }
+ });
+ $('download').addEventListener('click',()=>{
+  if(!val('name')){alert('Please enter the applicant name first.');$('name').focus();return;}
+  const blob=new Blob([fullLetter()],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='bank-application-letter.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ });
+ restoreTemplate();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
