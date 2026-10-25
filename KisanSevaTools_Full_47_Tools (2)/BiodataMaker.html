@@ -1,42 +1,324 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Biodata Maker | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Biodata Maker</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: Document Makers • Icon: 👤</div></section><section class="panel"><label>Full name</label><textarea rows="2" id="f0" placeholder="Full name"></textarea><label>Date of birth</label><textarea rows="2" id="f1" placeholder="Date of birth"></textarea><label>Address</label><textarea rows="2" id="f2" placeholder="Address"></textarea><label>Education</label><textarea rows="2" id="f3" placeholder="Education"></textarea><label>Occupation</label><textarea rows="2" id="f4" placeholder="Occupation"></textarea><label>Family details</label><textarea rows="2" id="f5" placeholder="Family details"></textarea><button onclick="previewDoc()">Preview document</button><button class="secondary" onclick="window.print()">Print / Save PDF</button><div id="out"></div><script>function previewDoc(){let fs=["Full name", "Date of birth", "Address", "Education", "Occupation", "Family details"],out=document.querySelector("#out");out.innerHTML="<hr><h2>Document preview</h2>"+fs.map((x,i)=>"<p><b>"+x+":</b> "+(document.querySelector("#f"+i).value||"—").replace(/</g,"&lt;")+"</p>").join("")}</script></section></main><script>
-(function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b32">
+<title>Professional Biodata Maker | CSC Seva Tools</title>
+<meta name="description" content="Create a printable personal biodata with photo, family details, education, occupation and multiple professional templates.">
+<style>
+:root{--bg:#0a1222;--panel:#121e32;--panel2:#1a2940;--line:#2c3b54;--text:#f3f6fc;--muted:#9eacc1;--gold:#e8c47a;--blue:#8eb4ff;--radius:17px}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 0% 0%,#253d63 0,transparent 34%),var(--bg);color:var(--text);font:14px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+header{background:#0a1222e8;border-bottom:1px solid #ffffff12}
+.top{max-width:1450px;margin:auto;padding:15px 23px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.5px}
+.brandmark{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,#f4dba1,#b78b3c);color:#1d2740;font-size:23px}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.2px;font-weight:600}
+.tag{font-size:11px;color:var(--gold);border:1px solid #e8c47a44;background:#e8c47a0d;padding:7px 11px;border-radius:99px;font-weight:800}
+main{max-width:1450px;margin:auto;padding:32px 23px 50px}
+.hero{display:flex;justify-content:space-between;align-items:end;gap:18px;flex-wrap:wrap;margin-bottom:24px}
+.kicker{color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:850}
+h1{font-size:clamp(29px,4vw,44px);letter-spacing:-1.5px;line-height:1.12;margin:8px 0}
+.intro{max-width:720px;color:var(--muted);margin:0}
+.heroaside{font-size:11px;color:var(--muted);max-width:245px}
+.layout{display:grid;grid-template-columns:minmax(330px,.88fr) minmax(0,1.12fr);gap:20px;align-items:start}
+.panel{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:linear-gradient(145deg,#152137,#111a2b);box-shadow:0 18px 50px #0002}
+.phead{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.phead h2{font-size:14px;margin:0}.phead p{font-size:11px;color:var(--muted);margin:3px 0 0}
+.stepnum{color:var(--gold);font-size:11px;font-weight:850}
+.formbody{padding:18px}
+.section{margin:4px 0 13px;font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:1.2px;color:var(--blue)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{min-width:0;margin-bottom:13px}
+.field.full{grid-column:1/-1}
+label{display:block;font-size:11px;font-weight:750;margin-bottom:6px;color:#dce5f3}
+input,select,textarea{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:#0d1728;color:var(--text);padding:10px 11px}
+input,select{height:42px}textarea{min-height:76px;resize:vertical}
+input::placeholder,textarea::placeholder{color:#66778f}
+.help{color:var(--muted);font-size:10px;margin:5px 0 0}
+.divider{height:1px;background:var(--line);margin:17px 0}
+.btn{border:1px solid transparent;border-radius:10px;padding:10px 13px;font-size:11px;font-weight:850;transition:.16s}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.primary{background:linear-gradient(130deg,#f2dba2,#c99d4f);color:#172139}
+.secondary{background:var(--panel2);border-color:var(--line);color:var(--text)}
+.ghost{background:transparent;border-color:var(--line);color:var(--muted)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap}.btnrow .btn{flex:1}
+.photozone{display:flex;gap:13px;align-items:center;padding:12px;border:1px dashed #405574;border-radius:12px}
+.photothumb{width:64px;height:76px;flex-shrink:0;display:grid;place-items:center;overflow:hidden;background:#23344d;border-radius:8px;color:var(--muted);font-size:10px;text-align:center}
+.photothumb img{width:100%;height:100%;object-fit:cover}
+.photoinfo{min-width:0}.photoinfo b{display:block;font-size:12px}.photoinfo span{display:block;font-size:10px;color:var(--muted);margin:3px 0 8px}
+.previewpanel{position:sticky;top:12px}
+.previewbar{padding:12px 15px;display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.previewbar strong{font-size:12px}
+.live{font-size:10px;color:var(--gold);font-weight:850}
+.templates{display:flex;gap:5px;background:#0b1423;padding:4px;border-radius:10px}
+.templates button{border:0;background:transparent;color:var(--muted);border-radius:7px;padding:7px 9px;font-size:10px;font-weight:800}
+.templates button.active{background:#2a3b55;color:var(--gold)}
+.paperstage{padding:17px;background:#dce3ee;max-height:850px;overflow:auto}
+.paper{width:100%;max-width:780px;min-height:720px;background:#fffdf8;color:#243148;margin:auto;padding:clamp(22px,4vw,43px);box-shadow:0 10px 28px #1c2a401c;font-family:Georgia,"Times New Roman",serif;font-size:12px;line-height:1.65;overflow-wrap:anywhere}
+.paper-header{text-align:center;border-bottom:2px solid #b99553;padding-bottom:16px;margin-bottom:20px}
+.paper-header .ornament{color:#ad8742;font-size:17px;letter-spacing:4px}
+.paper-header h2{font-size:24px;letter-spacing:3px;text-transform:uppercase;margin:5px 0;color:#233b60}
+.paper-header p{font-family:Arial,sans-serif;color:#7b6a4e;font-size:9px;letter-spacing:2px;margin:0}
+.paper-top{display:grid;grid-template-columns:minmax(0,1fr) 105px;gap:18px;align-items:start}
+.paper-photo{width:100px;height:125px;border:1px solid #c9b68c;display:grid;place-items:center;text-align:center;color:#94846b;background:#f5f0e5;font:10px Arial,sans-serif;overflow:hidden}
+.paper-photo img{width:100%;height:100%;object-fit:cover}
+.paper-name{font-size:22px;color:#233b60;font-weight:bold;margin:0 0 6px}
+.paper-intro{font-size:11px;color:#74664e}
+.paper-section{margin-top:20px}
+.paper-section h3{font:800 10px Arial,sans-serif;letter-spacing:1.4px;text-transform:uppercase;color:#8a6b34;border-bottom:1px solid #d8c7a3;padding-bottom:6px;margin:0 0 9px}
+.paper-table{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed}
+.paper-table td{padding:5px 4px;vertical-align:top;border-bottom:1px solid #eee6d7;overflow-wrap:anywhere}
+.paper-table td:first-child{width:39%;color:#74664e}
+.paper-note{white-space:pre-wrap;font-size:11px}
+.paper-footer{margin-top:25px;padding-top:12px;border-top:1px solid #d8c7a3;color:#84775e;font-size:9px;text-align:center}
+.notice{margin-top:14px;border:1px solid #e8c47a2e;background:#e8c47a0a;padding:12px;border-radius:11px;color:var(--muted);font-size:11px}
+.notice b{color:var(--gold)}
+footer{max-width:1450px;margin:auto;padding:18px 23px 28px;border-top:1px solid #ffffff10;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.previewpanel{position:static}.paper{min-height:600px}}
+@media(max-width:560px){.top,main,footer{padding-left:14px;padding-right:14px}.tag{display:none}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.formbody{padding:14px}.paperstage{padding:8px}.paper{padding:19px;min-height:570px}.paper-top{grid-template-columns:minmax(0,1fr) 82px;gap:10px}.paper-photo{width:80px;height:100px}.paper-header h2{font-size:20px}.paper-name{font-size:18px}.previewbar{align-items:flex-start}}
+@media print{
+ @page{size:A4;margin:13mm}
+ body{background:#fff!important;color:#000!important}
+ header,main>.hero,.formpanel,footer,.previewbar,.notice{display:none!important}
+ main{padding:0!important;margin:0!important;max-width:none!important}
+ .layout{display:block!important}
+ .previewpanel{position:static!important;border:0!important;box-shadow:none!important;background:#fff!important}
+ .paperstage{padding:0!important;background:#fff!important;max-height:none!important;overflow:visible!important}
+ .paper{max-width:none!important;width:100%!important;min-height:0!important;padding:0!important;box-shadow:none!important;font-size:11pt!important}
+}
+</style>
+</head>
+<body>
+<header><div class="top">
+ <div class="brand"><div class="brandmark">✦</div><div>CSC SEVA TOOLS<small>PERSONAL DOCUMENT STUDIO</small></div></div>
+ <span class="tag">✧ PREMIUM BIODATA DESIGNER</span>
+</div></header>
+<main>
+ <section class="hero">
+  <div><div class="kicker">Personal document creator</div>
+   <h1>Professional Biodata Maker<span style="color:var(--gold)">.</span></h1>
+   <p class="intro">Create a structured personal biodata with personal information, education, family details and an optional photo. Preview your design before printing.</p>
+  </div>
+  <div class="heroaside">Designed for general personal biodata. Choose which details to include and keep private information optional.</div>
+ </section>
+
+ <section class="layout">
+  <div class="panel formpanel">
+   <div class="phead"><div><h2>Biodata information</h2><p>Fill the sections you need</p></div><span class="stepnum">STEP 01</span></div>
+   <div class="formbody">
+    <div class="section">01 · Document style</div>
+    <div class="field"><label for="layoutStyle">Choose template</label>
+     <select id="layoutStyle"><option value="classic">Classic · Gold & Ivory</option><option value="modern">Modern · Blue & White</option><option value="minimal">Minimal · Clean & Simple</option></select>
+    </div>
+    <div class="field"><label for="photo">Profile photo (optional)</label>
+     <div class="photozone"><div class="photothumb" id="photoThumb">PHOTO<br>PREVIEW</div><div class="photoinfo"><b>Add a profile photo</b><span>JPG, PNG or WebP · Maximum 8 MB</span><input id="photo" type="file" accept="image/jpeg,image/png,image/webp" style="height:auto;padding:7px;font-size:10px"></div></div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">02 · Personal information</div>
+    <div class="fields">
+     <div class="field full"><label for="fullName">Full name *</label><input id="fullName" placeholder="Enter full name" autocomplete="name"></div>
+     <div class="field"><label for="dob">Date of birth</label><input id="dob" type="date"></div>
+     <div class="field"><label for="gender">Gender (optional)</label><select id="gender"><option value="">Not specified</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div>
+     <div class="field"><label for="height">Height (optional)</label><input id="height" placeholder="e.g. 170 cm"></div>
+     <div class="field"><label for="marital">Marital status</label><select id="marital"><option value="">Not specified</option><option>Single</option><option>Married</option><option>Other</option></select></div>
+     <div class="field"><label for="nationality">Nationality</label><input id="nationality" placeholder="e.g. Indian"></div>
+     <div class="field"><label for="language">Languages</label><input id="language" placeholder="e.g. Marathi, Hindi"></div>
+     <div class="field full"><label for="address">Address (optional)</label><textarea id="address" rows="2" placeholder="Village / town / city"></textarea></div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">03 · Education & occupation</div>
+    <div class="fields">
+     <div class="field full"><label for="education">Education</label><input id="education" placeholder="Highest qualification / institution"></div>
+     <div class="field"><label for="occupation">Occupation</label><input id="occupation" placeholder="Profession or work"></div>
+     <div class="field"><label for="income">Annual income (optional)</label><input id="income" placeholder="Optional"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">04 · Family details</div>
+    <div class="fields">
+     <div class="field"><label for="father">Father's name</label><input id="father" placeholder="Father's full name"></div>
+     <div class="field"><label for="fatherJob">Father's occupation</label><input id="fatherJob" placeholder="Optional"></div>
+     <div class="field"><label for="mother">Mother's name</label><input id="mother" placeholder="Mother's full name"></div>
+     <div class="field"><label for="motherJob">Mother's occupation</label><input id="motherJob" placeholder="Optional"></div>
+     <div class="field"><label for="siblings">Siblings</label><input id="siblings" placeholder="e.g. 1 brother, 1 sister"></div>
+     <div class="field"><label for="familyType">Family type</label><select id="familyType"><option value="">Not specified</option><option>Nuclear</option><option>Joint</option></select></div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">05 · Additional information</div>
+    <div class="field"><label for="about">About me / other details</label><textarea id="about" rows="3" placeholder="Write a short introduction or other relevant details"></textarea></div>
+    <div class="field"><label for="contact">Contact information (optional)</label><input id="contact" placeholder="Email or phone, if you want to include it"></div>
+    <p class="help">Avoid including Aadhaar, bank details or other sensitive identity numbers in a general biodata.</p>
+    <div class="divider"></div>
+    <div class="btnrow">
+     <button class="btn secondary" id="reset">Reset form</button>
+     <button class="btn ghost" id="downloadText">Download TXT</button>
+    </div>
+   </div>
+  </div>
+
+  <div>
+   <div class="panel previewpanel">
+    <div class="previewbar"><strong>Live biodata preview</strong><span class="live">● AUTO-UPDATE</span>
+     <div class="templates"><button class="active" data-style="classic">Classic</button><button data-style="modern">Modern</button><button data-style="minimal">Minimal</button></div>
+    </div>
+    <div class="paperstage"><article class="paper" id="paper">
+     <div class="paper-header"><div class="ornament">✦ · ✦ · ✦</div><h2>BIODATA</h2><p>PERSONAL PROFILE</p></div>
+     <div class="paper-top">
+      <div><div class="paper-name" id="pName">Your Full Name</div><div class="paper-intro" id="pIntro">Personal information and profile</div></div>
+      <div class="paper-photo" id="pPhoto">PHOTO</div>
+     </div>
+     <section class="paper-section" id="personalSection"><h3>Personal Information</h3><table class="paper-table" id="personalTable"></table></section>
+     <section class="paper-section" id="educationSection"><h3>Education & Occupation</h3><table class="paper-table" id="educationTable"></table></section>
+     <section class="paper-section" id="familySection"><h3>Family Details</h3><table class="paper-table" id="familyTable"></table></section>
+     <section class="paper-section" id="aboutSection"><h3>About Me</h3><div class="paper-note" id="pAbout"></div></section>
+     <section class="paper-section" id="contactSection"><h3>Contact</h3><div class="paper-note" id="pContact"></div></section>
+     <div class="paper-footer">Personal biodata · Please verify all information before sharing</div>
+    </article></div>
+    <div class="formbody">
+     <div class="btnrow">
+      <button class="btn primary" id="print">Print / Save PDF</button>
+      <button class="btn secondary" id="downloadHtml">Download HTML</button>
+     </div>
+     <div class="notice"><b>Privacy:</b> This page builds the document in your browser. The photo is not uploaded to a server by this page. Downloaded files may contain the personal information you enter, so store and share them carefully.</div>
+    </div>
+   </div>
+  </div>
+ </section>
+</main>
+<footer><span>CSC Seva Tools · Professional Biodata Maker</span><span>Browser-based document creation</span></footer>
+<script>
+(()=>{
+ const $=id=>document.getElementById(id);
+ const ids=['fullName','dob','gender','height','marital','nationality','language','address','education','occupation','income','father','fatherJob','mother','motherJob','siblings','familyType','about','contact'];
+ let photoData='';
+ const dateToday=new Date();
+ function fmtDate(v){
+  if(!v)return '';
+  const d=new Date(v+'T00:00:00');
+  return isNaN(d)?v:d.toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'});
+ }
+ function esc(s){
+  return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ }
+ function val(id){return $(id).value.trim();}
+ function tableRows(rows){
+  return rows.filter(r=>r[1]).map(r=>'<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>').join('');
+ }
+ function showSection(id,content){
+  $(id).style.display=content?'':'none';
+ }
+ function render(){
+  const name=val('fullName')||'Your Full Name';
+  $('pName').textContent=name;
+  const intro=[val('occupation'),val('education')].filter(Boolean).join(' · ');
+  $('pIntro').textContent=intro||'Personal information and profile';
+  const personal=[
+   ['Date of birth',fmtDate(val('dob'))],['Gender',val('gender')],['Height',val('height')],
+   ['Marital status',val('marital')],['Nationality',val('nationality')],['Languages',val('language')],['Address',val('address')]
+  ];
+  $('personalTable').innerHTML=tableRows(personal);
+  showSection('personalSection',personal.some(r=>r[1]));
+  const work=[['Education',val('education')],['Occupation',val('occupation')],['Annual income',val('income')]];
+  $('educationTable').innerHTML=tableRows(work);
+  showSection('educationSection',work.some(r=>r[1]));
+  const family=[["Father's name",val('father')],["Father's occupation",val('fatherJob')],["Mother's name",val('mother')],["Mother's occupation",val('motherJob')],['Siblings',val('siblings')],['Family type',val('familyType')]];
+  $('familyTable').innerHTML=tableRows(family);
+  showSection('familySection',family.some(r=>r[1]));
+  $('pAbout').textContent=val('about');
+  showSection('aboutSection',!!val('about'));
+  $('pContact').textContent=val('contact');
+  showSection('contactSection',!!val('contact'));
+  const photo=$('pPhoto');
+  photo.innerHTML=photoData?'<img src="'+photoData+'" alt="Profile photo">':'PHOTO';
+  photo.style.display=photoData?'grid':'none';
+ }
+ function setStyle(style){
+  $('layoutStyle').value=style;
+  document.querySelectorAll('[data-style]').forEach(b=>b.classList.toggle('active',b.dataset.style===style));
+  const paper=$('paper');
+  paper.style.fontFamily=style==='modern'?'Arial,Helvetica,sans-serif':style==='minimal'?'Arial,Helvetica,sans-serif':'Georgia,"Times New Roman",serif';
+  paper.style.background=style==='modern'?'#ffffff':style==='minimal'?'#ffffff':'#fffdf8';
+  paper.style.color=style==='modern'?'#24364d':'#243148';
+  paper.style.borderTop=style==='modern'?'5px solid #315c9b':style==='minimal'?'none':'none';
+  paper.querySelector('.paper-header').style.borderBottom=style==='minimal'?'1px solid #cbd2dc':'2px solid '+(style==='modern'?'#315c9b':'#b99553');
+  paper.querySelector('.paper-header h2').style.color=style==='modern'?'#315c9b':'#233b60';
+  paper.querySelectorAll('.paper-section h3').forEach(h=>{h.style.color=style==='modern'?'#315c9b':style==='minimal'?'#39475a':'#8a6b34';h.style.borderBottomColor=style==='modern'?'#c9d6e8':style==='minimal'?'#d9dee6':'#d8c7a3';});
+  render();
+ }
+ function textDocument(){
+  const sections=[];
+  sections.push('BIODATA\n'+(val('fullName')||''));
+  const groups=[
+   ['PERSONAL INFORMATION',[['Date of birth',fmtDate(val('dob'))],['Gender',val('gender')],['Height',val('height')],['Marital status',val('marital')],['Nationality',val('nationality')],['Languages',val('language')],['Address',val('address')]]],
+   ['EDUCATION & OCCUPATION',[['Education',val('education')],['Occupation',val('occupation')],['Annual income',val('income')]]],
+   ['FAMILY DETAILS',[["Father's name",val('father')],["Father's occupation",val('fatherJob')],["Mother's name",val('mother')],["Mother's occupation",val('motherJob')],['Siblings',val('siblings')],['Family type',val('familyType')]]],
+   ['ABOUT ME',[['About me',val('about')]]],
+   ['CONTACT',[['Contact',val('contact')]]]
+  ];
+  groups.forEach(([title,rows])=>{
+   const lines=rows.filter(r=>r[1]).map(r=>r[0]+': '+r[1]);
+   if(lines.length)sections.push(title+'\n'+lines.join('\n'));
+  });
+  return sections.join('\n\n');
+ }
+ function download(name,content,type){
+  const blob=new Blob([content],{type});
+  const url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1200);
+ }
+ ids.forEach(id=>{
+  $(id).addEventListener('input',render);
+  $(id).addEventListener('change',render);
+ });
+ $('layoutStyle').addEventListener('change',e=>setStyle(e.target.value));
+ document.querySelectorAll('[data-style]').forEach(b=>b.addEventListener('click',()=>setStyle(b.dataset.style)));
+ $('photo').addEventListener('change',e=>{
+  const file=e.target.files[0];if(!file)return;
+  if(!/^image\/(jpeg|png|webp)$/.test(file.type)){alert('Please choose a JPG, PNG or WebP photo.');e.target.value='';return;}
+  if(file.size>8*1024*1024){alert('Photo must be smaller than 8 MB.');e.target.value='';return;}
+  const reader=new FileReader();
+  reader.onload=()=>{
+   const img=new Image();
+   img.onload=()=>{
+    if(img.naturalWidth>5000||img.naturalHeight>5000){alert('Please choose a photo with dimensions below 5000 × 5000 pixels.');e.target.value='';return;}
+    photoData=reader.result;
+    $('photoThumb').innerHTML='<img src="'+photoData+'" alt="Selected photo">';
+    render();
+   };
+   img.onerror=()=>alert('Could not read this image. Please choose another photo.');
+   img.src=reader.result;
+  };
+  reader.readAsDataURL(file);
+ });
+ $('print').addEventListener('click',()=>{
+  if(!val('fullName')){alert('Please enter the full name before printing.');$('fullName').focus();return;}
+  window.print();
+ });
+ $('downloadText').addEventListener('click',()=>{
+  if(!val('fullName')){alert('Please enter the full name first.');$('fullName').focus();return;}
+  download('biodata.txt',textDocument(),'text/plain;charset=utf-8');
+ });
+ $('downloadHtml').addEventListener('click',()=>{
+  if(!val('fullName')){alert('Please enter the full name first.');$('fullName').focus();return;}
+  const clone=$('paper').cloneNode(true);
+  const css='body{font-family:Arial,sans-serif;background:#fff;padding:24px;color:#243148}.paper{max-width:780px;margin:auto;padding:35px;background:#fffdf8;line-height:1.65}.paper-header{text-align:center;border-bottom:2px solid #b99553;padding-bottom:16px}.paper-header h2{font-size:24px;letter-spacing:3px}.paper-top{display:grid;grid-template-columns:1fr 105px;gap:18px}.paper-photo{width:100px;height:125px;border:1px solid #c9b68c;overflow:hidden}.paper-photo img{width:100%;height:100%;object-fit:cover}.paper-section{margin-top:20px}.paper-section h3{font-size:11px;border-bottom:1px solid #d8c7a3;padding-bottom:6px}.paper-table{width:100%;border-collapse:collapse}.paper-table td{padding:5px;border-bottom:1px solid #eee6d7;vertical-align:top}.paper-table td:first-child{width:39%}.paper-footer{margin-top:25px;border-top:1px solid #d8c7a3;padding-top:12px;text-align:center;font-size:10px}';
+  const doc='<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Personal Biodata</title><style>'+css+'</style></head><body>'+clone.outerHTML+'</body></html>';
+  download('personal-biodata.html',doc,'text/html;charset=utf-8');
+ });
+ $('reset').addEventListener('click',()=>{
+  if(!confirm('Clear all biodata details and remove the selected photo?'))return;
+  ids.forEach(id=>$(id).value='');
+  photoData='';$('photo').value='';$('photoThumb').textContent='PHOTO PREVIEW';
+  setStyle('classic');render();
+ });
+ setStyle('classic');
 })();
-</script></body></html>
+</script>
+</body>
+</html>
