@@ -1,55 +1,204 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Image Converter | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Image Converter</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: Photo Tools • Icon: 🔄</div></section><section class="panel"><label>Select image/file</label><input id="file" type="file" accept="image/*" multiple><div id="preview"></div><label>Output format</label><select id="fmt"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WEBP</option></select><button onclick="convertImg()">Convert & Download</button></section><section class="panel"><h2>Preview / output</h2><div id="out"></div></section>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111827">
+<title>Image Converter Pro | CSC Seva Tools</title>
+<meta name="description" content="Convert images to PNG, JPEG or WebP, resize images, control quality and download converted files in your browser.">
+<style>
+:root{--bg:#101827;--panel:#182235;--panel2:#202d42;--line:#304057;--ink:#f4f7fc;--muted:#9aaac0;--purple:#b4a0ff;--cyan:#67e8d4;--danger:#ff9090}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 10% 0%,#29234d 0,transparent 35%),var(--bg);color:var(--ink);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}
+header{border-bottom:1px solid #ffffff12;background:#101827e8}.top{max-width:1450px;margin:auto;padding:15px 23px;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.5px}.logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),var(--cyan));color:#121a2c;font-size:22px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.3px}.badge{border:1px solid #67e8d444;color:var(--cyan);padding:7px 11px;border-radius:99px;font-size:10px}
+main{max-width:1450px;margin:auto;padding:29px 23px 48px}.hero{display:flex;justify-content:space-between;align-items:end;gap:15px;flex-wrap:wrap;margin-bottom:23px}.kicker{color:var(--cyan);font-size:10px;letter-spacing:2px;font-weight:900}h1{font-size:clamp(28px,4vw,43px);letter-spacing:-1.4px;line-height:1.12;margin:8px 0}.sub{color:var(--muted);max-width:730px;margin:0}
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:18px;align-items:start}.sidebar{display:grid;gap:15px;min-width:0}.card{background:linear-gradient(145deg,#1a263a,#151f31);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 15px 40px #0001}.head{padding:15px 16px;border-bottom:1px solid var(--line)}.head h2{font-size:13px;margin:0}.head p{font-size:10px;color:var(--muted);margin:3px 0 0}.body{padding:16px}.field{margin-bottom:14px}.field label{display:block;color:#c7d3e5;font-size:10px;font-weight:850;margin-bottom:6px}.field input,.field select{width:100%;height:41px;border:1px solid var(--line);border-radius:9px;background:#111b2b;color:var(--ink);padding:9px 10px}.field input[type=range]{height:auto;padding:0;accent-color:var(--purple)}.field input[type=color]{padding:3px;height:40px}.field input[type=checkbox]{width:16px;height:16px;accent-color:var(--cyan)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field.full{grid-column:1/-1}.help{color:var(--muted);font-size:10px;line-height:1.6;margin:6px 0 0}.btn{border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:var(--panel2);color:var(--ink);font-size:11px;font-weight:850}.primary{background:linear-gradient(130deg,var(--purple),var(--cyan));border:0;color:#111827}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.btnrow .btn{flex:1}.upload{border:1px dashed #5c6b84;border-radius:12px;background:#101a2a;padding:15px}.upload input{width:100%;font-size:10px;color:var(--muted)}.upload strong{display:block;margin-bottom:6px}.work{min-width:0}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid var(--line)}.toolbar h2{font-size:13px;margin:0}.toolbar span{font-size:10px;color:var(--muted)}.dropzone{margin:16px;padding:27px 15px;text-align:center;border:1px dashed #586985;border-radius:13px;background:#131e30}.dropzone .icon{font-size:30px;color:var(--purple)}.dropzone strong{display:block;margin:7px 0}.dropzone p{font-size:11px;color:var(--muted);margin:0 0 13px}.filelist{padding:0 15px 15px;display:grid;gap:10px}.filecard{display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:13px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:11px;background:#131e30;min-width:0}.thumb{width:92px;height:78px;display:grid;place-items:center;overflow:hidden;border-radius:8px;background-color:#fff;background-image:linear-gradient(45deg,#dce1e8 25%,transparent 25%),linear-gradient(-45deg,#dce1e8 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#dce1e8 75%),linear-gradient(-45deg,transparent 75%,#dce1e8 75%);background-size:12px 12px;background-position:0 0,0 6px,6px -6px,-6px 0}.thumb img{max-width:100%;max-height:100%;object-fit:contain}.filename{font-size:12px;font-weight:800;overflow-wrap:anywhere}.filemeta{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.6}.fileactions{display:flex;flex-direction:column;gap:6px}.mini{padding:7px 9px;font-size:10px;border:1px solid var(--line);border-radius:7px;background:#202d42;color:white}.mini:disabled{opacity:.5;cursor:not-allowed}.progress{height:4px;background:#2b374a;border-radius:9px;overflow:hidden;margin-top:8px}.progress i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan));transition:width .2s}.status{font-size:10px;color:var(--cyan);margin-top:5px}.empty{padding:30px 15px;text-align:center;color:var(--muted);font-size:12px}.summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:15px}.stat{border:1px solid var(--line);background:#182235;border-radius:12px;padding:13px;min-width:0}.stat span{font-size:10px;color:var(--muted)}.stat strong{display:block;font-size:21px;margin-top:4px;overflow-wrap:anywhere}.notice{padding:12px;border:1px solid #b4a0ff30;border-radius:10px;background:#b4a0ff0b;color:#b8c4d8;font-size:10px;line-height:1.65}.notice b{color:var(--purple)}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#e8f8f2;color:#163e31;padding:11px 15px;border-radius:10px;font-size:12px;display:none;z-index:9;max-width:calc(100% - 25px)}.toast.show{display:block}
+footer{max-width:1450px;margin:auto;border-top:1px solid #ffffff12;padding:18px 23px 26px;color:var(--muted);font-size:10px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar>.card:last-child{grid-column:1/-1}}
+@media(max-width:550px){.top,main,footer{padding-left:12px;padding-right:12px}.badge{display:none}.sidebar{grid-template-columns:1fr}.sidebar>.card:last-child{grid-column:auto}.body{padding:13px}.filecard{grid-template-columns:68px minmax(0,1fr)}.thumb{width:68px;height:68px}.fileactions{grid-column:1/-1;flex-direction:row}.fileactions button{flex:1}.summary{gap:6px}.stat{padding:9px}.stat strong{font-size:17px}.dropzone{margin:10px}.grid2{gap:8px}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="brand"><div class="logo">⇄</div><div>CSC SEVA TOOLS<small>IMAGE CONVERSION WORKSPACE</small></div></div><span class="badge">LOCAL PROCESSING · PRO</span></div></header>
+<main>
+<section class="hero"><div><div class="kicker">Image pipeline</div><h1>Image Converter Pro<span style="color:var(--cyan)">.</span></h1><p class="sub">Convert, resize and optimize image files in one workspace. Process multiple images and download each result in your chosen format.</p></div></section>
+<div class="layout">
+<aside class="sidebar">
+<section class="card"><div class="head"><h2>01 / Output format</h2><p>Choose your target file type.</p></div><div class="body">
+<div class="field"><label for="format">CONVERT TO</label><select id="format"><option value="image/png">PNG · Transparency support</option><option value="image/jpeg">JPEG · Smaller photographs</option><option value="image/webp">WebP · Modern web images</option></select></div>
+<div class="field"><label for="quality">OUTPUT QUALITY <span id="qualityLabel">85%</span></label><input id="quality" type="range" min="10" max="100" value="85"><p class="help">Quality applies mainly to JPEG and WebP. PNG is generally lossless and may ignore this setting.</p></div>
+<div class="field"><label for="resizeMode">RESIZE MODE</label><select id="resizeMode"><option value="original">Keep original dimensions</option><option value="pixels">Set maximum width and height</option><option value="percent">Scale by percentage</option></select></div>
+<div class="grid2" id="pixelFields" style="display:none">
+<div class="field"><label for="maxWidth">MAX WIDTH (px)</label><input id="maxWidth" type="number" min="1" max="12000" value="1600"></div>
+<div class="field"><label for="maxHeight">MAX HEIGHT (px)</label><input id="maxHeight" type="number" min="1" max="12000" value="1600"></div>
+</div>
+<div class="field" id="percentField" style="display:none"><label for="percent">SCALE (%)</label><input id="percent" type="number" min="1" max="400" value="75"></div>
+<div class="field"><label for="background">BACKGROUND FOR TRANSPARENT IMAGES</label><input id="background" type="color" value="#ffffff"><p class="help">Used when converting transparency to JPEG.</p></div>
+<div class="field"><label><input type="checkbox" id="keepNames" checked style="width:15px;height:15px;vertical-align:middle"> Add format suffix to output filenames</label></div>
+<button class="btn primary" id="convertAll" style="width:100%">Convert all images ↗</button>
+</div></section>
+<section class="card"><div class="head"><h2>02 / Batch management</h2><p>Control your current image queue.</p></div><div class="body">
+<div class="btnrow"><button class="btn" id="downloadAll">Download all results</button><button class="btn" id="clearAll">Clear queue</button></div>
+<p class="help">Each image is downloaded separately. This page does not create ZIP archives.</p>
+</div></section>
+<section class="card"><div class="head"><h2>03 / Processing notes</h2></div><div class="body"><div class="notice"><b>Private by design:</b> image decoding and conversion happen in your browser. Large images may use significant memory. Converted output can differ in size and appearance depending on format and quality.</div></div></section>
+</aside>
+<section class="card work">
+<div class="toolbar"><div><h2>Conversion queue</h2><span id="queueLabel">No images added</span></div><span id="overallStatus">Ready</span></div>
+<div class="dropzone" id="dropzone"><div class="icon">⇧</div><strong>Drop images here or choose files</strong><p>Supports JPG, PNG, WebP, GIF (first frame), BMP and compatible browser image formats.</p><button class="btn primary" id="choose">Choose images</button><input id="files" type="file" accept="image/*" multiple hidden></div>
+<div class="summary"><div class="stat"><span>QUEUED</span><strong id="queued">0</strong></div><div class="stat"><span>CONVERTED</span><strong id="converted">0</strong></div><div class="stat"><span>OUTPUT SIZE</span><strong id="outputSize">0 KB</strong></div></div>
+<div class="filelist" id="fileList"><div class="empty">Your uploaded images will appear here, with their dimensions, size and conversion status.</div></div>
+</section>
+</div>
+</main>
+<footer><span>CSC Seva Tools · Image Converter Pro</span><span>Browser Canvas conversion · No automatic cloud upload</span></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
-const fi=document.querySelector('#file');
-if(fi)fi.addEventListener('change',()=>{let p=document.querySelector('#preview');if(!p)return;p.innerHTML='';[...fi.files].forEach(f=>{if(f.type.startsWith('image/')){let im=document.createElement('img');im.className='preview';im.style.maxWidth='160px';im.style.margin='6px';im.src=URL.createObjectURL(f);p.appendChild(im)}})});
-function loadImgs(){return Promise.all([...document.querySelector('#file').files].map(f=>new Promise((res,rej)=>{let im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=URL.createObjectURL(f)})))}
-function dl(canvas,name='output.png',type='image/png'){let a=document.createElement('a');a.href=canvas.toDataURL(type,.92);a.download=name;a.click()}
-function resizeImg(){loadImgs().then(([im])=>{let c=document.createElement('canvas');c.width=+document.querySelector('#w').value;c.height=+document.querySelector('#h').value;c.getContext('2d').drawImage(im,0,0,c.width,c.height);document.querySelector('#out').replaceChildren(c);dl(c,'resized.png')})}
-function convertImg(){loadImgs().then(([im])=>{let c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);let t=document.querySelector('#fmt').value;dl(c,'converted.'+(t==='image/jpeg'?'jpg':t==='image/png'?'png':'webp'),t)})}
-function cropImg(){loadImgs().then(([im])=>{let s=Math.min(im.naturalWidth,im.naturalHeight),c=document.createElement('canvas');c.width=s;c.height=s;c.getContext('2d').drawImage(im,(im.naturalWidth-s)/2,(im.naturalHeight-s)/2,s,s,0,0,s,s);document.querySelector('#out').replaceChildren(c);dl(c,'crop.png')})}
-function makeSheet(){loadImgs().then(([im])=>{let n=+document.querySelector('#copies').value,c=document.createElement('canvas');c.width=1240;c.height=1754;let x=c.getContext('2d');x.fillStyle='white';x.fillRect(0,0,c.width,c.height);let cols=2,rows=Math.ceil(n/cols),cw=560,ch= Math.min(700,1600/rows);for(let i=0;i<n;i++)x.drawImage(im,30+(i%cols)*610,30+Math.floor(i/cols)*ch,cw,ch*.8);document.querySelector('#out').replaceChildren(c);dl(c,'A4-photo-sheet.png')})}
-function makePhoto(){let v=document.querySelector('#size').value;document.querySelector('#copies').value='4';makeSheet()}
-function joinImages(){loadImgs().then(ims=>{let w=Math.max(...ims.map(i=>i.naturalWidth)),h=ims.reduce((s,i)=>s+i.naturalHeight,0),c=document.createElement('canvas');c.width=w;c.height=h;let y=0;ims.forEach(i=>{c.getContext('2d').drawImage(i,0,y);y+=i.naturalHeight});document.querySelector('#out').replaceChildren(c);dl(c,'joined.png')})}
-</script>
-</main><script>
-(function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+let queue=[],nextId=1,busy=false,toastTimer;
+const supported=new Set(['image/jpeg','image/png','image/webp']);
+function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2500);}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function fmtBytes(b){if(b<1024)return b+' B';if(b<1048576)return (b/1024).toFixed(1)+' KB';return (b/1048576).toFixed(2)+' MB';}
+function outFormat(){return $('format').value;}
+function extension(){return {'image/png':'png','image/jpeg':'jpg','image/webp':'webp'}[outFormat()];}
+function outputName(name){
+ const stem=name.replace(/\.[^.]+$/,'');
+ return $('keepNames').checked?stem+'-converted.'+extension():stem+'.'+extension();
+}
+function updateControls(){
+ $('qualityLabel').textContent=$('quality').value+'%';
+ $('pixelFields').style.display=$('resizeMode').value==='pixels'?'grid':'none';
+ $('percentField').style.display=$('resizeMode').value==='percent'?'':'none';
+}
+function render(){
+ $('queueLabel').textContent=queue.length?queue.length+' image(s) in queue':'No images added';
+ $('queued').textContent=queue.length;
+ $('converted').textContent=queue.filter(x=>x.status==='Done').length;
+ $('outputSize').textContent=fmtBytes(queue.reduce((s,x)=>s+(x.output?.size||0),0));
+ if(!queue.length){$('fileList').innerHTML='<div class="empty">Your uploaded images will appear here, with their dimensions, size and conversion status.</div>';return;}
+ $('fileList').innerHTML=queue.map(x=>`
+ <article class="filecard" data-id="${x.id}">
+  <div class="thumb"><img src="${x.url}" alt=""></div>
+  <div><div class="filename">${esc(x.name)}</div><div class="filemeta">${x.width} × ${x.height} px · ${fmtBytes(x.size)}<br>Output: ${x.output?fmtBytes(x.output.size):'Not converted'}</div><div class="progress"><i style="width:${x.status==='Done'?100:x.status==='Converting'?45:0}%"></i></div><div class="status">${esc(x.status)}${x.error?' · '+esc(x.error):''}</div></div>
+  <div class="fileactions"><button class="mini" data-action="download" data-id="${x.id}" ${x.output?'':'disabled'}>Download</button><button class="mini" data-action="remove" data-id="${x.id}" ${busy?'disabled':''}>Remove</button></div>
+ </article>`).join('');
+}
+function readImage(file){
+ return new Promise((resolve,reject)=>{
+  const url=URL.createObjectURL(file),img=new Image();
+  img.onload=()=>{
+   if(!img.naturalWidth||!img.naturalHeight){URL.revokeObjectURL(url);reject(new Error('Invalid image dimensions'));return;}
+   resolve({url,img,width:img.naturalWidth,height:img.naturalHeight});
+  };
+  img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('Cannot read image'));};
+  img.src=url;
+ });
+}
+async function addFiles(files){
+ const incoming=[...files];
+ if(queue.length+incoming.length>100){toast('Maximum 100 images in the queue.');return;}
+ for(const file of incoming){
+  if(!file.type.startsWith('image/')){toast('Skipped '+file.name+': not an image.');continue;}
+  if(file.size>25*1024*1024){toast('Skipped '+file.name+': over 25 MB.');continue;}
+  try{
+   const loaded=await readImage(file);
+   queue.push({id:nextId++,name:file.name,size:file.size,type:file.type,url:loaded.url,img:loaded.img,width:loaded.width,height:loaded.height,status:'Ready',output:null,error:''});
+  }catch(e){toast('Could not open '+file.name);}
+ }
+ render();
+}
+function dimensions(item){
+ let w=item.width,h=item.height,mode=$('resizeMode').value;
+ if(mode==='percent'){
+  const p=Number($('percent').value);
+  if(!Number.isFinite(p)||p<1||p>400)throw new Error('Scale must be 1–400%.');
+  w=Math.max(1,Math.round(w*p/100));h=Math.max(1,Math.round(h*p/100));
+ }else if(mode==='pixels'){
+  const mw=Number($('maxWidth').value),mh=Number($('maxHeight').value);
+  if(!Number.isFinite(mw)||!Number.isFinite(mh)||mw<1||mh<1||mw>12000||mh>12000)throw new Error('Maximum dimensions must be 1–12,000 pixels.');
+  const scale=Math.min(1,mw/w,mh/h);
+  w=Math.max(1,Math.round(w*scale));h=Math.max(1,Math.round(h*scale));
+ }
+ if(w*h>40000000)throw new Error('Output exceeds 40 megapixels. Reduce dimensions.');
+ return {w,h};
+}
+function convert(item){
+ return new Promise((resolve,reject)=>{
+  try{
+   const {w,h}=dimensions(item),type=outFormat(),canvas=document.createElement('canvas');
+   canvas.width=w;canvas.height=h;
+   const ctx=canvas.getContext('2d');
+   if(!ctx)throw new Error('Canvas is unavailable.');
+   if(type==='image/jpeg'){ctx.fillStyle=$('background').value;ctx.fillRect(0,0,w,h);}
+   ctx.drawImage(item.img,0,0,w,h);
+   canvas.toBlob(blob=>{
+    canvas.width=canvas.height=1;
+    if(!blob){reject(new Error('Browser could not encode this format.'));return;}
+    resolve({blob,size:blob.size,width:w,height:h,type,name:outputName(item.name)});
+   },type,Number($('quality').value)/100);
+  }catch(e){reject(e);}
+ });
+}
+async function convertAll(){
+ if(busy)return;
+ if(!queue.length){toast('Choose at least one image first.');return;}
+ if($('resizeMode').value==='percent'&&(!Number.isFinite(Number($('percent').value))||Number($('percent').value)<1||Number($('percent').value)>400)){toast('Scale must be between 1% and 400%.');return;}
+ busy=true;$('convertAll').disabled=true;$('overallStatus').textContent='Processing…';render();
+ for(const item of queue){
+  if(item.status==='Converting')continue;
+  item.status='Converting';item.error='';render();
+  try{
+   const result=await convert(item);
+   if(item.output?.url)URL.revokeObjectURL(item.output.url);
+   item.output={...result,url:URL.createObjectURL(result.blob)};
+   item.status='Done';
+  }catch(e){item.status='Error';item.error=e.message||'Conversion failed';}
+  render();
+ }
+ busy=false;$('convertAll').disabled=false;$('overallStatus').textContent='Finished';
+ const success=queue.filter(x=>x.status==='Done').length;
+ toast(`${success} of ${queue.length} image(s) converted.`);
+}
+function downloadItem(item){
+ if(!item?.output)return;
+ const a=document.createElement('a');a.href=item.output.url;a.download=item.output.name;
+ document.body.appendChild(a);a.click();a.remove();
+}
+$('choose').addEventListener('click',()=>$('files').click());
+$('files').addEventListener('change',async e=>{await addFiles(e.target.files);e.target.value='';});
+$('dropzone').addEventListener('dragover',e=>{e.preventDefault();$('dropzone').style.borderColor='var(--cyan)';});
+$('dropzone').addEventListener('dragleave',()=>{$('dropzone').style.borderColor='';});
+$('dropzone').addEventListener('drop',async e=>{e.preventDefault();$('dropzone').style.borderColor='';await addFiles(e.dataTransfer.files);});
+$('fileList').addEventListener('click',e=>{
+ const b=e.target.closest('button[data-action]');if(!b)return;
+ const item=queue.find(x=>x.id===Number(b.dataset.id));if(!item)return;
+ if(b.dataset.action==='download')downloadItem(item);
+ if(b.dataset.action==='remove'){
+  if(busy){toast('Wait until conversion finishes.');return;}
+  URL.revokeObjectURL(item.url);if(item.output?.url)URL.revokeObjectURL(item.output.url);
+  queue=queue.filter(x=>x.id!==item.id);render();
+ }
+});
+['format','quality','resizeMode','maxWidth','maxHeight','percent','background','keepNames'].forEach(id=>{
+ $(id).addEventListener('input',updateControls);$(id).addEventListener('change',updateControls);
+});
+$('convertAll').addEventListener('click',convertAll);
+$('downloadAll').addEventListener('click',()=>{
+ const done=queue.filter(x=>x.output);
+ if(!done.length){toast('Convert images before downloading.');return;}
+ done.forEach((x,i)=>setTimeout(()=>downloadItem(x),i*250));
+ toast('Started individual downloads. Your browser may ask permission for multiple files.');
+});
+$('clearAll').addEventListener('click',()=>{
+ if(busy){toast('Wait until conversion finishes.');return;}
+ if(!queue.length)return;
+ if(!confirm('Remove all images and conversion results from this workspace?'))return;
+ queue.forEach(x=>{URL.revokeObjectURL(x.url);if(x.output?.url)URL.revokeObjectURL(x.output.url);});
+ queue=[];render();$('overallStatus').textContent='Ready';
+});
+updateControls();render();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
