@@ -1,42 +1,173 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Age Calculator | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Age Calculator</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: Calculators • Icon: 🎂</div></section><section class="panel"><label>Date of birth</label><input id="dob" type="date"><button onclick="calc()">Calculate age</button><h2 id="out"></h2><script>function calc(){const v=document.querySelector('#dob').value,out=document.querySelector('#out');if(!v){out.textContent='Please enter your date of birth.';return}const dob=new Date(v+'T00:00:00'),now=new Date();now.setHours(0,0,0,0);if(Number.isNaN(dob.getTime())||dob>now){out.textContent='Please enter a valid date of birth that is not in the future.';return}let y=now.getFullYear()-dob.getFullYear(),m=now.getMonth()-dob.getMonth(),d=now.getDate()-dob.getDate();if(d<0){m--;const days=new Date(now.getFullYear(),now.getMonth(),0).getDate();d+=days}if(m<0){y--;m+=12}out.textContent=y+' years, '+m+' months and '+d+' days.'}</script></section></main><script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#087f8c">
+<title>Age Calculator | CSC Seva Tools</title>
+<style>
+:root{--teal:#087f8c;--navy:#102a43;--pale:#e9f9f8;--bg:#f3f8fa;--line:#d9e7eb;--muted:#637783}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#172b3a;font-family:Arial,sans-serif}
+header{padding:16px 5%;background:#fff;border-bottom:1px solid var(--line);font-weight:800;color:var(--teal);font-size:20px}
+header span{color:var(--navy)}
+.hero{background:linear-gradient(125deg,#102a43,#087f8c);color:white;padding:34px 5%}
+.hero>div{max-width:1050px;margin:auto}
+.hero small{letter-spacing:2px;text-transform:uppercase;color:#b8f4ed}
+h1{font-size:clamp(28px,5vw,42px);margin:12px 0}
+.hero p{max-width:600px;line-height:1.7;color:#e0f5f5}
+main{max-width:1050px;margin:24px auto;padding:0 15px 35px}
+.layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px;align-items:start}
+.card{background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 28px #102a4308}
+.head{padding:19px;border-bottom:1px solid var(--line)}
+.head h2{font-size:18px;margin:0 0 6px}
+.head p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}
+.body{padding:20px}
+label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}
+input,select,button{font:inherit}
+input[type=date]{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:#172b3a}
+.field{margin-bottom:18px}
+.btn{border:0;border-radius:9px;padding:12px 15px;font-weight:700;cursor:pointer}
+.primary{background:var(--teal);color:#fff}
+.primary:hover{background:#066b75}
+.secondary{background:var(--pale);color:var(--teal);border:1px solid #c9efec}
+.row{display:flex;gap:9px}.row>*{flex:1}
+.result-hero{background:var(--pale);padding:23px}
+.result-hero small{color:var(--muted);font-weight:700}
+.age{font-size:clamp(26px,4vw,37px);font-weight:800;color:var(--navy);margin:10px 0}
+.age-sub{font-size:13px;color:#45616b;line-height:1.7}
+.metrics{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.metric{border:1px solid var(--line);padding:15px;border-radius:11px}
+.metric span{display:block;font-size:11px;color:var(--muted);margin-bottom:8px}
+.metric strong{font-size:19px;color:var(--navy);overflow-wrap:anywhere}
+.metric em{font-size:11px;color:var(--muted);font-style:normal}
+.next{margin:0 16px 17px;padding:16px;border-radius:11px;background:#f5fbff;border:1px solid #dbeaf2}
+.next h3{font-size:14px;margin:0 0 8px}
+.next p{font-size:12px;line-height:1.6;color:var(--muted);margin:0}
+.status{font-size:12px;line-height:1.5;margin-top:12px;color:#a12626}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.tip{background:white;border:1px solid var(--line);border-radius:12px;padding:16px}
+.tip b{font-size:13px}.tip p{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:0}
+footer{text-align:center;padding:20px;background:white;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
+@media(max-width:700px){.layout{grid-template-columns:1fr}.hero{padding:28px 18px}main{margin-top:16px;padding:0 12px 25px}.body{padding:16px}.tips{grid-template-columns:1fr}.metrics{padding:12px}.metric{padding:12px}}
+@media print{header,.hero,.input-card,.tips,footer{display:none!important}main{margin:0;padding:0}.layout{display:block}.card{box-shadow:none;border:0}}
+</style>
+</head>
+<body>
+<header>CSC <span>Seva Tools</span></header>
+<section class="hero"><div>
+<small>Everyday calculator · Tool 03</small>
+<h1>Age Calculator</h1>
+<p>Calculate your exact age from your date of birth, see how many days you've lived, and find the date and weekday of your next birthday.</p>
+</div></section>
+<main>
+<div class="layout">
+<section class="card input-card">
+<div class="head"><h2>Your details</h2><p>Choose your birth date and the date you want to calculate your age on.</p></div>
+<div class="body">
+<div class="field"><label for="dob">Date of birth</label><input type="date" id="dob" required></div>
+<div class="field"><label for="asof">Calculate age on</label><input type="date" id="asof" required></div>
+<div class="row">
+<button class="btn primary" id="calculate" type="button">Calculate age</button>
+<button class="btn secondary" id="today" type="button">Use today</button>
+</div>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+</div>
+</section>
+<section class="card">
+<div class="head"><h2>Your age result</h2><p>Calendar-based age breakdown.</p></div>
+<div class="result-hero">
+<small>YOUR EXACT AGE</small>
+<div class="age" id="age">— years, — months</div>
+<div class="age-sub" id="ageSub">Enter your date of birth to calculate your age.</div>
+</div>
+<div class="metrics">
+<div class="metric"><span>Total days lived</span><strong id="days">—</strong><br><em>calendar days</em></div>
+<div class="metric"><span>Total weeks lived</span><strong id="weeks">—</strong><br><em>completed weeks</em></div>
+<div class="metric"><span>Next birthday in</span><strong id="until">—</strong><br><em>days remaining</em></div>
+<div class="metric"><span>Birth weekday</span><strong id="weekday">—</strong><br><em>day of the week</em></div>
+</div>
+<div class="next"><h3 id="nextTitle">Next birthday</h3><p id="nextInfo">Your next birthday date will appear here.</p></div>
+</section>
+</div>
+<div class="tips">
+<div class="tip"><b>Calendar accurate</b><p>Age is calculated using calendar years and months, including leap years.</p></div>
+<div class="tip"><b>Flexible date</b><p>Calculate your age as of today or any past date after your birth date.</p></div>
+<div class="tip"><b>Privacy first</b><p>Your date calculations happen locally in this browser. No account is required.</p></div>
+</div>
+</main>
+<footer>Useful everyday tools · CSC Seva Tools</footer>
+<script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+const $=id=>document.getElementById(id);
+const today=new Date();
+function isoDate(d){
+return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function parseDate(value){
+if(!value)return null;
+const p=value.split("-").map(Number);
+const d=new Date(p[0],p[1]-1,p[2]);
+if(d.getFullYear()!==p[0]||d.getMonth()!==p[1]-1||d.getDate()!==p[2])return null;
+d.setHours(0,0,0,0);
+return d;
+}
+function addYearsClamped(date,years){
+const target=new Date(date.getFullYear()+years,date.getMonth(),1);
+const last=new Date(target.getFullYear(),target.getMonth()+1,0).getDate();
+target.setDate(Math.min(date.getDate(),last));
+return target;
+}
+function ageParts(birth,end){
+let years=end.getFullYear()-birth.getFullYear();
+let anchor=addYearsClamped(birth,years);
+if(anchor>end){years--;anchor=addYearsClamped(birth,years);}
+let months=(end.getFullYear()-anchor.getFullYear())*12+end.getMonth()-anchor.getMonth();
+let monthAnchor=new Date(anchor.getFullYear(),anchor.getMonth()+months,1);
+const last=new Date(monthAnchor.getFullYear(),monthAnchor.getMonth()+1,0).getDate();
+monthAnchor.setDate(Math.min(anchor.getDate(),last));
+if(monthAnchor>end){months--;monthAnchor=new Date(anchor.getFullYear(),anchor.getMonth()+months,1);monthAnchor.setDate(Math.min(anchor.getDate(),new Date(monthAnchor.getFullYear(),monthAnchor.getMonth()+1,0).getDate()));}
+const days=Math.round((end-monthAnchor)/86400000);
+return {years,months,days};
+}
+function formatDate(d){
+return d.toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"});
+}
+function calculate(){
+const birth=parseDate($("dob").value);
+const end=parseDate($("asof").value);
+$("status").textContent="";
+if(!birth||!end){$("status").textContent="Please select both dates.";return;}
+if(birth>end){$("status").textContent="Date of birth cannot be after the calculation date.";return;}
+const totalDays=Math.round((end-birth)/86400000);
+const parts=ageParts(birth,end);
+$("age").textContent=parts.years+" years, "+parts.months+" months";
+$("ageSub").textContent=parts.days+" additional days · Calculated as of "+formatDate(end);
+$("days").textContent=totalDays.toLocaleString("en-IN");
+$("weeks").textContent=Math.floor(totalDays/7).toLocaleString("en-IN");
+$("weekday").textContent=birth.toLocaleDateString("en-IN",{weekday:"long"});
+let next=new Date(end.getFullYear(),birth.getMonth(),1);
+const last=new Date(next.getFullYear(),next.getMonth()+1,0).getDate();
+next.setDate(Math.min(birth.getDate(),last));
+if(next<=end){
+next=new Date(end.getFullYear()+1,birth.getMonth(),1);
+const lastNext=new Date(next.getFullYear(),next.getMonth()+1,0).getDate();
+next.setDate(Math.min(birth.getDate(),lastNext));
+}
+const remaining=Math.round((next-end)/86400000);
+$("until").textContent=remaining.toLocaleString("en-IN");
+$("nextTitle").textContent="Next birthday · "+formatDate(next);
+$("nextInfo").textContent="Falls on a "+next.toLocaleDateString("en-IN",{weekday:"long"})+". "+(remaining===0?"Happy birthday!":remaining+" day"+(remaining===1?"":"s")+" remaining from the selected date.");
+}
+$("dob").max=isoDate(today);
+$("asof").max=isoDate(today);
+$("asof").value=isoDate(today);
+$("calculate").addEventListener("click",calculate);
+$("today").addEventListener("click",()=>{$("asof").value=isoDate(today);calculate();});
+$("dob").addEventListener("change",calculate);
+$("asof").addEventListener("change",calculate);
 })();
-</script></body></html>
+</script>
+</body>
+</html>
