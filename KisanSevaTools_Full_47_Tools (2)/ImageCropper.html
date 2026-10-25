@@ -4,57 +4,265 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Image Crop Studio | Kisan Seva Tools</title>
+<title>Image Crop Studio Pro | Kisan Seva Tools</title>
 <style>
-:root{--bg:#f4f6fb;--panel:#fff;--ink:#182230;--muted:#667085;--line:#e4e7ec;--brand:#4f46e5;--soft:#eef2ff;--green:#15803d}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,Segoe UI,Arial,sans-serif}
-button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:9px;padding:10px 14px;font-weight:650}
-.app{max-width:1250px;margin:auto;padding:24px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{background:#172554;color:white;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-size:21px}.brand h1{font-size:20px;margin:0}.brand p{color:var(--muted);margin:2px 0 0}.tag{background:#dcfce7;color:#166534;border-radius:20px;padding:6px 10px;font-size:12px;font-weight:700}
-h2{font-size:17px;margin:0 0 5px}.muted{color:var(--muted)}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:20px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 3px 12px #10182808}.head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.stage{min-height:420px;border:1px dashed #cbd5e1;border-radius:12px;background:linear-gradient(45deg,#f8fafc 25%,#eef2f7 25%,#eef2f7 50%,#f8fafc 50%,#f8fafc 75%,#eef2f7 75%);background-size:24px 24px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:12px}.stage canvas{max-width:100%;max-height:65vh;object-fit:contain;touch-action:none;cursor:crosshair}.empty{text-align:center;color:var(--muted);padding:70px 15px}.upload{display:block;border:1px solid var(--line);padding:14px;border-radius:10px;background:#fafbff;margin-bottom:16px}.upload input{display:block;width:100%;margin-top:9px}.btn-primary{background:var(--brand);color:#fff}.btn-dark{background:#172554;color:#fff}.btn-light{background:#f2f4f7;color:#344054;border:1px solid var(--line)}.btn-danger{background:#fff1f2;color:#be123c}.btnrow{display:flex;flex-wrap:wrap;gap:8px}.field{margin:15px 0}.field label{display:block;font-weight:650;margin-bottom:7px}.field select,.field input[type=number]{width:100%;padding:10px;border:1px solid #d0d5dd;border-radius:9px;background:white;color:var(--ink)}.ratios{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.ratio{border:1px solid var(--line);background:white;color:#344054}.ratio.active{border-color:var(--brand);background:var(--soft);color:var(--brand)}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.stat{background:#f8fafc;padding:12px;border-radius:10px}.stat small{display:block;color:var(--muted)}.stat strong{font-size:16px}.hint{font-size:12px;color:var(--muted);margin-top:10px}.footer{margin-top:18px;text-align:center;color:var(--muted);font-size:12px}
-@media(max-width:800px){.app{padding:14px}.layout{grid-template-columns:1fr}.stage{min-height:260px}.top{align-items:flex-start}.tag{display:none}.panel{padding:15px}}
+:root{--bg:#f5f7fb;--panel:#fff;--ink:#172033;--muted:#667085;--line:#e4e7ec;--brand:#5145e5;--soft:#eeedff;--green:#15803d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,"Segoe UI",Arial,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{max-width:1320px;margin:auto;padding:26px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:25px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{height:46px;width:46px;display:grid;place-items:center;border-radius:14px;background:#191d46;color:white;font-size:23px}
+.brand h1{margin:0;font-size:21px;letter-spacing:-.5px}
+.brand p{margin:3px 0 0;color:var(--muted);font-size:12px}
+.status{padding:7px 11px;border:1px solid #bbf7d0;border-radius:30px;color:#166534;background:#f0fdf4;font-size:11px;font-weight:750}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:20px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:17px;box-shadow:0 4px 16px #10182806}
+.main{padding:22px;min-width:0}
+.sidebar{padding:21px}
+.heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}
+.heading h2,.sidebar h2{font-size:16px;margin:0}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+.btn{border:1px solid var(--line);background:white;color:#344054;border-radius:9px;padding:9px 12px;font-weight:650}
+.btn:hover{background:#f8fafc}
+.primary{background:var(--brand);border-color:var(--brand);color:white}
+.primary:hover{background:#4338ca}
+.upload{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px;border:1px dashed #b7b5ff;border-radius:12px;background:#fafaff;margin-bottom:17px}
+.upload strong{display:block}
+.upload input{display:block;width:100%;max-width:300px;margin-top:7px;font-size:12px}
+.workspace{min-height:420px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:13px;background-color:#f9fafb;background-image:linear-gradient(45deg,#edf0f5 25%,transparent 25%),linear-gradient(-45deg,#edf0f5 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#edf0f5 75%),linear-gradient(-45deg,transparent 75%,#edf0f5 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
+#canvas{display:block;max-width:100%;max-height:62vh;touch-action:none;cursor:crosshair}
+.empty{text-align:center;padding:50px 20px;color:var(--muted)}
+.empty .symbol{font-size:45px;margin-bottom:8px}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:15px}
+.toolbar-group{display:flex;gap:8px;flex-wrap:wrap}
+.field{margin:18px 0}
+.field label{display:block;font-size:12px;font-weight:700;margin-bottom:8px;color:#344054}
+select{width:100%;padding:10px;border:1px solid #d0d5dd;border-radius:9px;background:white;color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--brand)}
+.ratios{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.ratio{border:1px solid var(--line);background:#fff;color:#344054;padding:10px 5px;border-radius:9px;font-size:12px;font-weight:650}
+.ratio.active{background:var(--soft);border-color:#a5a0ff;color:var(--brand)}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:20px 0}
+.metric{padding:12px;border:1px solid var(--line);border-radius:10px;background:#fafbff}
+.metric span{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
+.metric strong{font-size:15px}
+.download{width:100%;border:0;border-radius:10px;background:var(--brand);color:white;font-weight:750;padding:13px}
+.download:disabled{opacity:.45;cursor:not-allowed}
+.help{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12px;color:var(--muted);margin-top:15px}
+.footer{text-align:center;font-size:12px;color:var(--muted);margin-top:20px}
+@media(max-width:850px){.app{padding:14px}.layout{grid-template-columns:1fr}.main,.sidebar{padding:15px}.workspace{min-height:270px}.status{display:none}.brand h1{font-size:18px}}
+@media(max-width:420px){.upload{display:block}.upload input{max-width:100%}.heading{align-items:flex-start}.ratios{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <div class="app">
-<header class="top"><div class="brand"><div class="logo">✂</div><div><h1>Image Crop Studio</h1><p>Kisan Seva Tools · Image workspace</p></div></div><span class="tag">● READY TO EDIT</span></header>
+<header class="top">
+  <div class="brand">
+    <div class="logo">✂</div>
+    <div><h1>Image Crop Studio Pro</h1><p>Kisan Seva Tools / Image workspace</p></div>
+  </div>
+  <span class="status">● READY TO EDIT</span>
+</header>
+
 <div class="layout">
-<main class="panel">
-<div class="head"><div><h2>Canvas workspace</h2><div class="muted">Drag over the image to select the crop area.</div></div><button class="btn-light" id="reset">Reset crop</button></div>
-<label class="upload"><strong>Import image</strong><div class="muted">JPG, PNG, WebP · Processed in your browser</div><input type="file" id="file" accept="image/png,image/jpeg,image/webp"></label>
-<div class="stage" id="stage"><div class="empty" id="empty"><div style="font-size:36px">▧</div><strong>Your canvas is waiting</strong><p>Upload an image to start cropping.</p></div><canvas id="canvas" hidden></canvas></div>
-<div class="btnrow" style="margin-top:14px"><button class="btn-light" id="center">Select full image</button><button class="btn-light" id="undo">Undo selection</button></div>
-<p class="hint">Tip: select a ratio first, then drag on the image. The crop selection can be moved and resized by creating a new selection.</p>
+<main class="panel main">
+  <div class="heading">
+    <div><h2>Canvas workspace</h2><div class="muted small">Select the area you want to keep.</div></div>
+    <button class="btn" id="reset">Reset crop</button>
+  </div>
+
+  <div class="upload">
+    <div><strong>Import image</strong><div class="muted small">JPG, PNG or WebP · Stays on your device</div></div>
+    <input type="file" id="file" accept="image/jpeg,image/png,image/webp">
+  </div>
+
+  <div class="workspace" id="workspace">
+    <div class="empty" id="empty"><div class="symbol">▧</div><strong>Your editing workspace</strong><p>Upload a photo to begin cropping.</p></div>
+    <canvas id="canvas" hidden></canvas>
+  </div>
+
+  <div class="toolbar">
+    <div class="toolbar-group">
+      <button class="btn" id="full">Full image</button>
+      <button class="btn" id="undo">Undo selection</button>
+    </div>
+    <span class="muted small" id="hint">No image loaded</span>
+  </div>
+  <div class="help">How to crop: choose a ratio, then drag across the image to select the area. Drag again to replace the selection.</div>
 </main>
-<aside class="panel">
-<h2>Crop settings</h2><p class="muted">Choose an output proportion.</p>
-<div class="field"><label>Aspect ratio</label><div class="ratios">
-<button class="ratio active" data-ratio="0">Free</button><button class="ratio" data-ratio="1">1:1</button><button class="ratio" data-ratio="1.5">3:2</button><button class="ratio" data-ratio="1.7777778">16:9</button><button class="ratio" data-ratio=".6666667">2:3</button><button class="ratio" data-ratio="1.4142136">A-series</button>
-</div></div>
-<div class="field"><label for="format">Download format</label><select id="format"><option value="image/png">PNG · Best quality</option><option value="image/jpeg">JPEG · Smaller file</option><option value="image/webp">WebP · Modern format</option></select></div>
-<div class="field"><label for="quality">JPEG/WebP quality: <span id="qval">92%</span></label><input id="quality" type="range" min="40" max="100" value="92" style="width:100%"></div>
-<div class="stats"><div class="stat"><small>Source size</small><strong id="sourceSize">—</strong></div><div class="stat"><small>Crop size</small><strong id="cropSize">—</strong></div></div>
-<button class="btn-primary" id="download" style="width:100%">↓ Download cropped image</button>
-<p class="hint">Nothing is uploaded to a server. Crop coordinates are applied to the original image for full-resolution output.</p>
+
+<aside class="panel sidebar">
+  <h2>Export settings</h2>
+  <p class="muted small">Configure your final image.</p>
+
+  <div class="field">
+    <label>Aspect ratio</label>
+    <div class="ratios">
+      <button class="ratio active" data-ratio="0">Free</button>
+      <button class="ratio" data-ratio="1">1:1</button>
+      <button class="ratio" data-ratio="1.5">3:2</button>
+      <button class="ratio" data-ratio="1.7777778">16:9</button>
+      <button class="ratio" data-ratio=".6666667">2:3</button>
+      <button class="ratio" data-ratio="1.4142136">A-series</button>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="format">File format</label>
+    <select id="format">
+      <option value="image/png">PNG — High quality</option>
+      <option value="image/jpeg">JPEG — Photo</option>
+      <option value="image/webp">WebP — Compact</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="quality">Export quality: <span id="qualityLabel">92%</span></label>
+    <input type="range" id="quality" min="40" max="100" value="92">
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><span>Original resolution</span><strong id="original">—</strong></div>
+    <div class="metric"><span>Crop resolution</span><strong id="cropped">—</strong></div>
+  </div>
+
+  <button class="download" id="download" disabled>↓ &nbsp; Export cropped image</button>
+  <div class="help">Export uses the original image resolution, not just the on-screen preview. PNG ignores the quality slider.</div>
 </aside>
-</div><div class="footer">Kisan Seva Tools · Image Crop Studio</div>
 </div>
+<div class="footer">Kisan Seva Tools · Image Crop Studio Pro</div>
+</div>
+
 <script>
-const file=document.getElementById('file'),canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d'),stage=document.getElementById('stage');
-const empty=document.getElementById('empty');let img=null,box=null,ratio=0,drag=null,start=null,previous=null;
-function draw(){if(!img)return;const maxW=Math.max(240,stage.clientWidth-26),maxH=Math.min(650,innerHeight*.65);const scale=Math.min(maxW/img.width,maxH/img.height,1);canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.style.width=canvas.width+'px';canvas.style.height=canvas.height+'px';canvas.hidden=false;empty.hidden=true;ctx.drawImage(img,0,0,canvas.width,canvas.height);if(box){ctx.save();ctx.fillStyle='rgba(15,23,42,.55)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.clearRect(box.x,box.y,box.w,box.h);ctx.drawImage(img,box.x/scale,box.y/scale,box.w/scale,box.h/scale,box.x,box.y,box.w,box.h);ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.strokeRect(box.x,box.y,box.w,box.h);ctx.restore()}canvas.dataset.scale=scale;document.getElementById('sourceSize').textContent=img.width+' × '+img.height;document.getElementById('cropSize').textContent=box?Math.round(box.w/scale)+' × '+Math.round(box.h/scale):'Full image'}
-function fitBox(x,y,w,h){if(ratio&&w/h>ratio)w=h*ratio;else if(ratio)h=w/ratio;w=Math.min(w,canvas.width-x);h=Math.min(h,canvas.height-y);if(ratio){if(w/h>ratio)w=h*ratio;else h=w/ratio}return{x,y,w:Math.max(1,w),h:Math.max(1,h)}}
-file.addEventListener('change',()=>{const f=file.files[0];if(!f)return;if(!/^image\/(png|jpeg|webp)$/.test(f.type)){alert('Please choose a JPG, PNG or WebP image.');return}const url=URL.createObjectURL(f);const im=new Image();im.onload=()=>{img=im;box={x:0,y:0,w:1,h:1};draw();box={x:0,y:0,w:canvas.width,h:canvas.height};if(ratio)box=fitBox(0,0,canvas.width,canvas.height);draw();URL.revokeObjectURL(url)};im.onerror=()=>alert('Could not open this image.');im.src=url});
-function pos(e){const r=canvas.getBoundingClientRect();return{x:Math.max(0,Math.min(canvas.width,(e.clientX-r.left)*canvas.width/r.width)),y:Math.max(0,Math.min(canvas.height,(e.clientY-r.top)*canvas.height/r.height))}}
-canvas.addEventListener('pointerdown',e=>{if(!img)return;canvas.setPointerCapture(e.pointerId);start=pos(e);previous=box?{...box}:null;drag=true;box={x:start.x,y:start.y,w:1,h:1};draw()});
-canvas.addEventListener('pointermove',e=>{if(!drag)return;const p=pos(e),dx=Math.abs(p.x-start.x),dy=Math.abs(p.y-start.y);let w=dx,h=dy;if(ratio){if(w/h>ratio)h=w/ratio;else w=h*ratio}const sx=p.x<start.x?start.x-w:start.x,sy=p.y<start.y?start.y-h:start.y;box={x:Math.max(0,sx),y:Math.max(0,sy),w:Math.max(1,Math.min(w,canvas.width-Math.max(0,sx))),h:Math.max(1,Math.min(h,canvas.height-Math.max(0,sy)))};if(ratio){if(box.w/box.h>ratio)box.w=box.h*ratio;else box.h=box.w/ratio}draw()});
-function stop(){if(!drag)return;drag=false;if(box.w<3||box.h<3){box=previous||{x:0,y:0,w:canvas.width,h:canvas.height}}draw()}canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);
-document.querySelectorAll('[data-ratio]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-ratio]').forEach(x=>x.classList.remove('active'));b.classList.add('active');ratio=Number(b.dataset.ratio);if(img){box=fitBox(0,0,canvas.width,canvas.height);draw()}});
-document.getElementById('center').onclick=()=>{if(img){box={x:0,y:0,w:canvas.width,h:canvas.height};if(ratio)box=fitBox(0,0,canvas.width,canvas.height);draw()}};
-document.getElementById('reset').onclick=()=>{if(img){box={x:0,y:0,w:canvas.width,h:canvas.height};if(ratio)box=fitBox(0,0,canvas.width,canvas.height);draw()}};
-document.getElementById('undo').onclick=()=>{if(img){box=previous||{x:0,y:0,w:canvas.width,h:canvas.height};previous=null;draw()}};
-document.getElementById('quality').oninput=e=>document.getElementById('qval').textContent=e.target.value+'%';
-document.getElementById('download').onclick=()=>{if(!img||!box){alert('Upload an image first.');return}const scale=Number(canvas.dataset.scale),sx=Math.round(box.x/scale),sy=Math.round(box.y/scale),sw=Math.max(1,Math.round(box.w/scale)),sh=Math.max(1,Math.round(box.h/scale));const out=document.createElement('canvas');out.width=sw;out.height=sh;const c=out.getContext('2d');const fmt=document.getElementById('format').value;if(fmt==='image/jpeg'){c.fillStyle='#fff';c.fillRect(0,0,sw,sh)}c.drawImage(img,sx,sy,sw,sh,0,0,sw,sh);out.toBlob(blob=>{if(!blob){alert('Export failed. Try PNG format.');return}const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='kisan-cropped-image.'+({'image/png':'png','image/jpeg':'jpg','image/webp':'webp'}[fmt]);a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)},fmt,Number(document.getElementById('quality').value)/100)};
-addEventListener('resize',()=>{if(img){const old=box;draw();if(old){box={x:0,y:0,w:canvas.width,h:canvas.height};if(ratio)box=fitBox(0,0,canvas.width,canvas.height);draw()}}});
+(function(){
+const $=id=>document.getElementById(id);
+const canvas=$('canvas'),ctx=canvas.getContext('2d'),workspace=$('workspace');
+let image=null,ratio=0,box=null,dragging=false,start=null,previous=null,scale=1;
+
+function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
+function fullBox(){return{x:0,y:0,w:canvas.width,h:canvas.height}}
+function fitBox(){
+  let w=canvas.width,h=canvas.height;
+  if(ratio){
+    if(w/h>ratio)w=h*ratio;
+    else h=w/ratio;
+  }
+  return{x:(canvas.width-w)/2,y:(canvas.height-h)/2,w,h};
+}
+function setBoxFromDrag(p){
+  let dx=p.x-start.x,dy=p.y-start.y,w=Math.abs(dx),h=Math.abs(dy);
+  if(ratio){
+    if(h===0)h=1;
+    if(w/h>ratio)h=w/ratio;
+    else w=h*ratio;
+  }
+  let x=dx<0?start.x-w:start.x;
+  let y=dy<0?start.y-h:start.y;
+  if(x<0){x=0;w=Math.abs(p.x-start.x)}
+  if(y<0){y=0;h=Math.abs(p.y-start.y)}
+  w=Math.min(w,canvas.width-x);h=Math.min(h,canvas.height-y);
+  if(ratio){
+    if(w/h>ratio)w=h*ratio;
+    else h=w/ratio;
+  }
+  box={x:clamp(x,0,canvas.width-1),y:clamp(y,0,canvas.height-1),w:Math.max(1,w),h:Math.max(1,h)};
+}
+function draw(){
+  if(!image)return;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(image,0,0,canvas.width,canvas.height);
+  if(box){
+    ctx.save();
+    ctx.fillStyle='rgba(15,23,42,.56)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(box.x,box.y,box.w,box.h);
+    ctx.drawImage(image,box.x/scale,box.y/scale,box.w/scale,box.h/scale,box.x,box.y,box.w,box.h);
+    ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.setLineDash([5,4]);
+    ctx.strokeRect(box.x,box.y,box.w,box.h);
+    ctx.setLineDash([]);
+    const sx=box.w/3,sy=box.h/3;
+    ctx.strokeStyle='rgba(255,255,255,.65)';ctx.lineWidth=1;
+    for(let i=1;i<3;i++){ctx.beginPath();ctx.moveTo(box.x+sx*i,box.y);ctx.lineTo(box.x+sx*i,box.y+box.h);ctx.stroke();ctx.beginPath();ctx.moveTo(box.x,box.y+sy*i);ctx.lineTo(box.x+box.w,box.y+sy*i);ctx.stroke()}
+    ctx.restore();
+  }
+  updateMetrics();
+}
+function updateMetrics(){
+  $('original').textContent=image?image.naturalWidth+' × '+image.naturalHeight:'—';
+  $('cropped').textContent=box?Math.round(box.w/scale)+' × '+Math.round(box.h/scale):'—';
+  $('hint').textContent=box?'Crop selected':'No crop selected';
+  $('download').disabled=!image||!box||box.w<1||box.h<1;
+}
+function resizeCanvas(){
+  if(!image)return;
+  const maxW=Math.max(200,workspace.clientWidth-28);
+  const maxH=Math.max(200,Math.min(window.innerHeight*.62,680));
+  scale=Math.min(maxW/image.naturalWidth,maxH/image.naturalHeight,1);
+  canvas.width=Math.max(1,Math.round(image.naturalWidth*scale));
+  canvas.height=Math.max(1,Math.round(image.naturalHeight*scale));
+  canvas.style.width=canvas.width+'px';canvas.style.height=canvas.height+'px';
+  box=fitBox();canvas.hidden=false;$('empty').hidden=true;draw();
+}
+$('file').addEventListener('change',e=>{
+  const f=e.target.files&&e.target.files[0];if(!f)return;
+  if(!['image/jpeg','image/png','image/webp'].includes(f.type)){alert('Please choose a JPG, PNG or WebP image.');e.target.value='';return}
+  if(f.size>25*1024*1024){alert('Please select an image smaller than 25 MB.');e.target.value='';return}
+  const url=URL.createObjectURL(f),im=new Image();
+  im.onload=()=>{if(image&&image.src.startsWith('blob:'))URL.revokeObjectURL(image.src);image=im;resizeCanvas();URL.revokeObjectURL(url)};
+  im.onerror=()=>{URL.revokeObjectURL(url);alert('This image could not be opened.')};
+  im.src=url;
+});
+function point(e){
+  const r=canvas.getBoundingClientRect();
+  return{x:clamp((e.clientX-r.left)*canvas.width/r.width,0,canvas.width),y:clamp((e.clientY-r.top)*canvas.height/r.height,0,canvas.height)}
+}
+canvas.addEventListener('pointerdown',e=>{
+  if(!image)return;
+  canvas.setPointerCapture(e.pointerId);
+  start=point(e);previous=box?{...box}:null;dragging=true;
+  box={x:start.x,y:start.y,w:1,h:1};draw();
+});
+canvas.addEventListener('pointermove',e=>{if(!dragging)return;setBoxFromDrag(point(e));draw()});
+function stop(){
+  if(!dragging)return;
+  dragging=false;
+  if(box.w<4||box.h<4)box=previous||fullBox();
+  draw();
+}
+canvas.addEventListener('pointerup',stop);
+canvas.addEventListener('pointercancel',stop);
+$('full').onclick=()=>{if(image){previous=box?{...box}:null;box=fullBox();draw()}};
+$('reset').onclick=()=>{if(image){previous=box?{...box}:null;box=fitBox();draw()}};
+$('undo').onclick=()=>{if(image&&previous){const now=box;box=previous;previous=now;draw()}};
+document.querySelectorAll('[data-ratio]').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('[data-ratio]').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');ratio=Number(btn.dataset.ratio);
+  if(image){previous=box?{...box}:null;box=fitBox();draw()}
+}));
+$('quality').oninput=e=>$('qualityLabel').textContent=e.target.value+'%';
+$('download').onclick=()=>{
+  if(!image||!box)return;
+  const sx=clamp(Math.floor(box.x/scale),0,image.naturalWidth-1);
+  const sy=clamp(Math.floor(box.y/scale),0,image.naturalHeight-1);
+  const sw=clamp(Math.round(box.w/scale),1,image.naturalWidth-sx);
+  const sh=clamp(Math.round(box.h/scale),1,image.naturalHeight-sy);
+  const out=document.createElement('canvas');out.width=sw;out.height=sh;
+  const c=out.getContext('2d'),fmt=$('format').value;
+  if(fmt==='image/jpeg'){c.fillStyle='#fff';c.fillRect(0,0,sw,sh)}
+  c.drawImage(image,sx,sy,sw,sh,0,0,sw,sh);
+  out.toBlob(blob=>{
+    if(!blob){alert('Export failed. Try PNG format.');return}
+    const url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download='kisan-cropped-image.'+({'image/png':'png','image/jpeg':'jpg','image/webp':'webp'}[fmt]);
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+  },fmt,Number($('quality').value)/100);
+};
+window.addEventListener('resize',()=>{if(image)resizeCanvas()});
+})();
 </script>
 </body>
 </html>
