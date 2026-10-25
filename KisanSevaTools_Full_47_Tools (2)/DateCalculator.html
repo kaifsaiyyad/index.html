@@ -1,42 +1,212 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Date Calculator | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Date Calculator</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: Calculators • Icon: 📅</div></section><section class="panel"><label>Start date</label><input id="d1" type="date"><label>End date</label><input id="d2" type="date"><button onclick="calc()">Calculate days</button><h2 id="out"></h2><script>function calc(){const a=document.querySelector('#d1').value,b=document.querySelector('#d2').value,out=document.querySelector('#out');if(!a||!b){out.textContent='Please select both dates.';return}const start=new Date(a+'T00:00:00Z'),end=new Date(b+'T00:00:00Z');if(Number.isNaN(start.getTime())||Number.isNaN(end.getTime())){out.textContent='Please enter valid dates.';return}const days=Math.round((end-start)/86400000);out.textContent='Difference: '+Math.abs(days)+' days'+(days<0?' (end date is before start date)':'')+'. Inclusive count: '+(Math.abs(days)+1)+' days.'}</script></section></main><script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#6941c6">
+<title>Date Calculator | CSC Seva Tools</title>
+<style>
+:root{--p:#6941c6;--dark:#39216f;--light:#f1ebff;--bg:#f8f6fc;--line:#e5def4;--muted:#716b82}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#29233a}
+header{padding:16px 5%;background:white;border-bottom:1px solid var(--line);font-size:20px;font-weight:800;color:var(--p)}
+header span{color:var(--dark)}
+.hero{padding:34px 5%;color:white;background:linear-gradient(120deg,#39216f,#6941c6,#9a79ef)}
+.hero>div{max-width:1050px;margin:auto}
+.hero small{letter-spacing:2px;text-transform:uppercase;opacity:.8}
+h1{font-size:clamp(28px,5vw,42px);margin:12px 0}
+.hero p{line-height:1.7;max-width:650px;color:#f0eaff}
+main{max-width:1050px;margin:24px auto;padding:0 15px 35px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{border:1px solid var(--line);background:white;color:var(--dark);padding:11px 14px;border-radius:9px;font-size:12px;font-weight:700;cursor:pointer}
+.tab.active{background:var(--p);color:white;border-color:var(--p)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.card{background:white;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 6px 24px #39216f08}
+.head{padding:19px;border-bottom:1px solid var(--line)}
+.head h2{font-size:18px;margin:0 0 6px}
+.head p{font-size:12px;color:var(--muted);line-height:1.5;margin:0}
+.body{padding:20px}
+.field{margin-bottom:18px}
+label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}
+input,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;background:white;color:#29233a;font:inherit}
+input:focus,select:focus{outline:2px solid #d6c8ff;border-color:var(--p)}
+.btn{border:0;border-radius:9px;padding:12px 15px;font-weight:700;cursor:pointer;font-size:13px}
+.primary{background:var(--p);color:white}.secondary{background:var(--light);color:var(--dark);border:1px solid var(--line)}
+.row{display:flex;gap:9px}.row>*{flex:1}
+.result{padding:23px;background:var(--light);border-bottom:1px solid var(--line)}
+.result small{color:var(--muted);font-weight:700}
+.big{font-size:clamp(28px,4vw,38px);font-weight:800;color:var(--dark);margin:10px 0}
+.result p{font-size:12px;color:#5f5378;line-height:1.6;margin:0}
+.metrics{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.metric{padding:14px;border:1px solid var(--line);border-radius:10px}
+.metric span{font-size:11px;color:var(--muted);display:block;margin-bottom:7px}
+.metric strong{font-size:16px;overflow-wrap:anywhere}
+.status{font-size:12px;line-height:1.6;margin-top:12px;color:#a12626}
+.panel{display:none}.panel.active{display:block}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.tip{background:white;border:1px solid var(--line);padding:16px;border-radius:12px}
+.tip b{font-size:13px}.tip p{font-size:11px;line-height:1.6;color:var(--muted);margin-bottom:0}
+footer{text-align:center;padding:20px;background:white;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.hero{padding:27px 18px}main{margin-top:16px;padding:0 12px 25px}.body{padding:16px}.tips{grid-template-columns:1fr}}
+@media print{header,.hero,.tabs,.input-card,.tips,footer{display:none!important}main{margin:0;padding:0}.grid{display:block}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+<header>CSC <span>Seva Tools</span></header>
+<section class="hero"><div>
+<small>Calendar tools · Tool 04</small>
+<h1>Date Calculator</h1>
+<p>Find the difference between two dates or calculate a date by adding or subtracting days, weeks, months and years.</p>
+</div></section>
+<main>
+<div class="tabs">
+<button class="tab active" data-panel="difference" type="button">Date difference</button>
+<button class="tab" data-panel="add" type="button">Add to a date</button>
+<button class="tab" data-panel="subtract" type="button">Subtract from a date</button>
+</div>
+
+<div class="grid">
+<section class="card input-card">
+<div class="head"><h2 id="formTitle">Calculate date difference</h2><p id="formDesc">Choose two dates to calculate the time between them.</p></div>
+<div class="body">
+<div class="panel active" id="difference">
+<div class="field"><label for="startDate">Start date</label><input type="date" id="startDate"></div>
+<div class="field"><label for="endDate">End date</label><input type="date" id="endDate"></div>
+<div class="field"><label for="inclusive">Count both start and end dates?</label><select id="inclusive"><option value="no">No — elapsed days</option><option value="yes">Yes — inclusive count</option></select></div>
+</div>
+
+<div class="panel" id="add">
+<div class="field"><label for="baseAdd">Starting date</label><input type="date" id="baseAdd"></div>
+<div class="field"><label for="addValue">Amount to add</label><input type="number" id="addValue" min="0" max="1000000" value="30"></div>
+<div class="field"><label for="addUnit">Unit</label><select id="addUnit"><option value="days">Days</option><option value="weeks">Weeks</option><option value="months">Months</option><option value="years">Years</option></select></div>
+</div>
+
+<div class="panel" id="subtract">
+<div class="field"><label for="baseSubtract">Starting date</label><input type="date" id="baseSubtract"></div>
+<div class="field"><label for="subtractValue">Amount to subtract</label><input type="number" id="subtractValue" min="0" max="1000000" value="30"></div>
+<div class="field"><label for="subtractUnit">Unit</label><select id="subtractUnit"><option value="days">Days</option><option value="weeks">Weeks</option><option value="months">Months</option><option value="years">Years</option></select></div>
+</div>
+
+<div class="row">
+<button class="btn primary" id="calculate" type="button">Calculate</button>
+<button class="btn secondary" id="today" type="button">Use today</button>
+</div>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+</div>
+</section>
+
+<section class="card">
+<div class="head"><h2>Calculation result</h2><p>Dates are calculated using your device's local calendar.</p></div>
+<div class="result">
+<small id="resultLabel">DATE DIFFERENCE</small>
+<div class="big" id="mainResult">—</div>
+<p id="resultDescription">Enter your dates to see the result.</p>
+</div>
+<div class="metrics">
+<div class="metric"><span>Start / base date</span><strong id="startResult">—</strong></div>
+<div class="metric"><span>End / result date</span><strong id="endResult">—</strong></div>
+<div class="metric"><span>Weekday of result</span><strong id="weekdayResult">—</strong></div>
+<div class="metric"><span>Weeks and days</span><strong id="weeksResult">—</strong></div>
+</div>
+<div style="padding:0 16px 16px"><button class="btn secondary" id="print" type="button">Print result</button></div>
+</section>
+</div>
+
+<div class="tips">
+<div class="tip"><b>Elapsed days</b><p>Date difference excludes the starting day by default, as standard elapsed-time calculations do.</p></div>
+<div class="tip"><b>Calendar months</b><p>Adding months or years keeps the day within the destination month, including shorter months.</p></div>
+<div class="tip"><b>Easy to use</b><p>Switch between the three modes without needing another calculator.</p></div>
+</div>
+</main>
+<footer>Everyday calendar tools · CSC Seva Tools</footer>
+
+<script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+"use strict";
+const $=id=>document.getElementById(id);
+const now=new Date();now.setHours(0,0,0,0);
+function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function parse(s){
+if(!s)return null;
+const a=s.split("-").map(Number),d=new Date(a[0],a[1]-1,a[2]);
+return d.getFullYear()===a[0]&&d.getMonth()===a[1]-1&&d.getDate()===a[2]?d:null;
+}
+function fmt(d){return d.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});}
+function weekday(d){return d.toLocaleDateString("en-IN",{weekday:"long"});}
+function addClamped(date,n,unit){
+const d=new Date(date);
+if(unit==="days")d.setDate(d.getDate()+n);
+if(unit==="weeks")d.setDate(d.getDate()+n*7);
+if(unit==="months"||unit==="years"){
+const day=d.getDate();
+const targetMonth=d.getMonth()+(unit==="years"?n*12:n);
+d.setDate(1);d.setMonth(targetMonth);
+const last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
+d.setDate(Math.min(day,last));
+}
+return d;
+}
+let mode="difference";
+function showError(s){$("status").textContent=s;}
+function clearError(){$("status").textContent="";}
+function setResult(label,big,desc,start,end,days){
+$("resultLabel").textContent=label;
+$("mainResult").textContent=big;
+$("resultDescription").textContent=desc;
+$("startResult").textContent=start?fmt(start):"—";
+$("endResult").textContent=end?fmt(end):"—";
+$("weekdayResult").textContent=end?weekday(end):"—";
+$("weeksResult").textContent=days===null?"—":Math.floor(days/7)+" weeks, "+days%7+" days";
+}
+function calculate(){
+clearError();
+if(mode==="difference"){
+const a=parse($("startDate").value),b=parse($("endDate").value);
+if(!a||!b){showError("Please select both dates.");return;}
+if(b<a){showError("End date must be on or after the start date.");return;}
+let days=Math.round((b-a)/86400000);
+if($("inclusive").value==="yes")days++;
+setResult("TIME BETWEEN DATES",days.toLocaleString("en-IN")+" days",
+Math.floor(days/7)+" complete weeks and "+days%7+" days.",a,b,days);
+}else{
+const isAdd=mode==="add";
+const base=parse($(isAdd?"baseAdd":"baseSubtract").value);
+const n=Number($(isAdd?"addValue":"subtractValue").value);
+const unit=$(isAdd?"addUnit":"subtractUnit").value;
+if(!base){showError("Please select a starting date.");return;}
+if(!Number.isFinite(n)||n<0||n>1000000){showError("Enter an amount from 0 to 1,000,000.");return;}
+if(!Number.isInteger(n)){showError("Enter a whole number for the selected unit.");return;}
+const result=addClamped(base,isAdd?n:-n,unit);
+const days=Math.abs(Math.round((result-base)/86400000));
+setResult(isAdd?"DATE AFTER ADDITION":"DATE AFTER SUBTRACTION",fmt(result),
+n+" "+unit+" "+(isAdd?"added to ":"subtracted from ")+fmt(base)+".",base,result,days);
+}
+}
+function selectMode(next){
+mode=next;
+document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.panel===next));
+document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===next));
+$("formTitle").textContent=next==="difference"?"Calculate date difference":next==="add"?"Add time to a date":"Subtract time from a date";
+$("formDesc").textContent=next==="difference"?"Choose two dates to calculate the time between them.":"Choose a date and the amount of time to change.";
+clearError();calculate();
+}
+$("startDate").value=iso(now);
+$("endDate").value=iso(now);
+$("baseAdd").value=iso(now);
+$("baseSubtract").value=iso(now);
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>selectMode(b.dataset.panel)));
+$("calculate").addEventListener("click",calculate);
+$("today").addEventListener("click",()=>{
+const v=iso(now);
+if(mode==="difference"){$("startDate").value=v;$("endDate").value=v;}
+else $(mode==="add"?"baseAdd":"baseSubtract").value=v;
+calculate();
+});
+["startDate","endDate","inclusive","baseAdd","addValue","addUnit","baseSubtract","subtractValue","subtractUnit"].forEach(id=>$(id).addEventListener("change",calculate));
+$("print").addEventListener("click",()=>window.print());
+calculate();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
