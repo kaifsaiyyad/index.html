@@ -1,18 +1,312 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#125c3b"><title>Resume/CV Maker | Kisan Seva Tools</title>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kisan Seva Tools | Resume Maker</title>
 <style>
-:root{--green:#12633e;--green-dark:#0a4028;--mint:#eaf5ee;--ink:#182820;--muted:#66766d;--line:#dce7df;--paper:#fff;--bg:#f4f7f5;--shadow:0 12px 32px rgba(20,60,38,.08)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}header{background:linear-gradient(115deg,var(--green-dark),var(--green));color:#fff;padding:14px max(18px,calc((100% - 1180px)/2));box-shadow:0 4px 18px #153c281f}header a{color:#fff;text-decoration:none;font-weight:750}main{max-width:1180px;margin:24px auto 48px;padding:0 18px}.hero{background:linear-gradient(125deg,#fff,#f0f8f2);border:1px solid var(--line);border-radius:20px;padding:24px 26px;box-shadow:var(--shadow);margin-bottom:18px}.eyebrow{text-transform:uppercase;letter-spacing:.12em;color:var(--green);font-size:11px;font-weight:800}.hero h1{font-size:clamp(25px,4vw,34px);line-height:1.15;letter-spacing:-.04em;margin:6px 0 9px}.hero p{color:var(--muted);margin:0;max-width:650px}.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.badge{background:#e4f2e8;color:#145333;border:1px solid #cfe5d6;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700}.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,.95fr);gap:18px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-width:0}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:16px}.panel h2{font-size:18px;margin:0;letter-spacing:-.02em}.panel-head p{font-size:12px;color:var(--muted);margin:4px 0 0}.step{background:var(--mint);color:var(--green);border-radius:9px;padding:6px 9px;font-weight:800;font-size:12px;white-space:nowrap}.section-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--green);font-weight:850;border-bottom:1px solid var(--line);padding-bottom:8px;margin:22px 0 12px}.section-title:first-of-type{margin-top:0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.field{min-width:0}.field.full{grid-column:1/-1}label{display:block;font-weight:750;font-size:12px;margin:11px 0 5px;color:#31483a}input,textarea,select{width:100%;font:inherit;color:var(--ink);background:#fff;border:1px solid #cbd9cf;border-radius:10px;padding:11px 12px;min-height:44px;outline:none;transition:border .15s,box-shadow .15s}textarea{resize:vertical;min-height:82px}input:focus,textarea:focus,select:focus{border-color:#25834f;box-shadow:0 0 0 3px #25834f1b}input::placeholder,textarea::placeholder{color:#9aa79f}.hint{font-size:11px;color:var(--muted);margin:5px 0 0}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}button{font:inherit;font-weight:800;border:0;border-radius:10px;min-height:44px;padding:11px 15px;background:var(--green);color:#fff;cursor:pointer;transition:transform .12s,filter .12s}button:hover{filter:brightness(1.06);transform:translateY(-1px)}button.secondary{background:#edf5ef;color:#174a2e;border:1px solid #d4e6d9}button.ghost{background:#fff;color:#385446;border:1px solid var(--line)}.preview-panel{position:sticky;top:12px}.preview-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}.preview-top p{margin:3px 0 0;font-size:12px;color:var(--muted)}.preview-wrap{background:#e8eee9;border:1px solid #dce6df;border-radius:14px;padding:14px;overflow:auto}.resume{background:#fff;min-height:550px;max-width:640px;margin:auto;box-shadow:0 5px 20px #173c2515;color:#202a24;padding:32px 34px;overflow-wrap:anywhere}.resume .r-name{font-size:28px;font-weight:850;letter-spacing:-.04em;line-height:1.15;color:#145a37;margin:0}.resume .r-role{font-size:13px;font-weight:700;color:#607168;margin:6px 0 12px}.resume .r-contact{font-size:11px;color:#4d5d53;border-bottom:2px solid #1c7046;padding-bottom:13px;margin-bottom:18px}.resume h3{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#17613d;margin:18px 0 7px;padding-bottom:5px;border-bottom:1px solid #d9e7dd}.resume .r-body{font-size:12px;white-space:pre-line;line-height:1.6}.resume .r-skills{display:flex;gap:6px;flex-wrap:wrap}.resume .skill{font-size:10px;background:#edf5ef;color:#185536;border-radius:5px;padding:4px 7px}.empty-preview{font-size:12px;color:#77867d;background:#f8fbf9;border:1px dashed #cddbd1;padding:12px;border-radius:8px;margin-top:12px}.privacy{font-size:11px;color:#718077;margin:18px 2px 0}.toast{display:none;margin-top:10px;background:#e7f5eb;border:1px solid #c9e4d1;color:#145331;padding:10px;border-radius:9px;font-size:12px;font-weight:700}.toast.show{display:block}.hidden{display:none!important}
-@media(max-width:850px){main{padding:0 12px;margin:14px auto 30px}.layout{grid-template-columns:1fr}.preview-panel{position:static}.hero{padding:20px}.panel{padding:16px}.resume{padding:24px 22px;min-height:460px}}@media(max-width:440px){.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.resume .r-name{font-size:24px}.resume{padding:20px 17px}.preview-wrap{padding:7px}.panel-head{gap:5px}.step{font-size:10px}}
-@media print{@page{size:A4;margin:12mm}body{background:#fff!important}.no-print,header,.hero,.form-panel,.privacy{display:none!important}main{max-width:none;padding:0;margin:0}.layout{display:block}.preview-panel{position:static;border:0;box-shadow:none;padding:0}.preview-top{display:none}.preview-wrap{padding:0;border:0;background:#fff;overflow:visible}.resume{max-width:none;min-height:0;box-shadow:none;padding:0;margin:0}.resume .r-name{font-size:27px}.resume h3{break-after:avoid}.resume section{break-inside:avoid}}
-</style></head><body><header class="no-print"><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="hero no-print"><div class="eyebrow">Career documents · Free browser tool</div><h1>Resume / CV Maker</h1><p>Create a clean, professional resume in minutes. Add your details and see the resume preview update instantly. Your entries stay in this browser page.</p><div class="badges"><span class="badge">✓ Live preview</span><span class="badge">✓ A4 print layout</span><span class="badge">✓ No account needed</span></div></section>
-<div class="layout"><section class="panel form-panel no-print"><div class="panel-head"><div><h2>Your details</h2><p>Fill only the sections you need.</p></div><span class="step">STEP 1 OF 2</span></div>
-<div class="section-title">Personal information</div><div class="fields"><div class="field full"><label for="name">Full name *</label><input id="name" placeholder="e.g. Ayesha Shaikh" autocomplete="name" maxlength="100"></div><div class="field full"><label for="role">Professional title</label><input id="role" placeholder="e.g. Junior Web Developer" maxlength="100"></div><div class="field"><label for="phone">Mobile number</label><input id="phone" type="tel" placeholder="e.g. +91 98765 43210" autocomplete="tel" maxlength="30"></div><div class="field"><label for="email">Email address</label><input id="email" type="email" placeholder="name@example.com" autocomplete="email" maxlength="120"></div><div class="field full"><label for="location">City / Location</label><input id="location" placeholder="e.g. Yavatmal, Maharashtra" autocomplete="address-level2" maxlength="100"></div><div class="field full"><label for="summary">Professional summary</label><textarea id="summary" placeholder="Write 2–3 short lines about your strengths and career goal." maxlength="900"></textarea><p class="hint">Tip: Keep it specific and honest. Avoid adding Aadhaar or other sensitive ID numbers.</p></div></div>
-<div class="section-title">Education</div><div class="fields"><div class="field full"><label for="education">Qualification and institution</label><textarea id="education" placeholder="12th Science — College name, Board / year" maxlength="1200"></textarea></div></div>
-<div class="section-title">Skills</div><div class="fields"><div class="field full"><label for="skills">Skills (separate with commas)</label><textarea id="skills" placeholder="Communication, MS Office, HTML, teamwork" maxlength="800"></textarea></div></div>
-<div class="section-title">Experience / Projects</div><div class="fields"><div class="field full"><label for="experience">Work experience, internships or projects</label><textarea id="experience" placeholder="Role or project — organisation, dates, and what you did." maxlength="1800"></textarea></div></div>
-<div class="section-title">Optional details</div><div class="fields"><div class="field full"><label for="languages">Languages</label><input id="languages" placeholder="Hindi, Marathi, English" maxlength="250"></div><div class="field full"><label for="achievements">Achievements / Certifications</label><textarea id="achievements" placeholder="Certificates, awards or relevant achievements" maxlength="1000"></textarea></div></div>
-<div class="actions"><button id="updateBtn" type="button">Update preview</button><button class="secondary" id="printBtn" type="button">Print / Save PDF</button><button class="ghost" id="clearBtn" type="button">Clear form</button></div><div id="message" class="toast" role="status" aria-live="polite"></div></section>
-<section class="panel preview-panel"><div class="preview-top no-print"><div><h2>Resume preview</h2><p>Print-ready, clean A4-style layout</p></div><span class="step">STEP 2 OF 2</span></div><div class="preview-wrap"><article class="resume" id="resume" aria-label="Resume preview"><h2 class="r-name" id="p-name">Your Full Name</h2><div class="r-role" id="p-role">Professional title</div><div class="r-contact" id="p-contact">Phone · Email · City</div><section id="s-summary"><h3>Profile</h3><div class="r-body" id="p-summary">Your professional summary will appear here.</div></section><section id="s-education"><h3>Education</h3><div class="r-body" id="p-education">Add your qualification and institution.</div></section><section id="s-skills"><h3>Key skills</h3><div class="r-skills" id="p-skills"><span class="skill">Your skills</span></div></section><section id="s-experience"><h3>Experience & projects</h3><div class="r-body" id="p-experience">Add your experience, internship or projects.</div></section><section id="s-languages"><h3>Languages</h3><div class="r-body" id="p-languages"></div></section><section id="s-achievements"><h3>Achievements & certifications</h3><div class="r-body" id="p-achievements"></div></section></article></div><p class="privacy no-print">Privacy: details are processed in this page only. Avoid entering sensitive identity or banking information. Review the resume before printing or sharing.</p></section></div></main>
+:root{--g:#12643e;--dark:#093d29;--gold:#e4b94f;--bg:#f1f6f2;--line:#dce7df}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#203329}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+header{background:linear-gradient(120deg,var(--dark),var(--g));color:white;padding:20px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:15px;background:var(--gold);color:var(--dark);display:grid;place-items:center;font-size:25px;font-weight:bold}
+.brand h2{margin:0;font-size:19px}
+.brand small{color:#d8e8dc}
+header button{padding:10px 15px;border:1px solid #ffffff70;border-radius:9px;background:#ffffff12;color:white;font-weight:bold}
+.hero{padding:32px 5%;background:linear-gradient(120deg,#e1f0e5,#fff8e7);border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(26px,4vw,40px);margin:0;color:var(--dark)}
+.hero h1 span{color:#bd8b19}
+.hero p{color:#64736a;margin-bottom:0}
+main{max-width:1500px;margin:24px auto;padding:0 18px}
+.layout{display:grid;grid-template-columns:minmax(300px,440px) minmax(0,1fr);gap:20px;align-items:start}
+.card{background:white;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 8px 25px #153d2910}
+.cardhead{padding:17px 20px;border-bottom:1px solid var(--line);font-weight:bold;color:var(--dark);font-size:17px}
+.form{padding:17px;max-height:1000px;overflow:auto}
+.group{border:1px solid var(--line);border-radius:12px;margin-bottom:13px;overflow:hidden}
+.group h3{margin:0;padding:13px;background:#f1f7f2;color:var(--g);font-size:14px}
+.fields{padding:13px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{min-width:0}
+.field.full{grid-column:1/-1}
+label{display:block;font-size:11px;font-weight:bold;color:#56665b;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
+input,textarea{width:100%;padding:11px;border:1px solid #d6e2d9;border-radius:8px;background:white;outline:none;font-size:13px}
+input:focus,textarea:focus{border-color:var(--g);box-shadow:0 0 0 3px #12643e15}
+textarea{min-height:75px;resize:vertical}
+.actions{display:flex;gap:8px;flex-wrap:wrap;padding:14px}
+.btn{padding:11px 14px;border:0;border-radius:9px;font-weight:bold;font-size:13px}
+.green{background:var(--g);color:white}
+.gold{background:var(--gold);color:#263325}
+.light{background:#eaf3ec;color:var(--g);border:1px solid #d5e5d9}
+.progress{padding:14px 17px;background:#f7faf7;border-bottom:1px solid var(--line)}
+.progressline{height:7px;background:#dfe9e2;border-radius:20px;overflow:hidden;margin:10px 0}
+.progressline div{height:100%;width:0;background:linear-gradient(90deg,var(--g),var(--gold))}
+.progress small{color:#65756a}
+.previewhead{padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.templates{display:flex;gap:6px;flex-wrap:wrap}
+.template{background:white;border:1px solid #d6e2d9;border-radius:8px;padding:8px 10px;font-size:12px}
+.template.active{background:#e5f3e9;border-color:var(--g);color:var(--g);font-weight:bold}
+.paperwrap{background:#e6eee8;padding:22px;overflow:auto}
+.paper{width:794px;min-height:1123px;margin:auto;background:white;padding:48px 52px;box-shadow:0 5px 25px #0001;color:#26342a;font-family:Arial,sans-serif}
+.cvhead{display:flex;gap:18px;align-items:center;padding-bottom:20px;border-bottom:3px solid var(--g);margin-bottom:22px}
+.photo{width:90px;height:90px;object-fit:cover;border-radius:12px;display:none}
+.name{font-size:30px;color:var(--dark);margin:0 0 7px;overflow-wrap:anywhere}
+.role{color:#b38320;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:1px}
+.contact{font-size:10px;color:#68766c;line-height:1.8;margin-top:8px;overflow-wrap:anywhere}
+.cvsection{margin-bottom:20px;break-inside:avoid}
+.cvsection h3{font-size:12px;letter-spacing:1.2px;color:var(--g);border-bottom:1px solid #dce7df;padding-bottom:7px;margin:0 0 9px}
+.cvsection p{font-size:11px;line-height:1.65;margin:0;white-space:pre-line;overflow-wrap:anywhere}
+.skills{display:flex;flex-wrap:wrap;gap:6px}
+.skill{background:#eaf4ed;color:#225d3b;padding:6px 8px;border-radius:5px;font-size:10px}
+.modern .cvhead{background:var(--dark);margin:-48px -52px 22px;padding:38px 52px;border:0}
+.modern .name{color:white}.modern .role{color:var(--gold)}.modern .contact{color:#e1eee4}
+.classic .cvhead{display:block;text-align:center;border-bottom:2px solid #222}
+.classic .name{font-family:Georgia,serif;color:#222}
+.classic .role,.classic .cvsection h3{color:#444}
+.classic .cvsection h3{border-color:#888}
+.minimal .cvhead{border-bottom:1px solid #bbb}
+.minimal .name{color:#222;font-size:28px}
+footer{text-align:center;color:#748078;font-size:12px;padding:22px}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#173e2b;color:white;padding:12px 18px;border-radius:10px;display:none;z-index:10}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.paperwrap{padding:10px;overflow:auto;justify-content:flex-start}.paper{margin:0;transform:scale(.78);transform-origin:top left;margin-right:-170px;margin-bottom:-245px}.form{max-height:none}}
+@media(max-width:480px){main{padding:0 8px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.paper{transform:scale(.48);margin-right:-410px;margin-bottom:-585px}.hero{padding:25px 18px}}
+@media print{
+body{background:white}
+header,.hero,.formcard,.previewhead,footer{display:none!important}
+main{margin:0;padding:0;max-width:none}
+.layout{display:block}
+.previewcard{border:0;box-shadow:none}
+.paperwrap{padding:0;background:white;overflow:visible}
+.paper{width:100%;min-height:0;box-shadow:none;margin:0;padding:12mm;transform:none!important}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand">
+  <div class="logo">✦</div>
+  <div><h2>KISAN SEVA TOOLS</h2><small>Your Life • Our Digital Support</small></div>
+ </div>
+ <div>
+  <button onclick="loadSample()">Load Sample</button>
+  <button onclick="window.print()">Print / Save PDF</button>
+ </div>
+</header>
+
+<section class="hero">
+ <h1>Resume / CV <span>Maker</span></h1>
+ <p>Create a professional resume in minutes. Fill in your details and see the live preview.</p>
+</section>
+
+<main>
+<div class="layout">
+<section class="card formcard">
+ <div class="cardhead">✦ Build Your Resume</div>
+ <div class="progress">
+  <strong id="pct">0% complete</strong>
+  <div class="progressline"><div id="bar"></div></div>
+  <small id="progressText">Add your details to get started.</small>
+ </div>
+ <div class="form">
+  <div class="group">
+   <h3>01 · Personal Information</h3>
+   <div class="fields">
+    <div class="field full"><label>Full name *</label><input id="name" placeholder="Your full name"></div>
+    <div class="field full"><label>Professional title</label><input id="role" placeholder="e.g. Web Developer"></div>
+    <div class="field"><label>Email</label><input id="email" type="email" placeholder="you@example.com"></div>
+    <div class="field"><label>Phone</label><input id="phone" placeholder="+91"></div>
+    <div class="field full"><label>Location</label><input id="location" placeholder="City, State, India"></div>
+    <div class="field full"><label>LinkedIn / Portfolio</label><input id="links" placeholder="LinkedIn or portfolio URL"></div>
+    <div class="field full"><label>Profile photo (optional)</label><input id="photo" type="file" accept="image/*"></div>
+   </div>
+  </div>
+  <div class="group">
+   <h3>02 · Summary & Objective</h3>
+   <div class="fields">
+    <div class="field full"><label>Professional summary</label><textarea id="summary" placeholder="Write a short introduction about yourself"></textarea></div>
+    <div class="field full"><label>Career objective</label><textarea id="objective" placeholder="What kind of role are you looking for?"></textarea></div>
+   </div>
+  </div>
+  <div class="group">
+   <h3>03 · Education</h3>
+   <div class="fields">
+    <div class="field full"><label>Degree / Qualification</label><input id="degree" placeholder="e.g. B.Sc. Computer Science"></div>
+    <div class="field full"><label>School / College</label><input id="school" placeholder="Institution name"></div>
+    <div class="field"><label>Years</label><input id="years" placeholder="2023 - 2026"></div>
+    <div class="field"><label>Grade / Percentage</label><input id="grade" placeholder="e.g. 78%"></div>
+   </div>
+  </div>
+  <div class="group">
+   <h3>04 · Experience</h3>
+   <div class="fields">
+    <div class="field full"><label>Job title</label><input id="job" placeholder="Job title or internship"></div>
+    <div class="field full"><label>Company</label><input id="company" placeholder="Company name"></div>
+    <div class="field full"><label>Dates</label><input id="jobdates" placeholder="e.g. Jun 2024 - Present"></div>
+    <div class="field full"><label>Responsibilities & achievements</label><textarea id="jobdesc" placeholder="Describe your work and achievements"></textarea></div>
+   </div>
+  </div>
+  <div class="group">
+   <h3>05 · Skills & Additional Details</h3>
+   <div class="fields">
+    <div class="field full"><label>Skills (separate with commas)</label><textarea id="skills" placeholder="HTML, CSS, Communication, MS Office"></textarea></div>
+    <div class="field full"><label>Projects</label><textarea id="projects" placeholder="Project name and what you created"></textarea></div>
+    <div class="field full"><label>Certifications</label><textarea id="certs" placeholder="Course or certificate name"></textarea></div>
+    <div class="field full"><label>Languages</label><input id="languages" placeholder="English, Hindi, Marathi"></div>
+    <div class="field full"><label>Achievements</label><textarea id="achievements" placeholder="Awards or achievements"></textarea></div>
+    <div class="field full"><label>Interests (optional)</label><input id="interests" placeholder="Reading, technology, volunteering"></div>
+   </div>
+  </div>
+ </div>
+ <div class="actions">
+  <button class="btn light" onclick="saveDraft()">Save Draft</button>
+  <button class="btn gold" onclick="loadSample()">Sample Resume</button>
+  <button class="btn light" onclick="clearForm()">Clear All</button>
+  <button class="btn green" onclick="window.print()">Save as PDF</button>
+ </div>
+</section>
+
+<section class="card previewcard">
+ <div class="previewhead">
+  <div><strong>Live Resume Preview</strong><div style="font-size:12px;color:#718076;margin-top:4px">A4 layout · Updates as you type</div></div>
+  <div class="templates">
+   <button class="template active" data-t="emerald">Emerald</button>
+   <button class="template" data-t="modern">Modern</button>
+   <button class="template" data-t="classic">Classic</button>
+   <button class="template" data-t="minimal">Minimal</button>
+  </div>
+ </div>
+ <div class="paperwrap">
+  <article class="paper" id="paper">
+   <div class="cvhead">
+    <img id="outPhoto" class="photo" alt="Profile photo">
+    <div>
+     <h1 class="name" id="outName">Your Name</h1>
+     <div class="role" id="outRole">Professional Title</div>
+     <div class="contact" id="outContact">Email · Phone · Location</div>
+    </div>
+   </div>
+   <section class="cvsection" id="sSummary"><h3>PROFESSIONAL SUMMARY</h3><p id="outSummary"></p></section>
+   <section class="cvsection" id="sObjective"><h3>CAREER OBJECTIVE</h3><p id="outObjective"></p></section>
+   <section class="cvsection" id="sExperience"><h3>EXPERIENCE</h3><p id="outJob"></p><p id="outCompany"></p><p id="outDates"></p><p id="outJobdesc"></p></section>
+   <section class="cvsection" id="sEducation"><h3>EDUCATION</h3><p id="outDegree"></p><p id="outSchool"></p><p id="outYears"></p><p id="outGrade"></p></section>
+   <section class="cvsection" id="sSkills"><h3>CORE SKILLS</h3><div class="skills" id="outSkills"></div></section>
+   <section class="cvsection" id="sProjects"><h3>PROJECTS</h3><p id="outProjects"></p></section>
+   <section class="cvsection" id="sCerts"><h3>CERTIFICATIONS</h3><p id="outCerts"></p></section>
+   <section class="cvsection" id="sLanguages"><h3>LANGUAGES</h3><p id="outLanguages"></p></section>
+   <section class="cvsection" id="sAchievements"><h3>ACHIEVEMENTS</h3><p id="outAchievements"></p></section>
+   <section class="cvsection" id="sInterests"><h3>INTERESTS</h3><p id="outInterests"></p></section>
+  </article>
+ </div>
+</section>
+</div>
+</main>
+<footer>Kisan Seva Tools · Create a clear, honest and professional resume.</footer>
+<div id="toast"></div>
+
 <script>
-(function(){'use strict';const ids=['name','role','phone','email','location','summary','education','skills','experience','languages','achievements'];const $=id=>document.getElementById(id);const val=id=>$(id).value.trim();function text(id,value,fallback){$(id).textContent=value||fallback||''}function section(id,show){$('s-'+id).classList.toggle('hidden',!show)}function render(){const name=val('name');text('p-name',name||'Your Full Name');text('p-role',val('role'),'Professional title');const contact=[val('phone'),val('email'),val('location')].filter(Boolean);text('p-contact',contact.join('  •  ')||'Phone  •  Email  •  City');const summary=val('summary'),education=val('education'),skills=val('skills').split(/[,\n]/).map(s=>s.trim()).filter(Boolean),experience=val('experience'),languages=val('languages'),achievements=val('achievements');text('p-summary',summary,'Your professional summary will appear here.');text('p-education',education,'Add your qualification and institution.');$('p-skills').replaceChildren();(skills.length?skills:['Your skills']).slice(0,30).forEach(s=>{const span=document.createElement('span');span.className='skill';span.textContent=s;$('p-skills').appendChild(span)});text('p-experience',experience,'Add your experience, internship or projects.');text('p-languages',languages);text('p-achievements',achievements);section('summary',!!summary);section('education',!!education);section('skills',skills.length>0);section('experience',!!experience);section('languages',!!languages);section('achievements',!!achievements)}ids.forEach(id=>$(id).addEventListener('input',render));$('updateBtn').addEventListener('click',()=>{render();const m=$('message');m.textContent=val('name')?'Preview updated. Check the resume on the right.':'Preview updated. Add your full name to personalise it.';m.classList.add('show')});$('printBtn').addEventListener('click',()=>{render();if(!val('name')){const m=$('message');m.textContent='Tip: add your full name before printing. You can still print the current preview.';m.classList.add('show')}window.print()});$('clearBtn').addEventListener('click',()=>{if(!confirm('Clear all resume details? This cannot be undone.'))return;ids.forEach(id=>$(id).value='');render();$('message').textContent='All fields cleared.';$('message').classList.add('show')});render()})();
-</script></body></html>
+const $=id=>document.getElementById(id);
+const fields=['name','role','email','phone','location','links','summary','objective','degree','school','years','grade','job','company','jobdates','jobdesc','skills','projects','certs','languages','achievements','interests'];
+const outputs={
+name:'outName',role:'outRole',summary:'outSummary',objective:'outObjective',
+job:'outJob',company:'outCompany',jobdates:'outDates',jobdesc:'outJobdesc',
+degree:'outDegree',school:'outSchool',years:'outYears',grade:'outGrade',
+projects:'outProjects',certs:'outCerts',languages:'outLanguages',
+achievements:'outAchievements',interests:'outInterests'
+};
+function val(id){return $(id).value.trim()}
+function text(id,v){$(id).textContent=v}
+function show(id,condition){$(id).style.display=condition?'':'none'}
+function render(){
+ Object.entries(outputs).forEach(([id,out])=>text(out,val(id)));
+ text('outName',val('name')||'Your Name');
+ text('outRole',val('role')||'Professional Title');
+ text('outContact',[val('email'),val('phone'),val('location'),val('links')].filter(Boolean).join('  •  ')||'Email · Phone · Location');
+ const skillBox=$('outSkills');skillBox.innerHTML='';
+ val('skills').split(/[,\n]/).map(s=>s.trim()).filter(Boolean).forEach(s=>{
+  const tag=document.createElement('span');tag.className='skill';tag.textContent=s;skillBox.appendChild(tag);
+ });
+ if(!skillBox.children.length)text('outSkills','Add your skills');
+ show('sSummary',!!val('summary'));
+ show('sObjective',!!val('objective'));
+ show('sExperience',!!(val('job')||val('company')||val('jobdesc')));
+ show('sEducation',!!(val('degree')||val('school')));
+ show('sSkills',!!val('skills'));
+ show('sProjects',!!val('projects'));
+ show('sCerts',!!val('certs'));
+ show('sLanguages',!!val('languages'));
+ show('sAchievements',!!val('achievements'));
+ show('sInterests',!!val('interests'));
+ const total=fields.length;
+ const filled=fields.filter(id=>val(id)).length;
+ const pct=Math.round(filled/total*100);
+ $('pct').textContent=pct+'% complete';
+ $('bar').style.width=pct+'%';
+ $('progressText').textContent=pct>=75?'Great progress! Review details before exporting.':pct>=35?'Good start. Add education, skills and contact details.':'Fill in your personal and career details to begin.';
+}
+fields.forEach(id=>$(id).addEventListener('input',()=>{
+ render();
+ try{localStorage.setItem('kst_resume_v1',JSON.stringify(Object.fromEntries(fields.map(k=>[k,val(k)]))))}catch(e){}
+}));
+document.querySelectorAll('.template').forEach(btn=>btn.addEventListener('click',()=>{
+ document.querySelectorAll('.template').forEach(b=>b.classList.toggle('active',b===btn));
+ $('paper').className='paper '+(btn.dataset.t==='emerald'?'':btn.dataset.t);
+}));
+$('photo').addEventListener('change',e=>{
+ const f=e.target.files[0];if(!f)return;
+ if(!f.type.startsWith('image/')){alert('Choose an image file.');return}
+ if(f.size>4*1024*1024){alert('Choose a photo smaller than 4 MB.');return}
+ const reader=new FileReader();
+ reader.onload=()=>{$('outPhoto').src=reader.result;$('outPhoto').style.display='block'};
+ reader.readAsDataURL(f);
+});
+function saveDraft(){
+ try{
+  localStorage.setItem('kst_resume_v1',JSON.stringify(Object.fromEntries(fields.map(k=>[k,val(k)]))));
+  notify('Draft saved in this browser.');
+ }catch(e){notify('Draft could not be saved in this browser.')}
+}
+function loadDraft(){
+ try{
+  const data=JSON.parse(localStorage.getItem('kst_resume_v1')||'{}');
+  fields.forEach(id=>{if(typeof data[id]==='string')$(id).value=data[id]});
+ }catch(e){}
+}
+function clearForm(){
+ if(!confirm('Clear all resume details?'))return;
+ fields.forEach(id=>$(id).value='');
+ $('photo').value='';$('outPhoto').removeAttribute('src');$('outPhoto').style.display='none';
+ try{localStorage.removeItem('kst_resume_v1')}catch(e){}
+ render();notify('All details cleared.');
+}
+function loadSample(){
+ const sample={
+ name:'Ayesha Shaikh',role:'Customer Support Executive',
+ email:'ayesha@example.com',phone:'+91 98765 43210',
+ location:'Pune, Maharashtra',links:'linkedin.com/in/ayesha-shaikh',
+ summary:'Customer-focused professional with strong communication, problem-solving and documentation skills. Experienced in supporting customers, resolving queries and maintaining accurate records.',
+ objective:'Seeking a customer support role where I can support customers and contribute to a collaborative team.',
+ degree:'Bachelor of Commerce (B.Com)',school:'Modern College of Arts, Science & Commerce',
+ years:'2021 - 2024',grade:'78%',
+ job:'Customer Support Intern',company:'Bright Services Pvt. Ltd.',
+ jobdates:'Jun 2023 - Dec 2023',
+ jobdesc:'Resolved customer queries through phone and email. Maintained accurate records and documented common questions for the team.',
+ skills:'Communication, MS Excel, Customer Service, Problem Solving, Email Writing, Data Entry',
+ projects:'Customer FAQ Guide — Created a simple guide to help customers find answers quickly.',
+ certs:'MS Excel Fundamentals — Online Course',
+ languages:'English, Hindi, Marathi',
+ achievements:'Recognized for reliable attendance and clear communication.',
+ interests:'Reading, volunteering, learning digital tools'
+ };
+ fields.forEach(id=>$(id).value=sample[id]||'');
+ render();saveDraft();notify('Sample loaded. Replace it with your own details.');
+}
+function notify(message){
+ $('toast').textContent=message;$('toast').style.display='block';
+ setTimeout(()=>$('toast').style.display='none',2400);
+}
+loadDraft();render();
+</script>
+</body>
+</html>
