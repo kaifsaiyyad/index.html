@@ -1,55 +1,528 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mobile Cam Scanner | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Mobile Cam Scanner</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: ID Card & Print • Icon: 📷</div></section><section class="panel"><label>Select image/file</label><input id="file" type="file" accept="image/*" multiple><div id="preview"></div><p>On a phone, use the camera/file picker to capture a document image. This page provides basic image preview; perspective correction/OCR is not included.</p><button onclick="window.print()">Print / Save PDF</button></section><section class="panel"><h2>Preview / output</h2><div id="out"></div></section>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#09111e">
+<title>Mobile Cam Scanner Pro | Kisan Seva Tools</title>
+<style>
+:root{--bg:#09111e;--panel:#111c2d;--panel2:#19283d;--line:#2b405b;--text:#edf5ff;--muted:#9bacc4;--cyan:#64ead7;--blue:#78aaff;--green:#75e4a8;--red:#ff8a9b}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#19334b 0,#09111e 55%);font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--text)}
+button,input,select{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:10;padding:12px clamp(12px,3vw,32px);background:#09111eed;backdrop-filter:blur(15px);border-bottom:1px solid #ffffff13}
+.nav{max-width:1550px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:950;letter-spacing:.5px}
+.logo{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#74aaff,#64ead7);color:#071522;font-size:24px}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.6px;margin-top:4px}
+.badge{font-size:9px;font-weight:900;color:var(--cyan);border:1px solid #64ead755;border-radius:30px;padding:8px 11px}
+main{max-width:1550px;margin:auto;padding:24px clamp(10px,2.5vw,30px) 45px}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;flex-wrap:wrap;margin:7px 0 22px}
+.eyebrow{font-size:10px;letter-spacing:2px;font-weight:900;color:var(--cyan)}
+h1{font-size:clamp(28px,4vw,44px);line-height:1.1;margin:10px 0}
+.hero p{font-size:13px;color:var(--muted);line-height:1.65;max-width:760px;margin:0}
+.layout{display:grid;grid-template-columns:minmax(280px,355px) minmax(0,1fr);gap:16px;align-items:start}
+.panel{min-width:0;background:linear-gradient(155deg,#142136f5,#0e1929f5);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 20px 60px #0002}
+.panelhead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:15px 17px;border-bottom:1px solid var(--line)}
+.panelhead h2{font-size:13px;margin:0}
+.kicker{font-size:9px;font-weight:900;letter-spacing:1.5px;color:var(--cyan)}
+.pad{padding:15px}
+.section{padding:15px 0;border-bottom:1px solid #ffffff12}
+.section:first-child{padding-top:0}
+.section:last-child{border-bottom:0;padding-bottom:0}
+.sectitle{font-size:12px;font-weight:900;display:flex;justify-content:space-between;gap:8px;margin:0 0 12px}
+.field{min-width:0;margin-bottom:12px}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:10px;font-weight:800;color:#c1cee0;margin-bottom:6px}
+input,select{width:100%;min-width:0;background:#091322;border:1px solid var(--line);border-radius:9px;color:var(--text);padding:10px;font-size:12px;outline:none}
+input:focus,select:focus{border-color:var(--cyan)}
+input[type=range]{padding:0;accent-color:var(--cyan)}
+input[type=file]{font-size:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.btn{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#1c2b42;color:var(--text);font-size:11px;font-weight:850;transition:.18s}
+.btn:hover{border-color:var(--cyan);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(135deg,#78aaff,#64ead7);color:#081522;border:0}
+.btn.green{background:linear-gradient(135deg,#9ef1be,#64d9b4);color:#092019;border:0}
+.btn.full{width:100%}
+.btn.small{font-size:10px;padding:8px 9px}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.camera-box{position:relative;min-height:210px;background:#030811;border:1px solid var(--line);border-radius:13px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+#video{width:100%;max-height:310px;object-fit:contain;display:block}
+.camera-empty{text-align:center;color:var(--muted);padding:24px}
+.camera-empty .iconbig{font-size:36px}
+.camera-empty p{font-size:11px;line-height:1.6}
+.live{position:absolute;top:10px;left:10px;background:#ff425b;color:white;border-radius:20px;padding:6px 9px;font-size:9px;font-weight:900}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.controls .btn:last-child{grid-column:1/-1}
+.rangehead{display:flex;justify-content:space-between;gap:8px;font-size:10px;color:var(--muted)}
+.rangehead label{margin:0}
+.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.filter{border:1px solid var(--line);background:#0b1626;border-radius:10px;padding:10px 8px;text-align:left;color:var(--muted);font-size:10px;font-weight:850}
+.filter.active{border-color:var(--cyan);color:var(--text);background:#64ead70b}
+.filter span{display:block;font-size:17px;margin-bottom:7px}
+.editorhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.editorhead h2{font-size:14px;margin:0}
+.tabs{display:flex;gap:4px;background:#091322;border:1px solid var(--line);padding:4px;border-radius:10px}
+.tab{border:0;background:transparent;color:var(--muted);font-size:10px;font-weight:850;padding:8px 10px;border-radius:7px}
+.tab.active{background:#263c56;color:white}
+.workspace{margin-top:14px;min-height:460px;border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;align-items:center;justify-content:center;background-color:#08111e;background-image:radial-gradient(#ffffff0c 1px,transparent 1px);background-size:17px 17px;overflow:auto}
+#scanCanvas{display:block;max-width:100%;max-height:70vh;object-fit:contain;background:white;box-shadow:0 14px 35px #0007}
+.placeholder{text-align:center;max-width:300px;color:var(--muted)}
+.placeholder .iconbig{font-size:48px}
+.placeholder h3{color:var(--text);font-size:16px}
+.placeholder p{font-size:12px;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.stat{border:1px solid var(--line);background:#ffffff05;border-radius:10px;padding:10px;min-width:0}
+.stat small{display:block;color:var(--muted);font-size:9px;margin-bottom:5px}
+.stat strong{font-size:11px;overflow-wrap:anywhere}
+.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.tip{font-size:10px;line-height:1.65;color:var(--muted);border:1px solid #ffffff12;background:#ffffff05;border-radius:10px;padding:11px;margin-top:12px}
+#notice{font-size:10px;line-height:1.6;color:var(--muted);margin-top:10px}
+.pages-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:18px 0 10px}
+.pages-head h3{font-size:12px;margin:0}
+.pages{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:9px}
+.pagecard{min-width:0;position:relative;border:1px solid var(--line);border-radius:10px;padding:6px;background:#0b1423;cursor:pointer}
+.pagecard.active{border-color:var(--cyan);box-shadow:0 0 0 1px #64ead722}
+.pagecard img{width:100%;height:90px;object-fit:contain;background:#fff;border-radius:4px;display:block}
+.pagecard .pname{font-size:9px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:6px}
+.pagecard .remove{position:absolute;right:9px;top:9px;width:21px;height:21px;border:0;border-radius:50%;background:#ff6577;color:#24070c;font-weight:900;font-size:13px}
+.toast{position:fixed;z-index:20;bottom:18px;left:50%;transform:translate(-50%,20px);opacity:0;transition:.2s;pointer-events:none;background:#1c2b42;border:1px solid #47617e;border-radius:12px;padding:12px 16px;font-size:12px;max-width:90vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:#788ba5;font-size:10px;line-height:1.7;padding:0 14px 24px}
+.hidden{display:none!important}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.layout>section{order:1}.layout>aside{order:2}.workspace{min-height:310px}}
+@media(max-width:480px){header{padding:10px}.brand{font-size:11px}.logo{width:37px;height:37px}main{padding:17px 9px 30px}.pad{padding:12px}.workspace{min-height:240px;padding:9px}.stats{gap:5px}.stat{padding:8px}.stat strong{font-size:10px}.actions{grid-template-columns:1fr 1fr}.actions .btn:last-child{grid-column:1/-1}.pages{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media print{
+ body{background:#fff!important}
+ header,.hero,aside,.editorhead,.stats,.actions,.tip,.pages-head,.pages,footer,.no-print{display:none!important}
+ main{padding:0!important;margin:0!important}
+ .layout{display:block!important}
+ .panel{border:0!important;box-shadow:none!important;background:#fff!important}
+ .layout>section{display:block!important}
+ .panelhead{display:none!important}
+ .pad{padding:0!important}
+ .workspace{display:block!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;background:#fff!important;overflow:visible!important}
+ #scanCanvas{max-width:none!important;max-height:none!important;width:100%!important;height:auto!important;box-shadow:none!important}
+ @page{size:auto;margin:8mm}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="nav">
+  <div class="brand"><div class="logo">▧</div><div>KISAN SEVA TOOLS<small>MOBILE CAM SCANNER PRO</small></div></div>
+  <span class="badge">✦ DOCUMENT STUDIO</span>
+ </div>
+</header>
+<main>
+ <div class="hero">
+  <div><div class="eyebrow">TOOL 46 / SCAN LAB</div>
+   <h1>Scan smarter. <span style="color:var(--cyan)">Go paperless.</span></h1>
+   <p>Capture documents using your phone camera or upload existing images. Enhance readability, adjust crop margins, organise multiple pages and print or save your scans as PDF.</p>
+  </div>
+ </div>
+ <div class="layout">
+  <aside class="panel">
+   <div class="panelhead"><h2>Capture & enhance</h2><span class="kicker">01 / SCAN</span></div>
+   <div class="pad">
+    <div class="section">
+     <div class="sectitle">Live camera <span class="kicker">CAMERA</span></div>
+     <div class="camera-box">
+      <video id="video" autoplay muted playsinline class="hidden"></video>
+      <div id="cameraEmpty" class="camera-empty"><div class="iconbig">▣</div><strong>Camera ready when you are</strong><p>Allow camera permission to capture a document.</p></div>
+      <span id="liveBadge" class="live hidden">● LIVE</span>
+     </div>
+     <div class="controls">
+      <button class="btn primary" id="startCamera">Start camera</button>
+      <button class="btn" id="switchCamera">Switch camera</button>
+      <button class="btn green" id="captureBtn" disabled>◎ Capture document</button>
+     </div>
+     <p class="tip">Camera access usually requires HTTPS and permission. On a laptop, you can use the webcam or upload a document photo instead.</p>
+    </div>
+    <div class="section">
+     <div class="sectitle">Import document <span class="kicker">UPLOAD</span></div>
+     <div class="field"><label for="fileInput">Choose an image or photo</label><input id="fileInput" type="file" accept="image/*" multiple></div>
+     <button class="btn full" id="addPageBtn">＋ Add current scan to pages</button>
+     <div class="tip">For multi-page documents, capture or upload each page, then add it to your page collection.</div>
+    </div>
+    <div class="section">
+     <div class="sectitle">Scan filter <span class="kicker">02 / ENHANCE</span></div>
+     <div class="filters" id="filters">
+      <button class="filter active" data-filter="original"><span>◉</span>Original colour</button>
+      <button class="filter" data-filter="gray"><span>◐</span>Grayscale</button>
+      <button class="filter" data-filter="bw"><span>◧</span>Black & white</button>
+      <button class="filter" data-filter="vivid"><span>✦</span>Enhanced colour</button>
+     </div>
+     <div class="field" style="margin-top:14px"><div class="rangehead"><label for="brightness">Brightness</label><span id="brightnessValue">100%</span></div><input id="brightness" type="range" min="60" max="150" value="100"></div>
+     <div class="field"><div class="rangehead"><label for="contrast">Contrast</label><span id="contrastValue">100%</span></div><input id="contrast" type="range" min="60" max="180" value="100"></div>
+     <button class="btn full" id="resetFilters">Reset enhancements</button>
+    </div>
+    <div class="section">
+     <div class="sectitle">Crop & page format <span class="kicker">03 / FRAME</span></div>
+     <div class="field"><label for="paperSize">Page format</label><select id="paperSize"><option value="original">Original image ratio</option><option value="a4">A4 portrait ratio</option><option value="letter">Letter portrait ratio</option><option value="square">Square crop</option></select></div>
+     <div class="field"><div class="rangehead"><label for="crop">Crop amount</label><span id="cropValue">0%</span></div><input id="crop" type="range" min="0" max="20" value="0"></div>
+     <div class="field"><label for="rotation">Rotation</label><select id="rotation"><option value="0">0°</option><option value="90">90° clockwise</option><option value="180">180°</option><option value="270">270° clockwise</option></select></div>
+     <button class="btn full" id="resetCrop">Reset crop & rotation</button>
+    </div>
+    <div class="section">
+     <div class="sectitle">Page collection <span class="kicker">04 / ORGANISE</span></div>
+     <div class="grid2">
+      <button class="btn" id="prevPage">← Previous</button>
+      <button class="btn" id="nextPage">Next →</button>
+     </div>
+     <div style="height:9px"></div>
+     <div class="grid2">
+      <button class="btn" id="moveLeft">Move left</button>
+      <button class="btn" id="moveRight">Move right</button>
+     </div>
+     <div style="height:9px"></div>
+     <button class="btn full" id="deletePage">Remove selected page</button>
+     <div style="height:9px"></div>
+     <button class="btn full" id="clearPages">Clear all scanned pages</button>
+    </div>
+   </div>
+  </aside>
+  <section class="panel">
+   <div class="panelhead"><h2>Document preview</h2><span class="kicker">LIVE / WORKSPACE</span></div>
+   <div class="pad">
+    <div class="editorhead">
+     <div><h2 id="previewTitle">Your scanned document</h2><div style="font-size:10px;color:var(--muted);margin-top:5px">Enhancements update the preview</div></div>
+     <div class="tabs">
+      <button class="tab active" id="previewTab">Current page</button>
+      <button class="tab" id="pagesTab">All pages</button>
+     </div>
+    </div>
+    <div class="workspace">
+     <div id="emptyState" class="placeholder"><div class="iconbig">▤</div><h3>Your scan will appear here</h3><p>Start your camera or upload a document image to begin.</p><button class="btn primary" id="uploadFromEmpty">Upload a document</button></div>
+     <canvas id="scanCanvas" class="hidden" width="800" height="1100"></canvas>
+    </div>
+    <div class="stats">
+     <div class="stat"><small>IMAGE SIZE</small><strong id="sizeStat">—</strong></div>
+     <div class="stat"><small>PAGE NUMBER</small><strong id="pageStat">0 pages</strong></div>
+     <div class="stat"><small>FILTER</small><strong id="filterStat">Original colour</strong></div>
+    </div>
+    <div class="actions">
+     <button class="btn primary" id="downloadBtn">↓ Download PNG</button>
+     <button class="btn green" id="pdfBtn">▤ Print / Save PDF</button>
+     <button class="btn" id="saveAllBtn">Export all pages</button>
+    </div>
+    <div id="notice">Ready to scan. Your images are processed locally in this page.</div>
+    <div class="pages-head"><h3>Scanned pages</h3><span class="kicker" id="pageCount">0 PAGES</span></div>
+    <div id="pages" class="pages"></div>
+    <div class="tip">Privacy note: this standalone tool does not upload your scans to a server. Scanned documents may contain sensitive information; avoid saving them on a shared computer. Always check the scan before submitting it.</div>
+   </div>
+  </section>
+ </div>
+</main>
+<footer>Kisan Seva Tools · Mobile Cam Scanner Pro · Browser-based scanning and image enhancement · Check document readability before sharing.</footer>
+<div class="toast" id="toast"></div>
 <script>
-const fi=document.querySelector('#file');
-if(fi)fi.addEventListener('change',()=>{let p=document.querySelector('#preview');if(!p)return;p.innerHTML='';[...fi.files].forEach(f=>{if(f.type.startsWith('image/')){let im=document.createElement('img');im.className='preview';im.style.maxWidth='160px';im.style.margin='6px';im.src=URL.createObjectURL(f);p.appendChild(im)}})});
-function loadImgs(){return Promise.all([...document.querySelector('#file').files].map(f=>new Promise((res,rej)=>{let im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=URL.createObjectURL(f)})))}
-function dl(canvas,name='output.png',type='image/png'){let a=document.createElement('a');a.href=canvas.toDataURL(type,.92);a.download=name;a.click()}
-function resizeImg(){loadImgs().then(([im])=>{let c=document.createElement('canvas');c.width=+document.querySelector('#w').value;c.height=+document.querySelector('#h').value;c.getContext('2d').drawImage(im,0,0,c.width,c.height);document.querySelector('#out').replaceChildren(c);dl(c,'resized.png')})}
-function convertImg(){loadImgs().then(([im])=>{let c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);let t=document.querySelector('#fmt').value;dl(c,'converted.'+(t==='image/jpeg'?'jpg':t==='image/png'?'png':'webp'),t)})}
-function cropImg(){loadImgs().then(([im])=>{let s=Math.min(im.naturalWidth,im.naturalHeight),c=document.createElement('canvas');c.width=s;c.height=s;c.getContext('2d').drawImage(im,(im.naturalWidth-s)/2,(im.naturalHeight-s)/2,s,s,0,0,s,s);document.querySelector('#out').replaceChildren(c);dl(c,'crop.png')})}
-function makeSheet(){loadImgs().then(([im])=>{let n=+document.querySelector('#copies').value,c=document.createElement('canvas');c.width=1240;c.height=1754;let x=c.getContext('2d');x.fillStyle='white';x.fillRect(0,0,c.width,c.height);let cols=2,rows=Math.ceil(n/cols),cw=560,ch= Math.min(700,1600/rows);for(let i=0;i<n;i++)x.drawImage(im,30+(i%cols)*610,30+Math.floor(i/cols)*ch,cw,ch*.8);document.querySelector('#out').replaceChildren(c);dl(c,'A4-photo-sheet.png')})}
-function makePhoto(){let v=document.querySelector('#size').value;document.querySelector('#copies').value='4';makeSheet()}
-function joinImages(){loadImgs().then(ims=>{let w=Math.max(...ims.map(i=>i.naturalWidth)),h=ims.reduce((s,i)=>s+i.naturalHeight,0),c=document.createElement('canvas');c.width=w;c.height=h;let y=0;ims.forEach(i=>{c.getContext('2d').drawImage(i,0,y);y+=i.naturalHeight});document.querySelector('#out').replaceChildren(c);dl(c,'joined.png')})}
-</script>
-</main><script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+"use strict";
+const $=id=>document.getElementById(id);
+const video=$("video"),canvas=$("scanCanvas");
+let ctx=canvas.getContext("2d",{willReadFrequently:true});
+let stream=null,facing="environment",sourceImage=null,sourceURL=null;
+let pages=[],activeIndex=-1,filter="original",toastTimer=null,previewMode="current";
+const filterNames={original:"Original colour",gray:"Grayscale",bw:"Black & white",vivid:"Enhanced colour"};
+function notify(s){
+ const t=$("toast");t.textContent=s;t.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2700);
+}
+function currentPage(){return activeIndex>=0&&activeIndex<pages.length?pages[activeIndex]:null;}
+function stopCamera(){
+ if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
+ video.srcObject=null;video.classList.add("hidden");
+ $("cameraEmpty").classList.remove("hidden");$("liveBadge").classList.add("hidden");
+ $("startCamera").textContent="Start camera";$("captureBtn").disabled=true;
+}
+async function startCamera(){
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+  notify("Camera unavailable. Use HTTPS or upload a document image.");return;
+ }
+ stopCamera();
+ try{
+  stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:facing},width:{ideal:1920},height:{ideal:1080}},audio:false});
+  video.srcObject=stream;await video.play();
+  video.classList.remove("hidden");$("cameraEmpty").classList.add("hidden");
+  $("liveBadge").classList.remove("hidden");$("startCamera").textContent="Restart camera";
+  $("captureBtn").disabled=false;notify("Camera is ready. Place your document in view.");
+ }catch(e){
+  stopCamera();
+  notify(e.name==="NotAllowedError"?"Camera permission denied. Allow access or upload a photo.":"Could not start camera. Try uploading a photo.");
+ }
+}
+function makeImageFile(file){
+ if(!file||!file.type.startsWith("image/")){notify("Choose a valid image file.");return;}
+ if(file.size>20*1024*1024){notify("Choose an image under 20 MB.");return;}
+ const url=URL.createObjectURL(file),img=new Image();
+ img.onload=()=>{
+  if(sourceURL)URL.revokeObjectURL(sourceURL);
+  sourceURL=url;sourceImage=img;render();notify("Document image loaded.");
+ };
+ img.onerror=()=>{URL.revokeObjectURL(url);notify("Could not open this image.");};
+ img.src=url;
+}
+function capture(){
+ if(!stream||!video.videoWidth){notify("Start the camera first.");return;}
+ const c=document.createElement("canvas");
+ c.width=video.videoWidth;c.height=video.videoHeight;
+ c.getContext("2d").drawImage(video,0,0,c.width,c.height);
+ c.toBlob(blob=>{
+  if(!blob){notify("Could not capture the image.");return;}
+  const url=URL.createObjectURL(blob),img=new Image();
+  img.onload=()=>{if(sourceURL)URL.revokeObjectURL(sourceURL);sourceURL=url;sourceImage=img;render();notify("Document captured. Adjust it and add it to pages.");};
+  img.onerror=()=>{URL.revokeObjectURL(url);notify("Capture could not be opened.");};
+  img.src=url;
+ },"image/jpeg",.94);
+}
+function rotatedDimensions(img,rotation){
+ return rotation===90||rotation===270?[img.height,img.width]:[img.width,img.height];
+}
+function renderSource(target,img){
+ if(!img)return false;
+ const rotation=Number($("rotation").value)||0;
+ const crop=Number($("crop").value)||0;
+ const [rw,rh]=rotatedDimensions(img,rotation);
+ const margin=crop/100;
+ let x=rw*margin,y=rh*margin,w=rw*(1-2*margin),h=rh*(1-2*margin);
+ const paper=$("paperSize").value;
+ if(paper!=="original"){
+  const ratio=paper==="a4"?210/297:paper==="letter"?8.5/11:1;
+  const current=w/h;
+  if(current>ratio){const nw=h*ratio;x+=(w-nw)/2;w=nw;}
+  else{const nh=w/ratio;y+=(h-nh)/2;h=nh;}
+ }
+ const max=2400,scale=Math.min(1,max/Math.max(w,h));
+ target.width=Math.max(1,Math.round(w*scale));target.height=Math.max(1,Math.round(h*scale));
+ const c=target.getContext("2d",{willReadFrequently:true});
+ c.save();c.translate(target.width/2,target.height/2);c.rotate(rotation*Math.PI/180);
+ const originalScale=Math.min(target.width/w,target.height/h);
+ const drawW=img.width*originalScale,drawH=img.height*originalScale;
+ c.drawImage(img,-drawW/2,-drawH/2,drawW,drawH);
+ c.restore();
+ // Crop the rotated image by copying the desired centred rectangle from a full rotated canvas.
+ const full=document.createElement("canvas");
+ full.width=rw;full.height=rh;
+ const f=full.getContext("2d");
+ f.translate(rw/2,rh/2);f.rotate(rotation*Math.PI/180);f.drawImage(img,-img.width/2,-img.height/2);
+ const cropped=document.createElement("canvas");
+ cropped.width=Math.max(1,Math.round(w));cropped.height=Math.max(1,Math.round(h));
+ cropped.getContext("2d").drawImage(full,Math.round(x),Math.round(y),cropped.width,cropped.height,0,0,cropped.width,cropped.height);
+ c.clearRect(0,0,target.width,target.height);
+ c.drawImage(cropped,0,0,target.width,target.height);
+ const brightness=Number($("brightness").value)||100;
+ const contrast=Number($("contrast").value)||100;
+ if(filter!=="original"||brightness!==100||contrast!==100){
+  const imageData=c.getImageData(0,0,target.width,target.height),d=imageData.data;
+  const cf=(259*(contrast+255))/(255*(259-contrast));
+  for(let i=0;i<d.length;i+=4){
+   let r=d[i],g=d[i+1],b=d[i+2];
+   if(filter==="gray"||filter==="bw"){
+    const y=.299*r+.587*g+.114*b;r=g=b=y;
+   }else if(filter==="vivid"){
+    const avg=(r+g+b)/3;r=avg+(r-avg)*1.18;g=avg+(g-avg)*1.18;b=avg+(b-avg)*1.18;
+   }
+   r=cf*(r-128)+128;g=cf*(g-128)+128;b=cf*(b-128)+128;
+   r*=brightness/100;g*=brightness/100;b*=brightness/100;
+   if(filter==="bw"){const t=(r+g+b)/3>165?255:0;r=g=b=t;}
+   d[i]=Math.max(0,Math.min(255,r));d[i+1]=Math.max(0,Math.min(255,g));d[i+2]=Math.max(0,Math.min(255,b));
+  }
+  c.putImageData(imageData,0,0);
+ }
+ return true;
+}
+function getRenderedCanvas(page){
+ const out=document.createElement("canvas");
+ if(page&&page.image){
+  const old={filter,brightness:$("brightness").value,contrast:$("contrast").value,crop:$("crop").value,rotation:$("rotation").value,paperSize:$("paperSize").value};
+  filter=page.filter;
+  $("brightness").value=page.brightness;$("contrast").value=page.contrast;
+  $("crop").value=page.crop;$("rotation").value=page.rotation;$("paperSize").value=page.paperSize;
+  renderSource(out,page.image);
+  filter=old.filter;$("brightness").value=old.brightness;$("contrast").value=old.contrast;
+  $("crop").value=old.crop;$("rotation").value=old.rotation;$("paperSize").value=old.paperSize;
+ }else if(sourceImage)renderSource(out,sourceImage);
+ return out;
+}
+function updateStats(){
+ const page=currentPage();
+ const img=sourceImage;
+ $("sizeStat").textContent=img?(img.naturalWidth+" × "+img.naturalHeight+" px"):"—";
+ $("pageStat").textContent=pages.length+" page"+(pages.length===1?"":"s");
+ $("filterStat").textContent=filterNames[filter];
+ $("pageCount").textContent=pages.length+" PAGE"+(pages.length===1?"":"S");
+ $("brightnessValue").textContent=$("brightness").value+"%";
+ $("contrastValue").textContent=$("contrast").value+"%";
+ $("cropValue").textContent=$("crop").value+"%";
+ $("previewTitle").textContent=page?"Page "+(activeIndex+1)+" preview":"Your scanned document";
+ $("notice").textContent=page?"Selected page "+(activeIndex+1)+" of "+pages.length+". Enhancements are applied when exported.":"Ready to scan. Upload or capture a document to begin.";
+}
+function render(){
+ updateStats();
+ if(!sourceImage){
+  canvas.classList.add("hidden");$("emptyState").classList.remove("hidden");renderPages();return;
+ }
+ $("emptyState").classList.add("hidden");canvas.classList.remove("hidden");
+ try{renderSource(canvas,sourceImage);}catch(e){console.error(e);notify("Could not render this image. Try another photo.");}
+ renderPages();
+}
+function renderPages(){
+ const holder=$("pages");holder.innerHTML="";
+ pages.forEach((p,i)=>{
+  const card=document.createElement("div");card.className="pagecard"+(i===activeIndex?" active":"");
+  const img=document.createElement("img");img.alt="Scanned page "+(i+1);
+  const preview=getRenderedCanvas(p);
+  img.src=preview.toDataURL("image/jpeg",.75);
+  const name=document.createElement("div");name.className="pname";name.textContent="Page "+(i+1);
+  const remove=document.createElement("button");remove.className="remove";remove.textContent="×";remove.title="Remove page";
+  remove.addEventListener("click",e=>{e.stopPropagation();removePage(i);});
+  card.append(img,name,remove);card.addEventListener("click",()=>selectPage(i));holder.appendChild(card);
+ });
+}
+function saveCurrentPage(){
+ if(!sourceImage){notify("Capture or upload a document first.");return;}
+ const image=sourceImage;
+ const page={
+  image,
+  filter,
+  brightness:$("brightness").value,
+  contrast:$("contrast").value,
+  crop:$("crop").value,
+  rotation:$("rotation").value,
+  paperSize:$("paperSize").value
+ };
+ pages.push(page);activeIndex=pages.length-1;render();notify("Page "+pages.length+" added to your scan collection.");
+}
+function selectPage(i){
+ if(i<0||i>=pages.length)return;
+ activeIndex=i;
+ const p=pages[i];sourceImage=p.image;
+ filter=p.filter;
+ $("brightness").value=p.brightness;$("contrast").value=p.contrast;
+ $("crop").value=p.crop;$("rotation").value=p.rotation;$("paperSize").value=p.paperSize;
+ document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));
+ render();
+}
+function removePage(i){
+ pages.splice(i,1);
+ if(!pages.length){activeIndex=-1;sourceImage=null;}
+ else{activeIndex=Math.min(activeIndex,pages.length-1);selectPage(activeIndex);}
+ render();notify("Page removed.");
+}
+function downloadCurrent(){
+ if(!sourceImage){notify("Capture or upload a document first.");return;}
+ const out=document.createElement("canvas");renderSource(out,sourceImage);
+ out.toBlob(blob=>{
+  if(!blob){notify("PNG export failed.");return;}
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="KisanSeva-Scan-Page-"+(activeIndex+1)+".png";
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+  notify("Scanned page exported as PNG.");
+ },"image/png");
+}
+function printPages(){
+ const items=pages.length?pages.map(p=>getRenderedCanvas(p)):sourceImage?[getRenderedCanvas(null)]:[];
+ if(!items.length){notify("Scan or add a page first.");return;}
+ const win=window.open("","_blank");
+ if(!win){notify("Allow pop-ups to print or save as PDF.");return;}
+ win.document.open();
+ win.document.write("<!DOCTYPE html><html><head><meta charset='utf-8'><title>Scanned Documents</title><style>@page{size:A4;margin:10mm}body{margin:0;font-family:Arial}section{width:100%;height:calc(100vh - 1px);display:flex;align-items:center;justify-content:center;page-break-after:always;break-after:page}section:last-child{page-break-after:auto;break-after:auto}img{max-width:100%;max-height:100%;object-fit:contain} @media print{section{height:277mm}}</style></head><body></body></html>");
+ win.document.close();
+ items.forEach((c,i)=>{
+  const section=win.document.createElement("section"),img=win.document.createElement("img");
+  img.alt="Scanned document page "+(i+1);img.src=c.toDataURL("image/jpeg",.92);
+  section.appendChild(img);win.document.body.appendChild(section);
+ });
+ win.focus();
+ win.onload=()=>win.setTimeout(()=>win.print(),300);
+}
+function exportAll(){
+ if(!pages.length){notify("Add at least one page first.");return;}
+ // Download each page as a separate PNG; browsers may ask permission for multiple downloads.
+ let i=0;
+ function next(){
+  if(i>=pages.length){notify("Page exports prepared.");return;}
+  const page=pages[i],out=getRenderedCanvas(page);
+  out.toBlob(blob=>{
+   if(blob){
+    const url=URL.createObjectURL(blob),a=document.createElement("a");
+    a.href=url;a.download="KisanSeva-Scan-Page-"+String(i+1).padStart(2,"0")+".png";
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);
+   }
+   i++;setTimeout(next,250);
+  },"image/png");
+ }
+ next();
+}
+$("startCamera").addEventListener("click",startCamera);
+$("switchCamera").addEventListener("click",async()=>{
+ facing=facing==="environment"?"user":"environment";
+ if(stream)await startCamera();else notify("Camera selection set. Start the camera.");
+});
+$("captureBtn").addEventListener("click",capture);
+$("fileInput").addEventListener("change",e=>{
+ const files=Array.from(e.target.files||[]);if(!files.length)return;
+ if(files.length>1){
+  files.forEach((f,i)=>setTimeout(()=>makeImageFile(f),i*350));
+  notify("Loading selected images. Add each page after it appears.");
+ }else makeImageFile(files[0]);
+ e.target.value="";
+});
+$("uploadFromEmpty").addEventListener("click",()=>$("fileInput").click());
+$("addPageBtn").addEventListener("click",saveCurrentPage);
+$("filters").addEventListener("click",e=>{
+ const b=e.target.closest("[data-filter]");if(!b)return;
+ filter=b.dataset.filter;
+ document.querySelectorAll(".filter").forEach(f=>f.classList.toggle("active",f===b));
+ render();
+});
+["brightness","contrast","crop","rotation","paperSize"].forEach(id=>{
+ $(id).addEventListener("input",render);$(id).addEventListener("change",render);
+});
+$("resetFilters").addEventListener("click",()=>{
+ filter="original";$("brightness").value=100;$("contrast").value=100;
+ document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter==="original"));render();
+});
+$("resetCrop").addEventListener("click",()=>{
+ $("crop").value=0;$("rotation").value=0;$("paperSize").value="original";render();
+});
+$("prevPage").addEventListener("click",()=>{if(pages.length)selectPage(Math.max(0,activeIndex-1));});
+$("nextPage").addEventListener("click",()=>{if(pages.length)selectPage(Math.min(pages.length-1,activeIndex+1));});
+$("moveLeft").addEventListener("click",()=>{
+ if(activeIndex<=0)return;
+ [pages[activeIndex-1],pages[activeIndex]]=[pages[activeIndex],pages[activeIndex-1]];
+ activeIndex--;render();notify("Page moved earlier.");
+});
+$("moveRight").addEventListener("click",()=>{
+ if(activeIndex<0||activeIndex>=pages.length-1)return;
+ [pages[activeIndex+1],pages[activeIndex]]=[pages[activeIndex],pages[activeIndex+1]];
+ activeIndex++;render();notify("Page moved later.");
+});
+$("deletePage").addEventListener("click",()=>{if(activeIndex>=0)removePage(activeIndex);else notify("Select a page first.");});
+$("clearPages").addEventListener("click",()=>{
+ if(!pages.length){notify("No saved pages to clear.");return;}
+ if(!confirm("Remove all pages from this scan collection?"))return;
+ pages=[];activeIndex=-1;sourceImage=null;render();notify("All scanned pages cleared.");
+});
+$("downloadBtn").addEventListener("click",downloadCurrent);
+$("pdfBtn").addEventListener("click",printPages);
+$("saveAllBtn").addEventListener("click",exportAll);
+$("previewTab").addEventListener("click",()=>{
+ previewMode="current";$("previewTab").classList.add("active");$("pagesTab").classList.remove("active");
+ canvas.classList.remove("hidden");$("emptyState").classList.toggle("hidden",!!sourceImage);
+});
+$("pagesTab").addEventListener("click",()=>{
+ previewMode="pages";$("pagesTab").classList.add("active");$("previewTab").classList.remove("active");
+ $("pages").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+window.addEventListener("beforeunload",()=>{
+ stopCamera();if(sourceURL)URL.revokeObjectURL(sourceURL);
+});
+render();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
