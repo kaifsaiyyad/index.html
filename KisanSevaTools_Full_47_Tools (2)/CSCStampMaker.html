@@ -1,42 +1,585 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CSC Stamp Maker | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>CSC Stamp Maker</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: CSC & Design • Icon: 🔖</div></section><section class="panel"><label>Name / Shop</label><textarea rows="2" id="f0" placeholder="Name / Shop"></textarea><label>Main text</label><textarea rows="2" id="f1" placeholder="Main text"></textarea><label>Address</label><textarea rows="2" id="f2" placeholder="Address"></textarea><label>Phone (optional)</label><textarea rows="2" id="f3" placeholder="Phone (optional)"></textarea><button onclick="previewDoc()">Preview document</button><button class="secondary" onclick="window.print()">Print / Save PDF</button><div id="out"></div><script>function previewDoc(){let fs=["Name / Shop", "Main text", "Address", "Phone (optional)"],out=document.querySelector("#out");out.innerHTML="<hr><h2>Document preview</h2>"+fs.map((x,i)=>"<p><b>"+x+":</b> "+(document.querySelector("#f"+i).value||"—").replace(/</g,"&lt;")+"</p>").join("")}</script></section></main><script>
-(function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSC Stamp Maker Pro | Kisan Seva Tools</title>
+<style>
+:root{
+  --bg:#f3f6fb;--panel:#fff;--ink:#15243b;--muted:#708097;
+  --line:#e1e8f1;--brand:#087f8c;--brand2:#075e68;
+  --gold:#e8a33b;--shadow:0 12px 35px #172b4610;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.topbar{background:#102b3b;color:#fff;padding:17px 22px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:43px;height:43px;border-radius:13px;background:linear-gradient(135deg,#14b8a6,#e9ad4b);
+  display:grid;place-items:center;color:#092c36;font-size:23px;font-weight:900}
+.brand h1{font-size:17px;margin:0}
+.brand p{margin:4px 0 0;color:#b8d1dc;font-size:12px}
+.top-tag{font-size:11px;letter-spacing:1px;border:1px solid #47717f;
+  padding:8px 11px;border-radius:20px;color:#c8e5e9}
+.hero{padding:26px 20px 19px;max-width:1320px;margin:auto}
+.eyebrow{color:var(--brand);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase}
+.hero h2{font-size:clamp(25px,4vw,37px);letter-spacing:-1px;margin:8px 0}
+.hero p{color:var(--muted);margin:0;line-height:1.6;max-width:760px;font-size:14px}
+.layout{max-width:1320px;margin:auto;padding:0 20px 35px;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.88fr);gap:20px;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:19px;
+  box-shadow:var(--shadow);overflow:hidden}
+.panel-head{padding:18px 20px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+.panel-head h3{font-size:15px;margin:0}
+.step{background:#e4f7f5;color:#087f8c;font-weight:900;font-size:10px;
+  padding:6px 9px;border-radius:8px}
+.panel-body{padding:20px}
+.section-title{font-size:11px;font-weight:900;color:#718197;
+  letter-spacing:1.2px;text-transform:uppercase;margin:3px 0 13px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field{min-width:0;display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+label{font-size:12px;font-weight:750;color:#34465d}
+input,select,textarea{width:100%;border:1px solid #dce5ee;border-radius:10px;
+  background:#fbfdff;padding:11px 12px;color:#17283d;outline:none;min-width:0}
+input:focus,select:focus,textarea:focus{border-color:#0a9b9b;
+  box-shadow:0 0 0 3px #0a9b9b15}
+textarea{resize:vertical;min-height:70px;line-height:1.5}
+.hint{font-size:10px;color:#8795a6;line-height:1.5}
+.rule{height:1px;background:var(--line);margin:20px 0}
+.segment{display:flex;gap:8px;flex-wrap:wrap}
+.segment button{flex:1;min-width:90px;border:1px solid var(--line);background:#f8fafc;
+  color:#506176;border-radius:10px;padding:10px;font-size:12px;font-weight:800}
+.segment button.active{background:#e5f7f5;border-color:#07948f;color:#087f8c}
+.color-row{display:flex;gap:10px;flex-wrap:wrap}
+.swatch{width:38px;height:38px;border-radius:12px;border:3px solid white;
+  box-shadow:0 0 0 1px #d4dce5;position:relative}
+.swatch.active{box-shadow:0 0 0 2px #087f8c}
+.swatch.active:after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;
+  color:white;font-weight:900;text-shadow:0 1px 4px #000}
+.range-line{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.range-line output{font-size:11px;color:var(--brand);font-weight:900}
+input[type=range]{padding:0;accent-color:var(--brand);box-shadow:none;border:0;background:transparent}
+.check-row{display:flex;align-items:flex-start;gap:9px;color:#5c6e82;font-size:12px;line-height:1.5}
+.check-row input{width:auto;margin-top:3px;accent-color:var(--brand)}
+.preview-wrap{padding:18px;background:
+  linear-gradient(45deg,#edf1f5 25%,transparent 25%),
+  linear-gradient(-45deg,#edf1f5 25%,transparent 25%),
+  linear-gradient(45deg,transparent 75%,#edf1f5 75%),
+  linear-gradient(-45deg,transparent 75%,#edf1f5 75%);
+  background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
+.canvas-stage{background:#fff;border:1px solid #e3e9ef;border-radius:15px;
+  min-height:260px;display:grid;place-items:center;padding:16px;overflow:hidden}
+#stampCanvas{display:block;width:100%;height:auto;max-height:440px;object-fit:contain}
+.preview-meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  padding:13px 2px 0;color:#738298;font-size:11px}
+.status-dot{display:inline-block;width:7px;height:7px;background:#14a78c;border-radius:50%;margin-right:6px}
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:18px}
+.btn{border:0;border-radius:11px;padding:13px 14px;font-size:12px;font-weight:850;
+  transition:transform .15s,filter .15s}
+.btn:hover{filter:brightness(.97);transform:translateY(-1px)}
+.btn-primary{background:linear-gradient(135deg,#078e91,#076c79);color:white}
+.btn-dark{background:#142f40;color:white}
+.btn-light{background:#edf3f7;color:#31475a}
+.btn-gold{background:#f8e9c9;color:#795014}
+.action-grid .wide{grid-column:1/-1}
+.note{margin:0 18px 18px;padding:12px;border-radius:11px;background:#fff8e8;
+  color:#80602a;font-size:11px;line-height:1.6;border:1px solid #f2e2bd}
+.footer{text-align:center;padding:19px;color:#8491a2;font-size:11px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);
+  background:#102b3b;color:white;padding:12px 18px;border-radius:12px;
+  box-shadow:0 10px 30px #0002;font-size:12px;opacity:0;pointer-events:none;
+  transition:.2s;z-index:5;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.preview-panel{grid-row:1}
+  .hero{padding-top:21px}}
+@media(max-width:480px){.layout{padding:0 11px 24px;gap:13px}
+  .hero{padding:22px 13px 17px}.panel-body{padding:15px}
+  .panel-head{padding:15px}.form-grid{gap:11px}
+  .preview-wrap{padding:10px}.canvas-stage{min-height:200px;padding:8px}
+  .action-grid{padding:12px}.topbar{padding:14px}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">K</div>
+    <div>
+      <h1>KISAN SEVA TOOLS</h1>
+      <p>CSC Stamp Maker Pro · Design Studio</p>
+    </div>
+  </div>
+  <div class="top-tag">✦ PROFESSIONAL STAMP DESIGNER</div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Business identity tools / 037</div>
+  <h2>Your Business. Your Stamp. <span style="color:#078b8d">Your Style.</span></h2>
+  <p>Create a clean, print-ready business stamp for your shop, service centre or office. Customize the layout, ink colour and text, then export a high-resolution transparent PNG.</p>
+</section>
+
+<main class="layout">
+  <section class="panel">
+    <div class="panel-head">
+      <h3>Configure your stamp</h3><span class="step">01 / EDIT</span>
+    </div>
+    <div class="panel-body">
+      <div class="section-title">Business information</div>
+      <div class="form-grid">
+        <div class="field full">
+          <label for="business">Business / Shop Name *</label>
+          <input id="business" maxlength="48" value="KAIF PAN SHOP" placeholder="Your business name">
+        </div>
+        <div class="field full">
+          <label for="subtitle">Subtitle / Service</label>
+          <input id="subtitle" maxlength="55" value="CSC & DIGITAL SERVICES" placeholder="e.g. Digital Service Centre">
+        </div>
+        <div class="field full">
+          <label for="address">Address</label>
+          <textarea id="address" maxlength="110" rows="2" placeholder="Shop address, village, district">At. Kamalwelli, Post Satpalli, Dist. Yavatmal</textarea>
+        </div>
+        <div class="field">
+          <label for="phone">Mobile / Contact</label>
+          <input id="phone" maxlength="25" placeholder="Optional contact number">
+        </div>
+        <div class="field">
+          <label for="registration">Reference / ID</label>
+          <input id="registration" maxlength="35" placeholder="Optional business reference">
+        </div>
+        <div class="field full">
+          <label for="custom">Additional stamp text</label>
+          <input id="custom" maxlength="55" placeholder="e.g. RECEIVED • VERIFIED • PAID">
+          <div class="hint">Only use wording that accurately describes your business and the purpose of the stamp.</div>
+        </div>
+      </div>
+
+      <div class="rule"></div>
+      <div class="section-title">Choose a stamp format</div>
+      <div class="segment" id="shapeChoices">
+        <button class="active" data-shape="rect">▰ Rectangle</button>
+        <button data-shape="round">◉ Round</button>
+        <button data-shape="compact">▪ Compact</button>
+      </div>
+
+      <div class="rule"></div>
+      <div class="section-title">Ink colour</div>
+      <div class="color-row" id="colorChoices">
+        <button class="swatch active" data-color="#174ea6" aria-label="Blue ink" title="Blue" style="background:#174ea6"></button>
+        <button class="swatch" data-color="#20252b" aria-label="Black ink" title="Black" style="background:#20252b"></button>
+        <button class="swatch" data-color="#b32632" aria-label="Red ink" title="Red" style="background:#b32632"></button>
+        <button class="swatch" data-color="#087a54" aria-label="Green ink" title="Green" style="background:#087a54"></button>
+      </div>
+
+      <div class="rule"></div>
+      <div class="section-title">Fine-tune design</div>
+      <div class="form-grid">
+        <div class="field full">
+          <div class="range-line"><label for="size">Text size</label><output id="sizeOut">100%</output></div>
+          <input id="size" type="range" min="75" max="125" value="100">
+        </div>
+        <div class="field full">
+          <div class="range-line"><label for="border">Border thickness</label><output id="borderOut">6 px</output></div>
+          <input id="border" type="range" min="2" max="12" value="6">
+        </div>
+        <div class="field">
+          <label for="font">Typeface</label>
+          <select id="font">
+            <option value="Arial">Clean Sans</option>
+            <option value="Georgia">Classic Serif</option>
+            <option value="Trebuchet MS">Modern Rounded</option>
+            <option value="Courier New">Monospace</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="layoutStyle">Text style</label>
+          <select id="layoutStyle">
+            <option value="bold">Bold business</option>
+            <option value="normal">Regular</option>
+            <option value="italic">Italic accent</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="rule"></div>
+      <label class="check-row">
+        <input type="checkbox" id="transparent" checked>
+        <span><strong>Transparent background</strong><br>Recommended for PNG stamps and placement on documents.</span>
+      </label>
+      <div style="height:12px"></div>
+      <label class="check-row">
+        <input type="checkbox" id="uppercase" checked>
+        <span><strong>Uppercase business name</strong><br>Use a consistent professional stamp appearance.</span>
+      </label>
+    </div>
+  </section>
+
+  <section class="panel preview-panel">
+    <div class="panel-head">
+      <h3>Live stamp preview</h3><span class="step">02 / PREVIEW</span>
+    </div>
+    <div class="preview-wrap">
+      <div class="canvas-stage">
+        <canvas id="stampCanvas" width="1200" height="650" aria-label="Your stamp preview"></canvas>
+      </div>
+      <div class="preview-meta">
+        <span><i class="status-dot"></i>Live preview</span>
+        <span id="dimensions">1200 × 650 px canvas</span>
+      </div>
+    </div>
+    <div class="action-grid">
+      <button class="btn btn-primary" id="download">⬇ Download PNG</button>
+      <button class="btn btn-dark" id="print">▣ Print stamp</button>
+      <button class="btn btn-light" id="reset">↺ Reset design</button>
+      <button class="btn btn-gold" id="copyText">▤ Copy stamp text</button>
+      <button class="btn btn-light wide" id="saveSettings">♡ Save design on this device</button>
+      <button class="btn btn-light wide" id="loadSettings">↻ Load saved design</button>
+    </div>
+    <p class="note">⚠️ This tool creates a business stamp design only. It does not create government authorization, registration, or certification. Do not imitate official government, bank, or other third-party seals. Check the stamp's dimensions and ink requirements with your printer before production.</p>
+  </section>
+</main>
+
+<footer class="footer">Kisan Seva Tools · CSC Stamp Maker Pro · Your data stays in this browser.</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  const canvas = $("stampCanvas");
+  const ctx = canvas.getContext("2d");
+  let shape = "rect";
+  let ink = "#174ea6";
+  let toastTimer;
+
+  const ids = ["business","subtitle","address","phone","registration","custom",
+    "size","border","font","layoutStyle","transparent","uppercase"];
+
+  function val(id){ return $(id).value.trim(); }
+  function checked(id){ return $(id).checked; }
+
+  function showToast(message){
+    const el = $("toast");
+    el.textContent = message;
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove("show"), 2400);
+  }
+
+  function linesFrom(text){
+    return String(text || "").split(/\n+/).map(s => s.trim()).filter(Boolean);
+  }
+
+  function wrapText(text, maxWidth, font){
+    ctx.font = font;
+    const words = String(text).split(/\s+/).filter(Boolean);
+    const lines = [];
+    let line = "";
+    for(const word of words){
+      const test = line ? line + " " + word : word;
+      if(ctx.measureText(test).width > maxWidth && line){
+        lines.push(line);
+        line = word;
+      }else{
+        line = test;
+      }
+    }
+    if(line) lines.push(line);
+    return lines;
+  }
+
+  function fitText(text, maxWidth, startingSize, weight, family){
+    let size = startingSize;
+    while(size > 15){
+      ctx.font = `${weight} ${size}px "${family}"`;
+      if(ctx.measureText(text).width <= maxWidth) break;
+      size -= 2;
+    }
+    return size;
+  }
+
+  function render(){
+    const isRound = shape === "round";
+    const isCompact = shape === "compact";
+    canvas.width = isRound ? 900 : isCompact ? 1100 : 1200;
+    canvas.height = isRound ? 900 : isCompact ? 430 : 650;
+
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0,0,W,H);
+    if(!checked("transparent")){
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0,0,W,H);
+    }
+
+    const nameRaw = val("business") || "YOUR BUSINESS NAME";
+    const name = checked("uppercase") ? nameRaw.toUpperCase() : nameRaw;
+    const subtitle = val("subtitle");
+    const addressLines = wrapText(val("address"), W * (isRound ? .65 : .80),
+      `500 ${isRound ? 30 : 28}px "${val("font")}"`);
+    const phone = val("phone");
+    const reference = val("registration");
+    const custom = val("custom");
+    const borderWidth = Number(val("border"));
+    const scale = Number(val("size")) / 100;
+    const family = val("font");
+    const style = val("layoutStyle");
+    const weight = style === "normal" ? "500" : "800";
+    const italic = style === "italic" ? "italic " : "";
+
+    ctx.strokeStyle = ink;
+    ctx.fillStyle = ink;
+    ctx.lineWidth = borderWidth * 2;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+
+    const margin = isRound ? 52 : isCompact ? 30 : 48;
+
+    if(isRound){
+      ctx.beginPath();
+      ctx.arc(W/2,H/2,W/2-margin,0,Math.PI*2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(W/2,H/2,W/2-margin-18,0,Math.PI*2);
+      ctx.lineWidth = Math.max(2,borderWidth*.8);
+      ctx.stroke();
+    }else{
+      const radius = isCompact ? 22 : 28;
+      ctx.beginPath();
+      ctx.roundRect(margin,margin,W-margin*2,H-margin*2,radius);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.roundRect(margin+13,margin+13,W-(margin+13)*2,H-(margin+13)*2,Math.max(8,radius-8));
+      ctx.lineWidth = Math.max(2,borderWidth*.7);
+      ctx.stroke();
+    }
+
+    const left = isRound ? W*.18 : margin+34;
+    const right = isRound ? W*.82 : W-margin-34;
+    const maxWidth = right-left;
+    const centerX = W/2;
+
+    const items = [];
+    const add = (text, size, weightValue, gap, italicValue=false) => {
+      if(text) items.push({text,size,weight:weightValue,gap,italic:italicValue});
+    };
+
+    if(isCompact){
+      add(name,52*scale,weight,9,style==="italic");
+      add(subtitle,29*scale,"700",7);
+      if(custom) add(custom,27*scale,"700",7);
+      if(phone) add("Mobile: "+phone,24*scale,"500",5);
+      if(reference) add("Ref: "+reference,21*scale,"500",5);
+      if(addressLines.length) add(addressLines.join(" • "),21*scale,"500",0);
+    }else{
+      add(name,(isRound?51:52)*scale,weight,isRound?18:13,style==="italic");
+      add(subtitle,(isRound?29:27)*scale,"700",isRound?17:12);
+      if(custom) add(custom,25*scale,"800",13);
+      if(addressLines.length) add(addressLines.join(" | "),22*scale,"500",9);
+      if(phone) add("Mobile: "+phone,21*scale,"600",8);
+      if(reference) add("Ref: "+reference,19*scale,"600",0);
+    }
+
+    // Keep the entire layout within the printable area.
+    let totalHeight = 0;
+    items.forEach((item,i) => {
+      const maxSize = fitText(item.text,maxWidth,item.size,item.weight,family);
+      item.finalSize = maxSize;
+      item.font = `${item.italic ? "italic " : ""}${item.weight} ${maxSize}px "${family}"`;
+      ctx.font = item.font;
+      item.width = ctx.measureText(item.text).width;
+      item.height = maxSize * 1.25;
+      totalHeight += item.height + item.gap;
+    });
+
+    const top = isRound ? H*.28 : isCompact ? H*.22 : H*.20;
+    const bottom = isRound ? H*.72 : isCompact ? H*.78 : H*.80;
+    const available = bottom-top;
+    if(totalHeight > available){
+      const factor = available/totalHeight;
+      items.forEach(item=>{
+        item.finalSize = Math.max(14,item.finalSize*factor);
+        item.font = `${item.italic ? "italic " : ""}${item.weight} ${item.finalSize}px "${family}"`;
+        item.height = item.finalSize*1.25;
+        item.gap *= factor;
+      });
+      totalHeight = items.reduce((sum,item)=>sum+item.height+item.gap,0);
+    }
+
+    let y = H/2-totalHeight/2;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    items.forEach(item=>{
+      y += item.height/2;
+      ctx.font = item.font;
+      ctx.fillText(item.text,centerX,y,maxWidth);
+      y += item.height/2+item.gap;
+    });
+
+    $("sizeOut").textContent = val("size")+"%";
+    $("borderOut").textContent = val("border")+" px";
+    $("dimensions").textContent = `${W} × ${H} px canvas`;
+  }
+
+  function getStampText(){
+    const parts = [
+      val("business"),val("subtitle"),val("address"),val("phone"),
+      val("registration"),val("custom")
+    ].filter(Boolean);
+    return parts.join("\n");
+  }
+
+  function fileName(){
+    const name = (val("business") || "business-stamp")
+      .toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+    return (name || "business-stamp")+"-stamp.png";
+  }
+
+  function downloadPNG(){
+    render();
+    canvas.toBlob(blob=>{
+      if(!blob){showToast("Could not export the image. Try again.");return;}
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href=url;
+      a.download=fileName();
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),1500);
+      showToast("High-resolution PNG export started.");
+    },"image/png");
+  }
+
+  function printStamp(){
+    render();
+    const image = canvas.toDataURL("image/png");
+    const w = window.open("","_blank");
+    if(!w){showToast("Allow pop-ups to print the stamp.");return;}
+    w.document.write(`<!DOCTYPE html><html><head><title>Business Stamp</title>
+      <style>
+      *{box-sizing:border-box}
+      body{margin:0;padding:20mm;font-family:Arial,sans-serif;text-align:center}
+      img{display:block;width:min(100%,100mm);height:auto;max-height:180mm;
+      object-fit:contain;margin:20mm auto}
+      p{font-size:10px;color:#555}
+      @page{margin:12mm}
+      @media print{p{display:none}}
+      </style></head><body>
+      <img src="${image}" alt="Business stamp">
+      <p>Check print scale and ink requirements before production.</p>
+      <script>window.onload=()=>setTimeout(()=>window.print(),300);<\/script>
+      </body></html>`);
+    w.document.close();
+  }
+
+  function reset(){
+    $("business").value="KAIF PAN SHOP";
+    $("subtitle").value="CSC & DIGITAL SERVICES";
+    $("address").value="At. Kamalwelli, Post Satpalli, Dist. Yavatmal";
+    $("phone").value="";
+    $("registration").value="";
+    $("custom").value="";
+    $("size").value=100;
+    $("border").value=6;
+    $("font").value="Arial";
+    $("layoutStyle").value="bold";
+    $("transparent").checked=true;
+    $("uppercase").checked=true;
+    shape="rect";
+    ink="#174ea6";
+    document.querySelectorAll("[data-shape]").forEach(b=>b.classList.toggle("active",b.dataset.shape===shape));
+    document.querySelectorAll("[data-color]").forEach(b=>b.classList.toggle("active",b.dataset.color===ink));
+    render();
+    showToast("Design reset to the default template.");
+  }
+
+  function saveSettings(){
+    try{
+      const settings={};
+      ids.forEach(id=>{
+        const el=$(id);
+        settings[id]=el.type==="checkbox"?el.checked:el.value;
+      });
+      settings.shape=shape;
+      settings.ink=ink;
+      localStorage.setItem("kst_stamp_maker_v1",JSON.stringify(settings));
+      showToast("Design saved in this browser.");
+    }catch(e){
+      showToast("Browser storage is unavailable. You can still download the PNG.");
+    }
+  }
+
+  function loadSettings(){
+    try{
+      const raw=localStorage.getItem("kst_stamp_maker_v1");
+      if(!raw){showToast("No saved design found on this device.");return;}
+      const s=JSON.parse(raw);
+      ids.forEach(id=>{
+        if(s[id]===undefined)return;
+        if($(id).type==="checkbox")$(id).checked=Boolean(s[id]);
+        else $(id).value=s[id];
+      });
+      shape=["rect","round","compact"].includes(s.shape)?s.shape:"rect";
+      ink=["#174ea6","#20252b","#b32632","#087a54"].includes(s.ink)?s.ink:"#174ea6";
+      document.querySelectorAll("[data-shape]").forEach(b=>b.classList.toggle("active",b.dataset.shape===shape));
+      document.querySelectorAll("[data-color]").forEach(b=>b.classList.toggle("active",b.dataset.color===ink));
+      render();
+      showToast("Saved design loaded.");
+    }catch(e){showToast("Could not load saved design.");}
+  }
+
+  ids.forEach(id=>{
+    $(id).addEventListener("input",render);
+    $(id).addEventListener("change",render);
+  });
+
+  document.querySelectorAll("[data-shape]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      shape=btn.dataset.shape;
+      document.querySelectorAll("[data-shape]").forEach(b=>b.classList.toggle("active",b===btn));
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-color]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      ink=btn.dataset.color;
+      document.querySelectorAll("[data-color]").forEach(b=>b.classList.toggle("active",b===btn));
+      render();
+    });
+  });
+
+  $("download").addEventListener("click",downloadPNG);
+  $("print").addEventListener("click",printStamp);
+  $("reset").addEventListener("click",reset);
+  $("saveSettings").addEventListener("click",saveSettings);
+  $("loadSettings").addEventListener("click",loadSettings);
+  $("copyText").addEventListener("click",async()=>{
+    const text=getStampText();
+    if(!text){showToast("Enter some stamp text first.");return;}
+    try{
+      await navigator.clipboard.writeText(text);
+      showToast("Stamp text copied.");
+    }catch(e){
+      const area=document.createElement("textarea");
+      area.value=text;
+      document.body.appendChild(area);
+      area.select();
+      const ok=document.execCommand("copy");
+      area.remove();
+      showToast(ok?"Stamp text copied.":"Copy was blocked by the browser.");
+    }
+  });
+
+  render();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
