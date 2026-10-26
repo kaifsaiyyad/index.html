@@ -1,55 +1,497 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mini Documents Album | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Mini Documents Album</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: ID Card & Print • Icon: 🗂️</div></section><section class="panel"><label>Select image/file</label><input id="file" type="file" accept="image/*" multiple><div id="preview"></div><button onclick="window.print()">Print selected document album</button></section><section class="panel"><h2>Preview / output</h2><div id="out"></div></section>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#09111e">
+<title>Mini Documents Album Pro | Kisan Seva Tools</title>
+<style>
+:root{--bg:#09111e;--panel:#111d2e;--panel2:#17273c;--line:#2a3c54;--text:#f2f6ff;--muted:#98abc2;--mint:#65e7c5;--blue:#83aaff;--gold:#f6cd85;--red:#ff94a4}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 15% -10%,#244d59 0,transparent 42%),var(--bg);color:var(--text);font-family:Inter,"Segoe UI",Arial,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:10;background:#09111eea;backdrop-filter:blur(15px);border-bottom:1px solid #ffffff12;padding:12px 20px}
+.nav{max-width:1450px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:950;letter-spacing:.6px}
+.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--mint));color:#071520;display:grid;place-items:center;font-size:23px}
+.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:1.7px;margin-top:4px}
+.badge{font-size:9px;font-weight:900;color:var(--mint);border:1px solid #65e7c555;border-radius:30px;padding:8px 11px}
+main{max-width:1450px;margin:auto;padding:25px 17px 45px}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;margin:8px 0 22px}
+.eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:var(--mint)}
+h1{font-size:clamp(29px,4vw,44px);line-height:1.1;letter-spacing:-1px;margin:10px 0}
+.hero p{font-size:12px;line-height:1.75;color:var(--muted);max-width:720px;margin:0}
+.btn{border:1px solid var(--line);border-radius:10px;background:#1c2c42;color:var(--text);padding:10px 13px;font-size:11px;font-weight:850;transition:.15s}
+.btn:hover{border-color:var(--mint);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(120deg,var(--blue),var(--mint));border:0;color:#071521}
+.btn.danger{color:var(--red);border-color:#ff94a433}
+.btn.small{padding:7px 9px;font-size:10px}
+.btn.full{width:100%}
+.layout{display:grid;grid-template-columns:275px minmax(0,1fr);gap:15px;align-items:start}
+.panel{min-width:0;background:linear-gradient(145deg,#142238,#0f1929);border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 18px 50px #0002}
+.panelhead{padding:15px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.panelhead h2{font-size:13px;margin:0}
+.kicker{font-size:9px;font-weight:900;letter-spacing:1.4px;color:var(--mint)}
+.pad{padding:14px}
+.field{margin-bottom:12px}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:10px;font-weight:850;color:#c3d0e2;margin-bottom:6px}
+input,select,textarea{width:100%;min-width:0;background:#091421;border:1px solid var(--line);border-radius:9px;padding:10px;color:var(--text);font-size:12px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--mint)}
+input[type=file]{font-size:10px}
+input[type=checkbox]{width:auto;accent-color:var(--mint)}
+textarea{resize:vertical;min-height:65px}
+.drop{padding:18px 12px;border:1px dashed #526b88;border-radius:13px;text-align:center;background:#0b1726}
+.drop .icon{font-size:31px;margin-bottom:8px}
+.drop p{font-size:10px;line-height:1.6;color:var(--muted);margin:7px 0 12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-bottom:15px}
+.stat{min-width:0;padding:12px;border:1px solid var(--line);background:#ffffff04;border-radius:12px}
+.stat .symbol{font-size:17px;margin-bottom:8px}
+.stat small{display:block;font-size:9px;color:var(--muted);margin-bottom:6px}
+.stat strong{font-size:19px;overflow-wrap:anywhere}
+.stat em{display:block;font-style:normal;color:var(--muted);font-size:9px;margin-top:4px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:13px}
+.search{position:relative;flex:1;min-width:170px}
+.search input{padding-left:34px}
+.search span{position:absolute;left:12px;top:10px;color:var(--muted)}
+.filters{display:flex;gap:7px;flex-wrap:wrap}
+.filters select{width:auto;max-width:175px}
+.documents{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.doc{min-width:0;position:relative;background:#101c2c;border:1px solid var(--line);border-radius:13px;overflow:hidden;transition:.16s}
+.doc:hover{transform:translateY(-2px);border-color:#58758c}
+.thumb{height:145px;background:#e9eef5;position:relative;display:grid;place-items:center;overflow:hidden;cursor:pointer}
+.thumb img{width:100%;height:100%;object-fit:contain}
+.docicon{font-size:45px;color:#33465e}
+.typepill{position:absolute;left:8px;top:8px;border-radius:6px;padding:5px 7px;font-size:8px;font-weight:950;background:#091421e8;color:white}
+.star{position:absolute;right:8px;top:8px;border:1px solid #ffffff66;border-radius:8px;width:29px;height:29px;background:#091421d9;color:#fff;font-size:15px}
+.star.active{color:var(--gold)}
+.docbody{padding:11px}
+.docbody h3{font-size:12px;line-height:1.45;margin:0 0 6px;overflow-wrap:anywhere}
+.docbody p{font-size:10px;line-height:1.6;color:var(--muted);margin:0;overflow-wrap:anywhere}
+.docmeta{display:flex;justify-content:space-between;gap:6px;margin-top:10px;font-size:9px;color:var(--muted)}
+.docactions{display:flex;gap:6px;margin-top:11px}
+.docactions .btn{flex:1;min-width:0;padding:8px 5px}
+.empty{border:1px dashed #3a506c;border-radius:14px;text-align:center;padding:38px 16px;color:var(--muted);grid-column:1/-1}
+.empty .big{font-size:39px}
+.empty h3{font-size:15px;color:var(--text);margin:12px 0 7px}
+.empty p{font-size:11px;line-height:1.7;max-width:350px;margin:0 auto 15px}
+.status{font-size:10px;line-height:1.65;color:var(--muted);margin-top:12px}
+.note{font-size:10px;line-height:1.75;color:var(--muted);border:1px solid #ffffff12;background:#ffffff04;border-radius:10px;padding:11px;margin-top:14px}
+.privacy{color:var(--mint)}
+.modal{position:fixed;inset:0;z-index:30;background:#02060bdc;display:none;align-items:center;justify-content:center;padding:14px}
+.modal.open{display:flex}
+.dialog{width:min(650px,100%);max-height:92vh;overflow:auto;background:#111d2e;border:1px solid #3a506b;border-radius:17px;box-shadow:0 25px 100px #0008}
+.dialoghead{position:sticky;top:0;z-index:2;background:#111d2ef2;backdrop-filter:blur(12px);display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.dialoghead h2{font-size:14px;margin:0}
+.dialogbody{padding:16px}
+.previewbox{display:grid;place-items:center;background:#08121f;border:1px solid var(--line);border-radius:11px;min-height:180px;padding:10px;margin-bottom:15px}
+.previewbox img{display:block;max-width:100%;max-height:48vh;object-fit:contain}
+.previewbox iframe{width:100%;height:50vh;border:0;background:white}
+.dialogactions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.toast{position:fixed;z-index:50;bottom:18px;left:50%;transform:translate(-50%,16px);opacity:0;pointer-events:none;transition:.2s;background:#20344b;border:1px solid #49647e;border-radius:11px;padding:12px 16px;font-size:12px;max-width:92vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.hidden{display:none!important}
+footer{text-align:center;font-size:10px;line-height:1.8;color:#7f91aa;padding:0 15px 24px}
+@media(max-width:1000px){.documents{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:245px minmax(0,1fr)}}
+@media(max-width:760px){main{padding:19px 10px 30px}.layout{grid-template-columns:1fr}.layout>aside{order:1}.layout>section{order:2}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.thumb{height:130px}}
+@media(max-width:420px){.documents{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.docbody{padding:8px}.docactions{gap:4px}.docactions .btn{font-size:9px}.thumb{height:105px}.filters{width:100%}.filters select{flex:1;max-width:none}.brand{font-size:11px}.badge{font-size:8px}.stats{gap:6px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="nav">
+  <div class="brand"><div class="logo">▤</div><div>KISAN SEVA TOOLS<small>MINI DOCUMENTS ALBUM PRO</small></div></div>
+  <span class="badge">✦ PRIVATE VAULT</span>
+ </div>
+</header>
+
+<main>
+ <div class="hero">
+  <div>
+   <div class="eyebrow">DOCUMENT ORGANISER / TOOL 21</div>
+   <h1>Your documents.<br><span style="color:var(--mint)">One organised place.</span></h1>
+   <p>Organise document scans, receipts, certificates and PDFs. Search your collection, add categories and expiry dates, mark favourites, and export a backup when needed.</p>
+  </div>
+ </div>
+
+ <div class="stats">
+  <div class="stat"><div class="symbol">▤</div><small>ALL DOCUMENTS</small><strong id="totalStat">0</strong><em>Saved entries</em></div>
+  <div class="stat"><div class="symbol">✦</div><small>FAVOURITES</small><strong id="favStat">0</strong><em>Quick access</em></div>
+  <div class="stat"><div class="symbol">◷</div><small>EXPIRING SOON</small><strong id="expiryStat">0</strong><em>Within 30 days</em></div>
+  <div class="stat"><div class="symbol">▧</div><small>LOCAL STORAGE</small><strong id="storageStat">Ready</strong><em>Browser database</em></div>
+ </div>
+
+ <div class="layout">
+  <aside class="panel">
+   <div class="panelhead"><h2>Add a document</h2><span class="kicker">01 / SAVE</span></div>
+   <div class="pad">
+    <form id="addForm">
+     <div class="field">
+      <div class="drop">
+       <div class="icon">▧</div>
+       <strong style="font-size:12px">Choose document files</strong>
+       <p>Images or PDF files from your phone or computer. Multiple files can be selected.</p>
+       <input id="files" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" multiple required>
+      </div>
+     </div>
+     <div class="field"><label for="title">Document title</label><input id="title" maxlength="100" placeholder="e.g. PAN Card, Marksheet"></div>
+     <div class="field"><label for="category">Category</label>
+      <select id="category">
+       <option>Identity</option><option>Education</option><option>Banking</option><option>Certificates</option><option>Receipts & Bills</option><option>Business</option><option>Medical</option><option>Property</option><option>Other</option>
+      </select>
+     </div>
+     <div class="field"><label for="issued">Issue date (optional)</label><input id="issued" type="date"></div>
+     <div class="field"><label for="expiry">Expiry date (optional)</label><input id="expiry" type="date"></div>
+     <div class="field"><label for="notes">Notes (optional)</label><textarea id="notes" maxlength="500" placeholder="A short description or reminder"></textarea></div>
+     <label style="display:flex;align-items:flex-start;gap:8px;line-height:1.6;margin:0 0 13px"><input type="checkbox" id="favourite" style="margin-top:2px"> Add to favourites</label>
+     <button class="btn primary full" type="submit" id="saveBtn">＋ Save to album</button>
+    </form>
+    <div class="status" id="saveStatus">Your files are saved in this browser's local database.</div>
+    <div class="note"><span class="privacy">Privacy note:</span> files are not intentionally uploaded to a server. This is not encrypted storage; avoid using a shared device for sensitive documents. Back up your files and never rely on browser storage as your only copy.</div>
+   </div>
+  </aside>
+
+  <section class="panel">
+   <div class="panelhead"><h2>My document collection</h2><span class="kicker">02 / LIBRARY</span></div>
+   <div class="pad">
+    <div class="toolbar">
+     <div class="search"><span>⌕</span><input id="search" type="search" placeholder="Search titles, categories, notes..."></div>
+     <div class="filters">
+      <select id="filterCategory" aria-label="Filter by category">
+       <option value="">All categories</option><option>Identity</option><option>Education</option><option>Banking</option><option>Certificates</option><option>Receipts & Bills</option><option>Business</option><option>Medical</option><option>Property</option><option>Other</option>
+      </select>
+      <select id="sort" aria-label="Sort documents"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="az">Title A–Z</option><option value="expiry">Nearest expiry</option></select>
+     </div>
+    </div>
+    <div class="toolbar">
+     <div style="font-size:10px;color:var(--muted)" id="resultCount">0 documents</div>
+     <div class="filters">
+      <button class="btn small" id="favFilter">☆ Favourites</button>
+      <button class="btn small" id="exportBtn">↓ Backup</button>
+      <button class="btn small" id="importBtn">↑ Restore</button>
+      <input type="file" id="importFile" accept=".json,application/json" class="hidden">
+     </div>
+    </div>
+    <div class="documents" id="documents">
+     <div class="empty"><div class="big">▤</div><h3>Your album is ready</h3><p>Add your first document using the form. Your saved entries will appear here.</p></div>
+    </div>
+    <div class="status" id="libraryStatus" aria-live="polite">Opening local document database...</div>
+   </div>
+  </section>
+ </div>
+</main>
+
+<footer>Kisan Seva Tools · Mini Documents Album Pro<br>Keep a separate secure backup of important documents.</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+ <div class="dialog">
+  <div class="dialoghead"><h2 id="modalTitle">Document details</h2><button class="btn small" id="closeModal">✕ Close</button></div>
+  <div class="dialogbody" id="modalBody"></div>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
+
 <script>
-const fi=document.querySelector('#file');
-if(fi)fi.addEventListener('change',()=>{let p=document.querySelector('#preview');if(!p)return;p.innerHTML='';[...fi.files].forEach(f=>{if(f.type.startsWith('image/')){let im=document.createElement('img');im.className='preview';im.style.maxWidth='160px';im.style.margin='6px';im.src=URL.createObjectURL(f);p.appendChild(im)}})});
-function loadImgs(){return Promise.all([...document.querySelector('#file').files].map(f=>new Promise((res,rej)=>{let im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=URL.createObjectURL(f)})))}
-function dl(canvas,name='output.png',type='image/png'){let a=document.createElement('a');a.href=canvas.toDataURL(type,.92);a.download=name;a.click()}
-function resizeImg(){loadImgs().then(([im])=>{let c=document.createElement('canvas');c.width=+document.querySelector('#w').value;c.height=+document.querySelector('#h').value;c.getContext('2d').drawImage(im,0,0,c.width,c.height);document.querySelector('#out').replaceChildren(c);dl(c,'resized.png')})}
-function convertImg(){loadImgs().then(([im])=>{let c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);let t=document.querySelector('#fmt').value;dl(c,'converted.'+(t==='image/jpeg'?'jpg':t==='image/png'?'png':'webp'),t)})}
-function cropImg(){loadImgs().then(([im])=>{let s=Math.min(im.naturalWidth,im.naturalHeight),c=document.createElement('canvas');c.width=s;c.height=s;c.getContext('2d').drawImage(im,(im.naturalWidth-s)/2,(im.naturalHeight-s)/2,s,s,0,0,s,s);document.querySelector('#out').replaceChildren(c);dl(c,'crop.png')})}
-function makeSheet(){loadImgs().then(([im])=>{let n=+document.querySelector('#copies').value,c=document.createElement('canvas');c.width=1240;c.height=1754;let x=c.getContext('2d');x.fillStyle='white';x.fillRect(0,0,c.width,c.height);let cols=2,rows=Math.ceil(n/cols),cw=560,ch= Math.min(700,1600/rows);for(let i=0;i<n;i++)x.drawImage(im,30+(i%cols)*610,30+Math.floor(i/cols)*ch,cw,ch*.8);document.querySelector('#out').replaceChildren(c);dl(c,'A4-photo-sheet.png')})}
-function makePhoto(){let v=document.querySelector('#size').value;document.querySelector('#copies').value='4';makeSheet()}
-function joinImages(){loadImgs().then(ims=>{let w=Math.max(...ims.map(i=>i.naturalWidth)),h=ims.reduce((s,i)=>s+i.naturalHeight,0),c=document.createElement('canvas');c.width=w;c.height=h;let y=0;ims.forEach(i=>{c.getContext('2d').drawImage(i,0,y);y+=i.naturalHeight});document.querySelector('#out').replaceChildren(c);dl(c,'joined.png')})}
-</script>
-</main><script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+"use strict";
+const $=id=>document.getElementById(id);
+const DB_NAME="KisanSevaMiniAlbumDB";
+const STORE="documents";
+let db=null,items=[],favouritesOnly=false,activeObjectUrl=null;
+const MAX_FILE=15*1024*1024;
+const MAX_TOTAL=80*1024*1024;
+const allowed=["image/jpeg","image/png","image/webp","application/pdf"];
+
+function toast(msg){
+ const el=$("toast");el.textContent=msg;el.classList.add("show");
+ clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove("show"),2800);
+}
+function esc(s){
+ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function makeId(){
+ return Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,10);
+}
+function dateText(s){
+ if(!s)return "Not set";
+ const d=new Date(s+"T00:00:00");
+ return Number.isNaN(d.getTime())?s:d.toLocaleDateString();
+}
+function fileSize(n){
+ if(n<1024)return n+" B";
+ if(n<1048576)return (n/1024).toFixed(1)+" KB";
+ return (n/1048576).toFixed(2)+" MB";
+}
+function openDB(){
+ return new Promise((resolve,reject)=>{
+  if(!("indexedDB" in window)){reject(Error("IndexedDB is not supported by this browser."));return;}
+  const req=indexedDB.open(DB_NAME,1);
+  req.onupgradeneeded=()=>{
+   const d=req.result;
+   if(!d.objectStoreNames.contains(STORE)){
+    const s=d.createObjectStore(STORE,{keyPath:"id"});
+    s.createIndex("createdAt","createdAt",{unique:false});
+   }
+  };
+  req.onsuccess=()=>resolve(req.result);
+  req.onerror=()=>reject(req.error||Error("Could not open the local database."));
+  req.onblocked=()=>reject(Error("Database opening is blocked by another tab. Close other copies of this tool and retry."));
+ });
+}
+function transaction(mode,work){
+ return new Promise((resolve,reject)=>{
+  if(!db){reject(Error("Local database is not ready."));return;}
+  const tx=db.transaction(STORE,mode),store=tx.objectStore(STORE);
+  let result;
+  try{result=work(store);}catch(e){reject(e);return;}
+  tx.oncomplete=()=>resolve(result);
+  tx.onerror=()=>reject(tx.error||Error("Database operation failed."));
+  tx.onabort=()=>reject(tx.error||Error("Database operation was cancelled."));
+ });
+}
+async function loadAll(){
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction(STORE,"readonly"),req=tx.objectStore(STORE).getAll();
+  req.onsuccess=()=>resolve(req.result||[]);
+  req.onerror=()=>reject(req.error||Error("Could not load documents."));
+ });
+}
+async function saveItem(item){
+ return transaction("readwrite",s=>s.put(item));
+}
+async function deleteItem(id){
+ return transaction("readwrite",s=>s.delete(id));
+}
+async function refresh(){
+ items=await loadAll();
+ items.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+ render();
+ $("libraryStatus").textContent="Local database ready · "+items.length+" saved item(s).";
+}
+function getFiltered(){
+ const q=$("search").value.trim().toLowerCase();
+ const cat=$("filterCategory").value;
+ const sort=$("sort").value;
+ let list=items.filter(d=>{
+  const text=[d.title,d.category,d.notes,d.name].join(" ").toLowerCase();
+  return (!q||text.includes(q))&&(!cat||d.category===cat)&&(!favouritesOnly||d.favourite);
+ });
+ if(sort==="newest")list.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+ if(sort==="oldest")list.sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+ if(sort==="az")list.sort((a,b)=>(a.title||"").localeCompare(b.title||""));
+ if(sort==="expiry")list.sort((a,b)=>{
+  if(!a.expiry)return 1;if(!b.expiry)return -1;return a.expiry.localeCompare(b.expiry);
+ });
+ return list;
+}
+function isExpiring(d){
+ if(!d.expiry)return false;
+ const today=new Date();today.setHours(0,0,0,0);
+ const exp=new Date(d.expiry+"T00:00:00");
+ const days=(exp-today)/86400000;
+ return days>=0&&days<=30;
+}
+function isExpired(d){
+ if(!d.expiry)return false;
+ return new Date(d.expiry+"T00:00:00")<new Date(new Date().setHours(0,0,0,0));
+}
+function render(){
+ $("totalStat").textContent=items.length;
+ $("favStat").textContent=items.filter(d=>d.favourite).length;
+ $("expiryStat").textContent=items.filter(isExpiring).length;
+ $("storageStat").textContent=db?"Ready":"Offline";
+ const list=getFiltered(),box=$("documents");box.innerHTML="";
+ $("resultCount").textContent=list.length+" document"+(list.length===1?"":"s");
+ $("favFilter").classList.toggle("primary",favouritesOnly);
+ if(!list.length){
+  const e=document.createElement("div");e.className="empty";
+  e.innerHTML='<div class="big">⌕</div><h3>'+(items.length?"No matching documents":"Your album is empty")+'</h3><p>'+(items.length?"Try another search or category filter.":"Add an image or PDF to start building your document collection.")+'</p>';
+  box.append(e);return;
+ }
+ list.forEach(d=>{
+  const card=document.createElement("article");card.className="doc";
+  const thumb=document.createElement("div");thumb.className="thumb";thumb.title="Open document";
+  if(d.type==="application/pdf"){
+   thumb.innerHTML='<div class="docicon">▤</div><span style="position:absolute;bottom:10px;font-size:10px;color:#33465e;font-weight:900">PDF DOCUMENT</span>';
+  }else{
+   const img=document.createElement("img");img.alt=d.title;img.loading="lazy";
+   img.src=URL.createObjectURL(d.blob);thumb.append(img);
+   img.onload=()=>URL.revokeObjectURL(img.src);
+   img.onerror=()=>{img.remove();thumb.insertAdjacentHTML("beforeend",'<span class="docicon">▧</span>');};
+  }
+  thumb.insertAdjacentHTML("beforeend",'<span class="typepill">'+(d.type==="application/pdf"?"PDF":"IMAGE")+'</span>');
+  const star=document.createElement("button");star.className="star"+(d.favourite?" active":"");star.textContent=d.favourite?"★":"☆";star.title="Toggle favourite";
+  star.addEventListener("click",e=>{e.stopPropagation();toggleFavourite(d.id);});
+  thumb.append(star);thumb.addEventListener("click",()=>openDetail(d.id));
+  const body=document.createElement("div");body.className="docbody";
+  const title=document.createElement("h3");title.textContent=d.title||d.name||"Untitled document";
+  const desc=document.createElement("p");desc.textContent=d.category+(d.notes?" · "+d.notes:"");
+  const meta=document.createElement("div");meta.className="docmeta";
+  const date=document.createElement("span");date.textContent=new Date(d.createdAt).toLocaleDateString();
+  const size=document.createElement("span");size.textContent=fileSize(d.size||0);
+  meta.append(date,size);
+  body.append(title,desc,meta);
+  if(d.expiry){
+   const ex=document.createElement("p");ex.style.marginTop="8px";
+   ex.style.color=isExpired(d)?"var(--red)":isExpiring(d)?"var(--gold)":"var(--muted)";
+   ex.textContent=(isExpired(d)?"Expired: ":isExpiring(d)?"Expires soon: ":"Expiry: ")+dateText(d.expiry);
+   body.append(ex);
+  }
+  const actions=document.createElement("div");actions.className="docactions";
+  const view=document.createElement("button");view.className="btn";view.textContent="Open";view.addEventListener("click",()=>openDetail(d.id));
+  const del=document.createElement("button");del.className="btn danger";del.textContent="Delete";del.addEventListener("click",()=>removeItem(d.id));
+  actions.append(view,del);body.append(actions);
+  card.append(thumb,body);box.append(card);
+ });
+}
+async function toggleFavourite(id){
+ const d=items.find(x=>x.id===id);if(!d)return;
+ d.favourite=!d.favourite;await saveItem(d);await refresh();
+}
+async function removeItem(id){
+ const d=items.find(x=>x.id===id);if(!d)return;
+ if(!confirm("Delete \""+d.title+"\" from this browser's album? This cannot be undone unless you have a backup."))return;
+ try{await deleteItem(id);await refresh();toast("Document deleted.");}
+ catch(e){toast("Could not delete: "+e.message);}
+}
+function closeModal(){
+ $("modal").classList.remove("open");
+ $("modalBody").innerHTML="";
+ if(activeObjectUrl){URL.revokeObjectURL(activeObjectUrl);activeObjectUrl=null;}
+}
+function openDetail(id){
+ const d=items.find(x=>x.id===id);if(!d)return;
+ closeModal();
+ $("modalTitle").textContent=d.title||"Document details";
+ const body=$("modalBody");
+ const preview=document.createElement("div");preview.className="previewbox";
+ activeObjectUrl=URL.createObjectURL(d.blob);
+ if(d.type==="application/pdf"){
+  const iframe=document.createElement("iframe");iframe.title="PDF preview";iframe.src=activeObjectUrl;preview.append(iframe);
+ }else{
+  const img=document.createElement("img");img.src=activeObjectUrl;img.alt=d.title;preview.append(img);
+ }
+ const details=document.createElement("div");
+ details.style.cssText="font-size:11px;line-height:1.9;color:var(--muted)";
+ details.innerHTML="<b style='color:var(--text)'>Category:</b> "+esc(d.category)+"<br>"+
+ "<b style='color:var(--text)'>Original filename:</b> "+esc(d.name)+"<br>"+
+ "<b style='color:var(--text)'>Size:</b> "+fileSize(d.size||0)+"<br>"+
+ "<b style='color:var(--text)'>Added:</b> "+new Date(d.createdAt).toLocaleString()+"<br>"+
+ "<b style='color:var(--text)'>Issue date:</b> "+dateText(d.issued)+"<br>"+
+ "<b style='color:var(--text)'>Expiry date:</b> "+dateText(d.expiry)+"<br>"+
+ "<b style='color:var(--text)'>Notes:</b> "+esc(d.notes||"None");
+ const actions=document.createElement("div");actions.className="dialogactions";
+ const download=document.createElement("button");download.className="btn primary";download.textContent="↓ Download original";
+ download.addEventListener("click",()=>downloadBlob(d.blob,d.name||"document"));
+ const favourite=document.createElement("button");favourite.className="btn";favourite.textContent=d.favourite?"★ Remove favourite":"☆ Add favourite";
+ favourite.addEventListener("click",async()=>{await toggleFavourite(d.id);closeModal();});
+ const del=document.createElement("button");del.className="btn danger";del.textContent="Delete";
+ del.addEventListener("click",async()=>{closeModal();await removeItem(d.id);});
+ actions.append(download,favourite,del);body.append(preview,details,actions);
+ $("modal").classList.add("open");
+}
+function downloadBlob(blob,name){
+ const url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=name||"document";document.body.append(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+async function addFiles(files){
+ const list=Array.from(files||[]);
+ if(!list.length)return;
+ const valid=list.filter(f=>allowed.includes(f.type)&&f.size>0&&f.size<=MAX_FILE);
+ if(valid.length!==list.length)toast("Some files skipped: allowed formats are JPG, PNG, WebP or PDF, up to 15 MB each.");
+ const total=items.reduce((sum,d)=>sum+(d.size||0),0);
+ let added=0;
+ for(const file of valid){
+  if(total+valid.slice(0,added+1).reduce((sum,f)=>sum+f.size,0)>MAX_TOTAL){
+   toast("Storage safety limit reached (80 MB). Export a backup or remove files first.");break;
+  }
+  const isFirst=added===0;
+  const proposedTitle=isFirst&&valid.length===1?($("title").value.trim()||file.name.replace(/\.[^.]+$/,"")):file.name.replace(/\.[^.]+$/,"");
+  const item={
+   id:makeId(),title:proposedTitle.slice(0,100),name:file.name,
+   category:$("category").value,notes:isFirst?$("notes").value.trim():"",
+   issued:isFirst?$("issued").value:"",expiry:isFirst?$("expiry").value:"",
+   favourite:isFirst&&$("favourite").checked,type:file.type,size:file.size,
+   blob:file,createdAt:Date.now()+added
+  };
+  try{await saveItem(item);added++;}
+  catch(e){toast("Could not save file. Browser storage may be full.");break;}
+ }
+ await refresh();
+ $("addForm").reset();
+ $("category").value="Identity";
+ if(added)toast(added+" document"+(added===1?"":"s")+" saved locally.");
+}
+async function exportBackup(){
+ try{
+  const backup=[];
+  for(const d of items){
+   const data=await blobToDataURL(d.blob);
+   backup.push({id:d.id,title:d.title,name:d.name,category:d.category,notes:d.notes,issued:d.issued,expiry:d.expiry,favourite:d.favourite,type:d.type,size:d.size,createdAt:d.createdAt,data});
+  }
+  const blob=new Blob([JSON.stringify({format:"KisanSevaMiniAlbumBackup",version:1,exportedAt:new Date().toISOString(),documents:backup},null,2)],{type:"application/json"});
+  downloadBlob(blob,"KisanSeva-Mini-Documents-Backup.json");
+  toast("Backup exported. Store it somewhere safe.");
+ }catch(e){toast("Backup failed: "+e.message);}
+}
+function blobToDataURL(blob){
+ return new Promise((resolve,reject)=>{
+  const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(Error("Could not read a document for backup."));r.readAsDataURL(blob);
+ });
+}
+function dataURLToBlob(data){
+ return fetch(data).then(r=>r.blob());
+}
+async function importBackup(file){
+ if(!file)return;
+ if(file.size>120*1024*1024){toast("Backup file is too large.");return;}
+ try{
+  const parsed=JSON.parse(await file.text());
+  if(parsed.format!=="KisanSevaMiniAlbumBackup"||!Array.isArray(parsed.documents))throw Error("This is not a valid Kisan Seva Album backup.");
+  let imported=0;
+  for(const d of parsed.documents){
+   if(!d.data||!allowed.includes(d.type)||typeof d.title!=="string")continue;
+   const blob=await dataURLToBlob(d.data);
+   if(!blob.size||blob.size>MAX_FILE)continue;
+   if(items.reduce((s,x)=>s+(x.size||0),0)+blob.size>MAX_TOTAL){toast("Local storage limit reached. Imported "+imported+" files.");break;}
+   await saveItem({id:makeId(),title:d.title.slice(0,100),name:String(d.name||"restored-document"),category:String(d.category||"Other"),notes:String(d.notes||"").slice(0,500),issued:d.issued||"",expiry:d.expiry||"",favourite:!!d.favourite,type:d.type,size:blob.size,blob,createdAt:Date.now()+imported});
+   imported++;
+  }
+  await refresh();toast(imported+" document(s) restored.");
+ }catch(e){toast("Restore failed: "+e.message);}
+}
+$("addForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!$("files").files.length){toast("Choose at least one document first.");return;}
+ $("saveBtn").disabled=true;$("saveBtn").textContent="Saving...";
+ try{await addFiles($("files").files);}
+ catch(err){toast("Error: "+err.message);}
+ finally{$("saveBtn").disabled=false;$("saveBtn").textContent="＋ Save to album";}
+});
+$("search").addEventListener("input",render);
+$("filterCategory").addEventListener("change",render);
+$("sort").addEventListener("change",render);
+$("favFilter").addEventListener("click",()=>{favouritesOnly=!favouritesOnly;render();});
+$("exportBtn").addEventListener("click",exportBackup);
+$("importBtn").addEventListener("click",()=>$("importFile").click());
+$("importFile").addEventListener("change",async e=>{await importBackup(e.target.files[0]);e.target.value="";});
+$("closeModal").addEventListener("click",closeModal);
+$("modal").addEventListener("click",e=>{if(e.target===$("modal"))closeModal();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+(async function init(){
+ try{
+  db=await openDB();await refresh();
+ }catch(e){
+  $("storageStat").textContent="Error";
+  $("libraryStatus").textContent="Could not open local database: "+e.message;
+  toast("Local storage unavailable. Try a current browser on HTTPS.");
+ }
 })();
-</script></body></html>
+})();
+</script>
+</body>
+</html>
