@@ -2,115 +2,375 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#23395d">
-<title>Affidavit Format Maker | CSC Seva Tools</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#182b2a">
+<title>Affidavit Format Pro | Kisan Seva Tools</title>
+<meta name="description" content="Prepare and print editable affidavit drafts with an A4 document preview.">
 <style>
-:root{--p:#23395d;--dark:#14213d;--gold:#c6a45c;--bg:#f5f4f0;--line:#e4e0d5;--muted:#77766e}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:#263246}
-header{padding:16px 5%;background:#fff;border-bottom:1px solid var(--line);font-size:20px;font-weight:800;color:var(--p)}header span{color:var(--dark)}
-.hero{padding:30px 5%;background:linear-gradient(120deg,#14213d,#23395d);color:white}.hero>div{max-width:1100px;margin:auto}.hero small{color:#e8d6a4;letter-spacing:2px;text-transform:uppercase}
-h1{font-size:clamp(27px,4vw,40px);margin:12px 0}.hero p{font-size:13px;line-height:1.7;color:#e4eaf4;max-width:670px}
-main{max-width:1100px;margin:22px auto;padding:0 14px 35px}.grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px;align-items:start}
-.card{background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:0 6px 22px #14213d08}
-.head{padding:18px;border-bottom:1px solid var(--line)}.head h2{font-size:17px;margin:0 0 5px}.head p{font-size:11px;line-height:1.5;color:var(--muted);margin:0}
-.body{padding:17px}.field{margin-bottom:14px}label{display:block;font-size:11px;font-weight:700;margin-bottom:7px}
-input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:12px Arial,sans-serif;color:#263246;background:#fff}
-textarea{min-height:75px;resize:vertical;line-height:1.5}input:focus,textarea:focus,select:focus{outline:2px solid #d8e1ef;border-color:var(--p)}
-.btn{border:0;border-radius:8px;padding:11px 14px;font-size:12px;font-weight:700;cursor:pointer}.primary{background:var(--p);color:white}.secondary{background:#f2f0e9;color:var(--p);border:1px solid var(--line)}
-.actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{flex:1}
-.preview-wrap{padding:20px;background:#ecebe5}
-.document{background:#fffefa;border:1px solid #e4e0d5;padding:35px 28px;min-height:600px;color:#242424;font-family:"Times New Roman",serif;overflow-wrap:anywhere}
-.doc-title{text-align:center;text-decoration:underline;font-weight:bold;font-size:20px;letter-spacing:1px;margin-bottom:28px}
-.doc-text{font-size:14px;line-height:1.9;white-space:pre-wrap;min-height:180px}
-.doc-meta{font-size:13px;line-height:1.8;white-space:pre-wrap}
-.signature{margin-top:45px;font-size:13px;line-height:1.8}
-.warning{padding:13px;border:1px solid #e7d8a7;border-radius:9px;background:#fff9e8;font-size:11px;line-height:1.6;color:#685526;margin-top:14px}
-.status{font-size:11px;color:var(--muted);line-height:1.5;margin-top:10px}
-footer{text-align:center;padding:20px;background:white;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
-@media(max-width:750px){.grid{grid-template-columns:1fr}.hero{padding:25px 17px}main{padding:0 10px 25px}.body{padding:14px}.preview-wrap{padding:9px}.document{padding:24px 18px;min-height:500px}}
-@media print{header,.hero,.form-card,footer,.preview-head{display:none!important}main{margin:0;padding:0}.grid{display:block}.card{border:0;box-shadow:none}.preview-wrap{padding:0;background:white}.document{border:0;padding:10mm;min-height:0}}
+:root{
+ --bg:#e9eeeb;--paper:#fffefa;--ink:#202b2b;--muted:#687774;
+ --green:#174c43;--green2:#236b5c;--gold:#c79d54;--line:#d7dfda;
+ --panel:#fff;--shadow:0 12px 35px #203b3010;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 Inter,system-ui,Arial,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.top{background:#182b2a;color:white;padding:17px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-size:18px;font-weight:950;letter-spacing:1px}
+.brand span{color:#e6c27f}
+.top small{font-size:11px;color:#c3d2cc}
+.wrap{max-width:1500px;margin:auto;padding:24px}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--green2);font-weight:900}
+h1{font-size:clamp(27px,4vw,39px);line-height:1.15;margin:6px 0;letter-spacing:-1px}
+p{margin:4px 0;color:var(--muted)}
+.tag{border:1px solid #b9d1c5;background:#f5faf6;color:var(--green);border-radius:30px;padding:8px 12px;font-size:11px;font-weight:850}
+.layout{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:20px;align-items:start}
+.panel{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:21px;box-shadow:var(--shadow)}
+.head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
+h2{font-size:17px;margin:0}
+.step{font-size:10px;font-weight:900;letter-spacing:1px;color:var(--green2);background:#eaf4ee;padding:6px 9px;border-radius:7px}
+.section{border-top:1px solid var(--line);margin-top:18px;padding-top:17px}
+.section h3{font-size:12px;margin:0 0 12px;color:#426258}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{min-width:0}
+.full{grid-column:1/-1}
+label{display:block;font-size:11px;font-weight:800;margin-bottom:5px;color:#425650}
+input,select,textarea{width:100%;min-width:0;padding:10px 11px;border:1px solid #cbd6d0;border-radius:8px;background:#fff;color:#202b2b;outline:none}
+textarea{min-height:85px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--green2);box-shadow:0 0 0 3px #236b5c18}
+.help{font-size:10px;color:var(--muted);margin-top:4px}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.btn{border:1px solid transparent;border-radius:8px;padding:10px 13px;font-size:12px;font-weight:850}
+.primary{background:var(--green);color:white}
+.secondary{background:#e8f1ec;color:var(--green)}
+.outline{border-color:#cbd6d0;background:white;color:#344e45}
+.btn:hover{filter:brightness(.97)}
+.presetgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.preset{border:1px solid #d2ddd6;background:#f7faf8;border-radius:9px;padding:11px;text-align:left;color:#244a3d;font-size:11px;font-weight:800}
+.preset.active{border-color:var(--green2);background:#e8f4ed;box-shadow:inset 0 0 0 1px var(--green2)}
+.previewbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.previewstage{background:#dfe5e1;padding:14px;border-radius:11px}
+.paper{background:var(--paper);color:#191919;max-width:100%;min-height:850px;margin:auto;padding:clamp(20px,4vw,45px);box-shadow:0 5px 22px #1c30251a;font-family:"Times New Roman",serif;font-size:12px;line-height:1.8;overflow-wrap:anywhere}
+.paper .legal-title{text-align:center;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:15px 0 24px}
+.paper .caption{text-align:center;font-size:12px;font-weight:bold;text-transform:uppercase;margin-bottom:20px}
+.paper .center{text-align:center}
+.paper .paragraph{margin:12px 0;text-align:justify;white-space:pre-wrap}
+.paper .fieldline{border-bottom:1px dotted #555;display:inline-block;min-width:60px}
+.paper .signatures{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:50px;text-align:center}
+.paper .signatures div{border-top:1px solid #333;padding-top:7px}
+.paper .notary{margin-top:35px;border:1px dashed #888;padding:14px;text-align:center}
+.paper .watermark{text-align:center;font-size:9px;color:#777;margin-top:20px}
+.status{font-size:11px;color:var(--green2);margin-top:10px;min-height:17px}
+.notice{background:#fff7e7;border:1px solid #e8d6a7;color:#715c2c;padding:12px;border-radius:9px;font-size:11px;margin-top:14px}
+.footer{text-align:center;padding:24px;color:var(--muted);font-size:11px}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.wrap{padding:14px}.panel{padding:16px}}
+@media(max-width:430px){.fields{grid-template-columns:1fr}.full{grid-column:auto}.panel{padding:13px}.previewstage{padding:5px}.paper{padding:18px;min-height:700px}.top{padding:14px}}
+@media print{
+ @page{size:A4 portrait;margin:18mm}
+ body{background:#fff!important}
+ .top,.hero,.editor,.previewbar,.preview-tools,.footer,.notice{display:none!important}
+ .wrap{padding:0;max-width:none}
+ .layout{display:block}
+ .previewpanel{padding:0;border:0;box-shadow:none}
+ .previewstage{padding:0;background:#fff}
+ .paper{padding:0;min-height:0;box-shadow:none;font-size:12pt;line-height:1.8}
+}
 </style>
 </head>
 <body>
-<header>CSC <span>Seva Tools</span></header>
-<section class="hero"><div><small>Document formats · Tool 11</small><h1>Affidavit Format Maker</h1><p>Prepare an editable affidavit draft for common declaration purposes, review the wording and print it for professional verification.</p></div></section>
-<main><div class="grid">
-<section class="card form-card">
-<div class="head"><h2>Draft details</h2><p>Choose a sample format and replace the placeholders with accurate information.</p></div>
-<div class="body">
-<div class="field"><label for="purpose">Affidavit purpose</label>
-<select id="purpose">
-<option value="general">General declaration</option>
-<option value="name">Name declaration</option>
-<option value="address">Address declaration</option>
-<option value="dob">Date of birth declaration</option>
-<option value="income">Income declaration</option>
-<option value="lost">Lost document declaration</option>
-</select></div>
-<div class="field"><label for="name">Declarant's full name</label><input id="name" placeholder="Full legal name"></div>
-<div class="field"><label for="parent">Parent / spouse name (optional)</label><input id="parent" placeholder="Name"></div>
-<div class="field"><label for="age">Age (optional)</label><input id="age" type="number" min="1" max="120" placeholder="Age in years"></div>
-<div class="field"><label for="address">Full address</label><textarea id="address" placeholder="Residential address"></textarea></div>
-<div class="field"><label for="statement">Declaration statement</label><textarea id="statement" style="min-height:130px" placeholder="Enter the factual declaration you need to make."></textarea></div>
-<div class="field"><label for="place">Place of declaration</label><input id="place" placeholder="City / town"></div>
-<div class="field"><label for="date">Date</label><input id="date" type="date"></div>
-<div class="field"><label for="extra">Additional details (optional)</label><textarea id="extra" placeholder="Reference number or other relevant details"></textarea></div>
-<div class="actions"><button class="btn primary" id="print" type="button">Print / Save PDF</button><button class="btn secondary" id="reset" type="button">Reset draft</button></div>
-<div class="warning"><strong>Important:</strong> This is a general editable draft, not a legally validated affidavit. Requirements, stamp paper value, notarisation and supporting documents vary. Have the final document reviewed by an authorised legal professional or relevant authority before signing or submitting.</div>
-<div class="status" id="status" role="status" aria-live="polite">Only enter information needed for your document.</div>
-</div></section>
-<section class="card">
-<div class="head preview-head"><h2>Document preview</h2><p>Review the generated draft before printing.</p></div>
-<div class="preview-wrap"><article class="document">
-<div class="doc-title">AFFIDAVIT</div>
-<div class="doc-meta" id="meta">I, [Full Name], declare as follows:</div>
-<div class="doc-text" id="bodyText">I hereby declare that the information provided in this affidavit is true and correct to the best of my knowledge and belief.</div>
-<div class="doc-text" id="extraText" style="min-height:0"></div>
-<div class="signature" id="signature">Place: ___________<br>Date: ___________<br><br><br>Signature of Declarant: __________________</div>
-</article></div>
-</section>
-</div></main>
-<footer>Document tools · CSC Seva Tools</footer>
+<header class="top">
+ <div class="brand">KISAN <span>SEVA</span> TOOLS</div>
+ <small>LEGAL DOCUMENT WORKSPACE · TOOL 34</small>
+</header>
+
+<main class="wrap">
+ <section class="hero">
+  <div>
+   <div class="eyebrow">Document drafting suite / 34</div>
+   <h1>Affidavit Format Pro</h1>
+   <p>Create an editable affidavit draft with a clean, print-friendly document preview.</p>
+  </div>
+  <span class="tag">A4 DOCUMENT · LIVE PREVIEW</span>
+ </section>
+
+ <div class="layout">
+  <section class="panel editor">
+   <div class="head"><h2>Draft configuration</h2><span class="step">01 / EDIT</span></div>
+
+   <div class="section" style="border:0;padding-top:0;margin-top:0">
+    <h3>CHOOSE A DRAFT TYPE</h3>
+    <div class="presetgrid">
+     <button class="preset active" data-type="general" type="button">General affidavit</button>
+     <button class="preset" data-type="name" type="button">Name declaration</button>
+     <button class="preset" data-type="address" type="button">Address declaration</button>
+     <button class="preset" data-type="dob" type="button">Date of birth</button>
+     <button class="preset" data-type="lost" type="button">Lost document</button>
+     <button class="preset" data-type="income" type="button">Income declaration</button>
+    </div>
+   </div>
+
+   <div class="section">
+    <h3>01 — AFFIANT DETAILS</h3>
+    <div class="fields">
+     <div class="field full"><label for="person">Full name of deponent *</label><input id="person" maxlength="120" placeholder="Full legal name"></div>
+     <div class="field"><label for="parent">Father / mother / spouse name</label><input id="parent" maxlength="120" placeholder="Related person's name"></div>
+     <div class="field"><label for="age">Age</label><input id="age" type="number" min="1" max="120" placeholder="Age in years"></div>
+     <div class="field full"><label for="address">Full residential address *</label><textarea id="address" maxlength="400" placeholder="House, village/town, district, state, PIN"></textarea></div>
+     <div class="field"><label for="occupation">Occupation</label><input id="occupation" maxlength="100" placeholder="Occupation"></div>
+     <div class="field"><label for="nationality">Nationality</label><input id="nationality" maxlength="60" value="Indian"></div>
+    </div>
+   </div>
+
+   <div class="section">
+    <h3>02 — DOCUMENT DETAILS</h3>
+    <div class="fields">
+     <div class="field"><label for="place">Place of execution *</label><input id="place" maxlength="100" placeholder="Town / city"></div>
+     <div class="field"><label for="date">Date</label><input id="date" type="date"></div>
+     <div class="field"><label for="authority">For submission to</label><input id="authority" maxlength="160" placeholder="Office / authority, if known"></div>
+     <div class="field"><label for="stamp">Stamp paper details (optional)</label><input id="stamp" maxlength="100" placeholder="As applicable / not specified"></div>
+     <div class="field full"><label for="subject">Affidavit subject / title *</label><input id="subject" maxlength="180" placeholder="Subject of the declaration"></div>
+    </div>
+   </div>
+
+   <div class="section">
+    <h3>03 — DECLARATION CONTENT</h3>
+    <div class="field">
+     <label for="facts">Statement of facts *</label>
+     <textarea id="facts" maxlength="5000" style="min-height:190px" placeholder="Write the facts you personally know to be true. Number separate statements on new lines."></textarea>
+     <div class="help">Use accurate facts only. Avoid entering unnecessary sensitive identity or financial information.</div>
+    </div>
+    <div class="field" style="margin-top:12px">
+     <label for="extra">Additional declaration (optional)</label>
+     <textarea id="extra" maxlength="1800" placeholder="Additional relevant declaration, if required by the receiving authority."></textarea>
+    </div>
+    <div class="field" style="margin-top:12px">
+     <label for="language">Draft language</label>
+     <select id="language">
+      <option value="en">English</option>
+      <option value="hi">Hindi</option>
+      <option value="mr">Marathi</option>
+     </select>
+     <div class="help">The interface is English. Select a language to set the document's language label; this tool does not translate your text automatically.</div>
+    </div>
+   </div>
+
+   <div class="section">
+    <h3>04 — VERIFICATION & SIGNATURES</h3>
+    <div class="fields">
+     <div class="field"><label for="verifyPlace">Verification place</label><input id="verifyPlace" maxlength="100" placeholder="Place"></div>
+     <div class="field"><label for="verifyDate">Verification date</label><input id="verifyDate" type="date"></div>
+     <div class="field"><label for="witness">Witness names (optional)</label><input id="witness" maxlength="200" placeholder="Names, if required"></div>
+     <div class="field"><label for="notary">Attestation section</label>
+      <select id="notary"><option value="show">Show blank attestation area</option><option value="hide">Hide attestation area</option></select>
+     </div>
+    </div>
+   </div>
+
+   <div class="btnrow">
+    <button class="btn primary" id="save" type="button">Save draft</button>
+    <button class="btn secondary" id="load" type="button">Load draft</button>
+    <button class="btn outline" id="export" type="button">Export JSON</button>
+    <button class="btn outline" id="reset" type="button">Reset form</button>
+   </div>
+   <div class="status" id="status" role="status" aria-live="polite">Drafts are stored locally in this browser when you save them.</div>
+   <div class="notice"><strong>Legal notice:</strong> This tool creates a general draft, not a legally validated affidavit. Required wording, stamp duty, notarization, witnesses and registration vary by purpose and jurisdiction. Confirm the correct format with the receiving authority or a qualified legal professional. Never sign a false statement.</div>
+  </section>
+
+  <section class="panel previewpanel">
+   <div class="previewbar">
+    <div><h2>Live A4 document</h2><p>Review all details before printing.</p></div>
+    <span class="step">02 / PREVIEW</span>
+   </div>
+   <div class="previewstage">
+    <article class="paper" id="paper">
+     <div class="center" id="pJurisdiction">BEFORE THE COMPETENT AUTHORITY</div>
+     <div class="legal-title" id="pTitle">AFFIDAVIT</div>
+     <div class="caption" id="pSubject">GENERAL DECLARATION</div>
+     <div class="paragraph" id="pIntro"></div>
+     <div id="pFacts"></div>
+     <div class="paragraph" id="pTruth"></div>
+     <div class="paragraph" id="pVerification"></div>
+     <div class="signatures">
+      <div>Signature / Thumb impression of deponent</div>
+      <div>Witness signature (if required)</div>
+     </div>
+     <div class="paragraph" id="pWitness"></div>
+     <div class="notary" id="pNotary">SPACE FOR NOTARY / OATH COMMISSIONER / AUTHORIZED ATTESTATION, AS APPLICABLE</div>
+     <div class="watermark">Draft prepared using Kisan Seva Tools · Confirm legal requirements before use</div>
+    </article>
+   </div>
+   <div class="btnrow preview-tools">
+    <button class="btn primary" id="print" type="button">Print / Save as PDF</button>
+    <button class="btn secondary" id="download" type="button">Download HTML</button>
+    <button class="btn outline" id="copy" type="button">Copy draft text</button>
+   </div>
+   <div class="status">Use the browser print dialog and choose “Save as PDF” to create a PDF copy.</div>
+  </section>
+ </div>
+ <footer class="footer">Kisan Seva Tools · Affidavit Format Pro · Check official requirements before submission.</footer>
+</main>
+
 <script>
 (function(){
+"use strict";
 const $=id=>document.getElementById(id);
-const templates={
-general:"I hereby declare that the information stated in this affidavit is true and correct to the best of my knowledge and belief. I understand that any false statement may have consequences under applicable law.",
-name:"I declare that my name and the name details stated in the accompanying documents refer to me, and the details provided below are accurate to the best of my knowledge.",
-address:"I declare that the address stated in this document is my current residential address to the best of my knowledge and belief.",
-dob:"I declare that the date of birth information stated below is accurate to the best of my knowledge and is supported by the records available to me.",
-income:"I declare that the income information stated below is accurate to the best of my knowledge and belief, and that the supporting details provided are genuine.",
-lost:"I declare that the document described below is reported as lost or missing to the best of my knowledge. I will inform the relevant authority if it is found."
+const ids=["person","parent","age","address","occupation","nationality","place","date","authority","stamp","subject","facts","extra","language","verifyPlace","verifyDate","witness","notary"];
+let currentType="general";
+const today=()=>new Date().toISOString().slice(0,10);
+
+const presets={
+ general:{
+  subject:"General Affidavit",
+  facts:"1. That I am the deponent making this declaration.\n2. That the statements made in this affidavit are based on my personal knowledge and belief.\n3. That I am making this declaration for the stated purpose."
+ },
+ name:{
+  subject:"Declaration Regarding Name",
+  facts:"1. That my name and the relevant records are described below.\n2. That the name information stated in this declaration is true to the best of my knowledge.\n3. That this declaration is submitted for consideration by the relevant authority."
+ },
+ address:{
+  subject:"Declaration Regarding Residential Address",
+  facts:"1. That I reside at the address stated in this document.\n2. That the address details provided by me are accurate to the best of my knowledge.\n3. That I am making this declaration for submission to the relevant authority."
+ },
+ dob:{
+  subject:"Declaration Regarding Date of Birth",
+  facts:"1. That I am making this declaration regarding my date of birth.\n2. That the date-of-birth details I provide are true to the best of my knowledge.\n3. That the relevant supporting records, where required, may be submitted to the receiving authority."
+ },
+ lost:{
+  subject:"Declaration Regarding Lost Document",
+  facts:"1. That I am making this declaration regarding a document reported as lost.\n2. That the details of the document and circumstances of its loss should be stated accurately here.\n3. That I will follow the receiving authority's instructions for any required report, replacement or supporting documents."
+ },
+ income:{
+  subject:"Income Declaration",
+  facts:"1. That I am making this declaration regarding my income for the stated purpose.\n2. That the income details stated in this declaration must reflect my actual circumstances and available records.\n3. That I understand the receiving authority may request supporting evidence."
+ }
 };
-function formatDate(v){if(!v)return "___________";const d=new Date(v+"T00:00:00");return isNaN(d)?"___________":d.toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"});}
-function update(){
-const name=$("name").value.trim()||"[Full Name]";
-const parent=$("parent").value.trim();
-const age=$("age").value.trim();
-const address=$("address").value.trim()||"[Full Address]";
-let meta="I, "+name;
-if(parent)meta+=", son/daughter/spouse of "+parent;
-if(age)meta+=", aged "+age+" years";
-meta+=", residing at "+address+", do hereby state as follows:";
-$("meta").textContent=meta;
-$("bodyText").textContent=$("statement").value.trim()||templates[$("purpose").value];
-$("extraText").textContent=$("extra").value.trim();
-$("signature").innerHTML="Place: "+escapeText($("place").value.trim()||"___________")+"<br>Date: "+escapeText(formatDate($("date").value))+"<br><br><br>Signature of Declarant: __________________";
+function v(id){return $(id).value.trim();}
+function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function setStatus(t){$("status").textContent=t;}
+function dateLong(s){
+ if(!s)return "________________";
+ return new Date(s+"T12:00:00").toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"});
 }
-function escapeText(s){return s.replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));}
-$("purpose").addEventListener("change",()=>{
-if(!$("statement").value.trim())update();
+function labelLanguage(){
+ return {en:"ENGLISH DRAFT",hi:"HINDI DRAFT",mr:"MARATHI DRAFT"}[v("language")]||"ENGLISH DRAFT";
+}
+function update(){
+ const name=v("person")||"________________";
+ const relation=v("parent");
+ const age=v("age");
+ const address=v("address")||"________________";
+ const place=v("place")||"________________";
+ $("pJurisdiction").textContent=v("authority")?"FOR SUBMISSION TO: "+v("authority").toUpperCase():"BEFORE THE COMPETENT AUTHORITY";
+ $("pTitle").textContent="AFFIDAVIT";
+ $("pSubject").textContent=(v("subject")||"GENERAL DECLARATION").toUpperCase()+" · "+labelLanguage();
+ const intro="I, "+name+
+  (age?", aged "+age+" years":"")+
+  (relation?", child/spouse of "+relation:"")+
+  (v("occupation")?", occupation: "+v("occupation"):"")+
+  ", residing at "+address+
+  (v("nationality")?", nationality: "+v("nationality"):"")+
+  ", do hereby solemnly affirm and declare as follows:";
+ $("pIntro").textContent=intro;
+ const factLines=v("facts").split(/\n+/).map(s=>s.trim()).filter(Boolean);
+ const factHost=$("pFacts");
+ factHost.replaceChildren();
+ if(!factLines.length){
+  const p=document.createElement("div");p.className="paragraph";p.textContent="1. [Enter the facts to be declared.]";factHost.appendChild(p);
+ }else{
+  factLines.forEach((line,i)=>{
+   const p=document.createElement("div");p.className="paragraph";
+   p.textContent=/^\d+[\).]/.test(line)?line:(i+1)+". "+line;
+   factHost.appendChild(p);
+  });
+ }
+ if(v("extra")){
+  const p=document.createElement("div");p.className="paragraph";p.textContent=v("extra");factHost.appendChild(p);
+ }
+ $("pTruth").textContent="I state that the facts set out above are true to the best of my knowledge and belief. I understand that I must verify the accuracy of this statement and comply with applicable legal requirements before signing.";
+ $("pVerification").textContent="Verified at "+place+" on "+dateLong(v("verifyDate")||v("date"))+", subject to the applicable verification procedure.";
+ $("pWitness").textContent=v("witness")?"Witness(es): "+v("witness"):"";
+ $("pNotary").style.display=v("notary")==="hide"?"none":"block";
+ document.documentElement.lang=v("language")==="hi"?"hi":v("language")==="mr"?"mr":"en";
+}
+function collect(){
+ const d={schemaVersion:1,type:currentType};
+ ids.forEach(id=>d[id]=$(id).value);
+ return d;
+}
+function restore(d){
+ if(!d||typeof d!=="object")throw new Error("Invalid draft");
+ ids.forEach(id=>{if(typeof d[id]==="string")$(id).value=d[id];});
+ currentType=presets[d.type]?d.type:"general";
+ document.querySelectorAll(".preset").forEach(b=>b.classList.toggle("active",b.dataset.type===currentType));
+ update();
+}
+function blobDownload(name,content,type){
+ const url=URL.createObjectURL(new Blob([content],{type}));
+ const a=document.createElement("a");a.href=url;a.download=name;
+ document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function applyPreset(type){
+ currentType=type;
+ const p=presets[type]||presets.general;
+ $("subject").value=p.subject;
+ $("facts").value=p.facts;
+ document.querySelectorAll(".preset").forEach(b=>b.classList.toggle("active",b.dataset.type===type));
+ update();
+ setStatus("Draft type selected. Edit the sample wording to match your real facts and the receiving authority's requirements.");
+}
+document.querySelectorAll(".preset").forEach(b=>b.addEventListener("click",()=>applyPreset(b.dataset.type)));
+ids.forEach(id=>$(id).addEventListener("input",update));
+$("save").addEventListener("click",()=>{
+ try{localStorage.setItem("kst_affidavit_draft_v1",JSON.stringify(collect()));setStatus("Draft saved in this browser.");}
+ catch(e){setStatus("Draft could not be saved; browser storage may be unavailable.");}
 });
-["name","parent","age","address","statement","place","date","extra"].forEach(id=>$(id).addEventListener("input",update));
-$("print").addEventListener("click",()=>window.print());
+$("load").addEventListener("click",()=>{
+ try{
+  const raw=localStorage.getItem("kst_affidavit_draft_v1");
+  if(!raw){setStatus("No saved draft found in this browser.");return;}
+  restore(JSON.parse(raw));setStatus("Draft loaded.");
+ }catch(e){setStatus("Draft could not be loaded. The saved data may be invalid.");}
+});
 $("reset").addEventListener("click",()=>{
-if(!confirm("Reset all draft fields?"))return;
-["name","parent","age","address","statement","place","date","extra"].forEach(id=>$(id).value="");
-$("purpose").value="general";update();$("status").textContent="Draft reset.";
+ if(!confirm("Reset all affidavit fields? The saved draft in local storage will remain."))return;
+ ids.forEach(id=>$(id).value="");
+ $("nationality").value="Indian";$("date").value=today();$("verifyDate").value=today();
+ $("language").value="en";$("notary").value="show";
+ applyPreset("general");setStatus("Form reset.");
 });
-$("date").value=new Date().toLocaleDateString("en-CA");
-update();
+function valid(){
+ if(!v("person")||!v("address")||!v("place")||!v("subject")||!v("facts")){
+  setStatus("Complete the required fields: name, address, place, subject and statement of facts.");return false;
+ }
+ if(v("age")&&(!Number.isFinite(Number(v("age")))||Number(v("age"))<1||Number(v("age"))>120)){
+  setStatus("Please enter a valid age.");return false;
+ }
+ return true;
+}
+$("print").addEventListener("click",()=>{if(valid())window.print();});
+$("download").addEventListener("click",()=>{
+ if(!valid())return;
+ const html="<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Affidavit Draft</title><style>body{max-width:760px;margin:35px auto;padding:24px;font:12pt/1.8 'Times New Roman',serif;color:#191919}.title{text-align:center;font-weight:bold;font-size:16pt;margin:24px 0}.caption{text-align:center;font-weight:bold;text-transform:uppercase}.paragraph{margin:12px 0;text-align:justify;white-space:pre-wrap}.signatures{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-top:50px;text-align:center}.signatures div{border-top:1px solid;padding-top:7px}.notary{border:1px dashed #777;padding:15px;text-align:center;margin-top:35px}@media print{body{margin:0;padding:0}}</style></head><body>"+$("paper").outerHTML+"</body></html>";
+ blobDownload("AffidavitDraft.html",html,"text/html;charset=utf-8");
+ setStatus("HTML draft downloaded. Open it in a browser to review or print.");
+});
+$("copy").addEventListener("click",async()=>{
+ if(!valid())return;
+ const text=$("paper").innerText;
+ try{await navigator.clipboard.writeText(text);setStatus("Affidavit draft copied to clipboard.");}
+ catch(e){
+  const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();
+  try{document.execCommand("copy");setStatus("Draft copied if clipboard access was allowed; otherwise copy the preview manually.");}
+  catch(err){setStatus("Clipboard unavailable. Select the preview text and copy it manually.");}
+  ta.remove();
+ }
+});
+$("date").value=today();$("verifyDate").value=today();
+applyPreset("general");
 })();
 </script>
 </body>
