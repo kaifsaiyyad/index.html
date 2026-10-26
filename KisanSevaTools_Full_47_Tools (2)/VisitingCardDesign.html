@@ -1,42 +1,482 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Visiting Card Design | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Visiting Card Design</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: CSC & Design • Icon: 💼</div></section><section class="panel"><label>Business name</label><textarea rows="2" id="f0" placeholder="Business name"></textarea><label>Person name</label><textarea rows="2" id="f1" placeholder="Person name"></textarea><label>Phone</label><textarea rows="2" id="f2" placeholder="Phone"></textarea><label>Address</label><textarea rows="2" id="f3" placeholder="Address"></textarea><label>Services</label><textarea rows="2" id="f4" placeholder="Services"></textarea><button onclick="previewDoc()">Preview document</button><button class="secondary" onclick="window.print()">Print / Save PDF</button><div id="out"></div><script>function previewDoc(){let fs=["Business name", "Person name", "Phone", "Address", "Services"],out=document.querySelector("#out");out.innerHTML="<hr><h2>Document preview</h2>"+fs.map((x,i)=>"<p><b>"+x+":</b> "+(document.querySelector("#f"+i).value||"—").replace(/</g,"&lt;")+"</p>").join("")}</script></section></main><script>
-(function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visiting Card Design Studio Pro | Kisan Seva Tools</title>
+<style>
+:root{
+ --bg:#f2f5fa;--panel:#fff;--ink:#18273c;--muted:#78869a;
+ --line:#e0e7ef;--brand:#0c8b91;--deep:#102b3b;
+ --shadow:0 12px 34px #2036500d
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:Inter,Arial,"Noto Sans Devanagari",sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.topbar{padding:15px 22px;background:#102b3b;color:#fff;
+ display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{height:43px;width:43px;border-radius:13px;display:grid;place-items:center;
+ background:linear-gradient(135deg,#14b8a6,#f2bd58);color:#112d39;font-weight:1000;font-size:23px}
+.brand h1{font-size:16px;margin:0}.brand p{font-size:11px;color:#bed2db;margin:4px 0 0}
+.top-tag{font-size:10px;letter-spacing:1px;border:1px solid #496777;padding:8px 11px;border-radius:30px}
+.hero{max-width:1450px;margin:auto;padding:26px 20px 19px}
+.eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:var(--brand)}
+.hero h2{font-size:clamp(27px,4vw,39px);letter-spacing:-1px;margin:9px 0}
+.hero p{font-size:13px;line-height:1.7;color:var(--muted);max-width:800px;margin:0}
+.layout{max-width:1450px;margin:auto;padding:0 20px 35px;
+ display:grid;grid-template-columns:minmax(320px,.86fr) minmax(0,1.14fr);gap:19px;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;
+ overflow:hidden;box-shadow:var(--shadow);min-width:0}
+.panel-head{padding:17px 19px;border-bottom:1px solid var(--line);
+ display:flex;align-items:center;justify-content:space-between;gap:10px}
+.panel-head h3{font-size:14px;margin:0}
+.step{font-size:10px;font-weight:900;color:#087b83;background:#e3f7f4;padding:6px 9px;border-radius:7px}
+.panel-body{padding:18px}
+.section-title{font-size:10px;letter-spacing:1.3px;color:#758399;font-weight:900;
+ margin:4px 0 12px;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.full{grid-column:1/-1}
+label{font-size:11px;font-weight:800;color:#40526a}
+input,select,textarea{width:100%;min-width:0;border:1px solid #dce5ee;
+ border-radius:9px;background:#fbfdff;padding:10px 11px;color:#1b2c41;outline:none}
+input:focus,select:focus,textarea:focus{border-color:#0c9b9a;box-shadow:0 0 0 3px #0c9b9a16}
+textarea{resize:vertical;min-height:62px}
+.hint{font-size:10px;color:#8290a1;line-height:1.5}
+.divider{height:1px;background:var(--line);margin:18px 0}
+.segment{display:flex;gap:7px;flex-wrap:wrap}
+.segment button{flex:1;min-width:80px;border:1px solid var(--line);background:#f8fafc;
+ color:#617086;border-radius:9px;padding:10px 7px;font-size:11px;font-weight:800}
+.segment button.active{background:#e2f7f4;border-color:#66c9c0;color:#087c83}
+.swatches{display:flex;gap:10px;flex-wrap:wrap}
+.swatch{height:34px;width:34px;border-radius:50%;border:3px solid #fff;
+ box-shadow:0 0 0 1px #d3dce6;position:relative}
+.swatch.active{box-shadow:0 0 0 2px #0c8b91}
+.swatch.active:after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;
+ color:white;text-shadow:0 1px 4px #000;font-weight:900}
+.range-line{display:flex;justify-content:space-between;gap:8px}
+output{font-size:11px;color:var(--brand);font-weight:900}
+input[type=range]{padding:0;border:0;box-shadow:none;accent-color:var(--brand)}
+.file-box{border:1px dashed #cbd8e5;border-radius:10px;padding:12px;background:#fafcff}
+.file-box input{padding:6px;border:0;background:transparent;font-size:11px}
+.upload-preview{max-width:90px;max-height:60px;object-fit:contain;display:none;margin-top:7px}
+.preview-area{padding:17px;background:
+ linear-gradient(45deg,#e8edf3 25%,transparent 25%),
+ linear-gradient(-45deg,#e8edf3 25%,transparent 25%),
+ linear-gradient(45deg,transparent 75%,#e8edf3 75%),
+ linear-gradient(-45deg,transparent 75%,#e8edf3 75%);
+ background-size:18px 18px;background-position:0 0,0 9px,9px -9px,-9px 0}
+.card-stage{background:#fff;border:1px solid #e1e8ef;border-radius:13px;
+ min-height:240px;display:grid;place-items:center;padding:14px;overflow:hidden}
+#cardCanvas{display:block;width:100%;height:auto;max-height:480px;object-fit:contain}
+.side-tabs{display:flex;gap:7px;margin-bottom:12px}
+.side-tabs button{flex:1;border:1px solid var(--line);border-radius:9px;
+ padding:10px;background:#f7f9fc;font-size:11px;font-weight:900;color:#607086}
+.side-tabs button.active{background:#102b3b;color:#fff;border-color:#102b3b}
+.preview-meta{display:flex;justify-content:space-between;gap:9px;flex-wrap:wrap;
+ font-size:10px;color:#77859a;padding:12px 2px 0}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:16px}
+.btn{border:0;border-radius:10px;padding:12px 9px;font-size:11px;font-weight:900}
+.btn:hover{filter:brightness(.96)}
+.primary{background:linear-gradient(135deg,#0c9293,#086c7b);color:#fff}
+.dark{background:#132e40;color:#fff}.light{background:#edf2f7;color:#31475a}
+.gold{background:#f7e8c9;color:#805619}.wide{grid-column:1/-1}
+.note{margin:0 16px 16px;padding:11px;border:1px solid #f0dfb6;background:#fff8e9;
+ border-radius:10px;color:#80602b;font-size:10px;line-height:1.65}
+.footer{text-align:center;padding:20px;color:#8592a2;font-size:10px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);
+ background:#102b3b;color:white;padding:12px 17px;border-radius:10px;font-size:12px;
+ opacity:0;pointer-events:none;transition:.2s;z-index:10;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.preview-panel{grid-row:1}}
+@media(max-width:500px){.topbar{padding:13px}.hero{padding:22px 13px 17px}
+ .layout{padding:0 10px 25px;gap:12px}.panel-body{padding:13px}.panel-head{padding:14px}
+ .preview-area{padding:8px}.actions{padding:11px}.grid{gap:10px}.card-stage{padding:7px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+ <div class="brand"><div class="logo">K</div><div>
+  <h1>KISAN SEVA TOOLS</h1><p>Visiting Card Design Studio Pro · Tool 039</p>
+ </div></div>
+ <div class="top-tag">✦ PREMIUM CARD DESIGNER</div>
+</header>
+
+<section class="hero">
+ <div class="eyebrow">DESIGN / BRANDING / PRINT</div>
+ <h2>Your brand deserves a <span style="color:#0c8b91">powerful first impression.</span></h2>
+ <p>Design both sides of your visiting card, customize colours and typography, add a logo, include a QR code and export a high-resolution print-ready image.</p>
+</section>
+
+<main class="layout">
+<section class="panel">
+ <div class="panel-head"><h3>Card design controls</h3><span class="step">01 / CREATE</span></div>
+ <div class="panel-body">
+  <div class="section-title">Your business details</div>
+  <div class="grid">
+   <div class="field full"><label for="business">Business / Shop Name *</label>
+    <input id="business" maxlength="65" value="KAIF PAN SHOP"></div>
+   <div class="field"><label for="person">Your Name</label><input id="person" maxlength="55" value="Kaif Saiyyad"></div>
+   <div class="field"><label for="role">Designation</label><input id="role" maxlength="55" value="Owner"></div>
+   <div class="field"><label for="phone">Mobile Number</label><input id="phone" maxlength="30" placeholder="+91 XXXXX XXXXX"></div>
+   <div class="field"><label for="email">Email</label><input id="email" maxlength="90" type="email" placeholder="you@example.com"></div>
+   <div class="field full"><label for="address">Business Address</label>
+    <textarea id="address" maxlength="160" rows="2" placeholder="Shop address, town, district">Kamalwelli, Maharashtra, India</textarea></div>
+   <div class="field full"><label for="website">Website / Social Link</label>
+    <input id="website" maxlength="150" placeholder="https://yourwebsite.com"></div>
+   <div class="field full"><label for="tagline">Tagline / Services</label>
+    <input id="tagline" maxlength="100" value="CSC • DIGITAL SERVICES • PRINTING"></div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-title">Choose your design style</div>
+  <div class="segment" id="themes">
+   <button class="active" data-theme="luxury">01 Luxury</button>
+   <button data-theme="neon">02 Neon Tech</button>
+   <button data-theme="corporate">03 Corporate</button>
+   <button data-theme="minimal">04 Minimal</button>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-title">Custom colours</div>
+  <div class="swatches" id="colors">
+   <button class="swatch active" data-color="#d7b46a" title="Gold" style="background:#d7b46a"></button>
+   <button class="swatch" data-color="#25d9cf" title="Neon teal" style="background:#25d9cf"></button>
+   <button class="swatch" data-color="#4277f5" title="Royal blue" style="background:#4277f5"></button>
+   <button class="swatch" data-color="#e87945" title="Orange" style="background:#e87945"></button>
+   <button class="swatch" data-color="#35b879" title="Green" style="background:#35b879"></button>
+   <button class="swatch" data-color="#f0f0f0" title="White" style="background:#f0f0f0"></button>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-title">Logo & QR code</div>
+  <div class="grid">
+   <div class="field full file-box">
+    <label for="logoUpload">Upload your logo (PNG / JPG / WebP)</label>
+    <input id="logoUpload" type="file" accept="image/png,image/jpeg,image/webp">
+    <img id="logoPreview" class="upload-preview" alt="Uploaded logo preview">
+    <button type="button" class="btn light" id="removeLogo" style="margin-top:7px">Remove logo</button>
+   </div>
+   <div class="field full">
+    <label for="qrText">QR code content (optional)</label>
+    <input id="qrText" maxlength="500" placeholder="Website URL or contact information">
+    <div class="hint">A QR code is generated using an online QR service. Avoid putting private information here.</div>
+   </div>
+   <div class="field full">
+    <label for="font">Typography</label>
+    <select id="font">
+     <option value="Arial">Modern Sans</option>
+     <option value="Georgia">Classic Serif</option>
+     <option value="Trebuchet MS">Rounded Modern</option>
+     <option value="Courier New">Tech Mono</option>
+    </select>
+   </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-title">Layout options</div>
+  <div class="grid">
+   <div class="field"><label for="cardSize">Card size</label>
+    <select id="cardSize"><option value="standard">Standard 3.5 × 2 in</option><option value="metric">Metric 90 × 54 mm</option></select></div>
+   <div class="field"><label for="density">Text size</label>
+    <select id="density"><option value="normal">Balanced</option><option value="large">Large</option><option value="compact">Compact</option></select></div>
+   <div class="field full">
+    <div class="range-line"><label for="roundness">Corner rounding</label><output id="roundOut">28%</output></div>
+    <input id="roundness" type="range" min="0" max="50" value="28">
+   </div>
+   <div class="field full">
+    <label class="hint" style="display:flex;gap:8px;align-items:center">
+     <input id="showQr" type="checkbox" checked style="width:auto"> Show QR code on the back (if content is entered)
+    </label>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="panel preview-panel">
+ <div class="panel-head"><h3>Live business card</h3><span class="step">02 / PREVIEW</span></div>
+ <div class="panel-body" style="padding-bottom:0">
+  <div class="side-tabs">
+   <button class="active" data-side="front">✦ FRONT SIDE</button>
+   <button data-side="back">↗ BACK SIDE</button>
+  </div>
+  <div class="grid" style="margin-bottom:14px">
+   <div class="field"><label>Card dimensions</label><div id="dimensionLabel" class="hint">1050 × 600 px · 3.5 × 2 in</div></div>
+   <div class="field"><label>Current side</label><div id="sideLabel" class="hint">Front side</div></div>
+  </div>
+ </div>
+ <div class="preview-area">
+  <div class="card-stage"><canvas id="cardCanvas" width="1050" height="600" aria-label="Business card preview"></canvas></div>
+  <div class="preview-meta"><span>● Live preview</span><span>High-resolution canvas</span></div>
+ </div>
+ <div class="actions">
+  <button class="btn primary" id="downloadSide">⬇ Download this side</button>
+  <button class="btn dark" id="printBoth">▣ Print both sides</button>
+  <button class="btn light" id="downloadBoth">⇩ Download both PNGs</button>
+  <button class="btn gold" id="save">♡ Save draft</button>
+  <button class="btn light wide" id="load">↻ Load saved draft</button>
+  <button class="btn light wide" id="reset">↺ Reset design</button>
+ </div>
+ <p class="note">Print tip: PNG files are high resolution, but the final physical size depends on printer settings. Choose actual size / 100% scale when supported. Allow bleed and safe margins if your print shop requires them. QR generation needs an internet connection.</p>
+</section>
+</main>
+
+<footer class="footer">Kisan Seva Tools · Visiting Card Design Studio Pro · Drafts stay in your browser.</footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+(()=>{
+"use strict";
+const $=id=>document.getElementById(id);
+const canvas=$("cardCanvas"),ctx=canvas.getContext("2d");
+let theme="luxury",accent="#d7b46a",side="front",logoImage=null,toastTimer;
+const ids=["business","person","role","phone","email","address","website","tagline",
+"qrText","font","cardSize","density","roundness","showQr"];
+const themes={
+ luxury:{bg:"#11151d",bg2:"#20242c",ink:"#f7f1e6",muted:"#c3bcae",line:"#55504a"},
+ neon:{bg:"#071c27",bg2:"#103341",ink:"#f0ffff",muted:"#b4dce0",line:"#255562"},
+ corporate:{bg:"#f7f9fc",bg2:"#eaf0f7",ink:"#152b42",muted:"#516a82",line:"#ccd8e5"},
+ minimal:{bg:"#ffffff",bg2:"#f4f5f6",ink:"#1d2835",muted:"#677381",line:"#dce1e7"}
+};
+function toast(msg){const e=$("toast");e.textContent=msg;e.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>e.classList.remove("show"),2400)}
+function value(id){return $(id).value.trim()}
+function roundRect(x,y,w,h,r,fill,stroke,lw=2){
+ ctx.beginPath();ctx.roundRect(x,y,Math.min(r,w/2,h/2));
+ if(fill){ctx.fillStyle=fill;ctx.fill()}
+ if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw;ctx.stroke()}
+}
+function fit(text,maxWidth,size,weight="600",font="Arial"){
+ let n=size;while(n>12){ctx.font=`${weight} ${n}px "${font}"`;if(ctx.measureText(text).width<=maxWidth)break;n-=2}
+ return n;
+}
+function drawText(text,x,y,maxWidth,size,color,weight="500",align="left"){
+ if(!text)return;
+ const font=value("font"),n=fit(text,maxWidth,size,weight,font);
+ ctx.font=`${weight} ${n}px "${font}"`;ctx.fillStyle=color;ctx.textAlign=align;ctx.textBaseline="middle";
+ ctx.fillText(text,x,y,maxWidth);
+}
+function drawImageContain(img,x,y,w,h){
+ const ratio=Math.min(w/img.width,h/img.height);
+ const iw=img.width*ratio,ih=img.height*ratio;
+ ctx.drawImage(img,x+(w-iw)/2,y+(h-ih)/2,iw,ih);
+}
+function initials(){
+ const name=value("business")||"YOUR BUSINESS";
+ const words=name.split(/\s+/).filter(Boolean);
+ return words.slice(0,2).map(w=>w[0].toUpperCase()).join("");
+}
+function drawQR(){
+ const content=value("qrText");
+ if(!content||!$("showQr").checked)return;
+ const size=130,x=canvas.width-185,y=canvas.height-185;
+ ctx.fillStyle="#fff";ctx.fillRect(x-8,y-8,size+16,size+16);
+ // Online QR image; falls back to a visible placeholder if unavailable.
+ const img=new Image();
+ img.crossOrigin="anonymous";
+ img.onload=()=>{if(side==="back"&&value("qrText")===content){ctx.drawImage(img,x,y,size,size)}};
+ img.onerror=()=>{if(side==="back"){ctx.strokeStyle=accent;ctx.lineWidth=3;ctx.strokeRect(x,y,size,size);
+ ctx.fillStyle=accent;ctx.textAlign="center";ctx.font="bold 15px Arial";ctx.fillText("QR UNAVAILABLE",x+size/2,y+size/2)}};
+ img.src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&format=png&data="+encodeURIComponent(content);
+}
+function render(){
+ const metric=value("cardSize")==="metric";
+ canvas.width=metric?1063:1050;
+ canvas.height=metric?638:600;
+ const W=canvas.width,H=canvas.height,p=themes[theme],r=Number(value("roundness"))*2;
+ const name=value("business")||"YOUR BUSINESS";
+ const person=value("person"),role=value("role"),phone=value("phone"),email=value("email");
+ const address=value("address"),website=value("website"),tagline=value("tagline");
+ const font=value("font"),large=value("density")==="large",compact=value("density")==="compact";
+ const base=large?1.14:compact?.83:1;
+ ctx.clearRect(0,0,W,H);
+ ctx.fillStyle=p.bg;ctx.fillRect(0,0,W,H);
+
+ if(theme==="luxury"){
+   ctx.fillStyle=accent;ctx.beginPath();ctx.moveTo(W*.73,0);ctx.lineTo(W,0);ctx.lineTo(W,H);ctx.lineTo(W*.88,H);ctx.closePath();ctx.fill();
+   ctx.fillStyle=p.bg2;ctx.beginPath();ctx.moveTo(W*.79,0);ctx.lineTo(W*.86,0);ctx.lineTo(W*.66,H);ctx.lineTo(W*.59,H);ctx.closePath();ctx.fill();
+ }else if(theme==="neon"){
+   ctx.strokeStyle=accent;ctx.lineWidth=3;ctx.strokeRect(18,18,W-36,H-36);
+   ctx.globalAlpha=.12;ctx.fillStyle=accent;
+   for(let i=0;i<7;i++)ctx.fillRect(W-200+i*22,0,2,H);
+   ctx.globalAlpha=1;
+ }else if(theme==="corporate"){
+   ctx.fillStyle=accent;ctx.fillRect(0,0,24,H);
+   ctx.fillStyle=p.bg2;ctx.beginPath();ctx.moveTo(W*.75,0);ctx.lineTo(W,0);ctx.lineTo(W,H);ctx.lineTo(W*.90,H);ctx.closePath();ctx.fill();
+ }else{
+   ctx.strokeStyle=accent;ctx.lineWidth=4;ctx.strokeRect(18,18,W-36,H-36);
+   ctx.fillStyle=accent;ctx.fillRect(18,18,120,7);
+ }
+
+ if(side==="front"){
+   const left=theme==="corporate"?70:65;
+   const maxText=W*.67;
+   if(logoImage){
+     drawImageContain(logoImage,left,62,105,95);
+   }else{
+     roundRect(left,62,91,91,theme==="minimal"?12:22,theme==="corporate"?accent:p.bg2,accent,2);
+     ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=theme==="corporate"?"#ffffff":accent;
+     ctx.font=`900 36px "${font}"`;ctx.fillText(initials(),left+45.5,108);
+   }
+   drawText(name,left,198,maxText,48*base,p.ink,"900");
+   drawText(role,left,250,maxText,24*base,accent,"700");
+   if(tagline)drawText(tagline,left,306,maxText,19*base,p.muted,"600");
+   ctx.fillStyle=accent;ctx.fillRect(left,341,Math.min(125,W*.18),4);
+   let y=389,spacing=compact?36:42;
+   const lines=[];
+   if(phone)lines.push(["TEL",phone]);
+   if(email)lines.push(["MAIL",email]);
+   if(website)lines.push(["WEB",website]);
+   if(address)lines.push(["LOC",address]);
+   lines.slice(0,4).forEach(([label,text])=>{
+     ctx.fillStyle=accent;ctx.font="800 14px Arial";ctx.textAlign="left";ctx.fillText(label,left,y);
+     drawText(text,left+52,y,maxText-50,19*base,p.ink,"600");
+     y+=spacing;
+   });
+   ctx.fillStyle=accent;ctx.globalAlpha=.9;ctx.fillRect(W-95,H-55,35,4);ctx.globalAlpha=1;
+ }else{
+   const left=65;
+   ctx.fillStyle=accent;ctx.fillRect(left,67,65,5);
+   drawText(name,left,113,W*.68,39*base,p.ink,"900");
+   drawText("LET'S CONNECT",left,158,W*.64,18*base,accent,"800");
+   let y=220,spacing=compact?40:52;
+   const items=[];
+   if(person)items.push(["NAME",person]);
+   if(role)items.push(["ROLE",role]);
+   if(phone)items.push(["PHONE",phone]);
+   if(email)items.push(["EMAIL",email]);
+   if(website)items.push(["WEB",website]);
+   if(address)items.push(["ADDRESS",address]);
+   items.slice(0,6).forEach(([label,text])=>{
+     ctx.fillStyle=accent;ctx.font="800 13px Arial";ctx.textAlign="left";ctx.textBaseline="middle";
+     ctx.fillText(label,left,y);
+     drawText(text,left+95,y,W*.58,17*base,p.ink,"600");
+     y+=spacing;
+   });
+   if(value("qrText")&&$("showQr").checked){
+     ctx.fillStyle="#fff";ctx.fillRect(W-190,H-190,140,140);
+     ctx.strokeStyle=accent;ctx.lineWidth=2;ctx.strokeRect(W-190,H-190,140,140);
+     ctx.fillStyle=accent;ctx.textAlign="center";ctx.font="bold 13px Arial";
+     ctx.fillText("LOADING QR",W-120,H-120);
+     drawQR();
+   }else if(logoImage){
+     drawImageContain(logoImage,W-180,H-175,110,110);
+   }else{
+     ctx.strokeStyle=accent;ctx.lineWidth=2;ctx.strokeRect(W-175,H-160,110,110);
+     ctx.fillStyle=accent;ctx.textAlign="center";ctx.font="bold 30px Arial";
+     ctx.fillText(initials(),W-120,H-105);
+   }
+   if(tagline){
+     ctx.fillStyle=accent;ctx.fillRect(left,H-70,48,4);
+     drawText(tagline,left,H-43,W*.68,16,p.muted,"600");
+   }
+ }
+ $("roundOut").textContent=value("roundness")+"%";
+ $("dimensionLabel").textContent=`${canvas.width} × ${canvas.height} px · ${metric?"90 × 54 mm":"3.5 × 2 in"}`;
+ $("sideLabel").textContent=side==="front"?"Front side":"Back side";
+}
+function switchSide(s){
+ side=s;document.querySelectorAll("[data-side]").forEach(b=>b.classList.toggle("active",b.dataset.side===side));render();
+}
+function safeName(){return (value("business")||"business-card").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"business-card"}
+function downloadCanvas(suffix){
+ render();
+ try{
+   canvas.toBlob(blob=>{
+    if(!blob){toast("Could not export. If a QR code is displayed, try removing it and export again.");return}
+    const url=URL.createObjectURL(blob),a=document.createElement("a");
+    a.href=url;a.download=safeName()+"-"+suffix+".png";document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1500);toast("PNG download started.");
+   },"image/png");
+ }catch(e){toast("Export blocked. Try removing the online QR code and retry.")}
+}
+function printBoth(){
+ const old=side;side="front";render();const front=canvas.toDataURL("image/png");
+ side="back";render();const back=canvas.toDataURL("image/png");
+ side=old;render();
+ const w=window.open("","_blank");
+ if(!w){toast("Allow pop-ups to print or save as PDF.");return}
+ w.document.write(`<!DOCTYPE html><html><head><title>Business Card</title>
+ <style>@page{size:auto;margin:10mm}body{font-family:Arial;margin:0}
+ section{page-break-after:always;text-align:center;padding:12mm 0}
+ section:last-child{page-break-after:auto}
+ img{width:88mm;height:auto;max-width:100%;display:block;margin:auto}
+ p{font-size:10px;color:#777}@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style>
+ </head><body><section><img src="${front}"><p>FRONT SIDE · Check printer scaling before printing.</p></section>
+ <section><img src="${back}"><p>BACK SIDE · Duplex alignment depends on your printer.</p></section>
+ <script>window.onload=()=>setTimeout(()=>window.print(),500);<\/script></body></html>`);
+ w.document.close();
+}
+function state(){
+ return {fields:Object.fromEntries(ids.map(id=>[id,$(id).type==="checkbox"?$(id).checked:$(id).value])),
+ theme,accent,side};
+}
+function applyState(s){
+ if(s.fields)ids.forEach(id=>{if(s.fields[id]!==undefined){
+  if($(id).type==="checkbox")$(id).checked=Boolean(s.fields[id]);else $(id).value=s.fields[id];
+ }});
+ theme=["luxury","neon","corporate","minimal"].includes(s.theme)?s.theme:"luxury";
+ accent=["#d7b46a","#25d9cf","#4277f5","#e87945","#35b879","#f0f0f0"].includes(s.accent)?s.accent:"#d7b46a";
+ document.querySelectorAll("[data-theme]").forEach(b=>b.classList.toggle("active",b.dataset.theme===theme));
+ document.querySelectorAll("[data-color]").forEach(b=>b.classList.toggle("active",b.dataset.color===accent));
+ switchSide(s.side==="back"?"back":"front");
+}
+function reset(){
+ if(!confirm("Reset the card editor? Your uploaded logo will also be cleared."))return;
+ ids.forEach(id=>{const el=$(id);if(el.type==="checkbox")el.checked=id==="showQr";else el.value=""});
+ $("business").value="KAIF PAN SHOP";$("person").value="Kaif Saiyyad";$("role").value="Owner";
+ $("tagline").value="CSC • DIGITAL SERVICES • PRINTING";$("font").value="Arial";
+ $("cardSize").value="standard";$("density").value="normal";$("roundness").value=28;
+ theme="luxury";accent="#d7b46a";logoImage=null;$("logoUpload").value="";
+ $("logoPreview").style.display="none";
+ document.querySelectorAll("[data-theme]").forEach(b=>b.classList.toggle("active",b.dataset.theme===theme));
+ document.querySelectorAll("[data-color]").forEach(b=>b.classList.toggle("active",b.dataset.color===accent));
+ switchSide("front");render();toast("Editor reset.");
+}
+ids.forEach(id=>{$(id).addEventListener("input",render);$(id).addEventListener("change",render)});
+document.querySelectorAll("[data-theme]").forEach(b=>b.addEventListener("click",()=>{
+ theme=b.dataset.theme;document.querySelectorAll("[data-theme]").forEach(x=>x.classList.toggle("active",x===b));render();
+}));
+document.querySelectorAll("[data-color]").forEach(b=>b.addEventListener("click",()=>{
+ accent=b.dataset.color;document.querySelectorAll("[data-color]").forEach(x=>x.classList.toggle("active",x===b));render();
+}));
+document.querySelectorAll("[data-side]").forEach(b=>b.addEventListener("click",()=>switchSide(b.dataset.side)));
+$("logoUpload").addEventListener("change",e=>{
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ if(!["image/png","image/jpeg","image/webp"].includes(file.type)){toast("Choose a PNG, JPG or WebP image.");return}
+ if(file.size>5*1024*1024){toast("Logo must be 5 MB or smaller.");e.target.value="";return}
+ const reader=new FileReader();
+ reader.onload=()=>{
+  const img=new Image();
+  img.onload=()=>{logoImage=img;$("logoPreview").src=reader.result;$("logoPreview").style.display="block";render();toast("Logo loaded.")};
+  img.onerror=()=>toast("Could not open this image.");
+  img.src=reader.result;
+ };
+ reader.readAsDataURL(file);
+});
+$("removeLogo").addEventListener("click",()=>{
+ logoImage=null;$("logoUpload").value="";$("logoPreview").style.display="none";render();toast("Logo removed.");
+});
+$("downloadSide").addEventListener("click",()=>downloadCanvas(side));
+$("downloadBoth").addEventListener("click",()=>{
+ const old=side;side="front";downloadCanvas("front");setTimeout(()=>{side="back";downloadCanvas("back");side=old;render()},500);
+});
+$("printBoth").addEventListener("click",printBoth);
+$("save").addEventListener("click",()=>{
+ try{localStorage.setItem("kst_visiting_card_v1",JSON.stringify(state()));toast("Card settings saved on this device.")}
+ catch(e){toast("Could not save draft. Logo images are not saved with the draft.")}
+});
+$("load").addEventListener("click",()=>{
+ try{const raw=localStorage.getItem("kst_visiting_card_v1");if(!raw){toast("No saved draft found.");return}
+ applyState(JSON.parse(raw));toast("Saved settings loaded. Re-upload your logo if needed.");}
+ catch(e){toast("Could not load the saved draft.")}
+});
+$("reset").addEventListener("click",reset);
+render();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
