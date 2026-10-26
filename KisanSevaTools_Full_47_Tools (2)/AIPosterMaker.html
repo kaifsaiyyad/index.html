@@ -2,171 +2,535 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#1748e8">
-<title>Poster Maker | CSC Seva Tools</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090b16">
+<title>AI Poster Maker Pro | Kisan Seva Tools</title>
 <style>
-:root{--p:#1748e8;--dark:#101a36;--bg:#f3f6ff;--line:#dfe6f5;--muted:#68738b}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#18243d}
-header{background:white;border-bottom:1px solid var(--line);padding:15px 5%;font-size:20px;font-weight:800;color:var(--p)}header span{color:var(--dark)}
-.hero{padding:30px 5%;background:linear-gradient(120deg,#101a36,#1748e8,#6b8aff);color:white}.hero>div{max-width:1100px;margin:auto}
-.hero small{letter-spacing:2px;text-transform:uppercase;color:#d5deff}h1{font-size:clamp(28px,4vw,40px);margin:12px 0}.hero p{font-size:13px;line-height:1.7;color:#e4eaff;max-width:650px}
-main{max-width:1100px;margin:22px auto;padding:0 14px 35px}.grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px;align-items:start}
-.card{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 6px 24px #101a3608}
-.head{padding:18px;border-bottom:1px solid var(--line)}.head h2{font-size:17px;margin:0 0 5px}.head p{font-size:11px;line-height:1.5;color:var(--muted);margin:0}
-.body{padding:17px}.field{margin-bottom:13px}label{display:block;font-size:11px;font-weight:700;margin-bottom:7px}
-input,textarea,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:12px Arial,sans-serif;color:#18243d;background:white}
-textarea{min-height:65px;resize:vertical}input:focus,textarea:focus,select:focus{outline:2px solid #c9d5ff}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{border:0;border-radius:8px;padding:11px 14px;font-size:12px;font-weight:700;cursor:pointer}.primary{background:var(--p);color:white}.secondary{background:#edf1ff;color:var(--p);border:1px solid var(--line)}
-.actions{display:flex;flex-wrap:wrap;gap:8px}.actions button{flex:1}
-.themes{display:flex;gap:9px;flex-wrap:wrap}.theme{width:30px;height:30px;border:3px solid white;outline:1px solid #cbd3e5;border-radius:50%;cursor:pointer}.theme.active{outline:3px solid var(--p)}
-.preview-area{padding:18px;background:#e9eefb}
-.poster{--bg1:#101a36;--bg2:#1748e8;--accent:#f8d477;aspect-ratio:4/5;width:100%;max-width:440px;margin:auto;background:linear-gradient(145deg,var(--bg1),var(--bg2));color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10%;position:relative;overflow:hidden}
-.poster:before{content:"";position:absolute;inset:12px;border:1px solid #ffffff50;pointer-events:none}
-.poster:after{content:"";position:absolute;width:190px;height:190px;border:1px solid #ffffff25;border-radius:50%;top:-100px;right:-65px;pointer-events:none}
-.poster .badge{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:22px;overflow-wrap:anywhere}
-.poster h2{font-size:clamp(27px,4vw,44px);line-height:1.05;text-transform:uppercase;overflow-wrap:anywhere;margin:0;font-weight:900}
-.poster .line{width:55px;height:4px;background:var(--accent);margin:19px auto}
-.poster .subtitle{font-size:clamp(12px,2vw,17px);line-height:1.5;overflow-wrap:anywhere}
-.poster .date{font-size:12px;line-height:1.7;margin-top:22px;white-space:pre-wrap;overflow-wrap:anywhere}
-.poster .footer{font-size:10px;letter-spacing:1px;margin-top:25px;overflow-wrap:anywhere}
-.poster.theme-sunset{--bg1:#5c1e30;--bg2:#e75b34;--accent:#ffe6a8}
-.poster.theme-green{--bg1:#103b30;--bg2:#16856a;--accent:#d4ff8a}
-.poster.theme-purple{--bg1:#30135f;--bg2:#7950d7;--accent:#f2c8ff}
-.poster.theme-gold{--bg1:#382812;--bg2:#a7781e;--accent:#fff0b2}
-.poster.theme-light{--bg1:#edf4ff;--bg2:#c9d8ff;--accent:#1748e8;color:#142650}
-.poster.theme-light:before{border-color:#1748e855}
-.poster.theme-light:after{border-color:#1748e822}
-.note{font-size:11px;line-height:1.6;color:var(--muted);margin-top:12px}
-footer{text-align:center;background:white;border-top:1px solid var(--line);padding:20px;font-size:11px;color:var(--muted)}
-@media(max-width:750px){.grid{grid-template-columns:1fr}.hero{padding:25px 17px}main{padding:0 10px 25px}.body{padding:14px}.preview-area{padding:10px}.poster{max-width:420px}}
-@media print{header,.hero,.form-card,footer,.preview-head{display:none!important}main{margin:0;padding:0}.grid{display:block}.card{border:0;box-shadow:none}.preview-area{padding:0;background:white}.poster{max-width:none;width:100%;height:180mm;aspect-ratio:auto;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+:root{--bg:#090b16;--panel:#121729;--panel2:#19213a;--line:#2b3654;--text:#f4f6ff;--muted:#a1acc7;--accent:#a78bfa;--cyan:#65e8de;--gold:#f6c979}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#24204b 0,#090b16 48%);font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:10;background:#090b16ed;backdrop-filter:blur(16px);border-bottom:1px solid #ffffff12;padding:13px clamp(12px,3vw,35px)}
+.nav{max-width:1600px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:950;font-size:14px;letter-spacing:.4px}
+.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,#b4a0ff,#65e8de);display:grid;place-items:center;color:#111329;font-size:24px;box-shadow:0 7px 30px #a78bfa30}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.7px;margin-top:4px}
+.status{border:1px solid #65e8de55;color:var(--cyan);background:#65e8de09;border-radius:30px;padding:8px 11px;font-size:10px;font-weight:900}
+main{max-width:1600px;margin:auto;padding:25px clamp(10px,2.5vw,30px) 45px}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;margin:6px 0 22px}
+.eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:var(--cyan)}
+h1{font-size:clamp(28px,4vw,45px);letter-spacing:-1px;line-height:1.08;margin:10px 0}
+.hero p{font-size:13px;color:var(--muted);line-height:1.65;max-width:760px;margin:0}
+.layout{display:grid;grid-template-columns:minmax(285px,360px) minmax(0,1fr);gap:16px;align-items:start}
+.panel{background:linear-gradient(155deg,#151b30f5,#101526f5);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 20px 60px #0002;min-width:0}
+.panelhead{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.panelhead h2{font-size:13px;margin:0}
+.kicker{font-size:9px;letter-spacing:1.5px;color:var(--cyan);font-weight:900}
+.pad{padding:15px}
+.section{padding:15px 0;border-bottom:1px solid #ffffff12}
+.section:first-child{padding-top:0}
+.section:last-child{border:0;padding-bottom:0}
+.sectitle{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px;font-weight:900;margin:0 0 12px}
+.field{margin-bottom:12px;min-width:0}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:10px;color:#bbc6dc;font-weight:800;margin-bottom:6px}
+input,select,textarea{width:100%;min-width:0;background:#0a1020;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px;font-size:12px;outline:none}
+textarea{resize:vertical;min-height:65px;line-height:1.5}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+input[type=color]{height:38px;padding:4px}
+input[type=range]{padding:0;accent-color:var(--accent)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.btn{border:1px solid var(--line);background:#202a43;color:var(--text);border-radius:10px;padding:10px 12px;font-size:11px;font-weight:850;transition:.18s}
+.btn:hover{transform:translateY(-1px);border-color:var(--accent)}
+.btn.primary{background:linear-gradient(130deg,#b5a2ff,#65e8de);border:0;color:#101225}
+.btn.gold{background:linear-gradient(130deg,#ffe1a0,#efad62);color:#281707;border:0}
+.btn.full{width:100%}
+.btn.small{padding:8px 9px;font-size:10px}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.templates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.template{position:relative;border:1px solid var(--line);background:#0b1120;border-radius:12px;padding:8px;text-align:left;color:var(--text)}
+.template.active{border-color:var(--cyan);box-shadow:0 0 0 1px #65e8de25}
+.mini{aspect-ratio:4/5;border-radius:7px;overflow:hidden;padding:9px;display:flex;flex-direction:column;justify-content:space-between;min-height:88px}
+.mini strong{font-size:12px;line-height:1.1}
+.mini small{font-size:8px;line-height:1.3}
+.mini .minitag{font-size:7px;letter-spacing:1px}
+.template>span{display:block;font-size:10px;font-weight:850;margin:8px 2px 2px}
+.palette{display:flex;gap:7px;flex-wrap:wrap}
+.swatch{height:28px;width:28px;border:2px solid #ffffff35;border-radius:9px;position:relative}
+.swatch.active{outline:2px solid var(--cyan);outline-offset:2px}
+.swatch.active:after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;color:white;font-size:12px;text-shadow:0 1px 4px #000}
+.editor-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.editor-top h2{font-size:14px;margin:0}
+.tabs{display:flex;gap:5px;padding:4px;background:#090f1d;border:1px solid var(--line);border-radius:10px}
+.tab{background:transparent;color:var(--muted);border:0;padding:8px 10px;border-radius:7px;font-size:10px;font-weight:850}
+.tab.active{background:#293354;color:white}
+.canvasstage{margin-top:14px;border:1px solid var(--line);border-radius:15px;min-height:560px;display:flex;justify-content:center;align-items:center;overflow:auto;padding:22px;background-color:#090f1b;background-image:radial-gradient(#ffffff0d 1px,transparent 1px);background-size:17px 17px}
+.canvaswrap{max-width:100%;display:flex;justify-content:center}
+#poster{display:block;max-width:100%;height:auto;max-height:75vh;object-fit:contain;background:white;box-shadow:0 15px 45px #0008;border-radius:2px}
+.empty{text-align:center;max-width:290px;color:var(--muted)}
+.empty .symbol{font-size:48px}
+.empty h3{font-size:16px;color:var(--text)}
+.empty p{font-size:12px;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:13px}
+.stat{border:1px solid var(--line);background:#ffffff05;border-radius:10px;padding:10px}
+.stat small{display:block;color:var(--muted);font-size:9px;margin-bottom:5px}
+.stat strong{font-size:12px;overflow-wrap:anywhere}
+.exportrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.tip{font-size:10px;line-height:1.6;color:var(--muted);border:1px solid #ffffff12;background:#ffffff05;padding:11px;border-radius:10px;margin-top:12px}
+.rangehead{display:flex;justify-content:space-between;gap:8px;font-size:10px;color:var(--muted)}
+.rangehead label{margin:0}
+#notice{font-size:10px;color:var(--muted);margin-top:10px;line-height:1.5}
+.toast{position:fixed;bottom:18px;left:50%;transform:translate(-50%,20px);opacity:0;transition:.2s;pointer-events:none;z-index:30;background:#1c2843;border:1px solid #52658a;border-radius:12px;padding:12px 16px;font-size:12px;max-width:90vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:#7785a0;font-size:10px;line-height:1.7;padding:0 15px 25px}
+.hidden{display:none!important}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.layout>section{order:1}.layout>aside{order:2}.canvasstage{min-height:350px}}
+@media(max-width:480px){header{padding:10px}.brand{font-size:12px}.logo{width:37px;height:37px}main{padding:17px 9px 30px}.pad{padding:12px}.canvasstage{min-height:260px;padding:10px}.stats{gap:5px}.stat{padding:8px}.stat strong{font-size:10px}.exportrow{grid-template-columns:1fr 1fr}.exportrow .btn:last-child{grid-column:1/-1}}
+@media print{
+ body{background:#fff!important}
+ header,.hero,aside,.editor-top,.stats,.exportrow,.tip,footer,.no-print{display:none!important}
+ main{padding:0!important;margin:0!important}
+ .layout{display:block!important}
+ .panel{border:0!important;box-shadow:none!important;background:white!important}
+ .layout>section{display:block!important}
+ .panelhead{display:none!important}
+ .pad{padding:0!important}
+ .canvasstage{display:block!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;background:white!important;overflow:visible!important}
+ #poster{max-height:none!important;max-width:none!important;width:100%!important;height:auto!important;box-shadow:none!important}
+ @page{size:auto;margin:8mm}
+}
 </style>
 </head>
 <body>
-<header>CSC <span>Seva Tools</span></header>
-<section class="hero"><div><small>Creative studio · Tool 09</small><h1>Professional Poster Maker</h1><p>Design a simple promotional poster for your business, event, announcement or social media using custom text and colour themes.</p></div></section>
-<main><div class="grid">
-<section class="card form-card">
-<div class="head"><h2>Poster content</h2><p>Change the text and theme to customise your design.</p></div>
-<div class="body">
-<div class="field"><label for="category">Poster category</label><select id="category"><option>Announcement</option><option>Business Promotion</option><option>Special Event</option><option>Sale & Offer</option><option>Education</option><option>Service Information</option></select></div>
-<div class="field"><label for="headline">Main headline</label><textarea id="headline" maxlength="100">MAKE IT HAPPEN</textarea></div>
-<div class="field"><label for="subtitle">Supporting text</label><textarea id="subtitle" maxlength="250">Your idea deserves to stand out. Create something remarkable today.</textarea></div>
-<div class="field"><label for="date">Date / extra details</label><textarea id="date" maxlength="200" placeholder="Date, time, location or offer details"></textarea></div>
-<div class="field"><label for="footerText">Business name / footer</label><input id="footerText" maxlength="80" placeholder="Your business or brand name"></div>
-<div class="field"><label>Choose a theme</label><div class="themes">
-<button class="theme active" data-theme="default" style="background:linear-gradient(135deg,#101a36,#1748e8)" aria-label="Electric blue theme" type="button"></button>
-<button class="theme" data-theme="sunset" style="background:linear-gradient(135deg,#5c1e30,#e75b34)" aria-label="Sunset theme" type="button"></button>
-<button class="theme" data-theme="green" style="background:linear-gradient(135deg,#103b30,#16856a)" aria-label="Green theme" type="button"></button>
-<button class="theme" data-theme="purple" style="background:linear-gradient(135deg,#30135f,#7950d7)" aria-label="Purple theme" type="button"></button>
-<button class="theme" data-theme="gold" style="background:linear-gradient(135deg,#382812,#a7781e)" aria-label="Gold theme" type="button"></button>
-<button class="theme" data-theme="light" style="background:linear-gradient(135deg,#edf4ff,#1748e8)" aria-label="Light theme" type="button"></button>
-</div></div>
-<div class="two">
-<div class="field"><label for="format">Poster shape</label><select id="format"><option value="4/5">Social portrait 4:5</option><option value="1/1">Square 1:1</option><option value="9/16">Story 9:16</option><option value="3/4">Portrait 3:4</option></select></div>
-<div class="field"><label for="size">Download quality</label><select id="size"><option value="1080">Standard</option><option value="1600">High resolution</option></select></div>
-</div>
-<div class="actions"><button class="btn primary" id="download" type="button">Download PNG</button><button class="btn secondary" id="print" type="button">Print poster</button></div>
-<div class="note" id="status" role="status" aria-live="polite">Poster updates as you type. Download generates a PNG image locally in your browser.</div>
-</div>
-</section>
-<section class="card">
-<div class="head preview-head"><h2>Live poster preview</h2><p>Review your design before exporting.</p></div>
-<div class="preview-area">
-<article class="poster" id="poster">
-<div class="badge" id="pCategory">ANNOUNCEMENT</div>
-<h2 id="pHeadline">MAKE IT HAPPEN</h2>
-<div class="line"></div>
-<div class="subtitle" id="pSubtitle">Your idea deserves to stand out.</div>
-<div class="date" id="pDate"></div>
-<div class="footer" id="pFooter"></div>
-</article>
-</div>
-</section>
-</div></main>
-<footer>Creative tools for everyday work · CSC Seva Tools</footer>
+<header>
+ <div class="nav">
+  <div class="brand"><div class="logo">✳</div><div>KISAN SEVA TOOLS<small>AI POSTER MAKER PRO</small></div></div>
+  <span class="status">✦ CREATIVE STUDIO</span>
+ </div>
+</header>
+<main>
+ <div class="hero">
+  <div><div class="eyebrow">TOOL 44 / DESIGN LAB</div>
+   <h1>Make it bold. <span style="color:var(--cyan)">Make it yours.</span></h1>
+   <p>Design eye-catching shop posters, offers, festival greetings and announcements. Start with a template, customise every detail, add your own image and export a high-resolution PNG.</p>
+  </div>
+ </div>
+ <div class="layout">
+  <aside class="panel">
+   <div class="panelhead"><h2>Creative controls</h2><span class="kicker">01 / DESIGN</span></div>
+   <div class="pad">
+    <div class="section">
+     <div class="sectitle">Choose a poster template <span class="kicker">START HERE</span></div>
+     <div class="templates" id="templates">
+      <button class="template active" data-template="festival"><div class="mini" style="background:linear-gradient(145deg,#5424a6,#f04477);color:white"><small class="minitag">FESTIVAL SPECIAL</small><strong>HAPPY<br>FESTIVAL!</strong><small>WISHING YOU JOY</small></div><span>Festival Glow</span></button>
+      <button class="template" data-template="shop"><div class="mini" style="background:linear-gradient(145deg,#071c35,#1378bd);color:white"><small class="minitag">NOW OPEN</small><strong>YOUR SHOP<br>NAME</strong><small>QUALITY • TRUST • VALUE</small></div><span>Shop Promo</span></button>
+      <button class="template" data-template="sale"><div class="mini" style="background:linear-gradient(145deg,#a40e23,#ff7b2f);color:white"><small class="minitag">LIMITED OFFER</small><strong>MEGA<br>SALE!</strong><small>DON'T MISS OUT</small></div><span>Offer Blast</span></button>
+      <button class="template" data-template="elegant"><div class="mini" style="background:linear-gradient(145deg,#112b28,#31705d);color:#f6dfaa"><small class="minitag">A SPECIAL ANNOUNCEMENT</small><strong>YOU'RE<br>INVITED</strong><small>CELEBRATE WITH US</small></div><span>Elegant Invite</span></button>
+      <button class="template" data-template="modern"><div class="mini" style="background:linear-gradient(135deg,#15162b,#5844a7);color:white"><small class="minitag">NEW ARRIVAL</small><strong>BIG NEWS.<br>FRESH LOOK.</strong><small>MADE FOR YOU</small></div><span>Modern Neon</span></button>
+      <button class="template" data-template="minimal"><div class="mini" style="background:#f7f2e8;color:#283b38;border:1px solid #c8bfa9"><small class="minitag">YOUR BRAND</small><strong>LESS CLUTTER.<br>MORE IMPACT.</strong><small>YOUR MESSAGE HERE</small></div><span>Minimal Luxe</span></button>
+     </div>
+    </div>
+    <div class="section">
+     <div class="sectitle">Poster text <span class="kicker">02</span></div>
+     <div class="field"><label for="brand">Brand / shop name</label><input id="brand" maxlength="60" value="KAIF PAN SHOP"></div>
+     <div class="field"><label for="headline">Main headline</label><textarea id="headline" maxlength="120">HAPPY FESTIVAL!</textarea></div>
+     <div class="field"><label for="subtitle">Subtitle</label><input id="subtitle" maxlength="120" value="WISHING YOU HAPPINESS & SUCCESS"></div>
+     <div class="field"><label for="offer">Offer / announcement</label><textarea id="offer" maxlength="160" placeholder="e.g. Special prices this week!">Celebrate every moment with joy.</textarea></div>
+     <div class="field"><label for="footerText">Footer / contact details</label><input id="footerText" maxlength="120" value="YOUR ADDRESS • YOUR CONTACT"></div>
+     <div class="field"><label for="badgeText">Small badge text</label><input id="badgeText" maxlength="35" value="SPECIAL EDITION"></div>
+    </div>
+    <div class="section">
+     <div class="sectitle">Brand colours <span class="kicker">03</span></div>
+     <div class="field"><label>Quick colour palettes</label>
+      <div class="palette" id="palettes">
+       <button class="swatch active" data-bg1="#5424a6" data-bg2="#f04477" data-fg="#ffffff" style="background:linear-gradient(135deg,#5424a6,#f04477)" title="Festival"></button>
+       <button class="swatch" data-bg1="#071c35" data-bg2="#1378bd" data-fg="#ffffff" style="background:linear-gradient(135deg,#071c35,#1378bd)" title="Business"></button>
+       <button class="swatch" data-bg1="#a40e23" data-bg2="#ff7b2f" data-fg="#ffffff" style="background:linear-gradient(135deg,#a40e23,#ff7b2f)" title="Sale"></button>
+       <button class="swatch" data-bg1="#112b28" data-bg2="#31705d" data-fg="#f6dfaa" style="background:linear-gradient(135deg,#112b28,#31705d)" title="Elegant"></button>
+       <button class="swatch" data-bg1="#15162b" data-bg2="#5844a7" data-fg="#ffffff" style="background:linear-gradient(135deg,#15162b,#5844a7)" title="Neon"></button>
+       <button class="swatch" data-bg1="#f7f2e8" data-bg2="#ded2b7" data-fg="#283b38" style="background:linear-gradient(135deg,#f7f2e8,#ded2b7)" title="Minimal"></button>
+      </div>
+     </div>
+     <div class="grid3">
+      <div class="field"><label for="bg1">Start colour</label><input type="color" id="bg1" value="#5424a6"></div>
+      <div class="field"><label for="bg2">End colour</label><input type="color" id="bg2" value="#f04477"></div>
+      <div class="field"><label for="fg">Text colour</label><input type="color" id="fg" value="#ffffff"></div>
+     </div>
+     <div class="field"><label for="orientation">Poster format</label><select id="orientation"><option value="portrait">Portrait — 4:5</option><option value="square">Square — 1:1</option><option value="story">Story — 9:16</option><option value="landscape">Landscape — 16:9</option></select></div>
+     <div class="field"><label for="resolution">Export quality</label><select id="resolution"><option value="1080">Standard — 1080 px</option><option value="1600" selected>High — 1600 px</option><option value="2400">Ultra — 2400 px</option></select></div>
+    </div>
+    <div class="section">
+     <div class="sectitle">Add your image / logo <span class="kicker">04</span></div>
+     <div class="field"><label for="imageInput">Upload JPG, PNG or WebP</label><input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp"></div>
+     <div class="grid2">
+      <div class="field"><label for="imageStyle">Image treatment</label><select id="imageStyle"><option value="circle">Circle / badge</option><option value="rounded">Rounded rectangle</option><option value="square">Square image</option></select></div>
+      <div class="field"><label for="imagePosition">Placement</label><select id="imagePosition"><option value="right">Right side</option><option value="left">Left side</option><option value="center">Bottom centre</option></select></div>
+     </div>
+     <div class="field"><div class="rangehead"><label for="imageScale">Image size</label><span id="imageScaleValue">100%</span></div><input id="imageScale" type="range" min="50" max="150" value="100"></div>
+     <button class="btn full" id="removeImage">Remove uploaded image</button>
+     <p class="tip">Use your own logo, product or event photo. This editor places your image on the poster; it does not generate new images or automatically remove backgrounds.</p>
+    </div>
+    <div class="section">
+     <div class="sectitle">Typography & effects <span class="kicker">05</span></div>
+     <div class="field"><label for="font">Font style</label><select id="font"><option value="impact">Bold Display</option><option value="arial">Modern Sans</option><option value="georgia">Elegant Serif</option><option value="mono">Tech Mono</option></select></div>
+     <div class="field"><div class="rangehead"><label for="headlineSize">Headline size</label><span id="headlineSizeValue">100%</span></div><input id="headlineSize" type="range" min="65" max="140" value="100"></div>
+     <div class="field"><label for="decoration">Decoration</label><select id="decoration"><option value="glow">Glow / soft light</option><option value="lines">Geometric lines</option><option value="dots">Dot pattern</option><option value="none">Clean / none</option></select></div>
+     <label class="checkline"><input id="showBadge" type="checkbox" checked> Show badge</label>
+     <label class="checkline" style="margin-top:10px"><input id="showImage" type="checkbox" checked> Show uploaded image</label>
+     <label class="checkline" style="margin-top:10px"><input id="showBrand" type="checkbox" checked> Show shop / brand name</label>
+    </div>
+    <div class="section">
+     <div class="sectitle">Quick actions <span class="kicker">06</span></div>
+     <div class="grid2">
+      <button class="btn" id="resetBtn">Reset design</button>
+      <button class="btn" id="randomBtn">Surprise me ✦</button>
+     </div>
+    </div>
+   </div>
+  </aside>
+  <section class="panel">
+   <div class="panelhead"><h2>Live poster canvas</h2><span class="kicker">DESIGN / PREVIEW</span></div>
+   <div class="pad">
+    <div class="editor-top">
+     <div><h2>Your creative canvas</h2><div style="font-size:10px;color:var(--muted);margin-top:5px">Every change updates your design</div></div>
+     <div class="tabs">
+      <button class="tab active" id="previewTab">Preview</button>
+      <button class="tab" id="fitTab">Fit canvas</button>
+     </div>
+    </div>
+    <div class="canvasstage">
+     <div class="empty" id="emptyState"><div class="symbol">✳</div><h3>Your design starts here</h3><p>Choose a template, edit the text and colours, then export your finished poster.</p></div>
+     <div class="canvaswrap"><canvas id="poster" class="hidden" width="640" height="800"></canvas></div>
+    </div>
+    <div class="stats">
+     <div class="stat"><small>CANVAS SIZE</small><strong id="sizeStat">1280 × 1600</strong></div>
+     <div class="stat"><small>FORMAT</small><strong id="formatStat">Portrait 4:5</strong></div>
+     <div class="stat"><small>IMAGE</small><strong id="imageStat">No image</strong></div>
+    </div>
+    <div class="exportrow">
+     <button class="btn primary" id="downloadBtn">↓ Download PNG</button>
+     <button class="btn gold" id="printBtn">⎙ Print poster</button>
+     <button class="btn" id="copyTextBtn">Copy poster text</button>
+    </div>
+    <div class="tip">Export tip: use PNG for sharp text and graphics. Before printing, check the print preview and paper size. The “Surprise me” button changes the design style, not the truth of any offer or announcement.</div>
+    <div id="notice">Ready to create. No account or server upload is required for this basic editor.</div>
+   </div>
+  </section>
+ </div>
+</main>
+<footer>Kisan Seva Tools · AI Poster Maker Pro · Runs locally in your browser · Check spelling, prices and contact details before publishing.</footer>
+<div class="toast" id="toast"></div>
 <script>
 (function(){
+"use strict";
 const $=id=>document.getElementById(id);
-const fields=["category","headline","subtitle","date","footerText"];
-function update(){
-$("pCategory").textContent=$("category").value.toUpperCase();
-$("pHeadline").textContent=$("headline").value.trim()||"YOUR HEADLINE";
-$("pSubtitle").textContent=$("subtitle").value.trim();
-$("pDate").textContent=$("date").value.trim();
-$("pFooter").textContent=$("footerText").value.trim();
-$("poster").style.aspectRatio=$("format").value;
-}
-fields.forEach(id=>$(id).addEventListener("input",update));
-$("format").addEventListener("change",update);
-document.querySelectorAll(".theme").forEach(btn=>btn.addEventListener("click",()=>{
-document.querySelectorAll(".theme").forEach(b=>b.classList.remove("active"));
-btn.classList.add("active");
-$("poster").className="poster"+(btn.dataset.theme==="default"?"":" theme-"+btn.dataset.theme);
-update();
-}));
-function drawPoster(){
-const el=$("poster"),rect=el.getBoundingClientRect();
-const width=Number($("size").value),height=Math.round(width*rect.height/rect.width);
-const canvas=document.createElement("canvas");canvas.width=width;canvas.height=height;
-const ctx=canvas.getContext("2d");if(!ctx)throw new Error("Canvas is unavailable in this browser.");
-const style=getComputedStyle(el);
-const c1=style.getPropertyValue("--bg1").trim()||"#101a36";
-const c2=style.getPropertyValue("--bg2").trim()||"#1748e8";
-const accent=style.getPropertyValue("--accent").trim()||"#f8d477";
-const fg=style.color;
-const grad=ctx.createLinearGradient(0,0,width,height);grad.addColorStop(0,c1);grad.addColorStop(1,c2);
-ctx.fillStyle=grad;ctx.fillRect(0,0,width,height);
-ctx.strokeStyle=accent;ctx.lineWidth=Math.max(2,width*.003);
-ctx.strokeRect(width*.035,height*.02,width*.93,height*.96);
-ctx.textAlign="center";ctx.textBaseline="middle";
-const scale=width/440;
-let y=height*.23;
-ctx.fillStyle=accent;ctx.font="bold "+Math.round(11*scale)+"px Arial";
-ctx.fillText($("pCategory").textContent.toUpperCase(),width/2,y,width*.8);
-y+=height*.15;
-const words=$("pHeadline").textContent.split(/\s+/);
-let lines=[],line="";
-ctx.font="900 "+Math.round(36*scale)+"px Arial";
-words.forEach(word=>{
-const test=line?line+" "+word:word;
-if(ctx.measureText(test).width>width*.78&&line){lines.push(line);line=word;}else line=test;
-});
-if(line)lines.push(line);
-const fontSize=Math.min(36*scale,(height*.24)/(Math.max(lines.length,1)*1.1));
-ctx.font="900 "+Math.round(fontSize)+"px Arial";
-const lineHeight=fontSize*1.12;
-lines.slice(0,5).forEach((text,i)=>ctx.fillText(text,width/2,y+i*lineHeight,width*.8));
-y+=Math.min(lines.length,5)*lineHeight+height*.05;
-ctx.fillStyle=accent;ctx.fillRect(width*.43,y,width*.14,Math.max(3,width*.009));y+=height*.09;
-ctx.fillStyle=fg;ctx.font=Math.round(15*scale)+"px Arial";
-const wrap=(text,maxWidth,font)=>{
-ctx.font=font;const out=[];let current="";
-text.split(/\s+/).forEach(word=>{
-const test=current?current+" "+word:word;
-if(ctx.measureText(test).width>maxWidth&&current){out.push(current);current=word;}else current=test;
-});if(current)out.push(current);return out;
+const canvas=$("poster");
+const ctx=canvas.getContext("2d");
+const fields=["brand","headline","subtitle","offer","footerText","badgeText","bg1","bg2","fg","orientation","resolution","imageStyle","imagePosition","imageScale","font","headlineSize","decoration","showBadge","showImage","showBrand"];
+let uploadedImage=null,template="festival",toastTimer=null,renderToken=0;
+const defaults={
+ festival:{bg1:"#5424a6",bg2:"#f04477",fg:"#ffffff",headline:"HAPPY FESTIVAL!",subtitle:"WISHING YOU HAPPINESS & SUCCESS",offer:"Celebrate every moment with joy.",badgeText:"SPECIAL EDITION"},
+ shop:{bg1:"#071c35",bg2:"#1378bd",fg:"#ffffff",headline:"YOUR SHOP NAME",subtitle:"QUALITY • TRUST • VALUE",offer:"Visit us today for great service.",badgeText:"NOW OPEN"},
+ sale:{bg1:"#a40e23",bg2:"#ff7b2f",fg:"#ffffff",headline:"MEGA SALE!",subtitle:"LIMITED-TIME SPECIAL OFFER",offer:"Discover something you'll love.",badgeText:"LIMITED OFFER"},
+ elegant:{bg1:"#112b28",bg2:"#31705d",fg:"#f6dfaa",headline:"YOU'RE INVITED",subtitle:"A SPECIAL ANNOUNCEMENT",offer:"Celebrate this special moment with us.",badgeText:"SAVE THE DATE"},
+ modern:{bg1:"#15162b",bg2:"#5844a7",fg:"#ffffff",headline:"BIG NEWS. FRESH LOOK.",subtitle:"MADE FOR YOU",offer:"Discover what's new today.",badgeText:"NEW ARRIVAL"},
+ minimal:{bg1:"#f7f2e8",bg2:"#ded2b7",fg:"#283b38",headline:"LESS CLUTTER.\nMORE IMPACT.",subtitle:"YOUR BRAND. YOUR STORY.",offer:"Simple, thoughtful and made for you.",badgeText:"YOUR BRAND"}
 };
-const subtitle=wrap($("pSubtitle").textContent,width*.78,Math.round(15*scale)+"px Arial");
-subtitle.slice(0,5).forEach((text,i)=>ctx.fillText(text,width/2,y+i*22*scale,width*.8));
-y+=subtitle.length*22*scale+height*.05;
-ctx.font=Math.round(12*scale)+"px Arial";
-wrap($("pDate").textContent,width*.8,Math.round(12*scale)+"px Arial").slice(0,6).forEach((text,i)=>ctx.fillText(text,width/2,y+i*19*scale,width*.82));
-ctx.fillStyle=accent;ctx.font="bold "+Math.round(11*scale)+"px Arial";
-ctx.fillText($("pFooter").textContent,width/2,height*.88,width*.8);
-return canvas;
+function notify(msg){
+ const t=$("toast");t.textContent=msg;t.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2600);
 }
-$("download").addEventListener("click",()=>{
-try{
-const canvas=drawPoster();const a=document.createElement("a");
-a.download="csc-seva-poster.png";a.href=canvas.toDataURL("image/png");a.click();
-$("status").textContent="PNG download started. Check your browser's Downloads folder.";
-}catch(e){$("status").textContent=e.message||"Could not generate poster.";}
+function val(id){return $(id).value;}
+function isChecked(id){return $(id).checked;}
+function formatSize(){
+ const r=Number(val("resolution"))||1600;
+ switch(val("orientation")){
+  case "square":return [r,r,"Square 1:1"];
+  case "story":return [Math.round(r*9/16),r,"Story 9:16"];
+  case "landscape":return [r,Math.round(r*9/16),"Landscape 16:9"];
+  default:return [Math.round(r*4/5),r,"Portrait 4:5"];
+ }
+}
+function fontFamily(){
+ switch(val("font")){
+  case "arial":return "Arial, Helvetica, sans-serif";
+  case "georgia":return "Georgia, serif";
+  case "mono":return "'Courier New', monospace";
+  default:return "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif";
+ }
+}
+function roundRect(c,x,y,w,h,r){
+ r=Math.max(0,Math.min(r,w/2,h/2));
+ c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();
+}
+function gradient(c,w,h){
+ const g=c.createLinearGradient(0,0,w,h);
+ g.addColorStop(0,val("bg1"));g.addColorStop(1,val("bg2"));return g;
+}
+function wrapText(c,text,maxWidth){
+ const lines=[];
+ String(text||"").split("\n").forEach(paragraph=>{
+  const words=paragraph.split(/\s+/).filter(Boolean);
+  if(!words.length){lines.push("");return;}
+  let line="";
+  words.forEach(word=>{
+   const test=line?line+" "+word:word;
+   if(line&&c.measureText(test).width>maxWidth){lines.push(line);line=word;}
+   else line=test;
+  });
+  lines.push(line);
+ });
+ return lines;
+}
+function drawDecor(c,w,h){
+ const mode=val("decoration");
+ if(mode==="none")return;
+ c.save();
+ if(mode==="glow"){
+  const g=c.createRadialGradient(w*.5,h*.38,0,w*.5,h*.38,w*.65);
+  g.addColorStop(0,"#ffffff20");g.addColorStop(1,"#ffffff00");
+  c.fillStyle=g;c.fillRect(0,0,w,h);
+  c.strokeStyle=val("fg")+"45";c.lineWidth=Math.max(1,w*.002);
+  c.beginPath();c.arc(w*.84,h*.13,w*.23,0,Math.PI*2);c.stroke();
+  c.beginPath();c.arc(w*.84,h*.13,w*.17,0,Math.PI*2);c.stroke();
+ }else if(mode==="lines"){
+  c.strokeStyle=val("fg")+"30";c.lineWidth=Math.max(1,w*.002);
+  for(let i=0;i<7;i++){
+   c.beginPath();c.moveTo(w*(.05+i*.035),0);c.lineTo(w*(.45+i*.035),h*.4);c.stroke();
+   c.beginPath();c.moveTo(w*(.95-i*.03),h);c.lineTo(w*(.60-i*.025),h*.72);c.stroke();
+  }
+ }else if(mode==="dots"){
+  c.fillStyle=val("fg")+"35";
+  const gap=Math.max(12,w*.035),r=Math.max(1,w*.003);
+  for(let y=h*.05;y<h*.28;y+=gap)for(let x=w*.72;x<w*.94;x+=gap){c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fill();}
+ }
+ c.restore();
+}
+function drawImage(c,w,h){
+ if(!uploadedImage||!isChecked("showImage"))return;
+ const pos=val("imagePosition"),style=val("imageStyle"),scale=(Number(val("imageScale"))||100)/100;
+ let box;
+ if(pos==="left")box={x:w*.075,y:h*.34,w:w*.27,h:h*.25};
+ else if(pos==="center")box={x:w*.32,y:h*.68,w:w*.36,h:h*.22};
+ else box={x:w*.67,y:h*.34,w:w*.255,h:h*.26};
+ box.w*=scale;box.h*=scale;
+ box.x=Math.max(w*.025,Math.min(w-box.w-w*.025,box.x-(box.w-(pos==="center"?w*.36:w*.255))/2));
+ box.y=Math.max(h*.20,Math.min(h-box.h-h*.025,box.y));
+ c.save();
+ if(style==="circle"){
+  const d=Math.min(box.w,box.h),cx=box.x+box.w/2,cy=box.y+box.h/2;
+  c.beginPath();c.arc(cx,cy,d/2,0,Math.PI*2);c.clip();
+  c.fillStyle="#ffffff20";c.fillRect(cx-d/2,cy-d/2,d,d);
+  const s=Math.max(d/uploadedImage.width,d/uploadedImage.height);
+  const iw=uploadedImage.width*s,ih=uploadedImage.height*s;
+  c.drawImage(uploadedImage,cx-iw/2,cy-ih/2,iw,ih);
+  c.restore();
+  c.save();c.strokeStyle=val("fg");c.lineWidth=Math.max(3,w*.007);c.beginPath();c.arc(cx,cy,d/2,0,Math.PI*2);c.stroke();c.restore();
+  return;
+ }
+ roundRect(c,box.x,box.y,box.w,box.h,style==="rounded"?w*.025:0);
+ c.save();c.clip();
+ const s=Math.max(box.w/uploadedImage.width,box.h/uploadedImage.height);
+ const iw=uploadedImage.width*s,ih=uploadedImage.height*s;
+ c.drawImage(uploadedImage,box.x+(box.w-iw)/2,box.y+(box.h-ih)/2,iw,ih);
+ c.restore();
+ c.strokeStyle=val("fg");c.lineWidth=Math.max(2,w*.004);c.stroke();
+ c.restore();
+}
+function drawTextBlock(c,text,cx,y,maxW,fontSize,lineHeight,maxLines){
+ c.textAlign="center";c.textBaseline="top";
+ c.font="900 "+fontSize+"px "+fontFamily();
+ let lines=wrapText(c,text,maxW);
+ if(maxLines&&lines.length>maxLines){
+  lines=lines.slice(0,maxLines);
+  let last=lines[lines.length-1];
+  while(last.length>3&&c.measureText(last+"…").width>maxW)last=last.slice(0,-1);
+  lines[lines.length-1]=last+"…";
+ }
+ lines.forEach((line,i)=>c.fillText(line,cx,y+i*lineHeight,maxW));
+ return lines.length*lineHeight;
+}
+function drawPoster(target){
+ const [w,h]=formatSize();
+ target.width=w;target.height=h;
+ const c=target.getContext("2d");
+ c.clearRect(0,0,w,h);
+ c.fillStyle=gradient(c,w,h);c.fillRect(0,0,w,h);
+ drawDecor(c,w,h);
+ const pad=w*.075;
+ c.save();
+ c.strokeStyle=val("fg")+"75";c.lineWidth=Math.max(1,w*.002);
+ c.strokeRect(pad*.55,pad*.55,w-pad*1.1,h-pad*1.1);
+ c.restore();
+ const small=Math.min(w,h);
+ if(isChecked("showBadge")&&val("badgeText")){
+  c.save();
+  c.font="800 "+(small*.027)+"px Arial";
+  const txt=val("badgeText").toUpperCase();
+  const bw=Math.min(w*.7,c.measureText(txt).width+w*.07),bh=h*.055,bx=(w-bw)/2,by=h*.085;
+  roundRect(c,bx,by,bw,bh,bh/2);
+  c.fillStyle=val("fg")+"20";c.fill();
+  c.strokeStyle=val("fg")+"90";c.lineWidth=Math.max(1,w*.002);c.stroke();
+  c.fillStyle=val("fg");c.textAlign="center";c.textBaseline="middle";
+  c.fillText(txt,w/2,by+bh/2,bw-w*.025);
+  c.restore();
+ }
+ let y=h*.19;
+ if(isChecked("showBrand")&&val("brand")){
+  c.save();c.fillStyle=val("fg");c.textAlign="center";c.textBaseline="top";
+  c.font="800 "+(small*.035)+"px Arial";
+  c.fillText(val("brand").toUpperCase(),w/2,y,w*.78);
+  c.restore();y+=h*.06;
+ }
+ const imagePos=val("imagePosition"),hasImg=uploadedImage&&isChecked("showImage");
+ const headlineCx=hasImg&&imagePos==="left"?w*.62:hasImg&&imagePos==="right"?w*.40:w/2;
+ const headlineW=hasImg&&imagePos!=="center"?w*.64:w*.83;
+ const headlineBase=small*.105*(Number(val("headlineSize"))||100)/100;
+ c.save();c.fillStyle=val("fg");c.shadowColor=val("fg")+"35";c.shadowBlur=val("decoration")==="glow"?small*.012:0;
+ const headHeight=drawTextBlock(c,val("headline").toUpperCase(),headlineCx,y,headlineW,headlineBase,headlineBase*1.12,5);
+ c.restore();
+ let subY=y+headHeight+ h*.035;
+ c.save();c.fillStyle=val("fg")+"e8";
+ const subSize=small*.032;
+ const subHeight=drawTextBlock(c,val("subtitle"),w/2,subY,w*.78,subSize,subSize*1.4,3);
+ c.restore();
+ let bodyY=subY+subHeight+h*.045;
+ if(hasImg&&imagePos!=="center"){
+  drawImage(c,w,h);
+  bodyY=Math.max(bodyY,h*.62);
+ }else if(hasImg&&imagePos==="center"){
+  bodyY=Math.min(bodyY,h*.59);
+  drawImage(c,w,h);
+  bodyY=h*.60;
+ }
+ if(val("offer")){
+  c.save();c.fillStyle=val("fg");
+  const offerSize=small*.038;
+  const offerHeight=drawTextBlock(c,val("offer"),w/2,bodyY,w*.78,offerSize,offerSize*1.42,5);
+  c.restore();
+  bodyY+=offerHeight+h*.035;
+ }
+ if(val("footerText")){
+  const fy=h*.90;
+  c.save();c.strokeStyle=val("fg")+"70";c.lineWidth=Math.max(1,w*.002);
+  c.beginPath();c.moveTo(pad*1.3,fy-h*.025);c.lineTo(w-pad*1.3,fy-h*.025);c.stroke();
+  c.fillStyle=val("fg");c.textAlign="center";c.textBaseline="middle";
+  c.font="700 "+(small*.024)+"px Arial";
+  c.fillText(val("footerText"),w/2,fy,w*.82);
+  c.restore();
+ }
+ c.save();c.fillStyle=val("fg")+"85";c.textAlign="center";c.textBaseline="middle";
+ c.font="700 "+(small*.016)+"px Arial";c.fillText("DESIGNED WITH KISAN SEVA TOOLS",w/2,h*.955,w*.8);c.restore();
+}
+function render(){
+ try{
+  drawPoster(canvas);
+  $("emptyState").classList.add("hidden");canvas.classList.remove("hidden");
+  const [w,h,label]=formatSize();
+  $("sizeStat").textContent=w+" × "+h+" px";
+  $("formatStat").textContent=label;
+  $("imageStat").textContent=uploadedImage?(isChecked("showImage")?"Image added":"Image hidden"):"No image";
+  $("imageScaleValue").textContent=val("imageScale")+"%";
+  $("headlineSizeValue").textContent=val("headlineSize")+"%";
+  $("notice").textContent="Canvas ready · "+w+" × "+h+" px · Changes are processed in your browser.";
+ }catch(e){console.error(e);notify("Preview error. Try a different template or smaller image.");}
+}
+function applyTemplate(name){
+ template=name;
+ document.querySelectorAll(".template").forEach(b=>b.classList.toggle("active",b.dataset.template===name));
+ const d=defaults[name]||defaults.festival;
+ ["bg1","bg2","fg","headline","subtitle","offer","badgeText"].forEach(k=>$(k).value=d[k]);
+ const pal=document.querySelector('[data-bg1="'+d.bg1+'"]');
+ document.querySelectorAll(".swatch").forEach(s=>s.classList.toggle("active",s===pal));
+ $("decoration").value=name==="minimal"?"none":name==="modern"?"glow":name==="shop"?"lines":"glow";
+ $("font").value=name==="elegant"||name==="minimal"?"georgia":name==="modern"?"arial":"impact";
+ render();
+}
+function download(){
+ try{
+  const out=document.createElement("canvas");drawPoster(out);
+  out.toBlob(blob=>{
+   if(!blob){notify("PNG export failed. Try standard resolution.");return;}
+   const url=URL.createObjectURL(blob),a=document.createElement("a");
+   a.href=url;a.download="KisanSeva-Poster-"+template+".png";
+   document.body.appendChild(a);a.click();a.remove();
+   setTimeout(()=>URL.revokeObjectURL(url),1800);
+   notify("High-resolution PNG export prepared.");
+  },"image/png");
+ }catch(e){notify("Export failed. Try a lower resolution.");}
+}
+$("templates").addEventListener("click",e=>{
+ const b=e.target.closest("[data-template]");if(b)applyTemplate(b.dataset.template);
 });
-$("print").addEventListener("click",()=>window.print());
-update();
+$("palettes").addEventListener("click",e=>{
+ const b=e.target.closest("[data-bg1]");if(!b)return;
+ $("bg1").value=b.dataset.bg1;$("bg2").value=b.dataset.bg2;$("fg").value=b.dataset.fg;
+ document.querySelectorAll(".swatch").forEach(s=>s.classList.toggle("active",s===b));render();
+});
+fields.forEach(id=>{
+ $(id).addEventListener("input",render);
+ $(id).addEventListener("change",render);
+});
+$("imageInput").addEventListener("change",e=>{
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ if(!/^image\/(jpeg|png|webp)$/.test(file.type)){notify("Choose a JPG, PNG or WebP image.");e.target.value="";return;}
+ if(file.size>12*1024*1024){notify("Choose an image smaller than 12 MB.");e.target.value="";return;}
+ const url=URL.createObjectURL(file),img=new Image();
+ img.onload=()=>{
+  uploadedImage=img;URL.revokeObjectURL(url);render();notify("Your image has been added.");
+ };
+ img.onerror=()=>{URL.revokeObjectURL(url);notify("Could not open that image.");};
+ img.src=url;
+});
+$("removeImage").addEventListener("click",()=>{
+ uploadedImage=null;$("imageInput").value="";render();notify("Uploaded image removed.");
+});
+$("downloadBtn").addEventListener("click",download);
+$("printBtn").addEventListener("click",()=>{
+ const out=document.createElement("canvas");drawPoster(out);
+ const url=out.toDataURL("image/png");
+ const win=window.open("","_blank");
+ if(!win){notify("Allow pop-ups to print your poster.");return;}
+ const img=win.document.createElement("img");img.src=url;img.alt="Poster print";
+ img.style.cssText="display:block;width:100%;height:auto;margin:auto";
+ win.document.title="Kisan Seva Poster";
+ win.document.head.innerHTML='<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>@page{size:auto;margin:5mm}body{margin:0;text-align:center}img{max-width:100%}@media print{img{max-height:none}}</style>';
+ win.document.body.innerHTML="";win.document.body.appendChild(img);
+ img.onload=()=>win.setTimeout(()=>win.print(),300);
+});
+$("copyTextBtn").addEventListener("click",async()=>{
+ const text=[val("brand"),val("headline"),val("subtitle"),val("offer"),val("footerText")].filter(Boolean).join("\n");
+ try{await navigator.clipboard.writeText(text);notify("Poster text copied.");}
+ catch(e){
+  const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();
+  try{document.execCommand("copy");notify("Poster text copied.");}catch(err){notify("Copy is unavailable in this browser.");}
+  t.remove();
+ }
+});
+$("resetBtn").addEventListener("click",()=>{
+ if(!confirm("Reset all poster text and styling?"))return;
+ $("brand").value="KAIF PAN SHOP";
+ $("footerText").value="YOUR ADDRESS • YOUR CONTACT";
+ $("orientation").value="portrait";$("resolution").value="1600";
+ $("imageStyle").value="circle";$("imagePosition").value="right";$("imageScale").value="100";
+ $("font").value="impact";$("headlineSize").value="100";$("showBadge").checked=true;
+ $("showImage").checked=true;$("showBrand").checked=true;
+ uploadedImage=null;$("imageInput").value="";applyTemplate("festival");notify("Design reset.");
+});
+$("randomBtn").addEventListener("click",()=>{
+ const names=Object.keys(defaults),name=names[Math.floor(Math.random()*names.length)];
+ applyTemplate(name);
+ $("headlineSize").value=String(85+Math.floor(Math.random()*31));
+ $("imagePosition").value=["left","right","center"][Math.floor(Math.random()*3)];
+ $("decoration").value=["glow","lines","dots","none"][Math.floor(Math.random()*4)];
+ render();notify("A fresh design style is ready.");
+});
+$("previewTab").addEventListener("click",()=>{$("previewTab").classList.add("active");$("fitTab").classList.remove("active");render();});
+$("fitTab").addEventListener("click",()=>{$("fitTab").classList.add("active");$("previewTab").classList.remove("active");render();});
+render();
 })();
 </script>
 </body>
