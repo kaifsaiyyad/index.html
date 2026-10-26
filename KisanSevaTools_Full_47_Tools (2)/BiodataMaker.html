@@ -4,321 +4,621 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101b32">
-<title>Professional Biodata Maker | CSC Seva Tools</title>
-<meta name="description" content="Create a printable personal biodata with photo, family details, education, occupation and multiple professional templates.">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="Create a professional personal or marriage biodata with photo, education, family details, live preview and PDF printing.">
+<title>Biodata Maker Pro | Kisan Seva Tools</title>
 <style>
-:root{--bg:#0a1222;--panel:#121e32;--panel2:#1a2940;--line:#2c3b54;--text:#f3f6fc;--muted:#9eacc1;--gold:#e8c47a;--blue:#8eb4ff;--radius:17px}
+:root{--bg:#07111f;--panel:#101f33;--panel2:#142841;--line:#293e55;--text:#edf6ff;--muted:#9db1c9;--green:#46efad;--cyan:#55d8ff;--red:#ff788b;--gold:#d5a65b;--radius:18px}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 0% 0%,#253d63 0,transparent 34%),var(--bg);color:var(--text);font:14px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 8% 0%,#164a3c66,transparent 35%),radial-gradient(ellipse at 95% 8%,#123d7055,transparent 35%),var(--bg);color:var(--text);font-family:Inter,"Segoe UI",system-ui,Arial,sans-serif;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(#9bbad00a 1px,transparent 1px),linear-gradient(90deg,#9bbad00a 1px,transparent 1px);background-size:32px 32px}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-header{background:#0a1222e8;border-bottom:1px solid #ffffff12}
-.top{max-width:1450px;margin:auto;padding:15px 23px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.5px}
-.brandmark{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,#f4dba1,#b78b3c);color:#1d2740;font-size:23px}
-.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.2px;font-weight:600}
-.tag{font-size:11px;color:var(--gold);border:1px solid #e8c47a44;background:#e8c47a0d;padding:7px 11px;border-radius:99px;font-weight:800}
-main{max-width:1450px;margin:auto;padding:32px 23px 50px}
-.hero{display:flex;justify-content:space-between;align-items:end;gap:18px;flex-wrap:wrap;margin-bottom:24px}
-.kicker{color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:850}
-h1{font-size:clamp(29px,4vw,44px);letter-spacing:-1.5px;line-height:1.12;margin:8px 0}
-.intro{max-width:720px;color:var(--muted);margin:0}
-.heroaside{font-size:11px;color:var(--muted);max-width:245px}
-.layout{display:grid;grid-template-columns:minmax(330px,.88fr) minmax(0,1.12fr);gap:20px;align-items:start}
-.panel{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:linear-gradient(145deg,#152137,#111a2b);box-shadow:0 18px 50px #0002}
-.phead{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
-.phead h2{font-size:14px;margin:0}.phead p{font-size:11px;color:var(--muted);margin:3px 0 0}
-.stepnum{color:var(--gold);font-size:11px;font-weight:850}
-.formbody{padding:18px}
-.section{margin:4px 0 13px;font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:1.2px;color:var(--blue)}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field{min-width:0;margin-bottom:13px}
-.field.full{grid-column:1/-1}
-label{display:block;font-size:11px;font-weight:750;margin-bottom:6px;color:#dce5f3}
-input,select,textarea{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:#0d1728;color:var(--text);padding:10px 11px}
-input,select{height:42px}textarea{min-height:76px;resize:vertical}
-input::placeholder,textarea::placeholder{color:#66778f}
-.help{color:var(--muted);font-size:10px;margin:5px 0 0}
-.divider{height:1px;background:var(--line);margin:17px 0}
-.btn{border:1px solid transparent;border-radius:10px;padding:10px 13px;font-size:11px;font-weight:850;transition:.16s}
-.btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
-.primary{background:linear-gradient(130deg,#f2dba2,#c99d4f);color:#172139}
-.secondary{background:var(--panel2);border-color:var(--line);color:var(--text)}
-.ghost{background:transparent;border-color:var(--line);color:var(--muted)}
-.btnrow{display:flex;gap:8px;flex-wrap:wrap}.btnrow .btn{flex:1}
-.photozone{display:flex;gap:13px;align-items:center;padding:12px;border:1px dashed #405574;border-radius:12px}
-.photothumb{width:64px;height:76px;flex-shrink:0;display:grid;place-items:center;overflow:hidden;background:#23344d;border-radius:8px;color:var(--muted);font-size:10px;text-align:center}
-.photothumb img{width:100%;height:100%;object-fit:cover}
-.photoinfo{min-width:0}.photoinfo b{display:block;font-size:12px}.photoinfo span{display:block;font-size:10px;color:var(--muted);margin:3px 0 8px}
-.previewpanel{position:sticky;top:12px}
-.previewbar{padding:12px 15px;display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.previewbar strong{font-size:12px}
-.live{font-size:10px;color:var(--gold);font-weight:850}
-.templates{display:flex;gap:5px;background:#0b1423;padding:4px;border-radius:10px}
-.templates button{border:0;background:transparent;color:var(--muted);border-radius:7px;padding:7px 9px;font-size:10px;font-weight:800}
-.templates button.active{background:#2a3b55;color:var(--gold)}
-.paperstage{padding:17px;background:#dce3ee;max-height:850px;overflow:auto}
-.paper{width:100%;max-width:780px;min-height:720px;background:#fffdf8;color:#243148;margin:auto;padding:clamp(22px,4vw,43px);box-shadow:0 10px 28px #1c2a401c;font-family:Georgia,"Times New Roman",serif;font-size:12px;line-height:1.65;overflow-wrap:anywhere}
-.paper-header{text-align:center;border-bottom:2px solid #b99553;padding-bottom:16px;margin-bottom:20px}
-.paper-header .ornament{color:#ad8742;font-size:17px;letter-spacing:4px}
-.paper-header h2{font-size:24px;letter-spacing:3px;text-transform:uppercase;margin:5px 0;color:#233b60}
-.paper-header p{font-family:Arial,sans-serif;color:#7b6a4e;font-size:9px;letter-spacing:2px;margin:0}
-.paper-top{display:grid;grid-template-columns:minmax(0,1fr) 105px;gap:18px;align-items:start}
-.paper-photo{width:100px;height:125px;border:1px solid #c9b68c;display:grid;place-items:center;text-align:center;color:#94846b;background:#f5f0e5;font:10px Arial,sans-serif;overflow:hidden}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px clamp(14px,4vw,42px);background:#07111feF;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{display:grid;place-items:center;width:43px;height:43px;border-radius:14px;color:#04170f;font-weight:950;font-size:23px;background:linear-gradient(135deg,var(--green),var(--cyan));box-shadow:0 0 25px #46efad22}
+.brand strong{display:block;font-size:14px}
+.brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:10px 14px;min-height:41px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);color:var(--text);font-weight:750;transition:.18s}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.13)}
+.primary{color:#04170f;background:linear-gradient(110deg,var(--green),#6adfd3);border-color:#46efad77}
+.danger{color:#ffc0c9;background:#ff788b0c;border-color:#ff788b55}
+.hero{max-width:1450px;margin:auto;padding:35px clamp(14px,4vw,42px) 24px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 11px;border:1px solid #46efad44;border-radius:50px;color:#a9f9d7;background:#46efad0c;font-size:10px;font-weight:850;letter-spacing:.13em}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+.hero h1{font-size:clamp(32px,5vw,57px);line-height:1.04;letter-spacing:-.055em;margin:18px 0 12px}
+.gradient{color:transparent;background:linear-gradient(95deg,#fff,var(--green),var(--cyan));background-clip:text;-webkit-background-clip:text}
+.hero p{max-width:750px;color:var(--muted);font-size:14px;line-height:1.8;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:19px}
+.chip{padding:8px 10px;border:1px solid var(--line);border-radius:9px;color:#cbd9e8;background:#ffffff04;font-size:11px}
+.layout{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(330px,.97fr);align-items:start;gap:19px;max-width:1450px;margin:auto;padding:0 clamp(14px,4vw,42px) 40px}
+.panel{min-width:0;border:1px solid var(--line);border-radius:var(--radius);background:#101f33e8;box-shadow:0 20px 60px #0003;overflow:hidden;backdrop-filter:blur(15px)}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px 19px;border-bottom:1px solid var(--line)}
+.panel-head h2{font-size:16px;margin:0}
+.panel-head p{font-size:11px;color:var(--muted);margin:5px 0 0;line-height:1.5}
+.badge{padding:6px 9px;border-radius:8px;background:#46efad12;color:var(--green);font-size:10px;font-weight:850;white-space:nowrap}
+.form-body{padding:19px}
+.section-title{display:flex;align-items:center;gap:10px;margin:27px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line);font-size:13px;font-weight:850}
+.section-title:first-child{margin-top:0}
+.num{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;color:#04170f;background:linear-gradient(135deg,var(--green),var(--cyan));font-size:11px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.field{min-width:0}
+.full{grid-column:1/-1}
+label{display:block;font-size:11px;color:#d2e1f1;font-weight:750;margin-bottom:7px}
+.optional{font-weight:450;color:#8197b0}
+input,select,textarea{width:100%;min-width:0;min-height:43px;border:1px solid #344961;border-radius:10px;padding:10px 11px;background:#081626;color:var(--text)}
+input::placeholder,textarea::placeholder{color:#657c96}
+textarea{min-height:80px;resize:vertical;line-height:1.6}
+input[type=color]{padding:4px;height:43px}
+input[type=file]{font-size:11px;padding:8px}
+.hint{color:#8298b0;font-size:10px;line-height:1.5;margin-top:6px}
+.photo-box{display:flex;align-items:center;gap:14px;padding:13px;border:1px dashed #55d8ff55;border-radius:13px;background:#55d8ff08}
+.photo-thumb{display:grid;place-items:center;width:75px;height:91px;flex-shrink:0;overflow:hidden;border:1px solid var(--line);border-radius:9px;background:#081626;color:var(--muted);font-size:10px;text-align:center}
+.photo-thumb img{width:100%;height:100%;object-fit:cover}
+.photo-meta{min-width:0;flex:1}
+.photo-meta strong{display:block;font-size:12px;margin-bottom:5px}
+.photo-meta p{font-size:10px;line-height:1.5;color:var(--muted);margin:0 0 9px}
+.repeat-list{display:grid;gap:10px}
+.repeat-card{padding:12px;border:1px solid var(--line);border-radius:12px;background:#ffffff03}
+.repeat-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;font-size:11px;font-weight:850}
+.remove{padding:6px 9px;border:1px solid #ff788b55;border-radius:8px;color:#ffabb8;background:#ff788b0a;font-size:10px}
+.add{width:100%;margin-top:10px;padding:11px;border:1px dashed #46efad55;border-radius:10px;color:var(--green);background:#46efad08;font-weight:800}
+.form-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:23px;padding-top:17px;border-top:1px solid var(--line)}
+.form-actions .btn{flex:1}
+.status{display:none;margin-top:12px;padding:11px 12px;border-radius:10px;font-size:11px;line-height:1.6}
+.status.show{display:block}
+.status.ok{color:#b6f8d9;background:#46efad0d;border:1px solid #46efad44}
+.status.error{color:#ffc3cc;background:#ff788b0c;border:1px solid #ff788b44}
+.preview-panel{position:sticky;top:83px}
+.preview-tools{display:flex;flex-wrap:wrap;gap:7px;padding:12px;border-bottom:1px solid var(--line)}
+.preview-tools select{flex:1;min-width:130px;width:auto}
+.preview-tools .btn{padding:8px 10px;min-height:38px;font-size:11px}
+.stage{padding:15px;background:#091523;overflow:auto;min-height:400px}
+.paper{width:100%;max-width:650px;min-height:660px;margin:auto;padding:30px 28px;background:#fff;color:#1d2a39;box-shadow:0 15px 42px #0005;overflow-wrap:anywhere}
+.paper-header{display:flex;align-items:center;gap:16px;padding-bottom:17px;border-bottom:2px solid var(--accent,#1d8b66)}
+.paper-photo{display:grid;place-items:center;width:88px;height:105px;flex-shrink:0;overflow:hidden;border:1px solid #d8e4dc;border-radius:6px;background:#f1f5f2;color:#708076;font-size:10px;text-align:center}
 .paper-photo img{width:100%;height:100%;object-fit:cover}
-.paper-name{font-size:22px;color:#233b60;font-weight:bold;margin:0 0 6px}
-.paper-intro{font-size:11px;color:#74664e}
+.paper-person{min-width:0}
+.paper-person h2{font-size:23px;line-height:1.2;margin:0 0 7px;color:var(--accent,#176b4e);overflow-wrap:anywhere}
+.paper-person p{font-size:10px;line-height:1.5;color:#667384;margin:3px 0}
 .paper-section{margin-top:20px}
-.paper-section h3{font:800 10px Arial,sans-serif;letter-spacing:1.4px;text-transform:uppercase;color:#8a6b34;border-bottom:1px solid #d8c7a3;padding-bottom:6px;margin:0 0 9px}
-.paper-table{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed}
-.paper-table td{padding:5px 4px;vertical-align:top;border-bottom:1px solid #eee6d7;overflow-wrap:anywhere}
-.paper-table td:first-child{width:39%;color:#74664e}
-.paper-note{white-space:pre-wrap;font-size:11px}
-.paper-footer{margin-top:25px;padding-top:12px;border-top:1px solid #d8c7a3;color:#84775e;font-size:9px;text-align:center}
-.notice{margin-top:14px;border:1px solid #e8c47a2e;background:#e8c47a0a;padding:12px;border-radius:11px;color:var(--muted);font-size:11px}
-.notice b{color:var(--gold)}
-footer{max-width:1450px;margin:auto;padding:18px 23px 28px;border-top:1px solid #ffffff10;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-@media(max-width:950px){.layout{grid-template-columns:1fr}.previewpanel{position:static}.paper{min-height:600px}}
-@media(max-width:560px){.top,main,footer{padding-left:14px;padding-right:14px}.tag{display:none}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.formbody{padding:14px}.paperstage{padding:8px}.paper{padding:19px;min-height:570px}.paper-top{grid-template-columns:minmax(0,1fr) 82px;gap:10px}.paper-photo{width:80px;height:100px}.paper-header h2{font-size:20px}.paper-name{font-size:18px}.previewbar{align-items:flex-start}}
-@media print{
- @page{size:A4;margin:13mm}
- body{background:#fff!important;color:#000!important}
- header,main>.hero,.formpanel,footer,.previewbar,.notice{display:none!important}
- main{padding:0!important;margin:0!important;max-width:none!important}
- .layout{display:block!important}
- .previewpanel{position:static!important;border:0!important;box-shadow:none!important;background:#fff!important}
- .paperstage{padding:0!important;background:#fff!important;max-height:none!important;overflow:visible!important}
- .paper{max-width:none!important;width:100%!important;min-height:0!important;padding:0!important;box-shadow:none!important;font-size:11pt!important}
-}
+.paper-section h3{margin:0 0 9px;padding:7px 9px;background:#edf7f1;color:var(--accent,#176b4e);border-left:3px solid var(--accent,#1d8b66);font-size:11px;letter-spacing:.035em;text-transform:uppercase}
+.paper-table{width:100%;border-collapse:collapse;font-size:10px}
+.paper-table td{padding:7px 5px;border-bottom:1px solid #e8eeea;vertical-align:top;white-space:pre-wrap}
+.paper-table td:first-child{width:38%;color:#657386}
+.paper-table td:last-child{color:#1d2a39;font-weight:600}
+.paper-paragraph{font-size:10px;line-height:1.7;white-space:pre-wrap;margin:0;color:#39485a}
+.paper-footer{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-top:28px;padding-top:12px;border-top:1px solid #e0e8e2;color:#6e7d70;font-size:9px;white-space:pre-wrap}
+.template-classic{font-family:Georgia,serif}
+.template-classic .paper-section h3{background:#f0f0e8;color:#304739;border-left-color:#687e6c}
+.template-minimal .paper-header{border-color:#23364a}
+.template-minimal .paper-person h2{color:#20344a}
+.template-minimal .paper-section h3{background:#f0f3f7;color:#20344a;border-left-color:#23364a}
+.template-elegant{border-top:7px solid var(--gold)}
+.template-elegant .paper-person h2{color:#87612c}
+.template-elegant .paper-section h3{background:#fbf3e5;color:#87612c;border-left-color:var(--gold)}
+.completion{display:flex;align-items:center;gap:12px;padding:12px;margin:13px;border:1px solid var(--line);border-radius:12px;background:#ffffff03}
+.percent{display:grid;place-items:center;width:44px;height:44px;border:2px solid #46efad66;border-radius:50%;color:var(--green);font-size:11px;font-weight:900;flex-shrink:0}
+.completion strong{font-size:11px}
+.completion p{font-size:10px;color:var(--muted);margin:4px 0 0;line-height:1.5}
+.footer{text-align:center;padding:22px 14px 32px;color:#8194aa;font-size:10px;line-height:1.8}
+.toast{position:fixed;right:16px;bottom:16px;z-index:99;max-width:calc(100vw - 32px);padding:13px 15px;border:1px solid #46efad66;border-radius:12px;background:#102b3b;color:#efffff;box-shadow:0 12px 35px #0005;opacity:0;transform:translateY(10px);pointer-events:none;transition:.2s}
+.toast.show{opacity:1;transform:translateY(0)}
+[hidden]{display:none!important}
+@media(max-width:960px){.layout{grid-template-columns:1fr}.preview-panel{position:static}.stage{min-height:0}}
+@media(max-width:600px){.topbar{align-items:flex-start}.brand small{max-width:155px}.actions .btn{font-size:10px;padding:8px}.hero{padding-top:26px}.form-body{padding:14px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.paper{padding:20px 16px;min-height:0}.paper-person h2{font-size:19px}.paper-photo{width:70px;height:87px}.stage{padding:9px}.form-actions .btn{flex-basis:100%}}
+@media print{@page{size:A4;margin:12mm}body{background:#fff!important;color:#111!important}body:before,.topbar,.hero,.form-panel,.preview-tools,.completion,.footer,.toast,.no-print{display:none!important}.layout{display:block;max-width:none;margin:0;padding:0}.preview-panel{position:static;border:0;background:#fff;box-shadow:none;overflow:visible}.preview-panel>.panel-head{display:none}.stage{padding:0;background:#fff;overflow:visible}.paper{width:100%;max-width:none;min-height:0;padding:0;box-shadow:none}.paper-section{break-inside:avoid}.paper-table tr{break-inside:avoid}}
 </style>
 </head>
 <body>
-<header><div class="top">
- <div class="brand"><div class="brandmark">✦</div><div>CSC SEVA TOOLS<small>PERSONAL DOCUMENT STUDIO</small></div></div>
- <span class="tag">✧ PREMIUM BIODATA DESIGNER</span>
-</div></header>
-<main>
- <section class="hero">
-  <div><div class="kicker">Personal document creator</div>
-   <h1>Professional Biodata Maker<span style="color:var(--gold)">.</span></h1>
-   <p class="intro">Create a structured personal biodata with personal information, education, family details and an optional photo. Preview your design before printing.</p>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">K</div>
+    <div><strong>Kisan Seva Tools</strong><small>FutureTech Biodata Studio · Tool #30</small></div>
   </div>
-  <div class="heroaside">Designed for general personal biodata. Choose which details to include and keep private information optional.</div>
- </section>
+  <div class="actions">
+    <button class="btn" id="topReset" type="button">Reset</button>
+    <button class="btn primary" id="topPrint" type="button">Print / PDF ↗</button>
+  </div>
+</header>
 
- <section class="layout">
-  <div class="panel formpanel">
-   <div class="phead"><div><h2>Biodata information</h2><p>Fill the sections you need</p></div><span class="stepnum">STEP 01</span></div>
-   <div class="formbody">
-    <div class="section">01 · Document style</div>
-    <div class="field"><label for="layoutStyle">Choose template</label>
-     <select id="layoutStyle"><option value="classic">Classic · Gold & Ivory</option><option value="modern">Modern · Blue & White</option><option value="minimal">Minimal · Clean & Simple</option></select>
-    </div>
-    <div class="field"><label for="photo">Profile photo (optional)</label>
-     <div class="photozone"><div class="photothumb" id="photoThumb">PHOTO<br>PREVIEW</div><div class="photoinfo"><b>Add a profile photo</b><span>JPG, PNG or WebP · Maximum 8 MB</span><input id="photo" type="file" accept="image/jpeg,image/png,image/webp" style="height:auto;padding:7px;font-size:10px"></div></div>
-    </div>
-    <div class="divider"></div>
-    <div class="section">02 · Personal information</div>
-    <div class="fields">
-     <div class="field full"><label for="fullName">Full name *</label><input id="fullName" placeholder="Enter full name" autocomplete="name"></div>
-     <div class="field"><label for="dob">Date of birth</label><input id="dob" type="date"></div>
-     <div class="field"><label for="gender">Gender (optional)</label><select id="gender"><option value="">Not specified</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div>
-     <div class="field"><label for="height">Height (optional)</label><input id="height" placeholder="e.g. 170 cm"></div>
-     <div class="field"><label for="marital">Marital status</label><select id="marital"><option value="">Not specified</option><option>Single</option><option>Married</option><option>Other</option></select></div>
-     <div class="field"><label for="nationality">Nationality</label><input id="nationality" placeholder="e.g. Indian"></div>
-     <div class="field"><label for="language">Languages</label><input id="language" placeholder="e.g. Marathi, Hindi"></div>
-     <div class="field full"><label for="address">Address (optional)</label><textarea id="address" rows="2" placeholder="Village / town / city"></textarea></div>
-    </div>
-    <div class="divider"></div>
-    <div class="section">03 · Education & occupation</div>
-    <div class="fields">
-     <div class="field full"><label for="education">Education</label><input id="education" placeholder="Highest qualification / institution"></div>
-     <div class="field"><label for="occupation">Occupation</label><input id="occupation" placeholder="Profession or work"></div>
-     <div class="field"><label for="income">Annual income (optional)</label><input id="income" placeholder="Optional"></div>
-    </div>
-    <div class="divider"></div>
-    <div class="section">04 · Family details</div>
-    <div class="fields">
-     <div class="field"><label for="father">Father's name</label><input id="father" placeholder="Father's full name"></div>
-     <div class="field"><label for="fatherJob">Father's occupation</label><input id="fatherJob" placeholder="Optional"></div>
-     <div class="field"><label for="mother">Mother's name</label><input id="mother" placeholder="Mother's full name"></div>
-     <div class="field"><label for="motherJob">Mother's occupation</label><input id="motherJob" placeholder="Optional"></div>
-     <div class="field"><label for="siblings">Siblings</label><input id="siblings" placeholder="e.g. 1 brother, 1 sister"></div>
-     <div class="field"><label for="familyType">Family type</label><select id="familyType"><option value="">Not specified</option><option>Nuclear</option><option>Joint</option></select></div>
-    </div>
-    <div class="divider"></div>
-    <div class="section">05 · Additional information</div>
-    <div class="field"><label for="about">About me / other details</label><textarea id="about" rows="3" placeholder="Write a short introduction or other relevant details"></textarea></div>
-    <div class="field"><label for="contact">Contact information (optional)</label><input id="contact" placeholder="Email or phone, if you want to include it"></div>
-    <p class="help">Avoid including Aadhaar, bank details or other sensitive identity numbers in a general biodata.</p>
-    <div class="divider"></div>
-    <div class="btnrow">
-     <button class="btn secondary" id="reset">Reset form</button>
-     <button class="btn ghost" id="downloadText">Download TXT</button>
-    </div>
-   </div>
+<section class="hero">
+  <div class="eyebrow"><span class="dot"></span> FUTURETECH DOCUMENT STUDIO</div>
+  <h1>Create your biodata.<br><span class="gradient">Present yourself professionally.</span></h1>
+  <p>Design a personal, family, student or marriage biodata with a live document preview, profile photo, education records and print-ready output. You control which details you include.</p>
+  <div class="chips">
+    <span class="chip">✦ Live preview</span><span class="chip">✦ Four templates</span>
+    <span class="chip">✦ Photo support</span><span class="chip">✦ PDF via print</span>
+    <span class="chip">✦ Local draft storage</span><span class="chip">✦ Mobile responsive</span>
   </div>
+</section>
 
-  <div>
-   <div class="panel previewpanel">
-    <div class="previewbar"><strong>Live biodata preview</strong><span class="live">● AUTO-UPDATE</span>
-     <div class="templates"><button class="active" data-style="classic">Classic</button><button data-style="modern">Modern</button><button data-style="minimal">Minimal</button></div>
-    </div>
-    <div class="paperstage"><article class="paper" id="paper">
-     <div class="paper-header"><div class="ornament">✦ · ✦ · ✦</div><h2>BIODATA</h2><p>PERSONAL PROFILE</p></div>
-     <div class="paper-top">
-      <div><div class="paper-name" id="pName">Your Full Name</div><div class="paper-intro" id="pIntro">Personal information and profile</div></div>
-      <div class="paper-photo" id="pPhoto">PHOTO</div>
-     </div>
-     <section class="paper-section" id="personalSection"><h3>Personal Information</h3><table class="paper-table" id="personalTable"></table></section>
-     <section class="paper-section" id="educationSection"><h3>Education & Occupation</h3><table class="paper-table" id="educationTable"></table></section>
-     <section class="paper-section" id="familySection"><h3>Family Details</h3><table class="paper-table" id="familyTable"></table></section>
-     <section class="paper-section" id="aboutSection"><h3>About Me</h3><div class="paper-note" id="pAbout"></div></section>
-     <section class="paper-section" id="contactSection"><h3>Contact</h3><div class="paper-note" id="pContact"></div></section>
-     <div class="paper-footer">Personal biodata · Please verify all information before sharing</div>
-    </article></div>
-    <div class="formbody">
-     <div class="btnrow">
-      <button class="btn primary" id="print">Print / Save PDF</button>
-      <button class="btn secondary" id="downloadHtml">Download HTML</button>
-     </div>
-     <div class="notice"><b>Privacy:</b> This page builds the document in your browser. The photo is not uploaded to a server by this page. Downloaded files may contain the personal information you enter, so store and share them carefully.</div>
-    </div>
-   </div>
+<main class="layout">
+<section class="panel form-panel">
+  <div class="panel-head">
+    <div><h2>Biodata details</h2><p>Fill the fields you need. The preview updates automatically.</p></div>
+    <span class="badge">EDIT MODE</span>
   </div>
- </section>
+  <div class="form-body">
+  <form id="bioForm" novalidate>
+    <div class="section-title"><span class="num">01</span> Document setup</div>
+    <div class="grid">
+      <div class="field"><label for="docType">Biodata type</label>
+        <select id="docType" name="docType"><option>Personal Biodata</option><option>Marriage Biodata</option><option>Professional Biodata</option><option>Student Biodata</option></select>
+      </div>
+      <div class="field"><label for="template">Design template</label>
+        <select id="template" name="template"><option value="modern">Modern Emerald</option><option value="classic">Classic</option><option value="minimal">Minimal Professional</option><option value="elegant">Elegant Gold</option></select>
+      </div>
+      <div class="field"><label for="accent">Accent colour</label><input id="accent" name="accent" type="color" value="#1d8b66"></div>
+      <div class="field"><label for="fontScale">Text size</label><select id="fontScale" name="fontScale"><option value="small">Compact</option><option value="normal" selected>Normal</option><option value="large">Large</option></select></div>
+    </div>
+
+    <div class="section-title"><span class="num">02</span> Profile photo</div>
+    <div class="photo-box">
+      <div class="photo-thumb" id="photoThumb">PHOTO<br>PREVIEW</div>
+      <div class="photo-meta"><strong>Choose a profile image</strong><p>JPG, PNG or WebP. The selected photo is displayed in your browser.</p><input id="photo" type="file" accept="image/jpeg,image/png,image/webp"><button class="btn" id="removePhoto" type="button" style="margin-top:8px">Remove photo</button></div>
+    </div>
+
+    <div class="section-title"><span class="num">03</span> Personal information</div>
+    <div class="grid">
+      <div class="field full"><label for="fullName">Full name <span class="optional">· required</span></label><input id="fullName" name="fullName" required maxlength="100" placeholder="Enter full name"></div>
+      <div class="field"><label for="dob">Date of birth</label><input id="dob" name="dob" type="date"></div>
+      <div class="field"><label for="gender">Gender</label><select id="gender" name="gender"><option value="">Not specified</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+      <div class="field"><label for="height">Height</label><input id="height" name="height" maxlength="35" placeholder="e.g. 5 ft 7 in"></div>
+      <div class="field"><label for="marital">Marital status</label><select id="marital" name="marital"><option value="">Not specified</option><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select></div>
+      <div class="field"><label for="nationality">Nationality</label><input id="nationality" name="nationality" maxlength="60" placeholder="e.g. Indian"></div>
+      <div class="field"><label for="religion">Religion / community <span class="optional">· optional</span></label><input id="religion" name="religion" maxlength="100"></div>
+      <div class="field"><label for="motherTongue">Mother tongue</label><input id="motherTongue" name="motherTongue" maxlength="60" placeholder="e.g. Marathi"></div>
+      <div class="field"><label for="blood">Blood group</label><select id="blood" name="blood"><option value="">Not specified</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+      <div class="field"><label for="city">City / district</label><input id="city" name="city" maxlength="100"></div>
+    </div>
+
+    <div class="section-title"><span class="num">04</span> Contact details</div>
+    <div class="grid">
+      <div class="field"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" maxlength="25" placeholder="Contact number"></div>
+      <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" maxlength="120" placeholder="name@example.com"></div>
+      <div class="field full"><label for="address">Address <span class="optional">· optional</span></label><textarea id="address" name="address" maxlength="500" placeholder="Village, post, district, state or address you want to show"></textarea></div>
+    </div>
+
+    <div class="section-title"><span class="num">05</span> Education records</div>
+    <div class="repeat-list" id="educationList"></div>
+    <button class="add" id="addEducation" type="button">＋ Add education record</button>
+
+    <div class="section-title"><span class="num">06</span> Occupation</div>
+    <div class="grid">
+      <div class="field"><label for="occupation">Occupation / profession</label><input id="occupation" name="occupation" maxlength="120" placeholder="Job, business or profession"></div>
+      <div class="field"><label for="employer">Employer / organisation</label><input id="employer" name="employer" maxlength="120"></div>
+      <div class="field"><label for="workLocation">Work location</label><input id="workLocation" name="workLocation" maxlength="120"></div>
+      <div class="field"><label for="income">Income <span class="optional">· optional</span></label><input id="income" name="income" maxlength="80" placeholder="Include only if needed"></div>
+    </div>
+
+    <div class="section-title"><span class="num">07</span> Family details</div>
+    <div class="grid">
+      <div class="field"><label for="father">Father's name</label><input id="father" name="father" maxlength="100"></div>
+      <div class="field"><label for="fatherJob">Father's occupation</label><input id="fatherJob" name="fatherJob" maxlength="120"></div>
+      <div class="field"><label for="mother">Mother's name</label><input id="mother" name="mother" maxlength="100"></div>
+      <div class="field"><label for="motherJob">Mother's occupation</label><input id="motherJob" name="motherJob" maxlength="120"></div>
+      <div class="field"><label for="siblings">Brothers / sisters</label><input id="siblings" name="siblings" maxlength="150" placeholder="e.g. 1 brother, 1 sister"></div>
+      <div class="field"><label for="familyType">Family type</label><select id="familyType" name="familyType"><option value="">Not specified</option><option>Joint family</option><option>Nuclear family</option></select></div>
+      <div class="field full"><label for="familyBackground">Family background</label><textarea id="familyBackground" name="familyBackground" maxlength="700"></textarea></div>
+    </div>
+
+    <div class="section-title"><span class="num">08</span> Skills and interests</div>
+    <div class="grid">
+      <div class="field full"><label for="skills">Skills</label><textarea id="skills" name="skills" maxlength="700" placeholder="Separate multiple skills with commas"></textarea></div>
+      <div class="field full"><label for="hobbies">Hobbies / interests</label><textarea id="hobbies" name="hobbies" maxlength="700" placeholder="Reading, music, sports..."></textarea></div>
+      <div class="field full"><label for="about">Personal introduction</label><textarea id="about" name="about" maxlength="1200" placeholder="Write a short introduction"></textarea></div>
+      <div class="field full"><label for="notes">Additional notes / preferences</label><textarea id="notes" name="notes" maxlength="1000"></textarea></div>
+    </div>
+
+    <div class="section-title"><span class="num">09</span> Declaration and signature</div>
+    <div class="grid">
+      <div class="field full"><label for="declaration">Declaration</label><textarea id="declaration" name="declaration" maxlength="800">I declare that the information provided above is true to the best of my knowledge.</textarea></div>
+      <div class="field"><label for="place">Place</label><input id="place" name="place" maxlength="100"></div>
+      <div class="field"><label for="datePrepared">Date</label><input id="datePrepared" name="datePrepared" type="date"></div>
+      <div class="field full"><label for="signature">Signature name</label><input id="signature" name="signature" maxlength="100" placeholder="Name for signature line"></div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn primary" id="update" type="button">Update preview</button>
+      <button class="btn" id="save" type="button">Save draft</button>
+      <button class="btn" id="load" type="button">Load draft</button>
+      <button class="btn danger" id="clear" type="button">Clear form</button>
+    </div>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+  </form>
+  </div>
+</section>
+
+<section class="panel preview-panel">
+  <div class="panel-head"><div><h2>Live document preview</h2><p>Check the document before printing or saving to PDF.</p></div><span class="badge">LIVE</span></div>
+  <div class="preview-tools">
+    <select id="previewTemplate" aria-label="Preview template"><option value="modern">Modern Emerald</option><option value="classic">Classic</option><option value="minimal">Minimal Professional</option><option value="elegant">Elegant Gold</option></select>
+    <button class="btn" id="refresh" type="button">Refresh</button>
+    <button class="btn primary" id="print" type="button">Print / PDF</button>
+  </div>
+  <div class="stage">
+    <article id="paper" class="paper">
+      <header class="paper-header">
+        <div class="paper-photo" id="previewPhoto">PHOTO</div>
+        <div class="paper-person"><h2 id="pName">Your Full Name</h2><p id="pType">Personal Biodata</p><p id="pLocation"></p></div>
+      </header>
+      <section class="paper-section"><h3>Personal Information</h3><table class="paper-table"><tbody id="pPersonal"></tbody></table></section>
+      <section class="paper-section"><h3>Contact Information</h3><table class="paper-table"><tbody id="pContact"></tbody></table></section>
+      <section class="paper-section" id="eduSection"><h3>Education</h3><table class="paper-table"><tbody id="pEducation"></tbody></table></section>
+      <section class="paper-section" id="jobSection"><h3>Occupation</h3><table class="paper-table"><tbody id="pJob"></tbody></table></section>
+      <section class="paper-section" id="familySection"><h3>Family Details</h3><table class="paper-table"><tbody id="pFamily"></tbody></table></section>
+      <section class="paper-section" id="skillsSection"><h3>Skills and Interests</h3><table class="paper-table"><tbody id="pSkills"></tbody></table></section>
+      <section class="paper-section" id="aboutSection"><h3>About Me</h3><p class="paper-paragraph" id="pAbout"></p></section>
+      <section class="paper-section" id="notesSection"><h3>Additional Notes</h3><p class="paper-paragraph" id="pNotes"></p></section>
+      <section class="paper-section" id="declarationSection"><h3>Declaration</h3><p class="paper-paragraph" id="pDeclaration"></p></section>
+      <footer class="paper-footer"><div id="pDate"></div><div id="pSignature"></div></footer>
+    </article>
+  </div>
+  <div class="completion"><div class="percent" id="percent">0%</div><div><strong>Document completeness</strong><p id="completionText">Enter your details to prepare the preview.</p></div></div>
+</section>
 </main>
-<footer><span>CSC Seva Tools · Professional Biodata Maker</span><span>Browser-based document creation</span></footer>
+
+<footer class="footer">Kisan Seva Tools · Biodata Maker Pro · Tool #30<br>Your biodata is prepared in this browser. Review personal information before sharing it.</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
-(()=>{
- const $=id=>document.getElementById(id);
- const ids=['fullName','dob','gender','height','marital','nationality','language','address','education','occupation','income','father','fatherJob','mother','motherJob','siblings','familyType','about','contact'];
- let photoData='';
- const dateToday=new Date();
- function fmtDate(v){
-  if(!v)return '';
-  const d=new Date(v+'T00:00:00');
-  return isNaN(d)?v:d.toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'});
- }
- function esc(s){
-  return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- }
- function val(id){return $(id).value.trim();}
- function tableRows(rows){
-  return rows.filter(r=>r[1]).map(r=>'<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>').join('');
- }
- function showSection(id,content){
-  $(id).style.display=content?'':'none';
- }
- function render(){
-  const name=val('fullName')||'Your Full Name';
-  $('pName').textContent=name;
-  const intro=[val('occupation'),val('education')].filter(Boolean).join(' · ');
-  $('pIntro').textContent=intro||'Personal information and profile';
-  const personal=[
-   ['Date of birth',fmtDate(val('dob'))],['Gender',val('gender')],['Height',val('height')],
-   ['Marital status',val('marital')],['Nationality',val('nationality')],['Languages',val('language')],['Address',val('address')]
-  ];
-  $('personalTable').innerHTML=tableRows(personal);
-  showSection('personalSection',personal.some(r=>r[1]));
-  const work=[['Education',val('education')],['Occupation',val('occupation')],['Annual income',val('income')]];
-  $('educationTable').innerHTML=tableRows(work);
-  showSection('educationSection',work.some(r=>r[1]));
-  const family=[["Father's name",val('father')],["Father's occupation",val('fatherJob')],["Mother's name",val('mother')],["Mother's occupation",val('motherJob')],['Siblings',val('siblings')],['Family type',val('familyType')]];
-  $('familyTable').innerHTML=tableRows(family);
-  showSection('familySection',family.some(r=>r[1]));
-  $('pAbout').textContent=val('about');
-  showSection('aboutSection',!!val('about'));
-  $('pContact').textContent=val('contact');
-  showSection('contactSection',!!val('contact'));
-  const photo=$('pPhoto');
-  photo.innerHTML=photoData?'<img src="'+photoData+'" alt="Profile photo">':'PHOTO';
-  photo.style.display=photoData?'grid':'none';
- }
- function setStyle(style){
-  $('layoutStyle').value=style;
-  document.querySelectorAll('[data-style]').forEach(b=>b.classList.toggle('active',b.dataset.style===style));
-  const paper=$('paper');
-  paper.style.fontFamily=style==='modern'?'Arial,Helvetica,sans-serif':style==='minimal'?'Arial,Helvetica,sans-serif':'Georgia,"Times New Roman",serif';
-  paper.style.background=style==='modern'?'#ffffff':style==='minimal'?'#ffffff':'#fffdf8';
-  paper.style.color=style==='modern'?'#24364d':'#243148';
-  paper.style.borderTop=style==='modern'?'5px solid #315c9b':style==='minimal'?'none':'none';
-  paper.querySelector('.paper-header').style.borderBottom=style==='minimal'?'1px solid #cbd2dc':'2px solid '+(style==='modern'?'#315c9b':'#b99553');
-  paper.querySelector('.paper-header h2').style.color=style==='modern'?'#315c9b':'#233b60';
-  paper.querySelectorAll('.paper-section h3').forEach(h=>{h.style.color=style==='modern'?'#315c9b':style==='minimal'?'#39475a':'#8a6b34';h.style.borderBottomColor=style==='modern'?'#c9d6e8':style==='minimal'?'#d9dee6':'#d8c7a3';});
-  render();
- }
- function textDocument(){
-  const sections=[];
-  sections.push('BIODATA\n'+(val('fullName')||''));
-  const groups=[
-   ['PERSONAL INFORMATION',[['Date of birth',fmtDate(val('dob'))],['Gender',val('gender')],['Height',val('height')],['Marital status',val('marital')],['Nationality',val('nationality')],['Languages',val('language')],['Address',val('address')]]],
-   ['EDUCATION & OCCUPATION',[['Education',val('education')],['Occupation',val('occupation')],['Annual income',val('income')]]],
-   ['FAMILY DETAILS',[["Father's name",val('father')],["Father's occupation",val('fatherJob')],["Mother's name",val('mother')],["Mother's occupation",val('motherJob')],['Siblings',val('siblings')],['Family type',val('familyType')]]],
-   ['ABOUT ME',[['About me',val('about')]]],
-   ['CONTACT',[['Contact',val('contact')]]]
-  ];
-  groups.forEach(([title,rows])=>{
-   const lines=rows.filter(r=>r[1]).map(r=>r[0]+': '+r[1]);
-   if(lines.length)sections.push(title+'\n'+lines.join('\n'));
+"use strict";
+const $=id=>document.getElementById(id);
+const form=$("bioForm");
+const STORAGE_KEY="kst_biodata_maker_draft_v1";
+let photoData="";
+let educationCount=0;
+let toastTimer=null;
+
+function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,char=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[char]);
+}
+function fieldValue(id){
+  const el=$(id);
+  return el?String(el.value||"").trim():"";
+}
+function showToast(message){
+  const el=$("toast");
+  el.textContent=message;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>el.classList.remove("show"),2800);
+}
+function setStatus(message,type="ok"){
+  const el=$("status");
+  el.textContent=message;
+  el.className="status show "+(type==="error"?"error":"ok");
+}
+function hideStatus(){
+  $("status").className="status";
+  $("status").textContent="";
+}
+function safeImage(file){
+  return new Promise((resolve,reject)=>{
+    if(!file) return resolve("");
+    if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
+      return reject(new Error("Choose a JPG, PNG or WebP image."));
+    }
+    if(file.size>5*1024*1024){
+      return reject(new Error("Photo must be 5 MB or smaller."));
+    }
+    const reader=new FileReader();
+    reader.onload=()=>{
+      const img=new Image();
+      img.onload=()=>{
+        try{
+          const canvas=document.createElement("canvas");
+          const maxSide=1000;
+          const scale=Math.min(1,maxSide/Math.max(img.width,img.height));
+          canvas.width=Math.max(1,Math.round(img.width*scale));
+          canvas.height=Math.max(1,Math.round(img.height*scale));
+          const ctx=canvas.getContext("2d");
+          ctx.drawImage(img,0,0,canvas.width,canvas.height);
+          resolve(canvas.toDataURL("image/jpeg",.88));
+        }catch(error){reject(new Error("Could not process this photo."));}
+      };
+      img.onerror=()=>reject(new Error("Could not read this image."));
+      img.src=reader.result;
+    };
+    reader.onerror=()=>reject(new Error("Could not read the selected file."));
+    reader.readAsDataURL(file);
   });
-  return sections.join('\n\n');
- }
- function download(name,content,type){
-  const blob=new Blob([content],{type});
-  const url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1200);
- }
- ids.forEach(id=>{
-  $(id).addEventListener('input',render);
-  $(id).addEventListener('change',render);
- });
- $('layoutStyle').addEventListener('change',e=>setStyle(e.target.value));
- document.querySelectorAll('[data-style]').forEach(b=>b.addEventListener('click',()=>setStyle(b.dataset.style)));
- $('photo').addEventListener('change',e=>{
-  const file=e.target.files[0];if(!file)return;
-  if(!/^image\/(jpeg|png|webp)$/.test(file.type)){alert('Please choose a JPG, PNG or WebP photo.');e.target.value='';return;}
-  if(file.size>8*1024*1024){alert('Photo must be smaller than 8 MB.');e.target.value='';return;}
-  const reader=new FileReader();
-  reader.onload=()=>{
-   const img=new Image();
-   img.onload=()=>{
-    if(img.naturalWidth>5000||img.naturalHeight>5000){alert('Please choose a photo with dimensions below 5000 × 5000 pixels.');e.target.value='';return;}
-    photoData=reader.result;
-    $('photoThumb').innerHTML='<img src="'+photoData+'" alt="Selected photo">';
-    render();
-   };
-   img.onerror=()=>alert('Could not read this image. Please choose another photo.');
-   img.src=reader.result;
-  };
-  reader.readAsDataURL(file);
- });
- $('print').addEventListener('click',()=>{
-  if(!val('fullName')){alert('Please enter the full name before printing.');$('fullName').focus();return;}
+}
+function renderPhoto(){
+  const html=photoData?'<img alt="Profile photo" src="'+photoData+'">':"PHOTO";
+  $("photoThumb").innerHTML=html;
+  $("previewPhoto").innerHTML=html;
+}
+function addRow(tbody,label,value){
+  if(!String(value||"").trim())return;
+  const tr=document.createElement("tr");
+  const td1=document.createElement("td");
+  const td2=document.createElement("td");
+  td1.textContent=label;
+  td2.textContent=String(value).trim();
+  tr.append(td1,td2);
+  tbody.appendChild(tr);
+}
+function setRows(id,rows){
+  const tbody=$(id);
+  tbody.replaceChildren();
+  rows.forEach(row=>addRow(tbody,row[0],row[1]));
+  const section=tbody.closest(".paper-section");
+  if(section)section.hidden=tbody.children.length===0;
+}
+function setParagraph(id,sectionId,value){
+  $(id).textContent=value||"";
+  $(sectionId).hidden=!String(value||"").trim();
+}
+function formatDate(value){
+  if(!value)return "";
+  const date=new Date(value+"T12:00:00");
+  if(Number.isNaN(date.getTime()))return value;
+  return new Intl.DateTimeFormat("en-IN",{day:"2-digit",month:"short",year:"numeric"}).format(date);
+}
+function readEducation(){
+  return [...$("educationList").querySelectorAll(".repeat-card")].map(card=>({
+    qualification:card.querySelector('[data-field="qualification"]').value.trim(),
+    institute:card.querySelector('[data-field="institute"]').value.trim(),
+    year:card.querySelector('[data-field="year"]').value.trim(),
+    grade:card.querySelector('[data-field="grade"]').value.trim()
+  })).filter(item=>Object.values(item).some(Boolean));
+}
+function renderEducation(){
+  const tbody=$("pEducation");
+  tbody.replaceChildren();
+  readEducation().forEach(item=>{
+    const parts=[item.institute,item.year,item.grade].filter(Boolean);
+    addRow(tbody,item.qualification||"Education",parts.join(" · "));
+  });
+  $("eduSection").hidden=tbody.children.length===0;
+}
+function renderPreview(){
+  const name=fieldValue("fullName")||"Your Full Name";
+  $("pName").textContent=name;
+  $("pType").textContent=fieldValue("docType")||"Biodata";
+  $("pLocation").textContent=fieldValue("city");
+  $("paper").className="paper template-"+fieldValue("template");
+  $("paper").style.setProperty("--accent",fieldValue("accent")||"#1d8b66");
+  const scale=fieldValue("fontScale");
+  $("paper").style.fontSize=scale==="large"?"1.08em":scale==="small"?".94em":"1em";
+  renderPhoto();
+
+  setRows("pPersonal",[
+    ["Date of birth",formatDate(fieldValue("dob"))],
+    ["Gender",fieldValue("gender")],
+    ["Height",fieldValue("height")],
+    ["Marital status",fieldValue("marital")],
+    ["Nationality",fieldValue("nationality")],
+    ["Religion / community",fieldValue("religion")],
+    ["Mother tongue",fieldValue("motherTongue")],
+    ["Blood group",fieldValue("blood")]
+  ]);
+  setRows("pContact",[
+    ["Phone",fieldValue("phone")],
+    ["Email",fieldValue("email")],
+    ["Address",fieldValue("address")]
+  ]);
+  renderEducation();
+  setRows("pJob",[
+    ["Occupation",fieldValue("occupation")],
+    ["Employer",fieldValue("employer")],
+    ["Work location",fieldValue("workLocation")],
+    ["Income",fieldValue("income")]
+  ]);
+  setRows("pFamily",[
+    ["Father's name",fieldValue("father")],
+    ["Father's occupation",fieldValue("fatherJob")],
+    ["Mother's name",fieldValue("mother")],
+    ["Mother's occupation",fieldValue("motherJob")],
+    ["Siblings",fieldValue("siblings")],
+    ["Family type",fieldValue("familyType")],
+    ["Family background",fieldValue("familyBackground")]
+  ]);
+  setRows("pSkills",[
+    ["Skills",fieldValue("skills")],
+    ["Hobbies / interests",fieldValue("hobbies")]
+  ]);
+  setParagraph("pAbout","aboutSection",fieldValue("about"));
+  setParagraph("pNotes","notesSection",fieldValue("notes"));
+  setParagraph("pDeclaration","declarationSection",fieldValue("declaration"));
+  $("pDate").textContent=[
+    fieldValue("place")?"Place: "+fieldValue("place"):"",
+    fieldValue("datePrepared")?"Date: "+formatDate(fieldValue("datePrepared")):""
+  ].filter(Boolean).join("\n");
+  $("pSignature").textContent=fieldValue("signature")?"Signature: "+fieldValue("signature"):"";
+  updateCompleteness();
+}
+function updateCompleteness(){
+  const required=["fullName"];
+  const recommended=["dob","phone","city","occupation","father","educationList"];
+  let total=required.length+recommended.length;
+  let complete=required.filter(id=>id==="educationList"?readEducation().length>0:fieldValue(id)).length;
+  complete+=recommended.filter(id=>id==="educationList"?readEducation().length>0:fieldValue(id)).length;
+  const percent=Math.round(complete/total*100);
+  $("percent").textContent=percent+"%";
+  $("completionText").textContent=percent===100?"Key details are filled. Review before printing.":percent>=60?"Good progress. Fill any remaining details you want to include.":"Add your name and relevant details. Optional fields can stay blank.";
+}
+function addEducation(data={}){
+  if($("educationList").children.length>=12){
+    showToast("You can add up to 12 education records.");
+    return;
+  }
+  educationCount++;
+  const card=document.createElement("div");
+  card.className="repeat-card";
+  card.innerHTML=`
+    <div class="repeat-head"><span>Education record ${educationCount}</span><button class="remove" type="button">Remove</button></div>
+    <div class="grid">
+      <div class="field"><label>Qualification</label><input data-field="qualification" maxlength="100" placeholder="e.g. B.Com"></div>
+      <div class="field"><label>Institute / board</label><input data-field="institute" maxlength="150" placeholder="School, college or board"></div>
+      <div class="field"><label>Year</label><input data-field="year" maxlength="20" placeholder="e.g. 2025"></div>
+      <div class="field"><label>Grade / percentage</label><input data-field="grade" maxlength="40" placeholder="Optional"></div>
+    </div>`;
+  card.querySelector('[data-field="qualification"]').value=data.qualification||"";
+  card.querySelector('[data-field="institute"]').value=data.institute||"";
+  card.querySelector('[data-field="year"]').value=data.year||"";
+  card.querySelector('[data-field="grade"]').value=data.grade||"";
+  card.querySelector(".remove").addEventListener("click",()=>{
+    card.remove();
+    renumberEducation();
+    renderPreview();
+  });
+  card.querySelectorAll("input").forEach(input=>input.addEventListener("input",renderPreview));
+  $("educationList").appendChild(card);
+  renumberEducation();
+}
+function renumberEducation(){
+  [...$("educationList").querySelectorAll(".repeat-card")].forEach((card,index)=>{
+    card.querySelector(".repeat-head span").textContent="Education record "+(index+1);
+  });
+}
+function collectDraft(){
+  const values={};
+  [...form.querySelectorAll("input:not([type=file]),select,textarea")].forEach(el=>{
+    if(el.id)values[el.id]=el.value;
+  });
+  return {version:1,values,education:readEducation(),photo:photoData,savedAt:new Date().toISOString()};
+}
+function applyDraft(data){
+  if(!data||typeof data!=="object"||!data.values)throw new Error("Draft format is not valid.");
+  Object.entries(data.values).forEach(([id,value])=>{
+    const el=$(id);
+    if(el&&typeof value==="string"&&el.type!=="file")el.value=value;
+  });
+  $("educationList").replaceChildren();
+  educationCount=0;
+  (Array.isArray(data.education)?data.education:[]).slice(0,12).forEach(addEducation);
+  photoData=typeof data.photo==="string"&&data.photo.startsWith("data:image/")?data.photo:"";
+  $("previewTemplate").value=fieldValue("template")||"modern";
+  renderPreview();
+}
+function saveDraft(){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(collectDraft()));
+    setStatus("Draft saved on this device in this browser.");
+    showToast("Draft saved on this device.");
+  }catch(error){
+    setStatus("Could not save draft. Browser storage may be full or unavailable.","error");
+  }
+}
+function loadDraft(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw){showToast("No saved draft was found on this device.");return;}
+    applyDraft(JSON.parse(raw));
+    setStatus("Saved draft loaded.");
+    showToast("Draft loaded.");
+  }catch(error){
+    setStatus("Could not load this draft. It may be damaged or unavailable.","error");
+  }
+}
+function resetForm(){
+  if(!confirm("Clear the current biodata form? Unsaved details will be lost."))return;
+  form.reset();
+  $("educationList").replaceChildren();
+  educationCount=0;
+  photoData="";
+  addEducation();
+  $("previewTemplate").value="modern";
+  $("accent").value="#1d8b66";
+  $("datePrepared").value=new Date().toISOString().slice(0,10);
+  renderPreview();
+  hideStatus();
+  showToast("Form cleared.");
+}
+function printDocument(){
+  const name=fieldValue("fullName");
+  if(!name){
+    setStatus("Please enter your full name before printing.","error");
+    $("fullName").focus();
+    return;
+  }
+  renderPreview();
   window.print();
- });
- $('downloadText').addEventListener('click',()=>{
-  if(!val('fullName')){alert('Please enter the full name first.');$('fullName').focus();return;}
-  download('biodata.txt',textDocument(),'text/plain;charset=utf-8');
- });
- $('downloadHtml').addEventListener('click',()=>{
-  if(!val('fullName')){alert('Please enter the full name first.');$('fullName').focus();return;}
-  const clone=$('paper').cloneNode(true);
-  const css='body{font-family:Arial,sans-serif;background:#fff;padding:24px;color:#243148}.paper{max-width:780px;margin:auto;padding:35px;background:#fffdf8;line-height:1.65}.paper-header{text-align:center;border-bottom:2px solid #b99553;padding-bottom:16px}.paper-header h2{font-size:24px;letter-spacing:3px}.paper-top{display:grid;grid-template-columns:1fr 105px;gap:18px}.paper-photo{width:100px;height:125px;border:1px solid #c9b68c;overflow:hidden}.paper-photo img{width:100%;height:100%;object-fit:cover}.paper-section{margin-top:20px}.paper-section h3{font-size:11px;border-bottom:1px solid #d8c7a3;padding-bottom:6px}.paper-table{width:100%;border-collapse:collapse}.paper-table td{padding:5px;border-bottom:1px solid #eee6d7;vertical-align:top}.paper-table td:first-child{width:39%}.paper-footer{margin-top:25px;border-top:1px solid #d8c7a3;padding-top:12px;text-align:center;font-size:10px}';
-  const doc='<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Personal Biodata</title><style>'+css+'</style></head><body>'+clone.outerHTML+'</body></html>';
-  download('personal-biodata.html',doc,'text/html;charset=utf-8');
- });
- $('reset').addEventListener('click',()=>{
-  if(!confirm('Clear all biodata details and remove the selected photo?'))return;
-  ids.forEach(id=>$(id).value='');
-  photoData='';$('photo').value='';$('photoThumb').textContent='PHOTO PREVIEW';
-  setStyle('classic');render();
- });
- setStyle('classic');
-})();
+}
+function validateForm(){
+  const name=fieldValue("fullName");
+  if(!name){
+    setStatus("Full name is required.","error");
+    $("fullName").focus();
+    return false;
+  }
+  const email=fieldValue("email");
+  if(email&&!$("email").checkValidity()){
+    setStatus("Enter a valid email address or leave the field blank.","error");
+    $("email").focus();
+    return false;
+  }
+  const dob=fieldValue("dob");
+  if(dob&&new Date(dob+"T00:00:00")>new Date()){
+    setStatus("Date of birth cannot be in the future.","error");
+    $("dob").focus();
+    return false;
+  }
+  hideStatus();
+  return true;
+}
+
+$("addEducation").addEventListener("click",()=>addEducation());
+$("update").addEventListener("click",()=>{
+  if(validateForm()){renderPreview();setStatus("Preview updated.");}
+});
+$("refresh").addEventListener("click",()=>{renderPreview();showToast("Preview refreshed.");});
+$("save").addEventListener("click",saveDraft);
+$("load").addEventListener("click",loadDraft);
+$("clear").addEventListener("click",resetForm);
+$("topReset").addEventListener("click",resetForm);
+$("print").addEventListener("click",printDocument);
+$("topPrint").addEventListener("click",printDocument);
+$("removePhoto").addEventListener("click",()=>{
+  photoData="";
+  $("photo").value="";
+  renderPhoto();
+  renderPreview();
+  showToast("Photo removed.");
+});
+$("photo").addEventListener("change",async event=>{
+  const file=event.target.files&&event.target.files[0];
+  if(!file)return;
+  try{
+    photoData=await safeImage(file);
+    renderPhoto();
+    renderPreview();
+    showToast("Photo loaded into the preview.");
+  }catch(error){
+    event.target.value="";
+    photoData="";
+    renderPhoto();
+    setStatus(error.message,"error");
+  }
+});
+$("template").addEventListener("change",()=>{
+  $("previewTemplate").value=$("template").value;
+  renderPreview();
+});
+$("previewTemplate").addEventListener("change",()=>{
+  $("template").value=$("previewTemplate").value;
+  renderPreview();
+});
+$("accent").addEventListener("input",renderPreview);
+$("fontScale").addEventListener("change",renderPreview);
+form.addEventListener("input",event=>{
+  if(event.target.id==="photo")return;
+  renderPreview();
+});
+form.addEventListener("change",renderPreview);
+form.addEventListener("submit",event=>event.preventDefault());
+
+addEducation();
+$("datePrepared").value=new Date().toISOString().slice(0,10);
+renderPreview();
 </script>
 </body>
 </html>
