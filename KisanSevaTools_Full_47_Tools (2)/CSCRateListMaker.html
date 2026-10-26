@@ -3,574 +3,531 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10251f">
-<title>CSC Rate Manager | CSC Seva Tools</title>
-<meta name="description" content="Manage CSC service rates, categories, business branding, price lists, and JSON backups in one responsive dashboard.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSC Rate List Maker Pro | Kisan Seva Tools</title>
 <style>
 :root{
- --bg:#f3f6f3;--surface:#fff;--ink:#1b3029;--muted:#75847c;
- --line:#e0e8e1;--green:#17694d;--green2:#22835e;--mint:#dff4e8;
- --gold:#d6a34c;--red:#c64f4f;--dark:#10251f;--radius:15px;
+  --bg:#f2f5fa;--panel:#fff;--ink:#15263a;--muted:#758398;
+  --line:#e0e7f0;--primary:#087e8b;--deep:#103343;
+  --shadow:0 14px 38px #1b35500c;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);
+font-family:Inter,Arial,"Noto Sans Devanagari",sans-serif}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--green2);outline-offset:2px}
-.topbar{background:var(--dark);color:#fff}
-.topinner{max-width:1500px;margin:auto;padding:15px 25px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.3px}
-.brandmark{width:42px;height:42px;display:grid;place-items:center;background:linear-gradient(145deg,#d8f4df,#7bcda0);color:#133c2b;border-radius:12px;font-size:22px}
-.brand small{display:block;color:#a7c2b4;font-size:10px;letter-spacing:1.3px;font-weight:600}
-.topright{display:flex;align-items:center;gap:10px;font-size:11px;color:#b5d5c4}
-.statusdot{width:7px;height:7px;background:#6de0a3;border-radius:50%;display:inline-block;margin-right:6px}
-main{max-width:1500px;margin:auto;padding:27px 25px 45px}
-.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
-.eyebrow{text-transform:uppercase;font-size:10px;font-weight:850;letter-spacing:1.8px;color:var(--green2)}
-h1{font-size:clamp(26px,3.6vw,39px);line-height:1.12;letter-spacing:-1.3px;margin:7px 0}
-.sub{color:var(--muted);max-width:700px;margin:0}
-.headactions{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border:1px solid transparent;border-radius:9px;padding:10px 13px;font-size:11px;font-weight:800;transition:.15s}
-.btn:hover{filter:brightness(.97);transform:translateY(-1px)}
-.btn-primary{background:var(--green);color:#fff}
-.btn-light{background:#fff;border-color:var(--line);color:var(--ink)}
-.btn-dark{background:#244438;color:#fff}
-.btn-danger{background:#fff2f1;border-color:#f0d4d0;color:var(--red)}
-.btn-small{padding:6px 9px;font-size:10px}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px;align-items:start}
-.maincol,.sidecol{min-width:0;display:grid;gap:16px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 5px 22px #173d2010}
-.cardhead{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
-.cardhead h2{font-size:13px;margin:0;font-weight:850}
-.cardhead p{font-size:11px;color:var(--muted);margin:3px 0 0}
-.cardbody{padding:17px}
-.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
-.metric{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px;min-width:0}
-.metric .label{font-size:10px;color:var(--muted);font-weight:700}
-.metric .num{font-size:25px;line-height:1.3;letter-spacing:-.8px;font-weight:850;margin:6px 0 2px;color:var(--green)}
-.metric .note{font-size:10px;color:var(--muted)}
-.toolbar{display:flex;gap:9px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid var(--line);align-items:center}
-.search{flex:1;min-width:180px;position:relative}
-.search input{width:100%;padding:10px 12px 10px 35px;border:1px solid var(--line);border-radius:9px;background:#fafcf9;color:var(--ink)}
-.search:before{content:"⌕";position:absolute;left:12px;top:6px;font-size:22px;color:var(--muted)}
-.toolbar select{padding:10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);max-width:190px}
-.checkwrap{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);white-space:nowrap}
-.checkwrap input{accent-color:var(--green)}
-.tablewrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;white-space:nowrap}
-th{padding:11px 13px;background:#f7faf7;color:#738278;text-align:left;font-size:10px;letter-spacing:.6px;text-transform:uppercase;border-bottom:1px solid var(--line)}
-td{padding:9px 13px;border-bottom:1px solid #edf1ed;font-size:12px;vertical-align:middle}
-tbody tr:hover{background:#f9fcf9}
-tbody tr:last-child td{border-bottom:0}
-.namecell{min-width:185px}
-.nameinput{width:100%;min-width:155px;border:1px solid transparent;border-radius:6px;padding:6px;background:transparent;color:var(--ink);font-weight:750}
-.nameinput:focus{background:#fff;border-color:#b5d8c3}
-.categorycell{min-width:145px}
-.categoryselect{width:100%;min-width:135px;border:1px solid transparent;border-radius:6px;padding:6px;background:transparent;color:#607168;font-size:11px}
-.pricecell{min-width:105px}
-.pricewrap{display:flex;align-items:center;gap:4px}
-.rupee{font-size:12px;color:#87948a}
-.priceinput{width:76px;border:1px solid #dce7dc;background:#fff;border-radius:7px;padding:7px;color:var(--green);font-weight:850}
-.noteinput{width:100%;min-width:120px;border:1px solid transparent;border-radius:6px;padding:6px;background:transparent;color:#718077;font-size:11px}
-.noteinput:focus{border-color:var(--line);background:white}
-.tablefoot{padding:13px 16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
-.empty{padding:38px 15px;text-align:center;color:var(--muted)}
-.empty b{display:block;color:var(--ink);margin-bottom:5px}
-.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.field{min-width:0}
+.topbar{background:#102d3c;color:white;padding:15px 22px;display:flex;
+align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{height:43px;width:43px;border-radius:13px;display:grid;place-items:center;
+background:linear-gradient(140deg,#13b8a6,#f2bd58);color:#123440;font-size:22px;font-weight:1000}
+.brand h1{font-size:16px;margin:0}.brand p{font-size:11px;color:#b9d1da;margin:4px 0 0}
+.pill{font-size:10px;letter-spacing:1px;border:1px solid #456675;border-radius:30px;padding:8px 11px}
+.hero{max-width:1450px;margin:auto;padding:26px 20px 19px}
+.eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:var(--primary)}
+.hero h2{font-size:clamp(26px,4vw,38px);letter-spacing:-1px;margin:9px 0}
+.hero p{font-size:13px;color:var(--muted);line-height:1.65;max-width:800px;margin:0}
+.layout{max-width:1450px;margin:auto;padding:0 20px 35px;display:grid;
+grid-template-columns:minmax(330px,.88fr) minmax(0,1.12fr);gap:19px;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;
+overflow:hidden;box-shadow:var(--shadow);min-width:0}
+.panel-head{padding:17px 19px;border-bottom:1px solid var(--line);
+display:flex;align-items:center;justify-content:space-between;gap:10px}
+.panel-head h3{font-size:14px;margin:0}
+.step{font-size:10px;font-weight:900;color:#087c84;background:#e3f7f5;padding:6px 9px;border-radius:7px}
+.panel-body{padding:18px}
+.section-title{font-size:10px;letter-spacing:1.3px;color:#718197;font-weight:900;
+margin:4px 0 12px;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{min-width:0;display:flex;flex-direction:column;gap:6px}
 .field.full{grid-column:1/-1}
-.field label{display:block;font-size:10px;font-weight:800;color:#52665a;margin-bottom:5px}
-.field input,.field select,.field textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:#fbfdfb;color:var(--ink);min-width:0}
-.field input,.field select{height:40px}
-.field textarea{min-height:65px;resize:vertical}
-.hint{font-size:10px;color:var(--muted);margin:5px 0 0}
-.fullbtn{width:100%;margin-top:11px}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.chip{border:1px solid var(--line);border-radius:99px;padding:5px 9px;background:#fff;color:#63746a;font-size:10px}
-.chip:hover{border-color:#8ebca0;color:var(--green)}
-.sideinfo{font-size:11px;color:var(--muted);line-height:1.65}
-.sideinfo strong{color:var(--ink)}
-.sideinfo ul{padding-left:17px;margin:8px 0}
-.sideinfo li{margin-bottom:6px}
-.previewbanner{background:var(--dark);color:white;padding:17px;border-radius:12px;margin-bottom:13px}
-.previewbanner .small{font-size:9px;letter-spacing:1.4px;color:#9ed3b3;font-weight:800}
-.previewbanner h3{font-size:20px;line-height:1.2;margin:6px 0}
-.previewbanner p{font-size:10px;color:#c0d0c6;margin:0;white-space:pre-wrap}
-.previewline{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #edf1ed;font-size:11px}
-.previewline:last-child{border:0}
-.previewline span:first-child{color:#627267}
-.previewline strong{color:var(--green)}
-.notice{padding:12px;border-radius:10px;background:#f9f4e8;border:1px solid #eee1bd;color:#81704d;font-size:10px;line-height:1.6}
-.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);max-width:calc(100% - 30px);background:#10251f;color:#fff;padding:11px 16px;border-radius:10px;font-size:12px;box-shadow:0 8px 35px #0002;z-index:100;display:none}
-.toast.show{display:block}
-footer{max-width:1500px;margin:auto;padding:18px 25px 26px;border-top:1px solid #dfe7df;color:var(--muted);font-size:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-@media(max-width:1100px){.layout{grid-template-columns:minmax(0,1fr) 270px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:800px){.layout{grid-template-columns:1fr}.sidecol{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}}
-@media(max-width:560px){.topinner,main,footer{padding-left:13px;padding-right:13px}.heading{align-items:flex-start}.headactions{width:100%}.headactions .btn{flex:1}.metrics{gap:8px}.metric{padding:11px}.metric .num{font-size:22px}.sidecol{grid-template-columns:1fr}.cardbody{padding:13px}.toolbar{padding:11px}.toolbar select{flex:1;max-width:none}.search{min-width:100%}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}}
-@media print{
- @page{size:A4;margin:12mm}
- body{background:#fff!important;color:#111!important;font-size:10pt}
- .topbar,.heading,.metrics,.sidecol,.toolbar,.cardhead,.tablefoot,.no-print,footer{display:none!important}
- main{padding:0!important;margin:0!important;max-width:none!important}
- .layout,.maincol{display:block!important}
- .card{box-shadow:none!important;border:0!important;border-radius:0!important;overflow:visible!important}
- .tablewrap{overflow:visible!important}
- table{width:100%!important;white-space:normal!important}
- th,td{padding:6px 5px!important;font-size:9pt!important}
- th{background:#eaf2eb!important;color:#21382b!important}
- .nameinput,.categoryselect,.noteinput,.priceinput{border:0!important;padding:0!important;background:transparent!important;color:#111!important;width:auto!important;min-width:0!important;font-size:9pt!important}
- .rupee{color:#111!important}
- .namecell,.categorycell,.pricecell{min-width:0!important}
- #rateTable th:last-child,#rateTable td:last-child{display:none!important}
- #rateTable th:nth-child(1),#rateTable td:nth-child(1){display:none!important}
- #rateTable th:nth-child(2),#rateTable td:nth-child(2){width:44%!important}
- #rateTable th:nth-child(3),#rateTable td:nth-child(3){width:23%!important}
- #rateTable th:nth-child(4),#rateTable td:nth-child(4){width:15%!important}
- #rateTable th:nth-child(5),#rateTable td:nth-child(5){width:18%!important}
- #rateTable .categoryselect{appearance:none;-webkit-appearance:none}
- #rateTable .noteinput{width:100%!important}
- .printhead{display:block!important}
- .printhead h2{margin:0 0 4px}
- .printhead p{margin:0 0 14px;color:#555;white-space:pre-wrap}
-}
-.printhead{display:none}
+label{font-size:11px;font-weight:800;color:#3d5066}
+input,select,textarea{min-width:0;width:100%;padding:10px 11px;border:1px solid #dce5ee;
+border-radius:9px;background:#fbfdff;color:#192e41;outline:none}
+input:focus,select:focus,textarea:focus{border-color:#078c94;box-shadow:0 0 0 3px #078c9415}
+textarea{resize:vertical;min-height:64px}
+.hint{font-size:10px;line-height:1.5;color:#8592a2}
+.divider{height:1px;background:var(--line);margin:18px 0}
+.segment{display:flex;gap:7px;flex-wrap:wrap}
+.segment button{flex:1;min-width:80px;padding:10px;border:1px solid var(--line);
+border-radius:9px;background:#f8fafc;color:#5d6d80;font-size:11px;font-weight:800}
+.segment button.active{background:#e4f6f4;color:#087e8b;border-color:#69c7bf}
+.colors{display:flex;gap:10px;flex-wrap:wrap}
+.color{height:33px;width:33px;border:3px solid white;border-radius:50%;
+box-shadow:0 0 0 1px #d4dce5;position:relative}
+.color.active{box-shadow:0 0 0 2px #078c94}
+.color.active:after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;
+color:white;font-weight:900;text-shadow:0 1px 3px #000}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:11px}
+.toolbar strong{font-size:12px}
+.mini{border:0;border-radius:8px;padding:9px 11px;font-size:11px;font-weight:800}
+.add{background:#e2f7f2;color:#08735e}
+.import{background:#edf2f8;color:#43556b}
+.services{display:flex;flex-direction:column;gap:10px}
+.service{border:1px solid #e0e8f0;background:#fbfdff;border-radius:12px;padding:12px}
+.service-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.service-top b{font-size:11px;color:#53677d}
+.service-actions{display:flex;gap:5px}
+.service-actions button{width:29px;height:28px;border:1px solid #e1e7ee;background:#fff;
+border-radius:7px;color:#516276;font-weight:900}
+.service-actions .remove{color:#bd3948}
+.service-fields{display:grid;grid-template-columns:minmax(0,1fr) 94px;gap:9px}
+.service-fields .field{gap:5px}
+.service-fields input{font-size:12px;padding:9px}
+.service-fields label{font-size:10px}
+.category-select{margin-bottom:10px}
+.empty{border:1px dashed #cdd8e5;border-radius:11px;padding:24px 12px;text-align:center;
+color:#8090a4;font-size:12px;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:15px}
+.stat{padding:11px;border:1px solid var(--line);border-radius:11px;background:#fafcff}
+.stat span{display:block;color:#8290a1;font-size:10px}
+.stat strong{display:block;margin-top:5px;font-size:18px;letter-spacing:-.5px}
+.preview-area{padding:15px;background:
+linear-gradient(45deg,#e8edf3 25%,transparent 25%),
+linear-gradient(-45deg,#e8edf3 25%,transparent 25%),
+linear-gradient(45deg,transparent 75%,#e8edf3 75%),
+linear-gradient(-45deg,transparent 75%,#e8edf3 75%);
+background-size:18px 18px;background-position:0 0,0 9px,9px -9px,-9px 0}
+.poster-frame{background:#fff;border-radius:10px;box-shadow:0 4px 20px #263c5017;
+overflow:hidden;max-width:100%}
+#poster{width:100%;height:auto;display:block}
+.preview-meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;
+font-size:10px;color:#748398;padding:11px 2px 0}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:16px}
+.btn{border:0;border-radius:10px;padding:12px 10px;font-size:11px;font-weight:900}
+.btn:hover{filter:brightness(.96)}
+.primary{background:linear-gradient(135deg,#078e91,#086d7a);color:#fff}
+.dark{background:#142f40;color:#fff}
+.light{background:#edf2f7;color:#31475a}
+.gold{background:#f7e8c8;color:#805719}
+.wide{grid-column:1/-1}
+.note{margin:0 16px 16px;padding:11px;border:1px solid #f0dfb6;background:#fff8e8;
+border-radius:10px;color:#80602b;font-size:10px;line-height:1.6}
+.footer{text-align:center;padding:20px;color:#8592a2;font-size:10px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);
+background:#102d3c;color:white;padding:12px 17px;border-radius:10px;font-size:12px;
+opacity:0;pointer-events:none;transition:.2s;z-index:10;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.preview-panel{grid-row:1}}
+@media(max-width:500px){.topbar{padding:13px}.hero{padding:22px 13px 17px}
+.layout{padding:0 10px 25px;gap:12px}.panel-body{padding:13px}.panel-head{padding:14px}
+.preview-area{padding:8px}.actions{padding:11px}.grid{gap:10px}.service{padding:9px}}
 </style>
 </head>
 <body>
 <header class="topbar">
- <div class="topinner">
-  <div class="brand"><div class="brandmark">₹</div><div>CSC SEVA TOOLS<small>BUSINESS OPERATIONS / RATE MANAGER</small></div></div>
-  <div class="topright"><span><i class="statusdot"></i>Browser workspace</span></div>
- </div>
+  <div class="brand"><div class="logo">K</div><div>
+    <h1>KISAN SEVA TOOLS</h1><p>CSC Rate List Maker Pro · Tool 038</p>
+  </div></div>
+  <div class="pill">✦ BUSINESS POSTER STUDIO</div>
 </header>
 
-<main>
- <section class="heading">
-  <div><div class="eyebrow">Service operations dashboard</div>
-   <h1>CSC Rate Manager<span style="color:var(--green2)">.</span></h1>
-   <p class="sub">Manage your service catalogue, maintain your own rates and publish a clean rate list for customers. Changes are saved in this browser when local storage is available.</p>
-  </div>
-  <div class="headactions">
-   <button class="btn btn-light" id="exportJson">↧ Backup data</button>
-   <button class="btn btn-light" id="importBtn">↥ Restore backup</button>
-   <button class="btn btn-primary" id="printBtn">Print rate list ↗</button>
-  </div>
- </section>
+<section class="hero">
+  <div class="eyebrow">DESIGN / PRICING / PRINT</div>
+  <h2>Make your rates <span style="color:#087e8b">look professional.</span></h2>
+  <p>Build a customized CSC and shop service rate list with editable prices, categories, multiple poster themes and a live preview. Download your poster as a high-resolution PNG or print it to PDF.</p>
+</section>
 
- <section class="metrics">
-  <div class="metric"><div class="label">TOTAL SERVICES</div><div class="num" id="metricCount">0</div><div class="note">In your catalogue</div></div>
-  <div class="metric"><div class="label">CATEGORIES</div><div class="num" id="metricCategories">0</div><div class="note">Unique categories</div></div>
-  <div class="metric"><div class="label">AVERAGE RATE</div><div class="num" id="metricAverage">₹0</div><div class="note">Across listed services</div></div>
-  <div class="metric"><div class="label">LAST SAVED</div><div class="num" style="font-size:18px" id="metricSaved">Not saved</div><div class="note" id="saveStatus">Local browser storage</div></div>
- </section>
+<main class="layout">
+<section class="panel">
+  <div class="panel-head"><h3>Rate list settings</h3><span class="step">01 / EDIT</span></div>
+  <div class="panel-body">
+    <div class="section-title">Business identity</div>
+    <div class="grid">
+      <div class="field full"><label for="shop">Shop / Centre Name *</label>
+        <input id="shop" maxlength="65" value="KAIF PAN SHOP"></div>
+      <div class="field full"><label for="heading">Poster Heading</label>
+        <input id="heading" maxlength="65" value="SERVICE RATE LIST"></div>
+      <div class="field full"><label for="address">Address</label>
+        <textarea id="address" maxlength="150" rows="2" placeholder="Shop address">At. Kamalwelli, Post Satpalli, Dist. Yavatmal</textarea></div>
+      <div class="field"><label for="phone">Contact Number</label>
+        <input id="phone" maxlength="30" placeholder="Optional mobile number"></div>
+      <div class="field"><label for="currency">Currency symbol</label>
+        <select id="currency"><option value="₹">₹ Indian Rupee</option><option value="Rs.">Rs.</option><option value="$">$</option></select></div>
+      <div class="field full"><label for="notice">Footer / Customer Notice</label>
+        <input id="notice" maxlength="130" value="Please confirm the service charge before placing your request."></div>
+    </div>
 
- <section class="layout">
-  <div class="maincol">
-   <section class="card">
-    <div class="cardhead">
-     <div><h2>Service catalogue</h2><p>Edit names, categories, rates and customer-facing notes directly in the table.</p></div>
-     <button class="btn btn-primary" id="addTop">＋ Add service</button>
-    </div>
-    <div class="toolbar">
-     <div class="search"><input id="search" type="search" placeholder="Search service, category or note…"></div>
-     <select id="filterCategory" aria-label="Filter category"><option value="">All categories</option></select>
-     <label class="checkwrap"><input type="checkbox" id="pricedOnly"> Priced only</label>
-    </div>
-    <div class="printhead" id="printhead">
-     <h2 id="printBusiness">CSC SERVICE RATE LIST</h2>
-     <p id="printContact"></p>
-    </div>
-    <div class="tablewrap">
-     <table id="rateTable">
-      <thead><tr><th>ID</th><th>Service name</th><th>Category</th><th>Rate (₹)</th><th>Customer note</th><th>Action</th></tr></thead>
-      <tbody id="rateRows"></tbody>
-     </table>
-     <div class="empty" id="emptyState" hidden><b>No matching services found</b>Try another search or add a new service.</div>
-    </div>
-    <div class="tablefoot">
-     <span id="showingText">Showing 0 services</span>
-     <div class="btnrow"><button class="btn btn-light btn-small" id="clearFilters">Clear filters</button><button class="btn btn-light btn-small" id="deleteAll">Delete all</button></div>
-    </div>
-   </section>
-
-   <section class="card" id="addCard">
-    <div class="cardhead"><div><h2>Add a new service</h2><p>Create a custom row for your local business.</p></div><span style="color:var(--green);font-size:10px;font-weight:850">NEW ENTRY</span></div>
-    <div class="cardbody">
-     <form id="addForm">
-      <div class="formgrid">
-       <div class="field"><label for="newName">SERVICE NAME *</label><input id="newName" maxlength="100" required placeholder="e.g. Colour print A4"></div>
-       <div class="field"><label for="newCategory">CATEGORY *</label><input id="newCategory" maxlength="50" required list="categorySuggestions" placeholder="e.g. Printing"></div>
-       <datalist id="categorySuggestions"></datalist>
-       <div class="field"><label for="newPrice">RATE IN RUPEES</label><input id="newPrice" type="number" min="0" max="1000000" step="0.01" placeholder="Enter your price"></div>
-       <div class="field"><label for="newNote">CUSTOMER NOTE</label><input id="newNote" maxlength="140" placeholder="e.g. Per page"></div>
+    <div class="divider"></div>
+    <div class="section-title">Poster appearance</div>
+    <div class="field">
+      <label>Design theme</label>
+      <div class="segment" id="themes">
+        <button class="active" data-theme="emerald">01 Emerald</button>
+        <button data-theme="royal">02 Royal</button>
+        <button data-theme="sunrise">03 Sunrise</button>
       </div>
-      <button class="btn btn-primary fullbtn" type="submit">＋ Add service to catalogue</button>
-     </form>
     </div>
-   </section>
+    <div class="divider"></div>
+    <div class="grid">
+      <div class="field"><label for="paper">Poster size</label>
+        <select id="paper"><option value="A4">A4 Portrait</option><option value="A5">A5 Portrait</option><option value="square">Square Social Post</option></select></div>
+      <div class="field"><label for="language">Heading language</label>
+        <select id="language"><option value="custom">Use my heading</option><option value="en">English</option><option value="mr">Marathi</option><option value="hi">Hindi</option></select></div>
+      <div class="field full"><label for="subtitle">Subtitle</label>
+        <input id="subtitle" maxlength="100" value="CSC • ONLINE FORMS • DIGITAL SERVICES"></div>
+      <div class="field full"><label for="sort">Sort services by</label>
+        <select id="sort"><option value="manual">My custom order</option><option value="az">Name: A to Z</option><option value="price">Price: low to high</option></select></div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-title">Your services & prices</div>
+    <div class="toolbar">
+      <strong id="serviceCount">0 services</strong>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="mini import" id="sample">Load examples</button>
+        <button class="mini add" id="add">＋ Add service</button>
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:12px">Enter the rates you actually charge. Examples are editable and are not official or recommended tariffs.</div>
+    <div class="services" id="services"></div>
+
+    <div class="divider"></div>
+    <div class="section-title">Optional display settings</div>
+    <div class="grid">
+      <div class="field full"><label for="serviceLabel">Service column label</label>
+        <input id="serviceLabel" maxlength="35" value="SERVICE / सेवाएँ"></div>
+      <div class="field"><label for="priceLabel">Price label</label>
+        <input id="priceLabel" maxlength="25" value="PRICE"></div>
+      <div class="field"><label for="maxRows">Rows per poster page</label>
+        <select id="maxRows"><option value="10">10 rows</option><option value="14" selected>14 rows</option><option value="18">18 rows</option><option value="24">24 rows</option></select></div>
+    </div>
   </div>
+</section>
 
-  <aside class="sidecol">
-   <section class="card">
-    <div class="cardhead"><div><h2>Business identity</h2><p>Brand your customer rate list.</p></div></div>
-    <div class="cardbody">
-     <div class="field" style="margin-bottom:12px"><label for="businessName">BUSINESS / SHOP NAME</label><input id="businessName" maxlength="100" placeholder="e.g. KAIF PAN SHOP"></div>
-     <div class="field" style="margin-bottom:12px"><label for="businessAddress">ADDRESS</label><textarea id="businessAddress" maxlength="250" placeholder="Village, town, district"></textarea></div>
-     <div class="field" style="margin-bottom:12px"><label for="businessPhone">CONTACT NUMBER (OPTIONAL)</label><input id="businessPhone" inputmode="numeric" maxlength="10" placeholder="10-digit phone"></div>
-     <div class="field"><label for="currency">CURRENCY DISPLAY</label><select id="currency"><option value="INR">₹ Indian Rupee</option><option value="plain">INR (text)</option></select></div>
-     <div class="divider" style="height:1px;background:var(--line);margin:15px 0"></div>
-     <label class="checkwrap" style="white-space:normal"><input type="checkbox" id="showNotes" checked> Include notes in printed rate list</label>
-     <label class="checkwrap" style="white-space:normal;margin-top:10px"><input type="checkbox" id="showEmpty" > Include unpriced services in print</label>
+<section class="panel preview-panel">
+  <div class="panel-head"><h3>Live poster preview</h3><span class="step">02 / PREVIEW</span></div>
+  <div class="panel-body" style="padding-bottom:0">
+    <div class="stats">
+      <div class="stat"><span>Total services</span><strong id="statServices">0</strong></div>
+      <div class="stat"><span>Lowest entered</span><strong id="statLow">—</strong></div>
+      <div class="stat"><span>Highest entered</span><strong id="statHigh">—</strong></div>
     </div>
-   </section>
-
-   <section class="card">
-    <div class="cardhead"><div><h2>Rate list summary</h2><p>Based on your current catalogue.</p></div></div>
-    <div class="cardbody">
-     <div class="previewbanner"><div class="small">CUSTOMER RATE LIST</div><h3 id="previewBusiness">Your Business Name</h3><p id="previewAddress">Add your business address in settings.</p></div>
-     <div class="previewline"><span>Visible services</span><strong id="previewCount">0</strong></div>
-     <div class="previewline"><span>Lowest listed rate</span><strong id="previewLow">—</strong></div>
-     <div class="previewline"><span>Highest listed rate</span><strong id="previewHigh">—</strong></div>
-     <div class="previewline"><span>Unpriced services</span><strong id="previewUnpriced">0</strong></div>
-     <p class="hint" style="margin-top:12px">Prices are maintained by you. The dashboard does not verify official CSC, government or third-party fees.</p>
-    </div>
-   </section>
-
-   <section class="card">
-    <div class="cardhead"><div><h2>Data tools</h2><p>Keep a portable copy of your catalogue.</p></div></div>
-    <div class="cardbody">
-     <button class="btn btn-light fullbtn" style="margin-top:0" id="exportCsv">Download CSV spreadsheet</button>
-     <button class="btn btn-light fullbtn" id="exportJson2">Download JSON backup</button>
-     <button class="btn btn-light fullbtn" id="importBtn2">Restore from JSON</button>
-     <button class="btn btn-danger fullbtn" id="resetDemo">Restore sample catalogue</button>
-     <input type="file" id="importFile" accept=".json,application/json" hidden>
-     <p class="hint">Backups include service data and business settings. Import replaces the current catalogue after confirmation.</p>
-    </div>
-   </section>
-
-   <section class="card">
-    <div class="cardhead"><div><h2>Quick guide</h2></div></div>
-    <div class="cardbody sideinfo">
-     <strong>Daily workflow</strong>
-     <ul><li>Edit the sample prices to match your own rates.</li><li>Use search and categories to find entries.</li><li>Print a customer copy or save as PDF from the browser.</li><li>Export JSON before changing devices or clearing browser data.</li></ul>
-     <strong>Privacy note</strong>
-     <p>Data is stored in this browser where storage is available. It does not automatically sync to other computers or browsers.</p>
-    </div>
-   </section>
-  </aside>
- </section>
+  </div>
+  <div class="preview-area"><div class="poster-frame"><canvas id="poster" width="1240" height="1754" aria-label="Live rate list poster"></canvas></div>
+    <div class="preview-meta"><span>● Live design preview</span><span id="canvasSize">A4 · 1240 × 1754 px</span></div>
+  </div>
+  <div class="actions">
+    <button class="btn primary" id="download">⬇ Download PNG</button>
+    <button class="btn dark" id="print">▣ Print / Save PDF</button>
+    <button class="btn light" id="save">♡ Save draft</button>
+    <button class="btn light" id="load">↻ Load draft</button>
+    <button class="btn gold wide" id="exportCsv">▤ Export services as CSV</button>
+    <button class="btn light wide" id="reset">↺ Reset editor</button>
+  </div>
+  <p class="note">Important: This tool does not verify government or CSC tariffs. Add your own accurate charges and disclose any applicable third-party or government fees clearly. Preview, print scale and font rendering may vary by browser.</p>
+</section>
 </main>
-<footer><span>CSC Seva Tools · CSC Rate Manager</span><span>Sample rates are illustrative and must be verified by the business owner.</span></footer>
+
+<footer class="footer">Kisan Seva Tools · CSC Rate List Maker Pro · Drafts are saved locally in your browser.</footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (()=>{
-'use strict';
+"use strict";
 const $=id=>document.getElementById(id);
-const STORAGE_KEY='csc_seva_rate_manager_v1';
-const defaults=[
- ['Aadhaar printout','Document Services',10,'Per page'],
- ['Document photocopy - B/W','Printing',2,'Per side'],
- ['Document photocopy - Colour','Printing',10,'Per page'],
- ['A4 B/W print','Printing',5,'Per page'],
- ['A4 colour print','Printing',15,'Per page'],
- ['Photo print 4 × 6','Photo Services',20,'Per photo'],
- ['Passport photo sheet','Photo Services',40,'Per sheet'],
- ['Scan to PDF','Document Services',10,'Per document'],
- ['PDF merge','Digital Services',20,'Per file'],
- ['PDF compression','Digital Services',15,'Per file'],
- ['Online form filling','Online Services',50,'Service charge may vary'],
- ['Resume typing','Typing & Design',50,'Starting rate'],
- ['Lamination A4','Lamination',30,'Per sheet'],
- ['Colour photocopy ID','Printing',10,'Per side'],
- ['Mobile recharge','Recharge & Bills',0,'Enter applicable service charge'],
- ['Bill payment assistance','Recharge & Bills',0,'Enter applicable service charge'],
- ['Passport photo resize','Photo Services',20,'Per image'],
- ['QR code creation','Digital Services',20,'Per code'],
- ['Biodata typing','Typing & Design',50,'Starting rate'],
- ['Visiting card design','Typing & Design',100,'Starting rate']
-].map((x,i)=>({id:i+1,name:x[0],category:x[1],price:x[2],note:x[3]}));
+const canvas=$("poster"),ctx=canvas.getContext("2d");
+let services=[],nextId=1,theme="emerald",toastTimer;
+const fieldIds=["shop","heading","address","phone","currency","notice","subtitle","paper","language","sort","serviceLabel","priceLabel","maxRows"];
 
-let services=defaults.map(x=>({...x}));
-let nextId=Math.max(...services.map(s=>s.id))+1;
-let toastTimer=null;
+const palettes={
+ emerald:{bg:"#f7fbf9",head:"#0c5148",accent:"#0c8a79",soft:"#e1f4ee",ink:"#163d38",muted:"#5e7b74",line:"#d8e8e1",white:"#ffffff"},
+ royal:{bg:"#f7f8fd",head:"#202b62",accent:"#5265cf",soft:"#e8eaff",ink:"#202c57",muted:"#677397",line:"#dfe3f3",white:"#ffffff"},
+ sunrise:{bg:"#fffaf4",head:"#873d25",accent:"#d87535",soft:"#ffead8",ink:"#673b29",muted:"#9a705d",line:"#f0dfd3",white:"#ffffff"}
+};
+function toast(msg){const e=$("toast");e.textContent=msg;e.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>e.classList.remove("show"),2300)}
+function escapeHTML(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function money(n){return ($("currency").value||"₹")+" "+Number(n||0).toLocaleString("en-IN",{maximumFractionDigits:2})}
+function newService(name="",price="",category="General"){
+  return {id:nextId++,name,price:String(price),category};
+}
+function addService(name="",price="",category="General"){
+  if(services.length>=100){toast("Maximum 100 services per list.");return}
+  services.push(newService(name,price,category));renderServices();renderPoster();
+}
+function moveService(id,delta){
+  const i=services.findIndex(s=>s.id===id),j=i+delta;
+  if(i<0||j<0||j>=services.length)return;
+  [services[i],services[j]]=[services[j],services[i]];
+  renderServices();renderPoster();
+}
+function renderServices(){
+  const root=$("services");
+  $("serviceCount").textContent=services.length+" service"+(services.length===1?"":"s");
+  if(!services.length){root.innerHTML='<div class="empty">No services yet.<br>Add a service or load editable examples to get started.</div>';return}
+  root.innerHTML=services.map((s,i)=>`
+  <div class="service" data-id="${s.id}">
+    <div class="service-top"><b>SERVICE ${String(i+1).padStart(2,"0")}</b>
+      <div class="service-actions">
+        <button type="button" data-action="up" title="Move up" aria-label="Move up">↑</button>
+        <button type="button" data-action="down" title="Move down" aria-label="Move down">↓</button>
+        <button type="button" data-action="delete" class="remove" title="Delete service" aria-label="Delete service">×</button>
+      </div>
+    </div>
+    <div class="field category-select"><label>Category</label>
+      <select data-key="category">
+        ${["General","CSC / Online","Documents","Printing","Government Forms","Banking","Other"].map(c=>`<option ${s.category===c?"selected":""}>${c}</option>`).join("")}
+      </select>
+    </div>
+    <div class="service-fields">
+      <div class="field"><label>Service name</label>
+        <input data-key="name" maxlength="100" value="${escapeHTML(s.name)}" placeholder="e.g. Colour print"></div>
+      <div class="field"><label>Charge (₹)</label>
+        <input data-key="price" type="number" min="0" max="99999999" step="0.01" value="${escapeHTML(s.price)}" placeholder="0.00"></div>
+    </div>
+  </div>`).join("");
+}
+$("services").addEventListener("input",e=>{
+  const card=e.target.closest(".service");if(!card)return;
+  const s=services.find(x=>x.id===Number(card.dataset.id));if(!s)return;
+  const key=e.target.dataset.key;if(!key)return;
+  s[key]=e.target.value;renderPoster();
+});
+$("services").addEventListener("change",e=>{
+  const card=e.target.closest(".service");if(!card)return;
+  const s=services.find(x=>x.id===Number(card.dataset.id));if(!s)return;
+  const key=e.target.dataset.key;if(key)s[key]=e.target.value;
+  renderPoster();
+});
+$("services").addEventListener("click",e=>{
+  const btn=e.target.closest("[data-action]");if(!btn)return;
+  const card=btn.closest(".service"),id=Number(card.dataset.id),action=btn.dataset.action;
+  if(action==="delete"){services=services.filter(s=>s.id!==id);renderServices();renderPoster()}
+  if(action==="up")moveService(id,-1);
+  if(action==="down")moveService(id,1);
+});
+$("add").addEventListener("click",()=>addService());
 
-function safeNumber(value){
- const n=Number(value);
- return Number.isFinite(n)&&n>=0&&n<=1000000?n:null;
+function sampleServices(){
+  return [
+    newService("Online form filling","50","CSC / Online"),
+    newService("Black & white print","5","Printing"),
+    newService("Colour print","15","Printing"),
+    newService("Document scanning","10","Documents"),
+    newService("PDF merge / split","20","Documents"),
+    newService("Photo print","30","Printing"),
+    newService("Photocopy - per page","2","Printing"),
+    newService("Resume typing","100","Documents"),
+    newService("Application typing","30","Documents"),
+    newService("Online appointment assistance","50","CSC / Online")
+  ];
 }
-function escapeHtml(value){
- return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+$("sample").addEventListener("click",()=>{
+  if(services.length&&!confirm("Replace the current services with editable example rates?"))return;
+  services=sampleServices();nextId=services.reduce((m,s)=>Math.max(m,s.id+1),nextId);
+  renderServices();renderPoster();toast("Editable examples loaded. Review all prices.");
+});
+
+function getHeading(){
+  const lang=$("language").value;
+  if(lang==="mr")return "सेवा दर सूची";
+  if(lang==="hi")return "सेवा दर सूची";
+  return $("heading").value.trim()||"SERVICE RATE LIST";
 }
-function money(value){
- const n=safeNumber(value);
- if(n===null)return '—';
- const formatted=n.toLocaleString('en-IN',{maximumFractionDigits:2});
- return $('currency').value==='INR'?'₹'+formatted:'INR '+formatted;
+function getSorted(){
+  const arr=services.filter(s=>s.name.trim());
+  const mode=$("sort").value;
+  if(mode==="az")arr.sort((a,b)=>a.name.localeCompare(b.name));
+  if(mode==="price")arr.sort((a,b)=>(Number(a.price)||0)-(Number(b.price)||0));
+  return arr;
 }
-function notify(message){
- const t=$('toast');t.textContent=message;t.classList.add('show');
- if(toastTimer)clearTimeout(toastTimer);
- toastTimer=setTimeout(()=>t.classList.remove('show'),2600);
+function roundedRect(x,y,w,h,r,fill,stroke){
+  ctx.beginPath();ctx.roundRect(x,y,r?Math.min(r,w/2,h/2):0,r?Math.min(r,w/2,h/2):0);
+  if(fill){ctx.fillStyle=fill;ctx.fill()}
+  if(stroke){ctx.strokeStyle=stroke;ctx.stroke()}
 }
-function categories(){
- return [...new Set(services.map(s=>s.category.trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+function fitFont(text,maxWidth,start,weight="700",family="Arial"){
+  let size=start;
+  while(size>13){ctx.font=`${weight} ${size}px "${family}"`;if(ctx.measureText(text).width<=maxWidth)break;size-=2}
+  return size;
 }
-function getSettings(){
- return {
-  businessName:$('businessName').value,
-  businessAddress:$('businessAddress').value,
-  businessPhone:$('businessPhone').value,
-  currency:$('currency').value,
-  showNotes:$('showNotes').checked,
-  showEmpty:$('showEmpty').checked
- };
+function wrap(text,maxWidth,font){
+  ctx.font=font;const words=String(text||"").split(/\s+/).filter(Boolean);const lines=[];let line="";
+  for(const word of words){const test=line?line+" "+word:word;
+    if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}else line=test}
+  if(line)lines.push(line);return lines;
 }
-function applySettings(s={}){
- $('businessName').value=String(s.businessName??'');
- $('businessAddress').value=String(s.businessAddress??'');
- $('businessPhone').value=String(s.businessPhone??'');
- $('currency').value=s.currency==='plain'?'plain':'INR';
- $('showNotes').checked=s.showNotes!==false;
- $('showEmpty').checked=!!s.showEmpty;
-}
-function save(){
- try{
-  localStorage.setItem(STORAGE_KEY,JSON.stringify({version:1,services,nextId,settings:getSettings()}));
-  $('saveStatus').textContent='Saved in this browser';
-  $('metricSaved').textContent=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
- }catch(e){
-  $('saveStatus').textContent='Browser storage unavailable';
-  $('metricSaved').textContent='Not saved';
- }
-}
-function renderCategoryOptions(){
- const selected=$('filterCategory').value;
- const list=categories();
- $('filterCategory').innerHTML='<option value="">All categories</option>'+list.map(c=>'<option value="'+escapeHtml(c)+'">'+escapeHtml(c)+'</option>').join('');
- if(list.includes(selected))$('filterCategory').value=selected;
- $('categorySuggestions').innerHTML=list.map(c=>'<option value="'+escapeHtml(c)+'"></option>').join('');
-}
-function getVisible(){
- const q=$('search').value.trim().toLowerCase();
- const cat=$('filterCategory').value;
- const priced=$('pricedOnly').checked;
- return services.filter(s=>{
-  const matchesText=[s.name,s.category,s.note].some(v=>String(v||'').toLowerCase().includes(q));
-  return matchesText&&(!cat||s.category===cat)&&(!priced||safeNumber(s.price)!==null&&Number(s.price)>0);
- });
-}
-function renderRows(){
- renderCategoryOptions();
- const list=getVisible();
- $('rateRows').innerHTML=list.map(s=>`
-  <tr data-id="${s.id}">
-   <td style="color:#96a39a;font-size:10px">#${s.id}</td>
-   <td class="namecell"><input class="nameinput" data-field="name" aria-label="Service name" maxlength="100" value="${escapeHtml(s.name)}"></td>
-   <td class="categorycell"><select class="categoryselect" data-field="category" aria-label="Service category">${categories().map(c=>'<option '+(c===s.category?'selected':'')+' value="'+escapeHtml(c)+'">'+escapeHtml(c)+'</option>').join('')}<option value="__custom">＋ New category…</option></select></td>
-   <td class="pricecell"><div class="pricewrap"><span class="rupee">${$('currency').value==='INR'?'₹':'INR'}</span><input class="priceinput" data-field="price" aria-label="Service price" type="number" min="0" max="1000000" step="0.01" value="${s.price===null?'':escapeHtml(s.price)}" placeholder="—"></div></td>
-   <td><input class="noteinput" data-field="note" aria-label="Customer note" maxlength="140" value="${escapeHtml(s.note)}" placeholder="Optional note"></td>
-   <td><button type="button" class="btn btn-danger btn-small" data-action="delete" aria-label="Delete ${escapeHtml(s.name)}">Remove</button></td>
-  </tr>`).join('');
- $('emptyState').hidden=list.length>0;
- $('rateTable').style.display=list.length?'table':'none';
- $('showingText').textContent=`Showing ${list.length} of ${services.length} services`;
- updateStats();
-}
-function updateStats(){
- const priced=services.map(s=>safeNumber(s.price)).filter(n=>n!==null&&n>0);
- const avg=priced.length?priced.reduce((a,b)=>a+b,0)/priced.length:0;
- $('metricCount').textContent=services.length;
- $('metricCategories').textContent=categories().length;
- $('metricAverage').textContent=money(avg);
- $('previewCount').textContent=services.length;
- $('previewUnpriced').textContent=services.filter(s=>safeNumber(s.price)===null||Number(s.price)===0).length;
- $('previewLow').textContent=priced.length?money(Math.min(...priced)):'—';
- $('previewHigh').textContent=priced.length?money(Math.max(...priced)):'—';
- $('previewBusiness').textContent=$('businessName').value.trim()||'Your Business Name';
- $('previewAddress').textContent=[$('businessAddress').value.trim(),$('businessPhone').value.trim()].filter(Boolean).join('\n')||'Add your business address in settings.';
- $('printBusiness').textContent=$('businessName').value.trim()||'CSC SERVICE RATE LIST';
- $('printContact').textContent=[$('businessAddress').value.trim(),$('businessPhone').value.trim()].filter(Boolean).join(' | ');
-}
-function rerenderAndSave(){renderRows();save();}
-function addService(data){
- const name=String(data.name||'').trim();
- const category=String(data.category||'').trim();
- if(!name||!category){notify('Enter both a service name and category.');return false;}
- if(name.length>100||category.length>50){notify('Name or category is too long.');return false;}
- const price=data.price===''||data.price===null?null:safeNumber(data.price);
- if(data.price!==''&&data.price!==null&&price===null){notify('Enter a valid rate between 0 and 1,000,000.');return false;}
- services.push({id:nextId++,name,category,price,note:String(data.note||'').trim().slice(0,140)});
- $('search').value='';
- $('filterCategory').value='';
- $('pricedOnly').checked=false;
- rerenderAndSave();notify('Service added to catalogue.');return true;
-}
-function exportFile(filename,content,type){
- const blob=new Blob([content],{type});
- const url=URL.createObjectURL(blob);
- const a=document.createElement('a');a.href=url;a.download=filename;
- document.body.appendChild(a);a.click();a.remove();
- setTimeout(()=>URL.revokeObjectURL(url),1200);
-}
-function exportJSON(){
- exportFile('csc-rate-list-backup.json',JSON.stringify({version:1,exportedAt:new Date().toISOString(),services,nextId,settings:getSettings()},null,2),'application/json');
- notify('JSON backup downloaded.');
-}
-function csvEscape(v){return '"'+String(v??'').replace(/"/g,'""')+'"';}
-function exportCSV(){
- const rows=[['Service ID','Service Name','Category','Rate INR','Customer Note']];
- services.forEach(s=>rows.push([s.id,s.name,s.category,s.price??'',s.note]));
- const csv='\uFEFF'+rows.map(row=>row.map(csvEscape).join(',')).join('\r\n');
- exportFile('csc-service-rates.csv',csv,'text/csv;charset=utf-8');
- notify('CSV spreadsheet downloaded.');
-}
-function normalizeImported(raw){
- if(!raw||!Array.isArray(raw.services)||raw.services.length>2000)throw new Error('Backup must contain a services array with at most 2,000 entries.');
- const result=[];
- for(let i=0;i<raw.services.length;i++){
-  const s=raw.services[i];
-  if(!s||typeof s!=='object')throw new Error('Invalid service record at row '+(i+1)+'.');
-  const name=String(s.name||'').trim(),category=String(s.category||'').trim();
-  if(!name||!category||name.length>100||category.length>50)throw new Error('Invalid name or category at row '+(i+1)+'.');
-  let price=null;
-  if(s.price!==null&&s.price!==''&&s.price!==undefined){
-   price=safeNumber(s.price);
-   if(price===null)throw new Error('Invalid price at row '+(i+1)+'.');
-  }
-  result.push({
-   id:Number.isSafeInteger(Number(s.id))&&Number(s.id)>0?Number(s.id):i+1,
-   name,category,price,note:String(s.note||'').slice(0,140)
+function renderPoster(){
+  const p=palettes[theme],paper=$("paper").value;
+  const W=paper==="square"?1200:paper==="A5"?874:1240;
+  const H=paper==="square"?1200:paper==="A5"?1240:1754;
+  canvas.width=W;canvas.height=H;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle=p.bg;ctx.fillRect(0,0,W,H);
+  const pad=W*.065,inner=W-pad*2;
+  const title=getHeading(),shop=$("shop").value.trim()||"YOUR BUSINESS NAME";
+  const subtitle=$("subtitle").value.trim(),address=$("address").value.trim(),phone=$("phone").value.trim();
+  const list=getSorted(),maxRows=Number($("maxRows").value)||14;
+  const pageRows=list.slice(0,maxRows);
+  const overflow=list.length>maxRows;
+  const headerH=paper==="square"?240:255;
+  ctx.fillStyle=p.head;ctx.fillRect(0,0,W,headerH);
+  ctx.fillStyle=p.accent;ctx.fillRect(0,headerH-9,W,9);
+
+  // Decorative geometric corner marks.
+  ctx.globalAlpha=.12;ctx.fillStyle="#ffffff";
+  ctx.beginPath();ctx.arc(W-30,18,145,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(W-20,12,95,0,Math.PI*2);ctx.fill();
+  ctx.globalAlpha=1;
+
+  ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="#ffffff";
+  const shopSize=fitFont(shop,inner,44,"900");
+  ctx.font=`900 ${shopSize}px Arial`;ctx.fillText(shop,W/2,50+shopSize/2,inner);
+  ctx.font=`700 ${paper==="square"?34:37}px Arial`;
+  ctx.fillStyle="#d8fff4";ctx.fillText(title,W/2,111,inner);
+  if(subtitle){ctx.font=`600 ${fitFont(subtitle,inner,21,"600")}px Arial`;ctx.fillStyle="#ffffff";ctx.fillText(subtitle,W/2,158,inner)}
+  const contact=[address,phone].filter(Boolean).join("   •   ");
+  if(contact){const lines=wrap(contact,inner,`500 17px Arial`);ctx.font="500 17px Arial";
+    lines.slice(0,2).forEach((line,i)=>ctx.fillText(line,W/2,205+i*22,inner))}
+
+  const tableTop=headerH+35;
+  const headerRowH=56;
+  const rowH=paper==="square"?52:57;
+  const nameX=pad+20,priceX=W-pad-20,priceColW=inner*.27;
+  roundedRect(pad,tableTop,inner,headerRowH,12,p.accent,null);
+  ctx.fillStyle="#ffffff";ctx.textBaseline="middle";ctx.textAlign="left";
+  const label=$("serviceLabel").value.trim()||"SERVICE";
+  const priceLabel=$("priceLabel").value.trim()||"PRICE";
+  const labelSize=fitFont(label,inner-priceColW-50,20,"800");
+  ctx.font=`800 ${labelSize}px Arial`;ctx.fillText(label,nameX,tableTop+headerRowH/2,inner-priceColW-45);
+  ctx.textAlign="right";ctx.font="800 19px Arial";ctx.fillText(priceLabel,priceX,tableTop+headerRowH/2,priceColW);
+
+  let y=tableTop+headerRowH;
+  const actualRows=Math.max(1,pageRows.length);
+  pageRows.forEach((s,i)=>{
+    const rowY=y+i*rowH;
+    ctx.fillStyle=i%2===0?p.white:p.soft;
+    ctx.fillRect(pad,rowY,inner,rowH);
+    ctx.strokeStyle=p.line;ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(pad,rowY+rowH);ctx.lineTo(W-pad,rowY+rowH);ctx.stroke();
+
+    const category=s.category&&s.category!=="General"?s.category:"";
+    const name=s.name.trim();
+    ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=p.ink;
+    const fontSize=fitFont(name,inner-priceColW-48,21,"700");
+    ctx.font=`700 ${fontSize}px Arial`;
+    ctx.fillText(name,nameX,rowY+rowH/2-(category?7:0),inner-priceColW-48);
+    if(category){ctx.fillStyle=p.muted;ctx.font="500 12px Arial";ctx.fillText(category,nameX,rowY+rowH/2+13,inner-priceColW-48)}
+    const raw=Number(s.price);
+    const price=s.price.trim()!==""&&Number.isFinite(raw)&&raw>=0?money(raw):"—";
+    ctx.textAlign="right";ctx.fillStyle=p.head;
+    ctx.font=`800 ${fitFont(price,priceColW,21,"800")}px Arial`;
+    ctx.fillText(price,priceX,rowY+rowH/2,priceColW);
   });
- }
- const maxId=Math.max(0,...result.map(s=>s.id));
- return {services:result,nextId:Math.max(maxId+1,Number(raw.nextId)||1),settings:raw.settings||{}};
-}
-function loadBackupFile(file){
- if(!file)return;
- if(file.size>2*1024*1024){notify('Backup is too large. Maximum size is 2 MB.');return;}
- const reader=new FileReader();
- reader.onload=()=>{
-  try{
-   const imported=normalizeImported(JSON.parse(reader.result));
-   if(!confirm('Replace your current catalogue with '+imported.services.length+' services from this backup?'))return;
-   services=imported.services;nextId=imported.nextId;applySettings(imported.settings);
-   $('search').value='';$('filterCategory').value='';$('pricedOnly').checked=false;
-   rerenderAndSave();notify('Backup restored successfully.');
-  }catch(e){alert('Could not restore backup: '+e.message);}
- };
- reader.onerror=()=>notify('Unable to read the selected file.');
- reader.readAsText(file);
-}
-function printRateList(){
- const selected=services.filter(s=>{
-  const priced=safeNumber(s.price)!==null&&Number(s.price)>0;
-  return $('showEmpty').checked||priced;
- });
- if(!selected.length){notify('There are no services to print with the current setting.');return;}
- const rows=selected.map(s=>`
-  <tr><td>${escapeHtml(s.name)}</td><td>${escapeHtml(s.category)}</td><td>${safeNumber(s.price)!==null&&Number(s.price)>0?escapeHtml(money(s.price)):'On request'}</td>${$('showNotes').checked?'<td>'+escapeHtml(s.note||'—')+'</td>':''}</tr>`).join('');
- const w=window.open('','_blank');
- if(!w){alert('Your browser blocked the print window. Allow pop-ups for this site and try again.');return;}
- const business=escapeHtml($('businessName').value.trim()||'CSC SERVICE RATE LIST');
- const contact=escapeHtml([$ ('businessAddress').value.trim(),$('businessPhone').value.trim()].filter(Boolean).join(' | '));
- const headers='<th>Service</th><th>Category</th><th>Rate</th>'+($('showNotes').checked?'<th>Details</th>':'');
- w.document.open();
- w.document.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${business} - Service Rate List</title><style>
-  @page{size:A4;margin:14mm}*{box-sizing:border-box}body{font:12px/1.5 Arial,sans-serif;color:#1c2b22;margin:0}
-  header{border-bottom:3px solid #17694d;padding:0 0 14px;margin-bottom:18px}h1{font-size:24px;margin:0 0 5px;color:#17694d}header p{white-space:pre-wrap;color:#65736a;margin:0;font-size:11px}
-  .meta{font-size:10px;color:#7b887f;margin:8px 0 14px}table{width:100%;border-collapse:collapse}th{background:#e8f3eb;text-align:left;color:#244a35;font-size:10px;text-transform:uppercase;letter-spacing:.4px}
-  th,td{border:1px solid #dce6dd;padding:8px 7px;vertical-align:top;overflow-wrap:anywhere}tr{break-inside:avoid}footer{border-top:1px solid #dce6dd;padding-top:10px;margin-top:20px;color:#78857b;font-size:9px}
-  @media screen{body{max-width:900px;margin:25px auto;padding:25px;box-shadow:0 0 0 1px #ddd}button{padding:10px 14px;margin:0 0 16px;border:0;background:#17694d;color:#fff;border-radius:7px;cursor:pointer}}
-  </style></head><body><button onclick="window.print()">Print / Save PDF</button><header><h1>${business}</h1><p>${contact||'Service rate list'}</p></header><div class="meta">SERVICE RATE LIST · ${new Date().toLocaleDateString('en-IN')} · Rates are maintained by the business.</div><table><thead><tr>${headers}</tr></thead><tbody>${rows}</tbody></table><footer>Prices are indicative and subject to confirmation by the service provider. Government or third-party charges, where applicable, may be separate.</footer><script>window.onload=()=>setTimeout(()=>window.print(),300);<\/script></body></html>`);
- w.document.close();
-}
-$('rateRows').addEventListener('change',e=>{
- const el=e.target,field=el.dataset.field,row=el.closest('tr');
- if(!field||!row)return;
- const id=Number(row.dataset.id),s=services.find(x=>x.id===id);
- if(!s)return;
- if(field==='price'){
-  if(el.value===''){s.price=null;}
-  else{
-   const n=safeNumber(el.value);
-   if(n===null){notify('Enter a valid rate between 0 and 1,000,000.');el.value=s.price??'';return;}
-   s.price=n;
+
+  let footerY=tableTop+headerRowH+actualRows*rowH+28;
+  if(!pageRows.length){
+    ctx.fillStyle=p.muted;ctx.textAlign="center";ctx.font="500 23px Arial";
+    ctx.fillText("Add services to build your rate list",W/2,tableTop+headerRowH+55);
+    footerY=tableTop+headerRowH+105;
   }
- }else if(field==='name'){
-  const v=el.value.trim();
-  if(!v){notify('Service name cannot be empty.');el.value=s.name;return;}
-  s.name=v.slice(0,100);
- }else if(field==='note'){
-  s.note=el.value.trim().slice(0,140);
- }else if(field==='category'){
-  if(el.value==='__custom'){
-   const c=prompt('Enter a new category name:');
-   if(!c||!c.trim()){el.value=s.category;return;}
-   s.category=c.trim().slice(0,50);
-  }else{s.category=el.value;}
- }
- rerenderAndSave();
-});
-$('rateRows').addEventListener('click',e=>{
- const btn=e.target.closest('[data-action="delete"]');
- if(!btn)return;
- const row=btn.closest('tr'),id=Number(row.dataset.id),s=services.find(x=>x.id===id);
- if(!s)return;
- if(!confirm('Remove "'+s.name+'" from your catalogue?'))return;
- services=services.filter(x=>x.id!==id);rerenderAndSave();notify('Service removed.');
-});
-$('addForm').addEventListener('submit',e=>{
- e.preventDefault();
- const ok=addService({name:$('newName').value,category:$('newCategory').value,price:$('newPrice').value===''?null:$('newPrice').value,note:$('newNote').value});
- if(ok)$('addForm').reset();
-});
-$('addTop').addEventListener('click',()=>{
- $('addCard').scrollIntoView({behavior:'smooth',block:'start'});
- $('newName').focus({preventScroll:true});
-});
-$('search').addEventListener('input',renderRows);
-$('filterCategory').addEventListener('change',renderRows);
-$('pricedOnly').addEventListener('change',renderRows);
-$('clearFilters').addEventListener('click',()=>{$('search').value='';$('filterCategory').value='';$('pricedOnly').checked=false;renderRows();});
-$('deleteAll').addEventListener('click',()=>{
- if(!services.length){notify('Catalogue is already empty.');return;}
- if(!confirm('Delete every service from this catalogue? Export a backup first if you may need the data later.'))return;
- services=[];nextId=1;rerenderAndSave();notify('Catalogue cleared.');
-});
-['businessName','businessAddress','businessPhone','currency','showNotes','showEmpty'].forEach(id=>{
- $(id).addEventListener('input',()=>{updateStats();save();});
- $(id).addEventListener('change',()=>{renderRows();updateStats();save();});
-});
-$('exportJson').addEventListener('click',exportJSON);
-$('exportJson2').addEventListener('click',exportJSON);
-$('exportCsv').addEventListener('click',exportCSV);
-$('importBtn').addEventListener('click',()=>$('importFile').click());
-$('importBtn2').addEventListener('click',()=>$('importFile').click());
-$('importFile').addEventListener('change',e=>{loadBackupFile(e.target.files[0]);e.target.value='';});
-$('printBtn').addEventListener('click',printRateList);
-$('resetDemo').addEventListener('click',()=>{
- if(!confirm('Replace your catalogue with the original sample services? Your current list will be lost unless backed up.'))return;
- services=defaults.map(x=>({...x}));nextId=Math.max(...services.map(s=>s.id))+1;
- $('search').value='';$('filterCategory').value='';$('pricedOnly').checked=false;
- rerenderAndSave();notify('Sample catalogue restored. Review the sample prices before use.');
-});
-function init(){
- try{
-  const raw=localStorage.getItem(STORAGE_KEY);
-  if(raw){
-   const data=JSON.parse(raw);
-   const normalized=normalizeImported(data);
-   services=normalized.services;nextId=normalized.nextId;applySettings(normalized.settings);
+
+  if(overflow){
+    ctx.textAlign="center";ctx.fillStyle=p.accent;ctx.font="700 16px Arial";
+    ctx.fillText(`Showing ${maxRows} of ${list.length} services — increase rows per poster or export CSV.`,W/2,footerY,inner);
+    footerY+=34;
   }
- }catch(e){
-  services=defaults.map(x=>({...x}));nextId=Math.max(...services.map(s=>s.id))+1;
-  $('saveStatus').textContent='Could not read previous saved data';
- }
- renderRows();updateStats();
+  const notice=$("notice").value.trim();
+  const footerHeight=paper==="square"?110:100;
+  const fy=Math.min(Math.max(footerY+5,H-footerHeight-20),H-footerHeight-10);
+  ctx.fillStyle=p.soft;ctx.fillRect(pad,fy,inner,footerHeight);
+  ctx.fillStyle=p.head;ctx.textAlign="center";ctx.textBaseline="middle";
+  if(notice){
+    const nLines=wrap(notice,inner-35,"500 16px Arial");
+    ctx.font="500 16px Arial";
+    nLines.slice(0,3).forEach((line,i)=>ctx.fillText(line,W/2,fy+25+i*21,inner-35));
+  }
+  ctx.fillStyle=p.muted;ctx.font="700 12px Arial";
+  ctx.fillText("THANK YOU FOR YOUR VISIT",W/2,fy+footerHeight-18,inner);
+  $("canvasSize").textContent=`${paper==="square"?"Square":paper} · ${W} × ${H} px`;
+  $("statServices").textContent=list.length;
+  const prices=list.map(s=>Number(s.price)).filter((n,i)=>safelyHasPrice(list,i)&&Number.isFinite(n)&&n>=0);
+  $("statLow").textContent=prices.length?money(Math.min(...prices)):"—";
+  $("statHigh").textContent=prices.length?money(Math.max(...prices)):"—";
 }
-init();
+function safelyHasPrice(list,i){return list[i].price.trim()!==""}
+function getState(){
+  return {fields:Object.fromEntries(fieldIds.map(id=>[id,$(id).value])),
+    services:services.map(s=>({...s})),theme,nextId};
+}
+function applyState(s){
+  if(!s||typeof s!=="object")throw new Error("Invalid draft");
+  if(s.fields)fieldIds.forEach(id=>{if(s.fields[id]!==undefined)$(id).value=s.fields[id]});
+  services=Array.isArray(s.services)?s.services.slice(0,100).map(s=>({
+    id:Number(s.id)||nextId++,name:String(s.name||"").slice(0,100),
+    price:String(s.price??"").slice(0,30),category:String(s.category||"General").slice(0,40)
+  })):[];
+  nextId=Math.max(Number(s.nextId)||1,...services.map(s=>s.id+1),1);
+  theme=["emerald","royal","sunrise"].includes(s.theme)?s.theme:"emerald";
+  document.querySelectorAll("[data-theme]").forEach(b=>b.classList.toggle("active",b.dataset.theme===theme));
+  renderServices();renderPoster();
+}
+function exportPNG(){
+  renderPoster();
+  canvas.toBlob(blob=>{
+    if(!blob){toast("PNG export failed. Try again.");return}
+    const url=URL.createObjectURL(blob),a=document.createElement("a");
+    const name=($("shop").value||"csc-rate-list").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"csc-rate-list";
+    a.href=url;a.download=name+"-rate-list.png";document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1500);toast("High-resolution poster PNG is downloading.");
+  },"image/png");
+}
+function printPoster(){
+  renderPoster();const url=canvas.toDataURL("image/png"),w=window.open("","_blank");
+  if(!w){toast("Allow pop-ups to print or save as PDF.");return}
+  const paper=$("paper").value;
+  const size=paper==="A5"?"A5 portrait":paper==="square"?"100mm 100mm":"A4 portrait";
+  w.document.write(`<!DOCTYPE html><html><head><title>CSC Rate List</title>
+  <style>@page{size:${size};margin:0}*{box-sizing:border-box}html,body{margin:0;padding:0}
+  img{width:100%;height:100%;object-fit:contain;display:block}
+  @media print{body{print-color-adjust:exact;-webkit-print-color-adjust:exact}}</style></head>
+  <body><img src="${url}" alt="Rate list poster"><script>window.onload=()=>setTimeout(()=>window.print(),350);<\/script></body></html>`);
+  w.document.close();
+}
+function exportCSV(){
+  const rows=[["Category","Service","Price", "Currency"]];
+  getSorted().forEach(s=>rows.push([s.category,s.name,s.price,$("currency").value]));
+  const csv=rows.map(row=>row.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");
+  const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="csc-services-rate-list.csv";a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1200);toast("Service list exported as CSV.");
+}
+function reset(){
+  if(!confirm("Reset the editor and replace your current service list?"))return;
+  fieldIds.forEach(id=>{
+    const el=$(id);
+    if(el.tagName==="SELECT")el.selectedIndex=0;
+    else el.value="";
+  });
+  $("shop").value="KAIF PAN SHOP";$("heading").value="SERVICE RATE LIST";
+  $("address").value="At. Kamalwelli, Post Satpalli, Dist. Yavatmal";
+  $("subtitle").value="CSC • ONLINE FORMS • DIGITAL SERVICES";
+  $("notice").value="Please confirm the service charge before placing your request.";
+  $("currency").value="₹";$("paper").value="A4";$("language").value="custom";
+  $("sort").value="manual";$("serviceLabel").value="SERVICE / सेवाएँ";$("priceLabel").value="PRICE";$("maxRows").value="14";
+  services=[];nextId=1;theme="emerald";
+  document.querySelectorAll("[data-theme]").forEach(b=>b.classList.toggle("active",b.dataset.theme===theme));
+  renderServices();renderPoster();toast("Editor reset.");
+}
+fieldIds.forEach(id=>{$(id).addEventListener("input",renderPoster);$(id).addEventListener("change",renderPoster)});
+document.querySelectorAll("[data-theme]").forEach(b=>b.addEventListener("click",()=>{
+  theme=b.dataset.theme;document.querySelectorAll("[data-theme]").forEach(x=>x.classList.toggle("active",x===b));renderPoster();
+}));
+$("download").addEventListener("click",exportPNG);
+$("print").addEventListener("click",printPoster);
+$("exportCsv").addEventListener("click",exportCSV);
+$("reset").addEventListener("click",reset);
+$("save").addEventListener("click",()=>{
+  try{localStorage.setItem("kst_csc_rate_list_v1",JSON.stringify(getState()));toast("Draft saved on this device.")}
+  catch(e){toast("Could not save draft in this browser.")}
+});
+$("load").addEventListener("click",()=>{
+  try{const raw=localStorage.getItem("kst_csc_rate_list_v1");
+    if(!raw){toast("No saved draft found.");return}
+    applyState(JSON.parse(raw));toast("Draft loaded.")
+  }catch(e){toast("Could not load draft.")}
+});
+renderServices();renderPoster();
 })();
 </script>
 </body>
