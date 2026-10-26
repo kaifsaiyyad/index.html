@@ -1,42 +1,366 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cover Letter | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Cover Letter</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: Document Makers • Icon: ✉️</div></section><section class="panel"><label>Applicant name</label><textarea rows="2" id="f0" placeholder="Applicant name"></textarea><label>Address</label><textarea rows="2" id="f1" placeholder="Address"></textarea><label>To / Department</label><textarea rows="2" id="f2" placeholder="To / Department"></textarea><label>Subject</label><textarea rows="2" id="f3" placeholder="Subject"></textarea><label>Application details</label><textarea rows="2" id="f4" placeholder="Application details"></textarea><button onclick="previewDoc()">Preview document</button><button class="secondary" onclick="window.print()">Print / Save PDF</button><div id="out"></div><script>function previewDoc(){let fs=["Applicant name", "Address", "To / Department", "Subject", "Application details"],out=document.querySelector("#out");out.innerHTML="<hr><h2>Document preview</h2>"+fs.map((x,i)=>"<p><b>"+x+":</b> "+(document.querySelector("#f"+i).value||"—").replace(/</g,"&lt;")+"</p>").join("")}</script></section></main><script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101126">
+<title>Cover Letter Studio X | Kisan Seva Tools</title>
+<meta name="description" content="Create, customize, preview, and print professional job application cover letters.">
+<style>
+:root{
+ --bg:#101126;--panel:#191b36;--panel2:#202344;--ink:#f3f4ff;
+ --muted:#a6aacb;--line:#34375b;--purple:#a78bfa;--blue:#6c8cff;
+ --cyan:#54e5dc;--good:#65e6b0;--shadow:0 18px 55px #0003;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top right,#30265b 0,transparent 35%),var(--bg);color:var(--ink);font:15px/1.55 Inter,system-ui,Arial,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.top{padding:16px 24px;border-bottom:1px solid #ffffff17;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#101126e8}
+.brand{font-weight:950;letter-spacing:1px;font-size:18px}
+.brand b{color:var(--cyan)}
+.top small{color:var(--muted);font-size:11px}
+.shell{max-width:1500px;margin:auto;padding:25px}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:25px}
+.tag{color:var(--cyan);font-size:11px;letter-spacing:3px;font-weight:900;text-transform:uppercase}
+h1{font-size:clamp(29px,4vw,44px);letter-spacing:-1.5px;line-height:1.13;margin:8px 0}
+.gradient{background:linear-gradient(90deg,#fff,#b9a4ff,#54e5dc);background-clip:text;color:transparent}
+p{color:var(--muted);margin:5px 0}
+.live{border:1px solid #65e6b055;color:var(--good);padding:8px 12px;border-radius:30px;font-size:12px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.panel{background:linear-gradient(145deg,#1b1d3a,#16182f);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);min-width:0}
+.panelhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+h2{font-size:17px;margin:0}
+.counter{font-size:10px;letter-spacing:1px;color:var(--cyan);background:#54e5dc12;border:1px solid #54e5dc28;padding:5px 8px;border-radius:7px}
+.section{border-top:1px solid var(--line);padding-top:17px;margin-top:18px}
+.section h3{font-size:12px;color:#c9c8ee;margin:0 0 12px;letter-spacing:.5px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{min-width:0}
+.full{grid-column:1/-1}
+label{display:block;color:#c4c6e4;font-size:11px;font-weight:800;margin-bottom:6px}
+input,textarea,select{width:100%;background:#11132a;border:1px solid #383b60;color:#f3f4ff;padding:11px;border-radius:9px;outline:none}
+textarea{resize:vertical;min-height:76px}
+input:focus,textarea:focus,select:focus{border-color:var(--purple);box-shadow:0 0 0 3px #a78bfa20}
+input::placeholder,textarea::placeholder{color:#74799e}
+.help{font-size:10px;color:#9298bd;margin-top:4px}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.btn{border:1px solid transparent;border-radius:9px;padding:10px 13px;font-size:12px;font-weight:850}
+.primary{background:linear-gradient(100deg,#8b5cf6,#627bff);color:white}
+.secondary{background:#292c4c;color:#e4e5ff;border-color:#414469}
+.ghost{background:transparent;border-color:#414469;color:#d5d7f5}
+.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.templates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.template{border:1px solid #393d60;background:#15172f;border-radius:10px;padding:11px 7px;color:#dfe1ff;font-size:11px;font-weight:800}
+.template.active{border-color:var(--cyan);background:#54e5dc12;color:var(--cyan)}
+.meter{height:6px;background:#303352;border-radius:20px;overflow:hidden;margin-top:8px}
+.meter div{height:100%;width:0;background:linear-gradient(90deg,#a78bfa,#54e5dc);transition:width .2s}
+.previewwrap{background:#0c0d1d;border:1px solid #353757;border-radius:12px;padding:12px}
+.paper{background:#fff;color:#24283a;padding:clamp(19px,3vw,35px);min-height:670px;box-shadow:0 8px 35px #0003;overflow-wrap:anywhere}
+.paperheader{border-bottom:2px solid #6c8cff;padding-bottom:17px;margin-bottom:23px}
+.paperheader h2{font-size:23px;color:#252744;letter-spacing:-.6px}
+.paperheader p{color:#626983;font-size:10px;margin:3px 0}
+.paper .date{font-size:11px;color:#626983;margin:17px 0}
+.paper .recipient{font-size:11px;line-height:1.7;margin-bottom:20px}
+.paper .subject{font-size:12px;font-weight:900;margin:18px 0 12px;color:#252744}
+.paper .bodytext{font-family:Georgia,"Times New Roman",serif;font-size:13px;line-height:1.85;white-space:pre-wrap;color:#30334a}
+.paper .sign{font-family:Georgia,serif;margin-top:24px;font-size:13px;white-space:pre-line}
+.paperfooter{border-top:1px solid #e2e4ec;margin-top:30px;padding-top:8px;color:#8a8da1;font-size:9px}
+.previewtools{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.wordstat{font-size:11px;color:var(--muted)}
+.status{font-size:11px;color:var(--cyan);margin-top:10px;min-height:17px}
+.tip{background:#24223e;border:1px solid #4a416b;border-radius:10px;padding:12px;font-size:11px;color:#d5d2f4;margin-top:15px}
+.footer{text-align:center;color:#8186ab;font-size:11px;padding:26px}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.shell{padding:15px}.panel{padding:17px}}
+@media(max-width:430px){.fields{grid-template-columns:1fr}.full{grid-column:auto}.panel{padding:13px}.paper{padding:17px;min-height:600px}.top{padding:14px}.templates{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media print{
+ @page{size:A4;margin:19mm}
+ body{background:#fff!important;color:#222}
+ .top,.hero,.editor,.previewtools,.footer,.tip{display:none!important}
+ .shell{padding:0;max-width:none}
+ .layout{display:block}
+ .panel.previewpanel{padding:0;background:white;border:0;box-shadow:none}
+ .previewwrap{padding:0;background:white;border:0}
+ .paper{padding:0;min-height:0;box-shadow:none}
+ .paper .bodytext{font-size:12pt;line-height:1.7}
+ .paperheader h2{font-size:22pt}
+}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="brand">KISAN <b>SEVA</b> / STUDIO X</div>
+ <small>DOCUMENT DESIGN SYSTEM · TOOL 33</small>
+</header>
+
+<main class="shell">
+ <section class="hero">
+  <div>
+   <div class="tag">Career document lab / 2026</div>
+   <h1><span class="gradient">Cover Letter</span><br>Studio X</h1>
+   <p>Turn your experience into a clear, polished job application letter.</p>
+  </div>
+  <div class="live">● LIVE PREVIEW ENABLED</div>
+ </section>
+
+ <div class="layout">
+  <section class="panel editor">
+   <div class="panelhead"><h2>Build your letter</h2><span class="counter">01 / EDITOR</span></div>
+
+   <div class="section" style="border:0;padding-top:0;margin-top:0">
+    <h3>CHOOSE A DESIGN</h3>
+    <div class="templates">
+     <button class="template active" data-template="modern" type="button">✦ Modern</button>
+     <button class="template" data-template="classic" type="button">▤ Classic</button>
+     <button class="template" data-template="minimal" type="button">◇ Minimal</button>
+    </div>
+   </div>
+
+   <div class="section">
+    <h3>01 — YOUR DETAILS</h3>
+    <div class="fields">
+     <div class="field"><label for="name">Full name *</label><input id="name" maxlength="100" placeholder="Your full name"></div>
+     <div class="field"><label for="role">Job title applying for *</label><input id="role" maxlength="100" placeholder="Junior Web Developer"></div>
+     <div class="field"><label for="email">Email</label><input id="email" type="email" maxlength="120" placeholder="you@example.com"></div>
+     <div class="field"><label for="phone">Phone</label><input id="phone" maxlength="35" placeholder="+91 ..."></div>
+     <div class="field full"><label for="location">City / Address</label><input id="location" maxlength="160" placeholder="City, State, India"></div>
+     <div class="field"><label for="date">Letter date</label><input id="date" type="date"></div>
+     <div class="field"><label for="tone">Writing tone</label>
+      <select id="tone"><option value="professional">Professional</option><option value="confident">Confident</option><option value="friendly">Warm and friendly</option><option value="entry">Entry-level / Fresher</option></select>
+     </div>
+    </div>
+   </div>
+
+   <div class="section">
+    <h3>02 — COMPANY DETAILS</h3>
+    <div class="fields">
+     <div class="field"><label for="company">Company name *</label><input id="company" maxlength="120" placeholder="Company or organization"></div>
+     <div class="field"><label for="hiring">Hiring manager</label><input id="hiring" maxlength="100" placeholder="Manager name, if known"></div>
+     <div class="field"><label for="companyLocation">Company location</label><input id="companyLocation" maxlength="150" placeholder="City / Office address"></div>
+     <div class="field"><label for="source">Where you found the job</label>
+      <select id="source"><option value="">Not specified</option><option>Company website</option><option>LinkedIn</option><option>Job portal</option><option>Referral</option><option>Newspaper</option><option>Other</option></select>
+     </div>
+    </div>
+   </div>
+
+   <div class="section">
+    <h3>03 — YOUR STORY</h3>
+    <div class="fields">
+     <div class="field full"><label for="opening">Opening / why this role *</label><textarea id="opening" maxlength="900" placeholder="Why are you applying? What interests you about this opportunity?"></textarea></div>
+     <div class="field full"><label for="skills">Skills and relevant experience *</label><textarea id="skills" maxlength="1400" placeholder="Mention real skills, projects, experience, achievements or coursework."></textarea></div>
+     <div class="field full"><label for="fit">Why this company?</label><textarea id="fit" maxlength="900" placeholder="What do you value about the company or its work?"></textarea></div>
+     <div class="field full"><label for="closing">Closing statement</label><textarea id="closing" maxlength="500" placeholder="Express interest in an interview and thank the reader."></textarea></div>
+     <div class="field full"><label for="signoff">Sign-off</label>
+      <select id="signoff"><option>Kind regards,</option><option>Sincerely,</option><option>Best regards,</option><option>Yours faithfully,</option></select>
+     </div>
+    </div>
+    <div class="wordstat" id="wordCount">0 words · Suggested length: 200–350 words</div>
+    <div class="meter"><div id="meterBar"></div></div>
+   </div>
+
+   <div class="btnrow">
+    <button class="btn primary" type="button" id="sample">Load sample</button>
+    <button class="btn secondary" type="button" id="save">Save draft</button>
+    <button class="btn secondary" type="button" id="load">Load draft</button>
+    <button class="btn ghost" type="button" id="download">Download HTML</button>
+    <button class="btn ghost" type="button" id="reset">Reset</button>
+   </div>
+   <div class="status" id="status" role="status" aria-live="polite">Your letter is generated locally in your browser.</div>
+   <div class="tip">Privacy: your entered details are processed in this page. Drafts use this browser's local storage. Avoid saving confidential information on shared computers. This tool does not send applications or contact employers.</div>
+  </section>
+
+  <section class="panel previewpanel">
+   <div class="previewtools">
+    <div><h2>Document preview</h2><div class="wordstat">A4-friendly layout · Editable content</div></div>
+    <span class="counter">02 / OUTPUT</span>
+   </div>
+   <div class="previewwrap">
+    <article class="paper" id="paper">
+     <div class="paperheader">
+      <h2 id="pName">Your Full Name</h2>
+      <p id="pContact">Email · Phone · Location</p>
+     </div>
+     <div class="date" id="pDate"></div>
+     <div class="recipient" id="pRecipient"></div>
+     <div class="subject" id="pSubject">RE: Application for the position</div>
+     <div class="bodytext" id="pBody"></div>
+     <div class="sign" id="pSign"></div>
+     <div class="paperfooter">Cover letter prepared with Kisan Seva Tools · Review all details before sending.</div>
+    </article>
+   </div>
+   <div class="btnrow previewtools">
+    <button class="btn primary" id="print" type="button">Print / Save PDF</button>
+    <button class="btn secondary" id="copy" type="button">Copy letter text</button>
+   </div>
+   <div class="status">Tip: In the print window, select “Save as PDF” to save a PDF copy.</div>
+  </section>
+ </div>
+ <footer class="footer">Kisan Seva Tools · Cover Letter Studio X · Tool 33</footer>
+</main>
+
+<script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+"use strict";
+const $=id=>document.getElementById(id);
+const ids=["name","role","email","phone","location","date","tone","company","hiring","companyLocation","source","opening","skills","fit","closing","signoff"];
+let currentTemplate="modern";
+
+function val(id){return $(id).value.trim();}
+function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function status(s){$("status").textContent=s;}
+function words(s){return (s.trim().match(/\S+/g)||[]).length;}
+
+function dateText(value){
+ if(!value)return "Date: Not specified";
+ const d=new Date(value+"T12:00:00");
+ return "Date: "+d.toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"});
+}
+function generateBody(){
+ const name=val("name")||"Your Name";
+ const role=val("role")||"the advertised position";
+ const company=val("company")||"your organization";
+ const hiring=val("hiring");
+ const greeting=hiring?"Dear "+hiring+",":"Dear Hiring Manager,";
+ const opening=val("opening");
+ const skills=val("skills");
+ const fit=val("fit");
+ const closing=val("closing");
+ const tone=val("tone");
+ const defaultOpening={
+  professional:"I am writing to express my interest in the "+role+" position at "+company+".",
+  confident:"I am excited to apply for the "+role+" opportunity at "+company and contribute my relevant strengths to your team.",
+  friendly:"I was pleased to learn about the "+role+" opportunity at "+company and would welcome the chance to contribute.",
+  entry:"I am applying for the "+role+" position at "+company. I am eager to begin my professional journey and apply the knowledge and skills I have developed."
+ }[tone];
+ const defaultSkills={
+  professional:"My relevant skills, practical learning and commitment to quality would help me contribute to the responsibilities of this role.",
+  confident:"I bring a willingness to take ownership, solve problems and keep learning. I would work to turn these strengths into measurable contributions for the team.",
+  friendly:"I enjoy learning, working with others and approaching tasks thoughtfully. I would be glad to bring this attitude to your team.",
+  entry:"Although I am at the beginning of my career, I am motivated to learn, take feedback seriously and build strong practical skills."
+ }[tone];
+ const paragraphs=[
+  opening||defaultOpening,
+  skills||defaultSkills,
+  fit||("I am interested in the opportunity to learn from your team and contribute to "+company+"'s work."),
+  closing||"I would appreciate the opportunity to discuss how my background and motivation align with this role. Thank you for your time and consideration."
+ ];
+ return greeting+"\n\n"+paragraphs.join("\n\n")+"\n\n"+(val("signoff")||"Kind regards,")+"\n"+name;
+}
+function render(){
+ const name=val("name")||"Your Full Name";
+ const company=val("company")||"the company";
+ const role=val("role")||"the advertised position";
+ const contact=[val("email"),val("phone"),val("location")].filter(Boolean).join("  •  ");
+ $("pName").textContent=name;
+ $("pContact").textContent=contact||"Email · Phone · Location";
+ $("pDate").textContent=dateText(val("date"));
+ $("pRecipient").textContent=[
+  val("hiring")||"Hiring Manager",
+  company,
+  val("companyLocation")
+ ].filter(Boolean).join("\n");
+ $("pSubject").textContent="RE: Application for "+role;
+ $("pBody").textContent=generateBody();
+ $("pSign").textContent=(val("signoff")||"Kind regards,")+"\n"+name;
+ const count=words(generateBody());
+ $("wordCount").textContent=count+" words · Suggested length: 200–350 words";
+ $("meterBar").style.width=Math.min(100,count/350*100)+"%";
+ $("paper").style.borderTop=currentTemplate==="modern"?"5px solid #6c8cff":currentTemplate==="classic"?"5px solid #373737":"none";
+ $("paperheader").style.borderColor=currentTemplate==="classic"?"#555":currentTemplate==="minimal"?"#ddd":"#6c8cff";
+}
+function setTemplate(name){
+ currentTemplate=name;
+ document.querySelectorAll(".template").forEach(b=>b.classList.toggle("active",b.dataset.template===name));
+ $("paper").style.fontFamily=name==="classic"?"Georgia,'Times New Roman',serif":name==="minimal"?"Arial,sans-serif":"Inter,Arial,sans-serif";
+ render();
+}
+function data(){const d={schemaVersion:1,template:currentTemplate};ids.forEach(id=>d[id]=$(id).value);return d;}
+function restore(d){
+ if(!d||typeof d!=="object")throw new Error("Invalid draft");
+ ids.forEach(id=>{if(typeof d[id]==="string")$(id).value=d[id];});
+ setTemplate(["modern","classic","minimal"].includes(d.template)?d.template:"modern");
+ render();
+}
+function download(filename,content,type){
+ const blob=new Blob([content],{type});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");a.href=url;a.download=filename;
+ document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1200);
+}
+function sample(){
+ const example={
+  name:"Aarav Sharma",role:"Junior Web Developer",email:"aarav@example.com",
+  phone:"+91 98765 43210",location:"Pune, Maharashtra",
+  date:new Date().toISOString().slice(0,10),tone:"entry",
+  company:"Example Digital Solutions",hiring:"Hiring Manager",
+  companyLocation:"Pune, Maharashtra",source:"Company website",
+  opening:"I am writing to apply for the Junior Web Developer position at Example Digital Solutions. I am interested in building useful, accessible web experiences and would value the opportunity to contribute to your team.",
+  skills:"Through personal projects and self-directed learning, I have practised HTML, CSS and JavaScript, including responsive layouts and interactive forms. I am comfortable learning new tools, troubleshooting issues and improving my work through feedback. I am keen to keep developing these skills in a professional environment.",
+  fit:"I am drawn to the opportunity to work on practical digital products and collaborate with people who care about quality, usability and continuous improvement.",
+  closing:"I would welcome the opportunity to discuss my projects and how I could contribute to your team. Thank you for considering my application.",
+  signoff:"Kind regards,"
+ };
+ restore(sampleDataFix(sampleObjectFix(example)));
+ status("Sample loaded. Replace the example details with your own accurate information.");
+}
+function sampleObjectFix(x){return x;}
+function sampleDataFix(x){return x;}
+
+ids.forEach(id=>$(id).addEventListener("input",render));
+document.querySelectorAll(".template").forEach(b=>b.addEventListener("click",()=>setTemplate(b.dataset.template)));
+
+$("sample").addEventListener("click",sample);
+$("save").addEventListener("click",()=>{
+ try{localStorage.setItem("kst_cover_letter_v1",JSON.stringify(data()));status("Draft saved in this browser.");}
+ catch(e){status("Could not save draft. Browser storage may be unavailable.");}
+});
+$("load").addEventListener("click",()=>{
+ try{
+  const raw=localStorage.getItem("kst_cover_letter_v1");
+  if(!raw){status("No saved draft found in this browser.");return;}
+  restore(JSON.parse(raw));status("Draft loaded.");
+ }catch(e){status("Draft could not be loaded. It may be invalid.");}
+});
+$("reset").addEventListener("click",()=>{
+ if(!confirm("Clear the form and start a new cover letter?"))return;
+ ids.forEach(id=>$(id).value="");
+ $("date").value=new Date().toISOString().slice(0,10);
+ $("tone").value="professional";$("signoff").value="Kind regards,";
+ setTemplate("modern");render();status("Form cleared.");
+});
+function valid(){
+ if(!val("name")||!val("role")||!val("company")){
+  status("Please enter your name, job title and company name first.");
+  return false;
+ }
+ if(val("email")&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val("email"))){
+  status("Please check the email address format.");return false;
+ }
+ return true;
+}
+$("print").addEventListener("click",()=>{if(valid())window.print();});
+$("download").addEventListener("click",()=>{
+ if(!valid())return;
+ const html="<!DOCTYPE html><html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Cover Letter</title><style>body{max-width:760px;margin:45px auto;padding:20px;font:14px/1.8 Georgia,serif;color:#252744}h2{font:700 24px Arial;border-bottom:2px solid #6c8cff;padding-bottom:12px}pre{font:14px/1.8 Georgia,serif;white-space:pre-wrap;overflow-wrap:anywhere}@media print{body{margin:0;padding:0}}</style></head><body><h2>"+esc(val("name"))+"</h2><p>"+esc([val("email"),val("phone"),val("location")].filter(Boolean).join(" · "))+"</p><p>"+esc(dateText(val("date")))+"</p><pre>"+esc($("pRecipient").textContent)+"\n\n"+esc($("pSubject").textContent)+"\n\n"+esc($("pBody").textContent)+"</pre></body></html>";
+ download("CoverLetter.html",html,"text/html;charset=utf-8");
+ status("Cover letter HTML downloaded. Open it in a browser to review or print.");
+});
+$("copy").addEventListener("click",async()=>{
+ if(!valid())return;
+ const text=$("pName").textContent+"\n"+$("pContact").textContent+"\n\n"+$("pDate").textContent+"\n\n"+$("pRecipient").textContent+"\n\n"+$("pSubject").textContent+"\n\n"+$("pBody").textContent;
+ try{
+  await navigator.clipboard.writeText(text);status("Cover letter copied to clipboard.");
+ }catch(e){
+  const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();
+  try{document.execCommand("copy");status("Cover letter copied. If copying failed, select the preview text manually.");}
+  catch(err){status("Clipboard unavailable. Select and copy the preview text manually.");}
+  ta.remove();
+ }
+});
+$("date").value=new Date().toISOString().slice(0,10);
+render();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
