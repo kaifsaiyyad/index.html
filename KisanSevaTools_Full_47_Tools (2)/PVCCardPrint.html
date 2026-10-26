@@ -1,55 +1,413 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PVC Card Print | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>PVC Card Print</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: ID Card & Print • Icon: 💳</div></section><section class="panel"><label>Select image/file</label><input id="file" type="file" accept="image/*" multiple><div id="preview"></div><button onclick="window.print()">Print / Save PDF</button></section><section class="panel"><h2>Preview / output</h2><div id="out"></div></section>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080f1d">
+<title>PVC Card Print Pro | Kisan Seva Tools</title>
+<style>
+:root{--bg:#080f1d;--panel:#121e30;--panel2:#1a2b41;--line:#2b4059;--text:#f2f6ff;--muted:#9bacc2;--mint:#68ebc9;--blue:#86adff;--gold:#f5ce89;--red:#ff98a8}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 20% -15%,#214858,transparent 48%),var(--bg);font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--text)}
+button,input,select{font:inherit}button{cursor:pointer}
+header{position:sticky;top:0;z-index:10;padding:12px 18px;background:#080f1ded;backdrop-filter:blur(15px);border-bottom:1px solid #ffffff12}
+.nav{max-width:1450px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:950;letter-spacing:.5px}
+.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--mint));display:grid;place-items:center;color:#071521;font-size:22px}
+.brand small{display:block;font-size:9px;letter-spacing:1.7px;color:var(--muted);margin-top:4px}
+.badge{border:1px solid #68ebc955;border-radius:30px;color:var(--mint);padding:8px 10px;font-size:9px;font-weight:900}
+main{max-width:1450px;margin:auto;padding:24px 16px 40px}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:8px 0 22px}
+.eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:var(--mint)}
+h1{font-size:clamp(29px,4.2vw,44px);line-height:1.1;letter-spacing:-1px;margin:10px 0}
+.hero p{font-size:12px;color:var(--muted);line-height:1.75;max-width:750px;margin:0}
+.layout{display:grid;grid-template-columns:315px minmax(0,1fr);gap:15px;align-items:start}
+.panel{min-width:0;background:linear-gradient(145deg,#152338,#101a2a);border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 18px 55px #0002}
+.panelhead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:15px 16px;border-bottom:1px solid var(--line)}
+.panelhead h2{font-size:13px;margin:0}
+.kicker{font-size:9px;letter-spacing:1.4px;color:var(--mint);font-weight:900}
+.pad{padding:14px}
+.section{padding:14px 0;border-bottom:1px solid #ffffff10}
+.section:first-child{padding-top:0}.section:last-child{border:0;padding-bottom:0}
+.sectitle{display:flex;justify-content:space-between;gap:8px;font-size:11px;font-weight:900;margin-bottom:12px}
+.field{margin-bottom:12px}.field:last-child{margin-bottom:0}
+label{display:block;font-size:10px;color:#c3d0e2;font-weight:850;margin-bottom:6px}
+input,select{width:100%;min-width:0;background:#091421;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px;font-size:12px;outline:none}
+input:focus,select:focus{border-color:var(--mint)}
+input[type=checkbox]{width:auto;accent-color:var(--mint)}
+input[type=file]{font-size:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.btn{border:1px solid var(--line);border-radius:10px;background:#1c2d43;color:var(--text);padding:10px 12px;font-size:10px;font-weight:900;transition:.15s}
+.btn:hover{border-color:var(--mint);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(120deg,var(--blue),var(--mint));border:0;color:#081521}
+.btn.gold{background:linear-gradient(120deg,#ffe1a5,#edb66b);border:0;color:#291c0a}
+.btn.danger{color:var(--red)}
+.btn.full{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.drop{border:1px dashed #58718c;border-radius:12px;background:#0b1727;padding:16px 11px;text-align:center}
+.drop .big{font-size:29px;margin-bottom:6px}
+.drop p{font-size:10px;line-height:1.6;color:var(--muted);margin:7px 0 11px}
+.presets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.preset{padding:9px 4px;border:1px solid var(--line);border-radius:10px;background:#0b1626;color:var(--text);font-size:10px;font-weight:900}
+.preset.active{border-color:var(--mint);background:#183346}
+.preset small{display:block;color:var(--muted);font-size:9px;margin-top:4px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.topbar h2{font-size:14px;margin:0}
+.tabs{display:flex;gap:4px;padding:4px;border:1px solid var(--line);background:#091421;border-radius:10px}
+.tab{border:0;border-radius:7px;background:transparent;color:var(--muted);padding:8px 10px;font-size:10px;font-weight:900}
+.tab.active{background:#273d55;color:#fff}
+.stage{min-height:410px;margin-top:14px;border:1px solid var(--line);border-radius:13px;padding:14px;display:flex;align-items:center;justify-content:center;overflow:auto;background:#08111e;background-image:radial-gradient(#ffffff0b 1px,transparent 1px);background-size:17px 17px}
+#sheet{display:block;max-width:100%;max-height:70vh;height:auto;background:white;box-shadow:0 15px 40px #0008}
+#cardPreview{width:min(100%,520px);aspect-ratio:1.586;border-radius:8px;background:#e8edf3;box-shadow:0 14px 35px #0007;position:relative;overflow:hidden}
+#cardPreview img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.empty{text-align:center;color:var(--muted);max-width:290px}
+.empty .big{font-size:44px}.empty h3{color:var(--text);font-size:15px;margin:10px 0}
+.empty p{font-size:11px;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}
+.stat{min-width:0;border:1px solid var(--line);background:#ffffff04;border-radius:10px;padding:10px}
+.stat small{display:block;font-size:9px;color:var(--muted);margin-bottom:6px}
+.stat strong{font-size:12px;overflow-wrap:anywhere}
+.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.status{font-size:10px;line-height:1.7;color:var(--muted);margin-top:10px}
+.note{font-size:10px;line-height:1.7;color:var(--muted);padding:11px;background:#ffffff04;border:1px solid #ffffff12;border-radius:10px;margin-top:13px}
+.toast{position:fixed;z-index:30;bottom:18px;left:50%;transform:translate(-50%,16px);opacity:0;pointer-events:none;transition:.2s;background:#20344b;border:1px solid #49647e;border-radius:11px;padding:12px 16px;font-size:12px;max-width:92vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.hidden{display:none!important}
+footer{text-align:center;color:#8091a8;font-size:10px;line-height:1.8;padding:0 15px 25px}
+@media(max-width:950px){.layout{grid-template-columns:280px minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){main{padding:18px 10px 30px}.layout{grid-template-columns:1fr}.stage{min-height:260px;padding:8px}.actions{grid-template-columns:1fr 1fr}.actions .btn:last-child{grid-column:1/-1}}
+@media(max-width:420px){.pad{padding:11px}.brand{font-size:11px}.badge{font-size:8px}.stats{gap:6px}.stat{padding:8px}}
+@media print{
+ body{background:white!important}
+ header,.hero,aside,.topbar,.stats,.actions,.note,.status,footer,.no-print{display:none!important}
+ main{padding:0!important;margin:0!important}
+ .layout{display:block!important}
+ .panel{background:white!important;border:0!important;box-shadow:none!important}
+ .panelhead{display:none!important}
+ .pad{padding:0!important}
+ .stage{display:block!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;background:white!important;overflow:visible!important}
+ #sheet{width:100%!important;max-width:none!important;max-height:none!important;height:auto!important;box-shadow:none!important}
+ @page{margin:5mm}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="nav">
+  <div class="brand"><div class="logo">▤</div><div>KISAN SEVA TOOLS<small>PVC CARD PRINT PRO</small></div></div>
+  <span class="badge">✦ PVC PRINT STUDIO</span>
+ </div>
+</header>
+<main>
+ <div class="hero">
+  <div>
+   <div class="eyebrow">PVC CARD PRINT / TOOL 4</div>
+   <h1>Precision cards.<br><span style="color:var(--mint)">Professional sheets.</span></h1>
+   <p>Prepare PVC-sized card artwork, arrange copies on a sheet, manage front and back sides, and export a print layout with custom spacing and crop guides.</p>
+  </div>
+ </div>
+
+ <div class="layout">
+  <aside class="panel">
+   <div class="panelhead"><h2>Card print settings</h2><span class="kicker">01 / SETUP</span></div>
+   <div class="pad">
+    <div class="section">
+     <div class="sectitle">Upload card artwork <span class="kicker">IMAGES</span></div>
+     <div class="drop">
+      <div class="big">▧</div>
+      <strong style="font-size:12px">Choose front or back artwork</strong>
+      <p>Upload an existing card image. Use the side selector to prepare the front and back sheets separately.</p>
+      <input id="file" type="file" accept="image/jpeg,image/png,image/webp">
+     </div>
+     <div class="grid2" style="margin-top:9px">
+      <button class="btn" id="frontBtn">Front side</button>
+      <button class="btn" id="backBtn">Back side</button>
+     </div>
+     <div class="status" id="uploadStatus">No artwork uploaded yet.</div>
+    </div>
+
+    <div class="section">
+     <div class="sectitle">Standard card dimensions <span class="kicker">02</span></div>
+     <div class="presets">
+      <button class="preset active" data-size="cr80">CR80<small>85.6×54 mm</small></button>
+      <button class="preset" data-size="mini">Mini ID<small>80×50 mm</small></button>
+      <button class="preset" data-size="custom">Custom<small>Set size</small></button>
+     </div>
+     <div class="grid2" style="margin-top:11px">
+      <div class="field"><label for="cw">Card width (mm)</label><input id="cw" type="number" min="20" max="210" step="0.1" value="85.6"></div>
+      <div class="field"><label for="ch">Card height (mm)</label><input id="ch" type="number" min="20" max="297" step="0.1" value="54"></div>
+     </div>
+     <div class="field"><label for="fit">Image fit</label><select id="fit"><option value="contain">Fit entire image</option><option value="cover">Fill card frame / crop edges</option></select></div>
+     <div class="field"><label for="copies">Copies per side</label><input id="copies" type="number" min="1" max="100" value="10"></div>
+    </div>
+
+    <div class="section">
+     <div class="sectitle">Print sheet <span class="kicker">03</span></div>
+     <div class="field"><label for="paper">Paper size</label><select id="paper"><option value="a4">A4 · 210 × 297 mm</option><option value="a5">A5 · 148 × 210 mm</option><option value="letter">Letter · 216 × 279 mm</option><option value="custom">Custom paper</option></select></div>
+     <div class="grid2">
+      <div class="field"><label for="sw">Sheet width (mm)</label><input id="sw" type="number" min="50" max="500" value="210"></div>
+      <div class="field"><label for="sh">Sheet height (mm)</label><input id="sh" type="number" min="50" max="500" value="297"></div>
+     </div>
+     <div class="field"><label for="orientation">Orientation</label><select id="orientation"><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></div>
+     <div class="grid2">
+      <div class="field"><label for="margin">Outer margin (mm)</label><input id="margin" type="number" min="0" max="30" step="0.5" value="5"></div>
+      <div class="field"><label for="gap">Card gap (mm)</label><input id="gap" type="number" min="0" max="20" step="0.5" value="3"></div>
+     </div>
+     <div class="field"><label for="align">Grid alignment</label><select id="align"><option value="center">Center on sheet</option><option value="top">Start top-left</option></select></div>
+    </div>
+
+    <div class="section">
+     <div class="sectitle">Print finishing <span class="kicker">04</span></div>
+     <div class="field"><label for="dpi">Export resolution</label><select id="dpi"><option value="150">150 DPI · Standard</option><option value="200">200 DPI · High</option><option value="300" selected>300 DPI · Print</option></select></div>
+     <div class="field"><label for="bg">Sheet background</label><input id="bg" type="color" value="#ffffff"></div>
+     <label style="display:flex;gap:8px;align-items:center;margin-bottom:11px"><input id="cut" type="checkbox" checked> Show crop guides</label>
+     <label style="display:flex;gap:8px;align-items:center;margin-bottom:11px"><input id="border" type="checkbox" checked> Draw card border</label>
+     <label style="display:flex;gap:8px;align-items:center"><input id="labels" type="checkbox"> Add card numbers</label>
+     <button class="btn full" id="reset" style="margin-top:13px">↺ Reset settings</button>
+    </div>
+   </div>
+  </aside>
+
+  <section class="panel">
+   <div class="panelhead"><h2>Live print preview</h2><span class="kicker">02 / WORKSPACE</span></div>
+   <div class="pad">
+    <div class="topbar">
+     <div><h2 id="previewTitle">Front side · Print sheet</h2><div style="font-size:10px;color:var(--muted);margin-top:5px">Check your artwork before printing</div></div>
+     <div class="tabs">
+      <button class="tab active" id="sheetTab">Print sheet</button>
+      <button class="tab" id="cardTab">Single card</button>
+     </div>
+    </div>
+    <div class="stage">
+     <div class="empty" id="empty">
+      <div class="big">▤</div><h3>Your PVC print studio</h3>
+      <p>Upload card artwork to preview the card and build a print sheet.</p>
+      <button class="btn primary" id="uploadEmpty">Upload artwork</button>
+     </div>
+     <canvas id="sheet" class="hidden"></canvas>
+     <div id="cardPreview" class="hidden"></div>
+    </div>
+    <div class="stats">
+     <div class="stat"><small>CARD SIZE</small><strong id="sizeStat">85.6 × 54 mm</strong></div>
+     <div class="stat"><small>CARDS PER SHEET</small><strong id="countStat">0</strong></div>
+     <div class="stat"><small>GRID</small><strong id="gridStat">0 × 0</strong></div>
+     <div class="stat"><small>RESOLUTION</small><strong id="dpiStat">300 DPI</strong></div>
+    </div>
+    <div class="actions">
+     <button class="btn primary" id="download">↓ Download PNG</button>
+     <button class="btn gold" id="print">⎙ Print / Save PDF</button>
+     <button class="btn" id="exportBoth">Export front + back</button>
+    </div>
+    <div class="status" id="status" aria-live="polite">Upload artwork to start.</div>
+    <div class="note"><b style="color:var(--mint)">Printing tip:</b> select the matching paper in the print dialog and choose Actual size / 100% if available. PVC printer driver settings, card stock, printer feed orientation and duplex alignment affect the final result. This tool creates artwork sheets; it does not write data to a physical PVC card or encode a chip.</div>
+   </div>
+  </section>
+ </div>
+</main>
+<footer>Kisan Seva Tools · PVC Card Print Pro<br>Local browser image processing · Check a test sheet before printing on PVC stock.</footer>
+<div class="toast" id="toast"></div>
+
 <script>
-const fi=document.querySelector('#file');
-if(fi)fi.addEventListener('change',()=>{let p=document.querySelector('#preview');if(!p)return;p.innerHTML='';[...fi.files].forEach(f=>{if(f.type.startsWith('image/')){let im=document.createElement('img');im.className='preview';im.style.maxWidth='160px';im.style.margin='6px';im.src=URL.createObjectURL(f);p.appendChild(im)}})});
-function loadImgs(){return Promise.all([...document.querySelector('#file').files].map(f=>new Promise((res,rej)=>{let im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=URL.createObjectURL(f)})))}
-function dl(canvas,name='output.png',type='image/png'){let a=document.createElement('a');a.href=canvas.toDataURL(type,.92);a.download=name;a.click()}
-function resizeImg(){loadImgs().then(([im])=>{let c=document.createElement('canvas');c.width=+document.querySelector('#w').value;c.height=+document.querySelector('#h').value;c.getContext('2d').drawImage(im,0,0,c.width,c.height);document.querySelector('#out').replaceChildren(c);dl(c,'resized.png')})}
-function convertImg(){loadImgs().then(([im])=>{let c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);let t=document.querySelector('#fmt').value;dl(c,'converted.'+(t==='image/jpeg'?'jpg':t==='image/png'?'png':'webp'),t)})}
-function cropImg(){loadImgs().then(([im])=>{let s=Math.min(im.naturalWidth,im.naturalHeight),c=document.createElement('canvas');c.width=s;c.height=s;c.getContext('2d').drawImage(im,(im.naturalWidth-s)/2,(im.naturalHeight-s)/2,s,s,0,0,s,s);document.querySelector('#out').replaceChildren(c);dl(c,'crop.png')})}
-function makeSheet(){loadImgs().then(([im])=>{let n=+document.querySelector('#copies').value,c=document.createElement('canvas');c.width=1240;c.height=1754;let x=c.getContext('2d');x.fillStyle='white';x.fillRect(0,0,c.width,c.height);let cols=2,rows=Math.ceil(n/cols),cw=560,ch= Math.min(700,1600/rows);for(let i=0;i<n;i++)x.drawImage(im,30+(i%cols)*610,30+Math.floor(i/cols)*ch,cw,ch*.8);document.querySelector('#out').replaceChildren(c);dl(c,'A4-photo-sheet.png')})}
-function makePhoto(){let v=document.querySelector('#size').value;document.querySelector('#copies').value='4';makeSheet()}
-function joinImages(){loadImgs().then(ims=>{let w=Math.max(...ims.map(i=>i.naturalWidth)),h=ims.reduce((s,i)=>s+i.naturalHeight,0),c=document.createElement('canvas');c.width=w;c.height=h;let y=0;ims.forEach(i=>{c.getContext('2d').drawImage(i,0,y);y+=i.naturalHeight});document.querySelector('#out').replaceChildren(c);dl(c,'joined.png')})}
-</script>
-</main><script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+"use strict";
+const $=id=>document.getElementById(id);
+const canvas=$("sheet");
+let sides={front:null,back:null},side="front",view="sheet",toastTimer=null;
+function toast(s){
+ const t=$("toast");t.textContent=s;t.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2600);
+}
+function n(id,min,max,def){
+ let v=Number($(id).value);if(!Number.isFinite(v))v=def;
+ return Math.max(min,Math.min(max,v));
+}
+function paper(){
+ let w,h,name,p=$("paper").value;
+ if(p==="a5"){w=148;h=210;name="A5";}
+ else if(p==="letter"){w=215.9;h=279.4;name="Letter";}
+ else if(p==="custom"){w=n("sw",50,500,210);h=n("sh",50,500,297);name="Custom";}
+ else{w=210;h=297;name="A4";}
+ if($("orientation").value==="landscape"){[w,h]=[h,w];name+=" Landscape";}
+ else name+=" Portrait";
+ return {w,h,name,dpi:n("dpi",72,300,300)};
+}
+function current(){return sides[side];}
+function getLayout(){
+ const p=paper(),d=p.dpi;
+ const W=Math.round(p.w/25.4*d),H=Math.round(p.h/25.4*d);
+ const margin=n("margin",0,30,5)/25.4*d;
+ const gap=n("gap",0,20,3)/25.4*d;
+ const cw=n("cw",20,210,85.6)/25.4*d;
+ const ch=n("ch",20,297,54)/25.4*d;
+ const cols=Math.max(0,Math.floor((W-2*margin+gap)/(cw+gap)));
+ const rows=Math.max(0,Math.floor((H-2*margin+gap)/(ch+gap)));
+ const gw=cols*cw+Math.max(0,cols-1)*gap;
+ const gh=rows*ch+Math.max(0,rows-1)*gap;
+ const x0=margin+($("align").value==="center"?Math.max(0,(W-2*margin-gw)/2):0);
+ const y0=margin+($("align").value==="center"?Math.max(0,(H-2*margin-gh)/2):0);
+ const count=n("copies",1,100,10);
+ const slots=[];
+ for(let i=0;i<Math.min(count,cols*rows);i++){
+  const col=i%cols,row=Math.floor(i/cols);
+  slots.push({x:x0+col*(cw+gap),y:y0+row*(ch+gap),w:cw,h:ch,num:i+1});
+ }
+ return {...p,W,H,margin,gap,cw,ch,cols,rows,capacity:cols*rows,slots};
+}
+function paintImage(ctx,img,s,d){
+ ctx.save();ctx.beginPath();ctx.rect(s.x,s.y,s.w,s.h);ctx.clip();
+ const ir=img.width/img.height,fr=s.w/s.h;
+ let x=s.x,y=s.y,w=s.w,h=s.h;
+ if($("fit").value==="cover"){
+  if(ir>fr){w=s.h*ir;x=s.x-(w-s.w)/2;}
+  else{h=s.w/ir;y=s.y-(h-s.h)/2;}
+ }else{
+  if(ir>fr){h=s.w/ir;y=s.y+(s.h-h)/2;}
+  else{w=s.h*ir;x=s.x+(s.w-w)/2;}
+ }
+ ctx.drawImage(img,x,y,w,h);ctx.restore();
+ if($("border").checked){
+  ctx.strokeStyle="#64748b";ctx.lineWidth=Math.max(1,d.dpi/220);ctx.strokeRect(s.x,s.y,s.w,s.h);
+ }
+ if($("cut").checked){
+  const m=Math.max(2,d.dpi/30),lw=Math.max(1,d.dpi/250);
+  ctx.strokeStyle="#737d8b";ctx.lineWidth=lw;ctx.beginPath();
+  ctx.moveTo(s.x-m,s.y);ctx.lineTo(s.x-1,s.y);
+  ctx.moveTo(s.x,s.y-m);ctx.lineTo(s.x,s.y-1);
+  ctx.moveTo(s.x+s.w+1,s.y);ctx.lineTo(s.x+s.w+m,s.y);
+  ctx.moveTo(s.x+s.w,s.y-m);ctx.lineTo(s.x+s.w,s.y-1);
+  ctx.moveTo(s.x-m,s.y+s.h);ctx.lineTo(s.x-1,s.y+s.h);
+  ctx.moveTo(s.x,s.y+s.h+1);ctx.lineTo(s.x,s.y+s.h+m);
+  ctx.moveTo(s.x+s.w+1,s.y+s.h);ctx.lineTo(s.x+s.w+m,s.y+s.h);
+  ctx.moveTo(s.x+s.w,s.y+s.h+1);ctx.lineTo(s.x+s.w,s.y+s.h+m);
+  ctx.stroke();
+ }
+ if($("labels").checked){
+  const bh=Math.max(13,d.dpi*.11);
+  ctx.fillStyle="#ffffffdd";ctx.fillRect(s.x,s.y,s.w,bh);
+  ctx.fillStyle="#111827";ctx.font="bold "+Math.max(8,d.dpi*.065)+"px Arial";
+  ctx.textBaseline="middle";ctx.fillText("CARD "+s.num,s.x+3,s.y+bh/2,s.w-6);
+ }
+}
+function drawSheet(target){
+ const d=getLayout(),c=current();
+ target.width=d.W;target.height=d.H;
+ const ctx=target.getContext("2d");
+ ctx.fillStyle=$("bg").value;ctx.fillRect(0,0,d.W,d.H);
+ ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality="high";
+ if(c)d.slots.forEach(s=>paintImage(ctx,c.image,s,d));
+ return d;
+}
+function renderCardPreview(){
+ const box=$("cardPreview");box.innerHTML="";
+ const c=current();
+ if(c){
+  const img=document.createElement("img");img.src=c.url;img.alt=side+" artwork";
+  img.style.objectFit=$("fit").value;box.append(img);
+ }
+}
+function render(){
+ const c=current(),d=drawSheet(canvas),has=!!c;
+ $("empty").classList.toggle("hidden",has);
+ canvas.classList.toggle("hidden",!has||view!=="sheet");
+ $("cardPreview").classList.toggle("hidden",!has||view!=="card");
+ $("previewTitle").textContent=(side==="front"?"Front":"Back")+" side · "+(view==="sheet"?"Print sheet":"Single card");
+ renderCardPreview();
+ $("sizeStat").textContent=n("cw",20,210,85.6)+" × "+n("ch",20,297,54)+" mm";
+ $("countStat").textContent=has?d.slots.length:0;
+ $("gridStat").textContent=d.cols+" × "+d.rows;
+ $("dpiStat").textContent=d.dpi+" DPI";
+ $("uploadStatus").textContent="Front: "+(sides.front?"Ready":"Not added")+" · Back: "+(sides.back?"Ready":"Not added");
+ $("status").textContent=has?
+  d.slots.length+" "+side+" cards fit on "+d.name+". "+Math.max(0,n("copies",1,100,10)-d.capacity)+" additional copies exceed this sheet's capacity.":
+  "Upload artwork for the "+side+" side to continue.";
+ $("download").disabled=!has;
+ $("print").disabled=!has;
+ $("exportBoth").disabled=!sides.front&&!sides.back;
+}
+function upload(file){
+ if(!file)return;
+ if(!/^image\/(jpeg|png|webp)$/.test(file.type)||file.size>20*1024*1024||file.size===0){
+  toast("Choose a valid JPG, PNG or WebP image under 20 MB.");return;
+ }
+ const url=URL.createObjectURL(file),img=new Image();
+ img.onload=()=>{
+  if(sides[side])URL.revokeObjectURL(sides[side].url);
+  sides[side]={image:img,url,name:file.name};
+  render();toast((side==="front"?"Front":"Back")+" artwork loaded.");
+ };
+ img.onerror=()=>{URL.revokeObjectURL(url);toast("Could not open that image.");};
+ img.src=url;
+}
+function downloadCanvas(c,name){
+ c.toBlob(blob=>{
+  if(!blob){toast("PNG export failed. Try lower resolution.");return;}
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;document.body.append(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);toast("PNG download started.");
+ },"image/png");
+}
+function printSheet(){
+ if(!current()){toast("Upload artwork for this side first.");return;}
+ const d=getLayout(),out=document.createElement("canvas");drawSheet(out);
+ const win=window.open("","_blank");
+ if(!win){toast("Allow pop-ups to print or save as PDF.");return;}
+ win.document.open();
+ win.document.write("<!doctype html><html><head><meta charset='utf-8'><title>PVC "+side+" print sheet</title><style>@page{size:"+d.w+"mm "+d.h+"mm;margin:0}html,body{margin:0;padding:0;width:100%;height:100%}img{display:block;width:100%;height:100%;object-fit:fill}@media screen{body{display:flex;justify-content:center}img{width:auto;max-width:100%;height:auto;max-height:95vh}}</style></head><body></body></html>");
+ win.document.close();
+ const img=win.document.createElement("img");img.src=out.toDataURL("image/png");img.alt="PVC card print sheet";
+ win.document.body.appendChild(img);img.onload=()=>win.setTimeout(()=>win.print(),350);
+}
+function exportBoth(){
+ const old=side;let exported=0;
+ ["front","back"].forEach((s,i)=>{
+  if(!sides[s])return;
+  side=s;const out=document.createElement("canvas");drawSheet(out);
+  downloadCanvas(out,"KisanSeva-PVC-"+s+"-sheet.png");exported++;
+ });
+ side=old;render();
+ if(!exported)toast("Upload front or back artwork first.");
+ else toast("Front/back sheet export requested.");
+}
+$("file").addEventListener("change",e=>{upload(e.target.files[0]);e.target.value="";});
+$("uploadEmpty").addEventListener("click",()=>$("file").click());
+$("frontBtn").addEventListener("click",()=>{side="front";$("frontBtn").classList.add("primary");$("backBtn").classList.remove("primary");render();});
+$("backBtn").addEventListener("click",()=>{side="back";$("backBtn").classList.add("primary");$("frontBtn").classList.remove("primary");render();});
+document.querySelectorAll("[data-size]").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll("[data-size]").forEach(x=>x.classList.toggle("active",x===b));
+ const values=b.dataset.size==="mini"?[80,50]:[85.6,54];
+ $("cw").value=values[0];$("ch").value=values[1];render();
+}));
+$("paper").addEventListener("change",()=>{
+ const p=$("paper").value;
+ if(p==="a4"){$("sw").value=210;$("sh").value=297;}
+ else if(p==="a5"){$("sw").value=148;$("sh").value=210;}
+ else if(p==="letter"){$("sw").value=215.9;$("sh").value=279.4;}
+ render();
+});
+["cw","ch","fit","copies","sw","sh","orientation","margin","gap","align","dpi","bg","cut","border","labels"].forEach(id=>{
+ $(id).addEventListener("input",render);$(id).addEventListener("change",render);
+});
+$("reset").addEventListener("click",()=>{
+ $("paper").value="a4";$("sw").value=210;$("sh").value=297;
+ $("orientation").value="portrait";$("cw").value=85.6;$("ch").value=54;
+ $("fit").value="contain";$("copies").value=10;$("margin").value=5;$("gap").value=3;
+ $("align").value="center";$("dpi").value=300;$("bg").value="#ffffff";
+ $("cut").checked=true;$("border").checked=true;$("labels").checked=false;
+ document.querySelectorAll("[data-size]").forEach(b=>b.classList.toggle("active",b.dataset.size==="cr80"));
+ render();toast("Print settings reset.");
+});
+$("sheetTab").addEventListener("click",()=>{view="sheet";$("sheetTab").classList.add("active");$("cardTab").classList.remove("active");render();});
+$("cardTab").addEventListener("click",()=>{view="card";$("cardTab").classList.add("active");$("sheetTab").classList.remove("active");render();});
+$("download").addEventListener("click",()=>{
+ if(!current())return;const out=document.createElement("canvas");drawSheet(out);
+ downloadCanvas(out,"KisanSeva-PVC-"+side+"-print-sheet.png");
+});
+$("print").addEventListener("click",printSheet);
+$("exportBoth").addEventListener("click",exportBoth);
+window.addEventListener("beforeunload",()=>["front","back"].forEach(s=>{if(sides[s])URL.revokeObjectURL(sides[s].url);}));
+render();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
