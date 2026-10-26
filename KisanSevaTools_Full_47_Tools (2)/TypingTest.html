@@ -1,42 +1,353 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Typing Test | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Typing Test</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: CSC & Design • Icon: ⌨️</div></section><section class="panel"><p id="sample">Practice makes progress. Type this sentence accurately and steadily.</p><textarea id="typed" rows="4" placeholder="Start typing here..."></textarea><button onclick="start()">Start / Reset timer</button><h2 id="result">WPM: — | Accuracy: —</h2><script>let t=0,started=0;function start(){t=0;started=Date.now();document.querySelector("#typed").value="";document.querySelector("#typed").focus()}document.querySelector("#typed").addEventListener("input",()=>{if(!started)started=Date.now();let s=document.querySelector("#sample").textContent,v=document.querySelector("#typed").value,mins=Math.max((Date.now()-started)/60000,.01),words=v.trim()?v.trim().split(/\s+/).length:0,correct=0;for(let i=0;i<v.length;i++)if(v[i]===s[i])correct++;document.querySelector("#result").textContent="WPM: "+Math.round(words/mins)+" | Accuracy: "+(v.length?Math.round(correct/v.length*100):0)+"%"})</script></section></main><script>
-(function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Typing Test Pro | Kisan Seva Tools</title>
+<style>
+:root{--bg:#0b1220;--panel:#111c2d;--panel2:#172439;--ink:#edf5ff;--muted:#91a4bd;--line:#293a52;--green:#48e0b2;--blue:#64b5ff;--red:#ff657a;--gold:#ffcc70}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 10% 0%,#142a43 0,transparent 42%),var(--bg);color:var(--ink);font-family:Inter,system-ui,Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.top{padding:16px 22px;border-bottom:1px solid #26384d;background:#0b1524eF;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{width:43px;height:43px;border-radius:13px;background:linear-gradient(135deg,#48e0b2,#64b5ff);color:#102132;display:grid;place-items:center;font-weight:1000;font-size:22px}
+.brand h1{margin:0;font-size:16px}.brand p{margin:4px 0 0;font-size:11px;color:var(--muted)}
+.tag{border:1px solid #38536b;color:#b7d4e8;padding:8px 11px;border-radius:30px;font-size:10px;letter-spacing:1px}
+.hero{max-width:1250px;margin:auto;padding:28px 20px 20px}
+.eyebrow{font-size:10px;color:var(--green);letter-spacing:2px;font-weight:900}
+.hero h2{font-size:clamp(27px,4vw,41px);letter-spacing:-1.2px;margin:9px 0}
+.hero p{color:var(--muted);font-size:13px;line-height:1.7;max-width:760px;margin:0}
+.layout{max-width:1250px;margin:auto;padding:0 20px 35px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:17px;align-items:start}
+.panel{background:linear-gradient(155deg,#142136,#101a2a);border:1px solid var(--line);border-radius:17px;overflow:hidden;min-width:0;box-shadow:0 18px 55px #0002}
+.head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.head h3{font-size:13px;margin:0}.badge{font-size:10px;color:var(--green);background:#173d3a;padding:6px 9px;border-radius:7px;font-weight:900}
+.body{padding:18px}
+.label{font-size:10px;font-weight:900;letter-spacing:1.2px;color:#a6bad0;margin:4px 0 10px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);background:#152338;color:#b4c5d9;padding:10px 13px;border-radius:9px;font-size:11px;font-weight:800}
+.pill.active{border-color:#48e0b2;background:#173d3a;color:#7cf2d0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.full{grid-column:1/-1}
+label{font-size:11px;color:#b7c6d8;font-weight:800}
+input,select,textarea{width:100%;min-width:0;background:#0c1727;color:#e9f3ff;border:1px solid #30425a;border-radius:9px;padding:10px 11px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px #48e0b214}
+textarea{resize:vertical;min-height:76px;line-height:1.6}
+.hint{font-size:10px;color:#8fa3bb;line-height:1.6}
+.divider{height:1px;background:var(--line);margin:17px 0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.stat{background:#0c1727;border:1px solid #293b53;border-radius:12px;padding:13px 10px}
+.stat span{display:block;font-size:10px;color:#8ea2ba}
+.stat strong{display:block;font-size:clamp(18px,2.5vw,27px);margin-top:7px;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.green{color:var(--green)}.blue{color:var(--blue)}.red{color:var(--red)}.gold{color:var(--gold)}
+.timer-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0 10px}
+.timer{font-size:29px;font-weight:900;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.timer small{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0}
+.progress{height:5px;background:#25354b;border-radius:20px;overflow:hidden}
+.progress div{height:100%;width:0;background:linear-gradient(90deg,#48e0b2,#64b5ff);transition:width .15s}
+.text-box{padding:20px;border:1px solid #2c3e55;border-radius:13px;background:#0a1422;line-height:2;font-size:clamp(15px,2vw,18px);overflow-wrap:anywhere;user-select:none}
+.char{border-radius:3px;white-space:pre-wrap}
+.char.correct{color:var(--green)}
+.char.wrong{color:#fff;background:#a32e49;text-decoration:underline;text-decoration-color:#ff8b9c}
+.char.current{border-left:2px solid var(--gold);background:#26364b}
+.char.pending{color:#71869f}
+.input-area{margin-top:12px;min-height:115px}
+.btn{border:0;border-radius:10px;padding:12px 14px;font-size:11px;font-weight:900}
+.primary{background:linear-gradient(135deg,#48e0b2,#37b9bb);color:#08212a}
+.secondary{background:#1b2b41;color:#dceaff;border:1px solid #344760}
+.warning{background:#493722;color:#ffdc9c}
+.wide{width:100%}
+.side-body{padding:15px}
+.mini-stat{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);gap:10px;font-size:12px}
+.mini-stat:last-child{border:0}.mini-stat span{color:var(--muted)}.mini-stat strong{font-variant-numeric:tabular-nums}
+.history{display:flex;flex-direction:column;gap:8px}
+.history-item{background:#0c1727;border:1px solid var(--line);padding:11px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.history-item span{font-size:10px;color:var(--muted)}.history-item strong{font-size:13px}
+.result{padding:15px;border:1px solid #275b51;background:#10302d;border-radius:12px;margin-bottom:13px}
+.result h4{margin:0 0 7px;font-size:14px;color:var(--green)}
+.result p{font-size:11px;line-height:1.6;color:#c3e8df;margin:0}
+.note{padding:12px;background:#17283b;border:1px solid #2b435b;border-radius:10px;color:#a8bfd7;font-size:10px;line-height:1.7}
+.footer{text-align:center;padding:20px;color:#71859e;font-size:10px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#e5fff7;color:#0d322b;padding:12px 17px;border-radius:10px;font-size:12px;opacity:0;pointer-events:none;transition:.2s;z-index:10;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr;gap:12px}.side .panel{height:fit-content}}
+@media(max-width:560px){.top{padding:13px}.hero{padding:22px 13px 17px}.layout{padding:0 10px 25px;gap:12px}.body{padding:12px}.head{padding:14px}.stats{grid-template-columns:1fr 1fr}.side{display:flex;flex-direction:column}.text-box{padding:13px}.timer{font-size:25px}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="brand"><div class="logo">K</div><div><h1>KISAN SEVA TOOLS</h1><p>Typing Test Pro · Tool 041</p></div></div>
+ <div class="tag">✦ SPEED / ACCURACY / PRACTICE</div>
+</header>
+
+<section class="hero">
+ <div class="eyebrow">PRACTICE MODE / 041</div>
+ <h2>Train your fingers. <span style="color:#48e0b2">Beat your best.</span></h2>
+ <p>Build typing speed and accuracy with a live timer, instant error highlighting, WPM tracking and personal score history. Choose your language or practise with your own text.</p>
+</section>
+
+<main class="layout">
+<section class="panel">
+ <div class="head"><h3>Typing arena</h3><span class="badge" id="modeBadge">READY TO START</span></div>
+ <div class="body">
+  <div class="label">01 / TEST DURATION</div>
+  <div class="row" id="durations">
+   <button class="pill" data-time="30">30 SEC</button>
+   <button class="pill active" data-time="60">1 MIN</button>
+   <button class="pill" data-time="180">3 MIN</button>
+   <button class="pill" data-time="300">5 MIN</button>
+  </div>
+
+  <div class="divider"></div>
+  <div class="label">02 / LANGUAGE & PRACTICE</div>
+  <div class="grid">
+   <div class="field"><label for="language">Practice language</label>
+    <select id="language"><option value="en">English</option><option value="hi">Hindi</option><option value="mr">Marathi</option><option value="custom">My own text</option></select></div>
+   <div class="field"><label for="difficulty">Difficulty</label>
+    <select id="difficulty"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Advanced</option></select></div>
+   <div class="field full"><label for="customText">Custom practice text (optional)</label>
+    <textarea id="customText" placeholder="Paste your English, Hindi or Marathi practice text here. If left empty, a sample passage is used."></textarea>
+    <div class="hint">For Hindi and Marathi, paste text in the script you use. The test compares typed characters, including spaces and punctuation.</div></div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="label">03 / LIVE PERFORMANCE</div>
+  <div class="stats">
+   <div class="stat"><span>Typing speed</span><strong class="green" id="wpm">0</strong></div>
+   <div class="stat"><span>Accuracy</span><strong class="blue" id="accuracy">100%</strong></div>
+   <div class="stat"><span>Mistakes</span><strong class="red" id="mistakes">0</strong></div>
+   <div class="stat"><span>Correct chars</span><strong class="gold" id="correct">0</strong></div>
+  </div>
+
+  <div class="timer-row"><div><div class="label">TIME REMAINING</div><div class="timer" id="timer">01:00 <small>LEFT</small></div></div>
+   <button class="btn primary" id="start">▶ START TEST</button></div>
+  <div class="progress"><div id="progressBar"></div></div>
+
+  <div class="divider"></div>
+  <div class="label">04 / TYPE THE TEXT BELOW</div>
+  <div class="text-box" id="passage" aria-label="Typing passage"></div>
+  <div class="field input-area"><label for="typingInput">Your typing area</label>
+   <textarea id="typingInput" rows="4" placeholder="Press START TEST, then type the text above..." disabled autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+   <div class="hint" id="inputHint">Start the test to enable typing.</div>
+  </div>
+  <div class="row" style="margin-top:12px">
+   <button class="btn secondary" id="restart">↻ New test</button>
+   <button class="btn secondary" id="clear">⌫ Clear typing</button>
+   <button class="btn warning" id="finish">■ Finish now</button>
+  </div>
+  <div id="result" style="display:none;margin-top:16px"></div>
+ </div>
+</section>
+
+<aside class="side">
+ <section class="panel">
+  <div class="head"><h3>Personal best</h3><span class="badge">YOUR RECORD</span></div>
+  <div class="side-body">
+   <div class="mini-stat"><span>Best WPM</span><strong class="green" id="bestWpm">0</strong></div>
+   <div class="mini-stat"><span>Best accuracy</span><strong class="blue" id="bestAcc">0%</strong></div>
+   <div class="mini-stat"><span>Tests completed</span><strong id="totalTests">0</strong></div>
+   <div class="mini-stat"><span>Total practice time</span><strong id="practiceTime">0 min</strong></div>
+  </div>
+ </section>
+ <section class="panel">
+  <div class="head"><h3>Recent scores</h3><span class="badge">HISTORY</span></div>
+  <div class="side-body"><div class="history" id="history"><div class="hint">Complete your first test to see scores here.</div></div>
+   <button class="btn secondary wide" id="clearHistory" style="margin-top:12px">Clear score history</button>
+  </div>
+ </section>
+ <section class="panel">
+  <div class="head"><h3>Typing tips</h3></div>
+  <div class="side-body">
+   <div class="mini-stat"><span>Focus</span><strong>Accuracy first</strong></div>
+   <div class="mini-stat"><span>Posture</span><strong>Relax shoulders</strong></div>
+   <div class="mini-stat"><span>Technique</span><strong>Use all fingers</strong></div>
+   <div class="mini-stat"><span>Practice</span><strong>10–15 min/day</strong></div>
+   <div class="note" style="margin-top:12px">WPM means words per minute. This tool uses the standard approximate method: correctly typed characters divided by 5, then divided by elapsed minutes. Your real-world typing speed may vary.</div>
+  </div>
+ </section>
+</aside>
+</main>
+<footer class="footer">Kisan Seva Tools · Typing Test Pro · Practice regularly, improve steadily.</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(()=>{
+"use strict";
+const $=id=>document.getElementById(id);
+const samples={
+ en:{
+  easy:"Practice makes progress. Type slowly and focus on each word. Good habits build speed over time.",
+  medium:"Consistent practice improves typing speed, accuracy, and confidence. Keep your eyes on the text and use a relaxed posture. Small improvements every day can lead to excellent results.",
+  hard:"Efficient digital work depends on precision, consistency, and clear communication. Develop reliable keyboard habits, review mistakes thoughtfully, and build speed without sacrificing accuracy."
+ },
+ hi:{
+  easy:"अभ्यास से गति और शुद्धता बेहतर होती है। धीरे टाइप करें और हर शब्द पर ध्यान दें।",
+  medium:"नियमित अभ्यास से टाइपिंग की गति, शुद्धता और आत्मविश्वास बढ़ता है। सही मुद्रा रखें और गलतियों से सीखें।",
+  hard:"डिजिटल कार्य में सटीकता, निरंतरता और स्पष्ट संवाद का विशेष महत्व है। नियमित अभ्यास से बेहतर परिणाम प्राप्त किए जा सकते हैं।"
+ },
+ mr:{
+  easy:"नियमित सरावामुळे टायपिंगचा वेग आणि अचूकता सुधारते. प्रत्येक शब्दाकडे लक्ष द्या.",
+  medium:"दररोज थोडा वेळ सराव केल्याने टायपिंगचा वेग, अचूकता आणि आत्मविश्वास वाढतो. चुका तपासा आणि पुन्हा प्रयत्न करा.",
+  hard:"डिजिटल कामामध्ये अचूकता, सातत्य आणि स्पष्ट संवाद महत्त्वाचा असतो. नियमित सराव केल्याने कामाचा दर्जा आणि कार्यक्षमता सुधारू शकते."
+ }
+};
+let duration=60,remaining=60,running=false,finished=false,startTime=0,interval=null,passageText="",lastInput="",saved=loadStore();
+function loadStore(){try{return JSON.parse(localStorage.getItem("kst_typing_v1")||'{"history":[],"totalSeconds":0}')}catch(e){return{history:[],totalSeconds:0}}}
+function persist(){try{localStorage.setItem("kst_typing_v1",JSON.stringify(saved))}catch(e){}}
+function toast(msg){const el=$("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2200)}
+function getText(){
+ const custom=$("customText").value.trim();
+ if(custom)return custom;
+ const lang=$("language").value;
+ const level=$("difficulty").value;
+ if(lang==="custom")return "Paste your own practice text in the box above to start your custom typing test.";
+ return samples[lang]?.[level]||samples.en.medium;
+}
+function fmtTime(s){s=Math.max(0,Math.ceil(s));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function resetStats(){
+ $("wpm").textContent="0";$("accuracy").textContent="100%";$("mistakes").textContent="0";$("correct").textContent="0";
+ $("progressBar").style.width="0%";$("timer").innerHTML=fmtTime(duration)+' <small>LEFT</small>';
+}
+function prepare(){
+ stopClock();running=false;finished=false;remaining=duration;startTime=0;lastInput="";
+ passageText=getText();
+ $("typingInput").value="";$("typingInput").disabled=true;
+ $("typingInput").placeholder="Press START TEST, then type the text above...";
+ $("modeBadge").textContent="READY TO START";$("inputHint").textContent="Start the test to enable typing.";
+ $("result").style.display="none";$("result").innerHTML="";
+ renderPassage("");resetStats();
+ $("start").disabled=false;$("start").textContent="▶ START TEST";
+}
+function renderPassage(typed){
+ const root=$("passage");root.innerHTML="";
+ const frag=document.createDocumentFragment();
+ for(let i=0;i<passageText.length;i++){
+  const span=document.createElement("span");span.className="char";
+  const expected=passageText[i],actual=typed[i];
+  if(i<typed.length)span.classList.add(actual===expected?"correct":"wrong");
+  else span.classList.add("pending");
+  if(i===typed.length&&!finished)span.classList.add("current");
+  span.textContent=expected;frag.appendChild(span);
+ }
+ root.appendChild(frag);
+ const current=root.querySelector(".current");
+ if(current)current.scrollIntoView({block:"nearest",inline:"nearest"});
+}
+function metrics(){
+ const typed=$("typingInput").value;
+ let correctChars=0,errors=0;
+ for(let i=0;i<typed.length;i++){
+  if(typed[i]===passageText[i])correctChars++;else errors++;
+ }
+ const elapsed=running?Math.max(0.5,(Date.now()-startTime)/1000):Math.max(0,(duration-remaining));
+ const mins=Math.max(elapsed/60,1/60);
+ const wpm=Math.round((correctChars/5)/mins);
+ const accuracy=typed.length?Math.round(correctChars/typed.length*100):100;
+ $("wpm").textContent=String(wpm);$("accuracy").textContent=accuracy+"%";
+ $("mistakes").textContent=String(errors);$("correct").textContent=String(correctChars);
+ const pct=Math.min(100,typed.length/Math.max(1,passageText.length)*100);
+ $("progressBar").style.width=pct+"%";
+ return{typed,correctChars,errors,wpm,accuracy,elapsed};
+}
+function start(){
+ if(running)return;
+ if(finished)prepare();
+ passageText=getText();
+ if(!passageText){toast("Enter a practice text first.");return}
+ if($("language").value==="custom"&&!$("customText").value.trim()){toast("Paste your own practice text first.");return}
+ renderPassage("");
+ $("typingInput").value="";$("typingInput").disabled=false;
+ $("typingInput").placeholder="Start typing here...";
+ $("inputHint").textContent="Timer begins with your first keystroke. Keep going!";
+ $("modeBadge").textContent="TEST IN PROGRESS";
+ $("start").disabled=true;$("start").textContent="● RUNNING";
+ running=true;finished=false;remaining=duration;startTime=Date.now();
+ $("typingInput").focus();
+ tick();
+ interval=setInterval(tick,200);
+}
+function tick(){
+ if(!running)return;
+ const elapsed=(Date.now()-startTime)/1000;
+ remaining=Math.max(0,duration-elapsed);
+ $("timer").innerHTML=fmtTime(remaining)+' <small>LEFT</small>';
+ metrics();
+ if(remaining<=0)finishTest("time");
+}
+function stopClock(){if(interval!==null){clearInterval(interval);interval=null}}
+function finishTest(reason){
+ if(finished)return;
+ if(!running&&reason!=="manual")return;
+ if(running)remaining=Math.max(0,duration-(Date.now()-startTime)/1000);
+ running=false;finished=true;stopClock();
+ $("typingInput").disabled=true;$("start").disabled=false;$("start").textContent="↻ TRY AGAIN";
+ $("modeBadge").textContent="TEST COMPLETED";
+ $("timer").innerHTML=fmtTime(remaining)+' <small>LEFT</small>';
+ const m=metrics();
+ // Final score uses the actual elapsed test time; an untouched test has no score.
+ if(m.typed.length){
+  const score={wpm:m.wpm,accuracy:m.accuracy,errors:m.errors,correct:m.correctChars,
+   seconds:Math.round(m.elapsed),date:new Date().toLocaleString(),language:$("language").value,duration};
+  saved.history.unshift(score);saved.history=saved.history.slice(0,10);
+  saved.totalSeconds=(saved.totalSeconds||0)+score.seconds;
+  persist();renderHistory();renderPersonal();
+ }
+ const r=$("result");r.style.display="block";
+ const title=reason==="time"?"Time is up!":reason==="complete"?"Passage completed!":"Test finished!";
+ r.innerHTML=`<div class="result"><h4>✦ ${title}</h4><p>
+ Speed: <strong>${m.wpm} WPM</strong> · Accuracy: <strong>${m.accuracy}%</strong><br>
+ Correct characters: ${m.correctChars} · Mistakes: ${m.errors}<br>
+ Time used: ${Math.round(m.elapsed)} seconds.<br>
+ ${m.accuracy>=95?"Great accuracy! Keep building consistency.":m.accuracy>=85?"Good effort. Slow down a little and focus on accuracy.":"Keep practising at a comfortable pace. Accuracy comes first."}
+ </p></div>`;
+ $("inputHint").textContent="Test finished. Start a new test to practise again.";
+}
+function renderPersonal(){
+ const h=saved.history||[];
+ $("bestWpm").textContent=h.length?Math.max(...h.map(x=>x.wpm)):"0";
+ $("bestAcc").textContent=h.length?Math.max(...h.map(x=>x.accuracy))+"%":"0%";
+ $("totalTests").textContent=h.length;
+ $("practiceTime").textContent=Math.round((saved.totalSeconds||0)/60)+" min";
+}
+function renderHistory(){
+ const root=$("history"),h=saved.history||[];
+ if(!h.length){root.innerHTML='<div class="hint">Complete your first test to see scores here.</div>';renderPersonal();return}
+ root.innerHTML=h.slice(0,5).map(s=>`<div class="history-item"><div><strong>${s.wpm} WPM</strong><br><span>${s.accuracy}% accuracy · ${s.seconds}s</span></div><span>${s.language.toUpperCase()}</span></div>`).join("");
+ renderPersonal();
+}
+$("typingInput").addEventListener("input",()=>{
+ if(!running)return;
+ const typed=$("typingInput").value;
+ if(!startTime){startTime=Date.now();remaining=duration}
+ lastInput=typed;renderPassage(typed);metrics();
+ if(typed.length>=passageText.length){finishTest("complete")}
+});
+document.querySelectorAll("[data-time]").forEach(b=>b.addEventListener("click",()=>{
+ if(running){toast("Finish or restart the current test first.");return}
+ duration=Number(b.dataset.time);document.querySelectorAll("[data-time]").forEach(x=>x.classList.toggle("active",x===b));prepare();
+}));
+["language","difficulty","customText"].forEach(id=>{
+ $(id).addEventListener("change",()=>{if(!running)prepare()});
+ if(id==="customText")$(id).addEventListener("input",()=>{if(!running)prepare()});
+});
+$("start").addEventListener("click",start);
+$("restart").addEventListener("click",()=>{prepare();toast("New test ready.");});
+$("clear").addEventListener("click",()=>{
+ if(running){$("typingInput").value="";renderPassage("");metrics();$("typingInput").focus();toast("Typing cleared. Timer continues.");}
+ else{prepare();toast("Typing area cleared.");}
+});
+$("finish").addEventListener("click",()=>{
+ if(!running){toast("Start a test before finishing.");return}
+ finishTest("manual");
+});
+$("clearHistory").addEventListener("click",()=>{
+ if(!confirm("Clear all saved typing scores on this browser?"))return;
+ saved={history:[],totalSeconds:0};persist();renderHistory();toast("Score history cleared.");
+});
+prepare();renderHistory();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
