@@ -2,123 +2,554 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#8c3150">
-<title>Invitation Maker | CSC Seva Tools</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100b19">
+<title>AI Invitation Maker Pro | Kisan Seva Tools</title>
 <style>
-:root{--p:#8c3150;--dark:#511c32;--gold:#d7b66c;--bg:#fff6f7;--line:#efdce2;--muted:#806d75}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Georgia,"Times New Roman",serif;color:#422936}
-header{font:800 20px Arial,sans-serif;padding:16px 5%;background:white;border-bottom:1px solid var(--line);color:var(--p)}header span{color:var(--dark)}
-.hero{padding:29px 5%;background:linear-gradient(120deg,#511c32,#8c3150);color:white}.hero>div{max-width:1100px;margin:auto}.hero small{color:#f3d8a1;letter-spacing:2px;text-transform:uppercase}
-h1{font-size:clamp(27px,4vw,40px);margin:12px 0}.hero p{font:13px/1.7 Arial,sans-serif;color:#ffeaf0;max-width:650px}
-main{max-width:1100px;margin:22px auto;padding:0 14px 35px}.grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px;align-items:start}
-.card{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 6px 24px #511c3208}
-.head{padding:18px;border-bottom:1px solid var(--line)}.head h2{font:700 17px Arial,sans-serif;margin:0 0 5px}.head p{font:11px/1.5 Arial,sans-serif;color:var(--muted);margin:0}
-.body{padding:17px}.field{margin-bottom:13px}label{display:block;font:700 11px Arial,sans-serif;margin-bottom:7px}
-input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:12px Arial,sans-serif;color:#422936;background:#fff}
-textarea{min-height:65px;resize:vertical}input:focus,textarea:focus,select:focus{outline:2px solid #f0cad7}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{border:0;border-radius:8px;padding:11px 14px;font:700 12px Arial,sans-serif;cursor:pointer}.primary{background:var(--p);color:white}.secondary{background:#fff0f4;color:var(--p);border:1px solid var(--line)}
-.actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{flex:1}
-.theme-row{display:flex;gap:10px;flex-wrap:wrap}.theme{width:29px;height:29px;border-radius:50%;border:3px solid white;outline:1px solid #d9c5cd;cursor:pointer}.theme.active{outline:3px solid var(--gold)}
-.preview-wrap{padding:18px;background:#f3e9ec}
-.invite{--card:#8c3150;--ink:#511c32;--accent:#d7b66c;background:#fffdf8;border:7px double var(--accent);padding:27px 20px;text-align:center;min-height:500px;color:var(--ink);position:relative;display:flex;flex-direction:column;justify-content:center;overflow-wrap:anywhere}
-.invite .ornament{font-size:23px;color:var(--card);margin-bottom:12px}
-.invite .eyebrow{font:10px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;color:var(--card)}
-.invite h2{font-size:clamp(27px,3vw,36px);line-height:1.15;margin:15px 0;color:var(--card);font-weight:normal}
-.invite .subtitle{font-size:14px;font-style:italic;margin:0 0 17px}
-.invite .names{font-size:clamp(20px,3vw,29px);line-height:1.4;margin:7px 0;color:var(--ink)}
-.invite .details{font-size:12px;line-height:1.9;white-space:pre-wrap;margin:15px 0}
-.invite .bottom{font:10px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--card);margin-top:12px}
-.invite.theme-blue{--card:#244e78;--ink:#17324b;--accent:#b8d3e6}
-.invite.theme-green{--card:#2b6b50;--ink:#214837;--accent:#c4a76a}
-.invite.theme-purple{--card:#66458a;--ink:#402a59;--accent:#d3b8ec}
-.invite.theme-gold{--card:#986c18;--ink:#594313;--accent:#d6b86b}
-.invite.theme-dark{--card:#30343b;--ink:#292d33;--accent:#bca77b}
-.status{font:11px/1.5 Arial,sans-serif;color:var(--muted);margin-top:10px}
-footer{text-align:center;padding:20px;background:white;border-top:1px solid var(--line);font:11px Arial,sans-serif;color:var(--muted)}
-@media(max-width:760px){.grid{grid-template-columns:1fr}.hero{padding:25px 17px}main{padding:0 10px 25px}.body{padding:14px}.invite{min-height:440px;padding:24px 15px}.preview-wrap{padding:10px}}
-@media print{header,.hero,.form-card,footer,.preview-head{display:none!important}main{margin:0;padding:0}.grid{display:block}.card{border:0;box-shadow:none}.preview-wrap{padding:0;background:white}.invite{min-height:0;height:180mm;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+:root{--bg:#100b19;--panel:#1a1427;--line:#3a2c4c;--text:#fff8f1;--muted:#c1b2c9;--gold:#e9c58b;--pink:#e9a6c8;--mint:#9edac7}
+*{box-sizing:border-box}
+body{margin:0;color:var(--text);font-family:Inter,"Segoe UI",Arial,sans-serif;background:radial-gradient(ellipse at top,#382344 0,#100b19 52%)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:10;background:#100b19ed;backdrop-filter:blur(15px);border-bottom:1px solid #ffffff14;padding:12px clamp(12px,3vw,32px)}
+.nav{max-width:1600px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:950;font-size:13px;letter-spacing:.5px}
+.logo{height:43px;width:43px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#f6d7a0,#c18aaf);color:#30203b;font-size:23px;box-shadow:0 8px 30px #e9a6c82b}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.7px;margin-top:4px}
+.status{border:1px solid #e9c58b55;color:var(--gold);border-radius:25px;padding:8px 11px;font-size:9px;font-weight:900}
+main{max-width:1600px;margin:auto;padding:24px clamp(10px,2.5vw,30px) 45px}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;margin:7px 0 22px}
+.eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:var(--gold)}
+h1{font-size:clamp(27px,4vw,45px);line-height:1.1;letter-spacing:-.7px;margin:10px 0}
+.hero p{font-size:13px;line-height:1.65;color:var(--muted);max-width:750px;margin:0}
+.layout{display:grid;grid-template-columns:minmax(290px,370px) minmax(0,1fr);gap:16px;align-items:start}
+.panel{min-width:0;background:linear-gradient(150deg,#21182ff5,#151122f5);border:1px solid var(--line);border-radius:19px;overflow:hidden;box-shadow:0 20px 60px #0003}
+.panelhead{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.panelhead h2{font-size:13px;margin:0}
+.kicker{font-size:9px;letter-spacing:1.5px;color:var(--gold);font-weight:900}
+.pad{padding:15px}
+.section{padding:15px 0;border-bottom:1px solid #ffffff12}
+.section:first-child{padding-top:0}
+.section:last-child{border:0;padding-bottom:0}
+.sectitle{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px;font-weight:900;margin:0 0 12px}
+.field{min-width:0;margin-bottom:12px}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:10px;color:#d3c5dc;font-weight:800;margin-bottom:6px}
+input,select,textarea{width:100%;min-width:0;background:#100c1b;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px;font-size:12px;outline:none}
+textarea{resize:vertical;min-height:64px;line-height:1.5}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+input[type=color]{height:37px;padding:3px}
+.btn{border:1px solid var(--line);background:#2b213c;color:var(--text);border-radius:10px;padding:10px 12px;font-size:11px;font-weight:850;transition:.18s}
+.btn:hover{transform:translateY(-1px);border-color:var(--gold)}
+.btn.primary{background:linear-gradient(130deg,#f4d9a3,#d9a7c9);border:0;color:#2a1830}
+.btn.full{width:100%}
+.btn.small{font-size:10px;padding:8px 10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.templates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.template{border:1px solid var(--line);background:#100c1b;border-radius:12px;padding:8px;text-align:left;color:var(--text)}
+.template.active{border-color:var(--gold);box-shadow:0 0 0 1px #e9c58b22}
+.mini{aspect-ratio:4/5;border-radius:7px;padding:9px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;overflow:hidden}
+.mini strong{font-family:Georgia,serif;font-size:14px;line-height:1.1}
+.mini small{font-size:7px;letter-spacing:1px}
+.template>span{display:block;margin:8px 2px 2px;font-size:10px;font-weight:850}
+.palette{display:flex;gap:8px;flex-wrap:wrap}
+.swatch{width:29px;height:29px;border:2px solid #ffffff30;border-radius:9px;position:relative}
+.swatch.active{outline:2px solid var(--gold);outline-offset:2px}
+.swatch.active:after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;font-weight:900;font-size:12px;color:white;text-shadow:0 1px 4px #000}
+.rangehead{display:flex;justify-content:space-between;gap:8px;font-size:10px;color:var(--muted)}
+.rangehead label{margin:0}
+input[type=range]{padding:0;accent-color:var(--gold)}
+.checkline{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);line-height:1.5}
+.checkline input{width:auto;accent-color:var(--gold)}
+.editorhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.editorhead h2{font-size:14px;margin:0}
+.tabs{display:flex;gap:4px;padding:4px;background:#100c1b;border:1px solid var(--line);border-radius:10px}
+.tab{border:0;background:transparent;color:var(--muted);font-size:10px;font-weight:850;border-radius:7px;padding:8px 10px}
+.tab.active{background:#49304f;color:#fff5dc}
+.stage{margin-top:14px;min-height:560px;display:flex;align-items:center;justify-content:center;padding:22px;border:1px solid var(--line);border-radius:15px;overflow:auto;background-color:#100b18;background-image:radial-gradient(#ffffff0d 1px,transparent 1px);background-size:17px 17px}
+#inviteCanvas{display:block;max-width:100%;max-height:75vh;height:auto;object-fit:contain;background:#fff;box-shadow:0 15px 45px #0008}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:13px}
+.stat{border:1px solid var(--line);background:#ffffff05;border-radius:10px;padding:10px;min-width:0}
+.stat small{display:block;font-size:9px;color:var(--muted);margin-bottom:5px}
+.stat strong{font-size:11px;overflow-wrap:anywhere}
+.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.tip{font-size:10px;line-height:1.65;color:var(--muted);border:1px solid #ffffff12;background:#ffffff05;border-radius:10px;padding:11px;margin-top:12px}
+#notice{font-size:10px;color:var(--muted);line-height:1.5;margin-top:10px}
+.empty{text-align:center;color:var(--muted);max-width:290px}
+.empty .symbol{font-size:45px}
+.empty h3{color:var(--text);font-size:16px}
+.empty p{font-size:12px;line-height:1.7}
+.toast{position:fixed;bottom:18px;left:50%;transform:translate(-50%,20px);opacity:0;transition:.2s;pointer-events:none;z-index:20;background:#2a203b;border:1px solid #6e587b;border-radius:12px;padding:12px 16px;font-size:12px;max-width:90vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:#8e7d9b;font-size:10px;line-height:1.7;padding:0 14px 24px}
+.hidden{display:none!important}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.layout>section{order:1}.layout>aside{order:2}.stage{min-height:340px}}
+@media(max-width:480px){header{padding:10px}.brand{font-size:11px}.logo{width:37px;height:37px}main{padding:17px 9px 30px}.pad{padding:12px}.stage{min-height:250px;padding:9px}.stats{gap:5px}.stat{padding:8px}.stat strong{font-size:10px}.actions{grid-template-columns:1fr 1fr}.actions .btn:last-child{grid-column:1/-1}}
+@media print{
+ body{background:white!important}
+ header,.hero,aside,.editorhead,.stats,.actions,.tip,footer,.no-print{display:none!important}
+ main{padding:0!important;margin:0!important}
+ .layout{display:block!important}
+ .panel{border:0!important;box-shadow:none!important;background:white!important}
+ .layout>section{display:block!important}
+ .panelhead{display:none!important}
+ .pad{padding:0!important}
+ .stage{display:block!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;background:white!important;overflow:visible!important}
+ #inviteCanvas{max-width:none!important;max-height:none!important;width:100%!important;height:auto!important;box-shadow:none!important}
+ @page{size:auto;margin:7mm}
+}
 </style>
 </head>
 <body>
-<header>CSC <span>Seva Tools</span></header>
-<section class="hero"><div><small>Creative tools · Tool 08</small><h1>Invitation Card Maker</h1><p>Create a personalised invitation for birthdays, weddings, engagements, family gatherings and other special occasions.</p></div></section>
-<main><div class="grid">
-<section class="card form-card">
-<div class="head"><h2>Personalise invitation</h2><p>Enter the event details and select a design theme.</p></div>
-<div class="body">
-<div class="field"><label for="event">Occasion</label><select id="event"><option>Wedding Invitation</option><option>Birthday Celebration</option><option>Engagement Ceremony</option><option>Housewarming Ceremony</option><option>Anniversary Celebration</option><option>Family Gathering</option><option>Graduation Celebration</option><option>Special Event</option></select></div>
-<div class="field"><label for="host">Host / Names</label><input id="host" placeholder="e.g. Ayesha & Sameer"></div>
-<div class="field"><label for="subtitle">Invitation message</label><input id="subtitle" placeholder="e.g. Request the pleasure of your company"></div>
-<div class="field"><label for="message">Personal message</label><textarea id="message" placeholder="We would be delighted to celebrate this special occasion with you."></textarea></div>
-<div class="two">
-<div class="field"><label for="date">Event date</label><input id="date" type="date"></div>
-<div class="field"><label for="time">Event time</label><input id="time" type="time"></div>
-</div>
-<div class="field"><label for="venue">Venue / Address</label><textarea id="venue" placeholder="Venue name and address"></textarea></div>
-<div class="field"><label for="footerText">Closing line</label><input id="footerText" placeholder="e.g. With love, our family"></div>
-<div class="field"><label>Colour theme</label><div class="theme-row">
-<button class="theme active" data-theme="rose" style="background:#8c3150" aria-label="Rose theme" type="button"></button>
-<button class="theme" data-theme="blue" style="background:#244e78" aria-label="Blue theme" type="button"></button>
-<button class="theme" data-theme="green" style="background:#2b6b50" aria-label="Green theme" type="button"></button>
-<button class="theme" data-theme="purple" style="background:#66458a" aria-label="Purple theme" type="button"></button>
-<button class="theme" data-theme="gold" style="background:#986c18" aria-label="Gold theme" type="button"></button>
-<button class="theme" data-theme="dark" style="background:#30343b" aria-label="Charcoal theme" type="button"></button>
-</div></div>
-<div class="actions"><button class="btn primary" id="print" type="button">Print / Save PDF</button><button class="btn secondary" id="reset" type="button">Reset form</button></div>
-<div class="status" id="status" role="status" aria-live="polite">Your invitation preview updates as you type.</div>
-</div>
-</section>
-<section class="card">
-<div class="head preview-head"><h2>Live invitation preview</h2><p>Review the wording and details before printing.</p></div>
-<div class="preview-wrap">
-<article class="invite" id="invite">
-<div class="ornament">✦ ❦ ✦</div>
-<div class="eyebrow">You are invited to</div>
-<h2 id="pEvent">Wedding Invitation</h2>
-<div class="subtitle" id="pSubtitle">Request the pleasure of your company</div>
-<div class="names" id="pHost">Your Names Here</div>
-<div class="details" id="pMessage">We would be delighted to celebrate this special occasion with you.</div>
-<div class="details" id="pDate">Date to be announced</div>
-<div class="details" id="pVenue">Venue details</div>
-<div class="bottom" id="pFooter">With warm wishes</div>
-<div class="ornament" style="margin-top:18px">✦ ❦ ✦</div>
-</article>
-</div>
-</section>
-</div></main>
-<footer>Creative document tools · CSC Seva Tools</footer>
+<header>
+ <div class="nav">
+  <div class="brand"><div class="logo">❧</div><div>KISAN SEVA TOOLS<small>AI INVITATION MAKER PRO</small></div></div>
+  <span class="status">✦ INVITATION STUDIO</span>
+ </div>
+</header>
+<main>
+ <div class="hero">
+  <div>
+   <div class="eyebrow">TOOL 45 / CELEBRATION DESIGN LAB</div>
+   <h1>Make every moment <span style="color:var(--gold)">memorable.</span></h1>
+   <p>Create beautiful invitations for weddings, birthdays, engagements, festivals and special events. Personalise names, dates, venue, colours and photos, then export a high-resolution invitation card.</p>
+  </div>
+ </div>
+ <div class="layout">
+  <aside class="panel">
+   <div class="panelhead"><h2>Invitation designer</h2><span class="kicker">01 / CUSTOMISE</span></div>
+   <div class="pad">
+    <div class="section">
+     <div class="sectitle">Select invitation style <span class="kicker">TEMPLATES</span></div>
+     <div class="templates" id="templates">
+      <button class="template active" data-template="wedding"><div class="mini" style="background:linear-gradient(145deg,#183b31,#4d7255);color:#f5dfaa"><small>TOGETHER WITH OUR FAMILIES</small><strong>Wedding<br>Invitation</strong><small>JOY • LOVE • FOREVER</small></div><span>Royal Wedding</span></button>
+      <button class="template" data-template="birthday"><div class="mini" style="background:linear-gradient(145deg,#76275c,#ed8baf);color:white"><small>LET'S CELEBRATE</small><strong>Birthday<br>Party!</strong><small>CAKE • FUN • MEMORIES</small></div><span>Birthday Pop</span></button>
+      <button class="template" data-template="engagement"><div class="mini" style="background:linear-gradient(145deg,#f6eee4,#d5b5a5);color:#633b43"><small>WITH LOVE</small><strong>Engagement<br>Ceremony</strong><small>A BEAUTIFUL BEGINNING</small></div><span>Rose Elegance</span></button>
+      <button class="template" data-template="festival"><div class="mini" style="background:linear-gradient(145deg,#6b2c8b,#e56a55);color:#fff4c8"><small>WARM WISHES</small><strong>Festival<br>Celebration</strong><small>LIGHT • JOY • PEACE</small></div><span>Festival Glow</span></button>
+      <button class="template" data-template="business"><div class="mini" style="background:linear-gradient(145deg,#102d4a,#317c9a);color:#e5f8ff"><small>YOU ARE INVITED</small><strong>Grand<br>Opening</strong><small>JOIN OUR CELEBRATION</small></div><span>Business Event</span></button>
+      <button class="template" data-template="minimal"><div class="mini" style="background:#f7f2e9;color:#394a42;border:1px solid #d7c9b5"><small>PLEASE JOIN US</small><strong>A Special<br>Occasion</strong><small>AN INVITATION</small></div><span>Minimal Luxe</span></button>
+     </div>
+    </div>
+    <div class="section">
+     <div class="sectitle">Event information <span class="kicker">02</span></div>
+     <div class="field"><label for="eventType">Event type</label><select id="eventType"><option value="wedding">Wedding</option><option value="birthday">Birthday</option><option value="engagement">Engagement</option><option value="festival">Festival</option><option value="business">Business event</option><option value="custom">Other celebration</option></select></div>
+     <div class="field"><label for="eyebrow">Top line</label><input id="eyebrow" maxlength="90" value="TOGETHER WITH OUR FAMILIES"></div>
+     <div class="field"><label for="headline">Main invitation title</label><textarea id="headline" maxlength="120">Wedding Invitation</textarea></div>
+     <div class="field"><label for="subtitle">Invitation message</label><textarea id="subtitle" maxlength="220">We joyfully invite you to share in our special day.</textarea></div>
+    </div>
+    <div class="section">
+     <div class="sectitle">Names & personal message <span class="kicker">03</span></div>
+     <div class="grid2">
+      <div class="field"><label for="name1">Name one</label><input id="name1" maxlength="65" value="Your Name"></div>
+      <div class="field"><label for="name2">Name two</label><input id="name2" maxlength="65" value="Partner's Name"></div>
+     </div>
+     <div class="field"><label for="nameConnector">Name connector</label><select id="nameConnector"><option value="&"> &amp; </option><option value="and">and</option><option value="♥">♥</option><option value="|">|</option></select></div>
+     <div class="field"><label for="personalMessage">Personal note / invitation line</label><textarea id="personalMessage" maxlength="220">Your presence will make our celebration even more special.</textarea></div>
+     <label class="checkline"><input type="checkbox" id="showNames" checked> Show names prominently</label>
+    </div>
+    <div class="section">
+     <div class="sectitle">Date, time & venue <span class="kicker">04</span></div>
+     <div class="grid2">
+      <div class="field"><label for="eventDate">Event date</label><input id="eventDate" type="date"></div>
+      <div class="field"><label for="eventTime">Start time</label><input id="eventTime" type="time"></div>
+     </div>
+     <div class="field"><label for="venue">Venue / location</label><input id="venue" maxlength="120" placeholder="Venue name"></div>
+     <div class="field"><label for="address">Venue address</label><textarea id="address" maxlength="180" placeholder="Street, town or city"></textarea></div>
+     <div class="field"><label for="rsvp">RSVP / contact</label><input id="rsvp" maxlength="100" placeholder="Contact name or phone (optional)"></div>
+     <div class="field"><label for="closing">Closing line</label><input id="closing" maxlength="100" value="With love and warm wishes"></div>
+    </div>
+    <div class="section">
+     <div class="sectitle">Colours & card format <span class="kicker">05</span></div>
+     <div class="field"><label>Colour themes</label>
+      <div class="palette" id="palettes">
+       <button class="swatch active" data-bg1="#183b31" data-bg2="#4d7255" data-fg="#f5dfaa" style="background:linear-gradient(135deg,#183b31,#4d7255)" title="Forest gold"></button>
+       <button class="swatch" data-bg1="#76275c" data-bg2="#ed8baf" data-fg="#ffffff" style="background:linear-gradient(135deg,#76275c,#ed8baf)" title="Pink"></button>
+       <button class="swatch" data-bg1="#f6eee4" data-bg2="#d5b5a5" data-fg="#633b43" style="background:linear-gradient(135deg,#f6eee4,#d5b5a5)" title="Rose"></button>
+       <button class="swatch" data-bg1="#6b2c8b" data-bg2="#e56a55" data-fg="#fff4c8" style="background:linear-gradient(135deg,#6b2c8b,#e56a55)" title="Festival"></button>
+       <button class="swatch" data-bg1="#102d4a" data-bg2="#317c9a" data-fg="#e5f8ff" style="background:linear-gradient(135deg,#102d4a,#317c9a)" title="Ocean"></button>
+       <button class="swatch" data-bg1="#f7f2e9" data-bg2="#e7ddcb" data-fg="#394a42" style="background:linear-gradient(135deg,#f7f2e9,#e7ddcb)" title="Minimal"></button>
+      </div>
+     </div>
+     <div class="grid3">
+      <div class="field"><label for="bg1">Start</label><input type="color" id="bg1" value="#183b31"></div>
+      <div class="field"><label for="bg2">End</label><input type="color" id="bg2" value="#4d7255"></div>
+      <div class="field"><label for="fg">Text</label><input type="color" id="fg" value="#f5dfaa"></div>
+     </div>
+     <div class="field"><label for="format">Card format</label><select id="format"><option value="portrait">Portrait — 4:5</option><option value="square">Square — 1:1</option><option value="story">Story — 9:16</option><option value="landscape">Landscape — 16:9</option></select></div>
+     <div class="field"><label for="resolution">Export resolution</label><select id="resolution"><option value="1200">Standard — 1200 px</option><option value="1800" selected>High quality — 1800 px</option><option value="2400">Ultra — 2400 px</option></select></div>
+    </div>
+    <div class="section">
+     <div class="sectitle">Decorations & photo <span class="kicker">06</span></div>
+     <div class="field"><label for="font">Typography</label><select id="font"><option value="classic">Classic serif</option><option value="modern">Modern sans</option><option value="romantic">Romantic italic</option><option value="bold">Bold display</option></select></div>
+     <div class="field"><label for="decoration">Card decoration</label><select id="decoration"><option value="ornate">Ornate frame</option><option value="floral">Floral corners</option><option value="sparkle">Stars & sparkle</option><option value="clean">Minimal frame</option></select></div>
+     <div class="field"><label for="photo">Add a photo (optional)</label><input id="photo" type="file" accept="image/jpeg,image/png,image/webp"></div>
+     <div class="grid2">
+      <div class="field"><label for="photoStyle">Photo shape</label><select id="photoStyle"><option value="circle">Circle</option><option value="rounded">Rounded</option><option value="square">Rectangle</option></select></div>
+      <div class="field"><label for="photoPosition">Placement</label><select id="photoPosition"><option value="bottom">Bottom centre</option><option value="left">Left side</option><option value="right">Right side</option></select></div>
+     </div>
+     <label class="checkline"><input type="checkbox" id="showPhoto" checked> Show uploaded photo</label>
+     <label class="checkline" style="margin-top:10px"><input type="checkbox" id="showVenue" checked> Show venue and event details</label>
+    </div>
+    <div class="section">
+     <div class="sectitle">Finish your invitation <span class="kicker">07</span></div>
+     <div class="grid2">
+      <button class="btn" id="resetBtn">Reset design</button>
+      <button class="btn" id="randomBtn">Surprise me ✦</button>
+     </div>
+     <div class="tip">Review names, date, time and address before sharing. This editor does not send invitations or book venues; it creates a downloadable invitation design.</div>
+    </div>
+   </div>
+  </aside>
+  <section class="panel">
+   <div class="panelhead"><h2>Invitation preview</h2><span class="kicker">LIVE / DESIGN</span></div>
+   <div class="pad">
+    <div class="editorhead">
+     <div><h2>Your invitation card</h2><div style="font-size:10px;color:var(--muted);margin-top:5px">Edit any field to update the card</div></div>
+     <div class="tabs"><button class="tab active" id="previewTab">Preview</button><button class="tab" id="fitTab">Fit card</button></div>
+    </div>
+    <div class="stage">
+     <canvas id="inviteCanvas" width="720" height="900"></canvas>
+    </div>
+    <div class="stats">
+     <div class="stat"><small>CANVAS SIZE</small><strong id="sizeStat">1440 × 1800 px</strong></div>
+     <div class="stat"><small>DESIGN THEME</small><strong id="themeStat">Royal Wedding</strong></div>
+     <div class="stat"><small>PHOTO</small><strong id="photoStat">Not added</strong></div>
+    </div>
+    <div class="actions">
+     <button class="btn primary" id="downloadBtn">↓ Download PNG</button>
+     <button class="btn" id="printBtn">⎙ Print / PDF</button>
+     <button class="btn" id="copyBtn">Copy invitation text</button>
+    </div>
+    <div class="tip">For a digital invitation, share the exported PNG. For a printable card, choose Print / PDF and inspect the print dialog before saving. Physical print size depends on the printer and print settings.</div>
+    <div id="notice">Ready to design your invitation.</div>
+   </div>
+  </section>
+ </div>
+</main>
+<footer>Kisan Seva Tools · AI Invitation Maker Pro · Browser-based design editor · No automatic AI artwork generation in this standalone version.</footer>
+<div class="toast" id="toast"></div>
 <script>
 (function(){
+"use strict";
 const $=id=>document.getElementById(id);
-const fields=["event","host","subtitle","message","date","time","venue","footerText"];
-function formatDate(v){if(!v)return "";const d=new Date(v+"T00:00:00");return isNaN(d)?"":d.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});}
-function update(){
-$("pEvent").textContent=$("event").value||"Special Invitation";
-$("pHost").textContent=$("host").value.trim()||"Your Names Here";
-$("pSubtitle").textContent=$("subtitle").value.trim()||"You are warmly invited";
-$("pMessage").textContent=$("message").value.trim()||"We would be delighted to celebrate this special occasion with you.";
-const d=formatDate($("date").value),t=$("time").value;
-$("pDate").textContent=[d,t].filter(Boolean).join(" · ")||"Date and time to be announced";
-$("pVenue").textContent=$("venue").value.trim()||"Venue details to be announced";
-$("pFooter").textContent=$("footerText").value.trim()||"With warm wishes";
+const canvas=$("inviteCanvas");
+let ctx=canvas.getContext("2d"),photoImage=null,template="wedding",toastTimer=null;
+const defaults={
+ wedding:{bg1:"#183b31",bg2:"#4d7255",fg:"#f5dfaa",eyebrow:"TOGETHER WITH OUR FAMILIES",headline:"Wedding Invitation",subtitle:"We joyfully invite you to share in our special day.",name1:"Your Name",name2:"Partner's Name",personalMessage:"Your presence will make our celebration even more special.",closing:"With love and warm wishes",decoration:"ornate",font:"classic"},
+ birthday:{bg1:"#76275c",bg2:"#ed8baf",fg:"#ffffff",eyebrow:"LET'S CELEBRATE",headline:"Birthday Party!",subtitle:"Join us for a day full of joy, laughter and memories.",name1:"Birthday Star",name2:"",personalMessage:"Come celebrate this wonderful day with us!",closing:"Cake, fun and happy memories",decoration:"sparkle",font:"bold"},
+ engagement:{bg1:"#f6eee4",bg2:"#d5b5a5",fg:"#633b43",eyebrow:"WITH LOVE",headline:"Engagement Ceremony",subtitle:"A beautiful beginning to our forever story.",name1:"Your Name",name2:"Partner's Name",personalMessage:"We would be delighted to have you with us on our special day.",closing:"With love and gratitude",decoration:"floral",font:"romantic"},
+ festival:{bg1:"#6b2c8b",bg2:"#e56a55",fg:"#fff4c8",eyebrow:"WARM WISHES",headline:"Festival Celebration",subtitle:"You are warmly invited to celebrate with us.",name1:"Your Family",name2:"",personalMessage:"May the occasion bring happiness and togetherness.",closing:"Warm wishes to you and your family",decoration:"sparkle",font:"classic"},
+ business:{bg1:"#102d4a",bg2:"#317c9a",fg:"#e5f8ff",eyebrow:"YOU ARE INVITED",headline:"Grand Opening",subtitle:"Join us as we begin a new chapter.",name1:"Your Business",name2:"",personalMessage:"We look forward to celebrating this milestone with you.",closing:"Thank you for your support",decoration:"clean",font:"modern"},
+ minimal:{bg1:"#f7f2e9",bg2:"#e7ddcb",fg:"#394a42",eyebrow:"PLEASE JOIN US",headline:"A Special Occasion",subtitle:"An invitation to celebrate a memorable moment.",name1:"Your Name",name2:"",personalMessage:"Your presence would mean a great deal to us.",closing:"Warm regards",decoration:"clean",font:"classic"}
+};
+function notify(s){
+ const t=$("toast");t.textContent=s;t.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2500);
 }
-fields.forEach(id=>$(id).addEventListener("input",update));
-document.querySelectorAll(".theme").forEach(btn=>btn.addEventListener("click",()=>{
-document.querySelectorAll(".theme").forEach(b=>b.classList.remove("active"));
-btn.classList.add("active");
-$("invite").className="invite"+(btn.dataset.theme==="rose"?"":" theme-"+btn.dataset.theme);
-}));
-$("print").addEventListener("click",()=>window.print());
-$("reset").addEventListener("click",()=>{
-if(!confirm("Reset all invitation details?"))return;
-fields.forEach(id=>$(id).value="");
-$("event").selectedIndex=0;
-document.querySelectorAll(".theme").forEach(b=>b.classList.toggle("active",b.dataset.theme==="rose"));
-$("invite").className="invite";update();
+function v(id){return $(id).value.trim();}
+function checked(id){return $(id).checked;}
+function safeDate(raw){
+ if(!raw)return "";
+ const d=new Date(raw+"T12:00:00");
+ if(Number.isNaN(d.getTime()))return raw;
+ return d.toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"});
+}
+function dimensions(){
+ const r=Number(v("resolution"))||1800;
+ switch(v("format")){
+  case "square":return [r,r,"Square 1:1"];
+  case "story":return [Math.round(r*9/16),r,"Story 9:16"];
+  case "landscape":return [r,Math.round(r*9/16),"Landscape 16:9"];
+  default:return [Math.round(r*4/5),r,"Portrait 4:5"];
+ }
+}
+function fontFor(kind){
+ const family=v("font");
+ if(family==="modern")return "Arial, Helvetica, sans-serif";
+ if(family==="romantic")return "italic Georgia, serif";
+ if(family==="bold")return "900 Impact, Haettenschweiler, Arial, sans-serif";
+ return kind==="body"?"Georgia, serif":"Georgia, 'Times New Roman', serif";
+}
+function rounded(c,x,y,w,h,r){
+ r=Math.max(0,Math.min(r,w/2,h/2));
+ c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();
+}
+function drawText(c,text,cx,y,maxW,size,lineHeight,font,maxLines){
+ c.save();c.font=font;c.textAlign="center";c.textBaseline="top";
+ const lines=[];
+ String(text||"").split("\n").forEach(par=>{
+  const words=par.split(/\s+/).filter(Boolean);
+  if(!words.length){lines.push("");return;}
+  let line="";
+  words.forEach(word=>{
+   const next=line?line+" "+word:word;
+   if(line&&c.measureText(next).width>maxW){lines.push(line);line=word;}
+   else line=next;
+  });
+  lines.push(line);
+ });
+ if(maxLines&&lines.length>maxLines){
+  lines.length=maxLines;
+  let last=lines[maxLines-1];
+  while(last.length>3&&c.measureText(last+"…").width>maxW)last=last.slice(0,-1);
+  lines[maxLines-1]=last+"…";
+ }
+ lines.forEach((line,i)=>c.fillText(line,cx,y+i*lineHeight,maxW));
+ c.restore();
+ return lines.length*lineHeight;
+}
+function drawBackground(c,w,h){
+ const g=c.createLinearGradient(0,0,w,h);g.addColorStop(0,v("bg1"));g.addColorStop(1,v("bg2"));
+ c.fillStyle=g;c.fillRect(0,0,w,h);
+ const decoration=v("decoration");
+ if(decoration==="sparkle"){
+  c.save();c.fillStyle=v("fg")+"75";
+  for(let i=0;i<35;i++){
+   const x=w*(.07+((i*37)%83)/100),y=h*(.06+((i*53)%84)/100),r=Math.max(1,w*.0018);
+   c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fill();
+   if(i%4===0){c.strokeStyle=v("fg")+"60";c.lineWidth=Math.max(1,w*.001);c.beginPath();c.moveTo(x-r*3,y);c.lineTo(x+r*3,y);c.moveTo(x,y-r*3);c.lineTo(x,y+r*3);c.stroke();}
+  }c.restore();
+ }else if(decoration==="floral"){
+  c.save();c.strokeStyle=v("fg")+"70";c.lineWidth=Math.max(1,w*.002);
+  [[w*.12,h*.11,1],[w*.88,h*.11,-1],[w*.12,h*.89,1],[w*.88,h*.89,-1]].forEach(([x,y,dir])=>{
+   for(let i=0;i<4;i++){
+    c.beginPath();c.ellipse(x+dir*i*w*.017,y+i*h*.009,w*.025,w*.009,dir*.55,0,Math.PI*2);c.stroke();
+   }
+   c.beginPath();c.arc(x,y,w*.025,0,Math.PI*2);c.stroke();
+  });c.restore();
+ }
+}
+function drawFrame(c,w,h){
+ const pad=w*.055;
+ c.save();c.strokeStyle=v("fg");c.lineWidth=Math.max(1,w*.0025);
+ if(v("decoration")==="ornate"){
+  c.strokeRect(pad,pad,w-2*pad,h-2*pad);
+  c.strokeRect(pad+w*.018,pad+h*.012,w-2*(pad+w*.018),h-2*(pad+h*.012));
+  const s=w*.018;
+  [[pad,pad],[w-pad,pad],[pad,h-pad],[w-pad,h-pad]].forEach(([x,y])=>{
+   c.beginPath();c.arc(x,y,s,0,Math.PI*2);c.stroke();
+   c.beginPath();c.moveTo(x-s*1.6,y);c.lineTo(x+s*1.6,y);c.moveTo(x,y-s*1.6);c.lineTo(x,y+s*1.6);c.stroke();
+  });
+ }else if(v("decoration")==="clean"){
+  c.strokeRect(pad,pad,w-2*pad,h-2*pad);
+ }else{
+  c.beginPath();c.moveTo(pad,h*.14);c.lineTo(pad,pad);c.lineTo(w*.25,pad);
+  c.moveTo(w-pad,h*.14);c.lineTo(w-pad,pad);c.lineTo(w*.75,pad);
+  c.moveTo(pad,h*.86);c.lineTo(pad,h-pad);c.lineTo(w*.25,h-pad);
+  c.moveTo(w-pad,h*.86);c.lineTo(w-pad,h-pad);c.lineTo(w*.75,h-pad);c.stroke();
+ }
+ c.restore();
+}
+function drawPhoto(c,w,h){
+ if(!photoImage||!checked("showPhoto"))return;
+ const pos=v("photoPosition");
+ let bw=w*.27,bh=h*.17,x=(w-bw)/2,y=h*.70;
+ if(pos==="left"){x=w*.075;y=h*.39;bw=w*.24;bh=h*.18;}
+ if(pos==="right"){x=w*.685;y=h*.39;bw=w*.24;bh=h*.18;}
+ const shape=v("photoStyle");
+ c.save();
+ if(shape==="circle"){
+  const d=Math.min(bw,bh),cx=x+bw/2,cy=y+bh/2;
+  c.beginPath();c.arc(cx,cy,d/2,0,Math.PI*2);c.clip();
+  const s=Math.max(d/photoImage.width,d/photoImage.height);
+  c.drawImage(photoImage,cx-photoImage.width*s/2,cy-photoImage.height*s/2,photoImage.width*s,photoImage.height*s);
+  c.restore();
+  c.save();c.strokeStyle=v("fg");c.lineWidth=Math.max(2,w*.004);c.beginPath();c.arc(cx,cy,d/2,0,Math.PI*2);c.stroke();c.restore();return;
+ }
+ if(shape==="rounded")rounded(c,x,y,bw,bh,w*.025);else c.rect(x,y,bw,bh);
+ c.clip();
+ const s=Math.max(bw/photoImage.width,bh/photoImage.height);
+ c.drawImage(photoImage,x+(bw-photoImage.width*s)/2,y+(bh-photoImage.height*s)/2,photoImage.width*s,photoImage.height*s);
+ c.restore();
+ c.save();c.strokeStyle=v("fg");c.lineWidth=Math.max(2,w*.003);
+ if(shape==="rounded")rounded(c,x,y,bw,bh,w*.025);else c.strokeRect(x,y,bw,bh);
+ c.stroke();c.restore();
+}
+function drawInvitation(target){
+ const [w,h]=dimensions();target.width=w;target.height=h;
+ const c=target.getContext("2d");c.clearRect(0,0,w,h);
+ drawBackground(c,w,h);drawFrame(c,w,h);
+ const cx=w/2,pad=w*.11,side=v("photoPosition"),hasPhoto=photoImage&&checked("showPhoto");
+ let y=h*.09;
+ const fg=v("fg");
+ if(v("eyebrow")){
+  y+=drawText(c,v("eyebrow").toUpperCase(),cx,y,w*.75,w*.021,w*.032,"700 "+(w*.021)+"px Arial",2);
+  y+=h*.018;
+ }
+ const heading=v("headline")||"You're Invited";
+ const headingX=hasPhoto&&side!=="bottom"?(side==="left"?w*.65:w*.35):cx;
+ const headingW=hasPhoto&&side!=="bottom"?w*.57:w*.80;
+ const headingSize=w*.061;
+ y+=drawText(c,heading,headingX,y,headingW,headingSize,headingSize*1.14,fontFor("title"),4);
+ y+=h*.025;
+ if(v("subtitle")){
+  y+=drawText(c,v("subtitle"),cx,y,w*.78,w*.023,w*.036,fontFor("body"),4);
+  y+=h*.018;
+ }
+ if(checked("showNames")&&(v("name1")||v("name2"))){
+  const names=[v("name1"),v("name2")].filter(Boolean).join(" "+v("nameConnector")+" ");
+  y+=drawText(c,names,cx,y,w*.82,w*.052,w*.065,fontFor("title"),3);
+  y+=h*.014;
+ }
+ if(hasPhoto&&side!=="bottom"){
+  drawPhoto(c,w,h);
+  y=Math.max(y,h*.62);
+ }
+ c.save();c.strokeStyle=fg+"b0";c.lineWidth=Math.max(1,w*.0018);
+ c.beginPath();c.moveTo(w*.29,y);c.lineTo(w*.71,y);c.stroke();c.restore();
+ y+=h*.025;
+ if(v("personalMessage")){
+  y+=drawText(c,v("personalMessage"),cx,y,w*.77,w*.022,w*.035,fontFor("body"),4);
+  y+=h*.022;
+ }
+ if(checked("showVenue")){
+  const date=safeDate(v("eventDate"));
+  const time=v("eventTime")?new Date("2000-01-01T"+v("eventTime")).toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"}):"";
+  const dateTime=[date,time].filter(Boolean).join("  •  ");
+  if(dateTime){
+   y+=drawText(c,dateTime,cx,y,w*.82,w*.028,w*.04,"700 "+(w*.028)+"px Arial",2);
+   y+=h*.012;
+  }
+  if(v("venue")){
+   y+=drawText(c,v("venue"),cx,y,w*.82,w*.033,w*.042,fontFor("title"),2);
+   y+=h*.008;
+  }
+  if(v("address")){
+   y+=drawText(c,v("address"),cx,y,w*.76,w*.019,w*.03,"400 "+(w*.019)+"px Arial",3);
+   y+=h*.012;
+  }
+  if(v("rsvp")){
+   y+=drawText(c,"RSVP  •  "+v("rsvp"),cx,y,w*.82,w*.018,w*.026,"600 "+(w*.018)+"px Arial",2);
+   y+=h*.01;
+  }
+ }
+ if(hasPhoto&&side==="bottom")drawPhoto(c,w,h);
+ const closing=v("closing");
+ if(closing){
+  const bottomY=hasPhoto&&side==="bottom"?h*.88:h*.89;
+  drawText(c,closing,cx,bottomY,w*.78,w*.021,w*.03,fontFor("body"),2);
+ }
+}
+function render(){
+ try{
+  drawInvitation(canvas);
+  const [w,h,label]=dimensions();
+  $("sizeStat").textContent=w+" × "+h+" px";
+  $("themeStat").textContent=({
+   wedding:"Royal Wedding",birthday:"Birthday Pop",engagement:"Rose Elegance",
+   festival:"Festival Glow",business:"Business Event",minimal:"Minimal Luxe"
+  })[template]||"Custom invitation";
+  $("photoStat").textContent=photoImage?(checked("showPhoto")?"Photo added":"Photo hidden"):"Not added";
+  $("notice").textContent="Live preview ready · "+label+" · Browser-based editing";
+ }catch(e){console.error(e);notify("Preview error. Try a different template or photo.");}
+}
+function applyTemplate(name){
+ template=name;
+ document.querySelectorAll(".template").forEach(b=>b.classList.toggle("active",b.dataset.template===name));
+ const d=defaults[name]||defaults.wedding;
+ Object.keys(d).forEach(k=>{if($(k))$(k).value=d[k];});
+ $("eventType").value=name==="minimal"?"custom":name;
+ const pal=document.querySelector('[data-bg1="'+d.bg1+'"]');
+ document.querySelectorAll(".swatch").forEach(b=>b.classList.toggle("active",b===pal));
+ render();
+}
+function download(){
+ try{
+  const out=document.createElement("canvas");drawInvitation(out);
+  out.toBlob(blob=>{
+   if(!blob){notify("PNG export failed. Try a smaller resolution.");return;}
+   const url=URL.createObjectURL(blob),a=document.createElement("a");
+   a.href=url;a.download="KisanSeva-Invitation-"+template+".png";
+   document.body.appendChild(a);a.click();a.remove();
+   setTimeout(()=>URL.revokeObjectURL(url),1500);
+   notify("High-resolution invitation downloaded.");
+  },"image/png");
+ }catch(e){notify("Export failed. Try standard resolution.");}
+}
+function invitationText(){
+ const date=safeDate(v("eventDate"));
+ const time=v("eventTime")?new Date("2000-01-01T"+v("eventTime")).toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"}):"";
+ return [
+  v("eyebrow"),v("headline"),
+  checked("showNames")?[v("name1"),v("name2")].filter(Boolean).join(" "+v("nameConnector")+" "):"",
+  v("subtitle"),v("personalMessage"),
+  checked("showVenue")?date:"",
+  checked("showVenue")?time:"",
+  checked("showVenue")?v("venue"):"",
+  checked("showVenue")?v("address"):"",
+  checked("showVenue")?v("rsvp"):"",
+  v("closing")
+ ].filter(Boolean).join("\n\n");
+}
+$("templates").addEventListener("click",e=>{
+ const b=e.target.closest("[data-template]");if(b)applyTemplate(b.dataset.template);
 });
-update();
+$("palettes").addEventListener("click",e=>{
+ const b=e.target.closest("[data-bg1]");if(!b)return;
+ $("bg1").value=b.dataset.bg1;$("bg2").value=b.dataset.bg2;$("fg").value=b.dataset.fg;
+ document.querySelectorAll(".swatch").forEach(s=>s.classList.toggle("active",s===b));render();
+});
+const ids=["eventType","eyebrow","headline","subtitle","name1","name2","nameConnector","personalMessage","showNames","eventDate","eventTime","venue","address","rsvp","closing","bg1","bg2","fg","format","resolution","font","decoration","photoStyle","photoPosition","showPhoto","showVenue"];
+ids.forEach(id=>{ $(id).addEventListener("input",render);$(id).addEventListener("change",render); });
+$("eventType").addEventListener("change",()=>{
+ const t=$("eventType").value;
+ if(defaults[t])applyTemplate(t);else{$("headline").value="You're Invited";render();}
+});
+$("photo").addEventListener("change",e=>{
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ if(!/^image\/(jpeg|png|webp)$/.test(file.type)){notify("Choose a JPG, PNG or WebP image.");e.target.value="";return;}
+ if(file.size>10*1024*1024){notify("Choose a photo smaller than 10 MB.");e.target.value="";return;}
+ const url=URL.createObjectURL(file),img=new Image();
+ img.onload=()=>{photoImage=img;URL.revokeObjectURL(url);render();notify("Invitation photo added.");};
+ img.onerror=()=>{URL.revokeObjectURL(url);notify("Could not open this photo.");};
+ img.src=url;
+});
+$("downloadBtn").addEventListener("click",download);
+$("printBtn").addEventListener("click",()=>{
+ const out=document.createElement("canvas");drawInvitation(out);
+ const url=out.toDataURL("image/png"),win=window.open("","_blank");
+ if(!win){notify("Allow pop-ups to print your invitation.");return;}
+ const img=win.document.createElement("img");img.src=url;img.alt="Invitation card";
+ img.style.cssText="display:block;width:100%;height:auto;margin:auto";
+ win.document.title="Invitation Card";
+ win.document.head.innerHTML='<meta charset="utf-8"><style>@page{size:auto;margin:5mm}body{margin:0;text-align:center}img{max-width:100%}</style>';
+ win.document.body.innerHTML="";win.document.body.appendChild(img);
+ img.onload=()=>win.setTimeout(()=>win.print(),300);
+});
+$("copyBtn").addEventListener("click",async()=>{
+ const text=invitationText();
+ try{await navigator.clipboard.writeText(text);notify("Invitation text copied.");}
+ catch(e){
+  const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();
+  try{document.execCommand("copy");notify("Invitation text copied.");}catch(err){notify("Copy unavailable in this browser.");}
+  ta.remove();
+ }
+});
+$("resetBtn").addEventListener("click",()=>{
+ if(!confirm("Reset invitation details and photo?"))return;
+ ["eventDate","eventTime","venue","address","rsvp"].forEach(id=>$(id).value="");
+ $("showNames").checked=true;$("showVenue").checked=true;$("showPhoto").checked=true;
+ photoImage=null;$("photo").value="";$("format").value="portrait";$("resolution").value="1800";
+ $("photoStyle").value="circle";$("photoPosition").value="bottom";
+ applyTemplate("wedding");notify("Invitation design reset.");
+});
+$("randomBtn").addEventListener("click",()=>{
+ const names=Object.keys(defaults);
+ applyTemplate(names[Math.floor(Math.random()*names.length)]);
+ $("format").value=["portrait","square","story","landscape"][Math.floor(Math.random()*4)];
+ render();notify("A fresh invitation style is ready.");
+});
+$("previewTab").addEventListener("click",()=>{
+ $("previewTab").classList.add("active");$("fitTab").classList.remove("active");
+ canvas.style.maxHeight="75vh";
+});
+$("fitTab").addEventListener("click",()=>{
+ $("fitTab").classList.add("active");$("previewTab").classList.remove("active");
+ canvas.style.maxHeight="none";
+});
+applyTemplate("wedding");
 })();
 </script>
 </body>
