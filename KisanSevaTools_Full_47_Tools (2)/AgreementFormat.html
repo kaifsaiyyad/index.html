@@ -2,116 +2,531 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#475569">
-<title>Agreement Format Maker | CSC Seva Tools</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101d1a">
+<title>Agreement Studio Elite | Kisan Seva Tools</title>
+<meta name="description" content="Create, customize, preview and print agreement drafts with editable clauses and professional A4 formatting.">
 <style>
-:root{--p:#475569;--dark:#202b3c;--copper:#b56b45;--bg:#f5f6f8;--line:#e0e5ec;--muted:#6b7788}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#263343}
-header{padding:16px 5%;background:white;border-bottom:1px solid var(--line);font-size:20px;font-weight:800;color:var(--p)}header span{color:var(--dark)}
-.hero{padding:30px 5%;background:linear-gradient(120deg,#202b3c,#475569);color:white}.hero>div{max-width:1100px;margin:auto}.hero small{color:#e9b99d;letter-spacing:2px;text-transform:uppercase}
-h1{font-size:clamp(27px,4vw,40px);margin:12px 0}.hero p{max-width:670px;font-size:13px;line-height:1.7;color:#e6ebf2}
-main{max-width:1100px;margin:22px auto;padding:0 14px 35px}.grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px;align-items:start}
-.card{background:white;border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:0 6px 22px #202b3c08}
-.head{padding:18px;border-bottom:1px solid var(--line)}.head h2{font-size:17px;margin:0 0 5px}.head p{font-size:11px;color:var(--muted);line-height:1.5;margin:0}
-.body{padding:17px}.field{margin-bottom:14px}label{display:block;font-size:11px;font-weight:700;margin-bottom:7px}
-input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:12px Arial,sans-serif;color:#263343;background:white}
-textarea{min-height:70px;resize:vertical;line-height:1.5}input:focus,textarea:focus,select:focus{outline:2px solid #dbe3ee;border-color:var(--p)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{border:0;border-radius:8px;padding:11px 14px;font-size:12px;font-weight:700;cursor:pointer}.primary{background:var(--p);color:white}.secondary{background:#eef1f5;color:var(--dark);border:1px solid var(--line)}
-.actions{display:flex;flex-wrap:wrap;gap:8px}.actions button{flex:1}
-.preview-wrap{padding:20px;background:#e9edf2}
-.document{background:white;border-top:5px solid var(--copper);padding:30px 25px;min-height:600px;color:#242b35;font-family:"Times New Roman",serif;overflow-wrap:anywhere}
-.doc-title{text-align:center;font-size:20px;font-weight:bold;letter-spacing:1px;margin:0 0 25px;text-transform:uppercase}
-.doc-body{font-size:13px;line-height:1.9;white-space:pre-wrap;min-height:220px}
-.doc-parties{font-size:13px;line-height:1.8;white-space:pre-wrap;margin-bottom:15px}
-.signatures{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:50px;font-size:12px;line-height:1.7}
-.sign-line{border-top:1px solid #747d87;padding-top:7px}
-.warning{padding:13px;background:#fff7e8;border:1px solid #efdcad;border-radius:9px;color:#725729;font-size:11px;line-height:1.6;margin-top:14px}
-.status{font-size:11px;color:var(--muted);line-height:1.5;margin-top:10px}
-footer{text-align:center;padding:20px;background:white;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
-@media(max-width:750px){.grid{grid-template-columns:1fr}.hero{padding:25px 17px}main{padding:0 10px 25px}.body{padding:14px}.preview-wrap{padding:9px}.document{padding:24px 16px;min-height:500px}}
-@media(max-width:380px){.two,.signatures{grid-template-columns:1fr}}
-@media print{header,.hero,.form-card,footer,.preview-head{display:none!important}main{margin:0;padding:0}.grid{display:block}.card{border:0;box-shadow:none}.preview-wrap{padding:0;background:white}.document{border-top:3px solid var(--copper);padding:10mm;min-height:0}}
+:root{
+ --bg:#101d1a;--panel:#182823;--panel2:#20352d;--ink:#f2f6f1;
+ --muted:#a2b5a9;--line:#344b40;--gold:#e2bd76;--green:#57d6a0;
+ --danger:#ff8d8d;--white:#fffefa;--paperink:#202720;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 85% 0,#31452d 0,transparent 35%),var(--bg);color:var(--ink);font:14px/1.55 Inter,system-ui,Arial,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.topbar{padding:16px 23px;background:#101a17eF;border-bottom:1px solid #ffffff17;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-weight:950;letter-spacing:1px;font-size:18px}
+.brand span{color:var(--gold)}
+.topbar small{color:var(--muted);font-size:10px;letter-spacing:1px}
+.wrap{max-width:1550px;margin:auto;padding:24px}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.eyebrow{font-size:10px;font-weight:900;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+h1{font-size:clamp(28px,4vw,43px);line-height:1.1;letter-spacing:-1.4px;margin:7px 0}
+h1 span{color:var(--gold)}
+p{margin:4px 0;color:var(--muted)}
+.status-pill{padding:8px 12px;border:1px solid #e2bd7655;border-radius:25px;color:var(--gold);font-size:11px;font-weight:800}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.panel{min-width:0;background:linear-gradient(150deg,#1a2b24,#16231f);border:1px solid var(--line);border-radius:17px;padding:21px;box-shadow:0 18px 55px #0002}
+.panelhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
+h2{font-size:17px;margin:0}
+.step{font-size:10px;letter-spacing:1px;color:var(--gold);border:1px solid #e2bd7644;padding:5px 8px;border-radius:6px}
+.section{border-top:1px solid var(--line);padding-top:17px;margin-top:18px}
+.section h3{font-size:12px;color:#d8c9a4;margin:0 0 12px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{min-width:0}
+.full{grid-column:1/-1}
+label{display:block;font-size:11px;font-weight:800;color:#c6d6ca;margin-bottom:5px}
+input,select,textarea{width:100%;min-width:0;border:1px solid #3a5548;border-radius:8px;background:#101c18;color:#f2f6f1;padding:10px 11px;outline:none}
+textarea{resize:vertical;min-height:80px}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px #e2bd7618}
+input::placeholder,textarea::placeholder{color:#728b7c}
+.help{font-size:10px;color:var(--muted);margin-top:4px}
+.templates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.template{background:#12201a;border:1px solid #395346;border-radius:9px;color:#dce9dd;padding:11px 6px;font-size:11px;font-weight:800}
+.template.active{border-color:var(--gold);background:#e2bd7612;color:var(--gold);box-shadow:inset 0 0 0 1px #e2bd7633}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.btn{border:1px solid transparent;border-radius:8px;padding:10px 13px;font-size:12px;font-weight:850}
+.primary{background:var(--gold);color:#1b261e}
+.secondary{background:#2b4337;color:#eff7ee;border-color:#405d4c}
+.outline{background:transparent;border-color:#496252;color:#e2eee4}
+.btn:hover{filter:brightness(1.08)}
+.clause{border:1px solid #3b5447;border-radius:10px;margin:9px 0;overflow:hidden}
+.clausehead{display:flex;align-items:center;gap:8px;padding:9px 10px;background:#22372c}
+.clausehead input{font-weight:800;font-size:12px;padding:7px}
+.clausebody{padding:10px}
+.clausebody textarea{min-height:78px;font-size:12px}
+.clause-actions{display:flex;gap:6px}
+.smallbtn{background:#334a3c;color:#edf4ed;border:1px solid #506958;border-radius:6px;padding:6px 9px;font-size:10px;font-weight:800}
+.smallbtn.remove{color:#ffd0d0;background:#492d2d;border-color:#764444}
+.previewtop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.previewstage{background:#dce4dc;border-radius:11px;padding:14px}
+.paper{background:var(--white);color:var(--paperink);font-family:"Times New Roman",Georgia,serif;font-size:12px;line-height:1.8;padding:clamp(19px,3vw,40px);min-height:850px;overflow-wrap:anywhere;box-shadow:0 7px 24px #0002}
+.paper .doc-top{text-align:center;border-bottom:2px solid #526c50;padding-bottom:15px;margin-bottom:20px}
+.paper .doc-top h2{font-size:21px;letter-spacing:1px;text-transform:uppercase;color:#293e2d}
+.paper .doc-top p{font-size:10px;color:#586456}
+.paper .doc-title{text-align:center;font-size:15px;font-weight:800;text-transform:uppercase;margin:20px 0}
+.paper .meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:16px 0;font-size:10px}
+.paper .meta div{border:1px solid #e0e5dc;padding:7px}
+.paper .meta b{display:block;color:#667263;font-size:9px;text-transform:uppercase}
+.paper .paragraph{margin:12px 0;text-align:justify;white-space:pre-wrap}
+.paper .clause-title{font-weight:bold;margin:14px 0 4px}
+.paper .signgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:45px}
+.paper .signature{border-top:1px solid #667263;text-align:center;padding-top:7px;font-size:10px}
+.paper .witness{margin-top:28px;border-top:1px solid #d2d8cf;padding-top:12px}
+.paper .footer-note{border-top:1px solid #d7ded3;padding-top:8px;margin-top:25px;color:#727b6f;font-size:9px}
+.status{font-size:11px;color:var(--green);min-height:18px;margin-top:10px}
+.notice{border:1px solid #78633c;background:#352f20;color:#f1dfb4;border-radius:9px;padding:12px;font-size:11px;margin-top:15px}
+.wordstat{font-size:10px;color:var(--muted)}
+.footer{text-align:center;color:#8ea395;font-size:10px;padding:24px}
+@media(max-width:980px){.layout{grid-template-columns:1fr}.wrap{padding:14px}.panel{padding:16px}}
+@media(max-width:450px){.fields{grid-template-columns:1fr}.full{grid-column:auto}.templates{grid-template-columns:repeat(2,minmax(0,1fr))}.panel{padding:13px}.previewstage{padding:5px}.paper{padding:16px;min-height:700px}.topbar{padding:14px}}
+@media print{
+ @page{size:A4 portrait;margin:17mm}
+ body{background:white!important;color:#222}
+ .topbar,.hero,.editor,.previewtop,.preview-tools,.footer,.notice{display:none!important}
+ .wrap{max-width:none;padding:0}
+ .layout{display:block}
+ .previewpanel{padding:0;border:0;box-shadow:none;background:white}
+ .previewstage{padding:0;background:white}
+ .paper{padding:0;min-height:0;box-shadow:none;font-size:12pt;line-height:1.8}
+ .clause-title{break-after:avoid}
+ .signgrid{break-inside:avoid}
+}
 </style>
 </head>
 <body>
-<header>CSC <span>Seva Tools</span></header>
-<section class="hero"><div><small>Document formats · Tool 12</small><h1>Agreement Format Maker</h1><p>Prepare a basic agreement draft with party details, terms, effective date and signature areas. Review the complete document before printing.</p></div></section>
-<main><div class="grid">
-<section class="card form-card">
-<div class="head"><h2>Agreement details</h2><p>Enter the parties and the agreed terms in clear language.</p></div>
-<div class="body">
-<div class="field"><label for="type">Agreement type</label><select id="type"><option value="general">General agreement</option><option value="rental">Rental arrangement draft</option><option value="service">Service agreement draft</option><option value="loan">Personal loan agreement draft</option><option value="sale">Sale agreement draft</option></select></div>
-<div class="field"><label for="title">Agreement title</label><input id="title" value="GENERAL AGREEMENT" maxlength="100"></div>
-<div class="field"><label for="partyA">First party — full name / organisation</label><input id="partyA" placeholder="First party's legal name"></div>
-<div class="field"><label for="addressA">First party address</label><textarea id="addressA" placeholder="Full address"></textarea></div>
-<div class="field"><label for="partyB">Second party — full name / organisation</label><input id="partyB" placeholder="Second party's legal name"></div>
-<div class="field"><label for="addressB">Second party address</label><textarea id="addressB" placeholder="Full address"></textarea></div>
-<div class="two">
-<div class="field"><label for="date">Effective date</label><input id="date" type="date"></div>
-<div class="field"><label for="place">Place</label><input id="place" placeholder="City / town"></div>
-</div>
-<div class="field"><label for="subject">Purpose / subject of agreement</label><textarea id="subject" placeholder="Describe the purpose of the agreement"></textarea></div>
-<div class="field"><label for="terms">Terms and conditions</label><textarea id="terms" style="min-height:140px" placeholder="1. Describe the agreed responsibilities.&#10;2. State the payment or delivery terms, if applicable.&#10;3. Explain how changes or disputes will be handled."></textarea></div>
-<div class="field"><label for="duration">Duration / end date (optional)</label><input id="duration" placeholder="e.g. Until 31 December 2026"></div>
-<div class="field"><label for="extra">Additional clauses (optional)</label><textarea id="extra" placeholder="Any other mutually agreed conditions"></textarea></div>
-<div class="actions"><button class="btn primary" id="print" type="button">Print / Save PDF</button><button class="btn secondary" id="reset" type="button">Reset draft</button></div>
-<div class="warning"><strong>Legal notice:</strong> This tool creates a generic draft and does not determine legal enforceability. Agreements may require specific clauses, stamp duty, registration, witnesses or professional review depending on their purpose and applicable law. Obtain advice from a qualified legal professional before signing.</div>
-<div class="status" id="status" role="status" aria-live="polite">Use accurate details and make sure both parties understand all terms.</div>
-</div></section>
-<section class="card">
-<div class="head preview-head"><h2>Agreement preview</h2><p>Print or save this draft as PDF after review.</p></div>
-<div class="preview-wrap"><article class="document">
-<h2 class="doc-title" id="pTitle">GENERAL AGREEMENT</h2>
-<div class="doc-parties" id="pParties">This agreement is made between the parties named below.</div>
-<div class="doc-body" id="pBody"></div>
-<div class="doc-body" id="pExtra" style="min-height:0"></div>
-<div class="signatures">
-<div class="sign-line"><strong>First party</strong><br><span id="pSigA">Name: __________________</span><br>Signature: _______________</div>
-<div class="sign-line"><strong>Second party</strong><br><span id="pSigB">Name: __________________</span><br>Signature: _______________</div>
-<div class="sign-line">Witness 1<br>Name: __________________<br>Signature: _______________</div>
-<div class="sign-line">Witness 2<br>Name: __________________<br>Signature: _______________</div>
-</div>
-</article></div>
-</section>
-</div></main>
-<footer>Document tools · CSC Seva Tools</footer>
+<header class="topbar">
+ <div class="brand">KISAN <span>SEVA</span> / ELITE</div>
+ <small>AGREEMENT DESIGN SYSTEM · TOOL 35</small>
+</header>
+
+<main class="wrap">
+ <section class="hero">
+  <div>
+   <div class="eyebrow">Professional document workspace</div>
+   <h1>Agreement <span>Studio Elite</span></h1>
+   <p>Create structured agreement drafts with editable clauses and a print-ready preview.</p>
+  </div>
+  <span class="status-pill">A4 · LIVE PREVIEW · LOCAL DRAFTS</span>
+ </section>
+
+ <div class="layout">
+  <section class="panel editor">
+   <div class="panelhead"><h2>Agreement builder</h2><span class="step">01 / CREATE</span></div>
+
+   <div class="section" style="border:0;padding-top:0;margin-top:0">
+    <h3>CHOOSE A STARTING TEMPLATE</h3>
+    <div class="templates">
+     <button type="button" class="template active" data-type="general">General</button>
+     <button type="button" class="template" data-type="rent">Rent / Lease</button>
+     <button type="button" class="template" data-type="service">Service</button>
+     <button type="button" class="template" data-type="loan">Loan</button>
+     <button type="button" class="template" data-type="sale">Sale of goods</button>
+     <button type="button" class="template" data-type="partnership">Partnership</button>
+    </div>
+    <p class="help">Templates provide editable starting points, not legally approved contracts.</p>
+   </div>
+
+   <div class="section">
+    <h3>01 — AGREEMENT INFORMATION</h3>
+    <div class="fields">
+     <div class="field full"><label for="title">Agreement title *</label><input id="title" maxlength="150" placeholder="e.g. Service Agreement"></div>
+     <div class="field"><label for="place">Execution place *</label><input id="place" maxlength="100" placeholder="City / town"></div>
+     <div class="field"><label for="date">Agreement date *</label><input id="date" type="date"></div>
+     <div class="field"><label for="startDate">Effective date</label><input id="startDate" type="date"></div>
+     <div class="field"><label for="endDate">End date (if applicable)</label><input id="endDate" type="date"></div>
+     <div class="field full"><label for="purpose">Purpose / subject</label><textarea id="purpose" maxlength="600" placeholder="Briefly describe what this agreement covers."></textarea></div>
+    </div>
+   </div>
+
+   <div class="section">
+    <h3>02 — PARTY A / FIRST PARTY</h3>
+    <div class="fields">
+     <div class="field"><label for="aName">Full name / business *</label><input id="aName" maxlength="140" placeholder="First party's name"></div>
+     <div class="field"><label for="aRole">Role</label><input id="aRole" maxlength="80" placeholder="Owner / Client / Lender"></div>
+     <div class="field full"><label for="aAddress">Address *</label><textarea id="aAddress" maxlength="400" placeholder="Full correspondence address"></textarea></div>
+     <div class="field"><label for="aContact">Contact (optional)</label><input id="aContact" maxlength="100" placeholder="Phone or email"></div>
+    </div>
+   </div>
+
+   <div class="section">
+    <h3>03 — PARTY B / SECOND PARTY</h3>
+    <div class="fields">
+     <div class="field"><label for="bName">Full name / business *</label><input id="bName" maxlength="140" placeholder="Second party's name"></div>
+     <div class="field"><label for="bRole">Role</label><input id="bRole" maxlength="80" placeholder="Tenant / Provider / Borrower"></div>
+     <div class="field full"><label for="bAddress">Address *</label><textarea id="bAddress" maxlength="400" placeholder="Full correspondence address"></textarea></div>
+     <div class="field"><label for="bContact">Contact (optional)</label><input id="bContact" maxlength="100" placeholder="Phone or email"></div>
+    </div>
+   </div>
+
+   <div class="section">
+    <h3>04 — COMMERCIAL TERMS (OPTIONAL)</h3>
+    <div class="fields">
+     <div class="field"><label for="amount">Amount (₹)</label><input id="amount" type="number" min="0" max="999999999999" step="0.01" placeholder="0.00"></div>
+     <div class="field"><label for="payment">Payment terms</label><input id="payment" maxlength="250" placeholder="Due date / method / schedule"></div>
+     <div class="field"><label for="deposit">Deposit (₹, if applicable)</label><input id="deposit" type="number" min="0" max="999999999999" step="0.01" placeholder="0.00"></div>
+     <div class="field"><label for="notice">Notice period / termination</label><input id="notice" maxlength="200" placeholder="As mutually agreed"></div>
+     <div class="field full"><label for="property">Property / goods / service description</label><textarea id="property" maxlength="900" placeholder="Describe the property, items, deliverables or service involved."></textarea></div>
+    </div>
+   </div>
+
+   <div class="section">
+    <div class="panelhead"><h3 style="margin:0">05 — AGREEMENT CLAUSES</h3><span class="wordstat" id="clauseCount">0 clauses</span></div>
+    <div id="clauses"></div>
+    <div class="btnrow">
+     <button class="btn secondary" id="addClause" type="button">+ Add clause</button>
+     <button class="btn outline" id="resetClauses" type="button">Restore template clauses</button>
+    </div>
+    <p class="help">Edit, reorder or remove clauses. Only include terms both parties understand and agree to.</p>
+   </div>
+
+   <div class="section">
+    <h3>06 — ADDITIONAL DETAILS</h3>
+    <div class="fields">
+     <div class="field full"><label for="law">Governing law / jurisdiction (optional)</label><input id="law" maxlength="200" placeholder="Enter only after confirming it is appropriate"></div>
+     <div class="field full"><label for="special">Additional terms</label><textarea id="special" maxlength="1500" placeholder="Other agreed terms, limitations or conditions."></textarea></div>
+     <div class="field"><label for="witnessA">Witness 1 (optional)</label><input id="witnessA" maxlength="150" placeholder="Name"></div>
+     <div class="field"><label for="witnessB">Witness 2 (optional)</label><input id="witnessB" maxlength="150" placeholder="Name"></div>
+    </div>
+   </div>
+
+   <div class="btnrow">
+    <button class="btn primary" id="save" type="button">Save draft</button>
+    <button class="btn secondary" id="load" type="button">Load draft</button>
+    <button class="btn outline" id="json" type="button">Export JSON</button>
+    <button class="btn outline" id="reset" type="button">Reset all</button>
+   </div>
+   <div class="status" id="status" role="status" aria-live="polite">Your information stays in this page unless you export or print it.</div>
+   <div class="notice"><strong>Legal notice:</strong> This tool generates a general editable draft and does not provide legal advice. Applicable stamp duty, registration, notarization, witnesses, enforceability and required wording depend on the agreement type and local law. Have important agreements reviewed by a qualified legal professional before signing. Do not use the draft to misrepresent facts or rights.</div>
+  </section>
+
+  <section class="panel previewpanel">
+   <div class="previewtop">
+    <div><h2>Live agreement preview</h2><p>Check every clause before exporting.</p></div>
+    <span class="step">02 / DOCUMENT</span>
+   </div>
+   <div class="previewstage">
+    <article class="paper" id="paper">
+     <div class="doc-top">
+      <h2 id="pTitle">GENERAL AGREEMENT</h2>
+      <p id="pSubtitle">Draft document · Review before signing</p>
+     </div>
+     <div class="meta" id="pMeta"></div>
+     <div class="paragraph" id="pOpening"></div>
+     <div id="pClauses"></div>
+     <div class="paragraph" id="pTerms"></div>
+     <div class="paragraph" id="pLaw"></div>
+     <div class="paragraph" id="pClosing"></div>
+     <div class="signgrid">
+      <div class="signature"><strong id="pSigA">First Party</strong><br>Signature / Date</div>
+      <div class="signature"><strong id="pSigB">Second Party</strong><br>Signature / Date</div>
+     </div>
+     <div class="witness">
+      <strong>Witnesses (if required)</strong>
+      <p id="pWitnessA">Witness 1: __________________________</p>
+      <p id="pWitnessB">Witness 2: __________________________</p>
+     </div>
+     <div class="footer-note">Prepared using Kisan Seva Tools. This is a draft and does not establish that the agreement has been reviewed, executed, witnessed, stamped or registered.</div>
+    </article>
+   </div>
+   <div class="btnrow preview-tools">
+    <button class="btn primary" id="print" type="button">Print / Save as PDF</button>
+    <button class="btn secondary" id="download" type="button">Download HTML</button>
+    <button class="btn outline" id="copy" type="button">Copy text</button>
+   </div>
+   <div class="status">Print tip: select “Save as PDF” in your browser's print dialog.</div>
+  </section>
+ </div>
+ <footer class="footer">Kisan Seva Tools · Agreement Studio Elite · Tool 35</footer>
+</main>
+
 <script>
 (function(){
+"use strict";
 const $=id=>document.getElementById(id);
-const starter={
-general:"The parties agree to the purpose and terms described in this document. Each party agrees to act in good faith and fulfil the responsibilities expressly agreed between them.",
-rental:"The parties intend to record their rental arrangement, including the property details, rent, deposit, payment dates, maintenance responsibilities and duration. All specific terms should be reviewed and completed before signing.",
-service:"The parties intend to record the services to be provided, expected deliverables, fees, payment schedule, timelines and each party's responsibilities.",
-loan:"The parties intend to record the amount advanced, repayment schedule, applicable interest if any, payment method and agreed consequences of late payment. All financial terms should be clearly stated before signing.",
-sale:"The parties intend to record the item or property being sold, the agreed price, payment arrangements, delivery or possession details and other mutually agreed conditions."
+const fields=[
+ "title","place","date","startDate","endDate","purpose",
+ "aName","aRole","aAddress","aContact","bName","bRole","bAddress","bContact",
+ "amount","payment","deposit","notice","property","law","special","witnessA","witnessB"
+];
+let currentType="general";
+let clauseSequence=0;
+
+const templates={
+ general:{
+  title:"General Agreement",
+  clauses:[
+   ["Purpose and scope","The parties agree to the purpose and scope described in this document."],
+   ["Responsibilities of the parties","Each party will perform the responsibilities that they have expressly agreed to in this document."],
+   ["Changes to the agreement","Any changes should be recorded in writing and accepted by both parties."],
+   ["Dispute resolution","The parties will seek to resolve disagreements through good-faith discussion, subject to applicable law."]
+  ]
+ },
+ rent:{
+  title:"Rental / Lease Agreement Draft",
+  clauses:[
+   ["Premises and permitted use","The parties should clearly identify the premises, permitted use, access and any restrictions in the final agreement."],
+   ["Rent and payment","The amount, due date, payment method and any applicable late-payment terms should be expressly agreed and recorded."],
+   ["Security deposit","The deposit amount, permitted deductions, return conditions and refund timeline should be clearly specified."],
+   ["Maintenance and utilities","The parties should specify responsibility for routine maintenance, repairs, utilities and damage."],
+   ["Term and termination","The start date, end date, renewal procedure and lawful notice requirements should be stated in the final agreement."]
+  ]
+ },
+ service:{
+  title:"Service Agreement Draft",
+  clauses:[
+   ["Scope of services","The provider will deliver the services and agreed outputs described in the final scope of work."],
+   ["Timelines and acceptance","Milestones, delivery dates, review periods and acceptance criteria should be agreed in writing."],
+   ["Fees and payment","The parties should specify fees, taxes if applicable, invoice timing, payment dates and any approved expenses."],
+   ["Confidentiality and data","Each party should identify any confidential information and agree appropriate handling obligations."],
+   ["Termination and handover","The parties should specify lawful termination conditions, outstanding payments and any required handover."]
+  ]
+ },
+ loan:{
+  title:"Loan Agreement Draft",
+  clauses:[
+   ["Principal amount and disbursement","The principal amount, date of disbursement and method of transfer should be recorded accurately."],
+   ["Repayment schedule","Repayment dates, instalments, payment method and the final due date should be set out clearly."],
+   ["Interest and charges","Any interest, fees or other charges must be lawful, clearly stated and expressly agreed. Do not leave material terms ambiguous."],
+   ["Default and remedies","Any consequences of missed payments must be lawful and specifically described in the final agreement."],
+   ["Receipt and records","The parties should retain accurate records of disbursement and each repayment."]
+  ]
+ },
+ sale:{
+  title:"Sale of Goods Agreement Draft",
+  clauses:[
+   ["Goods and specifications","The goods, quantity, condition, specifications and any included accessories should be described precisely."],
+   ["Price and payment","The agreed price, payment schedule, taxes if applicable and payment method should be recorded."],
+   ["Delivery and inspection","The delivery location, delivery date, shipping responsibilities and inspection procedure should be agreed."],
+   ["Title and risk","The parties should specify when ownership and risk transfer, subject to applicable law."],
+   ["Defects and remedies","Any warranties, return terms and remedies must be clearly stated and comply with applicable law."]
+  ]
+ },
+ partnership:{
+  title:"Partnership Agreement Draft",
+  clauses:[
+   ["Business and contributions","The business purpose and each partner's agreed capital, assets, skills or other contributions should be described."],
+   ["Roles and decisions","Each partner's duties, authority, decision-making process and approval thresholds should be specified."],
+   ["Profit and loss allocation","The agreed method for allocating profits, losses, drawings and expenses should be documented."],
+   ["Accounts and records","The parties should agree accounting procedures, access to records, reporting and financial review."],
+   ["Exit and dissolution","Admission, retirement, transfer, dispute and dissolution procedures should be reviewed and stated clearly."]
+  ]
+ }
 };
-function fmtDate(v){if(!v)return "[Effective date]";const d=new Date(v+"T00:00:00");return isNaN(d)?"[Effective date]":d.toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"});}
-function update(){
-const a=$("partyA").value.trim()||"[First Party]";
-const b=$("partyB").value.trim()||"[Second Party]";
-$("pTitle").textContent=$("title").value.trim()||"AGREEMENT";
-$("pParties").textContent="This agreement is made on "+fmtDate($("date").value)+" at "+($("place").value.trim()||"[Place]")+".\n\nBetween:\n"+a+( $("addressA").value.trim()?"\nAddress: "+$("addressA").value.trim():"")+"\n(referred to as the First Party)\n\nAnd:\n"+b+($("addressB").value.trim()?"\nAddress: "+$("addressB").value.trim():"")+"\n(referred to as the Second Party).";
-const subject=$("subject").value.trim()||"[Describe the purpose of the agreement]";
-const terms=$("terms").value.trim()||starter[$("type").value];
-const duration=$("duration").value.trim();
-$("pBody").textContent="1. PURPOSE\n"+subject+"\n\n2. TERMS AND CONDITIONS\n"+terms+(duration?"\n\n3. DURATION\n"+duration:"")+"\n\nThe parties confirm that they have read and understood this draft and intend to record their mutual understanding, subject to applicable law and completion of all required formalities.";
-$("pExtra").textContent=$("extra").value.trim()? "\nAdditional clauses:\n"+$("extra").value.trim():"";
-$("pSigA").textContent="Name: "+a;
-$("pSigB").textContent="Name: "+b;
+function esc(s){
+ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
-["title","partyA","addressA","partyB","addressB","date","place","subject","terms","duration","extra"].forEach(id=>$(id).addEventListener("input",update));
-$("type").addEventListener("change",()=>{if(!$("terms").value.trim())update();else update();});
-$("print").addEventListener("click",()=>window.print());
-$("reset").addEventListener("click",()=>{
-if(!confirm("Reset all agreement details?"))return;
-["partyA","addressA","partyB","addressB","place","subject","terms","duration","extra"].forEach(id=>$(id).value="");
-$("date").value=new Date().toLocaleDateString("en-CA");
-$("type").value="general";$("title").value="GENERAL AGREEMENT";update();$("status").textContent="Draft reset.";
+function v(id){return $(id).value.trim();}
+function status(s){$("status").textContent=s;}
+function formatDate(s){
+ if(!s)return "Not specified";
+ const d=new Date(s+"T12:00:00");
+ return Number.isNaN(d.getTime())?s:d.toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"});
+}
+function formatAmount(s){
+ if(!s)return "Not specified";
+ const n=Number(s);
+ if(!Number.isFinite(n)||n<0)return "Not specified";
+ return "₹"+new Intl.NumberFormat("en-IN",{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
+}
+function makeClause(title="",body=""){
+ clauseSequence++;
+ const box=document.createElement("div");
+ box.className="clause";
+ box.dataset.id=String(clauseSequence);
+ const head=document.createElement("div");head.className="clausehead";
+ const titleInput=document.createElement("input");
+ titleInput.type="text";titleInput.maxLength=140;titleInput.value=title;
+ titleInput.placeholder="Clause heading";titleInput.setAttribute("aria-label","Clause heading");
+ const actions=document.createElement("div");actions.className="clause-actions";
+ const up=document.createElement("button");up.type="button";up.className="smallbtn";up.textContent="↑";up.title="Move clause up";
+ const down=document.createElement("button");down.type="button";down.className="smallbtn";down.textContent="↓";down.title="Move clause down";
+ const remove=document.createElement("button");remove.type="button";remove.className="smallbtn remove";remove.textContent="×";remove.title="Remove clause";
+ actions.append(up,down,remove);head.append(titleInput,actions);
+ const bodyWrap=document.createElement("div");bodyWrap.className="clausebody";
+ const bodyInput=document.createElement("textarea");
+ bodyInput.maxLength=2500;bodyInput.value=body;bodyInput.placeholder="Enter the agreed clause wording...";
+ bodyInput.setAttribute("aria-label","Clause wording");
+ bodyWrap.appendChild(bodyInput);box.append(head,bodyWrap);
+ titleInput.addEventListener("input",updatePreview);
+ bodyInput.addEventListener("input",updatePreview);
+ up.addEventListener("click",()=>{
+  const prev=box.previousElementSibling;
+  if(prev)box.parentNode.insertBefore(box,prev);
+  updatePreview();
+ });
+ down.addEventListener("click",()=>{
+  const next=box.nextElementSibling;
+  if(next)box.parentNode.insertBefore(next,box);
+  updatePreview();
+ });
+ remove.addEventListener("click",()=>{box.remove();updatePreview();});
+ $("clauses").appendChild(box);
+ updatePreview();
+}
+function getClauses(){
+ return [...$("clauses").querySelectorAll(".clause")].map(el=>({
+  title:el.querySelector(".clausehead input").value.trim(),
+  body:el.querySelector(".clausebody textarea").value.trim()
+ }));
+}
+function renderClauses(){
+ const host=$("pClauses");
+ host.replaceChildren();
+ const clauses=getClauses().filter(c=>c.title||c.body);
+ if(!clauses.length){
+  const p=document.createElement("div");p.className="paragraph";p.textContent="No clauses have been added.";host.appendChild(p);return;
+ }
+ clauses.forEach((c,i)=>{
+  const title=document.createElement("div");title.className="clause-title";
+  title.textContent=(i+1)+". "+(c.title||"Untitled clause");
+  const body=document.createElement("div");body.className="paragraph";
+  body.textContent=c.body||"[Clause wording not provided.]";
+  host.append(title,body);
+ });
+}
+function updatePreview(){
+ $("pTitle").textContent=(v("title")||"GENERAL AGREEMENT").toUpperCase();
+ $("pSubtitle").textContent="Draft agreement · Review before signing";
+ const meta=[
+  ["Execution place",v("place")||"Not specified"],
+  ["Agreement date",formatDate(v("date"))],
+  ["Effective date",formatDate(v("startDate"))],
+  ["End date",formatDate(v("endDate"))],
+  ["Party A",v("aName")||"Not specified"],
+  ["Party B",v("bName")||"Not specified"]
+ ];
+ $("pMeta").innerHTML=meta.map(x=>"<div><b>"+esc(x[0])+"</b>"+esc(x[1])+"</div>").join("");
+ const opening="This agreement is prepared on "+formatDate(v("date"))+
+  " at "+(v("place")||"the place specified by the parties")+
+  " between "+(v("aName")||"[First party name]")+
+  (v("aAddress")?", having an address at "+v("aAddress"):"")+
+  " (hereafter referred to as Party A) and "+(v("bName")||"[Second party name]")+
+  (v("bAddress")?", having an address at "+v("bAddress"):"")+
+  " (hereafter referred to as Party B). The parties intend to record the following terms, subject to applicable law.";
+ $("pOpening").textContent=opening+(v("purpose")?"\n\nPurpose: "+v("purpose"):"");
+ renderClauses();
+ const commercial=[];
+ if(v("amount"))commercial.push("Agreed amount / consideration: "+formatAmount(v("amount"))+".");
+ if(v("deposit"))commercial.push("Deposit: "+formatAmount(v("deposit"))+".");
+ if(v("payment"))commercial.push("Payment terms: "+v("payment"));
+ if(v("notice"))commercial.push("Notice / termination: "+v("notice"));
+ if(v("property"))commercial.push("Description: "+v("property"));
+ $("pTerms").textContent=commercial.length?"Additional commercial terms:\n"+commercial.join("\n"):"";
+ $("pLaw").textContent=(v("law")?"Governing law / jurisdiction: "+v("law")+".\n":"")+
+  (v("special")?"Additional agreed terms:\n"+v("special"):"");
+ $("pClosing").textContent="The parties should read this document carefully, confirm that all material terms are accurate, and sign only after agreeing to the final wording and satisfying applicable legal requirements.";
+ $("pSigA").textContent=v("aName")||"First Party";
+ $("pSigB").textContent=v("bName")||"Second Party";
+ $("pWitnessA").textContent="Witness 1: "+(v("witnessA")||"__________________________");
+ $("pWitnessB").textContent="Witness 2: "+(v("witnessB")||"__________________________");
+ $("clauseCount").textContent=getClauses().length+" clauses";
+}
+function applyTemplate(type){
+ currentType=templates[type]?type:"general";
+ const t=templates[currentType];
+ $("title").value=t.title;
+ $("clauses").replaceChildren();
+ t.clauses.forEach(c=>makeClause(c[0],c[1]));
+ document.querySelectorAll(".template").forEach(b=>b.classList.toggle("active",b.dataset.type===currentType));
+ updatePreview();
+ status("Template loaded. Review and edit every clause to fit your actual agreement.");
+}
+function collect(){
+ const d={schemaVersion:1,type:currentType,fields:{},clauses:getClauses()};
+ fields.forEach(id=>d.fields[id]=$(id).value);
+ return d;
+}
+function restore(d){
+ if(!d||typeof d!=="object"||!d.fields||typeof d.fields!=="object")throw new Error("Invalid draft");
+ fields.forEach(id=>{if(typeof d.fields[id]==="string")$(id).value=d.fields[id];});
+ $("clauses").replaceChildren();
+ if(Array.isArray(d.clauses)){
+  d.clauses.slice(0,40).forEach(c=>makeClause(String(c.title||"").slice(0,140),String(c.body||"").slice(0,2500)));
+ }
+ currentType=templates[d.type]?d.type:"general";
+ document.querySelectorAll(".template").forEach(b=>b.classList.toggle("active",b.dataset.type===currentType));
+ updatePreview();
+}
+function downloadFile(name,content,type){
+ const url=URL.createObjectURL(new Blob([content],{type}));
+ const a=document.createElement("a");a.href=url;a.download=name;
+ document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function validate(){
+ if(!v("title")||!v("place")||!v("date")||!v("aName")||!v("aAddress")||!v("bName")||!v("bAddress")){
+  status("Please complete agreement title, date, place and both parties' names and addresses.");return false;
+ }
+ for(const id of ["amount","deposit"]){
+  if(v(id)&&(!Number.isFinite(Number(v(id)))||Number(v(id))<0||Number(v(id))>999999999999)){
+   status("Please enter a valid non-negative amount.");return false;
+  }
+ }
+ if(v("endDate")&&v("startDate")&&v("endDate")<v("startDate")){
+  status("The end date cannot be earlier than the effective date.");return false;
+ }
+ return true;
+}
+document.querySelectorAll(".template").forEach(b=>b.addEventListener("click",()=>applyTemplate(b.dataset.type)));
+fields.forEach(id=>$(id).addEventListener("input",updatePreview));
+$("addClause").addEventListener("click",()=>{
+ if($("clauses").children.length>=40){status("Maximum of 40 clauses reached.");return;}
+ makeClause("New clause","");
+ status("New clause added.");
 });
-$("date").value=new Date().toLocaleDateString("en-CA");
-update();
+$("resetClauses").addEventListener("click",()=>{
+ if(!confirm("Replace the current clauses with the selected template clauses?"))return;
+ applyTemplate(currentType);
+});
+$("save").addEventListener("click",()=>{
+ try{localStorage.setItem("kst_agreement_draft_v1",JSON.stringify(collect()));status("Draft saved in this browser.");}
+ catch(e){status("Could not save draft. Browser storage may be unavailable.");}
+});
+$("load").addEventListener("click",()=>{
+ try{
+  const raw=localStorage.getItem("kst_agreement_draft_v1");
+  if(!raw){status("No saved draft found in this browser.");return;}
+  restore(JSON.parse(raw));status("Draft loaded.");
+ }catch(e){status("Could not load the draft. The stored data may be invalid.");}
+});
+$("reset").addEventListener("click",()=>{
+ if(!confirm("Reset all fields and clauses? Your separately saved draft will remain in browser storage."))return;
+ fields.forEach(id=>$(id).value="");
+ $("date").value=new Date().toISOString().slice(0,10);
+ $("startDate").value="";$("endDate").value="";
+ applyTemplate("general");
+ status("Form reset.");
+});
+$("json").addEventListener("click",()=>{
+ if(!validate())return;
+ const name=(v("aName")||"agreement").replace(/[^a-z0-9_-]/gi,"_").slice(0,60);
+ downloadFile("agreement-"+name+".json",JSON.stringify(collect(),null,2),"application/json");
+ status("Draft data exported as JSON. Store the file securely.");
+});
+$("print").addEventListener("click",()=>{if(validate())window.print();});
+$("download").addEventListener("click",()=>{
+ if(!validate())return;
+ const html="<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Agreement Draft</title><style>body{max-width:760px;margin:30px auto;padding:24px;font:12pt/1.8 'Times New Roman',serif;color:#202720}h2{text-align:center;text-transform:uppercase;border-bottom:2px solid #526c50;padding-bottom:15px}.meta{display:grid;grid-template-columns:1fr 1fr;gap:7px}.meta div{border:1px solid #ddd;padding:7px}.meta b{display:block;font-size:9pt}.paragraph{margin:12px 0;text-align:justify;white-space:pre-wrap}.clause-title{font-weight:bold;margin-top:14px}.signgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:45px}.signature{border-top:1px solid;text-align:center;padding-top:7px}.footer-note{border-top:1px solid #ddd;margin-top:25px;padding-top:8px;font-size:9pt}@media print{body{margin:0;padding:0}}</style></head><body>"+$("paper").outerHTML+"</body></html>";
+ downloadFile("AgreementDraft.html",html,"text/html;charset=utf-8");
+ status("Agreement HTML downloaded. Open it in a browser to review or print.");
+});
+$("copy").addEventListener("click",async()=>{
+ if(!validate())return;
+ const text=$("paper").innerText;
+ try{await navigator.clipboard.writeText(text);status("Agreement draft copied to clipboard.");}
+ catch(e){
+  const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();
+  try{document.execCommand("copy");status("Copy attempted. If it failed, select the preview text and copy manually.");}
+  catch(err){status("Clipboard unavailable. Select the preview text and copy manually.");}
+  ta.remove();
+ }
+});
+$("date").value=new Date().toISOString().slice(0,10);
+applyTemplate("general");
 })();
 </script>
 </body>
