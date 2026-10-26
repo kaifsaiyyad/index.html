@@ -1,55 +1,482 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WhatsApp Image Print | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>WhatsApp Image Print</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: ID Card & Print • Icon: 💬</div></section><section class="panel"><label>Select image/file</label><input id="file" type="file" accept="image/*" multiple><div id="preview"></div><button onclick="window.print()">Print / Save PDF</button></section><section class="panel"><h2>Preview / output</h2><div id="out"></div></section>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080e19">
+<title>WhatsApp Image Print Pro | Kisan Seva Tools</title>
+<style>
+:root{
+ --bg:#080e19;--panel:#111c2c;--panel2:#17263a;--line:#2b4057;
+ --text:#f0f6ff;--muted:#9aadc4;--mint:#68ebc9;--blue:#7caaff;
+ --gold:#f3cb83;--red:#ff8b9b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#17384a 0,#080e19 55%);font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--text)}
+button,input,select{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:10;padding:12px clamp(12px,3vw,32px);background:#080e19ed;backdrop-filter:blur(15px);border-bottom:1px solid #ffffff12}
+.nav{max-width:1600px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:950;letter-spacing:.5px}
+.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,#7caaff,#68ebc9);color:#071521;display:grid;place-items:center;font-size:23px}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.6px;margin-top:4px}
+.badge{font-size:9px;font-weight:900;color:var(--mint);border:1px solid #68ebc955;border-radius:30px;padding:8px 11px}
+main{max-width:1600px;margin:auto;padding:24px clamp(10px,2.5vw,30px) 45px}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:7px 0 22px}
+.eyebrow{font-size:10px;letter-spacing:2px;color:var(--mint);font-weight:900}
+h1{font-size:clamp(28px,4vw,45px);line-height:1.1;letter-spacing:-.8px;margin:10px 0}
+.hero p{font-size:13px;line-height:1.65;color:var(--muted);max-width:780px;margin:0}
+.layout{display:grid;grid-template-columns:minmax(280px,355px) minmax(0,1fr);gap:16px;align-items:start}
+.panel{min-width:0;background:linear-gradient(155deg,#142237f5,#0e1828f5);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 20px 60px #0002}
+.panelhead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 17px;border-bottom:1px solid var(--line)}
+.panelhead h2{font-size:13px;margin:0}
+.kicker{font-size:9px;letter-spacing:1.5px;color:var(--mint);font-weight:900}
+.pad{padding:15px}
+.section{padding:15px 0;border-bottom:1px solid #ffffff12}
+.section:first-child{padding-top:0}
+.section:last-child{border-bottom:0;padding-bottom:0}
+.sectitle{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:900;margin:0 0 12px}
+.field{margin-bottom:12px;min-width:0}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:10px;font-weight:800;color:#c1cee0;margin-bottom:6px}
+input,select{width:100%;min-width:0;background:#091321;border:1px solid var(--line);border-radius:9px;padding:10px;color:var(--text);font-size:12px;outline:none}
+input:focus,select:focus{border-color:var(--mint)}
+input[type=range]{padding:0;accent-color:var(--mint)}
+input[type=color]{height:38px;padding:3px}
+input[type=file]{font-size:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.btn{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#1c2b42;color:var(--text);font-size:11px;font-weight:850;transition:.18s}
+.btn:hover{border-color:var(--mint);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(135deg,#7caaff,#68ebc9);border:0;color:#081521}
+.btn.gold{background:linear-gradient(135deg,#ffe0a4,#edb46c);border:0;color:#281908}
+.btn.full{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.preset{background:#0b1626;border:1px solid var(--line);border-radius:11px;padding:9px;text-align:left;color:var(--text)}
+.preset.active{border-color:var(--mint);box-shadow:0 0 0 1px #68ebc922}
+.preset .preview{height:57px;border-radius:6px;display:grid;place-items:center;margin-bottom:8px;color:#15202c;background:#f5f1e8;overflow:hidden}
+.preset strong{display:block;font-size:10px}
+.preset small{font-size:9px;color:var(--muted)}
+.drop{position:relative;border:1px dashed #58728e;background:#0b1727;border-radius:13px;text-align:center;padding:19px 12px}
+.drop .big{font-size:32px}
+.drop p{font-size:10px;line-height:1.6;color:var(--muted);margin:8px 0}
+.drop input{margin-top:6px}
+.rangehead{display:flex;justify-content:space-between;gap:8px;font-size:10px;color:var(--muted)}
+.rangehead label{margin:0}
+.editorhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.editorhead h2{font-size:14px;margin:0}
+.tabs{display:flex;gap:4px;background:#091321;border:1px solid var(--line);border-radius:10px;padding:4px}
+.tab{background:transparent;border:0;color:var(--muted);font-size:10px;font-weight:850;padding:8px 10px;border-radius:7px}
+.tab.active{background:#263d55;color:#fff}
+.stage{margin-top:14px;min-height:530px;border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;justify-content:center;padding:17px;background-color:#08111e;background-image:radial-gradient(#ffffff0d 1px,transparent 1px);background-size:17px 17px;overflow:auto}
+.sheet-wrap{position:relative;max-width:100%;display:flex;justify-content:center}
+#sheet{display:block;max-width:100%;max-height:75vh;height:auto;background:white;box-shadow:0 15px 40px #0008}
+.empty{text-align:center;max-width:280px;color:var(--muted)}
+.empty .big{font-size:48px}
+.empty h3{color:var(--text);font-size:16px}
+.empty p{font-size:12px;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.stat{min-width:0;border:1px solid var(--line);background:#ffffff05;border-radius:10px;padding:10px}
+.stat small{display:block;color:var(--muted);font-size:9px;margin-bottom:5px}
+.stat strong{font-size:11px;overflow-wrap:anywhere}
+.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.photo-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:8px;margin-top:12px}
+.photo-card{position:relative;min-width:0;background:#0b1626;border:1px solid var(--line);border-radius:10px;padding:6px;cursor:pointer}
+.photo-card.active{border-color:var(--mint)}
+.photo-card img{width:100%;height:78px;object-fit:contain;background:white;border-radius:4px;display:block}
+.photo-card .caption{font-size:9px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:6px}
+.photo-card .remove{position:absolute;right:9px;top:9px;width:20px;height:20px;border:0;border-radius:50%;background:#ff7e91;color:#26080d;font-weight:900}
+.tip{font-size:10px;line-height:1.65;color:var(--muted);border:1px solid #ffffff12;background:#ffffff05;border-radius:10px;padding:11px;margin-top:12px}
+#notice{font-size:10px;line-height:1.6;color:var(--muted);margin-top:10px}
+.toast{position:fixed;z-index:20;bottom:18px;left:50%;transform:translate(-50%,20px);opacity:0;transition:.2s;pointer-events:none;background:#1b2c42;border:1px solid #47617e;border-radius:12px;padding:12px 16px;font-size:12px;max-width:90vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:#788ba5;font-size:10px;line-height:1.7;padding:0 14px 24px}
+.hidden{display:none!important}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.layout>section{order:1}.layout>aside{order:2}.stage{min-height:310px}}
+@media(max-width:480px){header{padding:10px}.brand{font-size:11px}.logo{width:37px;height:37px}main{padding:17px 9px 30px}.pad{padding:12px}.stage{min-height:230px;padding:8px}.stats{gap:5px}.stat{padding:8px}.stat strong{font-size:10px}.actions{grid-template-columns:1fr 1fr}.actions .btn:last-child{grid-column:1/-1}}
+@media print{
+ body{background:#fff!important}
+ header,.hero,aside,.editorhead,.stats,.actions,.tip,.photo-list,.section,.pages-head,footer,.no-print{display:none!important}
+ main{padding:0!important;margin:0!important}
+ .layout{display:block!important}
+ .panel{border:0!important;box-shadow:none!important;background:white!important}
+ .layout>section{display:block!important}
+ .panelhead{display:none!important}
+ .pad{padding:0!important}
+ .stage{display:block!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;background:white!important;overflow:visible!important}
+ #sheet{max-width:none!important;max-height:none!important;width:100%!important;height:auto!important;box-shadow:none!important}
+ @page{size:auto;margin:5mm}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="nav">
+  <div class="brand"><div class="logo">▤</div><div>KISAN SEVA TOOLS<small>WHATSAPP IMAGE PRINT PRO</small></div></div>
+  <span class="badge">✦ PRINT STUDIO</span>
+ </div>
+</header>
+<main>
+ <div class="hero">
+  <div>
+   <div class="eyebrow">TOOL 47 / PHOTO PRINT LAB</div>
+   <h1>From WhatsApp <span style="color:var(--mint)">to print.</span></h1>
+   <p>Arrange photos on A4 paper, create passport-size or 4×6 inch prints, choose multiple copies, customise spacing and margins, then download the print sheet or open print / PDF settings.</p>
+  </div>
+ </div>
+ <div class="layout">
+  <aside class="panel">
+   <div class="panelhead"><h2>Print setup</h2><span class="kicker">01 / CONFIGURE</span></div>
+   <div class="pad">
+    <div class="section">
+     <div class="sectitle">Add your photos <span class="kicker">UPLOAD</span></div>
+     <div class="drop">
+      <div class="big">▧</div>
+      <strong style="font-size:12px">Bring your images in</strong>
+      <p>Choose one or multiple JPG, PNG or WebP photos from your device.</p>
+      <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+     </div>
+     <div class="grid2" style="margin-top:9px">
+      <button class="btn" id="replaceBtn">Replace photos</button>
+      <button class="btn" id="clearBtn">Clear all</button>
+     </div>
+     <div id="photoCount" style="font-size:10px;color:var(--muted);margin-top:10px">0 photos loaded</div>
+    </div>
+    <div class="section">
+     <div class="sectitle">Choose a print preset <span class="kicker">02</span></div>
+     <div class="presets" id="presets">
+      <button class="preset active" data-preset="passport"><div class="preview"><span style="font-size:13px;font-weight:900">35 × 45</span></div><strong>Passport photo</strong><small>35 × 45 mm</small></button>
+      <button class="preset" data-preset="4x6"><div class="preview"><span style="font-size:13px;font-weight:900">4 × 6</span></div><strong>Photo print</strong><small>4 × 6 inches</small></button>
+      <button class="preset" data-preset="id"><div class="preview"><span style="font-size:13px;font-weight:900">ID</span></div><strong>ID photo</strong><small>25 × 35 mm</small></button>
+      <button class="preset" data-preset="custom"><div class="preview"><span style="font-size:13px;font-weight:900">CUSTOM</span></div><strong>Custom size</strong><small>Your dimensions</small></button>
+     </div>
+    </div>
+    <div class="section">
+     <div class="sectitle">Photo dimensions <span class="kicker">03</span></div>
+     <div class="grid2">
+      <div class="field"><label for="photoWidth">Width (mm)</label><input id="photoWidth" type="number" min="5" max="210" step="0.5" value="35"></div>
+      <div class="field"><label for="photoHeight">Height (mm)</label><input id="photoHeight" type="number" min="5" max="297" step="0.5" value="45"></div>
+     </div>
+     <div class="field"><label for="copies">Copies per photo</label><input id="copies" type="number" min="1" max="100" value="8"></div>
+     <div class="field"><label for="layoutMode">Photo arrangement</label><select id="layoutMode"><option value="auto">Automatic grid</option><option value="single">One photo repeated</option><option value="sequence">Each photo in sequence</option></select></div>
+     <div class="field"><label for="fit">Photo fit</label><select id="fit"><option value="cover">Fill frame (crop edges)</option><option value="contain">Fit whole photo</option></select></div>
+    </div>
+    <div class="section">
+     <div class="sectitle">Paper & layout <span class="kicker">04</span></div>
+     <div class="field"><label for="paper">Paper size</label><select id="paper"><option value="a4">A4 — 210 × 297 mm</option><option value="4x6">4 × 6 inch paper</option><option value="letter">Letter — 216 × 279 mm</option></select></div>
+     <div class="field"><label for="orientation">Orientation</label><select id="orientation"><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></div>
+     <div class="grid2">
+      <div class="field"><label for="margin">Outer margin (mm)</label><input id="margin" type="number" min="0" max="30" value="5"></div>
+      <div class="field"><label for="gap">Photo gap (mm)</label><input id="gap" type="number" min="0" max="20" step="0.5" value="3"></div>
+     </div>
+     <div class="field"><label for="background">Sheet background</label><input id="background" type="color" value="#ffffff"></div>
+     <label style="display:flex;align-items:center;gap:8px"><input id="cutLines" type="checkbox" checked style="width:auto"> Show cut guides</label>
+     <label style="display:flex;align-items:center;gap:8px;margin-top:10px"><input id="showLabels" type="checkbox" style="width:auto"> Show copy labels</label>
+    </div>
+    <div class="section">
+     <div class="sectitle">Export quality <span class="kicker">05</span></div>
+     <div class="field"><label for="quality">Canvas resolution</label><select id="quality"><option value="150">Standard — 150 DPI</option><option value="200">High — 200 DPI</option><option value="300" selected>Print — 300 DPI</option></select></div>
+     <button class="btn full" id="resetBtn">↺ Reset layout settings</button>
+    </div>
+    <div class="tip">Print accuracy depends on printer scaling and paper settings. Select “Actual size” or 100% in the print dialog when available, and verify dimensions with a test print.</div>
+   </div>
+  </aside>
+  <section class="panel">
+   <div class="panelhead"><h2>Live print sheet</h2><span class="kicker">PREVIEW / OUTPUT</span></div>
+   <div class="pad">
+    <div class="editorhead">
+     <div><h2>Your A4 print layout</h2><div style="font-size:10px;color:var(--muted);margin-top:5px">Live layout · Print-ready canvas</div></div>
+     <div class="tabs"><button class="tab active" id="sheetTab">Print sheet</button><button class="tab" id="photoTab">Photo library</button></div>
+    </div>
+    <div class="stage">
+     <div class="empty" id="emptyState"><div class="big">▤</div><h3>Your print sheet starts here</h3><p>Upload a photo and choose your desired print size to arrange copies on the page.</p><button class="btn primary" id="uploadEmpty">Upload photos</button></div>
+     <canvas id="sheet" class="hidden" width="1240" height="1754"></canvas>
+    </div>
+    <div class="stats">
+     <div class="stat"><small>PAPER</small><strong id="paperStat">A4 Portrait</strong></div>
+     <div class="stat"><small>PHOTOS PER SHEET</small><strong id="countStat">0</strong></div>
+     <div class="stat"><small>OUTPUT RESOLUTION</small><strong id="resolutionStat">300 DPI</strong></div>
+    </div>
+    <div class="actions">
+     <button class="btn primary" id="downloadBtn">↓ Download PNG</button>
+     <button class="btn gold" id="printBtn">⎙ Print / Save PDF</button>
+     <button class="btn" id="downloadAllBtn">Export all sheets</button>
+    </div>
+    <div id="notice">Ready to arrange your photos.</div>
+    <div class="sectitle" style="margin-top:18px">Photo library <span class="kicker" id="libraryCount">0 IMAGES</span></div>
+    <div class="photo-list" id="photoList"></div>
+    <div class="tip">Your images are processed locally in your browser. This tool does not send your photographs to WhatsApp or upload them to a server. The PNG is a raster print sheet; the print dialog can create a PDF. Very large layouts may require lower resolution on phones with limited memory.</div>
+   </div>
+  </section>
+ </div>
+</main>
+<footer>Kisan Seva Tools · WhatsApp Image Print Pro · Photo layout and print studio · Always check the print preview before using photo paper.</footer>
+<div class="toast" id="toast"></div>
 <script>
-const fi=document.querySelector('#file');
-if(fi)fi.addEventListener('change',()=>{let p=document.querySelector('#preview');if(!p)return;p.innerHTML='';[...fi.files].forEach(f=>{if(f.type.startsWith('image/')){let im=document.createElement('img');im.className='preview';im.style.maxWidth='160px';im.style.margin='6px';im.src=URL.createObjectURL(f);p.appendChild(im)}})});
-function loadImgs(){return Promise.all([...document.querySelector('#file').files].map(f=>new Promise((res,rej)=>{let im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=URL.createObjectURL(f)})))}
-function dl(canvas,name='output.png',type='image/png'){let a=document.createElement('a');a.href=canvas.toDataURL(type,.92);a.download=name;a.click()}
-function resizeImg(){loadImgs().then(([im])=>{let c=document.createElement('canvas');c.width=+document.querySelector('#w').value;c.height=+document.querySelector('#h').value;c.getContext('2d').drawImage(im,0,0,c.width,c.height);document.querySelector('#out').replaceChildren(c);dl(c,'resized.png')})}
-function convertImg(){loadImgs().then(([im])=>{let c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);let t=document.querySelector('#fmt').value;dl(c,'converted.'+(t==='image/jpeg'?'jpg':t==='image/png'?'png':'webp'),t)})}
-function cropImg(){loadImgs().then(([im])=>{let s=Math.min(im.naturalWidth,im.naturalHeight),c=document.createElement('canvas');c.width=s;c.height=s;c.getContext('2d').drawImage(im,(im.naturalWidth-s)/2,(im.naturalHeight-s)/2,s,s,0,0,s,s);document.querySelector('#out').replaceChildren(c);dl(c,'crop.png')})}
-function makeSheet(){loadImgs().then(([im])=>{let n=+document.querySelector('#copies').value,c=document.createElement('canvas');c.width=1240;c.height=1754;let x=c.getContext('2d');x.fillStyle='white';x.fillRect(0,0,c.width,c.height);let cols=2,rows=Math.ceil(n/cols),cw=560,ch= Math.min(700,1600/rows);for(let i=0;i<n;i++)x.drawImage(im,30+(i%cols)*610,30+Math.floor(i/cols)*ch,cw,ch*.8);document.querySelector('#out').replaceChildren(c);dl(c,'A4-photo-sheet.png')})}
-function makePhoto(){let v=document.querySelector('#size').value;document.querySelector('#copies').value='4';makeSheet()}
-function joinImages(){loadImgs().then(ims=>{let w=Math.max(...ims.map(i=>i.naturalWidth)),h=ims.reduce((s,i)=>s+i.naturalHeight,0),c=document.createElement('canvas');c.width=w;c.height=h;let y=0;ims.forEach(i=>{c.getContext('2d').drawImage(i,0,y);y+=i.naturalHeight});document.querySelector('#out').replaceChildren(c);dl(c,'joined.png')})}
-</script>
-</main><script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+"use strict";
+const $=id=>document.getElementById(id);
+const sheet=$("sheet");
+let photos=[],activePhoto=0,toastTimer=null;
+const presets={
+ passport:[35,45,8],
+ "4x6":[101.6,152.4,1],
+ id:[25,35,12],
+ custom:[40,50,4]
+};
+function notify(s){
+ const t=$("toast");t.textContent=s;t.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2600);
+}
+function num(id,min,max,fallback){
+ let n=Number($(id).value);
+ if(!Number.isFinite(n))n=fallback;
+ return Math.max(min,Math.min(max,n));
+}
+function currentPaper(){
+ const p=$("paper").value;
+ if(p==="4x6")return [101.6,152.4,"4 × 6 inch"];
+ if(p==="letter")return [215.9,279.4,"Letter"];
+ return [210,297,"A4"];
+}
+function dimensions(){
+ let [w,h,label]=currentPaper();
+ if($("orientation").value==="landscape"){[w,h]=[h,w];label+=" Landscape";}
+ else label+=" Portrait";
+ const dpi=num("quality",72,300,300);
+ return {w,h,label,dpi,pw:Math.round(w/25.4*dpi),ph:Math.round(h/25.4*dpi)};
+}
+function selectedPhoto(){return photos[activePhoto]||null;}
+function photoListRender(){
+ const box=$("photoList");box.innerHTML="";
+ photos.forEach((p,i)=>{
+  const card=document.createElement("div");
+  card.className="photo-card"+(i===activePhoto?" active":"");
+  const img=document.createElement("img");img.src=p.url;img.alt=p.name;
+  const caption=document.createElement("div");caption.className="caption";caption.textContent=(i+1)+". "+p.name;
+  const remove=document.createElement("button");remove.className="remove";remove.textContent="×";remove.title="Remove image";
+  remove.addEventListener("click",e=>{e.stopPropagation();removePhoto(i);});
+  card.append(img,caption,remove);
+  card.addEventListener("click",()=>{activePhoto=i;render();});
+  box.appendChild(card);
+ });
+ $("photoCount").textContent=photos.length+" photo"+(photos.length===1?"":"s")+" loaded";
+ $("libraryCount").textContent=photos.length+" IMAGE"+(photos.length===1?"":"S");
+}
+function removePhoto(i){
+ const p=photos[i];if(p)URL.revokeObjectURL(p.url);
+ photos.splice(i,1);
+ activePhoto=photos.length?Math.min(activePhoto,photos.length-1):0;
+ render();notify("Photo removed.");
+}
+function addFiles(files){
+ const list=Array.from(files||[]);
+ if(!list.length)return;
+ const valid=list.filter(f=>/^image\/(jpeg|png|webp)$/.test(f.type)&&f.size<=20*1024*1024);
+ if(valid.length!==list.length)notify("Some files were skipped. Use JPG, PNG or WebP under 20 MB each.");
+ valid.forEach(file=>{
+  const url=URL.createObjectURL(file),img=new Image();
+  img.onload=()=>{
+   photos.push({name:file.name,image:img,url});
+   if(photos.length===1)activePhoto=0;
+   render();
+  };
+  img.onerror=()=>{URL.revokeObjectURL(url);notify("Could not open "+file.name);};
+  img.src=url;
+ });
+ if(valid.length)notify(valid.length+" image"+(valid.length===1?"":"s")+" loading.");
+}
+function fitImage(c,img,x,y,w,h,fit){
+ const ir=img.width/img.height,fr=w/h;
+ let sx=0,sy=0,sw=img.width,sh=img.height;
+ if(fit==="cover"){
+  if(ir>fr){sw=img.height*fr;sx=(img.width-sw)/2;}
+  else{sh=img.width/fr;sy=(img.height-sh)/2;}
+ }else{
+  if(ir>fr){h=w/ir;y+=(arguments[4]-h)/2;}
+  else{w=h*ir;x+=(arguments[5]-w)/2;}
+ }
+ c.drawImage(img,sx,sy,sw,sh,x,y,w,h);
+}
+function getLayout(){
+ const d=dimensions();
+ const margin=num("margin",0,30,5)/25.4*d.dpi;
+ const gap=num("gap",0,20,3)/25.4*d.dpi;
+ const pw=num("photoWidth",5,210,35)/25.4*d.dpi;
+ const ph=num("photoHeight",5,297,45)/25.4*d.dpi;
+ const usableW=d.pw-2*margin,usableH=d.ph-2*margin;
+ const cols=Math.max(0,Math.floor((usableW+gap)/(pw+gap)));
+ const rows=Math.max(0,Math.floor((usableH+gap)/(ph+gap)));
+ const fit=$("fit").value;
+ const copies=num("copies",1,100,1);
+ const mode=$("layoutMode").value;
+ let slots=[];
+ if(cols&&rows&&photos.length){
+  let n=0;
+  for(let r=0;r<rows;r++){
+   for(let col=0;col<cols;col++){
+    if(mode==="single"&&n>=copies)continue;
+    if(mode!=="single"&&n>=copies*photos.length)continue;
+    const photoIndex=mode==="single"?activePhoto:
+      mode==="sequence"?Math.floor(n/copies)%photos.length:n%photos.length;
+    slots.push({x:margin+col*(pw+gap),y:margin+r*(ph+gap),w:pw,h:ph,photoIndex});
+    n++;
+   }
+  }
+ }
+ return {...d,margin,gap,pw,ph,cols,rows,slots,fit};
+}
+function drawSheet(target){
+ const d=getLayout();
+ target.width=d.pw;target.height=d.ph;
+ const c=target.getContext("2d");
+ c.fillStyle=$("background").value;c.fillRect(0,0,d.pw,d.ph);
+ if(!photos.length)return d;
+ c.imageSmoothingEnabled=true;c.imageSmoothingQuality="high";
+ d.slots.forEach((s,i)=>{
+  const p=photos[s.photoIndex];if(!p)return;
+  c.save();
+  c.fillStyle="#fff";c.fillRect(s.x,s.y,s.w,s.h);
+  c.save();c.beginPath();c.rect(s.x,s.y,s.w,s.h);c.clip();
+  // Draw using a centred cover or contain fit.
+  const ir=p.image.width/p.image.height,fr=s.w/s.h;
+  let x=s.x,y=s.y,w=s.w,h=s.h;
+  if(d.fit==="cover"){
+   if(ir>fr){w=s.h*ir;x=s.x-(w-s.w)/2;}
+   else{h=s.w/ir;y=s.y-(h-s.h)/2;}
+  }else{
+   if(ir>fr){h=s.w/ir;y=s.y+(s.h-h)/2;}
+   else{w=s.h*ir;x=s.x+(s.w-w)/2;}
+  }
+  c.drawImage(p.image,x,y,w,h);
+  c.restore();
+  if($("cutLines").checked){
+   c.strokeStyle="#657184";c.lineWidth=Math.max(1,d.dpi/150);
+   c.setLineDash([Math.max(2,d.dpi/30),Math.max(2,d.dpi/50)]);
+   c.strokeRect(s.x,s.y,s.w,s.h);c.setLineDash([]);
+  }
+  if($("showLabels").checked){
+   c.fillStyle="#ffffffdd";c.fillRect(s.x,s.y,s.w,Math.max(12,d.dpi*.12));
+   c.fillStyle="#111827";c.font="bold "+Math.max(8,d.dpi*.07)+"px Arial";
+   c.textAlign="left";c.textBaseline="middle";
+   c.fillText("PHOTO "+(i+1),s.x+3,s.y+Math.max(6,d.dpi*.06),s.w-6);
+  }
+  c.restore();
+ });
+ return d;
+}
+function render(){
+ const d=drawSheet(sheet);
+ const hasPhotos=photos.length>0;
+ sheet.classList.toggle("hidden",!hasPhotos);
+ $("emptyState").classList.toggle("hidden",hasPhotos);
+ $("paperStat").textContent=d.label;
+ $("countStat").textContent=d.slots.length;
+ $("resolutionStat").textContent=d.dpi+" DPI";
+ $("notice").textContent=hasPhotos?
+  d.slots.length+" photo slots fit on this sheet · "+d.cols+" columns × "+d.rows+" rows · "+d.pw+" × "+d.ph+" px.":
+  "Upload one or more photos to start your print layout.";
+ photoListRender();
+}
+function applyPreset(name){
+ const p=presets[name]||presets.passport;
+ $("photoWidth").value=p[0];$("photoHeight").value=p[1];$("copies").value=p[2];
+ document.querySelectorAll(".preset").forEach(b=>b.classList.toggle("active",b.dataset.preset===name));
+ render();
+}
+function downloadCanvas(c,name){
+ c.toBlob(blob=>{
+  if(!blob){notify("PNG export failed. Try a lower resolution.");return;}
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+  notify("PNG export prepared.");
+ },"image/png");
+}
+function printCurrent(){
+ if(!photos.length){notify("Upload photos first.");return;}
+ const out=document.createElement("canvas");drawSheet(out);
+ const win=window.open("","_blank");
+ if(!win){notify("Allow pop-ups to print or save as PDF.");return;}
+ const d=dimensions();
+ win.document.open();
+ win.document.write("<!doctype html><html><head><meta charset='utf-8'><title>Photo Print Sheet</title><style>@page{size:"+d.w+"mm "+d.h+"mm;margin:0}html,body{margin:0;padding:0;width:100%;height:100%}img{display:block;width:100%;height:100%;object-fit:fill} @media screen{body{display:flex;justify-content:center}img{width:auto;max-width:100%;height:auto;max-height:95vh}}</style></head><body></body></html>");
+ win.document.close();
+ const img=win.document.createElement("img");img.src=out.toDataURL("image/png");img.alt="Photo print sheet";
+ win.document.body.appendChild(img);
+ img.onload=()=>win.setTimeout(()=>win.print(),350);
+}
+function exportAllSheets(){
+ if(!photos.length){notify("Upload photos first.");return;}
+ const mode=$("layoutMode").value;
+ if(mode==="single"||photos.length===1){const out=document.createElement("canvas");drawSheet(out);downloadCanvas(out,"KisanSeva-Photo-Print.png");return;}
+ // Export one sheet per photo, each using the same layout settings.
+ let i=0;
+ const old=activePhoto;
+ function next(){
+  if(i>=photos.length){activePhoto=old;render();notify("Exported individual photo sheets.");return;}
+  activePhoto=i;
+  const out=document.createElement("canvas");
+  const d=getLayout();
+  out.width=d.pw;out.height=d.ph;
+  const c=out.getContext("2d");
+  c.fillStyle=$("background").value;c.fillRect(0,0,d.pw,d.ph);
+  const p=photos[i];
+  d.slots.forEach(s=>{
+   c.save();c.beginPath();c.rect(s.x,s.y,s.w,s.h);c.clip();
+   const ir=p.image.width/p.image.height,fr=s.w/s.h;
+   let x=s.x,y=s.y,w=s.w,h=s.h;
+   if(d.fit==="cover"){if(ir>fr){w=s.h*ir;x=s.x-(w-s.w)/2;}else{h=s.w/ir;y=s.y-(h-s.h)/2;}}
+   else{if(ir>fr){h=s.w/ir;y=s.y+(s.h-h)/2;}else{w=s.h*ir;x=s.x+(s.w-w)/2;}}
+   c.drawImage(p.image,x,y,w,h);c.restore();
+   if($("cutLines").checked){c.strokeStyle="#657184";c.setLineDash([Math.max(2,d.dpi/30),Math.max(2,d.dpi/50)]);c.strokeRect(s.x,s.y,s.w,s.h);c.setLineDash([]);}
+  });
+  downloadCanvas(out,"KisanSeva-Photo-Sheet-"+String(i+1).padStart(2,"0")+".png");
+  i++;setTimeout(next,350);
+ }
+ next();
+}
+$("fileInput").addEventListener("change",e=>{addFiles(e.target.files);e.target.value="";});
+$("replaceBtn").addEventListener("click",()=>{$("fileInput").click();});
+$("uploadEmpty").addEventListener("click",()=>{$("fileInput").click();});
+$("clearBtn").addEventListener("click",()=>{
+ if(!photos.length)return;
+ if(!confirm("Remove all uploaded photos?"))return;
+ photos.forEach(p=>URL.revokeObjectURL(p.url));photos=[];activePhoto=0;render();notify("Photo library cleared.");
+});
+$("presets").addEventListener("click",e=>{
+ const b=e.target.closest("[data-preset]");if(b)applyPreset(b.dataset.preset);
+});
+["photoWidth","photoHeight","copies","layoutMode","fit","paper","orientation","margin","gap","background","cutLines","showLabels","quality"].forEach(id=>{
+ $(id).addEventListener("input",render);$(id).addEventListener("change",render);
+});
+$("resetBtn").addEventListener("click",()=>{
+ $("paper").value="a4";$("orientation").value="portrait";$("margin").value=5;$("gap").value=3;
+ $("background").value="#ffffff";$("cutLines").checked=true;$("showLabels").checked=false;
+ $("quality").value="300";$("layoutMode").value="auto";$("fit").value="cover";
+ applyPreset("passport");notify("Layout settings reset.");
+});
+$("downloadBtn").addEventListener("click",()=>{
+ if(!photos.length){notify("Upload photos first.");return;}
+ const out=document.createElement("canvas");drawSheet(out);
+ downloadCanvas(out,"KisanSeva-WhatsApp-Print-Sheet.png");
+});
+$("printBtn").addEventListener("click",printCurrent);
+$("downloadAllBtn").addEventListener("click",exportAllSheets);
+$("sheetTab").addEventListener("click",()=>{
+ $("sheetTab").classList.add("active");$("photoTab").classList.remove("active");
+ $("sheet").classList.remove("hidden");$("emptyState").classList.toggle("hidden",photos.length>0);
+});
+$("photoTab").addEventListener("click",()=>{
+ $("photoTab").classList.add("active");$("sheetTab").classList.remove("active");
+ $("photoList").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+window.addEventListener("beforeunload",()=>photos.forEach(p=>URL.revokeObjectURL(p.url)));
+render();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
