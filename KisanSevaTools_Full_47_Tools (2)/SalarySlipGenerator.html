@@ -1,42 +1,463 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Salary Slip Generator | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Salary Slip Generator</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: Document Makers • Icon: 💵</div></section><section class="panel"><label>Employee name</label><textarea rows="2" id="f0" placeholder="Employee name"></textarea><label>Employer</label><textarea rows="2" id="f1" placeholder="Employer"></textarea><label>Month</label><textarea rows="2" id="f2" placeholder="Month"></textarea><label>Basic salary (₹)</label><textarea rows="2" id="f3" placeholder="Basic salary (₹)"></textarea><label>Allowances (₹)</label><textarea rows="2" id="f4" placeholder="Allowances (₹)"></textarea><label>Deductions (₹)</label><textarea rows="2" id="f5" placeholder="Deductions (₹)"></textarea><button onclick="previewDoc()">Preview document</button><button class="secondary" onclick="window.print()">Print / Save PDF</button><div id="out"></div><script>function previewDoc(){let fs=["Employee name", "Employer", "Month", "Basic salary (\u20b9)", "Allowances (\u20b9)", "Deductions (\u20b9)"],out=document.querySelector("#out");out.innerHTML="<hr><h2>Document preview</h2>"+fs.map((x,i)=>"<p><b>"+x+":</b> "+(document.querySelector("#f"+i).value||"—").replace(/</g,"&lt;")+"</p>").join("")}</script></section></main><script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salary Slip Generator Pro | Kisan Seva Tools</title>
+<meta name="description" content="Create professional salary slips with earnings, deductions, net salary calculations and print-ready payslips.">
+<style>
+:root{
+  --bg:#edf2f8;--panel:#fff;--ink:#172238;--muted:#66758c;
+  --line:#dce4ef;--blue:#2457e6;--cyan:#18b7c9;
+  --green:#087f5b;--red:#d9485f;--shadow:0 12px 36px #1b31500d;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,Arial,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.topbar{background:#111d35;color:white;padding:17px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:900;font-size:19px;letter-spacing:.3px}
+.brand span{color:#56d8e8}
+.topbar small{color:#bdc9de}
+.wrap{max-width:1450px;margin:auto;padding:24px}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:22px}
+.eyebrow{color:var(--blue);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase}
+h1{font-size:clamp(27px,4vw,39px);line-height:1.15;margin:6px 0}
+p{margin:5px 0;color:var(--muted)}
+.pill{background:#d9f7ee;color:#087f5b;padding:7px 12px;border-radius:30px;font-size:12px;font-weight:800}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);min-width:0}
+.panelhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+h2{font-size:18px;margin:0}
+.step{font-size:11px;color:var(--blue);background:#e9efff;padding:5px 9px;border-radius:7px;font-weight:900}
+.section{border-top:1px solid var(--line);padding-top:17px;margin-top:19px}
+.section h3{font-size:13px;margin:0 0 12px;color:#3b4b64}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field{min-width:0}
+.field.full{grid-column:1/-1}
+label{display:block;font-size:12px;font-weight:750;color:#46546b;margin-bottom:5px}
+input,select{width:100%;min-width:0;padding:10px 11px;border:1px solid #cfd9e7;border-radius:9px;background:#fff;color:var(--ink);outline:none}
+input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2457e61a}
+input[type=number]{font-variant-numeric:tabular-nums}
+.hint{font-size:11px;color:var(--muted);margin-top:4px}
+.items-head,.item{display:grid;grid-template-columns:minmax(0,1fr) 100px 36px;gap:7px;align-items:center}
+.items-head{font-size:11px;color:var(--muted);font-weight:800;margin-bottom:7px}
+.item{margin-bottom:8px}
+.item input{padding:9px;font-size:13px}
+.remove{border:0;border-radius:8px;background:#ffebee;color:var(--red);height:37px;font-weight:900}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.btn{border:0;border-radius:9px;padding:11px 15px;font-weight:800;font-size:13px}
+.primary{background:var(--blue);color:white}
+.secondary{background:#eaf0fb;color:#23416e}
+.outline{background:white;color:#30435f;border:1px solid var(--line)}
+.dark{background:#182744;color:white}
+.btn:hover{filter:brightness(.96)}
+.status{font-size:12px;color:var(--muted);margin-top:10px}
+.preview{background:#dfe7f2;border-radius:13px;padding:15px}
+.paper{background:white;color:#182238;padding:clamp(15px,3vw,29px);box-shadow:0 5px 25px #20334d12;min-height:420px;overflow-wrap:anywhere}
+.sliphead{display:flex;justify-content:space-between;gap:10px;border-bottom:2px solid #243b69;padding-bottom:17px}
+.sliphead h2{font-size:21px;letter-spacing:-.5px}
+.sliphead p{font-size:11px}
+.docbadge{align-self:flex-start;background:#edf2ff;color:#2457e6;padding:6px 8px;border-radius:6px;font-size:10px;font-weight:900}
+.sliptitle{text-align:center;font-size:12px;letter-spacing:2px;font-weight:900;margin:17px 0;text-transform:uppercase}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:9px;font-size:11px;margin-bottom:17px}
+.meta div{background:#f5f7fb;padding:9px;border-radius:6px}
+.meta b{display:block;color:#738098;font-size:9px;text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px}
+table{width:100%;border-collapse:collapse;font-size:11px;margin:10px 0 15px}
+th{background:#f0f4fb;text-align:left;color:#455675;font-size:10px}
+th,td{padding:9px 7px;border-bottom:1px solid #e5eaf2}
+td:last-child,th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.sumcard{padding:12px;background:#f3f6fb;border-radius:8px}
+.sumcard span{display:block;font-size:10px;color:#68768d}
+.sumcard strong{display:block;font-size:17px;margin-top:3px}
+.net{grid-column:1/-1;background:#e7f8f1;border:1px solid #c4efde;padding:15px;border-radius:9px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.net span{font-size:12px;font-weight:800;color:#087f5b}
+.net strong{font-size:clamp(20px,3vw,27px);color:#087f5b}
+.words{margin-top:13px;font-size:10px;color:#57677f;line-height:1.7}
+.disclaimer{font-size:10px;color:#748096;margin-top:17px;border-top:1px solid #e4e9f1;padding-top:10px}
+.signatures{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px;font-size:10px}
+.signatures div{border-top:1px solid #aeb9c9;padding-top:7px;text-align:center}
+.foot{text-align:center;color:var(--muted);font-size:11px;padding:24px}
+.notice{padding:12px;border:1px solid #f1dfaa;background:#fff9e9;color:#745b19;border-radius:10px;font-size:12px;margin-top:14px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.wrap{padding:15px}.panel{padding:17px}}
+@media(max-width:430px){.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.items-head,.item{grid-template-columns:minmax(0,1fr) 80px 32px}.preview{padding:7px}.panel{padding:13px}.topbar{padding:14px}.meta{gap:5px}.meta div{padding:7px}}
+@media print{
+ @page{size:A4 portrait;margin:12mm}
+ body{background:white!important;font-size:12px}
+ .topbar,.hero,.editor,.preview-tools,.foot,.notice{display:none!important}
+ .wrap{max-width:none;padding:0;margin:0}
+ .layout{display:block}
+ .panel.preview-panel{padding:0;border:0;box-shadow:none}
+ .preview{padding:0;background:white;border-radius:0}
+ .paper{padding:0;box-shadow:none;min-height:0}
+ .sliphead h2{font-size:20px}
+ tr{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">KISAN <span>SEVA</span> TOOLS</div>
+  <small>DOCUMENT STUDIO / SALARY MODULE 32</small>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Workforce document suite</div>
+      <h1>Salary Slip Generator</h1>
+      <p>Build a clean, professional payslip with live earnings and deduction calculations.</p>
+    </div>
+    <span class="pill">● Calculations update live</span>
+  </section>
+
+  <div class="layout">
+    <section class="panel editor">
+      <div class="panelhead">
+        <h2>Slip configuration</h2><span class="step">01 / EDIT</span>
+      </div>
+
+      <div class="fields">
+        <div class="field full">
+          <label for="company">Company / Business name *</label>
+          <input id="company" maxlength="100" placeholder="e.g. Kisan Seva Services">
+        </div>
+        <div class="field">
+          <label for="address">Company address</label>
+          <input id="address" maxlength="180" placeholder="Town, state">
+        </div>
+        <div class="field">
+          <label for="phone">Company contact</label>
+          <input id="phone" maxlength="40" placeholder="Phone or email">
+        </div>
+        <div class="field">
+          <label for="employee">Employee full name *</label>
+          <input id="employee" maxlength="100" placeholder="Employee name">
+        </div>
+        <div class="field">
+          <label for="employeeId">Employee ID</label>
+          <input id="employeeId" maxlength="40" placeholder="EMP-001">
+        </div>
+        <div class="field">
+          <label for="designation">Designation</label>
+          <input id="designation" maxlength="80" placeholder="Sales Executive">
+        </div>
+        <div class="field">
+          <label for="department">Department</label>
+          <input id="department" maxlength="80" placeholder="Operations">
+        </div>
+        <div class="field">
+          <label for="period">Salary month</label>
+          <input id="period" type="month">
+        </div>
+        <div class="field">
+          <label for="payDate">Payment date</label>
+          <input id="payDate" type="date">
+        </div>
+        <div class="field">
+          <label for="days">Paid days</label>
+          <input id="days" type="number" min="0" max="31" step="0.5" value="30">
+        </div>
+        <div class="field">
+          <label for="currency">Currency</label>
+          <select id="currency">
+            <option value="INR">INR — ₹ Rupee</option>
+            <option value="USD">USD — $ Dollar</option>
+            <option value="EUR">EUR — € Euro</option>
+            <option value="GBP">GBP — £ Pound</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>02 — Earnings (amounts in selected currency)</h3>
+        <div class="items-head"><span>Component</span><span>Amount</span><span></span></div>
+        <div id="earnings"></div>
+        <button class="btn secondary" type="button" id="addEarn">+ Add earning</button>
+      </div>
+
+      <div class="section">
+        <h3>03 — Deductions</h3>
+        <div class="items-head"><span>Component</span><span>Amount</span><span></span></div>
+        <div id="deductions"></div>
+        <button class="btn secondary" type="button" id="addDeduct">+ Add deduction</button>
+      </div>
+
+      <div class="section">
+        <h3>04 — Payment information</h3>
+        <div class="fields">
+          <div class="field">
+            <label for="paymentMode">Payment method</label>
+            <select id="paymentMode">
+              <option>Bank Transfer</option>
+              <option>Cash</option>
+              <option>UPI</option>
+              <option>Cheque</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="bankRef">Transaction / reference (optional)</label>
+            <input id="bankRef" maxlength="60" placeholder="Reference number">
+          </div>
+          <div class="field full">
+            <label for="notes">Notes (optional)</label>
+            <input id="notes" maxlength="220" placeholder="Additional payroll notes">
+          </div>
+        </div>
+      </div>
+
+      <div class="btnrow">
+        <button class="btn primary" type="button" id="saveDraft">Save draft</button>
+        <button class="btn secondary" type="button" id="loadDraft">Load draft</button>
+        <button class="btn outline" type="button" id="exportJson">Export data JSON</button>
+        <button class="btn outline" type="button" id="clearAll">Reset form</button>
+      </div>
+      <div class="status" id="status" role="status" aria-live="polite">Your information stays in this browser unless you export or print it.</div>
+      <div class="notice">Important: This tool prepares a payslip document. It does not verify employment, make a bank payment, or calculate statutory payroll compliance automatically. Confirm PF, ESI, TDS and other applicable deductions with your payroll professional.</div>
+    </section>
+
+    <section class="panel preview-panel">
+      <div class="panelhead preview-tools">
+        <h2>Live payslip preview</h2><span class="step">02 / PREVIEW</span>
+      </div>
+      <div class="preview">
+        <article class="paper" id="paper">
+          <div class="sliphead">
+            <div><h2 id="pCompany">Your Company</h2><p id="pAddress">Company address</p><p id="pPhone"></p></div>
+            <span class="docbadge">PAYSLIP</span>
+          </div>
+          <div class="sliptitle">Salary statement</div>
+          <div class="meta" id="pMeta"></div>
+
+          <h3 style="font-size:12px;margin:0">Employee earnings</h3>
+          <table>
+            <thead><tr><th>Component</th><th>Amount</th></tr></thead>
+            <tbody id="pEarn"></tbody>
+            <tfoot><tr><th>Total earnings</th><th id="pGross">₹0.00</th></tr></tfoot>
+          </table>
+
+          <h3 style="font-size:12px;margin:0">Deductions</h3>
+          <table>
+            <thead><tr><th>Component</th><th>Amount</th></tr></thead>
+            <tbody id="pDeduct"></tbody>
+            <tfoot><tr><th>Total deductions</th><th id="pDeductions">₹0.00</th></tr></tfoot>
+          </table>
+
+          <div class="summary">
+            <div class="sumcard"><span>Gross earnings</span><strong id="pGrossCard">₹0.00</strong></div>
+            <div class="sumcard"><span>Total deductions</span><strong id="pDeductCard">₹0.00</strong></div>
+            <div class="net"><span>NET SALARY PAYABLE</span><strong id="pNet">₹0.00</strong></div>
+          </div>
+          <div class="words" id="pWords"></div>
+          <div class="words" id="pPayment"></div>
+          <div class="words" id="pNotes"></div>
+          <div class="signatures"><div>Employee signature</div><div>Authorized signatory</div></div>
+          <div class="disclaimer">Generated salary statement. Verify all details and deductions before issuing. This document is not proof of a bank transfer.</div>
+        </article>
+      </div>
+      <div class="btnrow preview-tools">
+        <button class="btn primary" type="button" id="printBtn">Print / Save as PDF</button>
+        <button class="btn dark" type="button" id="downloadHtml">Download payslip HTML</button>
+      </div>
+      <div class="status preview-tools">Tip: In the print dialog, choose “Save as PDF” to create a PDF copy.</div>
+    </section>
+  </div>
+  <footer class="foot">Kisan Seva Tools · Salary Slip Generator Pro · Review before printing · Keep employee data private.</footer>
+</main>
+
+<script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+"use strict";
+const $ = id => document.getElementById(id);
+const moneyFields = ["days"];
+const formIds = [
+ "company","address","phone","employee","employeeId","designation",
+ "department","period","payDate","days","currency","paymentMode","bankRef","notes"
+];
+const defaultEarnings = [
+ ["Basic Salary",""],["House Rent Allowance (HRA)",""],["Dearness Allowance",""],
+ ["Conveyance Allowance",""],["Other Allowance",""]
+];
+const defaultDeductions = [
+ ["Provident Fund (PF)",""],["ESI",""],["Professional Tax",""],["TDS / Income Tax",""],["Other Deduction",""]
+];
+const safeText = value => String(value ?? "").trim();
+const escapeHTML = value => safeText(value).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[c]));
+const numeric = value => {
+ const n = Number(value);
+ return Number.isFinite(n) && n >= 0 ? n : 0;
+};
+function formatMoney(amount){
+ const code = $("currency").value || "INR";
+ try {
+  return new Intl.NumberFormat("en-IN",{
+   style:"currency",currency:code,minimumFractionDigits:2,maximumFractionDigits:2
+  }).format(amount);
+ } catch(e) {
+  return code+" "+amount.toFixed(2);
+ }
+}
+function setStatus(message){ $("status").textContent = message; }
+function makeItem(containerId,name,value=""){
+ const row = document.createElement("div");
+ row.className="item";
+ const label = document.createElement("input");
+ label.type="text";label.maxLength=70;label.placeholder="Component name";
+ label.value=name;label.setAttribute("aria-label","Component name");
+ const amount = document.createElement("input");
+ amount.type="number";amount.min="0";amount.max="999999999";
+ amount.step="0.01";amount.placeholder="0.00";amount.value=value;
+ amount.setAttribute("aria-label","Component amount");
+ const remove = document.createElement("button");
+ remove.type="button";remove.className="remove";remove.textContent="×";
+ remove.title="Remove component";remove.setAttribute("aria-label","Remove "+name);
+ label.addEventListener("input",updatePreview);
+ amount.addEventListener("input",updatePreview);
+ remove.addEventListener("click",()=>{row.remove();updatePreview();});
+ row.append(label,amount,remove);
+ $(containerId).appendChild(row);
+}
+function readItems(containerId){
+ return [...$(containerId).querySelectorAll(".item")].map(row=>{
+  const inputs=row.querySelectorAll("input");
+  return {name:safeText(inputs[0].value)||"Unnamed component",amount:numeric(inputs[1].value)};
+ });
+}
+function rowHTML(name,amount){
+ return "<tr><td>"+escapeHTML(name)+"</td><td>"+escapeHTML(formatMoney(amount))+"</td></tr>";
+}
+function textOr(value,fallback){return safeText(value)||fallback;}
+function updatePreview(){
+ const data={};
+ formIds.forEach(id=>data[id]=safeText($(id).value));
+ const earns=readItems("earnings"),deducts=readItems("deductions");
+ const gross=earns.reduce((s,x)=>s+x.amount,0);
+ const deductionTotal=deducts.reduce((s,x)=>s+x.amount,0);
+ const net=gross-deductionTotal;
+
+ $("pCompany").textContent=textOr(data.company,"Your Company");
+ $("pAddress").textContent=textOr(data.address,"Company address");
+ $("pPhone").textContent=data.phone ? "Contact: "+data.phone : "";
+ const month=data.period ? new Date(data.period+"-15T12:00:00").toLocaleDateString("en-IN",{month:"long",year:"numeric"}) : "Not specified";
+ const meta=[
+  ["Employee",textOr(data.employee,"Not specified")],
+  ["Employee ID",textOr(data.employeeId,"—")],
+  ["Designation",textOr(data.designation,"—")],
+  ["Department",textOr(data.department,"—")],
+  ["Salary period",month],
+  ["Payment date",data.payDate||"Not specified"],
+  ["Paid days",data.days||"0"],
+  ["Payment method",data.paymentMode||"Not specified"]
+ ];
+ $("pMeta").innerHTML=meta.map(x=>"<div><b>"+escapeHTML(x[0])+"</b>"+escapeHTML(x[1])+"</div>").join("");
+ $("pEarn").innerHTML=earns.map(x=>rowHTML(x.name,x.amount)).join("")||"<tr><td colspan='2'>No earnings entered</td></tr>";
+ $("pDeduct").innerHTML=deducts.map(x=>rowHTML(x.name,x.amount)).join("")||"<tr><td colspan='2'>No deductions entered</td></tr>";
+ $("pGross").textContent=formatMoney(gross);
+ $("pDeductions").textContent=formatMoney(deductionTotal);
+ $("pGrossCard").textContent=formatMoney(gross);
+ $("pDeductCard").textContent=formatMoney(deductionTotal);
+ $("pNet").textContent=formatMoney(net);
+ $("pNet").style.color=net<0?"#d9485f":"#087f5b";
+ $("pWords").textContent=net<0
+  ?"Warning: Deductions exceed earnings. Please review the amounts."
+  :"Net salary is the total earnings minus the entered deductions. Verify the amount before issuing.";
+ $("pPayment").textContent="Payment method: "+textOr(data.paymentMode,"Not specified")+
+  (data.bankRef ? " · Reference: "+data.bankRef : "");
+ $("pNotes").textContent=data.notes ? "Notes: "+data.notes : "";
+}
+function collectData(){
+ const data={};
+ formIds.forEach(id=>data[id]=$(id).value);
+ data.earnings=readItems("earnings");
+ data.deductions=readItems("deductions");
+ data.schemaVersion=1;
+ return data;
+}
+function restoreData(data){
+ if(!data || typeof data!=="object")throw new Error("Invalid draft.");
+ formIds.forEach(id=>{
+  if(data[id]!==undefined && $(id)) $(id).value=String(data[id]);
+ });
+ $("earnings").replaceChildren();
+ $("deductions").replaceChildren();
+ (Array.isArray(data.earnings)?data.earnings:defaultEarnings).forEach(x=>makeItem("earnings",x.name,x.amount));
+ (Array.isArray(data.deductions)?data.deductions:defaultDeductions).forEach(x=>makeItem("deductions",x.name,x.amount));
+ updatePreview();
+}
+function downloadBlob(filename,content,type){
+ const blob=new Blob([content],{type});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;a.download=filename;
+ document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function validForOutput(){
+ if(!safeText($("company").value)||!safeText($("employee").value)){
+  setStatus("Please enter both company name and employee name before exporting or printing.");
+  return false;
+ }
+ if(readItems("earnings").some(x=>!Number.isFinite(x.amount))||
+    readItems("deductions").some(x=>!Number.isFinite(x.amount))){
+  setStatus("Please check the amount fields.");
+  return false;
+ }
+ return true;
+}
+formIds.forEach(id=>$(id).addEventListener("input",updatePreview));
+$("addEarn").addEventListener("click",()=>makeItem("earnings","New earning"));
+$("addDeduct").addEventListener("click",()=>makeItem("deductions","New deduction"));
+$("saveDraft").addEventListener("click",()=>{
+ try{
+  localStorage.setItem("kst_salary_slip_draft_v1",JSON.stringify(collectData()));
+  setStatus("Draft saved on this browser.");
+ }catch(e){setStatus("Could not save draft. Browser storage may be unavailable.");}
+});
+$("loadDraft").addEventListener("click",()=>{
+ try{
+  const raw=localStorage.getItem("kst_salary_slip_draft_v1");
+  if(!raw){setStatus("No saved draft found on this browser.");return;}
+  restoreData(JSON.parse(raw));setStatus("Draft loaded.");
+ }catch(e){setStatus("Could not load the draft. The saved data may be invalid.");}
+});
+$("exportJson").addEventListener("click",()=>{
+ if(!validForOutput())return;
+ const name=(safeText($("employee").value)||"employee").replace(/[^a-z0-9_-]+/gi,"_");
+ downloadBlob("salary-data-"+name+".json",JSON.stringify(collectData(),null,2),"application/json");
+ setStatus("Salary data JSON exported. Store it securely.");
+});
+$("clearAll").addEventListener("click",()=>{
+ if(!confirm("Reset all fields and salary components? This does not delete an already saved draft."))return;
+ formIds.forEach(id=>$(id).value="");
+ $("days").value="30";
+ $("paymentMode").value="Bank Transfer";
+ $("earnings").replaceChildren();$("deductions").replaceChildren();
+ defaultEarnings.forEach(x=>makeItem("earnings",x[0],x[1]));
+ defaultDeductions.forEach(x=>makeItem("deductions",x[0],x[1]));
+ updatePreview();setStatus("Form reset. Your previously saved draft remains available.");
+});
+$("printBtn").addEventListener("click",()=>{
+ if(!validForOutput())return;
+ window.print();
+});
+$("downloadHtml").addEventListener("click",()=>{
+ if(!validForOutput())return;
+ const content="<!DOCTYPE html>\n<html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Salary Slip</title><style>body{font:14px Arial;color:#182238;margin:28px}table{width:100%;border-collapse:collapse;margin:12px 0}th,td{text-align:left;padding:9px;border-bottom:1px solid #ddd}th:last-child,td:last-child{text-align:right}.meta{display:grid;grid-template-columns:1fr 1fr;gap:8px}.meta div{padding:8px;background:#f4f6fa}.summary{padding:14px;background:#e7f8f1;margin-top:18px}button{padding:10px;margin:8px 0}@media print{button{display:none}body{margin:0}}</style></head><body>"+$("paper").outerHTML+"<p><button onclick='window.print()'>Print / Save as PDF</button></p></body></html>";
+ downloadBlob("salary-slip.html",content,"text/html;charset=utf-8");
+ setStatus("Payslip HTML downloaded. Open it in a browser to print or save as PDF.");
+});
+const now=new Date();
+$("period").value=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0");
+$("payDate").value=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
+defaultEarnings.forEach(x=>makeItem("earnings",x[0],x[1]));
+defaultDeductions.forEach(x=>makeItem("deductions",x[0],x[1]));
+updatePreview();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
