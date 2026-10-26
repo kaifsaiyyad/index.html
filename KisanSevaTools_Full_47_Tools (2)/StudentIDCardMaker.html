@@ -1,42 +1,448 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Student ID Card Maker | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><section class="panel"><h1>Student ID Card Maker</h1><div class="muted">Kisan Seva Tools • Local browser utility</div></section><section class="panel"><div class="muted">Category: ID Card & Print • Icon: 🎓</div></section><section class="panel"><label>Name</label><textarea rows="2" id="f0" placeholder="Name"></textarea><label>ID / Roll no.</label><textarea rows="2" id="f1" placeholder="ID / Roll no."></textarea><label>Class / Department</label><textarea rows="2" id="f2" placeholder="Class / Department"></textarea><label>School / Organization</label><textarea rows="2" id="f3" placeholder="School / Organization"></textarea><label>Address / Contact</label><textarea rows="2" id="f4" placeholder="Address / Contact"></textarea><button onclick="previewDoc()">Preview document</button><button class="secondary" onclick="window.print()">Print / Save PDF</button><div id="out"></div><script>function previewDoc(){let fs=["Name", "ID / Roll no.", "Class / Department", "School / Organization", "Address / Contact"],out=document.querySelector("#out");out.innerHTML="<hr><h2>Document preview</h2>"+fs.map((x,i)=>"<p><b>"+x+":</b> "+(document.querySelector("#f"+i).value||"—").replace(/</g,"&lt;")+"</p>").join("")}</script></section></main><script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080f1d">
+<title>Student ID Card Maker Pro | Kisan Seva Tools</title>
+<style>
+:root{--bg:#080f1d;--panel:#121e31;--line:#2a3d56;--text:#f2f6ff;--muted:#9bacc2;--mint:#68ebc9;--blue:#85adff;--gold:#f5cf8a;--red:#ff98a8}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 18% -15%,#244d5b,transparent 48%),var(--bg);color:var(--text);font-family:Inter,"Segoe UI",Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+header{position:sticky;top:0;z-index:10;background:#080f1dec;backdrop-filter:blur(16px);border-bottom:1px solid #ffffff12;padding:12px 18px}
+.nav{max-width:1500px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:950;letter-spacing:.6px}
+.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--mint));color:#071521;display:grid;place-items:center;font-size:22px}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.7px;margin-top:4px}
+.badge{color:var(--mint);border:1px solid #68ebc955;border-radius:30px;padding:8px 11px;font-size:9px;font-weight:900}
+main{max-width:1500px;margin:auto;padding:24px 16px 40px}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;margin:8px 0 23px}
+.eyebrow{font-size:10px;letter-spacing:2px;font-weight:900;color:var(--mint)}
+h1{font-size:clamp(30px,4.2vw,46px);line-height:1.1;letter-spacing:-1.1px;margin:10px 0}
+.hero p{font-size:12px;line-height:1.75;color:var(--muted);max-width:760px;margin:0}
+.layout{display:grid;grid-template-columns:340px minmax(0,1fr);gap:15px;align-items:start}
+.panel{min-width:0;background:linear-gradient(145deg,#152338,#101a2b);border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 18px 55px #0002}
+.panelhead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:15px 16px;border-bottom:1px solid var(--line)}
+.panelhead h2{font-size:13px;margin:0}
+.kicker{font-size:9px;letter-spacing:1.4px;font-weight:900;color:var(--mint)}
+.pad{padding:14px}
+.section{padding:14px 0;border-bottom:1px solid #ffffff10}
+.section:first-child{padding-top:0}.section:last-child{border:0;padding-bottom:0}
+.sectitle{display:flex;justify-content:space-between;gap:8px;font-size:11px;font-weight:900;margin:0 0 12px}
+.field{margin-bottom:11px}.field:last-child{margin-bottom:0}
+label{display:block;font-size:10px;color:#c4d1e2;font-weight:850;margin-bottom:6px}
+input,select,textarea{width:100%;min-width:0;background:#091421;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px;font-size:12px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--mint)}
+input[type=color]{height:38px;padding:3px}
+input[type=file]{font-size:10px}
+input[type=checkbox]{width:auto;accent-color:var(--mint)}
+textarea{min-height:58px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.btn{border:1px solid var(--line);border-radius:10px;background:#1c2d43;color:var(--text);padding:10px 12px;font-size:10px;font-weight:900;transition:.15s}
+.btn:hover{border-color:var(--mint);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(120deg,var(--blue),var(--mint));border:0;color:#071521}
+.btn.gold{background:linear-gradient(120deg,#ffe1a5,#edb66b);border:0;color:#291c0a}
+.btn.full{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.templates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.tpl{border:1px solid var(--line);border-radius:10px;padding:8px 4px;background:#0b1626;color:var(--text);font-size:10px;font-weight:900}
+.tpl.active{border-color:var(--mint);background:#193447}
+.tpl .swatch{height:35px;border-radius:6px;margin-bottom:7px}
+.tpl small{display:block;color:var(--muted);font-size:9px;margin-top:4px}
+.uploads{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.uploadbox{border:1px dashed #536c87;background:#0b1727;border-radius:11px;padding:11px 9px;text-align:center;min-width:0}
+.uploadbox .symbol{font-size:23px;margin-bottom:5px}
+.uploadbox strong{display:block;font-size:10px;margin-bottom:7px}
+.uploadbox input{font-size:9px;padding:7px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.topbar h2{font-size:14px;margin:0}
+.tabs{display:flex;gap:4px;background:#091421;border:1px solid var(--line);border-radius:10px;padding:4px}
+.tab{border:0;border-radius:7px;background:transparent;color:var(--muted);font-size:10px;font-weight:900;padding:8px 11px}
+.tab.active{background:#273d55;color:#fff}
+.stage{margin-top:14px;min-height:430px;display:flex;align-items:center;justify-content:center;padding:16px;border:1px solid var(--line);border-radius:13px;overflow:auto;background:#08111e;background-image:radial-gradient(#ffffff0b 1px,transparent 1px);background-size:17px 17px}
+#cardCanvas{display:block;max-width:100%;max-height:66vh;width:auto;height:auto;box-shadow:0 16px 50px #0008;border-radius:8px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}
+.stat{min-width:0;border:1px solid var(--line);border-radius:10px;background:#ffffff04;padding:10px}
+.stat small{display:block;color:var(--muted);font-size:9px;margin-bottom:6px}
+.stat strong{font-size:12px;overflow-wrap:anywhere}
+.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.status{font-size:10px;line-height:1.7;color:var(--muted);margin-top:10px}
+.note{font-size:10px;line-height:1.7;color:var(--muted);border:1px solid #ffffff12;background:#ffffff04;border-radius:10px;padding:11px;margin-top:14px}
+.toast{position:fixed;z-index:30;bottom:18px;left:50%;transform:translate(-50%,16px);opacity:0;pointer-events:none;transition:.2s;background:#20344b;border:1px solid #49647e;border-radius:11px;padding:12px 16px;font-size:12px;max-width:92vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.hidden{display:none!important}
+footer{text-align:center;color:#8091a8;font-size:10px;line-height:1.8;padding:0 15px 25px}
+@media(max-width:1000px){.layout{grid-template-columns:300px minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:740px){main{padding:18px 10px 30px}.layout{grid-template-columns:1fr}.stage{min-height:260px;padding:8px}.actions{grid-template-columns:1fr 1fr}.actions .btn:last-child{grid-column:1/-1}}
+@media(max-width:420px){.pad{padding:11px}.brand{font-size:11px}.badge{font-size:8px}.stats{gap:6px}.stat{padding:8px}.templates{gap:5px}.tpl{font-size:9px}}
+@media print{
+ body{background:#fff!important}
+ header,.hero,aside,.topbar,.stats,.actions,.note,.status,footer,.no-print{display:none!important}
+ main{padding:0!important;margin:0!important}
+ .layout{display:block!important}
+ .panel{background:#fff!important;border:0!important;box-shadow:none!important}
+ .panelhead{display:none!important}
+ .pad{padding:0!important}
+ .stage{display:block!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;background:white!important;overflow:visible!important}
+ #cardCanvas{width:100%!important;max-width:none!important;max-height:none!important;height:auto!important;border-radius:0!important;box-shadow:none!important}
+ @page{margin:10mm}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="nav">
+  <div class="brand"><div class="logo">ID</div><div>KISAN SEVA TOOLS<small>STUDENT ID CARD MAKER PRO</small></div></div>
+  <span class="badge">✦ DESIGN STUDIO</span>
+ </div>
+</header>
+
+<main>
+ <div class="hero">
+  <div>
+   <div class="eyebrow">STUDENT IDENTITY / TOOL 5</div>
+   <h1>Make every ID<br><span style="color:var(--mint)">look exceptional.</span></h1>
+   <p>Create a student identity card with a photo, school branding, custom colours, and a separate back side. Preview the design live, then export a PNG or print it.</p>
+  </div>
+ </div>
+
+ <div class="layout">
+  <aside class="panel">
+   <div class="panelhead"><h2>ID card editor</h2><span class="kicker">01 / CUSTOMISE</span></div>
+   <div class="pad">
+    <div class="section">
+     <div class="sectitle">Choose a design <span class="kicker">STYLE</span></div>
+     <div class="templates">
+      <button class="tpl active" data-template="modern"><div class="swatch" style="background:linear-gradient(135deg,#102c50,#2e7ca0)"></div>Modern<small>Blue / Mint</small></button>
+      <button class="tpl" data-template="royal"><div class="swatch" style="background:linear-gradient(135deg,#281d53,#a45cba)"></div>Royal<small>Violet</small></button>
+      <button class="tpl" data-template="green"><div class="swatch" style="background:linear-gradient(135deg,#123f39,#52b98a)"></div>Eco<small>Green</small></button>
+     </div>
+    </div>
+
+    <div class="section">
+     <div class="sectitle">School information <span class="kicker">01</span></div>
+     <div class="field"><label for="school">School / College name</label><input id="school" maxlength="65" value="YOUR SCHOOL / COLLEGE"></div>
+     <div class="field"><label for="address">Address / tagline</label><input id="address" maxlength="90" value="Learning today, leading tomorrow"></div>
+     <div class="field"><label for="academic">Academic year</label><input id="academic" maxlength="30" value="2026 – 2027"></div>
+     <div class="uploads">
+      <div class="uploadbox"><div class="symbol">▦</div><strong>Student photo</strong><input id="photo" type="file" accept="image/jpeg,image/png,image/webp"></div>
+      <div class="uploadbox"><div class="symbol">✦</div><strong>School logo</strong><input id="logoFile" type="file" accept="image/jpeg,image/png,image/webp"></div>
+     </div>
+    </div>
+
+    <div class="section">
+     <div class="sectitle">Student details <span class="kicker">02</span></div>
+     <div class="field"><label for="name">Full name</label><input id="name" maxlength="55" value="STUDENT NAME"></div>
+     <div class="grid2">
+      <div class="field"><label for="roll">Roll number</label><input id="roll" maxlength="20" value="024"></div>
+      <div class="field"><label for="studentId">Student ID</label><input id="studentId" maxlength="25" value="STU-2026-024"></div>
+     </div>
+     <div class="grid2">
+      <div class="field"><label for="className">Class / Grade</label><input id="className" maxlength="20" value="Class 12"></div>
+      <div class="field"><label for="sectionName">Section</label><input id="sectionName" maxlength="10" value="A"></div>
+     </div>
+     <div class="grid2">
+      <div class="field"><label for="blood">Blood group</label><select id="blood"><option>Not provided</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+      <div class="field"><label for="phone">Contact number</label><input id="phone" maxlength="20" placeholder="Optional"></div>
+     </div>
+     <div class="field"><label for="valid">Valid until</label><input id="valid" type="date"></div>
+    </div>
+
+    <div class="section">
+     <div class="sectitle">Back-side details <span class="kicker">03</span></div>
+     <div class="field"><label for="guardian">Parent / Guardian</label><input id="guardian" maxlength="55" placeholder="Parent or guardian name"></div>
+     <div class="field"><label for="emergency">Emergency contact</label><input id="emergency" maxlength="25" placeholder="Optional phone number"></div>
+     <div class="field"><label for="extra">School rules / return address</label><textarea id="extra" maxlength="300" placeholder="If found, please return this card to the school office."></textarea></div>
+    </div>
+
+    <div class="section">
+     <div class="sectitle">Appearance & print <span class="kicker">04</span></div>
+     <div class="grid2">
+      <div class="field"><label for="primary">Main colour</label><input id="primary" type="color" value="#123b62"></div>
+      <div class="field"><label for="accent">Accent colour</label><input id="accent" type="color" value="#68ebc9"></div>
+     </div>
+     <div class="field"><label for="size">Card dimensions</label><select id="size"><option value="cr80">Standard CR80 · 85.6 × 54 mm</option><option value="custom">Custom dimensions</option></select></div>
+     <div class="grid2">
+      <div class="field"><label for="widthMm">Width (mm)</label><input id="widthMm" type="number" min="30" max="150" step="0.1" value="85.6"></div>
+      <div class="field"><label for="heightMm">Height (mm)</label><input id="heightMm" type="number" min="30" max="150" step="0.1" value="54"></div>
+     </div>
+     <div class="field"><label for="dpi">Export resolution</label><select id="dpi"><option value="150">150 DPI</option><option value="200">200 DPI</option><option value="300" selected>300 DPI · Print quality</option></select></div>
+     <label style="display:flex;align-items:center;gap:8px;margin-bottom:11px"><input id="showYear" type="checkbox" checked> Show academic year</label>
+     <label style="display:flex;align-items:center;gap:8px"><input id="showId" type="checkbox" checked> Show student ID</label>
+     <button class="btn full" id="reset" style="margin-top:13px">↺ Reset design</button>
+    </div>
+   </div>
+  </aside>
+
+  <section class="panel">
+   <div class="panelhead"><h2>Live card preview</h2><span class="kicker">02 / DESIGN CANVAS</span></div>
+   <div class="pad">
+    <div class="topbar">
+     <div><h2 id="viewTitle">Front side</h2><div style="font-size:10px;color:var(--muted);margin-top:5px">Updates as you edit</div></div>
+     <div class="tabs"><button class="tab active" id="frontTab">Front</button><button class="tab" id="backTab">Back</button></div>
+    </div>
+    <div class="stage">
+     <canvas id="cardCanvas" width="1011" height="638"></canvas>
+    </div>
+    <div class="stats">
+     <div class="stat"><small>CARD SIZE</small><strong id="sizeStat">85.6 × 54 mm</strong></div>
+     <div class="stat"><small>RESOLUTION</small><strong id="dpiStat">300 DPI</strong></div>
+     <div class="stat"><small>PHOTO</small><strong id="photoStat">Placeholder</strong></div>
+     <div class="stat"><small>SIDE</small><strong id="sideStat">Front</strong></div>
+    </div>
+    <div class="actions">
+     <button class="btn primary" id="download">↓ Download PNG</button>
+     <button class="btn gold" id="print">⎙ Print / PDF</button>
+     <button class="btn" id="both">Export front + back</button>
+    </div>
+    <div class="status" id="status" aria-live="polite">Edit the fields to customise your card.</div>
+    <div class="note">This tool creates a visual student ID template. Confirm all details with the school before use. A generated card is not proof of enrolment or an official credential. The photo and logo are processed in your browser and are not intentionally uploaded to a server.</div>
+   </div>
+  </section>
+ </div>
+</main>
+
+<footer>Kisan Seva Tools · Student ID Card Maker Pro<br>Design · Preview · Export · Print</footer>
+<div class="toast" id="toast"></div>
+
+<script>
 (function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+"use strict";
+const $=id=>document.getElementById(id);
+const canvas=$("cardCanvas"),ctx=canvas.getContext("2d");
+let side="front",template="modern",studentPhoto=null,schoolLogo=null,toastTimer=null;
+const defaultPrimary="#123b62",defaultAccent="#68ebc9";
+const themes={
+ modern:{p:"#123b62",a:"#68ebc9"},
+ royal:{p:"#38235e",a:"#e2a8ff"},
+ green:{p:"#145342",a:"#8ee6b5"}
+};
+function toast(s){
+ const t=$("toast");t.textContent=s;t.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2500);
+}
+function text(id){return $(id).value.trim();}
+function fitText(value,x,y,maxW,maxSize,minSize,color,weight,align){
+ value=String(value||"");
+ let size=maxSize;
+ ctx.textAlign=align||"left";
+ ctx.textBaseline="middle";
+ while(size>minSize){
+  ctx.font=weight+" "+size+"px Arial";
+  if(ctx.measureText(value).width<=maxW)break;
+  size-=1;
+ }
+ ctx.font=weight+" "+Math.max(minSize,size)+"px Arial";
+ ctx.fillStyle=color;
+ ctx.fillText(value,x,y,maxW);
+}
+function roundRect(c,x,y,w,h,r){
+ c.beginPath();c.roundRect(x,y,w,h,r);
+}
+function drawImageCover(img,x,y,w,h,contain){
+ const ir=img.width/img.height,fr=w/h;
+ let dx=x,dy=y,dw=w,dh=h;
+ if(contain){
+  if(ir>fr){dh=w/ir;dy=y+(h-dh)/2;}
+  else{dw=h*ir;dx=x+(w-dw)/2;}
+ }else{
+  if(ir>fr){dw=h*ir;dx=x-(dw-w)/2;}
+  else{dh=w/ir;dy=y-(dh-h)/2;}
+ }
+ ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
+ ctx.drawImage(img,dx,dy,dw,dh);ctx.restore();
+}
+function imageCircle(img,cx,cy,r){
+ ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
+ drawImageCover(img,cx-r,cy-r,2*r,2*r,true);ctx.restore();
+ ctx.strokeStyle="#ffffff";ctx.lineWidth=6;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
+}
+function roundedPhoto(img,x,y,w,h,r){
+ ctx.save();roundRect(ctx,x,y,w,h,r);ctx.clip();
+ if(img)drawImageCover(img,x,y,w,h,false);
+ else{
+  ctx.fillStyle="#e4edf5";ctx.fillRect(x,y,w,h);
+  ctx.fillStyle="#8da4b9";ctx.beginPath();ctx.arc(x+w/2,y+h*.32,w*.15,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.ellipse(x+w/2,y+h*.85,w*.3,h*.3,0,Math.PI,Math.PI*2);ctx.fill();
+  ctx.font="bold 18px Arial";ctx.textAlign="center";ctx.fillStyle="#425b75";ctx.fillText("PHOTO",x+w/2,y+h-16);
+ }
+ ctx.restore();
+}
+function fitSchoolLogo(x,y,size){
+ if(schoolLogo){
+  ctx.save();ctx.beginPath();ctx.arc(x,y,size/2,0,Math.PI*2);ctx.clip();
+  drawImageCover(schoolLogo,x-size/2,y-size/2,size,size,true);ctx.restore();
+  ctx.strokeStyle="#ffffff99";ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,size/2,0,Math.PI*2);ctx.stroke();
+ }else{
+  ctx.fillStyle="#ffffff18";ctx.beginPath();ctx.arc(x,y,size/2,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle="#ffffff99";ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,size/2,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle="#fff";ctx.font="bold "+(size*.35)+"px Arial";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("S",x,y);
+ }
+}
+function drawFront(W,H){
+ const p=$("primary").value,a=$("accent").value;
+ ctx.fillStyle="#f7f9fc";ctx.fillRect(0,0,W,H);
+ const head=Math.round(H*.25);
+ const grad=ctx.createLinearGradient(0,0,W,head+70);grad.addColorStop(0,p);grad.addColorStop(1,template==="royal"?"#7652a6":template==="green"?"#36856b":"#246f8b");
+ ctx.fillStyle=grad;ctx.fillRect(0,0,W,head);
+ // Decorative accent strip and shapes
+ ctx.fillStyle=a;ctx.fillRect(0,head-9,W,9);
+ ctx.globalAlpha=.12;ctx.fillStyle="#fff";
+ ctx.beginPath();ctx.arc(W*.96,H*.04,H*.3,0,Math.PI*2);ctx.fill();
+ ctx.beginPath();ctx.arc(W*.8,H*.22,H*.19,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+ const logoSize=H*.15;
+ fitSchoolLogo(W*.105,head*.49,logoSize);
+ const school=text("school")||"YOUR SCHOOL / COLLEGE";
+ fitText(school,W*.19,head*.36,W*.75,Math.round(H*.060),Math.round(H*.025),"#ffffff","bold","left");
+ fitText(text("address"),W*.19,head*.68,W*.73,Math.round(H*.026),Math.round(H*.014),"#dce9f6","normal","left");
+ if($("showYear").checked&&text("academic")){
+  ctx.fillStyle="#ffffff20";roundRect(ctx,W*.72,head*.76,W*.23,H*.13,12);ctx.fill();
+  fitText(text("academic"),W*.835,head*.825,W*.21,Math.round(H*.025),Math.round(H*.014),"#ffffff","bold","center");
+ }
+ const photoX=W*.065,photoY=H*.34,photoW=W*.31,photoH=H*.48;
+ roundedPhoto(studentPhoto,photoX,photoY,photoW,photoH,18);
+ // Name and details
+ const x=W*.42,max=W*.52;
+ fitText("STUDENT",x,H*.355,max,H*.023,H*.015,p,"bold");
+ fitText(text("name")||"STUDENT NAME",x,H*.405,max,H*.052,H*.027,"#14283e","bold");
+ ctx.fillStyle=a;ctx.fillRect(x,H*.45,W*.14,6);
+ const line1=H*.52,line2=H*.605,line3=H*.69,line4=H*.775;
+ function detail(label,value,y){
+  fitText(label.toUpperCase(),x,y,max*.38,H*.021,H*.013,"#77889c","bold");
+  fitText(value||"—",x+max*.39,y,max*.60,H*.028,H*.014,"#192d44","bold");
+ }
+ detail("Class / Sec",text("className")+(text("sectionName")?" / "+text("sectionName"):""),line1);
+ detail("Roll No.",text("roll"),line2);
+ if($("showId").checked)detail("Student ID",text("studentId"),line3);
+ detail("Blood Group",text("blood")==="Not provided"?"—":text("blood"),line4);
+ ctx.fillStyle=p;ctx.fillRect(0,H*.89,W,H*.11);
+ fitText("STUDENT IDENTITY CARD",W*.05,H*.945,W*.55,H*.027,H*.015,"#ffffff","bold");
+ if(text("valid"))fitText("VALID TO "+text("valid"),W*.95,H*.945,W*.37,H*.022,H*.013,"#ffffff","bold","right");
+}
+function drawBack(W,H){
+ const p=$("primary").value,a=$("accent").value;
+ ctx.fillStyle="#f8fafc";ctx.fillRect(0,0,W,H);
+ ctx.fillStyle=p;ctx.fillRect(0,0,W,H*.20);
+ ctx.fillStyle=a;ctx.fillRect(0,H*.20,W,8);
+ fitSchoolLogo(W*.11,H*.10,H*.12);
+ fitText(text("school")||"YOUR SCHOOL / COLLEGE",W*.21,H*.085,W*.73,H*.048,H*.022,"#ffffff","bold");
+ fitText("STUDENT CARD · REVERSE SIDE",W*.21,H*.145,W*.73,H*.023,H*.014,"#e0eaf5","normal");
+ const x=W*.08,y=H*.29;
+ const fields=[
+  ["STUDENT NAME",text("name")||"—"],
+  ["PARENT / GUARDIAN",text("guardian")||"—"],
+  ["EMERGENCY CONTACT",text("emergency")||"—"],
+  ["SCHOOL CONTACT",text("phone")||"—"]
+ ];
+ let yy=y;
+ fields.forEach((f,i)=>{
+  fitText(f[0],x,yy,W*.84,H*.023,H*.014,"#72839a","bold");
+  fitText(f[1],x,yy+H*.045,W*.84,H*.034,H*.017,"#192d44","bold");
+  yy+=H*.125;
+ });
+ const boxY=H*.80,boxH=H*.115;
+ ctx.fillStyle="#eaf0f6";roundRect(ctx,x,boxY,W*.84,boxH,12);ctx.fill();
+ const extra=text("extra")||"If found, please return this card to the school office.";
+ ctx.save();ctx.beginPath();ctx.rect(x+12,boxY+5,W*.84-24,boxH-10);ctx.clip();
+ fitText(extra,x+15,boxY+boxH*.5,W*.84-30,H*.023,H*.013,"#31465e","normal");
+ ctx.restore();
+ ctx.fillStyle=p;ctx.fillRect(0,H*.95,W,H*.05);
+}
+function render(){
+ const dpi=Math.max(72,Math.min(300,Number($("dpi").value)||300));
+ const w=Math.max(30,Math.min(150,Number($("widthMm").value)||85.6));
+ const h=Math.max(30,Math.min(150,Number($("heightMm").value)||54));
+ const W=Math.round(w/25.4*dpi),H=Math.round(h/25.4*dpi);
+ canvas.width=W;canvas.height=H;
+ if(side==="front")drawFront(W,H);else drawBack(W,H);
+ $("viewTitle").textContent=side==="front"?"Front side design":"Back side design";
+ $("sizeStat").textContent=w+" × "+h+" mm";
+ $("dpiStat").textContent=dpi+" DPI";
+ $("photoStat").textContent=studentPhoto?"Uploaded":"Placeholder";
+ $("sideStat").textContent=side==="front"?"Front":"Back";
+ $("status").textContent="Live preview · "+W+" × "+H+" pixels · "+(side==="front"?"Front":"Back")+" side.";
+}
+function loadImage(file,callback){
+ if(!file)return;
+ if(!/^image\/(jpeg|png|webp)$/.test(file.type)||file.size>15*1024*1024){
+  toast("Use a JPG, PNG or WebP image under 15 MB.");return;
+ }
+ const url=URL.createObjectURL(file),img=new Image();
+ img.onload=()=>{
+  callback({image:img,url,name:file.name});render();toast("Image loaded.");
+ };
+ img.onerror=()=>{URL.revokeObjectURL(url);toast("Could not open that image.");};
+ img.src=url;
+}
+function download(sideName){
+ const url=canvas.toDataURL("image/png"),a=document.createElement("a");
+ a.href=url;a.download="KisanSeva-Student-ID-"+sideName+".png";
+ document.body.append(a);a.click();a.remove();toast("PNG download started.");
+}
+function printCard(){
+ const url=canvas.toDataURL("image/png");
+ const w=Number($("widthMm").value)||85.6,h=Number($("heightMm").value)||54;
+ const win=window.open("","_blank");
+ if(!win){toast("Allow pop-ups to print or save PDF.");return;}
+ win.document.open();
+ win.document.write("<!doctype html><html><head><meta charset='utf-8'><title>Student ID Card</title><style>@page{size:"+w+"mm "+h+"mm;margin:0}html,body{margin:0;padding:0;width:100%;height:100%}img{display:block;width:100%;height:100%;object-fit:fill}@media screen{body{display:flex;align-items:center;justify-content:center}img{width:auto;max-width:100%;height:auto;max-height:90vh}}</style></head><body><img src='"+url+"' alt='Student ID card'></body></html>");
+ win.document.close();win.onload=()=>win.setTimeout(()=>win.print(),300);
+}
+function selectSide(s){
+ side=s;
+ $("frontTab").classList.toggle("active",s==="front");
+ $("backTab").classList.toggle("active",s==="back");
+ render();
+}
+document.querySelectorAll("[data-template]").forEach(b=>b.addEventListener("click",()=>{
+ template=b.dataset.template;
+ document.querySelectorAll("[data-template]").forEach(x=>x.classList.toggle("active",x===b));
+ $("primary").value=themes[template].p;$("accent").value=themes[template].a;render();
+}));
+const fields=["school","address","academic","name","roll","studentId","className","sectionName","blood","phone","valid","guardian","emergency","extra","primary","accent","dpi","showYear","showId","widthMm","heightMm"];
+fields.forEach(id=>{
+ $(id).addEventListener("input",render);$(id).addEventListener("change",render);
+});
+$("photo").addEventListener("change",e=>loadImage(e.target.files[0],o=>{
+ if(studentPhoto)URL.revokeObjectURL(studentPhoto.url);studentPhoto=o;
+}));
+$("logoFile").addEventListener("change",e=>loadImage(e.target.files[0],o=>{
+ if(schoolLogo)URL.revokeObjectURL(schoolLogo.url);schoolLogo=o;
+}));
+$("frontTab").addEventListener("click",()=>selectSide("front"));
+$("backTab").addEventListener("click",()=>selectSide("back"));
+$("size").addEventListener("change",()=>{
+ if($("size").value==="cr80"){$("widthMm").value=85.6;$("heightMm").value=54;}
+ render();
+});
+$("download").addEventListener("click",()=>download(side));
+$("print").addEventListener("click",printCard);
+$("both").addEventListener("click",()=>{
+ const old=side;
+ selectSide("front");download("front");
+ setTimeout(()=>{selectSide("back");download("back");selectSide(old);},400);
+});
+$("reset").addEventListener("click",()=>{
+ $("school").value="YOUR SCHOOL / COLLEGE";$("address").value="Learning today, leading tomorrow";
+ $("academic").value="2026 – 2027";$("name").value="STUDENT NAME";$("roll").value="024";
+ $("studentId").value="STU-2026-024";$("className").value="Class 12";$("sectionName").value="A";
+ $("blood").selectedIndex=0;$("phone").value="";$("valid").value="";
+ $("guardian").value="";$("emergency").value="";$("extra").value="";
+ $("primary").value=defaultPrimary;$("accent").value=defaultAccent;
+ $("widthMm").value=85.6;$("heightMm").value=54;$("dpi").value="300";
+ $("showYear").checked=true;$("showId").checked=true;template="modern";
+ document.querySelectorAll("[data-template]").forEach(b=>b.classList.toggle("active",b.dataset.template==="modern"));
+ document.querySelectorAll("[data-template]").forEach(b=>{});
+ selectSide("front");toast("Design fields reset. Uploaded images retained.");
+});
+window.addEventListener("beforeunload",()=>{
+ if(studentPhoto)URL.revokeObjectURL(studentPhoto.url);
+ if(schoolLogo)URL.revokeObjectURL(schoolLogo.url);
+});
+render();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
