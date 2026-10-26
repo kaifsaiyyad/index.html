@@ -1,43 +1,457 @@
+
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>PDF Compressor | Kisan Seva Tools</title><style>
-:root{--green:#176b3a;--bg:#f4f7f5;--ink:#17221b;--line:#dce5df}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif}
-header{background:var(--green);color:white;padding:18px 16px}header a{color:white;text-decoration:none}
-main{max-width:900px;margin:22px auto;padding:0 14px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #173b2510}
-h1{font-size:24px;margin:0 0 7px}h2{font-size:18px;margin-top:0}.muted{color:#5c6d62;font-size:14px}
-label{display:block;font-weight:600;margin:12px 0 6px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px;border:1px solid #bac9bf;border-radius:8px;background:white}
-button,.btn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:11px 15px;cursor:pointer;text-decoration:none;display:inline-block;margin:8px 6px 0 0}
-button.secondary{background:#e5eee8;color:#153d25}button:disabled{opacity:.5}canvas,img.preview{max-width:100%;height:auto;border:1px dashed #b9c8bf;margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.note{background:#fff8df;padding:12px;border-radius:8px;border:1px solid #f0df9b}
-@media print{header,.noprint,button{display:none!important}body{background:white}.panel{box-shadow:none;border:0}}
-</style><style>
-/* Kisan Seva Tools Pass 6 responsive polish */
-:root{--green:#126b3b;--green2:#0b4e2a;--bg:#f3f7f4;--ink:#17231b;--line:#d8e5dc;--accent:#e8f5ec;--shadow:0 8px 28px rgba(16,72,38,.08)}
-html{scroll-behavior:smooth}body{background:linear-gradient(180deg,#eef7f0 0,#f7faf8 240px);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-header{background:linear-gradient(120deg,var(--green2),var(--green));box-shadow:0 3px 14px #123e2520;position:relative}header a{font-weight:700}main{width:min(100% - 20px,960px);margin:22px auto 40px}.panel{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,3vw,24px);margin:14px 0;box-shadow:var(--shadow);background:#fff}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;letter-spacing:-.025em}h2{font-size:clamp(17px,3vw,21px)}.muted{line-height:1.55}label{font-size:14px;color:#263d2e}input,select,textarea{min-height:44px;border-color:#c9d9ce;transition:border-color .15s,box-shadow .15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#21834a;box-shadow:0 0 0 3px #21834a20}button,.btn{min-height:44px;font-weight:700;box-shadow:0 2px 5px #0a3c1b12;transition:transform .12s,filter .12s}button:hover,.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}button.secondary{background:#e8f4eb;color:#15492a;border:1px solid #cce2d2}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.note{border-radius:12px;line-height:1.5}img,canvas,video{max-width:100%;height:auto;border-radius:10px}#out{overflow-wrap:anywhere}#out:empty{display:none}a{color:#176b3a}::selection{background:#c9efd4;color:#103a20}.kist-utility{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.kist-utility button{margin:0}.kist-foot{font-size:12px;color:#627469;margin-top:18px;padding:12px;border-top:1px solid #e2ebe5}
-@media(max-width:520px){main{width:calc(100% - 14px);margin:12px auto 26px}.panel{padding:14px;border-radius:13px}button,.btn{width:100%;margin:6px 0 0}header{padding:15px 13px}label{margin-top:14px}}
-@media print{body{background:#fff!important;color:#111}.panel{box-shadow:none!important;border:0!important;padding:8px!important;margin:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}input,select,textarea{border:0!important;box-shadow:none!important;padding:0!important;min-height:0}#out{display:block!important}}
-</style><style id="kst-professional-polish">
-:root{--green:#116b3b;--green2:#084d2a;--bg:#f3f8f4;--ink:#152b1e;--line:#d8e7dc;--accent:#e7f5eb;--shadow:0 10px 32px rgba(15,70,36,.09)}
-html{scroll-behavior:smooth}body{background:radial-gradient(ellipse at top,#eaf6ed 0,transparent 520px),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;color:var(--ink)}
-header{background:linear-gradient(115deg,#084d2a,#168148);padding:16px clamp(14px,3vw,26px);box-shadow:0 4px 18px rgba(6,65,31,.18)}header a{display:inline-flex;align-items:center;gap:8px;min-height:28px;letter-spacing:.01em}
-main{max-width:1000px;width:calc(100% - 28px);margin:24px auto 44px}.panel{border:1px solid #dce9df;border-radius:18px;padding:clamp(16px,3vw,26px);margin:16px 0;box-shadow:var(--shadow);background:rgba(255,255,255,.97)}
-h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;line-height:1.18;color:#123d25}h2{font-size:clamp(18px,3vw,23px);letter-spacing:-.02em;color:#173e28}p{line-height:1.65}.muted{font-size:13px;color:#607366}
-label{font-size:14px;font-weight:700;color:#274b34;margin:15px 0 7px}input,select,textarea{width:100%;min-height:46px;border:1px solid #cbdccf;border-radius:11px;padding:12px 13px;background:#fff;color:#17291d;font-size:16px;transition:border-color .15s,box-shadow .15s}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:none;border-color:#24864b;box-shadow:0 0 0 4px rgba(36,134,75,.13)}
-button,.btn{min-height:44px;border:1px solid #116b3b;background:linear-gradient(135deg,#167745,#0d5b31);color:#fff;border-radius:11px;padding:11px 16px;font-weight:750;box-shadow:0 3px 9px rgba(15,91,49,.14);transition:transform .15s,box-shadow .15s,filter .15s}button:hover,.btn:hover{filter:brightness(1.04);box-shadow:0 5px 14px rgba(15,91,49,.18);transform:translateY(-1px)}button.secondary{background:#eaf5ed;color:#14552f;border-color:#c9e1d0;box-shadow:none}button:focus-visible,a:focus-visible{outline:3px solid #85c89b;outline-offset:3px}
-.grid{gap:16px}.note{background:#fff9e7;border:1px solid #f0dfa5;border-radius:12px;padding:14px}.kist-utility{gap:10px}.kist-foot{border-top:1px solid #e1ece4;color:#6b7b70;line-height:1.55;padding:14px 4px}#out{overflow-wrap:anywhere}img,canvas,video{max-width:100%;height:auto;border-radius:12px}::selection{background:#c8efd3;color:#103b21}
-@media(max-width:600px){main{width:calc(100% - 18px);margin:12px auto 28px}.panel{padding:16px;margin:11px 0;border-radius:15px}header{padding:13px 12px}h1{font-size:25px}button,.btn{margin:7px 0 0;max-width:100%}.grid{grid-template-columns:minmax(0,1fr)}.kist-utility button{flex:1 1 130px}}
-@media(min-width:601px){.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{body{background:white!important}.panel{box-shadow:none!important;border:0!important}header,.noprint,.kist-utility,button,.btn{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}}
-</style></head><body><header><a href="../Home.html">← Kisan Seva Tools</a></header><main><h1>PDF Size Helper</h1><p>This browser-only page does not claim to compress an existing PDF unless a supported compression engine is loaded. It can show the file size and offer a print-to-PDF workflow for eligible documents.</p><label for="file">Choose PDF</label><input accept="application/pdf,.pdf" id="file" type="file"/><p aria-live="polite" id="status" role="status">Choose a PDF to inspect its size.</p><p class="muted">For true compression, images inside the PDF must be re-encoded or a compression engine must be used. Re-saving a PDF alone may not reduce its size.</p></main><script>
-(function(){
- const host=document.querySelector('main'); if(!host)return;
- const first=host.querySelector('h1');
- const bar=document.createElement('div');bar.className='kist-utility noprint';bar.setAttribute('aria-label','Tool actions');
- const clear=document.createElement('button');clear.type='button';clear.className='secondary';clear.textContent='Clear form';clear.addEventListener('click',function(){if(!confirm('Clear all entered information?'))return;host.querySelectorAll('input,textarea,select').forEach(function(el){if(el.type==='checkbox'||el.type==='radio')el.checked=false;else if(el.type==='file')el.value='';else if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});host.querySelectorAll('#out,[id*=preview i],[class*=preview i]').forEach(function(el){if(el.tagName==='CANVAS'){try{el.getContext('2d').clearRect(0,0,el.width,el.height)}catch(e){}}else if(el.id==='out')el.innerHTML='';});});
- const print=document.createElement('button');print.type='button';print.textContent='Print / Save PDF';print.addEventListener('click',function(){window.print()});
- bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
- const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080914">
+<title>PDF Compressor X | Kisan Seva Tools</title>
+<meta name="description" content="Compress PDF documents in your browser using adjustable rendering quality and compare the output file size.">
+<style>
+:root{
+ --bg:#080914;--panel:#12162b;--line:#292e4c;--text:#f4f6ff;
+ --muted:#99a2c0;--cyan:#61ffe1;--blue:#8493ff;--purple:#d18cff;
+ --red:#ff879e;--green:#85f6bf;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;color:var(--text);
+ font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+ background:radial-gradient(ellipse at 10% 0%,#6555ff28,transparent 34%),
+ radial-gradient(ellipse at 90% 15%,#00f5d51a,transparent 32%),var(--bg)
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+header{position:sticky;top:0;z-index:5;background:#080914dc;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{max-width:1200px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:.3px}
+.logo{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;color:#07131a;background:linear-gradient(135deg,var(--cyan),var(--blue));box-shadow:0 0 28px #61ffe125;font-size:20px}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.6px;margin-top:3px}
+.pill{border:1px solid var(--line);border-radius:30px;padding:8px 11px;font-size:11px;color:#d3dcfa}
+.pill span{color:var(--cyan)}
+main{max-width:1200px;margin:auto;padding:38px 22px 55px}
+.kicker{color:var(--cyan);font-size:11px;letter-spacing:2.4px;font-weight:850;text-transform:uppercase}
+h1{font-size:clamp(35px,5vw,58px);letter-spacing:-2.5px;line-height:1.04;margin:14px 0}
+.grad{background:linear-gradient(100deg,#fff,var(--cyan),var(--purple));color:transparent;background-clip:text;-webkit-background-clip:text}
+.intro{max-width:720px;color:var(--muted);font-size:14px;line-height:1.8}
+.layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(285px,.8fr);gap:19px;margin-top:28px;align-items:start}
+.panel{min-width:0;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#151a32f5,#0d1124f5);box-shadow:0 24px 70px #0003;overflow:hidden}
+.head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:20px;border-bottom:1px solid var(--line)}
+.head h2{font-size:15px;margin:0}
+.muted{font-size:11px;line-height:1.65;color:var(--muted);margin-top:5px}
+.badge{font-size:10px;color:var(--cyan);border:1px solid #61ffe12c;background:#61ffe10b;border-radius:9px;padding:7px 9px;white-space:nowrap}
+.body{padding:20px}
+.drop{min-height:195px;border:1px dashed #777eac;border-radius:18px;background:linear-gradient(140deg,#8b7bff0d,#61ffe10b);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:23px;transition:.2s}
+.drop.over{border-color:var(--cyan);background:#61ffe119;transform:scale(1.005)}
+.upicon{width:54px;height:54px;display:grid;place-items:center;border-radius:17px;color:var(--cyan);font-size:26px;background:#61ffe112;border:1px solid #61ffe12b;margin-bottom:12px}
+.drop strong{font-size:15px}
+.drop p{font-size:12px;line-height:1.7;color:var(--muted);margin:8px 0 15px}
+.btn{border:1px solid var(--line);border-radius:11px;padding:10px 13px;background:#ffffff08;color:var(--text);font-size:12px;font-weight:750;transition:.2s}
+.btn:hover{border-color:#61ffe175;transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn.primary{background:linear-gradient(105deg,var(--cyan),#a3ffe9);color:#06131a;border:0;box-shadow:0 8px 24px #61ffe21c}
+.btn.small{font-size:11px;padding:7px 9px;border-radius:9px}
+.btn.danger{color:#ff9eb2;border-color:#ff879e38}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:19px 0 12px}
+.row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.file{display:grid;grid-template-columns:49px minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:15px;background:#070b1a85}
+.pdficon{width:49px;height:56px;display:grid;place-items:center;border:1px solid #ff879e38;border-radius:11px;color:#ff9eb5;background:#ff879e0c;font-size:11px;font-weight:900}
+.filename{font-size:13px;font-weight:750;overflow-wrap:anywhere}
+.filemeta{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6}
+.empty{padding:27px 14px;text-align:center;border:1px solid var(--line);border-radius:14px;color:var(--muted);font-size:12px;line-height:1.8}
+.group{padding-bottom:17px;border-bottom:1px solid var(--line)}
+.group:last-child{border:0;padding:0}
+.group h3{font-size:12px;letter-spacing:.8px;margin:0 0 12px}
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:11px;color:var(--muted);margin-bottom:7px}
+select,input[type=text]{width:100%;min-width:0;border:1px solid var(--line);border-radius:11px;background:#080c1d;color:var(--text);padding:11px 12px;font-size:13px}
+select option{background:#10152a}
+.rangehead{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.rangehead output{font-size:11px;color:var(--cyan)}
+input[type=range]{width:100%;accent-color:var(--cyan)}
+.check{display:flex;align-items:center;gap:9px;font-size:12px;line-height:1.6;color:#dce4ff}
+.check input{accent-color:var(--cyan)}
+.notice{padding:11px 12px;border:1px solid #8493ff36;background:#8493ff0b;border-radius:12px;font-size:11px;color:#c8d2ff;line-height:1.7}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.metric{padding:12px;border:1px solid var(--line);background:#070a197a;border-radius:13px;min-width:0}
+.metric span{font-size:10px;color:var(--muted);display:block}
+.metric strong{font-size:18px;display:block;margin-top:7px;overflow-wrap:anywhere}
+.metric small{font-size:10px;color:var(--muted);display:block;margin-top:4px}
+.saving{color:var(--green)!important}
+.generate{width:100%;padding:15px;font-size:14px}
+.progress{display:none;height:5px;background:#ffffff0c;border-radius:8px;overflow:hidden;margin-top:12px}
+.progress.show{display:block}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--purple));transition:width .2s}
+.status{display:none;font-size:12px;line-height:1.7;padding:11px 12px;border-radius:11px;margin-top:12px;overflow-wrap:anywhere}
+.status.show{display:block}
+.status.error{color:#ffb5c4;border:1px solid #ff879e40;background:#ff879e0d}
+.status.success{color:#9effe2;border:1px solid #61ffe13a;background:#61ffe10c}
+.status.info{color:#cbd4ff;border:1px solid #8493ff40;background:#8493ff0c}
+.privacy{display:flex;gap:9px;color:var(--muted);font-size:11px;line-height:1.7;margin-top:13px}
+.privacy b{color:var(--cyan)}
+footer{max-width:1200px;margin:auto;padding:0 22px 28px;color:#7e88a8;font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:#bac7f5;text-decoration:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}}
+@media(max-width:520px){.nav{padding:12px 14px}.pill{font-size:10px}main{padding:27px 13px 42px}h1{letter-spacing:-1.5px}.head{padding:16px}.body{padding:14px}.file{grid-template-columns:43px minmax(0,1fr)}.pdficon{width:43px;height:51px}.fileactions{grid-column:2}footer{padding:0 14px 24px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+ <div class="nav">
+  <div class="brand"><div class="logo">K</div><div>KISAN SEVA TOOLS<small>FUTURE DOCUMENT LAB</small></div></div>
+  <div class="pill"><span>●</span> PDF COMPRESSOR / 027</div>
+ </div>
+</header>
+
+<main>
+ <section>
+  <div class="kicker">✦ Tool 027 / Smart file optimization</div>
+  <h1>Less file weight.<br><span class="grad">More digital freedom.</span></h1>
+  <p class="intro">Reduce a PDF's file size by rendering each page at your selected image quality. Compare the real input and output sizes before deciding whether the compressed document is right for you.</p>
+ </section>
+
+ <div class="layout">
+  <section class="panel">
+   <div class="head"><div><h2>01 / Input document</h2><div class="muted">Choose one PDF to optimize.</div></div><span class="badge">PDF IN</span></div>
+   <div class="body">
+    <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose or drop a PDF">
+     <div class="upicon">⇧</div>
+     <strong>Drop your PDF here</strong>
+     <p>One PDF · Maximum 30 MB<br>Text and pages will be rendered into images.</p>
+     <button type="button" class="btn primary" id="choose">＋ Select PDF</button>
+     <input type="file" id="fileInput" accept="application/pdf,.pdf" hidden>
+    </div>
+
+    <div class="toolbar">
+     <span class="muted">SOURCE FILE</span>
+     <button class="btn small danger" id="remove" type="button" disabled>Remove PDF</button>
+    </div>
+    <div id="fileArea"><div class="empty">No document selected.<br>Your PDF details will appear here.</div></div>
+    <div id="inputStatus" class="status" role="status" aria-live="polite"></div>
+
+    <div style="margin-top:18px" class="notice">
+     <strong>Important:</strong> This mode converts pages into JPG images inside a new PDF. Text may no longer be selectable or searchable, links and form fields are not preserved, and image quality may decrease. Keep your original PDF.
+    </div>
+   </div>
+  </section>
+
+  <aside class="panel">
+   <div class="head"><div><h2>02 / Compression engine</h2><div class="muted">Choose a balance between quality and size.</div></div><span class="badge">SMART MODE</span></div>
+   <div class="body">
+    <div style="display:flex;flex-direction:column;gap:18px">
+     <section class="group">
+      <h3>RENDER QUALITY</h3>
+      <div class="field">
+       <label for="preset">Optimization preset</label>
+       <select id="preset">
+        <option value="balanced" selected>Balanced — recommended</option>
+        <option value="small">Smaller file — lower detail</option>
+        <option value="quality">High quality — larger file</option>
+        <option value="custom">Custom settings</option>
+       </select>
+      </div>
+      <div class="field">
+       <div class="rangehead"><label for="scale">Render resolution</label><output id="scaleOut">1.25×</output></div>
+       <input id="scale" type="range" min="0.75" max="2" step="0.25" value="1.25">
+       <div class="muted">Higher resolution preserves more detail but usually increases file size.</div>
+      </div>
+      <div class="field">
+       <div class="rangehead"><label for="quality">JPG quality</label><output id="qualityOut">72%</output></div>
+       <input id="quality" type="range" min="35" max="95" step="5" value="72">
+      </div>
+     </section>
+
+     <section class="group">
+      <h3>OUTPUT IDENTITY</h3>
+      <div class="field">
+       <label for="filename">Output filename</label>
+       <input type="text" id="filename" maxlength="80" value="KisanSeva-Compressed" placeholder="My-Compressed-PDF">
+      </div>
+     </section>
+
+     <section class="group">
+      <h3>SIZE ANALYTICS</h3>
+      <div class="compare">
+       <div class="metric"><span>ORIGINAL SIZE</span><strong id="originalSize">—</strong><small id="originalDetail">Waiting for file</small></div>
+       <div class="metric"><span>NEW PDF SIZE</span><strong id="newSize">—</strong><small id="newDetail">Not generated</small></div>
+       <div class="metric"><span>SIZE CHANGE</span><strong id="saving">—</strong><small id="savingDetail">Actual comparison</small></div>
+       <div class="metric"><span>PAGE COUNT</span><strong id="pages">—</strong><small>Pages in document</small></div>
+      </div>
+     </section>
+
+     <section>
+      <button class="btn primary generate" id="compress" type="button" disabled>✦ Compress PDF</button>
+      <div class="progress" id="progress"><div class="bar" id="bar"></div></div>
+      <div class="status" id="compressStatus" role="status" aria-live="polite"></div>
+      <div class="privacy"><b>◆</b><span>Your PDF is processed in this browser, not uploaded to a Kisan Seva Tools server. Internet access is needed to load the PDF and PDF-generation libraries.</span></div>
+     </section>
+    </div>
+   </div>
+  </aside>
+ </div>
+</main>
+
+<footer><span>© Kisan Seva Tools · PDF Compressor X</span><span><a href="../Home.html">Back to all tools</a></span></footer>
+
+<script>
+(() => {
+ "use strict";
+ const $ = id => document.getElementById(id);
+ const MAX_BYTES = 30 * 1024 * 1024;
+ const MAX_PAGES = 60;
+ let sourceFile = null;
+ let pdfDoc = null;
+ let busy = false;
+ let outputUrl = null;
+ let pdfjsPromise = null;
+ let jspdfPromise = null;
+
+ function status(id,msg,type="info"){
+  $(id).textContent=msg;
+  $(id).className="status show "+type;
+ }
+ function hideStatus(id){$(id).textContent="";$(id).className="status"}
+ function fmt(n){
+  if(n===null||n===undefined||!Number.isFinite(n))return "—";
+  if(n<1024)return n+" B";
+  if(n<1048576)return (n/1024).toFixed(1)+" KB";
+  return (n/1048576).toFixed(2)+" MB";
+ }
+ function safeName(){
+  return ($("filename").value.trim().replace(/\.pdf$/i,"")
+   .replace(/[<>:"/\\|?*\x00-\x1f]/g,"_").replace(/\s+/g,"-").slice(0,80)
+   ||"KisanSeva-Compressed")+".pdf";
+ }
+ function clearOutput(){
+  if(outputUrl){URL.revokeObjectURL(outputUrl);outputUrl=null}
+  $("newSize").textContent="—";
+  $("newDetail").textContent="Not generated";
+  $("saving").textContent="—";
+  $("saving").className="";
+  $("savingDetail").textContent="Actual comparison";
+ }
+ function updateControls(){
+  $("compress").disabled=!pdfDoc||busy;
+  $("remove").disabled=!sourceFile||busy;
+  $("choose").disabled=busy;
+  $("pages").textContent=pdfDoc?pdfDoc.numPages:"—";
+  $("originalSize").textContent=sourceFile?fmt(sourceFile.size):"—";
+  $("originalDetail").textContent=sourceFile?"Input file":"Waiting for file";
+ }
+ function renderFile(){
+  if(!sourceFile){
+   $("fileArea").innerHTML='<div class="empty">No document selected.<br>Your PDF details will appear here.</div>';
+   return;
+  }
+  $("fileArea").innerHTML=`<div class="file">
+   <div class="pdficon">PDF</div>
+   <div><div class="filename">${escapeHTML(sourceFile.name)}</div>
+   <div class="filemeta">${fmt(sourceFile.size)} · ${pdfDoc?pdfDoc.numPages+" pages":"Reading PDF…"}</div></div>
+  </div>`;
+ }
+ function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ }
+ function loadScript(src,test){
+  if(test())return Promise.resolve();
+  return new Promise((resolve,reject)=>{
+   const script=document.createElement("script");
+   script.src=src;
+   script.onload=()=>test()?resolve():reject(new Error("A required library did not initialize."));
+   script.onerror=()=>reject(new Error("Could not load a required library. Check your internet connection."));
+   document.head.appendChild(script);
+  });
+ }
+ async function getPdfJs(){
+  if(pdfjsPromise)return pdfjsPromise;
+  pdfjsPromise=(async()=>{
+   await loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",()=>!!window.pdfjsLib);
+   window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+   return window.pdfjsLib;
+  })();
+  try{return await pdfjsPromise}catch(e){pdfjsPromise=null;throw e}
+ }
+ async function getJsPDF(){
+  if(jspdfPromise)return jspdfPromise;
+  jspdfPromise=(async()=>{
+   await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",()=>!!(window.jspdf&&window.jspdf.jsPDF));
+   return window.jspdf.jsPDF;
+  })();
+  try{return await jspdfPromise}catch(e){jspdfPromise=null;throw e}
+ }
+ async function chooseFile(file){
+  if(busy||!file)return;
+  hideStatus("inputStatus");hideStatus("compressStatus");clearOutput();
+  if(!(file.type==="application/pdf"||/\.pdf$/i.test(file.name))){
+   status("inputStatus","Please choose a PDF document.","error");return;
+  }
+  if(file.size===0){status("inputStatus","This file is empty.","error");return}
+  if(file.size>MAX_BYTES){status("inputStatus","Maximum file size is 30 MB. Try a smaller PDF.","error");return}
+  sourceFile=file;pdfDoc=null;renderFile();updateControls();
+  try{
+   status("inputStatus","Loading PDF and checking page count…","info");
+   const lib=await getPdfJs();
+   const bytes=await file.arrayBuffer();
+   const task=lib.getDocument({data:new Uint8Array(bytes)});
+   pdfDoc=await task.promise;
+   if(pdfDoc.numPages>MAX_PAGES){
+    pdfDoc.destroy();pdfDoc=null;
+    throw new Error("This tool supports up to "+MAX_PAGES+" pages per document. Split the PDF and try again.");
+   }
+   renderFile();updateControls();
+   status("inputStatus","PDF ready. Choose your compression settings and start.","success");
+  }catch(e){
+   sourceFile=null;pdfDoc=null;renderFile();updateControls();
+   status("inputStatus",e.message||"Could not read this PDF. It may be damaged or password-protected.","error");
+  }
+ }
+ $("choose").addEventListener("click",e=>{e.stopPropagation();if(!busy)$("fileInput").click()});
+ $("drop").addEventListener("click",e=>{if(!e.target.closest("button")&&!busy)$("fileInput").click()});
+ $("drop").addEventListener("keydown",e=>{
+  if((e.key==="Enter"||e.key===" ")&&e.target===$("drop")){e.preventDefault();if(!busy)$("fileInput").click()}
+ });
+ $("fileInput").addEventListener("change",e=>{chooseFile(e.target.files[0]);e.target.value=""});
+ ["dragenter","dragover"].forEach(ev=>$("drop").addEventListener(ev,e=>{
+  e.preventDefault();if(!busy)$("drop").classList.add("over");
+ }));
+ ["dragleave","drop"].forEach(ev=>$("drop").addEventListener(ev,e=>{
+  e.preventDefault();$("drop").classList.remove("over");
+ }));
+ $("drop").addEventListener("drop",e=>{if(!busy&&e.dataTransfer)chooseFile(e.dataTransfer.files[0])});
+ $("remove").addEventListener("click",()=>{
+  if(busy)return;
+  if(pdfDoc){try{pdfDoc.destroy()}catch{}}
+  pdfDoc=null;sourceFile=null;renderFile();updateControls();clearOutput();
+  hideStatus("inputStatus");hideStatus("compressStatus");
+ });
+
+ const presets={
+  balanced:{scale:1.25,quality:72},
+  small:{scale:0.9,quality:48},
+  quality:{scale:2,quality:90}
+ };
+ function setPreset(){
+  const p=presets[$("preset").value];
+  if(!p)return;
+  $("scale").value=p.scale;
+  $("quality").value=p.quality;
+  updateQualityLabels();
+ }
+ function updateQualityLabels(){
+  $("scaleOut").textContent=Number($("scale").value).toFixed(2).replace(/0$/,"")+"×";
+  $("qualityOut").textContent=$("quality").value+"%";
+ }
+ $("preset").addEventListener("change",()=>{
+  if($("preset").value!=="custom")setPreset();
+ });
+ ["scale","quality"].forEach(id=>$(id).addEventListener("input",()=>{
+  $("preset").value="custom";updateQualityLabels();
+ }));
+ function updateMetric(original,output){
+  $("newSize").textContent=fmt(output);
+  $("newDetail").textContent="Generated output";
+  const delta=original-output;
+  const pct=original>0?(delta/original)*100:0;
+  if(delta>0){
+   $("saving").textContent=pct.toFixed(1)+"% smaller";
+   $("saving").className="saving";
+   $("savingDetail").textContent=fmt(delta)+" saved";
+  }else if(delta<0){
+   $("saving").textContent=Math.abs(pct).toFixed(1)+"% larger";
+   $("saving").className="";
+   $("savingDetail").textContent=fmt(-delta)+" added";
+  }else{
+   $("saving").textContent="0%";
+   $("saving").className="";
+   $("savingDetail").textContent="Same file size";
+  }
+ }
+ async function compress(){
+  if(busy||!pdfDoc||!sourceFile)return;
+  hideStatus("compressStatus");clearOutput();
+  busy=true;updateControls();
+  $("progress").classList.add("show");$("bar").style.width="0%";
+  let newUrl=null;
+  try{
+   const PDFjs=await getPdfJs();
+   const jsPDF=await getJsPDF();
+   const originalSize=sourceFile.size;
+   const scale=Number($("scale").value);
+   const quality=Number($("quality").value)/100;
+   let output=null;
+   const count=pdfDoc.numPages;
+
+   for(let n=1;n<=count;n++){
+    status("compressStatus","Rendering page "+n+" of "+count+"…","info");
+    const page=await pdfDoc.getPage(n);
+    const originalViewport=page.getViewport({scale:1});
+    const viewport=page.getViewport({scale});
+    const canvas=document.createElement("canvas");
+    canvas.width=Math.ceil(viewport.width);
+    canvas.height=Math.ceil(viewport.height);
+
+    if(canvas.width*canvas.height>40000000){
+     canvas.width=1;canvas.height=1;
+     throw new Error("Page "+n+" is too large at this resolution. Choose a lower render resolution.");
+    }
+    const ctx=canvas.getContext("2d");
+    if(!ctx)throw new Error("Your browser cannot create an image canvas.");
+    ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);
+    await page.render({
+     canvasContext:ctx,viewport,background:"#ffffff"
+    }).promise;
+
+    const data=canvas.toDataURL("image/jpeg",quality);
+    const widthPt=originalViewport.width;
+    const heightPt=originalViewport.height;
+    if(!output){
+     output=new jsPDF({
+      orientation:widthPt>heightPt?"landscape":"portrait",
+      unit:"pt",format:[widthPt,heightPt],compress:true
+     });
+    }else{
+     output.addPage([widthPt,heightPt],widthPt>heightPt?"landscape":"portrait");
+    }
+    output.addImage(data,"JPEG",0,0,widthPt,heightPt,undefined,"FAST");
+    canvas.width=1;canvas.height=1;
+    $("bar").style.width=Math.round(n/count*85)+"%";
+    await new Promise(resolve=>setTimeout(resolve,0));
+   }
+
+   status("compressStatus","Building the optimized PDF…","info");
+   const blob=output.output("blob");
+   newUrl=URL.createObjectURL(blob);
+   updateMetric(originalSize,blob.size);
+   $("bar").style.width="100%";
+
+   const link=document.createElement("a");
+   link.href=newUrl;link.download=safeName();
+   document.body.appendChild(link);link.click();link.remove();
+   outputUrl=newUrl;newUrl=null;
+
+   if(blob.size<originalSize){
+    status("compressStatus","Compression complete. Actual reduction: "+((originalSize-blob.size)/originalSize*100).toFixed(1)+"%. Check your Downloads folder.","success");
+   }else{
+    status("compressStatus","PDF generated, but the output is not smaller than the original. This can happen when the source PDF is already optimized. Try the Smaller file preset if lower visual quality is acceptable.","info");
+   }
+  }catch(e){
+   if(newUrl)URL.revokeObjectURL(newUrl);
+   console.error(e);
+   status("compressStatus","Compression failed: "+(e.message||"Unknown error")+". Try fewer pages or a lower resolution.","error");
+  }finally{
+   busy=false;$("progress").classList.remove("show");updateControls();
+  }
+ }
+ $("compress").addEventListener("click",compress);
+ window.addEventListener("beforeunload",()=>{
+  if(outputUrl)URL.revokeObjectURL(outputUrl);
+ });
+ updateQualityLabels();
+ updateControls();
 })();
-</script><script>document.querySelector('#file').addEventListener('change',()=>{const f=document.querySelector('#file').files[0],s=document.querySelector('#status');if(!f){s.textContent='Choose a PDF to inspect its size.';return}if(f.type!=='application/pdf'&&!f.name.toLowerCase().endsWith('.pdf')){s.textContent='Please choose a PDF file.';return}s.textContent='File: '+f.name+' | Size: '+(f.size/1024).toFixed(1)+' KB ('+(f.size/1048576).toFixed(2)+' MB). This page inspected the size only; it has not compressed the file.'});</script></body></html>
+</script>
+</body>
+</html>
