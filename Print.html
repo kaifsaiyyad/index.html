@@ -1,527 +1,331 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#126b3b">
-<title>Indian Photo Studio Toolkit | Kisan Seva Tools</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#073d27">
+<title>Photo Studio Pro | Kisan Seva Tools</title>
 <style>
-:root{
-  --green:#126b3b;--deep:#073d27;--lime:#a7f3c0;
-  --bg:#f2f7f4;--ink:#14251b;--muted:#65766b;
-  --line:#dce8df;--white:#fff;--gold:#f5c451;
-}
+:root{--bg:#f1f6f2;--card:#fff;--green:#126b3b;--dark:#073d27;--mint:#b8f2ca;--ink:#17281e;--muted:#64766a;--line:#d9e6dc}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
-button,input,select{font:inherit}
-button{cursor:pointer}
-header{
-  color:white;background:radial-gradient(circle at 90% 0,#238853 0,transparent 35%),
-  linear-gradient(120deg,#073d27,#126b3b);
-  padding:22px 16px 25px;text-align:center;
-  border-bottom:4px solid #9ce8b7
-}
-.brand{font-size:12px;letter-spacing:2px;color:#b9f4cc;font-weight:800}
-header h1{font-size:clamp(24px,5vw,38px);margin:9px 0 6px}
-header p{margin:0;color:#e2f6e8;font-size:14px}
-.header-badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:15px}
-.pill{border:1px solid #ffffff45;background:#ffffff12;padding:7px 11px;
-  border-radius:30px;font-size:12px}
-main{max-width:1180px;margin:20px auto;padding:0 14px 35px}
-.back{display:inline-block;color:var(--green);font-weight:700;text-decoration:none;
-  padding:10px 13px;background:white;border:1px solid var(--line);border-radius:10px}
-.intro{margin:22px 0}
-.intro h2{margin:0 0 6px;font-size:24px}
-.intro p{color:var(--muted);margin:0;line-height:1.6}
-.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);
-  gap:17px;align-items:start}
-.panel{background:white;border:1px solid var(--line);border-radius:18px;
-  padding:18px;box-shadow:0 8px 28px #103f2010;min-width:0}
-.panel h3{margin:0 0 5px;font-size:18px}
-.sub{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 16px}
-.field{margin:13px 0}
-label{display:block;font-weight:700;font-size:13px;margin-bottom:7px}
-input[type=file],input[type=number],select{
-  width:100%;padding:11px;border:1px solid #cbdacf;border-radius:10px;
-  background:#fff;color:var(--ink);min-height:44px
-}
-input[type=color]{height:44px;width:100%;border:1px solid var(--line);
-  border-radius:10px;background:white;padding:4px}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px system-ui,Arial,sans-serif}
+header{padding:25px 16px;color:#fff;background:radial-gradient(circle at 90% 10%,#268953,transparent 35%),linear-gradient(125deg,#052e1d,#126b3b);border-bottom:4px solid var(--mint)}
+.brand{text-align:center;color:#c7f7d5;font-size:11px;letter-spacing:3px;font-weight:900}
+header h1{text-align:center;font-size:clamp(25px,5vw,38px);margin:10px 0}
+header p{text-align:center;color:#e1f5e7;margin:0}
+main{max-width:1200px;margin:22px auto;padding:0 14px 32px}
+a.back{display:inline-block;text-decoration:none;background:#fff;color:var(--green);padding:10px 14px;border:1px solid var(--line);border-radius:10px;font-weight:800}
+.intro{margin:22px 0}.intro h2{margin:0 0 5px}.intro p,.muted{color:var(--muted);line-height:1.6}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 26px #153d2010;min-width:0}
+.panel h3{margin:0 0 6px}.muted{font-size:13px;margin:0 0 15px}
+.section-title{font-size:12px;font-weight:900;letter-spacing:1px;color:var(--green);margin:22px 0 10px}
+label{display:block;font-size:12px;font-weight:800;margin:12px 0 6px}
+input,select,button{font:inherit}
+input[type=file],input[type=number],select{width:100%;min-height:43px;padding:10px;border:1px solid #c9d8cc;border-radius:10px;background:white;color:var(--ink)}
 input[type=range]{width:100%;accent-color:var(--green)}
-.drop{border:2px dashed #a8cdb4;background:#f5fbf6;border-radius:15px;
-  padding:18px;text-align:center}
-.drop .emoji{font-size:35px}
-.drop p{font-size:13px;color:var(--muted);margin:5px 0 12px}
-.btn{border:0;border-radius:10px;padding:12px 15px;font-weight:800;
-  background:var(--green);color:white;display:inline-flex;align-items:center;
-  justify-content:center;gap:7px;min-height:43px}
-.btn:hover{filter:brightness(.94)}
-.btn.secondary{background:#e8f4eb;color:var(--deep);border:1px solid #cce4d2}
-.btn.dark{background:var(--deep)}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.checkline{display:flex;align-items:center;gap:8px;font-size:13px;
-  margin:12px 0;color:#354b3c}
-.checkline input{accent-color:var(--green)}
-.preview-wrap{background:#edf2ee;border:1px solid var(--line);border-radius:14px;
-  padding:14px;min-height:280px;display:flex;align-items:center;
-  justify-content:center;overflow:auto}
-canvas{display:block;max-width:100%;height:auto;background:white;
-  box-shadow:0 4px 20px #14251b20}
-.placeholder{text-align:center;color:var(--muted);font-size:13px;max-width:230px}
-.placeholder strong{display:block;font-size:42px;margin-bottom:8px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.stat{background:#f3f8f4;border:1px solid var(--line);padding:10px;
-  border-radius:11px;min-width:0}
-.stat small{display:block;color:var(--muted);font-size:11px}
-.stat b{font-size:14px;overflow-wrap:anywhere}
-.notice{background:#fff8df;border-left:4px solid #e3b52b;border-radius:8px;
-  padding:12px;font-size:12px;line-height:1.6;margin-top:15px}
-.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
-.tool-card{background:white;border:1px solid var(--line);border-radius:14px;
-  padding:13px 8px;text-align:center;cursor:pointer;transition:.18s}
-.tool-card:hover,.tool-card.active{border-color:#31975a;
-  box-shadow:0 0 0 2px #bce9c9;background:#f4fbf6}
-.tool-card .ico{font-size:25px}
-.tool-card strong{display:block;font-size:12px;margin:7px 0 4px}
-.tool-card small{color:var(--muted);font-size:10px;line-height:1.4}
-.price{color:var(--green);font-size:11px;font-weight:900;margin-top:6px}
-hr{border:0;border-top:1px solid var(--line);margin:18px 0}
-footer{text-align:center;background:var(--deep);color:#d7f1df;padding:18px;
-  font-size:12px}
-.hidden{display:none!important}
-#message{font-size:13px;margin-top:10px;line-height:1.5}
-.ok{color:#087b3d}.error{color:#b42318}
-@media(max-width:800px){
-  .layout{grid-template-columns:1fr}
-  .tool-grid{grid-template-columns:repeat(2,1fr)}
-  .preview-wrap{min-height:220px}
-}
-@media(max-width:420px){
-  main{padding-left:10px;padding-right:10px}
-  .panel{padding:13px}
-  .two{gap:8px}
-  .tool-grid{gap:8px}
-  .stats{gap:5px}
-  .stat{padding:8px}
-}
-@media print{
-  header,main,.back,footer{display:none!important}
-  body{background:white}
-  #printArea{display:block!important}
-  #printArea canvas{max-width:none;box-shadow:none}
-}
+input[type=color]{width:100%;height:42px;padding:3px;background:white;border:1px solid var(--line);border-radius:9px}
+input[type=checkbox]{accent-color:var(--green)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.upload{border:2px dashed #9cc9a9;border-radius:14px;background:#f4fbf6;padding:15px}
+.btn{border:0;border-radius:10px;padding:12px 14px;background:var(--green);color:white;font-weight:800;min-height:43px}
+.btn.secondary{background:#e8f4eb;color:var(--dark);border:1px solid #c9e3d0}
+.btn.dark{background:var(--dark)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.choice{border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px 5px;text-align:center;cursor:pointer;min-width:0}
+.choice strong{display:block;font-size:12px;margin-top:5px}
+.choice small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.choice.active{border:2px solid var(--green);background:#f0faf3;box-shadow:0 0 0 2px #d4efdc}
+.preview{background:#e8eee9;border:1px solid var(--line);border-radius:14px;min-height:270px;padding:12px;display:flex;align-items:center;justify-content:center;overflow:auto}
+canvas{display:block;max-width:100%;height:auto;background:white;box-shadow:0 4px 18px #0002}
+.placeholder{text-align:center;color:var(--muted);max-width:220px}
+.placeholder b{font-size:42px;display:block}
+.statgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:12px}
+.stat{padding:10px;background:#f4f8f5;border:1px solid var(--line);border-radius:10px;min-width:0}
+.stat small{display:block;color:var(--muted);font-size:10px}
+.stat strong{font-size:12px;overflow-wrap:anywhere}
+.note{margin-top:14px;padding:12px;border-radius:10px;background:#fff7dd;border-left:4px solid #d7a91f;font-size:12px;line-height:1.6}
+#message{font-size:13px;margin-top:12px;line-height:1.5}
+.good{color:#087a3b}.bad{color:#b42318}
+footer{text-align:center;padding:18px;background:var(--dark);color:#d8f1df;font-size:12px}
+@media(max-width:800px){.workspace{grid-template-columns:1fr}.preview{min-height:220px}}
+@media(max-width:430px){main{padding-left:9px;padding-right:9px}.panel{padding:13px}.grid3{gap:5px}.choice{padding:9px 3px}.stat{padding:7px}}
 </style>
 </head>
 <body>
 <header>
-  <div class="brand">KISAN SEVA TOOLS • PHOTO LAB</div>
-  <h1>📸 Indian Photo Studio Toolkit</h1>
-  <p>Photo resize • Passport & visa sizes • ID photos • Print sheets</p>
-  <div class="header-badges">
-    <span class="pill">⚡ Browser-based editing</span>
-    <span class="pill">📱 Mobile friendly</span>
-    <span class="pill">🖨️ Print-ready export</span>
-  </div>
+ <div class="brand">KISAN SEVA TOOLS • PHOTO LAB</div>
+ <h1>📸 Photo Studio Pro</h1>
+ <p>Actual-size layouts · Crop · Enhance · Background · Print</p>
 </header>
 
 <main>
-  <a class="back" href="../Home.html">← Back to Home</a>
+ <a class="back" href="../Home.html">← Back to Home</a>
+ <section class="intro">
+  <h2>Professional Photo Maker</h2>
+  <p>Choose the photo frame and paper size separately. Preview your layout before downloading or printing.</p>
+ </section>
 
-  <section class="intro">
-    <h2>Photo tools, all in one place</h2>
-    <p>Choose a photo format, upload your picture, adjust the framing and export your result.
-    Each listed service has a proposed ₹5 charge; payment collection is not connected on this page.</p>
-  </section>
+ <div class="workspace">
+  <section class="panel">
+   <h3>1. Upload & frame</h3>
+   <p class="muted">Photo file stays in your browser while you edit it.</p>
+   <div class="upload">
+    <label for="upload">Choose photo (JPG, PNG, WebP)</label>
+    <input id="upload" type="file" accept="image/jpeg,image/png,image/webp">
+   </div>
 
-  <section aria-label="Photo tools">
-    <h3>Choose your photo tool</h3>
-    <p class="sub">Select a format below. Sizes are common presets; always follow the receiving authority's current instructions.</p>
-    <div class="tool-grid" id="toolGrid">
-      <button class="tool-card active" data-preset="passport">
-        <span class="ico">🛂</span><strong>Passport Photo</strong>
-        <small>35 × 45 mm</small><div class="price">₹5 / design</div>
-      </button>
-      <button class="tool-card" data-preset="visa">
-        <span class="ico">🌍</span><strong>Visa Photo</strong>
-        <small>35 × 45 mm preset</small><div class="price">₹5 / design</div>
-      </button>
-      <button class="tool-card" data-preset="usvisa">
-        <span class="ico">🗽</span><strong>US Visa Photo</strong>
-        <small>2 × 2 inches</small><div class="price">₹5 / design</div>
-      </button>
-      <button class="tool-card" data-preset="pan">
-        <span class="ico">🪪</span><strong>PAN Photo</strong>
-        <small>Custom crop & print</small><div class="price">₹5 / design</div>
-      </button>
-      <button class="tool-card" data-preset="id">
-        <span class="ico">🎓</span><strong>ID Card Photo</strong>
-        <small>25 × 30 mm preset</small><div class="price">₹5 / design</div>
-      </button>
-      <button class="tool-card" data-preset="stamp">
-        <span class="ico">📷</span><strong>Stamp Photo</strong>
-        <small>25 × 25 mm</small><div class="price">₹5 / design</div>
-      </button>
-      <button class="tool-card" data-preset="small">
-        <span class="ico">🖼️</span><strong>Small Photo</strong>
-        <small>30 × 40 mm</small><div class="price">₹5 / design</div>
-      </button>
-      <button class="tool-card" data-preset="four">
-        <span class="ico">🧾</span><strong>4 × 6 Print Sheet</strong>
-        <small>Multiple photo copies</small><div class="price">₹5 / design</div>
-      </button>
-      <button class="tool-card" data-preset="a4">
-        <span class="ico">📄</span><strong>A4 Photo Sheet</strong>
-        <small>Multiple photo copies</small><div class="price">₹5 / design</div>
-      </button>
-      <button class="tool-card" data-preset="custom">
-        <span class="ico">📐</span><strong>Custom Photo Size</strong>
-        <small>Choose width & height</small><div class="price">₹5 / design</div>
-      </button>
-      <button class="tool-card" data-preset="square">
-        <span class="ico">⬜</span><strong>Square Photo</strong>
-        <small>1:1 image crop</small><div class="price">₹5 / design</div>
-      </button>
-      <button class="tool-card" data-preset="whatsapp">
-        <span class="ico">💬</span><strong>WhatsApp Photo Print</strong>
-        <small>Prepare image for printing</small><div class="price">₹5 / design</div>
-      </button>
+   <div class="section-title">PHOTO FRAME SIZE</div>
+   <div class="grid3" id="frames">
+    <button class="choice active" data-frame="passport"><span>🛂</span><strong>Passport</strong><small>35 × 45 mm</small></button>
+    <button class="choice" data-frame="usvisa"><span>🌎</span><strong>US Visa</strong><small>2 × 2 inch</small></button>
+    <button class="choice" data-frame="visa"><span>🧳</span><strong>Visa</strong><small>35 × 45 mm</small></button>
+    <button class="choice" data-frame="id"><span>🪪</span><strong>ID Card</strong><small>25 × 30 mm</small></button>
+    <button class="choice" data-frame="stamp"><span>📷</span><strong>Stamp</strong><small>25 × 25 mm</small></button>
+    <button class="choice" data-frame="square"><span>⬜</span><strong>Square</strong><small>35 × 35 mm</small></button>
+    <button class="choice" data-frame="small"><span>🖼️</span><strong>Small</strong><small>30 × 40 mm</small></button>
+    <button class="choice" data-frame="custom"><span>📐</span><strong>Custom</strong><small>Your dimensions</small></button>
+   </div>
+
+   <div class="grid2" id="customSize" hidden>
+    <div><label for="fw">Frame width (mm)</label><input id="fw" type="number" min="10" max="100" value="35"></div>
+    <div><label for="fh">Frame height (mm)</label><input id="fh" type="number" min="10" max="100" value="45"></div>
+   </div>
+
+   <div class="section-title">PAPER / SHEET SIZE</div>
+   <div class="grid3" id="papers">
+    <button class="choice active" data-paper="4x6"><strong>4 × 6 inch</strong><small>101.6 × 152.4 mm</small></button>
+    <button class="choice" data-paper="a4"><strong>A4 Sheet</strong><small>210 × 297 mm</small></button>
+    <button class="choice" data-paper="single"><strong>Single Photo</strong><small>Frame dimensions</small></button>
+   </div>
+
+   <div class="grid2">
+    <div><label for="copies">Number of copies</label><input id="copies" type="number" min="1" max="60" value="8"></div>
+    <div><label for="dpi">Output resolution</label><select id="dpi"><option value="300">300 DPI (print)</option><option value="200">200 DPI</option><option value="150">150 DPI</option></select></div>
+   </div>
+
+   <div class="section-title">2. CROP & POSITION</div>
+   <label for="zoom">Zoom: <span id="zoomVal">1.00×</span></label>
+   <input id="zoom" type="range" min="1" max="3" value="1" step=".01">
+   <div class="grid2">
+    <div><label for="moveX">Move left / right</label><input id="moveX" type="range" min="-100" max="100" value="0"></div>
+    <div><label for="moveY">Move up / down</label><input id="moveY" type="range" min="-100" max="100" value="0"></div>
+   </div>
+   <label for="fit">Image fit</label>
+   <select id="fit"><option value="cover">Fill frame / crop edges</option><option value="contain">Fit entire photo</option></select>
+
+   <div class="section-title">3. PHOTO ENHANCEMENT</div>
+   <label for="brightness">Brightness: <span id="brightnessVal">100%</span></label>
+   <input id="brightness" type="range" min="50" max="150" value="100">
+   <label for="contrast">Contrast: <span id="contrastVal">100%</span></label>
+   <input id="contrast" type="range" min="50" max="150" value="100">
+   <label for="saturation">Saturation: <span id="saturationVal">100%</span></label>
+   <input id="saturation" type="range" min="0" max="150" value="100">
+
+   <div class="section-title">4. BACKGROUND COLOUR</div>
+   <div class="grid2">
+    <div><label for="bg">Preset colour</label>
+     <select id="bg">
+      <option value="#ffffff">White</option>
+      <option value="#e8f2ff">Light blue</option>
+      <option value="#e8f5e9">Light green</option>
+      <option value="#eeeeee">Light grey</option>
+      <option value="#fff0dc">Cream</option>
+      <option value="#000000">Black</option>
+      <option value="custom">Custom colour</option>
+     </select>
     </div>
+    <div><label for="customBg">Custom colour</label><input type="color" id="customBg" value="#ffffff"></div>
+   </div>
+   <label class="checkline"><input type="checkbox" id="border" checked> Show cut-line borders</label>
+   <div class="actions">
+    <button class="btn" id="generate">✨ Update Preview</button>
+    <button class="btn secondary" id="reset">Reset adjustments</button>
+   </div>
+   <div id="message" role="status" aria-live="polite">Upload a photo to begin.</div>
+   <div class="note"><b>Note:</b> Colour selection paints the frame background; it does not automatically isolate a person from the original background. Official passport and visa specifications vary. Confirm the required rules before submission.</div>
   </section>
 
-  <div class="layout">
-    <section class="panel">
-      <h3 id="selectedTitle">🛂 Passport Photo Maker</h3>
-      <p class="sub" id="selectedDesc">Prepare a 35 × 45 mm portrait crop.</p>
-
-      <div class="drop">
-        <div class="emoji">📤</div>
-        <strong>Upload your photo</strong>
-        <p>JPG, PNG or WebP image from your device</p>
-        <input id="upload" type="file" accept="image/jpeg,image/png,image/webp">
-      </div>
-
-      <div class="field">
-        <label for="fit">Image framing</label>
-        <select id="fit">
-          <option value="cover">Fill frame (crop edges)</option>
-          <option value="contain">Fit entire image (may leave margins)</option>
-        </select>
-      </div>
-
-      <div class="two">
-        <div class="field">
-          <label for="bg">Background colour</label>
-          <select id="bg">
-            <option value="#ffffff">White</option>
-            <option value="#dcecff">Light blue</option>
-            <option value="#d9f0df">Light green</option>
-            <option value="#f4f4f4">Light grey</option>
-            <option value="transparent">Transparent (PNG only)</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="quality">JPG quality</label>
-          <select id="quality">
-            <option value="0.92">High</option>
-            <option value="0.8">Standard</option>
-            <option value="0.65">Smaller file</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="two" id="customFields">
-        <div class="field">
-          <label for="customW">Width (mm)</label>
-          <input id="customW" type="number" min="10" max="210" value="35">
-        </div>
-        <div class="field">
-          <label for="customH">Height (mm)</label>
-          <input id="customH" type="number" min="10" max="297" value="45">
-        </div>
-      </div>
-
-      <div class="two">
-        <div class="field">
-          <label for="copies">Copies on sheet</label>
-          <input id="copies" type="number" min="1" max="60" value="8">
-        </div>
-        <div class="field">
-          <label for="sheet">Sheet size</label>
-          <select id="sheet">
-            <option value="4x6">4 × 6 inch</option>
-            <option value="a4">A4 paper</option>
-            <option value="single">Single photo only</option>
-          </select>
-        </div>
-      </div>
-
-      <label class="checkline">
-        <input id="border" type="checkbox" checked>
-        Add thin cut-line border around each photo
-      </label>
-
-      <div class="actions">
-        <button class="btn" id="generate" type="button">✨ Generate Preview</button>
-        <button class="btn secondary" id="reset" type="button">Reset settings</button>
-      </div>
-      <div id="message" role="status" aria-live="polite"></div>
-
-      <div class="notice">
-        <strong>Important:</strong> This page crops and resizes images; it does not automatically remove
-        a real background, verify identity, or guarantee government/visa acceptance.
-        Check official photo rules before submitting.
-      </div>
-    </section>
-
-    <section class="panel">
-      <h3>Live preview</h3>
-      <p class="sub">Preview your selected photo or generated print sheet.</p>
-      <div class="preview-wrap" id="previewWrap">
-        <div class="placeholder"><strong>🖼️</strong>Upload a photo and tap Generate Preview.</div>
-        <canvas id="canvas" class="hidden"></canvas>
-      </div>
-      <div class="stats">
-        <div class="stat"><small>Selected size</small><b id="sizeStat">35 × 45 mm</b></div>
-        <div class="stat"><small>Image output</small><b id="pixelStat">413 × 531 px</b></div>
-        <div class="stat"><small>Copies</small><b id="copyStat">8</b></div>
-      </div>
-      <div class="actions">
-        <button class="btn" id="downloadJpg" disabled>⬇ Download JPG</button>
-        <button class="btn secondary" id="downloadPng" disabled>⬇ Download PNG</button>
-        <button class="btn dark" id="print" disabled>🖨️ Print sheet</button>
-      </div>
-      <p class="sub" style="margin-top:13px">Print tip: select the correct paper size and use 100% / Actual Size when available. Printer margins can affect final dimensions.</p>
-    </section>
-  </div>
+  <section class="panel">
+   <h3>Live print preview</h3>
+   <p class="muted">The paper preview represents the selected physical sheet. It is not a passport-only canvas when 4×6 or A4 is selected.</p>
+   <div class="preview" id="preview">
+    <div class="placeholder" id="placeholder"><b>🖼️</b>Upload a photo, choose a frame and tap Update Preview.</div>
+    <canvas id="canvas" hidden></canvas>
+   </div>
+   <div class="statgrid">
+    <div class="stat"><small>Paper</small><strong id="paperStat">4 × 6 inch</strong></div>
+    <div class="stat"><small>Photo frame</small><strong id="frameStat">35 × 45 mm</strong></div>
+    <div class="stat"><small>Copies placed</small><strong id="placedStat">0</strong></div>
+   </div>
+   <div class="actions">
+    <button class="btn" id="jpg" disabled>⬇ Download JPG</button>
+    <button class="btn secondary" id="png" disabled>⬇ Download PNG</button>
+    <button class="btn dark" id="print" disabled>🖨️ Print at actual size</button>
+   </div>
+   <div class="note">
+    <b>Actual-size print settings</b><br>
+    4×6: select 4×6 inch paper in the printer dialog. A4: select A4 paper. Set scale to 100% / Actual Size and disable “Fit to page” if the driver allows it. Borderless printing depends on the printer.
+   </div>
+   <p class="muted" style="margin-top:14px">Suggested service price: ₹5 per design. This page does not collect payment.</p>
+  </section>
+ </div>
 </main>
-
-<div id="printArea" class="hidden"></div>
-<footer>© 2026 Kisan Seva Tools • Indian Photo Studio Toolkit</footer>
+<footer>© 2026 Kisan Seva Tools • Photo Studio Pro</footer>
 
 <script>
 (() => {
-  "use strict";
-  const $ = id => document.getElementById(id);
-  const presets = {
-    passport:{title:"🛂 Passport Photo Maker",desc:"Common 35 × 45 mm portrait preset.",w:35,h:45,copies:8,sheet:"4x6"},
-    visa:{title:"🌍 Visa Photo Maker",desc:"35 × 45 mm starter preset. Confirm the destination's exact requirements.",w:35,h:45,copies:8,sheet:"4x6"},
-    usvisa:{title:"🗽 US Visa Photo Maker",desc:"2 × 2 inch (50.8 × 50.8 mm) starter preset.",w:50.8,h:50.8,copies:4,sheet:"4x6"},
-    pan:{title:"🪪 PAN Photo Preparation",desc:"Prepare a photo crop for a PAN-related application. Follow the current form instructions.",w:35,h:45,copies:8,sheet:"4x6"},
-    id:{title:"🎓 ID Card Photo Maker",desc:"25 × 30 mm starter preset for ID-style photos.",w:25,h:30,copies:12,sheet:"4x6"},
-    stamp:{title:"📷 Stamp Photo Maker",desc:"25 × 25 mm square-style small photo preset.",w:25,h:25,copies:12,sheet:"4x6"},
-    small:{title:"🖼️ Small Photo Maker",desc:"30 × 40 mm small portrait preset.",w:30,h:40,copies:10,sheet:"4x6"},
-    four:{title:"🧾 4 × 6 Photo Print Sheet",desc:"Arrange repeated copies on a 4 × 6 inch sheet.",w:35,h:45,copies:8,sheet:"4x6"},
-    a4:{title:"📄 A4 Photo Print Sheet",desc:"Arrange repeated copies on A4 paper.",w:35,h:45,copies:20,sheet:"a4"},
-    custom:{title:"📐 Custom Photo Size",desc:"Set your own width and height in millimetres.",w:35,h:45,copies:8,sheet:"4x6"},
-    square:{title:"⬜ Square Photo Maker",desc:"Prepare a square 1:1 crop.",w:35,h:35,copies:8,sheet:"4x6"},
-    whatsapp:{title:"💬 WhatsApp Photo Print",desc:"Prepare a received image for a print sheet.",w:35,h:45,copies:8,sheet:"4x6"}
-  };
+"use strict";
+const $=id=>document.getElementById(id);
+const frames={
+ passport:{w:35,h:45},visa:{w:35,h:45},usvisa:{w:50.8,h:50.8},
+ id:{w:25,h:30},stamp:{w:25,h:25},square:{w:35,h:35},small:{w:30,h:40},custom:{w:35,h:45}
+};
+const papers={
+ "4x6":{w:101.6,h:152.4,label:"4 × 6 inch"},
+ a4:{w:210,h:297,label:"A4 Sheet"},
+ single:{w:0,h:0,label:"Single Photo"}
+};
+let frame="passport",paper="4x6",img=null,ready=false;
 
-  let activePreset = "passport";
-  let sourceImage = null;
-  let generated = false;
-
-  function message(text, type="") {
-    $("message").textContent = text;
-    $("message").className = type;
-  }
-  function dimensions() {
-    if (activePreset === "custom") {
-      return {
-        w: Math.max(10, Math.min(210, Number($("customW").value) || 35)),
-        h: Math.max(10, Math.min(297, Number($("customH").value) || 45))
-      };
-    }
-    return {w:presets[activePreset].w,h:presets[activePreset].h};
-  }
-  function mmToPx(mm) { return Math.round(mm / 25.4 * 300); }
-  function setPreset(name) {
-    activePreset = name;
-    const p = presets[name];
-    $("selectedTitle").textContent = p.title;
-    $("selectedDesc").textContent = p.desc;
-    $("customW").value = p.w;
-    $("customH").value = p.h;
-    $("copies").value = p.copies;
-    $("sheet").value = p.sheet;
-    document.querySelectorAll(".tool-card").forEach(card => {
-      card.classList.toggle("active", card.dataset.preset === name);
-    });
-    $("customFields").classList.toggle("hidden", name !== "custom");
-    updateStats();
-    if (sourceImage) render();
-  }
-  function updateStats() {
-    const d = dimensions();
-    $("sizeStat").textContent = `${d.w} × ${d.h} mm`;
-    $("pixelStat").textContent = `${mmToPx(d.w)} × ${mmToPx(d.h)} px`;
-    $("copyStat").textContent = $("copies").value || "1";
-  }
-  function drawPhoto(ctx, img, x, y, w, h) {
-    const bg = $("bg").value;
-    if (bg !== "transparent") {
-      ctx.fillStyle = bg;
-      ctx.fillRect(x,y,w,h);
-    } else {
-      ctx.clearRect(x,y,w,h);
-    }
-    const fit = $("fit").value;
-    const scale = fit === "cover" ? Math.max(w/img.naturalWidth,h/img.naturalHeight)
-                                  : Math.min(w/img.naturalWidth,h/img.naturalHeight);
-    const dw = img.naturalWidth * scale;
-    const dh = img.naturalHeight * scale;
-    const dx = x + (w-dw)/2;
-    const dy = y + (h-dh)/2;
-    ctx.save();
-    ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
-    ctx.drawImage(img,dx,dy,dw,dh);
-    ctx.restore();
-    if ($("border").checked) {
-      ctx.save();ctx.strokeStyle="#8a9a8e";ctx.lineWidth=Math.max(1,Math.round(w/350));
-      ctx.strokeRect(x+.5,y+.5,w-1,h-1);ctx.restore();
-    }
-  }
-  function render() {
-    if (!sourceImage) {
-      message("Pehle apne phone ya computer se photo upload karo.","error");
-      return;
-    }
-    const d = dimensions();
-    const photoW = mmToPx(d.w);
-    const photoH = mmToPx(d.h);
-    const sheetType = $("sheet").value;
-    let canvasW = photoW, canvasH = photoH, cols = 1, rows = 1;
-    const margin = sheetType === "a4" ? 5 : 2.5;
-    if (sheetType !== "single") {
-      const sw = sheetType === "a4" ? 210 : 101.6;
-      const sh = sheetType === "a4" ? 297 : 152.4;
-      const maxW = mmToPx(sw - margin*2);
-      const maxH = mmToPx(sh - margin*2);
-      cols = Math.max(1,Math.floor(maxW/photoW));
-      rows = Math.max(1,Math.floor(maxH/photoH));
-      const requested = Math.max(1,Math.min(60,Number($("copies").value)||1));
-      if (cols*rows < requested) {
-        message(`Is sheet par is size ke ${cols*rows} photos fit honge. Zyada copies ke liye A4 ya chhota photo size choose karo.`,"error");
-      } else {
-        message("Preview ready. Download ya print karne se pehle photo framing check karo.","ok");
-      }
-      canvasW = mmToPx(sw);
-      canvasH = mmToPx(sh);
-    } else {
-      message("Single photo preview ready.","ok");
-    }
-    const canvas = $("canvas");
-    canvas.width = canvasW;canvas.height = canvasH;
-    const ctx = canvas.getContext("2d");
-    ctx.clearRect(0,0,canvasW,canvasH);
-    if (sheetType !== "single") {
-      ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvasW,canvasH);
-      const requested = Math.max(1,Math.min(60,Number($("copies").value)||1));
-      const total = Math.min(requested,cols*rows);
-      for (let i=0;i<total;i++) {
-        const col=i%cols,row=Math.floor(i/cols);
-        const x=mmToPx(margin)+col*photoW;
-        const y=mmToPx(margin)+row*photoH;
-        drawPhoto(ctx,sourceImage,x,y,photoW,photoH);
-      }
-    } else {
-      drawPhoto(ctx,sourceImage,0,0,photoW,photoH);
-    }
-    canvas.classList.remove("hidden");
-    const placeholder = document.querySelector(".placeholder");
-    if (placeholder) placeholder.classList.add("hidden");
-    $("downloadJpg").disabled=false;
-    $("downloadPng").disabled=false;
-    $("print").disabled=false;
-    generated=true;
-    updateStats();
-  }
-  function download(type) {
-    if (!generated) return;
-    const canvas=$("canvas");
-    const mime=type==="jpg"?"image/jpeg":"image/png";
-    if (type==="jpg") {
-      const temp=document.createElement("canvas");
-      temp.width=canvas.width;temp.height=canvas.height;
-      const ctx=temp.getContext("2d");
-      ctx.fillStyle="#ffffff";ctx.fillRect(0,0,temp.width,temp.height);
-      ctx.drawImage(canvas,0,0);
-      saveData(temp.toDataURL(mime,Number($("quality").value)),`kisan-photo-${activePreset}.jpg`);
-    } else {
-      saveData(canvas.toDataURL(mime),`kisan-photo-${activePreset}.png`);
-    }
-  }
-  function saveData(url,name) {
-    const a=document.createElement("a");a.href=url;a.download=name;
-    document.body.appendChild(a);a.click();a.remove();
-  }
-  function printSheet() {
-    if (!generated) return;
-    const canvas=$("canvas");
-    const win=window.open("","_blank");
-    if (!win) {
-      message("Print window block ho gaya. Browser mein pop-ups allow karke phir try karo.","error");
-      return;
-    }
-    const size=$("sheet").value==="a4"?"A4":$("sheet").value==="4x6"?"4in 6in":"auto";
-    win.document.write(`<!DOCTYPE html><html><head><title>Photo Print</title>
-      <style>@page{size:${size};margin:0}html,body{margin:0;padding:0}
-      img{display:block;width:100%;height:auto;max-height:100vh;object-fit:contain}
-      @media print{img{break-inside:avoid}}</style></head><body>
-      <img src="${canvas.toDataURL("image/png")}" onload="setTimeout(()=>window.print(),300)">
-      </body></html>`);
-    win.document.close();
-  }
-
-  $("toolGrid").addEventListener("click",e=>{
-    const card=e.target.closest("[data-preset]");
-    if(card) setPreset(card.dataset.preset);
-  });
-  $("upload").addEventListener("change",e=>{
-    const file=e.target.files && e.target.files[0];
-    if(!file) return;
-    if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
-      message("JPG, PNG ya WebP file choose karo.","error");return;
-    }
-    if(file.size>15*1024*1024){
-      message("Photo 15 MB se chhoti honi chahiye.","error");return;
-    }
-    const img=new Image();
-    img.onload=()=>{
-      sourceImage=img;generated=false;
-      $("canvas").classList.add("hidden");
-      $("downloadJpg").disabled=true;$("downloadPng").disabled=true;$("print").disabled=true;
-      const placeholder=document.querySelector(".placeholder");
-      if(placeholder) placeholder.classList.remove("hidden");
-      message(`Photo loaded: ${img.naturalWidth} × ${img.naturalHeight} px. Generate Preview dabao.`,"ok");
-      updateStats();
-    };
-    img.onerror=()=>message("Photo load nahi hui. Dusri image try karo.","error");
-    img.src=URL.createObjectURL(file);
-  });
-  $("generate").addEventListener("click",render);
-  $("downloadJpg").addEventListener("click",()=>download("jpg"));
-  $("downloadPng").addEventListener("click",()=>download("png"));
-  $("print").addEventListener("click",printSheet);
-  ["customW","customH","copies","sheet","fit","bg","quality","border"].forEach(id=>{
-    $(id).addEventListener("change",()=>{
-      updateStats();
-      if(sourceImage) render();
-    });
-  });
-  $("reset").addEventListener("click",()=>{
-    $("fit").value="cover";$("bg").value="#ffffff";$("quality").value="0.92";
-    $("copies").value=presets[activePreset].copies;$("sheet").value=presets[activePreset].sheet;
-    $("border").checked=true;
-    setPreset(activePreset);
-    if(sourceImage) render();
-    else message("Settings reset ho gayi.");
-  });
-  setPreset("passport");
+function dims(){
+ if(frame==="custom")return {w:clamp(+$("fw").value||35,10,100),h:clamp(+$("fh").value||45,10,100)};
+ return frames[frame];
+}
+function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
+function dpi(){return +$("dpi").value}
+function px(mm){return Math.round(mm*dpi()/25.4)}
+function background(){
+ return $("bg").value==="custom"?$("customBg").value:$("bg").value;
+}
+function setMsg(t,good=true){$("message").textContent=t;$("message").className=good?"good":"bad"}
+function markChoices(selector,attr,value){
+ document.querySelectorAll(selector+" .choice").forEach(b=>b.classList.toggle("active",b.dataset[attr]===value));
+}
+function setFrame(v){
+ frame=v;markChoices("#frames","frame",v);
+ $("customSize").hidden=v!=="custom";
+ updateStats();
+ if(img)render();
+}
+function setPaper(v){
+ paper=v;markChoices("#papers","paper",v);updateStats();
+ if(img)render();
+}
+function updateStats(){
+ const d=dims(),p=papers[paper];
+ $("paperStat").textContent=paper==="single"?`${d.w} × ${d.h} mm`:p.label;
+ $("frameStat").textContent=`${d.w} × ${d.h} mm`;
+ $("zoomVal").textContent=(+$("zoom").value).toFixed(2)+"×";
+ ["brightness","contrast","saturation"].forEach(k=>$(k+"Val").textContent=$ (k).value+"%");
+}
+function drawPhoto(ctx,x,y,w,h){
+ const d=dims();
+ const bg=background();
+ ctx.fillStyle=bg;ctx.fillRect(x,y,w,h);
+ const base=$("fit").value==="cover"?Math.max(w/img.naturalWidth,h/img.naturalHeight):Math.min(w/img.naturalWidth,h/img.naturalHeight);
+ const scale=base*(+$("zoom").value);
+ const dw=img.naturalWidth*scale,dh=img.naturalHeight*scale;
+ const ox=(+$("moveX").value)/100*(dw-w)/2;
+ const oy=(+$("moveY").value)/100*(dh-h)/2;
+ const dx=x+(w-dw)/2+ox,dy=y+(h-dh)/2+oy;
+ ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
+ ctx.filter=`brightness(${$("brightness").value}%) contrast(${$("contrast").value}%) saturate(${$("saturation").value}%)`;
+ ctx.drawImage(img,dx,dy,dw,dh);ctx.filter="none";ctx.restore();
+ if($("border").checked){
+  ctx.save();ctx.strokeStyle="#87978c";ctx.lineWidth=Math.max(1,dpi()/100);
+  ctx.strokeRect(x+.5,y+.5,w-1,h-1);ctx.restore();
+ }
+}
+function render(){
+ if(!img){setMsg("Pehle photo upload karo.",false);return}
+ const d=dims(),fw=px(d.w),fh=px(d.h);
+ let sw=paper==="single"?d.w:papers[paper].w;
+ let sh=paper==="single"?d.h:papers[paper].h;
+ const cw=px(sw),ch=px(sh),canvas=$("canvas");
+ // Guard against accidental huge canvas memory allocations.
+ if(cw*ch>45000000){setMsg("Resolution bahut badi hai. 150 ya 200 DPI choose karo.",false);return}
+ canvas.width=cw;canvas.height=ch;
+ const ctx=canvas.getContext("2d");
+ ctx.fillStyle="#ffffff";ctx.fillRect(0,0,cw,ch);
+ const requested=paper==="single"?1:clamp(+$("copies").value||1,1,60);
+ const margin=paper==="a4"?5:2.5;
+ const mx=px(margin),my=px(margin);
+ const cols=Math.max(0,Math.floor((cw-2*mx)/fw));
+ const rows=Math.max(0,Math.floor((ch-2*my)/fh));
+ const capacity=paper==="single"?1:cols*rows;
+ const count=Math.min(requested,capacity);
+ if(count<1){setMsg("Is frame size ke liye selected sheet par jagah nahi hai. A4 ya chhota frame choose karo.",false);return}
+ for(let i=0;i<count;i++){
+  const x=paper==="single"?0:mx+(i%cols)*fw;
+  const y=paper==="single"?0:my+Math.floor(i/cols)*fh;
+  drawPhoto(ctx,x,y,fw,fh);
+ }
+ canvas.hidden=false;$("placeholder").hidden=true;
+ $("jpg").disabled=false;$("png").disabled=false;$("print").disabled=false;
+ $("placedStat").textContent=count;
+ ready=true;
+ updateStats();
+ const sheetText=paper==="single"?"single photo":papers[paper].label;
+ setMsg(`${sheetText} preview ready: ${count} photo(s) placed at ${dpi()} DPI.${count<requested?" Requested copies exceed available space; showing the copies that fit.":""}`);
+}
+function download(type){
+ if(!ready)return;
+ const c=$("canvas"),mime=type==="jpg"?"image/jpeg":"image/png";
+ // JPG cannot retain transparency; sheet is white.
+ const a=document.createElement("a");
+ a.href=c.toDataURL(mime,type==="jpg"?.94:undefined);
+ a.download=`kisan-${paper}-${frame}.${type}`;
+ document.body.appendChild(a);a.click();a.remove();
+}
+function printCanvas(){
+ if(!ready)return;
+ const c=$("canvas");
+ const w=papers[paper].w||dims().w,h=papers[paper].h||dims().h;
+ const page=paper==="a4"?"A4":paper==="4x6"?"4in 6in":`${w}mm ${h}mm`;
+ const win=window.open("","_blank");
+ if(!win){setMsg("Print window blocked. Allow pop-ups and try again.",false);return}
+ const url=c.toDataURL("image/png");
+ win.document.write(`<!doctype html><html><head><title>Photo Print</title>
+ <style>@page{size:${page};margin:0}*{box-sizing:border-box}html,body{margin:0;padding:0;width:100%;height:100%}
+ img{display:block;width:100%;height:100%;object-fit:fill}</style></head>
+ <body><img src="${url}" onload="setTimeout(()=>window.print(),250)"></body></html>`);
+ win.document.close();
+}
+$("frames").addEventListener("click",e=>{
+ const b=e.target.closest("[data-frame]");if(b)setFrame(b.dataset.frame);
+});
+$("papers").addEventListener("click",e=>{
+ const b=e.target.closest("[data-paper]");if(b)setPaper(b.dataset.paper);
+});
+$("upload").addEventListener("change",e=>{
+ const f=e.target.files&&e.target.files[0];if(!f)return;
+ if(!["image/jpeg","image/png","image/webp"].includes(f.type)){setMsg("JPG, PNG ya WebP image choose karo.",false);return}
+ if(f.size>15*1024*1024){setMsg("Image 15 MB se chhoti honi chahiye.",false);return}
+ const url=URL.createObjectURL(f),im=new Image();
+ im.onload=()=>{img=im;ready=false;setMsg(`Photo loaded: ${im.naturalWidth} × ${im.naturalHeight} px. Update Preview dabao.`);render();URL.revokeObjectURL(url)};
+ im.onerror=()=>{setMsg("Image load nahi hui. Dusri image try karo.",false);URL.revokeObjectURL(url)};
+ im.src=url;
+});
+$("generate").addEventListener("click",render);
+$("jpg").addEventListener("click",()=>download("jpg"));
+$("png").addEventListener("click",()=>download("png"));
+$("print").addEventListener("click",printCanvas);
+["fw","fh","dpi","copies","zoom","moveX","moveY","fit","bg","customBg","brightness","contrast","saturation","border"].forEach(id=>{
+ $(id).addEventListener("input",()=>{updateStats();if(img)render()});
+ $(id).addEventListener("change",()=>{updateStats();if(img)render()});
+});
+$("reset").addEventListener("click",()=>{
+ $("zoom").value=1;$("moveX").value=0;$("moveY").value=0;
+ $("fit").value="cover";$("brightness").value=100;$("contrast").value=100;
+ $("saturation").value=100;$("bg").value="#ffffff";$("customBg").value="#ffffff";
+ $("border").checked=true;$("dpi").value=300;
+ updateStats();if(img)render();else setMsg("Adjustments reset.");
+});
+updateStats();
 })();
 </script>
 </body>
