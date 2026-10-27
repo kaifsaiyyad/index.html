@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#103f2c">
-<title>Kisan Seva Tools | Smart Farmer Card Studio</title>
+<meta name="theme-color" content="#17643e">
+<title>CSC Seva Tools - Farmer Card Designer</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -14,484 +14,397 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <style>
-:root{--green:#124b32;--green2:#20774b;--gold:#c9ac60;--bg:#edf3ef;--line:#dce7df}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:#1b3527;font-family:Arial,Helvetica,sans-serif}
-header{background:linear-gradient(115deg,#103b29,#176541);color:white;padding:17px 20px;border-bottom:3px solid var(--gold)}
-.brand{max-width:1450px;margin:auto;display:flex;align-items:center;gap:12px}
-.brand-icon{width:43px;height:43px;border:1px solid #d8c57e;border-radius:13px;display:grid;place-items:center;font-size:24px}
-.brand h1{font-size:20px;margin:0}.brand p{font-size:11px;color:#d9e8dc;margin:5px 0 0}
-.badge{margin-left:auto;border:1px solid #ffffff4d;border-radius:30px;padding:7px 11px;font-size:10px;white-space:nowrap}
-.wrap{max-width:1450px;margin:24px auto;padding:0 18px}
-.hero{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:20px}
-.hero h2{margin:0;color:var(--green);font-size:clamp(22px,3vw,31px)}
-.hero p{margin:8px 0 0;color:#718074;font-size:13px;line-height:1.5}
-.pill{display:inline-block;background:#e0efe3;color:#256340;border-radius:30px;padding:7px 11px;font-size:11px;font-weight:bold;margin-bottom:9px}
-.layout{display:grid;grid-template-columns:minmax(320px,.85fr) minmax(0,1.15fr);gap:20px;align-items:start}
-.panel{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px #173c2410;overflow:hidden}
-.panelhead{padding:18px 20px;border-bottom:1px solid #e8eee9}
-.panelhead h3{font-size:17px;margin:0;color:var(--green)}
-.panelhead p{font-size:12px;color:#7b897e;margin:6px 0 0;line-height:1.5}
-.body{padding:18px 20px}
-.section{font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#35764f;margin:4px 0 13px}
-.uploadbox{border:1.5px dashed #8db49a;background:linear-gradient(135deg,#f5faf6,#edf6ef);border-radius:13px;padding:17px;text-align:center}
-.uploadicon{font-size:27px}.uploadbox h4{margin:7px 0 5px;color:var(--green);font-size:14px}
-.uploadbox p{margin:0 0 12px;font-size:11px;line-height:1.5;color:#728174}
-.uploadbox input{max-width:100%;font-size:12px}
-.progress{height:6px;background:#e5ece6;border-radius:20px;overflow:hidden;margin-top:12px;display:none}
-.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#24734a,#d1b85f);transition:width .2s}
-.status{display:none;margin-top:10px;padding:10px;border-radius:8px;font-size:12px;line-height:1.5}
-.status.show{display:block}.status.info{background:#edf5ff;color:#24537c}.status.ok{background:#eaf7ed;color:#235d34}.status.err{background:#fff0ee;color:#8b302a}
-.tip{background:#fff8e7;border:1px solid #efe0b5;color:#6d5926;padding:11px;border-radius:9px;font-size:11px;line-height:1.6;margin-top:13px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+:root{--g:#17643e;--g2:#2e8254;--gold:#c9b36a;--bg:#edf3ee}
+body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:#24392b}
+header{background:linear-gradient(110deg,#10442d,#20784a);color:#fff;text-align:center;padding:16px}
+header h1{font-size:22px;margin:0}
+header p{font-size:11px;margin:5px 0 0}
+.wrap{max-width:1200px;margin:20px auto;padding:0 14px}
+.layout{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(0,1.15fr);gap:18px;align-items:start}
+.panel{background:#fff;border-radius:13px;box-shadow:0 4px 18px #183b2415;overflow:hidden}
+.panelhead{padding:17px;border-bottom:1px solid #e5ece6}
+.panelhead h2{font-size:17px;color:var(--g);margin:0}
+.panelhead p{font-size:11px;line-height:1.5;color:#748176;margin:6px 0 0}
+.inner{padding:17px}
+.section{font-size:11px;font-weight:bold;letter-spacing:.7px;color:var(--g2);margin:5px 0 12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .field{display:flex;flex-direction:column;gap:5px;min-width:0}
-.field.full{grid-column:1/-1}
-label{font-size:11px;font-weight:700;color:#415d49}
-input,select{width:100%;min-width:0;border:1px solid #d3dfd5;border-radius:8px;background:#fcfefc;padding:10px;font-size:13px;color:#23392b;min-height:39px}
-input:focus,select:focus{outline:2px solid #c2dfca;border-color:#58976b}
-small.help{font-size:10px;color:#7a887c;line-height:1.5}
-.btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-button{font-family:inherit;cursor:pointer}
-.btn{border:0;border-radius:8px;padding:11px 14px;font-size:12px;font-weight:bold;min-height:39px}
-.btn:disabled{opacity:.6;cursor:wait}
-.primary{background:var(--green);color:white}.soft{background:#eaf3eb;color:#285d3c;border:1px solid #d7e5d9}
-.dark{background:#263a2d;color:white}.gold{background:#c5a64d;color:#233421}
-.themegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
-.themebtn{padding:8px 3px;background:#fff;border:1px solid #dce6de;border-radius:8px;font-size:11px;color:#39513e}
-.themebtn.active{border:2px solid #2a754a;background:#f2f8f3}
-.swatch{display:block;height:5px;border-radius:10px;margin-bottom:6px}
-.previewhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}
-.previewhead h3{margin:0;color:var(--green);font-size:17px}
-.previewhead span{font-size:10px;color:#79877c}
+.full{grid-column:1/-1}
+label{font-size:11px;font-weight:bold}
+input,select{width:100%;min-width:0;padding:10px;border:1px solid #d2ded4;border-radius:7px;background:#fcfefc;font-size:13px}
+input:focus,select:focus{outline:2px solid #c7e0ce}
+.help{font-size:10px;color:#718073;line-height:1.5}
+.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+button{cursor:pointer;border:0;border-radius:7px;padding:10px 13px;font-weight:bold;font-size:12px}
+.primary{background:var(--g);color:white}
+.soft{background:#e8f2ea;color:var(--g)}
+.gold{background:#c7ad54;color:#253627}
+.dark{background:#293a2f;color:white}
+.theme{background:#eaf0eb;color:#233b2b;border:1px solid #d6e1d7}
+.notice{padding:10px;border-radius:8px;background:#fff7df;color:#705b24;font-size:11px;line-height:1.6;margin-top:12px}
+.status{font-size:11px;line-height:1.5;margin-top:10px;color:#2b6940;overflow-wrap:anywhere}
+.cardstage{padding:17px}
+.previewtitle{display:flex;justify-content:space-between;gap:8px;align-items:center;margin:0 0 13px}
+.previewtitle h3{margin:0;color:var(--g);font-size:16px}
+.previewtitle span{font-size:10px;color:#778378}
 .cards{display:grid;gap:18px}
-.card{--c1:#10452f;--c2:#23774c;--accent:#c9ac60;position:relative;width:100%;aspect-ratio:85.6/54;overflow:hidden;border:1px solid #c6d8c9;border-radius:10px;background:#fff;box-shadow:0 9px 23px #123b2419;isolation:isolate}
-.card.theme-leaf{--c1:#285a3a;--c2:#659467;--accent:#cbdcb0}
-.card.theme-blue{--c1:#183c60;--c2:#3478a0;--accent:#d2b56a}
-.card.theme-gold{--c1:#5b421c;--c2:#a98232;--accent:#e6d39a}
-.card:before{content:"";position:absolute;inset:5px;border:1px solid var(--accent);border-radius:7px;pointer-events:none;z-index:5}
-.card:after{content:"";position:absolute;z-index:-1;width:45%;height:145%;right:-17%;top:-25%;border:1px solid #31845826;border-radius:50%;box-shadow:0 0 0 10px #3184580b,0 0 0 20px #3184580b;transform:rotate(24deg)}
-.cardhead{position:relative;z-index:2;background:linear-gradient(105deg,var(--c1),var(--c2));color:white;display:flex;align-items:center;justify-content:space-between;gap:5px;padding:2.2% 4%;min-height:15%}
-.logo{display:flex;align-items:center;gap:6px;min-width:0}
-.logoicon{width:24px;height:24px;display:grid;place-items:center;border:1px solid var(--accent);border-radius:7px;font-size:13px;flex-shrink:0}
-.logoname{font-size:clamp(7px,1.15vw,12px);font-weight:900;letter-spacing:.4px}
-.logosub{font-size:clamp(4px,.57vw,6px);margin-top:2px;letter-spacing:.5px;opacity:.9}
-.cardtag{font-size:clamp(4px,.6vw,7px);border:1px solid #ffffff7a;border-radius:20px;padding:4px 6px;white-space:nowrap}
-.cardtitle{text-align:center;position:relative;z-index:2;padding:2% 2% 0}
-.cardtitle h2{font-size:clamp(11px,1.7vw,18px);margin:0;color:var(--c1);letter-spacing:.4px}
-.cardtitle p{font-size:clamp(4px,.58vw,7px);margin:3px 0;color:#718074;letter-spacing:1px;font-weight:bold}
-.linegold{height:2px;width:30px;background:var(--accent);margin:4px auto}
-.frontcontent{position:relative;z-index:2;display:grid;grid-template-columns:22% minmax(0,1fr) 22%;gap:3%;align-items:center;padding:2% 4% 5%}
-.photoarea{aspect-ratio:3/3.7;border:1.3px solid var(--c2);border-radius:5px;background:#edf3ed;overflow:hidden;display:grid;place-items:center}
-.photoarea img{width:100%;height:100%;object-fit:cover;display:none}
-.photoempty{text-align:center;font-size:clamp(5px,.65vw,7px);color:#6b816f}.photoempty b{font-size:clamp(20px,3vw,34px);display:block;margin-bottom:4px}
-.details{display:grid;gap:4px;min-width:0}
-.drow{display:flex;gap:3px;min-width:0;font-size:clamp(6px,.85vw,9px);line-height:1.25}
-.drow strong{color:var(--c1);white-space:nowrap}
-.drow span{min-width:0;overflow-wrap:anywhere;font-weight:bold}
-.blank{color:#9aa59c!important;font-weight:normal!important}
-.bigid{margin-top:3px;padding:5px 6px;border-radius:4px;background:linear-gradient(100deg,var(--c1),var(--c2));color:white;font-size:clamp(5px,.72vw,8px);font-weight:bold;overflow-wrap:anywhere}
-.bigid b{font-size:clamp(8px,1.2vw,13px);color:#fff0b9}
+.card{--c:var(--g);--c2:var(--g2);position:relative;aspect-ratio:85.6/54;width:100%;overflow:hidden;background:#fff;border:1px solid #b7cbbb;border-radius:8px;box-shadow:0 5px 15px #1d47261a;color:#23372a}
+.card:before{content:"";position:absolute;inset:4px;border:1px solid var(--c);border-radius:6px;pointer-events:none;z-index:5}
+.card:after{content:"";position:absolute;right:-14%;top:5%;width:38%;height:110%;border:1px solid #3b875125;border-radius:50%;box-shadow:0 0 0 8px #3b87510b,0 0 0 17px #3b87510b;pointer-events:none}
+.card.blue{--c:#205b88;--c2:#4085b2}
+.card.leaf{--c:#39774b;--c2:#78a56d}
+.card.goldtheme{--c:#806324;--c2:#b59a4c}
+.ctop{position:relative;z-index:2;height:15%;background:linear-gradient(100deg,var(--c),var(--c2));color:white;display:flex;justify-content:space-between;align-items:center;padding:0 4%;gap:5px}
+.brand{font-weight:900;font-size:clamp(7px,1.1vw,12px);letter-spacing:.3px}
+.brand small{display:block;font-size:clamp(4px,.55vw,6px);font-weight:normal;letter-spacing:.6px;margin-top:2px}
+.topright{font-size:clamp(4px,.6vw,7px);border:1px solid #ffffff90;padding:4px 6px;border-radius:20px;white-space:nowrap}
+.ctitle{text-align:center;position:relative;z-index:2;margin-top:2.1%}
+.ctitle h3{font-size:clamp(11px,1.7vw,18px);margin:0;color:var(--c)}
+.ctitle p{font-size:clamp(5px,.6vw,7px);margin:3px 0;color:#657368;font-weight:bold;letter-spacing:.7px}
+.goldline{width:28px;height:2px;background:#c6ad61;margin:4px auto}
+.frontbody{position:relative;z-index:2;display:grid;grid-template-columns:23% minmax(0,1fr) 22%;gap:3%;align-items:center;padding:2% 5% 6%}
+.photo{width:100%;aspect-ratio:3/3.6;border:1px solid var(--c);border-radius:4px;background:#f1f5f1;overflow:hidden;display:grid;place-items:center}
+.photo img{display:none;width:100%;height:100%;object-fit:cover}
+.photoempty{text-align:center;color:#6c806f;font-size:clamp(5px,.65vw,7px)}
+.photoempty b{display:block;font-size:clamp(20px,3vw,33px);margin-bottom:4px}
+.details{min-width:0;display:grid;gap:5px}
+.drow{font-size:clamp(6px,.82vw,9px);line-height:1.25;overflow-wrap:anywhere}
+.drow b{color:var(--c)}
+.idbox{background:linear-gradient(100deg,var(--c),var(--c2));color:white;border-radius:4px;padding:5px;margin-top:2px;font-size:clamp(5px,.7vw,8px);overflow-wrap:anywhere}
+.idbox strong{font-size:clamp(8px,1.2vw,13px);color:#fff0b8}
 .qrcol{text-align:center;min-width:0}
-.qrbox{width:100%;aspect-ratio:1;border:1px solid var(--accent);border-radius:5px;padding:3px;display:grid;place-items:center;background:white;overflow:hidden}
-#qrFront{width:100%;height:100%;display:grid;place-items:center}
-#qrFront canvas,#qrFront img{max-width:100%!important;max-height:100%!important}
-.qrplaceholder{font-size:7px;color:#78877a;text-align:center;line-height:1.4}
-.qrlabel{font-size:clamp(4px,.55vw,6px);margin-top:4px;color:#65776a;font-weight:bold}
-.cardfooter{position:absolute;z-index:4;left:0;right:0;bottom:0;min-height:10%;background:linear-gradient(100deg,var(--c1),var(--c2));color:white;display:flex;align-items:center;justify-content:space-between;gap:6px;padding:1.6% 4%;font-size:clamp(4px,.6vw,7px);font-weight:bold}
-.cardfooter b{color:#fff0b9}
-.address{position:relative;z-index:2;margin:1.5% 4%;display:flex;gap:5px;font-size:clamp(6px,.8vw,9px);overflow-wrap:anywhere}
-.address strong{color:var(--c1);white-space:nowrap}
-.landwrap{position:relative;z-index:2;margin:0 4%;border:1px solid #cbd9cd;border-radius:5px;overflow:hidden}
-.landtable{border-collapse:collapse;width:100%;table-layout:fixed}
-.landtable th{background:#edf4ed;color:var(--c1);font-size:clamp(4px,.6vw,7px);padding:5px 1px;border-right:1px solid #d8e2d9;overflow-wrap:anywhere}
-.landtable td{text-align:center;font-size:clamp(5px,.72vw,8px);font-weight:bold;padding:6px 1px;border-top:1px solid #dce6dd;border-right:1px solid #e1e9e2;overflow-wrap:anywhere}
-.landtable th:last-child,.landtable td:last-child{border-right:0}
-.backnotes{position:relative;z-index:2;margin:2% 4%;display:grid;gap:5px}
-.note{display:flex;gap:6px;font-size:clamp(5px,.72vw,8px);line-height:1.3}
-.note strong{color:var(--c1);min-width:65px}
-.disclaimer{position:absolute;z-index:6;bottom:11%;left:4%;right:4%;text-align:center;color:#657569;font-size:clamp(4px,.55vw,6px);font-weight:bold}
-@media(max-width:950px){.layout{grid-template-columns:1fr}.hero{align-items:flex-start}.previewpanel{min-width:0}}
+.qrbox{aspect-ratio:1;width:100%;background:white;border:1px solid #c6b66d;border-radius:4px;padding:3px;display:grid;place-items:center;overflow:hidden}
+#qr{width:100%;height:100%;display:grid;place-items:center}
+#qr canvas,#qr img{max-width:100%!important;max-height:100%!important}
+.qrlabel{font-size:clamp(4px,.55vw,6px);margin-top:4px;color:#536a58;font-weight:bold}
+.disclaimer{position:absolute;z-index:4;bottom:11%;left:4%;right:4%;text-align:center;color:#526c59;font-size:clamp(4px,.52vw,6px);font-weight:bold}
+.cbottom{position:absolute;z-index:4;bottom:0;left:0;right:0;min-height:10%;background:linear-gradient(100deg,var(--c),var(--c2));color:white;display:flex;justify-content:space-between;align-items:center;padding:0 4%;font-size:clamp(4px,.6vw,7px);font-weight:bold}
+.cbottom b{color:#fff0b8}
+.address{position:relative;z-index:2;margin:2% 4% 1%;font-size:clamp(6px,.8vw,9px);line-height:1.3;overflow-wrap:anywhere}
+.address b{color:var(--c)}
+.landtable{position:relative;z-index:2;width:92%;margin:0 auto;border-collapse:collapse;table-layout:fixed}
+.landtable th{background:#edf4ed;color:var(--c);font-size:clamp(4px,.58vw,7px);padding:5px 1px;border:1px solid #d7e2d8;overflow-wrap:anywhere}
+.landtable td{text-align:center;font-size:clamp(5px,.68vw,8px);padding:5px 1px;border:1px solid #d7e2d8;overflow-wrap:anywhere;font-weight:bold}
+.backnote{position:relative;z-index:2;display:flex;gap:7px;margin:2% 4%;font-size:clamp(5px,.7vw,8px);line-height:1.3}
+.backnote b{color:var(--c)}
+@media(max-width:850px){.layout{grid-template-columns:1fr}}
 @media(max-width:480px){
- .wrap{padding:0 9px;margin:14px auto}.body{padding:14px}.panelhead{padding:15px}
- .grid{grid-template-columns:1fr}.field.full{grid-column:auto}
- .brand h1{font-size:17px}.badge{font-size:9px;padding:6px}
- .card{border-radius:7px}.logoicon{width:18px;height:18px;font-size:10px}
- .logoname{font-size:6px}.logosub{font-size:4px}.cardtag{font-size:4px;padding:3px}
- .frontcontent{gap:2%;padding:2% 3% 5%}.cardtitle h2{font-size:10px}
- .drow{font-size:5.5px;gap:2px}.details{gap:3px}.bigid{font-size:5px;padding:4px}.bigid b{font-size:7px}
- .qrbox{padding:2px}.qrlabel{font-size:4px}
- .address{font-size:5.5px;margin:1.5% 3%}.landwrap{margin:0 3%}
- .landtable th{font-size:4px;padding:4px 0}.landtable td{font-size:4.5px;padding:4px 0}
- .backnotes{margin:1.5% 3%}.note{font-size:5px}.note strong{min-width:50px}
- .disclaimer{font-size:4px}.cardfooter{font-size:4px;padding:1.5% 3%}
+ .wrap{padding:0 8px;margin:12px auto}.inner,.cardstage{padding:12px}
+ .grid{grid-template-columns:1fr}.full{grid-column:auto}
+ .frontbody{gap:2%;padding:2% 4% 6%}
+ .drow{font-size:5.5px}.details{gap:3px}
+ .ctitle h3{font-size:10px}.idbox{font-size:5px;padding:3px}
+ .idbox strong{font-size:7px}.landtable th{font-size:4px;padding:4px 0}
+ .landtable td{font-size:4.5px;padding:4px 0}
+ .address{font-size:5.5px}.backnote{font-size:5px}
 }
 @page{size:A4 portrait;margin:0}
 @media print{
  body{background:white;print-color-adjust:exact;-webkit-print-color-adjust:exact}
- header,.hero,.formpanel,.previewintro,.printnote,.status{display:none!important}
- .wrap{padding:0;margin:0;max-width:none}.layout{display:block}.previewpanel{border:0;box-shadow:none}
- .previewbody{padding:0}.cards{height:297mm;display:flex;align-items:center;justify-content:center;gap:8mm}
+ header,.formpanel,.previewtitle,.printnote{display:none!important}
+ .wrap{padding:0;margin:0;max-width:none}.layout{display:block}
+ .previewpanel{box-shadow:none;border:0}.cardstage{padding:0}
+ .cards{height:297mm;display:flex;align-items:center;justify-content:center;gap:8mm}
  .card{width:85.6mm;height:54mm;flex:0 0 85.6mm;box-shadow:none}
 }
 </style>
 </head>
 <body>
 <header>
- <div class="brand">
-  <div class="brand-icon">🌾</div>
-  <div><h1>Kisan Seva Tools</h1><p>Smart Farmer Card Studio · Personal Use</p></div>
-  <div class="badge">SMART CARD DESIGNER</div>
- </div>
+ <h1>🌾 CSC Seva Tools</h1>
+ <p>Farmer Card Designer · Personal Use Only</p>
 </header>
 
 <main class="wrap">
- <div class="hero">
-  <div>
-   <span class="pill">✦ SMART AUTO-FILL WORKFLOW</span>
-   <h2>Farmer Card Studio</h2>
-   <p>Upload a registration form, review the extracted details, and create a polished front-and-back card.</p>
+<div class="layout">
+<section class="panel formpanel">
+ <div class="panelhead">
+  <h2>Farmer Card Information</h2>
+  <p>Fill in details below or upload a registration form for OCR auto-fill.</p>
+ </div>
+ <div class="inner">
+  <div class="section">01 · Auto Details</div>
+  <div class="field">
+   <label for="formUpload">Upload registration form (image/PDF)</label>
+   <input id="formUpload" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf,image/*,application/pdf">
+   <span class="help">OCR tries to read printed English text. Verify every field yourself.</span>
   </div>
+  <div class="buttons">
+   <button type="button" class="primary" id="scanBtn">✦ Auto Fill Details</button>
+   <button type="button" class="soft" id="removeUpload">Remove Upload</button>
+  </div>
+  <div id="scanStatus" class="status" aria-live="polite"></div>
+
+  <hr style="border:0;border-top:1px solid #e5ece6;margin:20px 0">
+  <form id="farmerForm">
+   <div class="section">02 · Personal details</div>
+   <div class="grid">
+    <div class="field full"><label for="photoInput">Farmer photo (optional)</label><input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp"></div>
+    <div class="field"><label for="name">Farmer name</label><input id="name" maxlength="80" placeholder="Farmer name"></div>
+    <div class="field"><label for="father">Father / Husband name</label><input id="father" maxlength="80" placeholder="Optional"></div>
+    <div class="field"><label for="dob">Date of birth (optional)</label><input id="dob" type="date"></div>
+    <div class="field"><label for="gender">Gender (optional)</label><select id="gender"><option value="">Not specified</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+    <div class="field"><label for="mobile">Mobile (optional)</label><input id="mobile" inputmode="numeric" maxlength="10" placeholder="Optional"></div>
+    <div class="field"><label for="farmerId">Farmer reference ID</label><input id="farmerId" maxlength="30" placeholder="Optional reference"></div>
+   </div>
+
+   <div class="section" style="margin-top:20px">03 · Location & land details</div>
+   <div class="grid">
+    <div class="field"><label for="state">State</label><input id="state" maxlength="50" placeholder="State"></div>
+    <div class="field"><label for="district">District</label><input id="district" maxlength="50" placeholder="District"></div>
+    <div class="field"><label for="subdistrict">Sub-district / Taluka</label><input id="subdistrict" maxlength="50" placeholder="Taluka"></div>
+    <div class="field"><label for="village">Village</label><input id="village" maxlength="50" placeholder="Village"></div>
+    <div class="field"><label for="survey">Survey / Gat No.</label><input id="survey" maxlength="30" placeholder="Optional"></div>
+    <div class="field"><label for="subdivision">S/S</label><input id="subdivision" maxlength="30" placeholder="Optional"></div>
+    <div class="field full"><label for="area">Land area</label><input id="area" maxlength="30" placeholder="e.g. 2.02 acres"></div>
+   </div>
+
+   <div class="section" style="margin-top:20px">04 · Design</div>
+   <div class="buttons">
+    <button type="button" class="theme" data-theme="green">🌿 Green</button>
+    <button type="button" class="theme" data-theme="leaf">🍃 Leaf</button>
+    <button type="button" class="theme" data-theme="blue">🔵 Blue</button>
+    <button type="button" class="theme" data-theme="goldtheme">🏅 Gold</button>
+   </div>
+   <div class="buttons">
+    <button type="submit" class="primary">Update Card</button>
+    <button type="button" class="soft" id="clearBtn">Clear Details</button>
+   </div>
+   <div class="buttons">
+    <button type="button" class="gold" id="pdfBtn">Download A4 PDF — ₹10</button>
+    <button type="button" class="dark" id="printBtn">Print</button>
+   </div>
+   <div class="notice"><b>Important:</b> This is a personal-use sample card, not an official government-issued card. Do not present it as proof of government identity or benefits. Aadhaar is not collected by this tool.</div>
+  </form>
  </div>
+</section>
 
- <div class="layout">
-  <section class="panel formpanel">
-   <div class="panelhead">
-    <h3>Card Information</h3>
-    <p>Auto-fill from a form or enter details manually. Check every extracted field before generating your card.</p>
-   </div>
-   <div class="body">
-    <div class="section">01 · Smart document scan</div>
-    <div class="uploadbox">
-     <div class="uploadicon">📄</div>
-     <h4>Upload Farmer Registration Form</h4>
-     <p>Choose a clear JPG, PNG or PDF. OCR will attempt to read the document in your browser.</p>
-     <input id="formUpload" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf,image/jpeg,image/png,image/webp,application/pdf">
-     <div class="progress" id="progress"><span id="progressBar"></span></div>
-     <div id="scanStatus" class="status" role="status" aria-live="polite"></div>
-    </div>
-    <div class="btnrow">
-     <button type="button" class="btn primary" id="scanBtn">✦ Auto-Extract Details</button>
-     <button type="button" class="btn soft" id="clearUpload">Remove Upload</button>
-    </div>
-    <div class="tip"><b>Privacy & accuracy:</b> OCR may misread names, numbers and Marathi text. Review each field manually. This page does not submit the uploaded form to a server through its own code; OCR libraries load from external CDNs. Avoid uploading documents containing information you do not need.</div>
-
-    <hr style="border:0;border-top:1px solid #e6ede7;margin:22px 0">
-    <div class="section">02 · Farmer profile</div>
-    <form id="cardForm">
-     <div class="grid">
-      <div class="field full">
-       <label for="photo">Farmer photo (optional)</label>
-       <input id="photo" type="file" accept="image/png,image/jpeg,image/webp">
-       <small class="help">Choose a photo if the form scan does not contain a usable portrait.</small>
-      </div>
-      <div class="field"><label for="name">Farmer name</label><input id="name" maxlength="90" placeholder="Enter name"></div>
-      <div class="field"><label for="father">Father / guardian name</label><input id="father" maxlength="90" placeholder="Optional"></div>
-      <div class="field"><label for="farmerId">Farmer reference ID</label><input id="farmerId" maxlength="30" placeholder="Optional"></div>
-      <div class="field"><label for="language">Card language</label><select id="language"><option value="en">English</option><option value="mr">मराठी</option><option value="hi">हिन्दी</option></select></div>
-     </div>
-
-     <div class="section" style="margin-top:21px">03 · Location details</div>
-     <div class="grid">
-      <div class="field"><label for="state">State</label><input id="state" maxlength="60" placeholder="State"></div>
-      <div class="field"><label for="district">District</label><input id="district" maxlength="60" placeholder="District"></div>
-      <div class="field"><label for="subdistrict">Sub-district / Taluka</label><input id="subdistrict" maxlength="60" placeholder="Taluka"></div>
-      <div class="field"><label for="village">Village</label><input id="village" maxlength="60" placeholder="Village"></div>
-     </div>
-
-     <div class="section" style="margin-top:21px">04 · Land details</div>
-     <div class="grid">
-      <div class="field"><label for="survey">Survey / Gat number</label><input id="survey" maxlength="35" placeholder="Optional"></div>
-      <div class="field"><label for="subdivision">Sub-division</label><input id="subdivision" maxlength="35" placeholder="Optional"></div>
-      <div class="field full"><label for="area">Land area</label><input id="area" maxlength="40" placeholder="e.g. 2.02 acres"></div>
-     </div>
-
-     <div class="section" style="margin-top:21px">05 · Card appearance</div>
-     <div class="themegrid">
-      <button type="button" class="themebtn active" data-theme="theme-green"><span class="swatch" style="background:linear-gradient(90deg,#10452f,#23774c,#c9ac60)"></span>Forest</button>
-      <button type="button" class="themebtn" data-theme="theme-leaf"><span class="swatch" style="background:linear-gradient(90deg,#285a3a,#659467,#cbdcb0)"></span>Leaf</button>
-      <button type="button" class="themebtn" data-theme="theme-blue"><span class="swatch" style="background:linear-gradient(90deg,#183c60,#3478a0,#d2b56a)"></span>Blue</button>
-      <button type="button" class="themebtn" data-theme="theme-gold"><span class="swatch" style="background:linear-gradient(90deg,#5b421c,#a98232,#e6d39a)"></span>Gold</button>
-     </div>
-
-     <div class="btnrow">
-      <button class="btn primary" type="submit">Update Card Preview</button>
-      <button class="btn soft" type="button" id="resetBtn">Clear Details</button>
-     </div>
-     <div class="btnrow">
-      <button class="btn gold" type="button" id="pdfBtn">Download A4 PDF</button>
-      <button class="btn dark" type="button" id="printBtn">Print</button>
-     </div>
-     <div class="tip"><b>Official status:</b> This is a personal-use sample card, not a government-issued identity document. Do not use it to claim official identity or benefits.</div>
-    </form>
-   </div>
-  </section>
-
-  <section class="panel previewpanel">
-   <div class="panelhead previewintro">
-    <h3>Live Front & Back Preview</h3>
-    <p>Changes update the card automatically. Print or download after checking the details.</p>
-   </div>
-   <div class="body previewbody">
-    <div class="previewhead"><h3>Card Preview</h3><span>85.6 × 54 mm concept</span></div>
-    <div class="cards" id="printArea">
-     <article class="card theme-green" id="frontCard">
-      <div class="cardhead">
-       <div class="logo"><div class="logoicon">🌾</div><div><div class="logoname">KISAN SEVA TOOLS</div><div class="logosub">PERSONAL FARM PROFILE</div></div></div>
-       <div class="cardtag">PERSONAL USE</div>
-      </div>
-      <div class="cardtitle"><h2 id="frontTitle">FARMER PROFILE CARD</h2><p>KISAN SEVA TOOLS · PERSONAL DESIGN</p><div class="linegold"></div></div>
-      <div class="frontcontent">
-       <div class="photoarea"><img id="photoPreview" alt="Farmer photo"><div class="photoempty" id="photoEmpty"><b>♙</b>FARMER PHOTO</div></div>
-       <div class="details">
-        <div class="drow"><strong id="nameLabel">Name:</strong><span id="outName" class="blank">—</span></div>
-        <div class="drow"><strong id="fatherLabel">Father:</strong><span id="outFather" class="blank">—</span></div>
-        <div class="drow"><strong id="idLabel">Reference:</strong><span id="outId" class="blank">—</span></div>
-        <div class="bigid"><span id="idCaption">FARMER REFERENCE ID</span><br><b id="outBigId">SAMPLE</b></div>
-       </div>
-       <div class="qrcol"><div class="qrbox"><div id="qrFront"><div class="qrplaceholder">QR<br>PREVIEW</div></div></div><div class="qrlabel">SAMPLE QR CODE</div></div>
-      </div>
-      <div class="disclaimer" id="frontDisclaimer">PERSONAL-USE SAMPLE · NOT A GOVERNMENT-ISSUED CARD</div>
-      <div class="cardfooter"><span>KISAN SEVA TOOLS</span><b>PERSONAL USE ONLY</b></div>
-     </article>
-
-     <article class="card theme-green" id="backCard">
-      <div class="cardhead">
-       <div class="logo"><div class="logoicon">🌿</div><div><div class="logoname">KISAN SEVA TOOLS</div><div class="logosub">FARM & LAND PROFILE</div></div></div>
-       <div class="cardtag">SAMPLE DESIGN</div>
-      </div>
-      <div class="cardtitle"><h2 id="backTitle">FARMER INFORMATION</h2><p id="backSubtitle">LOCATION & LAND DETAILS</p><div class="linegold"></div></div>
-      <div class="address"><strong id="addressLabel">ADDRESS:</strong><span id="outAddress" class="blank">—</span></div>
-      <div class="landwrap"><table class="landtable">
-       <thead><tr><th id="thState">STATE</th><th id="thDistrict">DISTRICT</th><th id="thSub">SUB-DIST.</th><th id="thVillage">VILLAGE</th><th id="thSurvey">SURVEY NO.</th><th id="thSubdivision">SUB-DIV.</th><th id="thArea">AREA</th></tr></thead>
-       <tbody><tr><td id="outState" class="blank">—</td><td id="outDistrict" class="blank">—</td><td id="outSubdistrict" class="blank">—</td><td id="outVillage" class="blank">—</td><td id="outSurvey" class="blank">—</td><td id="outSubdivision" class="blank">—</td><td id="outArea" class="blank">—</td></tr></tbody>
-      </table></div>
-      <div class="backnotes">
-       <div class="note"><strong id="noteLabel">NOTE:</strong><span>Personal-use profile sample</span></div>
-       <div class="note"><strong id="referenceLabel">REFERENCE:</strong><span id="outBackId" class="blank">—</span></div>
-      </div>
-      <div class="disclaimer" id="backDisclaimer">NOT ISSUED OR VERIFIED BY ANY GOVERNMENT DEPARTMENT</div>
-      <div class="cardfooter"><span>PERSONAL FARM PROFILE</span><b>NOT AN OFFICIAL ID</b></div>
-     </article>
-    </div>
-    <p class="help printnote" style="margin-top:13px">A4 PDF arranges the front and back side by side. Actual OCR accuracy depends on image clarity, handwriting, language and form layout.</p>
-   </div>
-  </section>
+<section class="panel previewpanel">
+ <div class="panelhead">
+  <h2>Front & Back Card Preview</h2>
+  <p>Landscape card format inspired by your reference. Preview updates automatically.</p>
  </div>
+ <div class="cardstage">
+  <div class="previewtitle"><h3>Front Side</h3><span>85.6 × 54 mm concept</span></div>
+  <div class="cards" id="printArea">
+   <article class="card" id="frontCard">
+    <div class="ctop">
+     <div class="brand">CSC SEVA TOOLS<small>PERSONAL FARM PROFILE</small></div>
+     <div class="topright">PERSONAL USE</div>
+    </div>
+    <div class="ctitle"><h3>FARMER PROFILE CARD</h3><p>किसान प्रोफाइल · PERSONAL USE</p><div class="goldline"></div></div>
+    <div class="frontbody">
+     <div class="photo"><img id="photoPreview" alt="Farmer photo"><div class="photoempty" id="photoEmpty"><b>♙</b>FARMER PHOTO</div></div>
+     <div class="details">
+      <div class="drow"><b>Name:</b> <span id="outName">—</span></div>
+      <div class="drow"><b>Father:</b> <span id="outFather">—</span></div>
+      <div class="drow"><b>DOB:</b> <span id="outDob">—</span></div>
+      <div class="drow"><b>Gender:</b> <span id="outGender">—</span></div>
+      <div class="drow"><b>Mobile:</b> <span id="outMobile">—</span></div>
+      <div class="idbox">FARMER REFERENCE ID<br><strong id="outId">SAMPLE</strong></div>
+     </div>
+     <div class="qrcol"><div class="qrbox"><div id="qr"></div></div><div class="qrlabel">SAMPLE QR</div></div>
+    </div>
+    <div class="disclaimer">PERSONAL USE ONLY · NOT A GOVERNMENT-ISSUED DOCUMENT</div>
+    <div class="cbottom"><span>CSC SEVA TOOLS</span><b>PERSONAL FARM PROFILE</b></div>
+   </article>
+
+   <article class="card" id="backCard">
+    <div class="ctop">
+     <div class="brand">CSC SEVA TOOLS<small>FARM & LAND PROFILE</small></div>
+     <div class="topright">SAMPLE DESIGN</div>
+    </div>
+    <div class="ctitle"><h3>FARMER INFORMATION</h3><p>LOCATION & LAND DETAILS</p><div class="goldline"></div></div>
+    <div class="address"><b>ADDRESS:</b> <span id="outAddress">—</span></div>
+    <table class="landtable">
+     <thead><tr><th>STATE</th><th>DISTRICT</th><th>SUB DIST</th><th>VILL</th><th>S.NO</th><th>S/S</th><th>AREA</th></tr></thead>
+     <tbody><tr><td id="outState">—</td><td id="outDistrict">—</td><td id="outSubdistrict">—</td><td id="outVillage">—</td><td id="outSurvey">—</td><td id="outSubdivision">—</td><td id="outArea">—</td></tr></tbody>
+    </table>
+    <div class="backnote"><b>NOTE:</b><span>Personal-use sample profile</span></div>
+    <div class="backnote"><b>REFERENCE:</b><span id="outBackId">—</span></div>
+    <div class="disclaimer">NOT ISSUED OR VERIFIED BY ANY GOVERNMENT DEPARTMENT</div>
+    <div class="cbottom"><span>CSC SEVA TOOLS</span><b>NOT AN OFFICIAL ID</b></div>
+   </article>
+  </div>
+  <p class="help printnote" style="margin-top:12px">A4 PDF places both card sides next to each other. Check the preview before printing.</p>
+ </div>
+</section>
+</div>
 </main>
 
 <script>
 (function(){
 "use strict";
 const $=id=>document.getElementById(id);
-const form=$("cardForm");
-let theme="theme-green";
-let selectedFile=null;
-let ocrText="";
+let selectedTheme="green";
+let uploadedFile=null;
 
-if(window.pdfjsLib){
- pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-}
+function value(id){return $(id).value.trim()}
+function put(id,text){$(id).textContent=text||"—"}
+function message(text,error=false){$("scanStatus").textContent=text;$("scanStatus").style.color=error?"#a3342c":"#2b6940"}
 
-const labels={
- en:{front:"FARMER PROFILE CARD",back:"FARMER INFORMATION",sub:"LOCATION & LAND DETAILS",name:"Name:",father:"Father:",ref:"Reference:",id:"FARMER REFERENCE ID",address:"ADDRESS:",state:"STATE",district:"DISTRICT",sub:"SUB-DIST.",village:"VILLAGE",survey:"SURVEY NO.",subdivision:"SUB-DIV.",area:"AREA",note:"NOTE:",reference:"REFERENCE:",frontDisc:"PERSONAL-USE SAMPLE · NOT A GOVERNMENT-ISSUED CARD",backDisc:"NOT ISSUED OR VERIFIED BY ANY GOVERNMENT DEPARTMENT"},
- mr:{front:"शेतकरी प्रोफाइल कार्ड",back:"शेतकरी माहिती",sub:"गाव व जमीन तपशील",name:"नाव:",father:"वडिलांचे नाव:",ref:"संदर्भ:",id:"शेतकरी संदर्भ",address:"पत्ता:",state:"राज्य",district:"जिल्हा",sub:"तालुका",village:"गाव",survey:"गट नं.",subdivision:"उपविभाग",area:"क्षेत्र",note:"टीप:",reference:"संदर्भ:",frontDisc:"वैयक्तिक नमुना · सरकारी कार्ड नाही",backDisc:"कोणत्याही सरकारी विभागाने जारी केलेले नाही"},
- hi:{front:"किसान प्रोफाइल कार्ड",back:"किसान जानकारी",sub:"स्थान और भूमि विवरण",name:"नाम:",father:"पिता का नाम:",ref:"संदर्भ:",id:"किसान संदर्भ",address:"पता:",state:"राज्य",district:"जिला",sub:"तहसील",village:"गाँव",survey:"सर्वे नं.",subdivision:"उपविभाग",area:"क्षेत्र",note:"नोट:",reference:"संदर्भ:",frontDisc:"व्यक्तिगत नमूना · सरकारी कार्ड नहीं",backDisc:"किसी सरकारी विभाग द्वारा जारी नहीं"}
-};
-
-function val(id){return $(id).value.trim()}
-function put(id,text){
- const el=$(id);el.textContent=text||"—";
- el.classList.toggle("blank",!text);
-}
-function status(message,type="info"){
- const el=$("scanStatus");el.textContent=message;el.className="status show "+type;
-}
-function progress(percent,visible=true){
- $("progress").style.display=visible?"block":"none";
- $("progressBar").style.width=percent+"%";
-}
-function applyLanguage(){
- const t=labels[val("language")]||labels.en;
- const pairs={
- frontTitle:t.front,backTitle:t.back,backSubtitle:t.sub,
- nameLabel:t.name,fatherLabel:t.father,idLabel:t.ref,idCaption:t.id,
- addressLabel:t.address,thState:t.state,thDistrict:t.district,
- thSub:t.sub,thVillage:t.village,thSurvey:t.survey,
- thSubdivision:t.subdivision,thArea:t.area,noteLabel:t.note,
- referenceLabel:t.reference,frontDisclaimer:t.frontDisc,backDisclaimer:t.backDisc
- };
- Object.entries(pairs).forEach(([id,text])=>$(id).textContent=text);
-}
-function renderQR(){
- const target=$("qrFront");target.innerHTML="";
- if(!window.QRCode){target.innerHTML='<div class="qrplaceholder">QR unavailable</div>';return}
- const data={
-  type:"PERSONAL_FARM_PROFILE_SAMPLE",
-  reference:val("farmerId"),
-  name:val("name"),
-  village:val("village"),
-  district:val("district"),
-  sample:true
- };
- new QRCode(target,{text:JSON.stringify(data),width:130,height:130,colorDark:"#163e2a",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
-}
 function updateCard(){
- put("outName",val("name"));put("outFather",val("father"));put("outId",val("farmerId"));
- put("outBigId",val("farmerId")||"SAMPLE");
- put("outAddress",[val("village"),val("subdistrict"),val("district"),val("state")].filter(Boolean).join(", "));
- ["state","district","subdistrict","village","survey","subdivision","area"].forEach(id=>{
-  const outId=id==="subdistrict"?"outSubdistrict":id==="subdivision"?"outSubdivision":"out"+id.charAt(0).toUpperCase()+id.slice(1);
-  put(outId,val(id));
- });
- put("outBackId",val("farmerId"));
- applyLanguage();renderQR();
+ put("outName",value("name"));
+ put("outFather",value("father"));
+ put("outDob",value("dob"));
+ put("outGender",value("gender"));
+ put("outMobile",value("mobile"));
+ put("outId",value("farmerId")||"SAMPLE");
+ put("outAddress",[value("village"),value("subdistrict"),value("district"),value("state")].filter(Boolean).join(", "));
+ ["state","district","subdistrict","village","survey","subdivision","area"].forEach(id=>put("out"+id.charAt(0).toUpperCase()+id.slice(1),value(id)));
+ put("outBackId",value("farmerId")||"—");
+ makeQR();
 }
-form.addEventListener("input",updateCard);
-form.addEventListener("change",updateCard);
-form.addEventListener("submit",e=>{e.preventDefault();updateCard();status("Card preview updated.","ok")});
+function makeQR(){
+ const el=$("qr");el.innerHTML="";
+ if(!window.QRCode){el.textContent="QR unavailable";return}
+ const payload={
+  type:"PERSONAL_USE_SAMPLE",
+  reference:value("farmerId"),
+  name:value("name"),
+  village:value("village"),
+  district:value("district")
+ };
+ new QRCode(el,{text:JSON.stringify(payload),width:120,height:120,correctLevel:QRCode.CorrectLevel.M});
+}
+$("farmerForm").addEventListener("input",updateCard);
+$("farmerForm").addEventListener("change",updateCard);
+$("farmerForm").addEventListener("submit",e=>{e.preventDefault();updateCard();message("Card preview updated.")});
 
-document.querySelectorAll("[data-theme]").forEach(btn=>{
- btn.addEventListener("click",()=>{
-  theme=btn.dataset.theme;
-  ["frontCard","backCard"].forEach(id=>{
-   $(id).classList.remove("theme-green","theme-leaf","theme-blue","theme-gold");
-   $(id).classList.add(theme);
-  });
-  document.querySelectorAll("[data-theme]").forEach(b=>b.classList.toggle("active",b===btn));
+document.querySelectorAll("[data-theme]").forEach(btn=>btn.addEventListener("click",()=>{
+ selectedTheme=btn.dataset.theme;
+ ["frontCard","backCard"].forEach(id=>{
+  $(id).classList.remove("blue","leaf","goldtheme");
+  if(selectedTheme!=="green")$(id).classList.add(selectedTheme);
  });
-});
+}));
 
-$("formUpload").addEventListener("change",e=>{
- selectedFile=e.target.files&&e.target.files[0];
- ocrText="";
- if(selectedFile)status("Selected: "+selectedFile.name+". Tap Auto-Extract Details to scan it.","info");
-});
-$("clearUpload").addEventListener("click",()=>{
- $("formUpload").value="";selectedFile=null;ocrText="";
- status("Upload removed.","ok");progress(0,false);
-});
-
-$("photo").addEventListener("change",()=>{
- const file=$("photo").files[0];if(!file)return;
+$("photoInput").addEventListener("change",()=>{
+ const file=$("photoInput").files[0];if(!file)return;
  if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){
-  $("photo").value="";status("Choose JPG, PNG or WEBP up to 5 MB.","err");return;
+  $("photoInput").value="";message("Choose JPG, PNG or WEBP up to 5 MB.",true);return;
  }
  const reader=new FileReader();
- reader.onload=e=>{$("photoPreview").src=e.target.result;$("photoPreview").style.display="block";$("photoEmpty").style.display="none";};
+ reader.onload=e=>{$("photoPreview").src=e.target.result;$("photoPreview").style.display="block";$("photoEmpty").style.display="none"};
  reader.readAsDataURL(file);
 });
 
-async function getOCRImage(file){
+$("formUpload").addEventListener("change",e=>{
+ uploadedFile=e.target.files[0]||null;
+ if(uploadedFile)message("Selected "+uploadedFile.name+". Tap Auto Fill Details.");
+});
+$("removeUpload").addEventListener("click",()=>{
+ $("formUpload").value="";uploadedFile=null;message("Upload removed.");
+});
+
+if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+async function scanFile(file){
+ let source=file;
  if(file.type==="application/pdf"||file.name.toLowerCase().endsWith(".pdf")){
-  if(!window.pdfjsLib)throw new Error("PDF reader library could not load. Try uploading a page image.");
-  const bytes=await file.arrayBuffer();
-  const pdf=await pdfjsLib.getDocument({data:bytes}).promise;
-  if(pdf.numPages<1)throw new Error("No pages found in this PDF.");
+  if(!window.pdfjsLib)throw Error("PDF reader unavailable. Try an image instead.");
+  const pdf=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;
+  if(!pdf.numPages)throw Error("No pages found.");
   const page=await pdf.getPage(1);
   const viewport=page.getViewport({scale:2});
   const canvas=document.createElement("canvas");
   canvas.width=viewport.width;canvas.height=viewport.height;
   await page.render({canvasContext:canvas.getContext("2d"),viewport}).promise;
-  return canvas;
+  source=canvas;
  }
- if(!file.type.startsWith("image/"))throw new Error("Upload a JPG, PNG, WEBP or PDF file.");
- return file;
-}
-async function extractText(file){
- if(!window.Tesseract)throw new Error("OCR library could not load. Check your internet connection and reload.");
- const image=await getOCRImage(file);
- const result=await Tesseract.recognize(image,"eng",{
-  logger:m=>{
-   if(m.status==="recognizing text"){
-    progress(Math.round((m.progress||0)*100),true);
-    status("Reading document… "+Math.round((m.progress||0)*100)+"%","info");
-   }
-  }
+ if(!window.Tesseract)throw Error("OCR library failed to load. Check internet and reload.");
+ const result=await Tesseract.recognize(source,"eng",{
+  logger:m=>{if(m.status==="recognizing text")message("Reading form: "+Math.round((m.progress||0)*100)+"%")}
  });
  return result.data.text||"";
 }
-function findMatch(text,patterns){
- for(const pattern of patterns){
-  const regex=new RegExp("(?:^|\\n)\\s*(?:"+pattern+")\\s*[:：\\-]?\\s*([^\\n]{2,100})","im");
-  const match=text.match(regex);
-  if(match&&match[1])return match[1].trim().replace(/[|]+/g," ").replace(/\s{2,}/g," ").trim();
+function extract(text,patterns){
+ for(const p of patterns){
+  const re=new RegExp("(?:^|\\n)\\s*(?:"+p+")\\s*[:：\\-]?\\s*([^\\n]{2,90})","im");
+  const m=text.match(re);if(m&&m[1])return m[1].trim().replace(/\s{2,}/g," ");
  }
  return "";
 }
-function cleanValue(v){
- return (v||"").replace(/^[\s:;|#\-]+/,"").replace(/\s{2,}/g," ").trim();
-}
-function fillIfFound(id,text,patterns){
- const match=findMatch(text,patterns);
- if(match){
-  const cleaned=cleanValue(match);
-  if(cleaned)$(id).value=cleaned;
- }
-}
-function applyOCR(text){
- const lines=text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
- fillIfFound("name",text,["farmer name","name of farmer","name"]);
- fillIfFound("father",text,["father(?:'s)? name","father name","husband name","guardian name"]);
- fillIfFound("farmerId",text,["farmer id","farmer reference id","registration id","registration no","farmer number"]);
- fillIfFound("state",text,["state"]);
- fillIfFound("district",text,["district"]);
- fillIfFound("subdistrict",text,["sub[ -]?district","taluka","tehsil"]);
- fillIfFound("village",text,["village","vill"]);
- fillIfFound("survey",text,["survey(?:\\s*\\/\\s*gat)?(?:\\s*no)?","gat number","gat no","survey number"]);
- fillIfFound("subdivision",text,["sub[ -]?division","sub division","s\\/s"]);
- fillIfFound("area",text,["land area","area","total area"]);
- updateCard();
- return lines.length;
-}
 $("scanBtn").addEventListener("click",async()=>{
- if(!selectedFile){status("First choose a registration form image or PDF.","err");return}
- const button=$("scanBtn");button.disabled=true;button.textContent="Scanning…";progress(0,true);
+ if(!uploadedFile){message("Choose a registration form image or PDF first.",true);return}
+ const btn=$("scanBtn");btn.disabled=true;btn.textContent="Scanning...";
  try{
-  status("Preparing document for OCR…","info");
-  ocrText=await extractText(selectedFile);
-  if(!ocrText.trim())throw new Error("No readable text found. Try a clearer, straight image or enter details manually.");
-  const count=applyOCR(ocrText);
-  progress(100,true);
-  status("Scan complete. Please review every field. OCR text was read from "+count+" lines; handwriting and regional-language text may not be recognised accurately.","ok");
- }catch(err){
-  console.error(err);status(err.message||"Could not scan this document.","err");
- }finally{
-  button.disabled=false;button.textContent="✦ Auto-Extract Details";
-  setTimeout(()=>progress(0,false),1200);
- }
+  const text=await scanFile(uploadedFile);
+  if(!text.trim())throw Error("No readable text found. Try a clearer image.");
+  const mapping={
+   name:["farmer name","name of farmer","name"],
+   father:["father name","father's name","husband name","guardian name"],
+   farmerId:["farmer id","farmer reference id","registration number","registration no"],
+   state:["state"],district:["district"],subdistrict:["sub district","taluka","tehsil"],
+   village:["village","vill"],survey:["survey no","survey number","gat no","gat number"],
+   subdivision:["subdivision","sub division","s/s"],area:["land area","area"]
+  };
+  let found=0;
+  Object.entries(mapping).forEach(([id,patterns])=>{
+   const v=extract(text,patterns);
+   if(v){$(id).value=v;found++}
+  });
+  updateCard();
+  message("Auto-fill finished: "+found+" fields found. Verify and correct each field before downloading.");
+ }catch(err){console.error(err);message(err.message||"Unable to scan document.",true)}
+ finally{btn.disabled=false;btn.textContent="✦ Auto Fill Details"}
 });
 
-$("resetBtn").addEventListener("click",()=>{
- form.reset();$("formUpload").value="";selectedFile=null;ocrText="";
- $("photoPreview").removeAttribute("src");$("photoPreview").style.display="none";$("photoEmpty").style.display="block";
- theme="theme-green";
- ["frontCard","backCard"].forEach(id=>{
-  $(id).classList.remove("theme-leaf","theme-blue","theme-gold");$(id).classList.add("theme-green");
- });
- document.querySelectorAll("[data-theme]").forEach(b=>b.classList.toggle("active",b.dataset.theme==="theme-green"));
- updateCard();status("Form fields cleared.","ok");
+$("clearBtn").addEventListener("click",()=>{
+ $("farmerForm").reset();
+ $("photoPreview").removeAttribute("src");
+ $("photoPreview").style.display="none";$("photoEmpty").style.display="block";
+ updateCard();message("Details cleared.");
 });
+
 $("printBtn").addEventListener("click",()=>{updateCard();window.print()});
+
+/* ₹10 wallet charge. Uses the existing CSC wallet keys.
+   Download is attempted only after balance check and confirmation. */
+function getBalance(){return Number(localStorage.getItem("kst_balance")||0)}
+function logTransaction(){
+ let history;
+ try{history=JSON.parse(localStorage.getItem("kst_history")||"[]")}catch(e){history=[]}
+ history.unshift({service:"Farmer Card A4 PDF",amount:-10,date:new Date().toLocaleString()});
+ localStorage.setItem("kst_history",JSON.stringify(history));
+}
 $("pdfBtn").addEventListener("click",async()=>{
  if(!window.html2canvas||!window.jspdf||!window.jspdf.jsPDF){
-  status("PDF library did not load. Check internet or use Print.","err");return;
+  message("PDF libraries unavailable. Check internet or use Print.",true);return;
  }
- const button=$("pdfBtn");button.disabled=true;button.textContent="Preparing PDF…";
+ const balance=getBalance();
+ if(balance<10){alert("Farmer Card PDF charge: ₹10\nWallet balance: ₹"+balance+"\nPlease add wallet balance first.");return}
+ if(!confirm("Download Farmer Card PDF for ₹10?\nCurrent wallet balance: ₹"+balance))return;
+ const btn=$("pdfBtn");btn.disabled=true;btn.textContent="Preparing PDF...";
+ let charged=false;
  try{
+  localStorage.setItem("kst_balance",String(balance-10));charged=true;
+  logTransaction();
   updateCard();
   const {jsPDF}=window.jspdf;
   const pdf=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
   const w=85.6,h=54,gap=8,x=(210-(w*2+gap))/2,y=(297-h)/2;
   for(const [i,id] of ["frontCard","backCard"].entries()){
-   const canvas=await html2canvas($(id),{scale:3,backgroundColor:"#ffffff",useCORS:true,logging:false});
+   const canvas=await html2canvas($(id),{scale:3,backgroundColor:"#ffffff",logging:false});
    pdf.addImage(canvas.toDataURL("image/png"),"PNG",x+i*(w+gap),y,w,h);
   }
-  pdf.save("Kisan-Seva-Personal-Farmer-Card.pdf");
-  status("A4 PDF downloaded successfully.","ok");
+  pdf.save("CSC-Seva-Tools-Personal-Farmer-Card.pdf");
+  alert("PDF downloaded. ₹10 deducted from wallet.");
  }catch(err){
-  console.error(err);status("PDF creation failed. Try Print or reload the page.","err");
- }finally{button.disabled=false;button.textContent="Download A4 PDF"}
+  console.error(err);
+  if(charged){
+   localStorage.setItem("kst_balance",String(getBalance()+10));
+   let history;
+   try{history=JSON.parse(localStorage.getItem("kst_history")||"[]")}catch(e){history=[]}
+   const index=history.findIndex(t=>t.service==="Farmer Card A4 PDF");
+   if(index>=0)history.splice(index,1);
+   localStorage.setItem("kst_history",JSON.stringify(history));
+  }
+  message("PDF failed. If payment was deducted, the page attempted to refund ₹10. Check wallet history.",true);
+ }finally{btn.disabled=false;btn.textContent="Download A4 PDF — ₹10"}
 });
+
 updateCard();
 })();
 </script>
