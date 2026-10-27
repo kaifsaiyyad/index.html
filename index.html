@@ -4,354 +4,347 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#123f2d">
-<title>Kisan Seva Tools — Farmer Profile Card Designer</title>
+<meta name="theme-color" content="#104b32">
+<title>Kisan Seva Tools | Farmer Card Designer</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-:root {
-  --green:#15583b;
-  --deep:#0b3525;
-  --leaf:#287a50;
-  --gold:#c8aa62;
-  --ink:#20372b;
-  --muted:#6c7c71;
-  --line:#dce6dc;
+:root{
+  --green:#17633f;
+  --dark:#10452f;
+  --light:#e8f1e9;
+  --gold:#c5aa59;
+  --border:#cbdccf;
 }
 *{box-sizing:border-box}
 body{
   margin:0;
-  background:linear-gradient(145deg,#f7faf6,#e9f1ea);
+  background:#edf3ee;
+  color:#203b2b;
   font-family:Arial,Helvetica,sans-serif;
-  color:var(--ink);
 }
 header{
-  padding:20px 16px;
+  background:linear-gradient(110deg,#103e2a,#197147);
   color:white;
-  background:linear-gradient(115deg,#0b3525,#15583b 60%,#287a50);
+  text-align:center;
+  padding:18px 12px;
   border-bottom:3px solid var(--gold);
-  box-shadow:0 8px 24px #123c271c;
 }
-.brand{
-  max-width:1180px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  gap:13px;
-}
-.brand-mark{
-  width:48px;height:48px;
-  border:1px solid #d7c27f;
-  border-radius:15px;
-  display:grid;place-items:center;
-  background:#ffffff12;
-  font-size:25px;
-}
-.brand h1{font-size:clamp(20px,3vw,28px);margin:0}
-.brand p{font-size:12px;margin:5px 0 0;color:#e2eee4}
-.header-pill{
-  margin-left:auto;
-  border:1px solid #ffffff50;
-  border-radius:999px;
-  padding:8px 12px;
-  font-size:10px;font-weight:bold;
-}
-main{max-width:1180px;margin:24px auto;padding:0 16px 40px}
+header h1{font-size:24px;margin:0;letter-spacing:.3px}
+header p{font-size:12px;margin:5px 0 0;color:#e1eee4}
+.container{max-width:1100px;margin:22px auto;padding:0 14px}
 .intro{margin-bottom:18px}
-.eyebrow{
-  color:#8a7137;font-size:11px;font-weight:900;
-  letter-spacing:1.8px;text-transform:uppercase
-}
-h2{margin:5px 0;color:var(--deep);font-size:clamp(22px,3vw,30px)}
-.intro p{max-width:700px;color:var(--muted);font-size:13px;line-height:1.6}
-.pill{
-  display:inline-block;border-radius:999px;padding:8px 11px;
-  background:#e3eee4;color:#1c603d;font-size:11px;font-weight:bold
-}
+.intro h2{margin:0 0 7px;font-size:23px;color:var(--dark)}
+.intro p{margin:0;color:#66796b;font-size:13px;line-height:1.6}
 .layout{
   display:grid;
-  grid-template-columns:minmax(300px,.85fr) minmax(0,1.15fr);
-  gap:20px;align-items:start
+  grid-template-columns:minmax(280px,.85fr) minmax(0,1.15fr);
+  gap:18px;align-items:start
 }
 .panel{
-  background:white;border:1px solid var(--line);
-  border-radius:20px;box-shadow:0 16px 40px #0f37230f;overflow:hidden
+  background:#fff;border:1px solid #dce7dd;
+  border-radius:15px;overflow:hidden;
+  box-shadow:0 5px 22px #123c2410
 }
-.panel-head{
-  padding:18px 20px;border-bottom:1px solid #edf1ed;
-  background:linear-gradient(100deg,#fff,#f8fbf7)
+.panel-head{padding:16px 18px;border-bottom:1px solid #e7eee7}
+.panel-head h3{margin:0;font-size:17px;color:var(--green)}
+.panel-head p{margin:5px 0 0;font-size:12px;color:#728074;line-height:1.5}
+.form-body{padding:17px 18px}
+.section-title{
+  margin:2px 0 12px;font-size:12px;font-weight:bold;
+  letter-spacing:.7px;color:#34704c;text-transform:uppercase
 }
-.panel-head h3{margin:0;font-size:16px;color:var(--deep)}
-.panel-head p{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
-.form-content{padding:18px 20px 20px}
-.section-label{
-  display:flex;align-items:center;gap:8px;
-  margin:3px 0 13px;color:#245b3c;
-  font-size:12px;font-weight:900;letter-spacing:.45px
-}
-.section-label:after{content:"";height:1px;flex:1;background:#e5ece5}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-.field{min-width:0;display:flex;flex-direction:column;gap:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
 .field.full{grid-column:1/-1}
-label{font-size:12px;font-weight:bold;color:#405c49}
+label{font-size:12px;font-weight:bold;color:#405b48}
 input,select{
-  width:100%;min-height:43px;padding:10px 12px;
-  border:1px solid #d6e0d6;border-radius:10px;
-  background:#fcfefb;color:#233a2c;font-size:13px
+  width:100%;min-height:40px;padding:9px 10px;
+  border:1px solid #cedbd0;border-radius:7px;
+  background:#fcfefc;font-size:13px;color:#243b2b
 }
-input:focus,select:focus{
-  outline:none;border-color:#36805a;
-  box-shadow:0 0 0 3px #36805a19
-}
-input[type=file]{padding:7px}
-.hint{font-size:10px;color:#78867b;line-height:1.4}
-.theme-options{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+input:focus,select:focus{outline:2px solid #b5d5be;border-color:#4d9569}
+.help{font-size:10px;line-height:1.5;color:#778579}
+.theme-list{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
 .theme-btn{
-  border:1px solid #dce5dc;background:white;color:#334b39;
-  padding:9px 5px;min-height:42px;border-radius:10px;
-  font-size:11px;font-weight:bold
+  background:white;border:1px solid #d7e2d8;border-radius:8px;
+  padding:8px 3px;font-size:11px;font-weight:bold;color:#34513c
 }
-.theme-btn[aria-pressed=true]{
-  border-color:#286b47;box-shadow:0 0 0 2px #286b471c;background:#eff6ef
-}
-.swatch{display:block;width:100%;height:5px;border-radius:99px;margin-bottom:6px}
-.sw-green{background:linear-gradient(90deg,#0b3525,#287a50,#c8aa62)}
-.sw-leaf{background:linear-gradient(90deg,#285b3c,#7fa66c,#d6e8bf)}
-.sw-blue{background:linear-gradient(90deg,#183c60,#3678a4,#c8aa62)}
-.sw-gold{background:linear-gradient(90deg,#57401b,#b38b39,#ead9a0)}
-.actions,.preview-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
-button{font:inherit;cursor:pointer}
+.theme-btn.active{border:2px solid #286b46;background:#f0f7f0}
+.swatch{display:block;height:5px;border-radius:8px;margin-bottom:5px}
+.s-green{background:linear-gradient(90deg,#10452f,#31865b,#c5aa59)}
+.s-leaf{background:linear-gradient(90deg,#2c6942,#8db078,#d6e6bf)}
+.s-blue{background:linear-gradient(90deg,#183f62,#4284a9,#d4b968)}
+.s-gold{background:linear-gradient(90deg,#5a421b,#b68e36,#ebd99a)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .btn{
-  border:0;border-radius:11px;min-height:43px;
-  padding:11px 15px;font-size:12px;font-weight:850
+  border:0;border-radius:8px;padding:11px 13px;
+  min-height:40px;font-size:12px;font-weight:bold;cursor:pointer
 }
-.btn-primary{background:linear-gradient(110deg,#124a30,#287a50);color:white}
-.btn-secondary{background:#edf4ed;color:#24583a;border:1px solid #d9e6da}
-.btn-dark{background:#25382c;color:white}
-.btn-gold{background:linear-gradient(110deg,#a47d2e,#d5b967);color:#172d20}
-.btn:disabled{opacity:.55;cursor:not-allowed}
-.privacy-note{
-  margin-top:14px;padding:11px 12px;border-radius:11px;
-  background:#f8f5e9;border:1px solid #eee2bd;
-  color:#6d5a2f;font-size:11px;line-height:1.55
+.primary{background:var(--green);color:white}
+.secondary{background:#edf4ed;color:#28583b;border:1px solid #d6e4d7}
+.dark{background:#2b3930;color:white}
+.gold{background:#c4a34d;color:#192e20}
+.btn:disabled{opacity:.6;cursor:wait}
+.notice{
+  margin-top:13px;padding:10px 11px;border-radius:8px;
+  background:#f8f4e6;border:1px solid #eee2b8;
+  color:#6f5c2f;font-size:11px;line-height:1.6
 }
-.preview-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.preview-head h3{margin:0;font-size:16px;color:var(--deep)}
-.preview-head span{font-size:10px;color:var(--muted)}
-.preview-content{padding:18px}
-.card-stack{display:grid;gap:18px}
+.status{display:none;margin-top:12px;padding:10px;border-radius:8px;font-size:12px}
+.status.show{display:block}
+.status.ok{background:#edf7ee;color:#215a35}
+.status.error{background:#fff0ef;color:#8b2929}
+
+/* CARD PREVIEW */
+.preview-body{padding:17px}
+.preview-title{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:8px;margin-bottom:14px
+}
+.preview-title h3{margin:0;font-size:17px;color:var(--green)}
+.preview-title span{font-size:10px;color:#778579}
+.card-stack{display:grid;gap:16px}
 .card{
-  --c1:#0b3525;--c2:#15583b;--accent:#c8aa62;
+  --c1:#10452f;--c2:#17633f;--accent:#c5aa59;
   position:relative;width:100%;aspect-ratio:85.6/54;
-  overflow:hidden;border-radius:15px;border:1px solid #c5d6c6;
-  background:#fff;box-shadow:0 12px 25px #143f2520;isolation:isolate
+  overflow:hidden;background:#fff;border-radius:10px;
+  border:1px solid #c6d8ca;
+  box-shadow:0 8px 20px #123d241b;
+  isolation:isolate;
 }
-.card.theme-leaf{--c1:#285b3c;--c2:#7fa66c;--accent:#d6e8bf}
-.card.theme-blue{--c1:#183c60;--c2:#3678a4;--accent:#c8aa62}
-.card.theme-gold{--c1:#57401b;--c2:#b38b39;--accent:#ead9a0}
+.card.theme-leaf{--c1:#285b3b;--c2:#639263;--accent:#c9d9a7}
+.card.theme-blue{--c1:#183c60;--c2:#3478a0;--accent:#d3b86c}
+.card.theme-gold{--c1:#59421d;--c2:#a98232;--accent:#e6d39a}
 .card:before{
-  content:"";position:absolute;inset:7px;
-  border:1px solid var(--accent);border-radius:10px;
+  content:"";position:absolute;inset:5px;
+  border:1px solid var(--accent);border-radius:7px;
   pointer-events:none;z-index:5
 }
 .card:after{
-  content:"";position:absolute;width:52%;height:160%;
-  right:-18%;top:-48%;transform:rotate(28deg);
-  border:1px solid #c8d9c855;border-radius:50%;
-  box-shadow:0 0 0 10px #ffffff08,0 0 0 22px #ffffff08;
-  pointer-events:none;z-index:-1
+  content:"";position:absolute;z-index:-1;
+  width:44%;height:140%;right:-15%;top:-25%;
+  border:1px solid #3c865526;border-radius:50%;
+  box-shadow:0 0 0 9px #3c86520c,0 0 0 18px #3c86520c;
+  transform:rotate(25deg)
 }
-.card-band{
-  position:relative;display:flex;justify-content:space-between;
-  align-items:center;gap:8px;padding:12px 17px;
-  background:linear-gradient(110deg,var(--c1),var(--c2));
-  color:white;min-height:52px
+.card-header{
+  position:relative;z-index:2;
+  min-height:15%;padding:2.3% 4%;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  background:linear-gradient(105deg,var(--c1),var(--c2));color:white
 }
-.brand-mini{display:flex;align-items:center;gap:8px;min-width:0}
-.brand-symbol{
-  width:28px;height:28px;border-radius:9px;
-  border:1px solid var(--accent);display:grid;place-items:center;
-  color:var(--accent);font-size:16px;flex:0 0 auto
+.logo{display:flex;align-items:center;gap:7px;min-width:0}
+.logo-icon{
+  width:25px;height:25px;border:1px solid var(--accent);
+  border-radius:7px;display:grid;place-items:center;
+  color:var(--accent);font-size:14px;flex-shrink:0
 }
-.brand-name{font-size:clamp(9px,1.3vw,13px);font-weight:900;letter-spacing:.5px}
-.brand-sub{font-size:8px;opacity:.8;margin-top:2px;letter-spacing:.8px}
-.sample-chip{
-  border:1px solid #ffffff8c;border-radius:999px;
-  padding:5px 7px;font-size:7px;font-weight:900;letter-spacing:.5px
+.logo-name{font-size:clamp(8px,1.2vw,12px);font-weight:900;letter-spacing:.4px}
+.logo-sub{font-size:7px;opacity:.85;margin-top:2px;letter-spacing:.6px}
+.card-tag{
+  border:1px solid #ffffff8c;border-radius:30px;
+  padding:4px 6px;font-size:clamp(5px,.7vw,7px);
+  font-weight:bold;white-space:nowrap
 }
-.card-inner{position:relative;z-index:2;padding:14px 17px 22px}
-.card-heading{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.card-heading h4{font-size:clamp(13px,2vw,19px);margin:0;color:var(--c1);letter-spacing:.7px}
-.card-heading p{font-size:8px;margin:3px 0 0;color:#68776b;letter-spacing:1px}
-.gold-rule{height:2px;width:42px;background:var(--accent);margin-top:7px;border-radius:9px}
-.front-layout{display:grid;grid-template-columns:25% 1fr;gap:14px;align-items:start}
+.front-heading{
+  position:relative;z-index:2;text-align:center;
+  padding:2.1% 2% 0
+}
+.front-heading h2{
+  font-size:clamp(12px,1.8vw,18px);margin:0;color:var(--c1);
+  letter-spacing:.8px
+}
+.front-heading p{
+  font-size:clamp(5px,.65vw,7px);margin:3px 0 0;
+  color:#758175;letter-spacing:1.2px;font-weight:bold
+}
+.gold-line{width:34px;height:2px;background:var(--accent);margin:5px auto 0}
+.front-content{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:23% minmax(0,1fr) 22%;
+  gap:3%;align-items:center;
+  padding:2.4% 4% 5%
+}
 .photo-frame{
-  aspect-ratio:3/3.7;border:1.5px solid var(--accent);
-  border-radius:8px;background:linear-gradient(145deg,#edf4ec,#f9fbf8);
-  display:grid;place-items:center;overflow:hidden
+  width:100%;aspect-ratio:3/3.7;
+  background:#edf3ed;border:1.4px solid var(--c2);
+  border-radius:5px;overflow:hidden;
+  display:grid;place-items:center
 }
 .photo-frame img{width:100%;height:100%;object-fit:cover;display:none}
-.photo-placeholder{text-align:center;color:#69806e;padding:6px}
-.person-icon{font-size:clamp(22px,4vw,38px);display:block;margin-bottom:5px}
-.photo-placeholder span:last-child{display:block;font-size:8px;font-weight:800}
-.profile-data{min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:9px 12px}
-.data-item{min-width:0;border-bottom:1px solid #e9eee8;padding-bottom:5px}
-.data-label{font-size:8px;color:#718074;font-weight:850;text-transform:uppercase;letter-spacing:.5px}
-.data-value{margin-top:3px;font-size:clamp(10px,1.5vw,14px);font-weight:850;color:#243b2b;overflow-wrap:anywhere}
-.data-value.empty{font-size:10px;font-weight:600;color:#8a978b}
-.id-strip{
-  display:inline-flex;align-items:center;gap:7px;margin-top:10px;
-  padding:7px 9px;border-radius:7px;
-  background:linear-gradient(110deg,var(--c1),var(--c2));
-  color:white;font-size:9px;font-weight:850;letter-spacing:.5px
-}
-.id-strip strong{color:#fff2c9;font-size:12px}
-.card-foot{
-  position:absolute;bottom:0;left:0;right:0;padding:7px 13px;
+.photo-placeholder{text-align:center;color:#66806b;font-size:7px;font-weight:bold}
+.photo-placeholder b{display:block;font-size:clamp(20px,3vw,34px);margin-bottom:5px}
+.details{min-width:0;display:grid;gap:5px}
+.detail-row{display:flex;gap:4px;min-width:0;font-size:clamp(7px,.95vw,10px);line-height:1.3}
+.detail-row strong{color:var(--c1);white-space:nowrap}
+.detail-row span{min-width:0;overflow-wrap:anywhere;color:#273d2d;font-weight:700}
+.detail-row .blank{color:#9aa49b;font-weight:normal}
+.farmer-id{
+  margin-top:3px;padding:6px 7px;border-radius:4px;
   background:linear-gradient(100deg,var(--c1),var(--c2));
-  color:white;display:flex;justify-content:space-between;align-items:center;
-  gap:8px;font-size:7px;letter-spacing:.2px
+  color:white;font-size:clamp(6px,.8vw,9px);font-weight:bold;
+  overflow-wrap:anywhere
 }
-.card-foot b{color:#fff0bf;font-size:8px}
-.back-summary{font-size:9px;color:#647568;line-height:1.5;margin:-4px 0 10px}
-.land-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;border:1px solid #dbe5db;border-radius:8px;overflow:hidden}
-.land-table th{background:#eef4ec;color:#315a3e;font-size:8px;text-align:left;padding:7px 6px;border-bottom:1px solid #dbe5db}
-.land-table td{font-size:clamp(8px,1.1vw,11px);font-weight:bold;color:#263d2c;padding:9px 6px;border-bottom:1px solid #e7ede6;overflow-wrap:anywhere}
-.back-bottom{display:grid;grid-template-columns:1fr 78px;gap:12px;align-items:center;margin-top:12px}
-.info-list{display:grid;gap:7px}
-.info-row{display:flex;gap:7px;font-size:9px;line-height:1.4;overflow-wrap:anywhere}
-.info-row b{color:#285c3d;min-width:85px}
-.qr-area{border:1px solid var(--accent);border-radius:8px;padding:6px;text-align:center;background:white;min-height:72px;display:grid;place-items:center}
-.qr-area #qrcode{width:100%;display:grid;place-items:center;min-height:56px}
-.qr-area #qrcode img,.qr-area #qrcode canvas{max-width:100%;height:auto!important}
-.qr-caption{font-size:7px;color:#68776b;font-weight:850;margin-top:3px}
-.empty-qr{font-size:9px;color:#829084;text-align:center;line-height:1.4}
-.card-disclaimer{
-  position:absolute;z-index:6;left:10px;right:10px;bottom:23px;
-  text-align:center;color:#6e7a70;font-size:7px;font-weight:800
+.farmer-id span{color:#fff0b8;font-size:clamp(9px,1.3vw,14px)}
+.qr-column{text-align:center;min-width:0}
+.qr-box{
+  width:100%;aspect-ratio:1;background:#fff;
+  border:1px solid var(--accent);border-radius:5px;
+  padding:4px;display:grid;place-items:center;overflow:hidden
 }
-.status{display:none;margin-top:12px;padding:11px 12px;border-radius:10px;font-size:12px;line-height:1.5}
-.status.show{display:block}
-.status.error{background:#fff0ef;color:#8b2824;border:1px solid #f0ceca}
-.status.ok{background:#edf7ed;color:#225d36;border:1px solid #cfe5d0}
-.preview-help{font-size:11px;color:var(--muted);line-height:1.55;margin:12px 0 0}
-footer{max-width:1180px;margin:auto;padding:0 16px 26px;color:#718074;font-size:11px;line-height:1.6}
-
+.qr-box #qrFront{width:100%;height:100%;display:grid;place-items:center}
+.qr-box canvas,.qr-box img{max-width:100%!important;max-height:100%!important}
+.qr-placeholder{font-size:8px;color:#879187;line-height:1.5}
+.qr-caption{font-size:clamp(5px,.65vw,7px);font-weight:bold;color:#69786b;margin-top:4px}
+.card-footer{
+  position:absolute;z-index:4;left:0;right:0;bottom:0;
+  min-height:10%;padding:1.8% 4%;
+  display:flex;align-items:center;justify-content:space-between;gap:7px;
+  background:linear-gradient(100deg,var(--c1),var(--c2));
+  color:white;font-size:clamp(5px,.7vw,7px);font-weight:bold
+}
+.card-footer b{color:#fff0b8;letter-spacing:.3px}
+.back-heading{position:relative;z-index:2;padding:2.5% 4% 1%}
+.back-heading h2{
+  margin:0;text-align:center;color:var(--c1);
+  font-size:clamp(12px,1.8vw,18px);letter-spacing:.5px
+}
+.back-heading p{
+  margin:4px 0 0;text-align:center;font-size:clamp(5px,.65vw,7px);
+  color:#6c7c6f;letter-spacing:.8px;font-weight:bold
+}
+.address-line{
+  position:relative;z-index:2;margin:1.8% 4% 1.5%;
+  display:flex;gap:6px;align-items:baseline;
+  font-size:clamp(7px,.9vw,10px);overflow-wrap:anywhere
+}
+.address-line strong{color:var(--c1);white-space:nowrap}
+.address-line span{font-weight:bold;overflow-wrap:anywhere}
+.land-table-wrap{position:relative;z-index:2;margin:0 4%;overflow:hidden;border:1px solid #cbd9cc;border-radius:5px}
+.land-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.land-table th{
+  background:#edf4ed;color:var(--c1);
+  font-size:clamp(5px,.68vw,8px);padding:6px 2px;
+  border-right:1px solid #d7e2d8;overflow-wrap:anywhere
+}
+.land-table td{
+  text-align:center;color:#293e2e;font-weight:bold;
+  font-size:clamp(6px,.8vw,9px);padding:7px 2px;
+  border-top:1px solid #d7e2d8;border-right:1px solid #e0e9e1;
+  overflow-wrap:anywhere
+}
+.land-table th:last-child,.land-table td:last-child{border-right:0}
+.land-table td.empty-cell{color:#98a399;font-weight:normal}
+.back-bottom{
+  position:relative;z-index:2;display:grid;
+  grid-template-columns:1fr 22%;gap:3%;
+  align-items:center;margin:2% 4% 0
+}
+.back-notes{display:grid;gap:5px}
+.note-row{display:flex;gap:6px;font-size:clamp(6px,.8vw,9px);line-height:1.35}
+.note-row strong{color:var(--c1);min-width:78px}
+.note-row span{overflow-wrap:anywhere}
+.qr-back{border:1px solid var(--accent);border-radius:5px;padding:4px;text-align:center}
+.qr-back .qr-placeholder{font-size:7px}
+.qr-back-caption{font-size:6px;font-weight:bold;color:#6b796d;margin-top:3px}
+.disclaimer{
+  position:absolute;z-index:6;left:4%;right:4%;bottom:11%;
+  text-align:center;color:#66776a;
+  font-size:clamp(5px,.63vw,7px);font-weight:bold
+}
 @media(max-width:850px){
   .layout{grid-template-columns:1fr}
-  .preview-content{padding:14px}
-  .intro{align-items:start}
-  .header-pill{display:none}
 }
-@media(max-width:520px){
-  main{padding:0 10px 28px;margin:16px auto}
-  .form-content{padding:15px}
-  .panel-head{padding:15px}
+@media(max-width:480px){
+  .container{padding:0 9px;margin:14px auto}
   .grid{grid-template-columns:1fr}
   .field.full{grid-column:auto}
-  .theme-options{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .theme-btn{font-size:10px;padding:8px 3px}
-  .card-band{padding:9px 12px;min-height:42px}
-  .brand-symbol{width:24px;height:24px}
-  .card-inner{padding:10px 12px 22px}
-  .front-layout{grid-template-columns:24% 1fr;gap:9px}
-  .profile-data{gap:6px 8px}
-  .data-label{font-size:7px}
-  .data-value{font-size:10px}
-  .card-heading{margin-bottom:8px}
-  .card-heading h4{font-size:13px}
-  .card-heading p{font-size:7px}
-  .land-table th{font-size:7px;padding:6px 4px}
-  .land-table td{font-size:8px;padding:7px 4px}
-  .back-bottom{grid-template-columns:1fr 62px;gap:7px}
-  .info-row{font-size:8px}
-  .info-row b{min-width:68px}
-  .qr-area{padding:4px;min-height:60px}
-  .qr-area #qrcode{min-height:45px}
-  .card-disclaimer{font-size:6px;bottom:22px}
-  .card-foot{padding:6px 10px;font-size:6px}
-  .sample-chip{font-size:6px;padding:4px 5px}
-  .brand-name{font-size:9px}
-  .brand-sub{font-size:7px}
+  .form-body,.preview-body{padding:13px}
+  .card{border-radius:7px}
+  .card-header{padding:2% 3%}
+  .logo-icon{width:19px;height:19px;font-size:11px}
+  .logo-name{font-size:7px}
+  .logo-sub{font-size:5px}
+  .card-tag{font-size:5px;padding:3px 4px}
+  .front-content{gap:2%;padding:2% 3% 5%}
+  .front-heading h2,.back-heading h2{font-size:11px}
+  .front-heading p,.back-heading p{font-size:5px}
+  .detail-row{font-size:6px;gap:2px}
+  .details{gap:3px}
+  .farmer-id{font-size:5px;padding:4px}
+  .farmer-id span{font-size:8px}
+  .qr-box{padding:2px}
+  .qr-caption{font-size:5px}
+  .address-line{font-size:6px;margin:1.5% 3%}
+  .land-table-wrap{margin:0 3%}
+  .land-table th{font-size:5px;padding:4px 1px}
+  .land-table td{font-size:5px;padding:5px 1px}
+  .back-bottom{margin:1.5% 3%;gap:2%}
+  .note-row{font-size:6px;gap:3px}
+  .note-row strong{min-width:55px}
+  .disclaimer{bottom:11%;font-size:5px}
+  .card-footer{font-size:5px;padding:1.5% 3%}
 }
 @page{size:A4 portrait;margin:0}
 @media print{
-  body{background:white!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
-  header,.intro,.form-panel,footer,.preview-head,.preview-actions,.preview-help,.status{display:none!important}
-  main{margin:0;padding:0;max-width:none}
+  body{background:white;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  header,.intro,.form-panel,footer,.preview-title,.preview-actions,.preview-help,.status{display:none!important}
+  .container{max-width:none;margin:0;padding:0}
   .layout{display:block}
   .preview-panel{border:0;box-shadow:none}
-  .preview-content{padding:0}
-  .card-stack{height:297mm;display:flex;align-items:center;justify-content:center;gap:8mm}
-  .card{width:85.6mm;height:54mm;flex:0 0 85.6mm;box-shadow:none;break-inside:avoid}
+  .preview-body{padding:0}
+  .card-stack{
+    height:297mm;display:flex;flex-direction:row;
+    align-items:center;justify-content:center;gap:8mm
+  }
+  .card{width:85.6mm;height:54mm;flex:0 0 85.6mm;box-shadow:none}
 }
 </style>
 </head>
-
 <body>
+
 <header>
-  <div class="brand">
-    <div class="brand-mark">🌾</div>
-    <div>
-      <h1>Kisan Seva Tools</h1>
-      <p>Farmer Profile Card Designer · Personal-use sample</p>
-    </div>
-    <div class="header-pill">DESIGN STUDIO · V2</div>
-  </div>
+  <h1>🌾 Kisan Seva Tools</h1>
+  <p>Farmer Card Designer · Personal Use Only</p>
 </header>
 
-<main>
+<main class="container">
   <div class="intro">
-    <div>
-      <div class="eyebrow">Personal profile card builder</div>
-      <h2>Design your farmer profile card</h2>
-      <p>Create a clean front-and-back farmer profile card with a modern agricultural theme. This is a personal-use design sample, not an official government-issued identity document.</p>
-    </div>
-    <div class="pill">✦ Live preview · No prefilled personal data</div>
+    <h2>Professional Farmer Card Designer</h2>
+    <p>Reference-inspired front and back design with a photo area, farmer details, QR code, and structured land-information table. No personal details are prefilled.</p>
   </div>
 
   <div class="layout">
     <section class="panel form-panel">
       <div class="panel-head">
-        <h3>Card details</h3>
-        <p>Enter only the details you want printed on your personal profile card.</p>
+        <h3>Card information</h3>
+        <p>All fields are optional. Add only the details you want to display.</p>
       </div>
-      <div class="form-content">
-        <form id="cardForm" autocomplete="off">
-          <div class="section-label">01 · Profile</div>
+
+      <div class="form-body">
+        <form id="cardForm">
+          <div class="section-title">01 · Profile details</div>
           <div class="grid">
             <div class="field full">
-              <label for="photo">Profile photo (optional)</label>
-              <input type="file" id="photo" accept="image/png,image/jpeg,image/webp">
-              <span class="hint">Photo stays in this browser page; this demo does not upload it.</span>
+              <label for="photo">Farmer photo</label>
+              <input id="photo" type="file" accept="image/png,image/jpeg,image/webp">
+              <span class="help">Photo is previewed locally in this browser.</span>
             </div>
             <div class="field">
-              <label for="name">Display name (optional)</label>
-              <input id="name" maxlength="70" placeholder="Enter display name">
+              <label for="name">Farmer name</label>
+              <input id="name" maxlength="70" placeholder="Enter name">
             </div>
             <div class="field">
-              <label for="profileCode">Personal reference code (optional)</label>
-              <input id="profileCode" maxlength="24" placeholder="e.g. KST-DEMO-001">
+              <label for="father">Father / guardian name</label>
+              <input id="father" maxlength="70" placeholder="Optional">
             </div>
             <div class="field">
-              <label for="region">Village / locality (optional)</label>
-              <input id="region" maxlength="70" placeholder="Village or locality">
-            </div>
-            <div class="field">
-              <label for="district">District (optional)</label>
-              <input id="district" maxlength="70" placeholder="District">
-            </div>
-            <div class="field">
-              <label for="state">State / region (optional)</label>
-              <select id="state">
-                <option value="">Select region</option>
-                <option>Maharashtra</option><option>Madhya Pradesh</option>
-                <option>Gujarat</option><option>Telangana</option>
-                <option>Karnataka</option><option>Rajasthan</option><option>Other</option>
-              </select>
+              <label for="farmerId">Farmer reference ID</label>
+              <input id="farmerId" maxlength="24" placeholder="Optional reference">
             </div>
             <div class="field">
               <label for="language">Card language</label>
@@ -363,111 +356,216 @@ footer{max-width:1180px;margin:auto;padding:0 16px 26px;color:#718074;font-size:
             </div>
           </div>
 
-          <div class="section-label" style="margin-top:22px">02 · Land profile (optional)</div>
+          <div class="section-title" style="margin-top:20px">02 · Location details</div>
           <div class="grid">
             <div class="field">
-              <label for="survey">Survey / Gat reference</label>
-              <input id="survey" maxlength="35" placeholder="Optional reference">
+              <label for="state">State</label>
+              <select id="state">
+                <option value="">Select state</option>
+                <option>Maharashtra</option>
+                <option>Madhya Pradesh</option>
+                <option>Gujarat</option>
+                <option>Telangana</option>
+                <option>Karnataka</option>
+                <option>Rajasthan</option>
+                <option>Other</option>
+              </select>
             </div>
             <div class="field">
-              <label for="landArea">Land area (optional)</label>
-              <input id="landArea" maxlength="35" placeholder="e.g. 2.02 acres">
+              <label for="district">District</label>
+              <input id="district" maxlength="60" placeholder="Optional">
             </div>
-            <div class="field full">
-              <label for="notes">Additional note (optional)</label>
-              <input id="notes" maxlength="100" placeholder="Optional personal note">
+            <div class="field">
+              <label for="subdistrict">Sub-district / Taluka</label>
+              <input id="subdistrict" maxlength="60" placeholder="Optional">
+            </div>
+            <div class="field">
+              <label for="village">Village</label>
+              <input id="village" maxlength="60" placeholder="Optional">
             </div>
           </div>
 
-          <div class="section-label" style="margin-top:22px">03 · Visual theme</div>
-          <div class="theme-options" role="group" aria-label="Card theme">
-            <button type="button" class="theme-btn" data-theme="theme-green" aria-pressed="true"><span class="swatch sw-green"></span>Forest</button>
-            <button type="button" class="theme-btn" data-theme="theme-leaf" aria-pressed="false"><span class="swatch sw-leaf"></span>Leaf</button>
-            <button type="button" class="theme-btn" data-theme="theme-blue" aria-pressed="false"><span class="swatch sw-blue"></span>Blue</button>
-            <button type="button" class="theme-btn" data-theme="theme-gold" aria-pressed="false"><span class="swatch sw-gold"></span>Gold</button>
+          <div class="section-title" style="margin-top:20px">03 · Land information</div>
+          <div class="grid">
+            <div class="field">
+              <label for="survey">Survey / Gat number</label>
+              <input id="survey" maxlength="30" placeholder="Optional">
+            </div>
+            <div class="field">
+              <label for="subdivision">Sub-division</label>
+              <input id="subdivision" maxlength="30" placeholder="Optional">
+            </div>
+            <div class="field full">
+              <label for="area">Land area</label>
+              <input id="area" maxlength="35" placeholder="e.g. 2.02 acres">
+            </div>
+          </div>
+
+          <div class="section-title" style="margin-top:20px">04 · Choose a design</div>
+          <div class="theme-list">
+            <button type="button" class="theme-btn active" data-theme="theme-green"><span class="swatch s-green"></span>Forest</button>
+            <button type="button" class="theme-btn" data-theme="theme-leaf"><span class="swatch s-leaf"></span>Leaf</button>
+            <button type="button" class="theme-btn" data-theme="theme-blue"><span class="swatch s-blue"></span>Blue</button>
+            <button type="button" class="theme-btn" data-theme="theme-gold"><span class="swatch s-gold"></span>Gold</button>
           </div>
 
           <div class="actions">
-            <button type="submit" class="btn btn-primary">Update card preview</button>
-            <button type="button" id="clearBtn" class="btn btn-secondary">Clear details</button>
+            <button type="submit" class="btn primary">Update Card</button>
+            <button type="button" id="clearBtn" class="btn secondary">Clear Details</button>
+          </div>
+          <div class="actions">
+            <button type="button" id="pdfBtn" class="btn gold">Download A4 PDF</button>
+            <button type="button" id="printBtn" class="btn dark">Print</button>
+          </div>
+
+          <div class="notice">
+            <strong>Important:</strong> This is a personal-use sample design, not an official government-issued Farmer ID. Do not enter Aadhaar, bank details, or other sensitive information.
           </div>
           <div id="status" class="status" role="status" aria-live="polite"></div>
-          <div class="privacy-note"><strong>Privacy by design:</strong> this version does not ask for Aadhaar, phone number, date of birth, gender or bank details. It does not send form data to Google Sheets. Avoid entering sensitive information in optional fields.</div>
         </form>
       </div>
     </section>
 
-    <section class="panel preview-panel">
-      <div class="panel-head preview-head">
-        <div><h3>Live card preview</h3><p>Front and back · Landscape card layout</p></div>
-        <span>85.6 × 54 mm concept</span>
+    <section class="panel">
+      <div class="panel-head">
+        <h3>Front & back preview</h3>
+        <p>Horizontal card layout inspired by your reference image.</p>
       </div>
-      <div class="preview-content">
-        <div class="card-stack" id="cardStack">
-          <article class="card theme-green" id="frontCard" aria-label="Front of personal farmer profile sample card">
-            <div class="card-band">
-              <div class="brand-mini"><div class="brand-symbol">✦</div><div><div class="brand-name">KISAN SEVA TOOLS</div><div class="brand-sub">FARMER PROFILE DESIGN</div></div></div>
-              <div class="sample-chip">PERSONAL SAMPLE</div>
-            </div>
-            <div class="card-inner">
-              <div class="card-heading"><div><h4 id="frontHeading">FARMER PROFILE</h4><p id="frontSubheading">PERSONAL FARM PROFILE</p><div class="gold-rule"></div></div></div>
-              <div class="front-layout">
-                <div class="photo-frame">
-                  <img id="photoPreview" alt="Profile photo preview">
-                  <div class="photo-placeholder" id="photoPlaceholder"><span class="person-icon">♙</span><span>PHOTO AREA</span></div>
-                </div>
+
+      <div class="preview-body">
+        <div class="preview-title">
+          <h3>Card Preview</h3>
+          <span>85.6 × 54 mm concept</span>
+        </div>
+
+        <div class="card-stack" id="printArea">
+          <!-- FRONT -->
+          <article class="card theme-green" id="frontCard">
+            <div class="card-header">
+              <div class="logo">
+                <div class="logo-icon">🌾</div>
                 <div>
-                  <div class="profile-data">
-                    <div class="data-item"><div class="data-label" id="nameLabel">Display name</div><div class="data-value empty" id="outName">Add your name</div></div>
-                    <div class="data-item"><div class="data-label">Reference code</div><div class="data-value empty" id="outCode">Optional</div></div>
-                    <div class="data-item"><div class="data-label" id="villageLabel">Locality</div><div class="data-value empty" id="outRegion">Not added</div></div>
-                    <div class="data-item"><div class="data-label" id="districtLabel">District / state</div><div class="data-value empty" id="outDistrictState">Not added</div></div>
-                  </div>
-                  <div class="id-strip"><span>PROFILE REF.</span><strong id="outRef">SAMPLE</strong></div>
+                  <div class="logo-name">KISAN SEVA TOOLS</div>
+                  <div class="logo-sub">PERSONAL FARM PROFILE</div>
                 </div>
               </div>
+              <div class="card-tag">PERSONAL USE</div>
             </div>
-            <div class="card-disclaimer" id="frontDisclaimer">PERSONAL-USE SAMPLE · NOT A GOVERNMENT-ISSUED ID</div>
-            <div class="card-foot"><span>KST · PERSONAL PROFILE DESIGN</span><b>DEMO ONLY</b></div>
+
+            <div class="front-heading">
+              <h2 id="frontTitle">FARMER PROFILE CARD</h2>
+              <p>KISAN SEVA TOOLS · PERSONAL DESIGN</p>
+              <div class="gold-line"></div>
+            </div>
+
+            <div class="front-content">
+              <div class="photo-frame">
+                <img id="photoPreview" alt="Farmer photo preview">
+                <div class="photo-placeholder" id="photoPlaceholder">
+                  <b>♙</b>FARMER PHOTO
+                </div>
+              </div>
+
+              <div class="details">
+                <div class="detail-row"><strong id="nameLabel">Name:</strong><span id="outName" class="blank">—</span></div>
+                <div class="detail-row"><strong id="fatherLabel">Father:</strong><span id="outFather" class="blank">—</span></div>
+                <div class="detail-row"><strong id="idLabel">Reference:</strong><span id="outFarmerId" class="blank">—</span></div>
+                <div class="farmer-id"><span id="farmerIdCaption">FARMER ID:</span><br><span id="bigFarmerId">SAMPLE</span></div>
+              </div>
+
+              <div class="qr-column">
+                <div class="qr-box">
+                  <div id="qrFront"><div class="qr-placeholder">QR<br>PREVIEW</div></div>
+                </div>
+                <div class="qr-caption" id="qrCaption">SAMPLE QR CODE</div>
+              </div>
+            </div>
+
+            <div class="disclaimer" id="frontDisclaimer">PERSONAL-USE SAMPLE · NOT A GOVERNMENT-ISSUED CARD</div>
+            <div class="card-footer">
+              <span>KISAN SEVA TOOLS</span>
+              <b>PERSONAL USE ONLY</b>
+            </div>
           </article>
 
-          <article class="card theme-green" id="backCard" aria-label="Back of personal farmer profile sample card">
-            <div class="card-band">
-              <div class="brand-mini"><div class="brand-symbol">✦</div><div><div class="brand-name">KISAN SEVA TOOLS</div><div class="brand-sub">FARM & LAND NOTES</div></div></div>
-              <div class="sample-chip">NOT OFFICIAL</div>
+          <!-- BACK -->
+          <article class="card theme-green" id="backCard">
+            <div class="card-header">
+              <div class="logo">
+                <div class="logo-icon">🌿</div>
+                <div>
+                  <div class="logo-name">KISAN SEVA TOOLS</div>
+                  <div class="logo-sub">FARM & LAND PROFILE</div>
+                </div>
+              </div>
+              <div class="card-tag">SAMPLE DESIGN</div>
             </div>
-            <div class="card-inner">
-              <div class="card-heading"><div><h4 id="backHeading">FARM PROFILE DETAILS</h4><p id="backSubheading">PERSONAL RECORD · OPTIONAL FIELDS</p><div class="gold-rule"></div></div></div>
-              <p class="back-summary">A personal reference layout for locality and land notes. No official status is implied.</p>
+
+            <div class="back-heading">
+              <h2 id="backTitle">FARMER INFORMATION</h2>
+              <p id="backSubtitle">LOCATION & LAND DETAILS</p>
+            </div>
+
+            <div class="address-line">
+              <strong id="addressLabel">ADDRESS:</strong>
+              <span id="outAddress">—</span>
+            </div>
+
+            <div class="land-table-wrap">
               <table class="land-table">
-                <thead><tr><th id="thRegion">Locality</th><th id="thDistrict">District</th><th id="thState">State</th></tr></thead>
-                <tbody><tr><td id="outBackRegion">—</td><td id="outBackDistrict">—</td><td id="outState">—</td></tr></tbody>
+                <thead>
+                  <tr>
+                    <th id="thState">STATE</th>
+                    <th id="thDistrict">DISTRICT</th>
+                    <th id="thSubdistrict">SUB-DIST.</th>
+                    <th id="thVillage">VILLAGE</th>
+                    <th id="thSurvey">SURVEY NO.</th>
+                    <th id="thSubdiv">SUB-DIV.</th>
+                    <th id="thArea">AREA</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="outState" class="empty-cell">—</td>
+                    <td id="outDistrict" class="empty-cell">—</td>
+                    <td id="outSubdistrict" class="empty-cell">—</td>
+                    <td id="outVillage" class="empty-cell">—</td>
+                    <td id="outSurvey" class="empty-cell">—</td>
+                    <td id="outSubdivision" class="empty-cell">—</td>
+                    <td id="outArea" class="empty-cell">—</td>
+                  </tr>
+                </tbody>
               </table>
-              <div class="back-bottom">
-                <div class="info-list">
-                  <div class="info-row"><b id="surveyLabel">Survey reference</b><span id="outSurvey">Not added</span></div>
-                  <div class="info-row"><b id="landLabel">Land area</b><span id="outLand">Not added</span></div>
-                  <div class="info-row"><b id="notesLabel">Personal note</b><span id="outNotes">Not added</span></div>
+            </div>
+
+            <div class="back-bottom">
+              <div class="back-notes">
+                <div class="note-row"><strong id="noteLabel">NOTE:</strong><span id="outNote">Personal profile sample</span></div>
+                <div class="note-row"><strong id="refLabel">REFERENCE:</strong><span id="outBackId">—</span></div>
+              </div>
+              <div>
+                <div class="qr-back">
+                  <div class="qr-placeholder">PROFILE<br>REFERENCE</div>
                 </div>
-                <div><div class="qr-area"><div id="qrcode"><div class="empty-qr">Demo QR<br>not generated</div></div></div><div class="qr-caption" id="qrCaption">OPTIONAL DEMO QR</div></div>
+                <div class="qr-back-caption">PERSONAL SAMPLE</div>
               </div>
             </div>
-            <div class="card-disclaimer" id="backDisclaimer">SAMPLE DESIGN ONLY · NOT ISSUED OR VERIFIED BY ANY GOVERNMENT</div>
-            <div class="card-foot"><span>NO GOVERNMENT AFFILIATION</span><b>DEMO ONLY</b></div>
+
+            <div class="disclaimer" id="backDisclaimer">NOT ISSUED OR VERIFIED BY ANY GOVERNMENT DEPARTMENT</div>
+            <div class="card-footer">
+              <span>PERSONAL FARM PROFILE</span>
+              <b>NOT AN OFFICIAL ID</b>
+            </div>
           </article>
         </div>
 
-        <div class="preview-actions">
-          <button type="button" id="pdfBtn" class="btn btn-gold">Download A4 PDF</button>
-          <button type="button" id="printBtn" class="btn btn-dark">Print preview</button>
-        </div>
-        <p class="preview-help">PDF contains both sample card sides on one A4 sheet. This prototype is not a substitute for an official farmer registration or government identity document.</p>
+        <p class="help" style="margin-top:13px">
+          PDF output places both card sides side-by-side on one A4 page. Check the print preview before printing.
+        </p>
       </div>
     </section>
   </div>
 </main>
-
-<footer>Kisan Seva Tools · Personal-use card design prototype. This page does not issue, verify or represent a government identity document. Entered information stays in this browser page and is not sent to a server by this code.</footer>
 
 <script>
 (function(){
@@ -475,156 +573,157 @@ footer{max-width:1180px;margin:auto;padding:0 16px 26px;color:#718074;font-size:
 const $ = id => document.getElementById(id);
 const form = $("cardForm");
 const statusBox = $("status");
+let currentTheme = "theme-green";
 
 const translations = {
  en:{
-  front:"FARMER PROFILE",frontSub:"PERSONAL FARM PROFILE",
-  back:"FARM PROFILE DETAILS",backSub:"PERSONAL RECORD · OPTIONAL FIELDS",
-  name:"Display name",village:"Locality",district:"District / state",
-  locality:"Locality",districtHead:"District",stateHead:"State",
-  survey:"Survey reference",land:"Land area",note:"Personal note",
-  disclaimer:"PERSONAL-USE SAMPLE · NOT A GOVERNMENT-ISSUED ID",
-  backDisclaimer:"SAMPLE DESIGN ONLY · NOT ISSUED OR VERIFIED BY ANY GOVERNMENT"
+  front:"FARMER PROFILE CARD",back:"FARMER INFORMATION",
+  subtitle:"LOCATION & LAND DETAILS",name:"Name:",father:"Father:",
+  id:"Reference:",idCaption:"FARMER ID:",address:"ADDRESS:",
+  state:"STATE",district:"DISTRICT",subdistrict:"SUB-DIST.",
+  village:"VILLAGE",survey:"SURVEY NO.",subdiv:"SUB-DIV.",area:"AREA",
+  note:"NOTE:",ref:"REFERENCE:",
+  frontDisclaimer:"PERSONAL-USE SAMPLE · NOT A GOVERNMENT-ISSUED CARD",
+  backDisclaimer:"NOT ISSUED OR VERIFIED BY ANY GOVERNMENT DEPARTMENT"
  },
  mr:{
-  front:"शेतकरी प्रोफाइल",frontSub:"वैयक्तिक शेती प्रोफाइल",
-  back:"शेती प्रोफाइल तपशील",backSub:"वैयक्तिक नोंद · पर्यायी माहिती",
-  name:"प्रदर्शित नाव",village:"गाव / परिसर",district:"जिल्हा / राज्य",
-  locality:"गाव / परिसर",districtHead:"जिल्हा",stateHead:"राज्य",
-  survey:"गट / सर्वे संदर्भ",land:"जमिनीचे क्षेत्र",note:"वैयक्तिक नोंद",
-  disclaimer:"वैयक्तिक नमुना · सरकारी ओळखपत्र नाही",
-  backDisclaimer:"फक्त नमुना डिझाइन · कोणत्याही सरकारकडून जारी केलेले नाही"
+  front:"शेतकरी प्रोफाइल कार्ड",back:"शेतकरी माहिती",
+  subtitle:"गाव व जमीन तपशील",name:"नाव:",father:"वडिलांचे नाव:",
+  id:"संदर्भ:",idCaption:"शेतकरी संदर्भ:",address:"पत्ता:",
+  state:"राज्य",district:"जिल्हा",subdistrict:"तालुका",
+  village:"गाव",survey:"गट नं.",subdiv:"उपविभाग",area:"क्षेत्र",
+  note:"टीप:",ref:"संदर्भ:",
+  frontDisclaimer:"वैयक्तिक नमुना · सरकारी कार्ड नाही",
+  backDisclaimer:"कोणत्याही सरकारी विभागाने जारी केलेले नाही"
  },
  hi:{
-  front:"किसान प्रोफाइल",frontSub:"व्यक्तिगत कृषि प्रोफाइल",
-  back:"कृषि प्रोफाइल विवरण",backSub:"व्यक्तिगत रिकॉर्ड · वैकल्पिक जानकारी",
-  name:"प्रदर्शित नाम",village:"गाँव / क्षेत्र",district:"जिला / राज्य",
-  locality:"गाँव / क्षेत्र",districtHead:"जिला",stateHead:"राज्य",
-  survey:"सर्वे / गट संदर्भ",land:"भूमि क्षेत्र",note:"व्यक्तिगत नोट",
-  disclaimer:"व्यक्तिगत नमूना · सरकारी पहचान पत्र नहीं",
-  backDisclaimer:"केवल नमूना डिज़ाइन · किसी सरकार द्वारा जारी नहीं"
+  front:"किसान प्रोफाइल कार्ड",back:"किसान जानकारी",
+  subtitle:"स्थान और भूमि विवरण",name:"नाम:",father:"पिता का नाम:",
+  id:"संदर्भ:",idCaption:"किसान संदर्भ:",address:"पता:",
+  state:"राज्य",district:"जिला",subdistrict:"तहसील",
+  village:"गाँव",survey:"सर्वे नं.",subdiv:"उपविभाग",area:"क्षेत्र",
+  note:"नोट:",ref:"संदर्भ:",
+  frontDisclaimer:"व्यक्तिगत नमूना · सरकारी कार्ड नहीं",
+  backDisclaimer:"किसी सरकारी विभाग द्वारा जारी नहीं"
  }
 };
 
-function val(id){return $(id).value.trim()}
-function setText(id,text,emptyText){
+function value(id){return $(id).value.trim()}
+function setValue(id,text){
  const el=$(id);
- el.textContent=text || emptyText || "Not added";
- el.classList.toggle("empty",!text);
+ el.textContent=text || "—";
+ el.classList.toggle("blank",!text);
+ el.classList.toggle("empty-cell",!text);
 }
 function showStatus(message,type){
  statusBox.textContent=message;
  statusBox.className="status show "+type;
 }
 function updateLanguage(){
- const t=translations[$("language").value] || translations.en;
- $("frontHeading").textContent=t.front;
- $("frontSubheading").textContent=t.frontSub;
- $("backHeading").textContent=t.back;
- $("backSubheading").textContent=t.backSub;
- $("nameLabel").textContent=t.name;
- $("villageLabel").textContent=t.village;
- $("districtLabel").textContent=t.district;
- $("thRegion").textContent=t.locality;
- $("thDistrict").textContent=t.districtHead;
- $("thState").textContent=t.stateHead;
- $("surveyLabel").textContent=t.survey;
- $("landLabel").textContent=t.land;
- $("notesLabel").textContent=t.note;
- $("frontDisclaimer").textContent=t.disclaimer;
- $("backDisclaimer").textContent=t.backDisclaimer;
+ const t=translations[value("language")] || translations.en;
+ const map={
+  frontTitle:t.front,backTitle:t.back,backSubtitle:t.subtitle,
+  nameLabel:t.name,fatherLabel:t.father,idLabel:t.id,
+  farmerIdCaption:t.idCaption,addressLabel:t.address,
+  thState:t.state,thDistrict:t.district,thSubdistrict:t.subdistrict,
+  thVillage:t.village,thSurvey:t.survey,thSubdiv:t.subdiv,
+  thArea:t.area,noteLabel:t.note,refLabel:t.ref,
+  frontDisclaimer:t.frontDisclaimer,backDisclaimer:t.backDisclaimer
+ };
+ Object.keys(map).forEach(id=>$(id).textContent=map[id]);
 }
-function updateQR(){
- const qr=$("qrcode");
- qr.innerHTML="";
- const payload={
-  type:"KST_PERSONAL_PROFILE_SAMPLE",
-  sample:true,
-  reference:val("profileCode") || "SAMPLE",
-  name:val("name"),
-  locality:val("region"),
-  district:val("district"),
-  state:val("state")
+function makeQR(){
+ const target=$("qrFront");
+ target.innerHTML="";
+ const data={
+  type:"PERSONAL_PROFILE_SAMPLE",
+  reference:value("farmerId"),
+  name:value("name"),
+  village:value("village"),
+  sample:true
  };
  if(window.QRCode){
-  new QRCode(qr,{
-   text:JSON.stringify(payload),
-   width:120,height:120,
-   colorDark:"#163b29",colorLight:"#ffffff",
+  new QRCode(target,{
+   text:JSON.stringify(data),
+   width:130,height:130,
+   colorDark:"#163e2a",
+   colorLight:"#ffffff",
    correctLevel:QRCode.CorrectLevel.M
   });
  }else{
-  qr.innerHTML='<div class="empty-qr">QR library unavailable</div>';
+  target.innerHTML='<div class="qr-placeholder">QR library<br>unavailable</div>';
  }
 }
-function updatePreview(){
- const name=val("name"),code=val("profileCode");
- const region=val("region"),district=val("district");
- const state=val("state"),survey=val("survey");
- const land=val("landArea"),notes=val("notes");
+function updateCard(){
+ const name=value("name");
+ const father=value("father");
+ const id=value("farmerId");
+ const state=value("state");
+ const district=value("district");
+ const subdistrict=value("subdistrict");
+ const village=value("village");
+ const survey=value("survey");
+ const subdivision=value("subdivision");
+ const area=value("area");
 
- setText("outName",name,"Add your name");
- setText("outCode",code,"Optional");
- setText("outRegion",region,"Not added");
- setText("outDistrictState",[district,state].filter(Boolean).join(" · "),"Not added");
- setText("outRef",code || "SAMPLE","SAMPLE");
- setText("outBackRegion",region,"—");
- setText("outBackDistrict",district,"—");
- setText("outState",state,"—");
- setText("outSurvey",survey,"Not added");
- setText("outLand",land,"Not added");
- setText("outNotes",notes,"Not added");
+ setValue("outName",name);
+ setValue("outFather",father);
+ setValue("outFarmerId",id);
+ setValue("bigFarmerId",id || "SAMPLE");
+ setValue("outAddress",[village,subdistrict,district,state].filter(Boolean).join(", "));
+ setValue("outState",state);
+ setValue("outDistrict",district);
+ setValue("outSubdistrict",subdistrict);
+ setValue("outVillage",village);
+ setValue("outSurvey",survey);
+ setValue("outSubdivision",subdivision);
+ setValue("outArea",area);
+ setValue("outBackId",id);
+ setValue("outNote","Personal-use profile sample");
  updateLanguage();
- updateQR();
+ makeQR();
 }
-function applyTheme(theme){
- ["frontCard","backCard"].forEach(id=>{
-  $(id).classList.remove("theme-green","theme-leaf","theme-blue","theme-gold");
-  $(id).classList.add(theme);
+
+document.querySelectorAll("[data-theme]").forEach(button=>{
+ button.addEventListener("click",()=>{
+  currentTheme=button.dataset.theme;
+  ["frontCard","backCard"].forEach(id=>{
+   $(id).classList.remove("theme-green","theme-leaf","theme-blue","theme-gold");
+   $(id).classList.add(currentTheme);
+  });
+  document.querySelectorAll("[data-theme]").forEach(b=>b.classList.toggle("active",b===button));
  });
- document.querySelectorAll("[data-theme]").forEach(btn=>{
-  btn.setAttribute("aria-pressed",String(btn.dataset.theme===theme));
- });
-}
-document.querySelectorAll("[data-theme]").forEach(btn=>{
- btn.addEventListener("click",()=>applyTheme(btn.dataset.theme));
 });
 
 $("photo").addEventListener("change",function(){
  const file=this.files && this.files[0];
- if(!file){
-  $("photoPreview").style.display="none";
-  $("photoPlaceholder").style.display="block";
-  return;
- }
+ if(!file)return;
  if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
   this.value="";
-  showStatus("Choose a JPG, PNG or WEBP image.","error");
+  showStatus("Please choose a JPG, PNG or WEBP image.","error");
   return;
  }
  if(file.size>5*1024*1024){
   this.value="";
-  showStatus("Photo must be 5 MB or smaller.","error");
+  showStatus("Photo must be smaller than 5 MB.","error");
   return;
  }
  const reader=new FileReader();
- reader.onload=event=>{
-  $("photoPreview").src=event.target.result;
+ reader.onload=e=>{
+  $("photoPreview").src=e.target.result;
   $("photoPreview").style.display="block";
   $("photoPlaceholder").style.display="none";
-  showStatus("Photo preview updated. It remains in this page only.","ok");
+  showStatus("Photo preview updated.","ok");
  };
  reader.readAsDataURL(file);
 });
 
-form.addEventListener("input",event=>{
- if(event.target.id!=="photo") updatePreview();
-});
-form.addEventListener("change",updatePreview);
+form.addEventListener("input",updateCard);
+form.addEventListener("change",updateCard);
 form.addEventListener("submit",event=>{
  event.preventDefault();
- updatePreview();
- showStatus("Preview updated. No information was submitted to a server.","ok");
+ updateCard();
+ showStatus("Card preview updated successfully.","ok");
 });
 
 $("clearBtn").addEventListener("click",()=>{
@@ -632,55 +731,60 @@ $("clearBtn").addEventListener("click",()=>{
  $("photoPreview").removeAttribute("src");
  $("photoPreview").style.display="none";
  $("photoPlaceholder").style.display="block";
- applyTheme("theme-green");
- updatePreview();
- showStatus("Form cleared. No personal details remain in the preview.","ok");
+ currentTheme="theme-green";
+ ["frontCard","backCard"].forEach(id=>{
+  $(id).classList.remove("theme-leaf","theme-blue","theme-gold");
+  $(id).classList.add("theme-green");
+ });
+ document.querySelectorAll("[data-theme]").forEach(b=>{
+  b.classList.toggle("active",b.dataset.theme==="theme-green");
+ });
+ updateCard();
+ showStatus("All entered details cleared.","ok");
 });
 
 $("printBtn").addEventListener("click",()=>{
- updatePreview();
+ updateCard();
  window.print();
 });
 
 $("pdfBtn").addEventListener("click",async()=>{
- updatePreview();
  if(!window.html2canvas || !window.jspdf || !window.jspdf.jsPDF){
-  showStatus("PDF libraries did not load. Check your connection or use Print preview.","error");
+  showStatus("PDF libraries did not load. Check internet and try again.","error");
   return;
  }
- const btn=$("pdfBtn");
- btn.disabled=true;
- btn.textContent="Preparing PDF…";
+ const button=$("pdfBtn");
+ button.disabled=true;
+ button.textContent="Preparing PDF...";
  try{
   const {jsPDF}=window.jspdf;
   const pdf=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
-  const pageW=210,pageH=297;
   const cardW=85.6,cardH=54,gap=8;
-  const startX=(pageW-(cardW*2+gap))/2;
-  const startY=(pageH-cardH)/2;
+  const x=(210-(cardW*2+gap))/2;
+  const y=(297-cardH)/2;
   const cards=[$("frontCard"),$("backCard")];
 
   for(let i=0;i<cards.length;i++){
    const canvas=await html2canvas(cards[i],{
-    scale:3,backgroundColor:"#ffffff",useCORS:true,logging:false
+    scale:3,
+    backgroundColor:"#ffffff",
+    useCORS:true,
+    logging:false
    });
-   pdf.addImage(
-    canvas.toDataURL("image/png"),"PNG",
-    startX+i*(cardW+gap),startY,cardW,cardH
-   );
+   pdf.addImage(canvas.toDataURL("image/png"),"PNG",x+i*(cardW+gap),y,cardW,cardH);
   }
-  pdf.save("KST-Personal-Farmer-Profile-Sample.pdf");
-  showStatus("Sample PDF downloaded. No payment was processed and no data was uploaded.","ok");
+  pdf.save("Kisan-Seva-Personal-Farmer-Card.pdf");
+  showStatus("A4 PDF downloaded. No payment or server submission was made.","ok");
  }catch(error){
   console.error(error);
-  showStatus("PDF generation failed. Use Print preview or reload and try again.","error");
+  showStatus("PDF creation failed. Try Print instead or reload the page.","error");
  }finally{
-  btn.disabled=false;
-  btn.textContent="Download A4 PDF";
+  button.disabled=false;
+  button.textContent="Download A4 PDF";
  }
 });
 
-updatePreview();
+updateCard();
 })();
 </script>
 </body>
