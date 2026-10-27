@@ -1,331 +1,924 @@
-
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#073d27">
-<title>Photo Studio Pro | Kisan Seva Tools</title>
+<title>Kisan Seva Tools | Photo Studio Pro</title>
 <style>
-:root{--bg:#f1f6f2;--card:#fff;--green:#126b3b;--dark:#073d27;--mint:#b8f2ca;--ink:#17281e;--muted:#64766a;--line:#d9e6dc}
+:root{--green:#176b3a;--green2:#239653;--bg:#f3f7f4;--ink:#17231b;--muted:#637166;--line:#dce7df;--card:#fff;--red:#b42318}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px system-ui,Arial,sans-serif}
-header{padding:25px 16px;color:#fff;background:radial-gradient(circle at 90% 10%,#268953,transparent 35%),linear-gradient(125deg,#052e1d,#126b3b);border-bottom:4px solid var(--mint)}
-.brand{text-align:center;color:#c7f7d5;font-size:11px;letter-spacing:3px;font-weight:900}
-header h1{text-align:center;font-size:clamp(25px,5vw,38px);margin:10px 0}
-header p{text-align:center;color:#e1f5e7;margin:0}
-main{max-width:1200px;margin:22px auto;padding:0 14px 32px}
-a.back{display:inline-block;text-decoration:none;background:#fff;color:var(--green);padding:10px 14px;border:1px solid var(--line);border-radius:10px;font-weight:800}
-.intro{margin:22px 0}.intro h2{margin:0 0 5px}.intro p,.muted{color:var(--muted);line-height:1.6}
-.workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 26px #153d2010;min-width:0}
-.panel h3{margin:0 0 6px}.muted{font-size:13px;margin:0 0 15px}
-.section-title{font-size:12px;font-weight:900;letter-spacing:1px;color:var(--green);margin:22px 0 10px}
-label{display:block;font-size:12px;font-weight:800;margin:12px 0 6px}
-input,select,button{font:inherit}
-input[type=file],input[type=number],select{width:100%;min-height:43px;padding:10px;border:1px solid #c9d8cc;border-radius:10px;background:white;color:var(--ink)}
-input[type=range]{width:100%;accent-color:var(--green)}
-input[type=color]{width:100%;height:42px;padding:3px;background:white;border:1px solid var(--line);border-radius:9px}
-input[type=checkbox]{accent-color:var(--green)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.upload{border:2px dashed #9cc9a9;border-radius:14px;background:#f4fbf6;padding:15px}
-.btn{border:0;border-radius:10px;padding:12px 14px;background:var(--green);color:white;font-weight:800;min-height:43px}
-.btn.secondary{background:#e8f4eb;color:var(--dark);border:1px solid #c9e3d0}
-.btn.dark{background:var(--dark)}
-.btn:disabled{opacity:.4;cursor:not-allowed}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.choice{border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px 5px;text-align:center;cursor:pointer;min-width:0}
-.choice strong{display:block;font-size:12px;margin-top:5px}
-.choice small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
-.choice.active{border:2px solid var(--green);background:#f0faf3;box-shadow:0 0 0 2px #d4efdc}
-.preview{background:#e8eee9;border:1px solid var(--line);border-radius:14px;min-height:270px;padding:12px;display:flex;align-items:center;justify-content:center;overflow:auto}
-canvas{display:block;max-width:100%;height:auto;background:white;box-shadow:0 4px 18px #0002}
-.placeholder{text-align:center;color:var(--muted);max-width:220px}
-.placeholder b{font-size:42px;display:block}
-.statgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:12px}
-.stat{padding:10px;background:#f4f8f5;border:1px solid var(--line);border-radius:10px;min-width:0}
-.stat small{display:block;color:var(--muted);font-size:10px}
-.stat strong{font-size:12px;overflow-wrap:anywhere}
-.note{margin-top:14px;padding:12px;border-radius:10px;background:#fff7dd;border-left:4px solid #d7a91f;font-size:12px;line-height:1.6}
-#message{font-size:13px;margin-top:12px;line-height:1.5}
-.good{color:#087a3b}.bad{color:#b42318}
-footer{text-align:center;padding:18px;background:var(--dark);color:#d8f1df;font-size:12px}
-@media(max-width:800px){.workspace{grid-template-columns:1fr}.preview{min-height:220px}}
-@media(max-width:430px){main{padding-left:9px;padding-right:9px}.panel{padding:13px}.grid3{gap:5px}.choice{padding:9px 3px}.stat{padding:7px}}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(120deg,#104b2a,#1b8046);color:#fff;padding:18px clamp(14px,4vw,36px);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header h1{font-size:clamp(20px,3vw,29px);margin:0}
+header p{margin:4px 0 0;color:#d7f1df}
+.wrap{max-width:1450px;margin:auto;padding:18px}
+.notice{background:#fff7df;border:1px solid #f0d98b;border-radius:12px;padding:12px 14px;margin-bottom:16px;color:#614b0b}
+.layout{display:grid;grid-template-columns:minmax(290px,380px) minmax(0,1fr);gap:16px;align-items:start}
+.panel,.preview-panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px #12351a0a}
+.panel h2,.preview-panel h2{font-size:17px;margin:0 0 12px}
+.section{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.section:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.field{display:flex;flex-direction:column;gap:5px;margin:10px 0}
+.field label{font-size:13px;font-weight:650;color:#34483a}
+.field input:not([type=checkbox]):not([type=color]):not([type=file]),.field select,.field textarea{width:100%;border:1px solid #cbd9ce;border-radius:9px;padding:9px 10px;background:white;color:var(--ink);min-width:0}
+.field input[type=range]{width:100%}
+.field input[type=color]{width:100%;height:40px;border:1px solid var(--line);border-radius:8px;background:white}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+button,.btn{border:0;border-radius:9px;padding:10px 13px;background:var(--green);color:white;font-weight:700;cursor:pointer;font-size:13px}
+button:hover{filter:brightness(1.06)}
+button.secondary{background:#e7f2ea;color:#15572f;border:1px solid #c8dfce}
+button.dark{background:#27372c}
+button.danger{background:#b42318}
+.hint{font-size:12px;color:var(--muted)}
+.status{font-size:13px;color:var(--green);min-height:20px;margin-top:8px}
+.preview-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.canvas-wrap{background:#e8eee9;border:1px dashed #b8cbbd;border-radius:12px;padding:12px;min-height:280px;display:flex;align-items:center;justify-content:center;overflow:auto;margin-top:12px}
+canvas{max-width:100%;height:auto;box-shadow:0 4px 18px #0002;background:#fff}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.stat{padding:10px;border-radius:10px;background:#f0f7f1;border:1px solid #dcebe0}
+.stat strong{display:block;font-size:15px}
+.stat span{font-size:11px;color:var(--muted)}
+.hidden{display:none!important}
+.small-list{padding-left:20px}
+.job{border:1px solid var(--line);padding:9px;border-radius:9px;margin:7px 0;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.tag{font-size:11px;background:#e6f4e9;color:#176b3a;border-radius:20px;padding:3px 8px}
+.footer{padding:22px;text-align:center;color:var(--muted);font-size:12px}
+.range-value{font-size:12px;color:var(--green);font-weight:700}
+.modal-note{padding:10px;background:#f8faf8;border:1px solid var(--line);border-radius:9px;font-size:12px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.wrap{padding:10px}.panel,.preview-panel{padding:13px}}
+@media print{
+body{background:#fff}
+.no-print,header,.panel,.notice,.footer,.preview-top,.stats{display:none!important}
+.wrap{padding:0;max-width:none}
+.layout{display:block}
+.preview-panel{border:0;padding:0;box-shadow:none}
+.canvas-wrap{border:0;padding:0;margin:0;min-height:0;background:#fff}
+canvas{max-width:none;width:auto!important;height:auto!important;box-shadow:none}
+}
 </style>
 </head>
 <body>
 <header>
- <div class="brand">KISAN SEVA TOOLS • PHOTO LAB</div>
- <h1>📸 Photo Studio Pro</h1>
- <p>Actual-size layouts · Crop · Enhance · Background · Print</p>
+<div>
+<h1>📸 Photo Studio Pro</h1>
+<p>Kisan Seva Tools · Photo editing & print layout</p>
+</div>
+<div class="tag">Browser-based tools</div>
 </header>
 
-<main>
- <a class="back" href="../Home.html">← Back to Home</a>
- <section class="intro">
-  <h2>Professional Photo Maker</h2>
-  <p>Choose the photo frame and paper size separately. Preview your layout before downloading or printing.</p>
- </section>
+<main class="wrap">
+<div class="notice">
+<strong>Important:</strong> Photo processing is performed in your browser for the local features. AI background removal and AI restoration require a configured third-party service. For exact physical size, print at <b>Actual size / 100%</b> and disable “Fit to page”.
+</div>
 
- <div class="workspace">
-  <section class="panel">
-   <h3>1. Upload & frame</h3>
-   <p class="muted">Photo file stays in your browser while you edit it.</p>
-   <div class="upload">
-    <label for="upload">Choose photo (JPG, PNG, WebP)</label>
-    <input id="upload" type="file" accept="image/jpeg,image/png,image/webp">
-   </div>
+<div class="layout">
+<aside class="panel no-print">
 
-   <div class="section-title">PHOTO FRAME SIZE</div>
-   <div class="grid3" id="frames">
-    <button class="choice active" data-frame="passport"><span>🛂</span><strong>Passport</strong><small>35 × 45 mm</small></button>
-    <button class="choice" data-frame="usvisa"><span>🌎</span><strong>US Visa</strong><small>2 × 2 inch</small></button>
-    <button class="choice" data-frame="visa"><span>🧳</span><strong>Visa</strong><small>35 × 45 mm</small></button>
-    <button class="choice" data-frame="id"><span>🪪</span><strong>ID Card</strong><small>25 × 30 mm</small></button>
-    <button class="choice" data-frame="stamp"><span>📷</span><strong>Stamp</strong><small>25 × 25 mm</small></button>
-    <button class="choice" data-frame="square"><span>⬜</span><strong>Square</strong><small>35 × 35 mm</small></button>
-    <button class="choice" data-frame="small"><span>🖼️</span><strong>Small</strong><small>30 × 40 mm</small></button>
-    <button class="choice" data-frame="custom"><span>📐</span><strong>Custom</strong><small>Your dimensions</small></button>
-   </div>
+<div class="section">
+<h2>1. Upload photos</h2>
+<div class="field">
+<label for="photoFile">Main photo (JPG, PNG, WebP · max 15 MB)</label>
+<input id="photoFile" type="file" accept="image/jpeg,image/png,image/webp">
+</div>
+<div class="field">
+<label for="signatureFile">Optional signature</label>
+<input id="signatureFile" type="file" accept="image/*">
+</div>
+<div class="buttons">
+<button id="undoBtn" class="secondary">↶ Undo</button>
+<button id="redoBtn" class="secondary">↷ Redo</button>
+<button id="resetBtn" class="secondary">Reset edits</button>
+</div>
+<div id="uploadStatus" class="status">Upload a photo to begin.</div>
+</div>
 
-   <div class="grid2" id="customSize" hidden>
-    <div><label for="fw">Frame width (mm)</label><input id="fw" type="number" min="10" max="100" value="35"></div>
-    <div><label for="fh">Frame height (mm)</label><input id="fh" type="number" min="10" max="100" value="45"></div>
-   </div>
+<div class="section">
+<h2>2. Photo frame & paper</h2>
+<div class="field">
+<label for="frame">Photo size</label>
+<select id="frame">
+<option value="35x45">Passport · 35 × 45 mm</option>
+<option value="35x45">Visa · 35 × 45 mm</option>
+<option value="50.8x50.8">US Visa · 2 × 2 inch</option>
+<option value="25x30">ID · 25 × 30 mm</option>
+<option value="25x25">Stamp · 25 × 25 mm</option>
+<option value="35x35">Square · 35 × 35 mm</option>
+<option value="30x40">Small · 30 × 40 mm</option>
+<option value="custom">Custom size</option>
+</select>
+</div>
 
-   <div class="section-title">PAPER / SHEET SIZE</div>
-   <div class="grid3" id="papers">
-    <button class="choice active" data-paper="4x6"><strong>4 × 6 inch</strong><small>101.6 × 152.4 mm</small></button>
-    <button class="choice" data-paper="a4"><strong>A4 Sheet</strong><small>210 × 297 mm</small></button>
-    <button class="choice" data-paper="single"><strong>Single Photo</strong><small>Frame dimensions</small></button>
-   </div>
+<div class="grid2">
+<div class="field">
+<label for="customW">Custom width (mm)</label>
+<input id="customW" type="number" min="5" max="200" value="35">
+</div>
+<div class="field">
+<label for="customH">Custom height (mm)</label>
+<input id="customH" type="number" min="5" max="200" value="45">
+</div>
+</div>
 
-   <div class="grid2">
-    <div><label for="copies">Number of copies</label><input id="copies" type="number" min="1" max="60" value="8"></div>
-    <div><label for="dpi">Output resolution</label><select id="dpi"><option value="300">300 DPI (print)</option><option value="200">200 DPI</option><option value="150">150 DPI</option></select></div>
-   </div>
+<div class="field">
+<label for="paper">Paper / layout</label>
+<select id="paper">
+<option value="4x6">4 × 6 inch photo paper</option>
+<option value="a4">A4 paper</option>
+<option value="5x7">5 × 7 inch</option>
+<option value="6x8">6 × 8 inch</option>
+<option value="single">Single photo only</option>
+<option value="collage">Collage grid (3 × 3)</option>
+</select>
+</div>
 
-   <div class="section-title">2. CROP & POSITION</div>
-   <label for="zoom">Zoom: <span id="zoomVal">1.00×</span></label>
-   <input id="zoom" type="range" min="1" max="3" value="1" step=".01">
-   <div class="grid2">
-    <div><label for="moveX">Move left / right</label><input id="moveX" type="range" min="-100" max="100" value="0"></div>
-    <div><label for="moveY">Move up / down</label><input id="moveY" type="range" min="-100" max="100" value="0"></div>
-   </div>
-   <label for="fit">Image fit</label>
-   <select id="fit"><option value="cover">Fill frame / crop edges</option><option value="contain">Fit entire photo</option></select>
+<div class="grid2">
+<div class="field">
+<label for="copies">Copies requested</label>
+<input id="copies" type="number" min="1" max="200" value="8">
+</div>
+<div class="field">
+<label for="dpi">Export DPI</label>
+<select id="dpi">
+<option>150</option>
+<option>200</option>
+<option selected>300</option>
+</select>
+</div>
+<div class="field">
+<label for="gap">Gap (mm)</label>
+<input id="gap" type="number" min="0" max="20" value="2">
+</div>
+<div class="field">
+<label for="margin">Paper margin (mm)</label>
+<input id="margin" type="number" min="0" max="20" value="3">
+</div>
+</div>
+<label><input id="cutLines" type="checkbox" checked> Show cut lines</label>
+<p class="hint">Copies are limited by the paper area. Requested count may not fit on one sheet.</p>
+</div>
 
-   <div class="section-title">3. PHOTO ENHANCEMENT</div>
-   <label for="brightness">Brightness: <span id="brightnessVal">100%</span></label>
-   <input id="brightness" type="range" min="50" max="150" value="100">
-   <label for="contrast">Contrast: <span id="contrastVal">100%</span></label>
-   <input id="contrast" type="range" min="50" max="150" value="100">
-   <label for="saturation">Saturation: <span id="saturationVal">100%</span></label>
-   <input id="saturation" type="range" min="0" max="150" value="100">
+<div class="section">
+<h2>3. Crop & position</h2>
+<div class="field">
+<label for="fitMode">Image fit</label>
+<select id="fitMode">
+<option value="cover">Fill frame (crop edges)</option>
+<option value="contain">Fit whole image</option>
+</select>
+</div>
+<div class="field">
+<label>Zoom <span id="zoomVal" class="range-value">1.00×</span></label>
+<input id="zoom" type="range" min="1" max="3" step="0.05" value="1">
+</div>
+<div class="grid2">
+<div class="field">
+<label>Move horizontal <span id="xVal" class="range-value">0</span></label>
+<input id="offsetX" type="range" min="-100" max="100" value="0">
+</div>
+<div class="field">
+<label>Move vertical <span id="yVal" class="range-value">0</span></label>
+<input id="offsetY" type="range" min="-100" max="100" value="0">
+</div>
+</div>
+<div class="field">
+<label for="rotation">Rotate</label>
+<select id="rotation">
+<option value="0">0°</option>
+<option value="90">90°</option>
+<option value="180">180°</option>
+<option value="270">270°</option>
+</select>
+</div>
+<button id="detectFace" class="secondary">Try face detection</button>
+<div id="faceStatus" class="hint"></div>
+</div>
 
-   <div class="section-title">4. BACKGROUND COLOUR</div>
-   <div class="grid2">
-    <div><label for="bg">Preset colour</label>
-     <select id="bg">
-      <option value="#ffffff">White</option>
-      <option value="#e8f2ff">Light blue</option>
-      <option value="#e8f5e9">Light green</option>
-      <option value="#eeeeee">Light grey</option>
-      <option value="#fff0dc">Cream</option>
-      <option value="#000000">Black</option>
-      <option value="custom">Custom colour</option>
-     </select>
-    </div>
-    <div><label for="customBg">Custom colour</label><input type="color" id="customBg" value="#ffffff"></div>
-   </div>
-   <label class="checkline"><input type="checkbox" id="border" checked> Show cut-line borders</label>
-   <div class="actions">
-    <button class="btn" id="generate">✨ Update Preview</button>
-    <button class="btn secondary" id="reset">Reset adjustments</button>
-   </div>
-   <div id="message" role="status" aria-live="polite">Upload a photo to begin.</div>
-   <div class="note"><b>Note:</b> Colour selection paints the frame background; it does not automatically isolate a person from the original background. Official passport and visa specifications vary. Confirm the required rules before submission.</div>
-  </section>
+<div class="section">
+<h2>4. Photo adjustments</h2>
+<div class="field">
+<label>Brightness <span id="brightVal" class="range-value">100%</span></label>
+<input id="brightness" type="range" min="50" max="160" value="100">
+</div>
+<div class="field">
+<label>Contrast <span id="contrastVal" class="range-value">100%</span></label>
+<input id="contrast" type="range" min="50" max="160" value="100">
+</div>
+<div class="field">
+<label>Saturation <span id="satVal" class="range-value">100%</span></label>
+<input id="saturation" type="range" min="0" max="180" value="100">
+</div>
+<div class="field">
+<label>Sharpen <span id="sharpVal" class="range-value">0</span></label>
+<input id="sharpen" type="range" min="0" max="3" step="1" value="0">
+</div>
+<div class="field">
+<label for="bgColor">Background fill colour</label>
+<input id="bgColor" type="color" value="#ffffff">
+</div>
+<div class="buttons">
+<button id="autoFix" class="secondary">Quick colour fix</button>
+<button id="beforeAfter" class="secondary">Toggle original / edited</button>
+</div>
+<p class="hint">Colour controls cannot restore details missing from a blurry photo. Background colour does not remove the background of an ordinary photo.</p>
+</div>
 
-  <section class="panel">
-   <h3>Live print preview</h3>
-   <p class="muted">The paper preview represents the selected physical sheet. It is not a passport-only canvas when 4×6 or A4 is selected.</p>
-   <div class="preview" id="preview">
-    <div class="placeholder" id="placeholder"><b>🖼️</b>Upload a photo, choose a frame and tap Update Preview.</div>
-    <canvas id="canvas" hidden></canvas>
-   </div>
-   <div class="statgrid">
-    <div class="stat"><small>Paper</small><strong id="paperStat">4 × 6 inch</strong></div>
-    <div class="stat"><small>Photo frame</small><strong id="frameStat">35 × 45 mm</strong></div>
-    <div class="stat"><small>Copies placed</small><strong id="placedStat">0</strong></div>
-   </div>
-   <div class="actions">
-    <button class="btn" id="jpg" disabled>⬇ Download JPG</button>
-    <button class="btn secondary" id="png" disabled>⬇ Download PNG</button>
-    <button class="btn dark" id="print" disabled>🖨️ Print at actual size</button>
-   </div>
-   <div class="note">
-    <b>Actual-size print settings</b><br>
-    4×6: select 4×6 inch paper in the printer dialog. A4: select A4 paper. Set scale to 100% / Actual Size and disable “Fit to page” if the driver allows it. Borderless printing depends on the printer.
-   </div>
-   <p class="muted" style="margin-top:14px">Suggested service price: ₹5 per design. This page does not collect payment.</p>
-  </section>
- </div>
+<div class="section">
+<h2>5. Frames & collage</h2>
+<div class="field">
+<label for="borderStyle">Frame style</label>
+<select id="borderStyle">
+<option value="none">No frame</option>
+<option value="thin">Thin green border</option>
+<option value="white">White border</option>
+<option value="rounded">Rounded preview</option>
+<option value="double">Double border</option>
+</select>
+</div>
+<div class="field">
+<label for="collageCaption">Optional collage caption</label>
+<input id="collageCaption" maxlength="50" placeholder="e.g. Family Memories">
+</div>
+<div class="field">
+<label for="formal">Formal template overlay</label>
+<select id="formal">
+<option value="none">None</option>
+<option value="formal">Simple formal collar guide</option>
+</select>
+</div>
+<p class="hint">The formal overlay is decorative only. It does not replace clothing.</p>
+</div>
+
+<div class="section">
+<h2>6. Signature tools</h2>
+<div class="field">
+<label for="sigMode">Signature layout</label>
+<select id="sigMode">
+<option value="none">Photo only</option>
+<option value="side">Photo + signature side by side</option>
+<option value="below">Photo + signature below</option>
+</select>
+</div>
+<div class="field">
+<label for="sigScale">Signature width (% of photo width)</label>
+<input id="sigScale" type="range" min="20" max="100" value="70">
+</div>
+</div>
+
+<div class="section">
+<h2>7. Price calculator</h2>
+<div class="grid2">
+<div class="field">
+<label for="rate">Rate per sheet (₹)</label>
+<input id="rate" type="number" min="0" step="0.5" value="10">
+</div>
+<div class="field">
+<label for="serviceFee">Service fee (₹)</label>
+<input id="serviceFee" type="number" min="0" step="0.5" value="5">
+</div>
+</div>
+<div class="stat">
+<span>Estimated total</span>
+<strong id="priceTotal">₹15.00</strong>
+<span id="priceBreakdown">1 sheet + service fee</span>
+</div>
+<p class="hint">Local estimate only; no payment is collected.</p>
+</div>
+
+<div class="section">
+<h2>8. Export</h2>
+<div class="buttons">
+<button id="downloadJpg">Download JPG</button>
+<button id="downloadPng" class="secondary">Download PNG</button>
+<button id="printBtn" class="dark">Print / Save PDF</button>
+</div>
+<div class="field">
+<label for="jpgQuality">JPG quality <span id="qualityVal" class="range-value">92%</span></label>
+<input id="jpgQuality" type="range" min="50" max="100" value="92">
+</div>
+<p class="hint">Choose “Save as PDF” in the browser print dialog to create a PDF file.</p>
+</div>
+
+<div class="section">
+<h2>9. Presets</h2>
+<div class="field">
+<label for="presetName">Preset name</label>
+<input id="presetName" maxlength="30" placeholder="My passport settings">
+</div>
+<div class="buttons">
+<button id="savePreset">Save preset</button>
+<button id="loadPreset" class="secondary">Load selected</button>
+<button id="deletePreset" class="secondary">Delete selected</button>
+</div>
+<div class="field">
+<label for="presets">Saved presets (this browser only)</label>
+<select id="presets"><option value="">No presets saved</option></select>
+</div>
+</div>
+
+<div class="section">
+<h2>10. Print-job manager</h2>
+<div class="field">
+<label for="customerName">Customer / job label</label>
+<input id="customerName" maxlength="60" placeholder="Customer name or token">
+</div>
+<div class="buttons">
+<button id="saveJob">Save current job</button>
+<button id="clearJobs" class="danger">Clear jobs</button>
+</div>
+<div id="jobsList"></div>
+<p class="hint">Jobs stay in this browser. Avoid storing Aadhaar numbers or other sensitive data.</p>
+</div>
+
+<div class="section">
+<h2>11. AI service integration</h2>
+<div class="modal-note">Real AI background removal and restoration require a trusted provider through a secure backend. Never paste secret API keys into this public HTML file.</div>
+<div class="buttons">
+<button id="aiBg" class="secondary">AI background removal</button>
+<button id="aiEnhance" class="secondary">AI photo enhance</button>
+</div>
+<div id="aiStatus" class="hint">AI service not configured.</div>
+</div>
+
+</aside>
+
+<section class="preview-panel">
+<div class="preview-top">
+<div>
+<h2>Live print preview</h2>
+<div class="hint">Preview updates as you change settings.</div>
+</div>
+<div class="buttons no-print">
+<button id="renderBtn" class="secondary">Refresh preview</button>
+</div>
+</div>
+<div class="canvas-wrap">
+<canvas id="sheetCanvas" width="1200" height="1800"></canvas>
+</div>
+<div class="stats">
+<div class="stat"><span>Paper</span><strong id="paperStat">4 × 6 inch</strong></div>
+<div class="stat"><span>Photo size</span><strong id="sizeStat">35 × 45 mm</strong></div>
+<div class="stat"><span>Photos on sheet</span><strong id="countStat">0</strong></div>
+</div>
+<div class="section">
+<h2>Quick checklist</h2>
+<ul class="small-list">
+<li>Check the face crop and photo background before printing.</li>
+<li>Use the correct paper size in printer properties.</li>
+<li>Select Actual size / 100% in the print dialog; disable Fit to page.</li>
+<li>Print one test sheet and measure a photo with a ruler.</li>
+</ul>
+</div>
+<div id="mainStatus" class="status">Upload a photo to see the layout.</div>
+</section>
+</div>
 </main>
-<footer>© 2026 Kisan Seva Tools • Photo Studio Pro</footer>
+
+<div class="footer">Kisan Seva Tools · Photo Studio Pro · Keep original files backed up before editing.</div>
 
 <script>
-(() => {
-"use strict";
+(()=>{'use strict';
 const $=id=>document.getElementById(id);
-const frames={
- passport:{w:35,h:45},visa:{w:35,h:45},usvisa:{w:50.8,h:50.8},
- id:{w:25,h:30},stamp:{w:25,h:25},square:{w:35,h:35},small:{w:30,h:40},custom:{w:35,h:45}
-};
-const papers={
- "4x6":{w:101.6,h:152.4,label:"4 × 6 inch"},
- a4:{w:210,h:297,label:"A4 Sheet"},
- single:{w:0,h:0,label:"Single Photo"}
-};
-let frame="passport",paper="4x6",img=null,ready=false;
+const canvas=$('sheetCanvas'),ctx=canvas.getContext('2d');
+let sourceImg=null,signatureImg=null,originalData=null,history=[],future=[],showOriginal=false,renderTimer=null;
 
-function dims(){
- if(frame==="custom")return {w:clamp(+$("fw").value||35,10,100),h:clamp(+$("fh").value||45,10,100)};
- return frames[frame];
+const defaults={
+frame:'35x45',customW:35,customH:45,paper:'4x6',copies:8,dpi:'300',
+gap:2,margin:3,cutLines:true,fitMode:'cover',zoom:1,offsetX:0,offsetY:0,
+rotation:'0',brightness:100,contrast:100,saturation:100,sharpen:0,
+bgColor:'#ffffff',borderStyle:'none',collageCaption:'',formal:'none',
+sigMode:'none',sigScale:70,rate:10,serviceFee:5,jpgQuality:92
+};
+
+const settingsIds=Object.keys(defaults);
+
+function val(id){
+const e=$(id);
+if(!e)return null;
+if(e.type==='checkbox')return e.checked;
+if(e.type==='number'||e.type==='range')return Number(e.value);
+return e.value;
 }
-function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
-function dpi(){return +$("dpi").value}
-function px(mm){return Math.round(mm*dpi()/25.4)}
-function background(){
- return $("bg").value==="custom"?$("customBg").value:$("bg").value;
+
+function getSettings(){
+const o={};
+settingsIds.forEach(k=>o[k]=val(k));
+return o;
 }
-function setMsg(t,good=true){$("message").textContent=t;$("message").className=good?"good":"bad"}
-function markChoices(selector,attr,value){
- document.querySelectorAll(selector+" .choice").forEach(b=>b.classList.toggle("active",b.dataset[attr]===value));
+
+function applySettings(o){
+settingsIds.forEach(k=>{
+if(o[k]===undefined||!$(k))return;
+const e=$(k);
+if(e.type==='checkbox')e.checked=!!o[k];
+else e.value=o[k];
+});
+updateLabels();
+scheduleRender();
 }
-function setFrame(v){
- frame=v;markChoices("#frames","frame",v);
- $("customSize").hidden=v!=="custom";
- updateStats();
- if(img)render();
+
+function say(msg,where='mainStatus'){
+if($(where))$(where).textContent=msg;
 }
-function setPaper(v){
- paper=v;markChoices("#papers","paper",v);updateStats();
- if(img)render();
+
+function paperDims(name){
+return ({
+'4x6':[101.6,152.4,'4 × 6 inch'],
+'a4':[210,297,'A4'],
+'5x7':[127,177.8,'5 × 7 inch'],
+'6x8':[152.4,203.2,'6 × 8 inch'],
+'single':[0,0,'Single photo'],
+'collage':[101.6,152.4,'4 × 6 inch collage']
+})[name]||[101.6,152.4,'4 × 6 inch'];
 }
-function updateStats(){
- const d=dims(),p=papers[paper];
- $("paperStat").textContent=paper==="single"?`${d.w} × ${d.h} mm`:p.label;
- $("frameStat").textContent=`${d.w} × ${d.h} mm`;
- $("zoomVal").textContent=(+$("zoom").value).toFixed(2)+"×";
- ["brightness","contrast","saturation"].forEach(k=>$(k+"Val").textContent=$ (k).value+"%");
+
+function photoDims(){
+if(val('frame')==='custom')
+return [
+Math.max(5,Math.min(200,val('customW')||35)),
+Math.max(5,Math.min(200,val('customH')||45))
+];
+return val('frame').split('x').map(Number);
 }
-function drawPhoto(ctx,x,y,w,h){
- const d=dims();
- const bg=background();
- ctx.fillStyle=bg;ctx.fillRect(x,y,w,h);
- const base=$("fit").value==="cover"?Math.max(w/img.naturalWidth,h/img.naturalHeight):Math.min(w/img.naturalWidth,h/img.naturalHeight);
- const scale=base*(+$("zoom").value);
- const dw=img.naturalWidth*scale,dh=img.naturalHeight*scale;
- const ox=(+$("moveX").value)/100*(dw-w)/2;
- const oy=(+$("moveY").value)/100*(dh-h)/2;
- const dx=x+(w-dw)/2+ox,dy=y+(h-dh)/2+oy;
- ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
- ctx.filter=`brightness(${$("brightness").value}%) contrast(${$("contrast").value}%) saturate(${$("saturation").value}%)`;
- ctx.drawImage(img,dx,dy,dw,dh);ctx.filter="none";ctx.restore();
- if($("border").checked){
-  ctx.save();ctx.strokeStyle="#87978c";ctx.lineWidth=Math.max(1,dpi()/100);
-  ctx.strokeRect(x+.5,y+.5,w-1,h-1);ctx.restore();
- }
+
+function loadImage(file,cb){
+if(!file)return;
+if(file.size>15*1024*1024){
+say('File is larger than 15 MB. Please choose a smaller image.','uploadStatus');
+return;
 }
+if(!file.type.startsWith('image/')){
+say('Please choose an image file.','uploadStatus');
+return;
+}
+const url=URL.createObjectURL(file),img=new Image();
+img.onload=()=>{URL.revokeObjectURL(url);cb(img)};
+img.onerror=()=>{
+URL.revokeObjectURL(url);
+say('Could not open this image.','uploadStatus');
+};
+img.src=url;
+}
+
+function saveHistory(){
+if(!sourceImg)return;
+history.push(JSON.stringify(getSettings()));
+if(history.length>40)history.shift();
+future=[];
+updateHistoryButtons();
+}
+
+function updateHistoryButtons(){
+$('undoBtn').disabled=!history.length;
+$('redoBtn').disabled=!future.length;
+}
+
+function updateLabels(){
+$('zoomVal').textContent=Number(val('zoom')).toFixed(2)+'×';
+$('xVal').textContent=val('offsetX');
+$('yVal').textContent=val('offsetY');
+$('brightVal').textContent=val('brightness')+'%';
+$('contrastVal').textContent=val('contrast')+'%';
+$('satVal').textContent=val('saturation')+'%';
+$('sharpVal').textContent=val('sharpen');
+$('qualityVal').textContent=val('jpgQuality')+'%';
+
+const [w,h]=photoDims();
+$('sizeStat').textContent=w+' × '+h+' mm';
+$('paperStat').textContent=paperDims(val('paper'))[2];
+
+const total=Math.max(0,Number(val('rate'))||0)+Math.max(0,Number(val('serviceFee'))||0);
+$('priceTotal').textContent='₹'+total.toFixed(2);
+$('priceBreakdown').textContent='1 sheet ₹'+(Number(val('rate'))||0).toFixed(2)+' + service ₹'+(Number(val('serviceFee'))||0).toFixed(2);
+}
+
+function drawPhoto(target,x,y,w,h,s,forPreview=false){
+target.save();
+
+if(s.borderStyle==='rounded'&&forPreview){
+const r=Math.min(10,w*.05);
+target.beginPath();
+if(target.roundRect)target.roundRect(x,y,w,h,r);
+else target.rect(x,y,w,h);
+target.clip();
+}
+
+target.fillStyle=s.bgColor||'#fff';
+target.fillRect(x,y,w,h);
+
+if(sourceImg){
+target.save();
+target.beginPath();
+target.rect(x,y,w,h);
+target.clip();
+
+const rot=Number(s.rotation)||0;
+const swapped=rot===90||rot===270;
+let iw=sourceImg.naturalWidth,ih=sourceImg.naturalHeight;
+if(swapped)[iw,ih]=[ih,iw];
+
+const fit=s.fitMode==='contain'?Math.min(w/iw,h/ih):Math.max(w/iw,h/ih);
+const scale=fit*(Number(s.zoom)||1);
+const dw=iw*scale,dh=ih*scale;
+let dx=x+(w-dw)/2+(Number(s.offsetX)||0)/100*w;
+let dy=y+(h-dh)/2+(Number(s.offsetY)||0)/100*h;
+
+target.filter=showOriginal?'none':`brightness(${s.brightness}%) contrast(${s.contrast}%) saturate(${s.saturation}%)`;
+
+if(rot){
+target.translate(x+w/2,y+h/2);
+target.rotate(rot*Math.PI/180);
+target.drawImage(sourceImg,-dh/2,-dw/2,dh,dw);
+}else{
+target.drawImage(sourceImg,dx,dy,dw,dh);
+}
+
+target.filter='none';
+target.restore();
+
+if(signatureImg&&s.sigMode!=='none'){
+const sigW=w*(Number(s.sigScale)||70)/100;
+const sigH=sigW*(signatureImg.naturalHeight/signatureImg.naturalWidth);
+let sx=x+(w-sigW)/2;
+let sy=y+h-sigH-2;
+
+if(s.sigMode==='side'){
+sx=Math.min(x+w-sigW,x+w-sigW-2);
+sy=y+h-sigH-2;
+}
+
+target.fillStyle='#fff';
+target.fillRect(sx,sy,sigW,sigH);
+target.drawImage(signatureImg,sx,sy,sigW,sigH);
+}
+}
+
+if(s.formal==='formal'){
+target.strokeStyle='#314c3c';
+target.lineWidth=Math.max(1,w*.012);
+target.beginPath();
+target.moveTo(x+w*.27,y+h*.86);
+target.lineTo(x+w*.4,y+h*.99);
+target.lineTo(x+w*.5,y+h*.87);
+target.lineTo(x+w*.6,y+h*.99);
+target.lineTo(x+w*.73,y+h*.86);
+target.stroke();
+}
+
+if(s.borderStyle==='thin'||s.borderStyle==='double'||s.borderStyle==='white'){
+target.strokeStyle=s.borderStyle==='white'?'#fff':'#176b3a';
+target.lineWidth=Math.max(1,w*.012);
+target.strokeRect(x,y,w,h);
+if(s.borderStyle==='double'){
+target.lineWidth=Math.max(1,w*.006);
+target.strokeRect(x+3,y+3,w-6,h-6);
+}
+}
+target.restore();
+}
+
 function render(){
- if(!img){setMsg("Pehle photo upload karo.",false);return}
- const d=dims(),fw=px(d.w),fh=px(d.h);
- let sw=paper==="single"?d.w:papers[paper].w;
- let sh=paper==="single"?d.h:papers[paper].h;
- const cw=px(sw),ch=px(sh),canvas=$("canvas");
- // Guard against accidental huge canvas memory allocations.
- if(cw*ch>45000000){setMsg("Resolution bahut badi hai. 150 ya 200 DPI choose karo.",false);return}
- canvas.width=cw;canvas.height=ch;
- const ctx=canvas.getContext("2d");
- ctx.fillStyle="#ffffff";ctx.fillRect(0,0,cw,ch);
- const requested=paper==="single"?1:clamp(+$("copies").value||1,1,60);
- const margin=paper==="a4"?5:2.5;
- const mx=px(margin),my=px(margin);
- const cols=Math.max(0,Math.floor((cw-2*mx)/fw));
- const rows=Math.max(0,Math.floor((ch-2*my)/fh));
- const capacity=paper==="single"?1:cols*rows;
- const count=Math.min(requested,capacity);
- if(count<1){setMsg("Is frame size ke liye selected sheet par jagah nahi hai. A4 ya chhota frame choose karo.",false);return}
- for(let i=0;i<count;i++){
-  const x=paper==="single"?0:mx+(i%cols)*fw;
-  const y=paper==="single"?0:my+Math.floor(i/cols)*fh;
-  drawPhoto(ctx,x,y,fw,fh);
- }
- canvas.hidden=false;$("placeholder").hidden=true;
- $("jpg").disabled=false;$("png").disabled=false;$("print").disabled=false;
- $("placedStat").textContent=count;
- ready=true;
- updateStats();
- const sheetText=paper==="single"?"single photo":papers[paper].label;
- setMsg(`${sheetText} preview ready: ${count} photo(s) placed at ${dpi()} DPI.${count<requested?" Requested copies exceed available space; showing the copies that fit.":""}`);
+clearTimeout(renderTimer);
+const s=getSettings(),dpi=Number(s.dpi)||300;
+let [pw,ph,pname]=paperDims(s.paper),[fw,fh]=photoDims();
+if(s.paper==='single'){pw=fw;ph=fh}
+
+const scale=Math.min(6,Math.max(2,Math.round(dpi/60)));
+const W=Math.max(300,Math.round(pw*scale/0.5));
+const H=Math.max(300,Math.round(ph*scale/0.5));
+
+canvas.width=Math.min(W,2400);
+canvas.height=Math.min(H,3200);
+
+const cw=canvas.width,ch=canvas.height;
+ctx.fillStyle='#fff';
+ctx.fillRect(0,0,cw,ch);
+
+if(!sourceImg){
+ctx.fillStyle='#68786d';
+ctx.textAlign='center';
+ctx.font='bold 28px system-ui';
+ctx.fillText('Upload a photo to begin',cw/2,ch/2);
+ctx.font='16px system-ui';
+ctx.fillText('Your print layout will appear here',cw/2,ch/2+34);
+$('countStat').textContent='0';
+return;
 }
+
+const mmScaleX=cw/pw,mmScaleY=ch/ph;
+const margin=Math.max(0,Number(s.margin)||0);
+const gap=Math.max(0,Number(s.gap)||0);
+let cells=[];
+
+if(s.paper==='single'){
+cells=[[0,0,fw,fh]];
+}else if(s.paper==='collage'){
+const cols=3,rows=3;
+const availW=pw-2*margin,availH=ph-2*margin;
+const cellW=(availW-gap*(cols-1))/cols;
+const cellH=(availH-gap*(rows-1))/rows;
+for(let r=0;r<rows;r++)
+for(let c=0;c<cols;c++)
+cells.push([margin+c*(cellW+gap),margin+r*(cellH+gap),cellW,cellH]);
+}else{
+const availW=pw-2*margin,availH=ph-2*margin;
+const cols=Math.max(0,Math.floor((availW+gap)/(fw+gap)));
+const rows=Math.max(0,Math.floor((availH+gap)/(fh+gap)));
+const max=Math.min(Math.max(1,Number(s.copies)||1),cols*rows);
+let n=0;
+for(let r=0;r<rows&&n<max;r++)
+for(let c=0;c<cols&&n<max;c++,n++)
+cells.push([margin+c*(fw+gap),margin+r*(fh+gap),fw,fh]);
+}
+
+if(s.paper==='single')cells=[[0,0,fw,fh]];
+
+for(const [mx,my,mw,mh] of cells){
+const x=mx*mmScaleX,y=my*mmScaleY,w=mw*mmScaleX,h=mh*mmScaleY;
+drawPhoto(ctx,x,y,w,h,s,true);
+if(s.cutLines){
+ctx.save();
+ctx.strokeStyle='#777';
+ctx.lineWidth=1;
+ctx.setLineDash([4,4]);
+ctx.strokeRect(x,y,w,h);
+ctx.restore();
+}
+}
+
+if(s.collageCaption){
+ctx.fillStyle='#24382a';
+ctx.textAlign='center';
+ctx.font=`bold ${Math.max(12,cw*.025)}px system-ui`;
+ctx.fillText(s.collageCaption,cw/2,ch-8);
+}
+
+$('countStat').textContent=String(cells.length);
+
+if(s.paper!=='single'&&cells.length<(Number(s.copies)||1)){
+say(`Only ${cells.length} photo(s) fit on this sheet; requested ${s.copies}. Reduce photo size/margins or use larger paper.`);
+}else{
+say(`Preview ready · ${cells.length} photo(s) on ${pname}. Print at Actual size / 100%.`);
+}
+updateLabels();
+}
+
+function scheduleRender(){
+updateLabels();
+clearTimeout(renderTimer);
+renderTimer=setTimeout(render,80);
+}
+
+$('photoFile').addEventListener('change',e=>{
+loadImage(e.target.files[0],img=>{
+sourceImg=img;
+showOriginal=false;
+history=[];
+future=[];
+say(`Loaded ${img.naturalWidth} × ${img.naturalHeight} px photo.`,'uploadStatus');
+updateHistoryButtons();
+render();
+});
+});
+
+$('signatureFile').addEventListener('change',e=>{
+loadImage(e.target.files[0],img=>{
+signatureImg=img;
+say('Signature loaded. Select a signature layout to include it.','uploadStatus');
+render();
+});
+});
+
+settingsIds.forEach(id=>{
+const e=$(id);
+if(e)e.addEventListener('input',()=>{
+if(!['zoom','offsetX','offsetY','brightness','contrast','saturation','sharpen','jpgQuality'].includes(id))saveHistory();
+updateLabels();
+scheduleRender();
+});
+if(e&&e.tagName==='SELECT')e.addEventListener('change',()=>{
+saveHistory();
+scheduleRender();
+});
+});
+
+$('renderBtn').onclick=render;
+
+$('resetBtn').onclick=()=>{
+applySettings(defaults);
+showOriginal=false;
+history=[];
+future=[];
+updateHistoryButtons();
+say('Settings reset. Your uploaded image is unchanged.');
+};
+
+$('undoBtn').onclick=()=>{
+if(!history.length)return;
+future.push(JSON.stringify(getSettings()));
+applySettings(JSON.parse(history.pop()));
+updateHistoryButtons();
+};
+
+$('redoBtn').onclick=()=>{
+if(!future.length)return;
+history.push(JSON.stringify(getSettings()));
+applySettings(JSON.parse(future.pop()));
+updateHistoryButtons();
+};
+
+$('beforeAfter').onclick=()=>{
+showOriginal=!showOriginal;
+$('beforeAfter').textContent=showOriginal?'Show edited':'Toggle original / edited';
+render();
+};
+
+$('autoFix').onclick=()=>{
+saveHistory();
+$('brightness').value=105;
+$('contrast').value=108;
+$('saturation').value=105;
+updateLabels();
+render();
+};
+
+$('detectFace').onclick=async()=>{
+if(!sourceImg){
+say('Upload a photo first.','faceStatus');
+return;
+}
+if(!('FaceDetector' in window)){
+say('Face detection is not supported by this browser. Use manual crop controls.','faceStatus');
+return;
+}
+try{
+const detector=new FaceDetector({fastMode:true,maxDetectedFaces:1});
+const faces=await detector.detect(sourceImg);
+say(faces.length?`Detected ${faces.length} face(s). Detection is advisory; adjust crop manually.`:'No face detected. Adjust crop manually.','faceStatus');
+}catch(e){
+say('Face detection failed or is blocked by this browser.','faceStatus');
+}
+};
+
 function download(type){
- if(!ready)return;
- const c=$("canvas"),mime=type==="jpg"?"image/jpeg":"image/png";
- // JPG cannot retain transparency; sheet is white.
- const a=document.createElement("a");
- a.href=c.toDataURL(mime,type==="jpg"?.94:undefined);
- a.download=`kisan-${paper}-${frame}.${type}`;
- document.body.appendChild(a);a.click();a.remove();
+if(!sourceImg){
+say('Upload a photo before exporting.');
+return;
 }
-function printCanvas(){
- if(!ready)return;
- const c=$("canvas");
- const w=papers[paper].w||dims().w,h=papers[paper].h||dims().h;
- const page=paper==="a4"?"A4":paper==="4x6"?"4in 6in":`${w}mm ${h}mm`;
- const win=window.open("","_blank");
- if(!win){setMsg("Print window blocked. Allow pop-ups and try again.",false);return}
- const url=c.toDataURL("image/png");
- win.document.write(`<!doctype html><html><head><title>Photo Print</title>
- <style>@page{size:${page};margin:0}*{box-sizing:border-box}html,body{margin:0;padding:0;width:100%;height:100%}
- img{display:block;width:100%;height:100%;object-fit:fill}</style></head>
- <body><img src="${url}" onload="setTimeout(()=>window.print(),250)"></body></html>`);
- win.document.close();
+render();
+const mime=type==='jpg'?'image/jpeg':'image/png';
+canvas.toBlob(blob=>{
+if(!blob){
+say('Export failed. Try a smaller image.');
+return;
 }
-$("frames").addEventListener("click",e=>{
- const b=e.target.closest("[data-frame]");if(b)setFrame(b.dataset.frame);
+const a=document.createElement('a');
+a.href=URL.createObjectURL(blob);
+a.download=`kisan-seva-photo-sheet.${type==='jpg'?'jpg':'png'}`;
+document.body.appendChild(a);
+a.click();
+a.remove();
+setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+say(`${type.toUpperCase()} sheet exported. Check the pixel dimensions before printing.`);
+},mime,type==='jpg'?(Number(val('jpgQuality'))||92)/100:undefined);
+}
+
+$('downloadJpg').onclick=()=>download('jpg');
+$('downloadPng').onclick=()=>download('png');
+
+$('printBtn').onclick=()=>{
+if(!sourceImg){
+say('Upload a photo before printing.');
+return;
+}
+render();
+window.print();
+};
+
+$('jpgQuality').addEventListener('input',updateLabels);
+
+function safeStoreGet(key){
+try{return JSON.parse(localStorage.getItem(key)||'[]')}
+catch(e){return []}
+}
+
+function safeStoreSet(key,data){
+try{
+localStorage.setItem(key,JSON.stringify(data));
+return true;
+}catch(e){
+say('Could not save: browser storage may be full or disabled.');
+return false;
+}
+}
+
+function refreshPresets(){
+const list=safeStoreGet('kstPhotoPresets'),sel=$('presets');
+sel.innerHTML='';
+if(!list.length){
+sel.add(new Option('No presets saved',''));
+return;
+}
+list.forEach((p,i)=>sel.add(new Option(p.name,i)));
+}
+
+$('savePreset').onclick=()=>{
+const name=$('presetName').value.trim();
+if(!name){
+say('Enter a preset name.');
+return;
+}
+const list=safeStoreGet('kstPhotoPresets');
+const existing=list.findIndex(p=>p.name===name);
+const item={name,settings:getSettings()};
+if(existing>=0)list[existing]=item;
+else list.push(item);
+if(safeStoreSet('kstPhotoPresets',list)){
+refreshPresets();
+$('presets').value=String(existing>=0?existing:list.length-1);
+say('Preset saved in this browser.');
+}
+};
+
+$('loadPreset').onclick=()=>{
+const i=Number($('presets').value),list=safeStoreGet('kstPhotoPresets');
+if(!list[i])return say('Select a saved preset.');
+applySettings(list[i].settings);
+say('Preset loaded.');
+};
+
+$('deletePreset').onclick=()=>{
+const i=Number($('presets').value),list=safeStoreGet('kstPhotoPresets');
+if(!list[i])return say('Select a preset to delete.');
+list.splice(i,1);
+safeStoreSet('kstPhotoPresets',list);
+refreshPresets();
+say('Preset deleted.');
+};
+
+refreshPresets();
+
+function refreshJobs(){
+const list=safeStoreGet('kstPhotoJobs'),root=$('jobsList');
+root.innerHTML='';
+if(!list.length){
+root.innerHTML='<p class="hint">No saved jobs yet.</p>';
+return;
+}
+list.slice().reverse().forEach((j,rev)=>{
+const real=list.length-1-rev,div=document.createElement('div');
+div.className='job';
+const span=document.createElement('span');
+span.textContent=`${j.name} · ${j.paper} · ${j.count} photo(s) · ₹${j.total.toFixed(2)}`;
+const btn=document.createElement('button');
+btn.className='secondary';
+btn.textContent='Delete';
+btn.onclick=()=>{
+const jobs=safeStoreGet('kstPhotoJobs');
+jobs.splice(real,1);
+safeStoreSet('kstPhotoJobs',jobs);
+refreshJobs();
+};
+div.append(span,btn);
+root.appendChild(div);
 });
-$("papers").addEventListener("click",e=>{
- const b=e.target.closest("[data-paper]");if(b)setPaper(b.dataset.paper);
+}
+
+$('saveJob').onclick=()=>{
+const list=safeStoreGet('kstPhotoJobs'),s=getSettings();
+list.push({
+name:$('customerName').value.trim()||'Unnamed job',
+paper:paperDims(s.paper)[2],
+count:Number($('countStat').textContent)||0,
+total:(Number(s.rate)||0)+(Number(s.serviceFee)||0),
+date:new Date().toLocaleString()
 });
-$("upload").addEventListener("change",e=>{
- const f=e.target.files&&e.target.files[0];if(!f)return;
- if(!["image/jpeg","image/png","image/webp"].includes(f.type)){setMsg("JPG, PNG ya WebP image choose karo.",false);return}
- if(f.size>15*1024*1024){setMsg("Image 15 MB se chhoti honi chahiye.",false);return}
- const url=URL.createObjectURL(f),im=new Image();
- im.onload=()=>{img=im;ready=false;setMsg(`Photo loaded: ${im.naturalWidth} × ${im.naturalHeight} px. Update Preview dabao.`);render();URL.revokeObjectURL(url)};
- im.onerror=()=>{setMsg("Image load nahi hui. Dusri image try karo.",false);URL.revokeObjectURL(url)};
- im.src=url;
-});
-$("generate").addEventListener("click",render);
-$("jpg").addEventListener("click",()=>download("jpg"));
-$("png").addEventListener("click",()=>download("png"));
-$("print").addEventListener("click",printCanvas);
-["fw","fh","dpi","copies","zoom","moveX","moveY","fit","bg","customBg","brightness","contrast","saturation","border"].forEach(id=>{
- $(id).addEventListener("input",()=>{updateStats();if(img)render()});
- $(id).addEventListener("change",()=>{updateStats();if(img)render()});
-});
-$("reset").addEventListener("click",()=>{
- $("zoom").value=1;$("moveX").value=0;$("moveY").value=0;
- $("fit").value="cover";$("brightness").value=100;$("contrast").value=100;
- $("saturation").value=100;$("bg").value="#ffffff";$("customBg").value="#ffffff";
- $("border").checked=true;$("dpi").value=300;
- updateStats();if(img)render();else setMsg("Adjustments reset.");
-});
-updateStats();
+if(safeStoreSet('kstPhotoJobs',list)){
+refreshJobs();
+say('Print job saved locally.');
+}
+};
+
+$('clearJobs').onclick=()=>{
+if(confirm('Clear all saved local print jobs?')){
+localStorage.removeItem('kstPhotoJobs');
+refreshJobs();
+}
+};
+
+refreshJobs();
+
+$('aiBg').onclick=()=>{
+say('Not configured: connect a trusted AI background-removal provider through a server/backend before enabling this feature. No image was sent.','aiStatus');
+};
+
+$('aiEnhance').onclick=()=>{
+say('Not configured: connect a trusted AI photo-restoration provider through a server/backend before enabling this feature. No image was sent.','aiStatus');
+};
+
+updateLabels();
+updateHistoryButtons();
+render();
 })();
 </script>
 </body>
