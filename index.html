@@ -10,225 +10,238 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <style>
 *{box-sizing:border-box}
-:root{--g:#17643e;--g2:#2e8254;--gold:#c9b36a;--bg:#edf3ee}
+:root{--g:#17643e;--g2:#358754;--gold:#c9b36a;--bg:#edf3ee}
 body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:#24392b}
-header{background:linear-gradient(110deg,#10442d,#20784a);color:#fff;text-align:center;padding:16px}
+header{background:linear-gradient(110deg,#10442d,#20784a);color:white;text-align:center;padding:16px}
 header h1{font-size:22px;margin:0}
 header p{font-size:11px;margin:5px 0 0}
-.wrap{max-width:1200px;margin:20px auto;padding:0 14px}
-.layout{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(0,1.15fr);gap:18px;align-items:start}
-.panel{background:#fff;border-radius:13px;box-shadow:0 4px 18px #183b2415;overflow:hidden}
-.panelhead{padding:17px;border-bottom:1px solid #e5ece6}
+.wrap{max-width:1250px;margin:20px auto;padding:0 14px}
+.layout{display:grid;grid-template-columns:minmax(300px,.9fr) minmax(0,1.1fr);gap:18px;align-items:start}
+.panel{background:white;border-radius:13px;box-shadow:0 4px 18px #183b2415;overflow:hidden}
+.panelhead{padding:16px;border-bottom:1px solid #e5ece6}
 .panelhead h2{font-size:17px;color:var(--g);margin:0}
-.panelhead p{font-size:11px;line-height:1.5;color:#748176;margin:6px 0 0}
-.inner{padding:17px}
-.section{font-size:11px;font-weight:bold;letter-spacing:.7px;color:var(--g2);margin:5px 0 12px}
+.panelhead p,.help{font-size:11px;line-height:1.5;color:#748176}
+.inner,.cardstage{padding:16px}
+.section{font-size:11px;font-weight:bold;letter-spacing:.6px;color:var(--g2);margin:16px 0 10px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .field{display:flex;flex-direction:column;gap:5px;min-width:0}
 .full{grid-column:1/-1}
 label{font-size:11px;font-weight:bold}
 input,select{width:100%;min-width:0;padding:10px;border:1px solid #d2ded4;border-radius:7px;background:#fcfefc;font-size:13px}
-input:focus,select:focus{outline:2px solid #c7e0ce}
-.help{font-size:10px;color:#718073;line-height:1.5}
-.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 button{cursor:pointer;border:0;border-radius:7px;padding:10px 13px;font-weight:bold;font-size:12px}
 .primary{background:var(--g);color:white}
 .soft{background:#e8f2ea;color:var(--g)}
 .gold{background:#c7ad54;color:#253627}
 .dark{background:#293a2f;color:white}
 .theme{background:#eaf0eb;color:#233b2b;border:1px solid #d6e1d7}
+.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .notice{padding:10px;border-radius:8px;background:#fff7df;color:#705b24;font-size:11px;line-height:1.6;margin-top:12px}
-.status{font-size:11px;line-height:1.5;margin-top:10px;color:#2b6940;overflow-wrap:anywhere}
-.cardstage{padding:17px}
-.previewtitle{display:flex;justify-content:space-between;gap:8px;align-items:center;margin:0 0 13px}
+.status{font-size:11px;line-height:1.5;margin-top:10px;overflow-wrap:anywhere}
+.previewtitle{display:flex;justify-content:space-between;gap:8px;margin:0 0 12px}
 .previewtitle h3{margin:0;color:var(--g);font-size:16px}
-.previewtitle span{font-size:10px;color:#778378}
-.cards{display:grid;gap:18px}
-.card{--c:var(--g);--c2:var(--g2);position:relative;aspect-ratio:85.6/54;width:100%;overflow:hidden;background:#fff;border:1px solid #b7cbbb;border-radius:8px;box-shadow:0 5px 15px #1d47261a;color:#23372a}
-.card:before{content:"";position:absolute;inset:4px;border:1px solid var(--c);border-radius:6px;pointer-events:none;z-index:5}
-.card:after{content:"";position:absolute;right:-14%;top:5%;width:38%;height:110%;border:1px solid #3b875125;border-radius:50%;box-shadow:0 0 0 8px #3b87510b,0 0 0 17px #3b87510b;pointer-events:none}
+.cards{display:grid;gap:16px}
+.card{--c:#17643e;--c2:#358754;position:relative;aspect-ratio:85.6/54;width:100%;overflow:hidden;background:#fffdf5;border:2px solid var(--c);border-radius:7px;box-shadow:0 5px 15px #1d47261a;color:#23372a}
 .card.blue{--c:#205b88;--c2:#4085b2}
 .card.leaf{--c:#39774b;--c2:#78a56d}
 .card.goldtheme{--c:#806324;--c2:#b59a4c}
-.ctop{position:relative;z-index:2;height:15%;background:linear-gradient(100deg,var(--c),var(--c2));color:white;display:flex;justify-content:space-between;align-items:center;padding:0 4%;gap:5px}
-.brand{font-weight:900;font-size:clamp(7px,1.1vw,12px);letter-spacing:.3px}
-.brand small{display:block;font-size:clamp(4px,.55vw,6px);font-weight:normal;letter-spacing:.6px;margin-top:2px}
-.topright{font-size:clamp(4px,.6vw,7px);border:1px solid #ffffff90;padding:4px 6px;border-radius:20px;white-space:nowrap}
-.ctitle{text-align:center;position:relative;z-index:2;margin-top:2.1%}
+.card:before{content:"";position:absolute;inset:4px;border:1px solid var(--c);border-radius:5px;z-index:4;pointer-events:none}
+.leafpattern{position:absolute;inset:0;opacity:.10;pointer-events:none;background-image:radial-gradient(ellipse at 8% 15%,#17643e 0 4%,transparent 4.5%),radial-gradient(ellipse at 13% 23%,#17643e 0 3%,transparent 3.5%),radial-gradient(ellipse at 90% 80%,#17643e 0 5%,transparent 5.5%),radial-gradient(ellipse at 84% 88%,#17643e 0 3%,transparent 3.5%);background-size:40px 35px}
+.ctop{position:relative;z-index:2;height:16%;background:linear-gradient(100deg,var(--c),var(--c2));color:white;display:flex;justify-content:space-between;align-items:center;padding:0 4%;gap:5px}
+.agri{font-weight:900;font-size:clamp(10px,1.8vw,19px);letter-spacing:.6px}
+.agri small{display:block;font-size:clamp(4px,.55vw,6px);font-weight:normal;letter-spacing:1px;margin-top:2px}
+.cornerbrand{font-size:clamp(4px,.62vw,7px);text-align:right;max-width:33%;line-height:1.4}
+.cornerbrand b{display:block;font-size:clamp(5px,.78vw,9px)}
+.ctitle{text-align:center;position:relative;z-index:2;margin-top:1.5%}
 .ctitle h3{font-size:clamp(11px,1.7vw,18px);margin:0;color:var(--c)}
-.ctitle p{font-size:clamp(5px,.6vw,7px);margin:3px 0;color:#657368;font-weight:bold;letter-spacing:.7px}
-.goldline{width:28px;height:2px;background:#c6ad61;margin:4px auto}
-.frontbody{position:relative;z-index:2;display:grid;grid-template-columns:23% minmax(0,1fr) 22%;gap:3%;align-items:center;padding:2% 5% 6%}
+.ctitle p{font-size:clamp(5px,.65vw,7px);margin:3px 0;color:#657368;font-weight:bold;letter-spacing:.5px}
+.goldline{width:30px;height:2px;background:var(--gold);margin:4px auto}
+.frontbody{position:relative;z-index:2;display:grid;grid-template-columns:22% minmax(0,1fr) 20%;gap:3%;align-items:center;padding:2% 5% 7%}
 .photo{width:100%;aspect-ratio:3/3.6;border:1px solid var(--c);border-radius:4px;background:#f1f5f1;overflow:hidden;display:grid;place-items:center}
 .photo img{display:none;width:100%;height:100%;object-fit:cover}
 .photoempty{text-align:center;color:#6c806f;font-size:clamp(5px,.65vw,7px)}
-.photoempty b{display:block;font-size:clamp(20px,3vw,33px);margin-bottom:4px}
-.details{min-width:0;display:grid;gap:5px}
-.drow{font-size:clamp(6px,.82vw,9px);line-height:1.25;overflow-wrap:anywhere}
+.photoempty b{display:block;font-size:clamp(20px,3vw,33px)}
+.details{min-width:0;display:grid;gap:4px}
+.drow{font-size:clamp(6px,.8vw,9px);line-height:1.25;overflow-wrap:anywhere}
 .drow b{color:var(--c)}
-.idbox{background:linear-gradient(100deg,var(--c),var(--c2));color:white;border-radius:4px;padding:5px;margin-top:2px;font-size:clamp(5px,.7vw,8px);overflow-wrap:anywhere}
+.idbox{background:linear-gradient(100deg,var(--c),var(--c2));color:white;border-radius:4px;padding:4px;margin-top:2px;font-size:clamp(5px,.65vw,8px);overflow-wrap:anywhere}
 .idbox strong{font-size:clamp(8px,1.2vw,13px);color:#fff0b8}
 .qrcol{text-align:center;min-width:0}
 .qrbox{aspect-ratio:1;width:100%;background:white;border:1px solid #c6b66d;border-radius:4px;padding:3px;display:grid;place-items:center;overflow:hidden}
 #qr{width:100%;height:100%;display:grid;place-items:center}
 #qr canvas,#qr img{max-width:100%!important;max-height:100%!important}
 .qrlabel{font-size:clamp(4px,.55vw,6px);margin-top:4px;color:#536a58;font-weight:bold}
-.disclaimer{position:absolute;z-index:4;bottom:11%;left:4%;right:4%;text-align:center;color:#526c59;font-size:clamp(4px,.52vw,6px);font-weight:bold}
-.cbottom{position:absolute;z-index:4;bottom:0;left:0;right:0;min-height:10%;background:linear-gradient(100deg,var(--c),var(--c2));color:white;display:flex;justify-content:space-between;align-items:center;padding:0 4%;font-size:clamp(4px,.6vw,7px);font-weight:bold}
+.disclaimer{position:absolute;z-index:5;bottom:11%;left:4%;right:4%;text-align:center;color:#526c59;font-size:clamp(4px,.52vw,6px);font-weight:bold}
+.cbottom{position:absolute;z-index:5;bottom:0;left:0;right:0;min-height:9%;background:linear-gradient(100deg,var(--c),var(--c2));color:white;display:flex;justify-content:space-between;align-items:center;padding:0 4%;font-size:clamp(4px,.55vw,6px);font-weight:bold}
 .cbottom b{color:#fff0b8}
-.address{position:relative;z-index:2;margin:2% 4% 1%;font-size:clamp(6px,.8vw,9px);line-height:1.3;overflow-wrap:anywhere}
-.address b{color:var(--c)}
-.landtable{position:relative;z-index:2;width:92%;margin:0 auto;border-collapse:collapse;table-layout:fixed}
-.landtable th{background:#edf4ed;color:var(--c);font-size:clamp(4px,.58vw,7px);padding:5px 1px;border:1px solid #d7e2d8;overflow-wrap:anywhere}
-.landtable td{text-align:center;font-size:clamp(5px,.68vw,8px);padding:5px 1px;border:1px solid #d7e2d8;overflow-wrap:anywhere;font-weight:bold}
-.backnote{position:relative;z-index:2;display:flex;gap:7px;margin:2% 4%;font-size:clamp(5px,.7vw,8px);line-height:1.3}
+.address{position:relative;z-index:2;margin:2% 4%;font-size:clamp(6px,.8vw,9px);line-height:1.3;overflow-wrap:anywhere}
+.landtable{position:relative;z-index:2;width:92%;margin:2% auto;border-collapse:collapse;table-layout:fixed}
+.landtable th{background:#edf4ed;color:var(--c);font-size:clamp(4px,.58vw,7px);padding:4px 1px;border:1px solid #d7e2d8;overflow-wrap:anywhere}
+.landtable td{text-align:center;font-size:clamp(5px,.65vw,8px);padding:4px 1px;border:1px solid #d7e2d8;overflow-wrap:anywhere;font-weight:bold}
+.backnote{position:relative;z-index:2;display:flex;gap:6px;margin:2% 4%;font-size:clamp(5px,.7vw,8px);line-height:1.3}
 .backnote b{color:var(--c)}
+.landrow{border:1px solid #dbe6dc;border-radius:8px;padding:10px;margin:10px 0;background:#fbfdfb}
+.landrowhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;font-weight:bold;color:var(--g)}
+.smallbtn{padding:6px 9px;font-size:11px}
 @media(max-width:850px){.layout{grid-template-columns:1fr}}
-@media(max-width:480px){
- .wrap{padding:0 8px;margin:12px auto}.inner,.cardstage{padding:12px}
- .grid{grid-template-columns:1fr}.full{grid-column:auto}
- .frontbody{gap:2%;padding:2% 4% 6%}
- .drow{font-size:5.5px}.details{gap:3px}
- .ctitle h3{font-size:10px}.idbox{font-size:5px;padding:3px}
- .idbox strong{font-size:7px}.landtable th{font-size:4px;padding:4px 0}
- .landtable td{font-size:4.5px;padding:4px 0}
- .address{font-size:5.5px}.backnote{font-size:5px}
-}
+@media(max-width:480px){.wrap{padding:0 8px}.inner,.cardstage{padding:12px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.drow{font-size:5.5px}.details{gap:3px}.ctitle h3{font-size:10px}.idbox{font-size:5px;padding:3px}.idbox strong{font-size:7px}.landtable th{font-size:4px;padding:3px 0}.landtable td{font-size:4.5px;padding:3px 0}.address{font-size:5.5px}.backnote{font-size:5px}}
 @page{size:A4 portrait;margin:0}
 @media print{
  body{background:white;print-color-adjust:exact;-webkit-print-color-adjust:exact}
  header,.formpanel,.previewtitle,.printnote{display:none!important}
  .wrap{padding:0;margin:0;max-width:none}.layout{display:block}
  .previewpanel{box-shadow:none;border:0}.cardstage{padding:0}
- .cards{height:297mm;display:flex;align-items:center;justify-content:center;gap:8mm}
+ .cards{height:297mm;display:flex;align-items:flex-start;justify-content:center;gap:8mm;padding-top:12mm}
  .card{width:85.6mm;height:54mm;flex:0 0 85.6mm;box-shadow:none}
 }
 </style>
 </head>
 <body>
 <header>
- <h1>🌾 CSC Seva Tools</h1>
- <p>Farmer Card Designer · Personal Use Only</p>
+<h1>🌾 CSC Seva Tools</h1>
+<p>Farmer Card Designer · Personal Use Only</p>
 </header>
 
 <main class="wrap">
 <div class="layout">
 <section class="panel formpanel">
- <div class="panelhead">
-  <h2>Farmer Card Information</h2>
-  <p>Fill in details below or upload a registration form for OCR auto-fill.</p>
- </div>
- <div class="inner">
-  <div class="section">01 · Auto Details</div>
-  <div class="field">
-   <label for="formUpload">Upload registration form (image/PDF)</label>
-   <input id="formUpload" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf,image/*,application/pdf">
-   <span class="help">OCR tries to read printed English text. Verify every field yourself.</span>
-  </div>
-  <div class="buttons">
-   <button type="button" class="primary" id="scanBtn">✦ Auto Fill Details</button>
-   <button type="button" class="soft" id="removeUpload">Remove Upload</button>
-  </div>
-  <div id="scanStatus" class="status" aria-live="polite"></div>
+<div class="panelhead">
+<h2>Farmer Card Information</h2>
+<p>Enter farmer details and choose the card language.</p>
+</div>
+<div class="inner">
+<form id="farmerForm">
+<div class="section">01 · Language / भाषा</div>
+<div class="field">
+<label for="language">Card language</label>
+<select id="language">
+<option value="en">English</option>
+<option value="mr">मराठी</option>
+<option value="hi">हिन्दी</option>
+<option value="ur">اردو</option>
+<option value="gu">ગુજરાતી</option>
+<option value="kn">ಕನ್ನಡ</option>
+<option value="te">తెలుగు</option>
+<option value="lambadi">Lambadi / Banjari</option>
+</select>
+<span class="help">Some regional-language labels may need your review before printing.</span>
+</div>
 
-  <hr style="border:0;border-top:1px solid #e5ece6;margin:20px 0">
-  <form id="farmerForm">
-   <div class="section">02 · Personal details</div>
-   <div class="grid">
-    <div class="field full"><label for="photoInput">Farmer photo (optional)</label><input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp"></div>
-    <div class="field"><label for="name">Farmer name</label><input id="name" maxlength="80" placeholder="Farmer name"></div>
-    <div class="field"><label for="father">Father / Husband name</label><input id="father" maxlength="80" placeholder="Optional"></div>
-    <div class="field"><label for="dob">Date of birth (optional)</label><input id="dob" type="date"></div>
-    <div class="field"><label for="gender">Gender (optional)</label><select id="gender"><option value="">Not specified</option><option>Male</option><option>Female</option><option>Other</option></select></div>
-    <div class="field"><label for="mobile">Mobile (optional)</label><input id="mobile" inputmode="numeric" maxlength="10" placeholder="Optional"></div>
-    <div class="field"><label for="farmerId">Farmer reference ID</label><input id="farmerId" maxlength="30" placeholder="Optional reference"></div>
-   </div>
+<div class="section">02 · Personal details</div>
+<div class="grid">
+<div class="field full"><label for="photoInput">Farmer photo (optional)</label><input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp"></div>
+<div class="field"><label for="name">Farmer name</label><input id="name" maxlength="80" placeholder="Farmer name"></div>
+<div class="field"><label for="father">Father / Husband name</label><input id="father" maxlength="80" placeholder="Optional"></div>
+<div class="field"><label for="dob">Date of birth</label><input id="dob" type="date"></div>
+<div class="field"><label for="gender">Gender</label><select id="gender"><option value="">Not specified</option><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></div>
+<div class="field"><label for="mobile">Mobile (optional)</label><input id="mobile" inputmode="numeric" maxlength="10" placeholder="Optional"></div>
+<div class="field"><label for="farmerId">Farmer reference ID</label><input id="farmerId" maxlength="30" placeholder="Optional reference"></div>
+</div>
 
-   <div class="section" style="margin-top:20px">03 · Location & land details</div>
-   <div class="grid">
-    <div class="field"><label for="state">State</label><input id="state" maxlength="50" placeholder="State"></div>
-    <div class="field"><label for="district">District</label><input id="district" maxlength="50" placeholder="District"></div>
-    <div class="field"><label for="subdistrict">Sub-district / Taluka</label><input id="subdistrict" maxlength="50" placeholder="Taluka"></div>
-    <div class="field"><label for="village">Village</label><input id="village" maxlength="50" placeholder="Village"></div>
-    <div class="field"><label for="survey">Survey / Gat No.</label><input id="survey" maxlength="30" placeholder="Optional"></div>
-    <div class="field"><label for="subdivision">S/S</label><input id="subdivision" maxlength="30" placeholder="Optional"></div>
-    <div class="field full"><label for="area">Land area</label><input id="area" maxlength="30" placeholder="e.g. 2.02 acres"></div>
-   </div>
+<div class="section">03 · Location details</div>
+<div class="grid">
+<div class="field"><label for="state">State</label>
+<select id="state"><option value="">Select state</option></select></div>
+<div class="field"><label for="district">District</label>
+<select id="district"><option value="">Select district</option></select></div>
+<div class="field"><label for="subdistrict">Taluka / Tehsil</label>
+<select id="subdistrict"><option value="">Select taluka</option><option value="__manual">Enter manually…</option></select>
+<input id="subdistrictManual" placeholder="Type taluka name" hidden maxlength="80"></div>
+<div class="field"><label for="post">Post Office</label>
+<select id="post"><option value="">Select post office</option><option value="__manual">Enter manually…</option></select>
+<input id="postManual" placeholder="Type post office" hidden maxlength="100"></div>
+<div class="field"><label for="village">Village</label>
+<select id="village"><option value="">Select village</option><option value="__manual">Enter manually…</option></select>
+<input id="villageManual" placeholder="Type village name" hidden maxlength="100"></div>
+<div class="field"><label for="survey">Survey / Gat No.</label><input id="survey" maxlength="30" placeholder="Optional"></div>
+<div class="field"><label for="subdivision">S/S</label><input id="subdivision" maxlength="30" placeholder="Optional"></div>
+<div class="field"><label for="area">Land area</label><input id="area" maxlength="30" placeholder="e.g. 2.02 acres"></div>
+</div>
+<p class="help">Districts are listed for Maharashtra. Taluka, post office and village lists are not fully embedded; use manual entry when needed.</p>
 
-   <div class="section" style="margin-top:20px">04 · Design</div>
-   <div class="buttons">
-    <button type="button" class="theme" data-theme="green">🌿 Green</button>
-    <button type="button" class="theme" data-theme="leaf">🍃 Leaf</button>
-    <button type="button" class="theme" data-theme="blue">🔵 Blue</button>
-    <button type="button" class="theme" data-theme="goldtheme">🏅 Gold</button>
-   </div>
-   <div class="buttons">
-    <button type="submit" class="primary">Update Card</button>
-    <button type="button" class="soft" id="clearBtn">Clear Details</button>
-   </div>
-   <div class="buttons">
-    <button type="button" class="gold" id="pdfBtn">Download A4 PDF — ₹10</button>
-    <button type="button" class="dark" id="printBtn">Print</button>
-   </div>
-   <div class="notice"><b>Important:</b> This is a personal-use sample card, not an official government-issued card. Do not present it as proof of government identity or benefits. Aadhaar is not collected by this tool.</div>
-  </form>
- </div>
+<div class="section">04 · Extra land rows</div>
+<p class="help">Add a separate row for another land parcel. Rows appear on the back of the card.</p>
+<div id="landRows"></div>
+<div class="buttons">
+<button type="button" class="soft" id="addRow">＋ Add land row</button>
+</div>
+
+<div class="section">05 · Design</div>
+<div class="buttons">
+<button type="button" class="theme" data-theme="green">🌿 Green</button>
+<button type="button" class="theme" data-theme="leaf">🍃 Leaf</button>
+<button type="button" class="theme" data-theme="blue">🔵 Blue</button>
+<button type="button" class="theme" data-theme="goldtheme">🏅 Gold</button>
+</div>
+<div class="buttons">
+<button type="submit" class="primary">Update Card</button>
+<button type="button" class="soft" id="clearBtn">Clear Details</button>
+</div>
+<div class="buttons">
+<button type="button" class="gold" id="pdfBtn">Download A4 PDF — ₹10</button>
+<button type="button" class="dark" id="printBtn">Print</button>
+</div>
+<div class="notice"><b>Important:</b> Personal-use sample only. Not an official government-issued card. Do not use it as proof of identity, land ownership, government benefits or registration. Aadhaar is not collected.</div>
+<div id="status" class="status" aria-live="polite"></div>
+</form>
+</div>
 </section>
 
 <section class="panel previewpanel">
- <div class="panelhead">
-  <h2>Front & Back Card Preview</h2>
-  <p>Landscape card format inspired by your reference. Preview updates automatically.</p>
- </div>
- <div class="cardstage">
-  <div class="previewtitle"><h3>Front Side</h3><span>85.6 × 54 mm concept</span></div>
-  <div class="cards" id="printArea">
-   <article class="card" id="frontCard">
-    <div class="ctop">
-     <div class="brand">CSC SEVA TOOLS<small>PERSONAL FARM PROFILE</small></div>
-     <div class="topright">PERSONAL USE</div>
-    </div>
-    <div class="ctitle"><h3>FARMER PROFILE CARD</h3><p>किसान प्रोफाइल · PERSONAL USE</p><div class="goldline"></div></div>
-    <div class="frontbody">
-     <div class="photo"><img id="photoPreview" alt="Farmer photo"><div class="photoempty" id="photoEmpty"><b>♙</b>FARMER PHOTO</div></div>
-     <div class="details">
-      <div class="drow"><b>Name:</b> <span id="outName">—</span></div>
-      <div class="drow"><b>Father:</b> <span id="outFather">—</span></div>
-      <div class="drow"><b>DOB:</b> <span id="outDob">—</span></div>
-      <div class="drow"><b>Gender:</b> <span id="outGender">—</span></div>
-      <div class="drow"><b>Mobile:</b> <span id="outMobile">—</span></div>
-      <div class="idbox">FARMER REFERENCE ID<br><strong id="outId">SAMPLE</strong></div>
-     </div>
-     <div class="qrcol"><div class="qrbox"><div id="qr"></div></div><div class="qrlabel">SAMPLE QR</div></div>
-    </div>
-    <div class="disclaimer">PERSONAL USE ONLY · NOT A GOVERNMENT-ISSUED DOCUMENT</div>
-    <div class="cbottom"><span>CSC SEVA TOOLS</span><b>PERSONAL FARM PROFILE</b></div>
-   </article>
+<div class="panelhead">
+<h2>Front & Back Preview</h2>
+<p>Personal farmer profile card inspired by green agricultural designs.</p>
+</div>
+<div class="cardstage">
+<div class="previewtitle"><h3>Front and back</h3><span>85.6 × 54 mm</span></div>
+<div class="cards" id="printArea">
 
-   <article class="card" id="backCard">
-    <div class="ctop">
-     <div class="brand">CSC SEVA TOOLS<small>FARM & LAND PROFILE</small></div>
-     <div class="topright">SAMPLE DESIGN</div>
-    </div>
-    <div class="ctitle"><h3>FARMER INFORMATION</h3><p>LOCATION & LAND DETAILS</p><div class="goldline"></div></div>
-    <div class="address"><b>ADDRESS:</b> <span id="outAddress">—</span></div>
-    <table class="landtable">
-     <thead><tr><th>STATE</th><th>DISTRICT</th><th>SUB DIST</th><th>VILL</th><th>S.NO</th><th>S/S</th><th>AREA</th></tr></thead>
-     <tbody><tr><td id="outState">—</td><td id="outDistrict">—</td><td id="outSubdistrict">—</td><td id="outVillage">—</td><td id="outSurvey">—</td><td id="outSubdivision">—</td><td id="outArea">—</td></tr></tbody>
-    </table>
-    <div class="backnote"><b>NOTE:</b><span>Personal-use sample profile</span></div>
-    <div class="backnote"><b>REFERENCE:</b><span id="outBackId">—</span></div>
-    <div class="disclaimer">NOT ISSUED OR VERIFIED BY ANY GOVERNMENT DEPARTMENT</div>
-    <div class="cbottom"><span>CSC SEVA TOOLS</span><b>NOT AN OFFICIAL ID</b></div>
-   </article>
-  </div>
-  <p class="help printnote" style="margin-top:12px">A4 PDF places both card sides next to each other. Check the preview before printing.</p>
- </div>
+<article class="card" id="frontCard">
+<div class="leafpattern"></div>
+<div class="ctop">
+<div class="agri" id="outAgri">AgriStack<small>FARMER INFORMATION PROFILE</small></div>
+<div class="cornerbrand"><b>CSC Seva Tools</b>PERSONAL CARD DESIGN</div>
+</div>
+<div class="ctitle"><h3 id="outTitle">मेरा किसान कार्ड</h3><p id="outSubtitle">PERSONAL FARMER PROFILE</p><div class="goldline"></div></div>
+<div class="frontbody">
+<div class="photo"><img id="photoPreview" alt="Farmer photo"><div class="photoempty" id="photoEmpty"><b>♙</b>PHOTO</div></div>
+<div class="details">
+<div class="drow"><b id="labName">Name:</b> <span id="outName">—</span></div>
+<div class="drow"><b id="labFather">Father:</b> <span id="outFather">—</span></div>
+<div class="drow"><b id="labDob">DOB:</b> <span id="outDob">—</span></div>
+<div class="drow"><b id="labGender">Gender:</b> <span id="outGender">—</span></div>
+<div class="drow"><b id="labMobile">Mobile:</b> <span id="outMobile">—</span></div>
+<div class="idbox"><span id="labRef">FARMER REFERENCE ID</span><br><strong id="outId">SAMPLE</strong></div>
+</div>
+<div class="qrcol"><div class="qrbox"><div id="qr"></div></div><div class="qrlabel">SAMPLE QR</div></div>
+</div>
+<div class="disclaimer">PERSONAL USE · NOT GOVERNMENT ISSUED</div>
+<div class="cbottom"><span>Downloaded from CSC Seva Tools Website</span><b>PERSONAL PROFILE</b></div>
+</article>
+
+<article class="card" id="backCard">
+<div class="leafpattern"></div>
+<div class="ctop">
+<div class="agri">AgriStack<small>FARM & LAND INFORMATION</small></div>
+<div class="cornerbrand"><b>CSC Seva Tools</b>PERSONAL CARD DESIGN</div>
+</div>
+<div class="ctitle"><h3 id="backTitle">Farmer Information</h3><p id="backSubtitle">LOCATION & LAND DETAILS</p><div class="goldline"></div></div>
+<div class="address"><b id="labAddress">ADDRESS:</b> <span id="outAddress">—</span></div>
+<table class="landtable">
+<thead><tr><th id="thState">STATE</th><th id="thDistrict">DISTRICT</th><th id="thTaluka">TALUKA</th><th id="thVillage">VILLAGE</th><th id="thSurvey">GAT NO.</th><th id="thArea">AREA</th></tr></thead>
+<tbody id="landTableBody"><tr><td id="outState">—</td><td id="outDistrict">—</td><td id="outSubdistrict">—</td><td id="outVillage">—</td><td id="outSurvey">—</td><td id="outArea">—</td></tr></tbody>
+</table>
+<div class="backnote"><b id="labPost">POST OFFICE:</b><span id="outPost">—</span></div>
+<div class="backnote"><b id="labBackRef">REFERENCE:</b><span id="outBackId">—</span></div>
+<div class="disclaimer">PERSONAL USE · NOT GOVERNMENT ISSUED</div>
+<div class="cbottom"><span>Downloaded from CSC Seva Tools Website</span><b>NOT AN OFFICIAL ID</b></div>
+</article>
+
+</div>
+<p class="help printnote">The PDF is laid out at the top of A4, with front and back side-by-side. Use actual-size printing if your printer dialog offers that option.</p>
+</div>
 </section>
 </div>
 </main>
@@ -237,154 +250,223 @@ button{cursor:pointer;border:0;border-radius:7px;padding:10px 13px;font-weight:b
 (function(){
 "use strict";
 const $=id=>document.getElementById(id);
-let selectedTheme="green";
-let uploadedFile=null;
+const fields=["name","father","dob","gender","mobile","farmerId","state","district","subdistrict","post","village","survey","subdivision","area"];
+let theme="green",rowCount=0;
 
-function value(id){return $(id).value.trim()}
+const districtsMH=[
+"Ahilyanagar","Akola","Amravati","Beed","Bhandara","Buldhana","Chandrapur",
+"Chhatrapati Sambhajinagar","Dharashiv","Dhule","Gadchiroli","Gondia",
+"Hingoli","Jalgaon","Jalna","Kolhapur","Latur","Mumbai City",
+"Mumbai Suburban","Nagpur","Nanded","Nandurbar","Nashik","Palghar",
+"Parbhani","Pune","Raigad","Ratnagiri","Sangli","Satara","Sindhudurg",
+"Solapur","Thane","Wardha","Washim","Yavatmal"
+];
+const states=[
+"Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh",
+"Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka",
+"Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram",
+"Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana",
+"Tripura","Uttar Pradesh","Uttarakhand","West Bengal",
+"Andaman and Nicobar Islands","Chandigarh","Dadra and Nagar Haveli and Daman and Diu",
+"Delhi","Jammu and Kashmir","Ladakh","Lakshadweep","Puducherry"
+];
+
+const translations={
+en:{title:"My Farmer Card",subtitle:"PERSONAL FARMER PROFILE",back:"Farmer Information",backSub:"LOCATION & LAND DETAILS",name:"Name:",father:"Father:",dob:"DOB:",gender:"Gender:",mobile:"Mobile:",ref:"FARMER REFERENCE ID",address:"ADDRESS:",post:"POST OFFICE:",state:"STATE",district:"DISTRICT",taluka:"TALUKA",village:"VILLAGE",survey:"GAT NO.",area:"AREA",reference:"REFERENCE:"},
+mr:{title:"माझे किसान कार्ड",subtitle:"वैयक्तिक शेतकरी माहिती",back:"शेतकरी माहिती",backSub:"पत्ता आणि जमीन तपशील",name:"नाव:",father:"वडिलांचे नाव:",dob:"जन्मतारीख:",gender:"लिंग:",mobile:"मोबाईल:",ref:"शेतकरी संदर्भ क्रमांक",address:"पत्ता:",post:"टपाल कार्यालय:",state:"राज्य",district:"जिल्हा",taluka:"तालुका",village:"गाव",survey:"गट क्र.",area:"क्षेत्र",reference:"संदर्भ:"},
+hi:{title:"मेरा किसान कार्ड",subtitle:"व्यक्तिगत किसान जानकारी",back:"किसान की जानकारी",backSub:"पता और भूमि विवरण",name:"नाम:",father:"पिता का नाम:",dob:"जन्म तिथि:",gender:"लिंग:",mobile:"मोबाइल:",ref:"किसान संदर्भ संख्या",address:"पता:",post:"डाकघर:",state:"राज्य",district:"जिला",taluka:"तालुका",village:"गाँव",survey:"गट नंबर",area:"क्षेत्र",reference:"संदर्भ:"},
+ur:{title:"میرا کسان کارڈ",subtitle:"ذاتی کسان معلومات",back:"کسان کی معلومات",backSub:"پتہ اور زمین کی تفصیلات",name:"نام:",father:"والد کا نام:",dob:"تاریخ پیدائش:",gender:"جنس:",mobile:"موبائل:",ref:"کسان حوالہ نمبر",address:"پتہ:",post:"ڈاک خانہ:",state:"ریاست",district:"ضلع",taluka:"تعلقہ",village:"گاؤں",survey:"گٹ نمبر",area:"رقبہ",reference:"حوالہ:"},
+gu:{title:"મારું ખેડૂત કાર્ડ",subtitle:"વ્યક્તિગત ખેડૂત માહિતી",back:"ખેડૂત માહિતી",backSub:"સરનામું અને જમીન વિગતો",name:"નામ:",father:"પિતાનું નામ:",dob:"જન્મ તારીખ:",gender:"લિંગ:",mobile:"મોબાઇલ:",ref:"ખેડૂત સંદર્ભ નંબર",address:"સરનામું:",post:"પોસ્ટ ઓફિસ:",state:"રાજ્ય",district:"જિલ્લો",taluka:"તાલુકો",village:"ગામ",survey:"ગટ નંબર",area:"વિસ્તાર",reference:"સંદર્ભ:"},
+kn:{title:"ನನ್ನ ರೈತ ಕಾರ್ಡ್",subtitle:"ವೈಯಕ್ತಿಕ ರೈತ ಮಾಹಿತಿ",back:"ರೈತರ ಮಾಹಿತಿ",backSub:"ವಿಳಾಸ ಮತ್ತು ಭೂಮಿ ವಿವರಗಳು",name:"ಹೆಸರು:",father:"ತಂದೆಯ ಹೆಸರು:",dob:"ಜನ್ಮ ದಿನಾಂಕ:",gender:"ಲಿಂಗ:",mobile:"ಮೊಬೈಲ್:",ref:"ರೈತ ಉಲ್ಲೇಖ ಸಂಖ್ಯೆ",address:"ವಿಳಾಸ:",post:"ಅಂಚೆ ಕಚೇರಿ:",state:"ರಾಜ್ಯ",district:"ಜಿಲ್ಲೆ",taluka:"ತಾಲೂಕು",village:"ಗ್ರಾಮ",survey:"ಗಟ್ ಸಂಖ್ಯೆ",area:"ವಿಸ್ತೀರ್ಣ",reference:"ಉಲ್ಲೇಖ:"},
+te:{title:"నా రైతు కార్డు",subtitle:"వ్యక్తిగత రైతు సమాచారం",back:"రైతు సమాచారం",backSub:"చిరునామా మరియు భూమి వివరాలు",name:"పేరు:",father:"తండ్రి పేరు:",dob:"పుట్టిన తేదీ:",gender:"లింగం:",mobile:"మొబైల్:",ref:"రైతు సూచన సంఖ్య",address:"చిరునామా:",post:"పోస్ట్ ఆఫీస్:",state:"రాష్ట్రం",district:"జిల్లా",taluka:"తాలూకా",village:"గ్రామం",survey:"గట్ నంబర్",area:"విస్తీర్ణం",reference:"సూచన:"},
+lambadi:{title:"म्हारो किसान कार्ड",subtitle:"किसान री निजी जानकारी",back:"किसान जानकारी",backSub:"पता अने जमीन री जानकारी",name:"नाम:",father:"बाप रो नाम:",dob:"जनम तारीख:",gender:"लिंग:",mobile:"मोबाइल:",ref:"किसान संदर्भ नंबर",address:"पता:",post:"पोस्ट ऑफिस:",state:"राज्य",district:"जिला",taluka:"तालुका",village:"गाम",survey:"गट नंबर",area:"जमीन",reference:"संदर्भ:"}
+};
+
+function setOptions(select,items,placeholder){
+ select.innerHTML="";
+ const first=document.createElement("option");first.value="";first.textContent=placeholder;select.appendChild(first);
+ items.forEach(item=>{const o=document.createElement("option");o.value=item;o.textContent=item;select.appendChild(o)});
+ const manual=document.createElement("option");manual.value="__manual";manual.textContent="Other / Enter manually…";select.appendChild(manual);
+}
+function setStateOptions(){
+ const s=$("state");s.innerHTML='<option value="">Select state</option>';
+ states.forEach(x=>{const o=document.createElement("option");o.value=x;o.textContent=x;s.appendChild(o)});
+}
+setStateOptions();
+
+function manualToggle(selectId,inputId){
+ const manual=$(selectId).value==="__manual";
+ $(inputId).hidden=!manual;
+ if(manual)$(inputId).focus();
+}
+function selectedOrManual(selectId,inputId){
+ const s=$(selectId).value;
+ return s==="__manual"?$(inputId).value.trim():(s||"");
+}
+$("state").addEventListener("change",()=>{
+ setOptions($("district"),$("state").value==="Maharashtra"?districtsMH:[],"Select district");
+ setOptions($("subdistrict"),[],"Select taluka");
+ setOptions($("post"),[],"Select post office");
+ setOptions($("village"),[],"Select village");
+ ["subdistrictManual","postManual","villageManual"].forEach(id=>{$(id).value="";$(id).hidden=true});
+ updateCard();
+});
+$("district").addEventListener("change",()=>{
+ setOptions($("subdistrict"),[],"Select taluka");
+ setOptions($("post"),[],"Select post office");
+ setOptions($("village"),[],"Select village");
+ ["subdistrictManual","postManual","villageManual"].forEach(id=>{$(id).value="";$(id).hidden=true});
+ updateCard();
+});
+["subdistrict","post","village"].forEach(id=>{
+ $(id).addEventListener("change",()=>{
+  const manualId=id+"Manual";
+  manualToggle(id,manualId);
+  if(id==="subdistrict"){
+   setOptions($("post"),[],"Select post office");
+   setOptions($("village"),[],"Select village");
+   $("postManual").value="";$("villageManual").value="";
+   $("postManual").hidden=true;$("villageManual").hidden=true;
+  }
+  if(id==="post"){
+   setOptions($("village"),[],"Select village");
+   $("villageManual").value="";$("villageManual").hidden=true;
+  }
+  updateCard();
+ });
+});
+["subdistrictManual","postManual","villageManual"].forEach(id=>$(id).addEventListener("input",updateCard));
+
+function val(id){return $(id).value.trim()}
 function put(id,text){$(id).textContent=text||"—"}
-function message(text,error=false){$("scanStatus").textContent=text;$("scanStatus").style.color=error?"#a3342c":"#2b6940"}
+function status(text,error=false){$("status").textContent=text;$("status").style.color=error?"#a3342c":"#2b6940"}
+function loc(id){
+ if(id==="subdistrict")return selectedOrManual("subdistrict","subdistrictManual");
+ if(id==="post")return selectedOrManual("post","postManual");
+ if(id==="village")return selectedOrManual("village","villageManual");
+ return val(id);
+}
+
+function addLandRow(data={}){
+ rowCount++;
+ const id=rowCount,wrap=document.createElement("div");
+ wrap.className="landrow";wrap.dataset.row=id;
+ wrap.innerHTML=`
+ <div class="landrowhead"><span>Extra land parcel ${id}</span><button type="button" class="soft smallbtn removeRow">Remove</button></div>
+ <div class="grid">
+ <div class="field"><label>Survey / Gat No.</label><input class="rSurvey" maxlength="30" placeholder="Survey / Gat No."></div>
+ <div class="field"><label>Subdivision (S/S)</label><input class="rSubdivision" maxlength="30" placeholder="Optional"></div>
+ <div class="field full"><label>Land area</label><input class="rArea" maxlength="30" placeholder="e.g. 1.25 acres"></div>
+ </div>`;
+ wrap.querySelector(".rSurvey").value=data.survey||"";
+ wrap.querySelector(".rSubdivision").value=data.subdivision||"";
+ wrap.querySelector(".rArea").value=data.area||"";
+ wrap.querySelectorAll("input").forEach(input=>input.addEventListener("input",updateCard));
+ wrap.querySelector(".removeRow").addEventListener("click",()=>{wrap.remove();updateCard()});
+ $("landRows").appendChild(wrap);updateCard();
+}
+$("addRow").addEventListener("click",()=>addLandRow());
+
+function applyLanguage(){
+ const t=translations[$("language").value]||translations.en;
+ put("outTitle",t.title);put("outSubtitle",t.subtitle);put("backTitle",t.back);put("backSubtitle",t.backSub);
+ ["Name","Father","Dob","Gender","Mobile","Ref","Address","Post","BackRef"].forEach(()=>{});
+ const pairs={
+ labName:t.name,labFather:t.father,labDob:t.dob,labGender:t.gender,labMobile:t.mobile,
+ labRef:t.ref,labAddress:t.address,labPost:t.post,labBackRef:t.reference,
+ thState:t.state,thDistrict:t.district,thTaluka:t.taluka,thVillage:t.village,thSurvey:t.survey,thArea:t.area
+ };
+ Object.entries(pairs).forEach(([id,text])=>put(id,text));
+}
+$("language").addEventListener("change",()=>{applyLanguage();updateCard()});
 
 function updateCard(){
- put("outName",value("name"));
- put("outFather",value("father"));
- put("outDob",value("dob"));
- put("outGender",value("gender"));
- put("outMobile",value("mobile"));
- put("outId",value("farmerId")||"SAMPLE");
- put("outAddress",[value("village"),value("subdistrict"),value("district"),value("state")].filter(Boolean).join(", "));
- ["state","district","subdistrict","village","survey","subdivision","area"].forEach(id=>put("out"+id.charAt(0).toUpperCase()+id.slice(1),value(id)));
- put("outBackId",value("farmerId")||"—");
+ ["Name","Father","Dob","Gender","Mobile"].forEach(k=>put("out"+k,val(k.charAt(0).toLowerCase()+k.slice(1))));
+ put("outId",val("farmerId")||"SAMPLE");
+ put("outAddress",[loc("village"),loc("subdistrict"),val("district"),val("state")].filter(Boolean).join(", "));
+ put("outState",val("state"));put("outDistrict",val("district"));
+ put("outSubdistrict",loc("subdistrict"));put("outVillage",loc("village"));
+ put("outSurvey",val("survey"));put("outSubdivision",val("subdivision"));put("outArea",val("area"));
+ put("outPost",loc("post"));put("outBackId",val("farmerId")||"—");
+
+ const rows=[{survey:val("survey"),subdivision:val("subdivision"),area:val("area")}];
+ document.querySelectorAll("#landRows .landrow").forEach(r=>{
+  rows.push({survey:r.querySelector(".rSurvey").value.trim(),subdivision:r.querySelector(".rSubdivision").value.trim(),area:r.querySelector(".rArea").value.trim()});
+ });
+ const body=$("landTableBody");body.innerHTML="";
+ rows.filter(r=>r.survey||r.subdivision||r.area).slice(0,3).forEach(r=>{
+  const tr=document.createElement("tr");
+  [val("state"),val("district"),loc("subdistrict"),loc("village"),r.survey,r.area].forEach(text=>{
+   const td=document.createElement("td");td.textContent=text||"—";tr.appendChild(td);
+  });
+  body.appendChild(tr);
+ });
+ if(!body.children.length){
+  const tr=document.createElement("tr");
+  ["state","district","subdistrict","village","survey","area"].forEach(id=>{
+   const td=document.createElement("td");td.textContent=(id==="subdistrict"?loc(id):id==="village"?loc(id):val(id))||"—";tr.appendChild(td);
+  });
+  body.appendChild(tr);
+ }
  makeQR();
 }
 function makeQR(){
  const el=$("qr");el.innerHTML="";
  if(!window.QRCode){el.textContent="QR unavailable";return}
- const payload={
-  type:"PERSONAL_USE_SAMPLE",
-  reference:value("farmerId"),
-  name:value("name"),
-  village:value("village"),
-  district:value("district")
- };
+ const payload={type:"PERSONAL_USE_SAMPLE",reference:val("farmerId"),name:val("name"),village:loc("village"),district:val("district")};
  new QRCode(el,{text:JSON.stringify(payload),width:120,height:120,correctLevel:QRCode.CorrectLevel.M});
 }
 $("farmerForm").addEventListener("input",updateCard);
-$("farmerForm").addEventListener("change",updateCard);
-$("farmerForm").addEventListener("submit",e=>{e.preventDefault();updateCard();message("Card preview updated.")});
+$("farmerForm").addEventListener("submit",e=>{e.preventDefault();updateCard();status("Card preview updated.")});
 
 document.querySelectorAll("[data-theme]").forEach(btn=>btn.addEventListener("click",()=>{
- selectedTheme=btn.dataset.theme;
+ theme=btn.dataset.theme;
  ["frontCard","backCard"].forEach(id=>{
   $(id).classList.remove("blue","leaf","goldtheme");
-  if(selectedTheme!=="green")$(id).classList.add(selectedTheme);
+  if(theme!=="green")$(id).classList.add(theme);
  });
 }));
 
 $("photoInput").addEventListener("change",()=>{
  const file=$("photoInput").files[0];if(!file)return;
  if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){
-  $("photoInput").value="";message("Choose JPG, PNG or WEBP up to 5 MB.",true);return;
+  $("photoInput").value="";status("Choose JPG, PNG or WEBP up to 5 MB.",true);return;
  }
  const reader=new FileReader();
  reader.onload=e=>{$("photoPreview").src=e.target.result;$("photoPreview").style.display="block";$("photoEmpty").style.display="none"};
  reader.readAsDataURL(file);
 });
 
-$("formUpload").addEventListener("change",e=>{
- uploadedFile=e.target.files[0]||null;
- if(uploadedFile)message("Selected "+uploadedFile.name+". Tap Auto Fill Details.");
-});
-$("removeUpload").addEventListener("click",()=>{
- $("formUpload").value="";uploadedFile=null;message("Upload removed.");
-});
-
-if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
-async function scanFile(file){
- let source=file;
- if(file.type==="application/pdf"||file.name.toLowerCase().endsWith(".pdf")){
-  if(!window.pdfjsLib)throw Error("PDF reader unavailable. Try an image instead.");
-  const pdf=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;
-  if(!pdf.numPages)throw Error("No pages found.");
-  const page=await pdf.getPage(1);
-  const viewport=page.getViewport({scale:2});
-  const canvas=document.createElement("canvas");
-  canvas.width=viewport.width;canvas.height=viewport.height;
-  await page.render({canvasContext:canvas.getContext("2d"),viewport}).promise;
-  source=canvas;
- }
- if(!window.Tesseract)throw Error("OCR library failed to load. Check internet and reload.");
- const result=await Tesseract.recognize(source,"eng",{
-  logger:m=>{if(m.status==="recognizing text")message("Reading form: "+Math.round((m.progress||0)*100)+"%")}
- });
- return result.data.text||"";
-}
-function extract(text,patterns){
- for(const p of patterns){
-  const re=new RegExp("(?:^|\\n)\\s*(?:"+p+")\\s*[:：\\-]?\\s*([^\\n]{2,90})","im");
-  const m=text.match(re);if(m&&m[1])return m[1].trim().replace(/\s{2,}/g," ");
- }
- return "";
-}
-$("scanBtn").addEventListener("click",async()=>{
- if(!uploadedFile){message("Choose a registration form image or PDF first.",true);return}
- const btn=$("scanBtn");btn.disabled=true;btn.textContent="Scanning...";
- try{
-  const text=await scanFile(uploadedFile);
-  if(!text.trim())throw Error("No readable text found. Try a clearer image.");
-  const mapping={
-   name:["farmer name","name of farmer","name"],
-   father:["father name","father's name","husband name","guardian name"],
-   farmerId:["farmer id","farmer reference id","registration number","registration no"],
-   state:["state"],district:["district"],subdistrict:["sub district","taluka","tehsil"],
-   village:["village","vill"],survey:["survey no","survey number","gat no","gat number"],
-   subdivision:["subdivision","sub division","s/s"],area:["land area","area"]
-  };
-  let found=0;
-  Object.entries(mapping).forEach(([id,patterns])=>{
-   const v=extract(text,patterns);
-   if(v){$(id).value=v;found++}
-  });
-  updateCard();
-  message("Auto-fill finished: "+found+" fields found. Verify and correct each field before downloading.");
- }catch(err){console.error(err);message(err.message||"Unable to scan document.",true)}
- finally{btn.disabled=false;btn.textContent="✦ Auto Fill Details"}
-});
-
 $("clearBtn").addEventListener("click",()=>{
  $("farmerForm").reset();
- $("photoPreview").removeAttribute("src");
- $("photoPreview").style.display="none";$("photoEmpty").style.display="block";
- updateCard();message("Details cleared.");
+ $("photoPreview").removeAttribute("src");$("photoPreview").style.display="none";$("photoEmpty").style.display="block";
+ setOptions($("district"),[],"Select district");setOptions($("subdistrict"),[],"Select taluka");
+ setOptions($("post"),[],"Select post office");setOptions($("village"),[],"Select village");
+ ["subdistrictManual","postManual","villageManual"].forEach(id=>{$(id).value="";$(id).hidden=true});
+ $("landRows").innerHTML="";rowCount=0;applyLanguage();updateCard();status("Details cleared.");
 });
 
 $("printBtn").addEventListener("click",()=>{updateCard();window.print()});
 
-/* ₹10 wallet charge. Uses the existing CSC wallet keys.
-   Download is attempted only after balance check and confirmation. */
+/* Existing wallet keys: kst_balance and kst_history.
+   This is client-side wallet logic, not secure payment processing. */
 function getBalance(){return Number(localStorage.getItem("kst_balance")||0)}
 function logTransaction(){
- let history;
- try{history=JSON.parse(localStorage.getItem("kst_history")||"[]")}catch(e){history=[]}
+ let history;try{history=JSON.parse(localStorage.getItem("kst_history")||"[]")}catch(e){history=[]}
  history.unshift({service:"Farmer Card A4 PDF",amount:-10,date:new Date().toLocaleString()});
  localStorage.setItem("kst_history",JSON.stringify(history));
 }
 $("pdfBtn").addEventListener("click",async()=>{
- if(!window.html2canvas||!window.jspdf||!window.jspdf.jsPDF){
-  message("PDF libraries unavailable. Check internet or use Print.",true);return;
- }
+ if(!window.html2canvas||!window.jspdf||!window.jspdf.jsPDF){status("PDF libraries unavailable. Check internet or use Print.",true);return}
  const balance=getBalance();
  if(balance<10){alert("Farmer Card PDF charge: ₹10\nWallet balance: ₹"+balance+"\nPlease add wallet balance first.");return}
  if(!confirm("Download Farmer Card PDF for ₹10?\nCurrent wallet balance: ₹"+balance))return;
  const btn=$("pdfBtn");btn.disabled=true;btn.textContent="Preparing PDF...";
  let charged=false;
  try{
-  localStorage.setItem("kst_balance",String(balance-10));charged=true;
-  logTransaction();
-  updateCard();
-  const {jsPDF}=window.jspdf;
-  const pdf=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
-  const w=85.6,h=54,gap=8,x=(210-(w*2+gap))/2,y=(297-h)/2;
+  localStorage.setItem("kst_balance",String(balance-10));charged=true;logTransaction();updateCard();
+  const {jsPDF}=window.jspdf,pdf=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
+  const w=85.6,h=54,gap=8,x=(210-(w*2+gap))/2,y=12;
   for(const [i,id] of ["frontCard","backCard"].entries()){
    const canvas=await html2canvas($(id),{scale:3,backgroundColor:"#ffffff",logging:false});
    pdf.addImage(canvas.toDataURL("image/png"),"PNG",x+i*(w+gap),y,w,h);
@@ -395,17 +477,15 @@ $("pdfBtn").addEventListener("click",async()=>{
   console.error(err);
   if(charged){
    localStorage.setItem("kst_balance",String(getBalance()+10));
-   let history;
-   try{history=JSON.parse(localStorage.getItem("kst_history")||"[]")}catch(e){history=[]}
-   const index=history.findIndex(t=>t.service==="Farmer Card A4 PDF");
-   if(index>=0)history.splice(index,1);
+   let history;try{history=JSON.parse(localStorage.getItem("kst_history")||"[]")}catch(e){history=[]}
+   const index=history.findIndex(t=>t.service==="Farmer Card A4 PDF");if(index>=0)history.splice(index,1);
    localStorage.setItem("kst_history",JSON.stringify(history));
   }
-  message("PDF failed. If payment was deducted, the page attempted to refund ₹10. Check wallet history.",true);
+  status("PDF failed. If deducted, the page attempted to refund ₹10.",true);
  }finally{btn.disabled=false;btn.textContent="Download A4 PDF — ₹10"}
 });
 
-updateCard();
+applyLanguage();updateCard();
 })();
 </script>
 </body>
