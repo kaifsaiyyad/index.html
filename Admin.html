@@ -3,216 +3,208 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b4b2b">
 <title>Kisan Seva Tools | Admin Pro</title>
 <style>
-:root{
- --green:#176b3a;--dark:#0b4327;--mint:#e5f5e9;--bg:#f3f7f4;
- --ink:#19271e;--muted:#6c7b70;--line:#dfe8e1;--white:#fff;
- --amber:#8a5a00;--red:#b42318;--shadow:0 8px 28px #123b1d0b
-}
+:root{--g:#176b3a;--d:#0b4327;--mint:#e5f5e9;--bg:#f3f7f4;--ink:#19271e;--muted:#6c7b70;--line:#dfe8e1;--red:#b42318}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px system-ui,Arial,sans-serif}
 button,input,select{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.5;cursor:not-allowed}
+button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}
 a{text-decoration:none;color:inherit}
-.layout{min-height:100vh;display:grid;grid-template-columns:245px minmax(0,1fr)}
-.sidebar{background:#fff;border-right:1px solid var(--line);padding:20px 14px;display:flex;flex-direction:column;gap:24px}
-.brand{display:flex;align-items:center;gap:10px;padding:5px 8px;font-weight:900;font-size:16px}
-.logo{width:42px;height:42px;border-radius:13px;background:var(--mint);display:grid;place-items:center;font-size:22px}
-.brand small{display:block;font-size:11px;font-weight:500;color:var(--muted)}
-.nav-label{padding:0 10px;font-size:10px;font-weight:900;letter-spacing:1.5px;color:#91a096}
-.nav{display:grid;gap:5px}
-.nav a{padding:11px 12px;border-radius:10px;font-weight:700;color:#59675d;display:flex;gap:10px;align-items:center}
-.nav a:hover,.nav a.active{background:var(--mint);color:var(--green)}
-.security{background:#f4f8f4;border:1px solid var(--line);border-radius:12px;padding:13px;font-size:12px;line-height:1.6}
-.main{padding:25px;min-width:0}
-.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
-.eyebrow{color:var(--green);font-size:10px;font-weight:900;letter-spacing:1.7px}
-h1{font-size:28px;letter-spacing:-.5px;margin:4px 0}
-h2{font-size:17px;margin:0 0 5px}
-h3{font-size:12px;color:var(--muted);margin:0 0 9px}
-p{margin:5px 0}
-.muted{color:var(--muted);font-size:12px;line-height:1.6}
-.btn{border:0;border-radius:9px;padding:10px 13px;background:var(--green);color:white;font-weight:800}
-.btn:hover{background:var(--dark)}
-.btn.secondary{background:white;color:var(--green);border:1px solid var(--line)}
-.btn.reject{background:#fff0ee;color:var(--red);border:1px solid #f2d0cc}
-.btn.logout{background:#fff0ee;color:var(--red)}
-.panel,.stat{background:white;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}
-.panel{padding:18px;margin:16px 0}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:14px 0}
-.stat{padding:15px;min-width:0}
-.stat-icon{width:35px;height:35px;display:grid;place-items:center;background:var(--mint);border-radius:10px;font-size:17px;margin-bottom:12px}
-.stat strong{display:block;font-size:26px;overflow-wrap:anywhere;letter-spacing:-.5px}
-.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.badge{display:inline-block;padding:4px 8px;border-radius:30px;font-size:10px;font-weight:900;background:#edf1ee;color:#526257}
-.pending{background:#fff3d5;color:#865800}
-.approved,.success{background:#e2f5e8;color:#126b3b}
-.rejected,.failed{background:#ffebea;color:#b42318}
-.notice{padding:12px;border-radius:10px;background:#f3f8f4;border:1px solid var(--line);font-size:12px;line-height:1.6;margin:12px 0}
-.warning{background:#fff7df;border-color:#f0dfa5;color:#73500a}
-.controls{display:grid;grid-template-columns:minmax(180px,1fr) 190px auto;gap:9px;margin:13px 0}
-input,select{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink);min-height:42px}
-.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.layout{min-height:100vh;display:grid;grid-template-columns:235px minmax(0,1fr)}
+.sidebar{background:white;border-right:1px solid var(--line);padding:18px 12px;display:flex;flex-direction:column;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;padding:5px;font-weight:900}
+.logo{width:42px;height:42px;border-radius:12px;background:var(--mint);display:grid;place-items:center;font-size:22px}
+.brand small{display:block;color:var(--muted);font-weight:500;font-size:11px}
+.nav-label{font-size:10px;font-weight:900;letter-spacing:1.3px;color:#91a096;padding:8px}
+.nav{display:grid;gap:4px}
+.nav a{padding:10px;border-radius:9px;font-weight:700;color:#59675d}
+.nav a:hover{background:var(--mint);color:var(--g)}
+.security,.notice{background:#f4f8f4;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12px;line-height:1.6;margin:10px 0}
+.warning{background:#fff7df;border-color:#f0dfa5}
+.main{padding:22px;min-width:0}
+.topbar,.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar{margin-bottom:18px}
+h1{font-size:27px;margin:4px 0}h2{font-size:17px;margin:0 0 5px}h3{font-size:12px;color:var(--muted);margin:0 0 8px}
+p{margin:5px 0}.muted,.message{color:var(--muted);font-size:12px;line-height:1.6}
+.eyebrow{font-size:10px;font-weight:900;letter-spacing:1.5px;color:var(--g)}
+.btn{border:0;border-radius:8px;padding:10px 12px;background:var(--g);color:white;font-weight:800}
+.btn:hover{background:var(--d)}.secondary{background:white;color:var(--g);border:1px solid var(--line)}
+.reject,.logout{background:#fff0ee;color:var(--red);border:1px solid #f2d0cc}
+.panel,.stat{background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 24px #173d2508}
+.panel{padding:16px;margin:15px 0}
+.stats,.report-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}
+.stat,.report-box{padding:13px;min-width:0}
+.stat strong,.report-box strong{display:block;font-size:22px;overflow-wrap:anywhere;margin-top:5px}
+.stat-icon{font-size:20px;margin-bottom:8px}
+.controls{display:grid;grid-template-columns:minmax(150px,1fr) 180px auto;gap:8px;margin:12px 0}
+input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink);min-height:40px}
+input[type=checkbox]{width:18px;min-height:18px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:9px}
 table{width:100%;min-width:720px;border-collapse:collapse}
-th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);font-size:12px;vertical-align:middle}
-th{background:#f7faf7;color:#637267;text-transform:uppercase;letter-spacing:.4px;font-size:10px}
+th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);font-size:12px;vertical-align:middle}
+th{background:#f7faf7;color:#637267;font-size:10px;text-transform:uppercase}
 tbody tr:last-child td{border-bottom:0}
-tbody tr:hover{background:#fbfdfb}
-.action-cell{white-space:nowrap}
-.action-cell .btn{font-size:11px;padding:7px 9px;margin:2px}
-.report-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-.report-box{padding:14px;border:1px solid var(--line);border-radius:12px;min-width:0}
-.report-box strong{font-size:19px;display:block;overflow-wrap:anywhere;margin-top:6px}
-.message{font-size:12px;color:var(--muted);line-height:1.6}
-.error{color:var(--red)}
-.ok{color:var(--green)}
-#loginSection{max-width:430px;margin:8vh auto;padding:24px}
-.field{margin:14px 0}
-.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}
+.badge{display:inline-block;padding:4px 8px;border-radius:20px;font-size:10px;font-weight:900;background:#edf1ee}
+.pending{background:#fff3d5;color:#865800}.approved,.success{background:#e2f5e8;color:#126b3b}
+.rejected,.failed{background:#ffebea;color:#b42318}
+.action-cell{white-space:nowrap}.action-cell .btn{font-size:11px;padding:7px;margin:2px}
+.report-box{border:1px solid var(--line);border-radius:10px}
+#loginSection{max-width:420px;margin:8vh auto;padding:24px}
+.field{margin:14px 0}.field label{display:block;font-weight:800;font-size:12px;margin-bottom:5px}
 #loginForm .btn{width:100%;margin-top:8px}
 .footer{text-align:center;color:#89968c;font-size:11px;padding:20px}
 [hidden]{display:none!important}
-@media(max-width:1000px){
- .layout{grid-template-columns:1fr}
- .sidebar{border-right:0;border-bottom:1px solid var(--line);padding:12px}
- .nav{display:flex;overflow-x:auto}
- .nav a{white-space:nowrap}
- .nav-label,.security{display:none}
- .main{padding:16px}
- .report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:600px){
- .main{padding:10px}
- h1{font-size:24px}
- .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
- .stat{padding:12px}
- .stat strong{font-size:22px}
- .panel{padding:13px}
- .controls{grid-template-columns:1fr}
- .report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
+@media(max-width:1000px){.layout{grid-template-columns:1fr}.sidebar{border-right:0;border-bottom:1px solid var(--line);padding:10px}.nav{display:flex;overflow-x:auto}.nav a{white-space:nowrap}.nav-label,.security{display:none}.main{padding:12px}}
+@media(max-width:600px){h1{font-size:23px}.stats,.report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr}.panel{padding:12px}.main{padding:9px}}
 </style>
 </head>
 <body>
 
 <section class="panel" id="loginSection">
- <div style="text-align:center;margin-bottom:20px">
-  <div style="font-size:42px">🌾</div>
-  <div class="eyebrow">KISAN SEVA TOOLS</div>
-  <h1>Admin Pro</h1>
-  <p class="muted">Secure administrator sign-in</p>
- </div>
- <form id="loginForm">
-  <div class="field"><label for="email">Admin email</label><input id="email" type="email" autocomplete="username" required></div>
-  <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required></div>
-  <button class="btn" type="submit">Sign in securely</button>
- </form>
- <p id="loginMessage" class="message" role="status"></p>
+  <div style="text-align:center">
+    <div style="font-size:40px">🌾</div>
+    <div class="eyebrow">KISAN SEVA TOOLS</div>
+    <h1>Admin Pro</h1>
+    <p class="muted">Secure administrator sign-in</p>
+  </div>
+  <form id="loginForm">
+    <div class="field"><label for="email">Admin email</label><input id="email" type="email" autocomplete="username" required></div>
+    <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required></div>
+    <button class="btn" type="submit">Sign in securely</button>
+  </form>
+  <p id="loginMessage" class="message" role="status"></p>
 </section>
 
 <div class="layout" id="dashboard" hidden>
- <aside class="sidebar">
+<aside class="sidebar">
   <a href="Home.html" class="brand"><span class="logo">🌾</span><span>Kisan Seva Tools<small>Admin Pro Workspace</small></span></a>
   <div>
-   <div class="nav-label">WORKSPACE</div>
-   <nav class="nav">
-    <a class="active" href="#overview">▦ Dashboard</a>
-    <a href="#paymentRequests">₹ Payments</a>
-    <a href="#walletReport">◉ Wallet report</a>
-    <a href="#transactionReport">▤ Transactions</a>
-    <a href="#earningsReport">↗ Earnings</a>
-    <a href="ToolsManagement.html">⚙ Tools management</a>
-    <a href="Home.html">⌂ View website</a>
-   </nav>
+    <div class="nav-label">WORKSPACE</div>
+    <nav class="nav">
+      <a href="#overview">▦ Dashboard</a>
+      <a href="#paymentRequests">₹ Payments</a>
+      <a href="#walletReport">◉ Wallets</a>
+      <a href="#transactionReport">▤ Transactions</a>
+      <a href="#earningsReport">↗ Earnings</a>
+      <a href="#toolProgress">🧰 Tools progress</a>
+      <a href="#toolAnalytics">📊 Usage analytics</a>
+      <a href="ToolsManagement.html">⚙ Tools management</a>
+      <a href="Home.html">⌂ Website</a>
+    </nav>
   </div>
-  <div class="security"><b>🔐 Security note</b><br>Approving a request changes its status only. Wallet credit requires a separately verified payment workflow.</div>
- </aside>
+  <div class="security"><b>🔐 Security</b><br>Payment approval does not credit a wallet. Verify payments using the trusted payment backend.</div>
+</aside>
 
- <main class="main">
+<main class="main">
   <div class="topbar" id="overview">
-   <div><div class="eyebrow">ADMIN WORKSPACE / OVERVIEW</div><h1>Dashboard</h1><p class="muted">Your recorded activity at a glance.</p></div>
-   <button class="btn logout" id="logoutButton">Logout</button>
+    <div><div class="eyebrow">ADMIN WORKSPACE</div><h1>Dashboard</h1><p class="muted">Tools, customers and recorded activity.</p></div>
+    <button class="btn logout" id="logoutButton">Logout</button>
   </div>
 
   <section class="panel">
-   <div class="panel-head">
-    <div><h2>Account status</h2><p class="muted" id="adminEmail"></p></div>
-    <span class="badge success">Authenticated</span>
-   </div>
-   <p id="connectionMessage" class="message" role="status">Connecting to records…</p>
+    <div class="panel-head"><div><h2>Account status</h2><p class="muted" id="adminEmail"></p></div><span class="badge success">Authenticated</span></div>
+    <p id="connectionMessage" class="message">Connecting…</p>
   </section>
 
   <section class="stats">
-   <div class="stat"><div class="stat-icon">📨</div><h3>Total requests</h3><strong id="totalRequests">—</strong><p class="muted">Recorded requests</p></div>
-   <div class="stat"><div class="stat-icon">⏳</div><h3>Pending requests</h3><strong id="pendingRequests">—</strong><p class="muted">Awaiting review</p></div>
-   <div class="stat"><div class="stat-icon">✓</div><h3>Approved requests</h3><strong id="approvedRequests">—</strong><p class="muted">Status approved</p></div>
-   <div class="stat"><div class="stat-icon">↩</div><h3>Rejected requests</h3><strong id="rejectedRequests">—</strong><p class="muted">Status rejected</p></div>
+    <div class="stat"><div class="stat-icon">📨</div><h3>Total requests</h3><strong id="totalRequests">—</strong></div>
+    <div class="stat"><div class="stat-icon">⏳</div><h3>Pending requests</h3><strong id="pendingRequests">—</strong></div>
+    <div class="stat"><div class="stat-icon">✓</div><h3>Approved</h3><strong id="approvedRequests">—</strong></div>
+    <div class="stat"><div class="stat-icon">↩</div><h3>Rejected</h3><strong id="rejectedRequests">—</strong></div>
   </section>
 
   <section class="panel" id="paymentRequests">
-   <div class="panel-head">
-    <div><h2>Payment requests</h2><p class="muted">Search and filter requests before reviewing.</p></div>
-    <button class="btn secondary" id="exportRequests">Export CSV</button>
-   </div>
-   <div class="notice warning"><b>Important:</b> Approval here does not confirm receipt of money and does not credit the wallet. Verify payments independently through the payment provider.</div>
-   <div class="controls">
-    <input id="requestSearch" type="search" placeholder="Search request ID or user UID…">
-    <select id="requestFilter"><option value="all">All statuses</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
-    <button class="btn secondary" id="clearFilters">Clear filters</button>
-   </div>
-   <p id="requestsMessage" class="message" role="status">Loading requests…</p>
-   <div class="table-wrap"><table>
-    <thead><tr><th>Request ID</th><th>User UID</th><th>Amount</th><th>Status</th><th>Created at</th><th>Action</th></tr></thead>
-    <tbody id="requestsTable"><tr><td colspan="6">Loading…</td></tr></tbody>
-   </table></div>
+    <div class="panel-head"><div><h2>Payment requests</h2><p class="muted">Review recorded requests.</p></div><button class="btn secondary" id="exportRequests">Export CSV</button></div>
+    <div class="notice warning">Approval changes request status only. It does not confirm receipt of money or credit a wallet.</div>
+    <div class="controls">
+      <input id="requestSearch" type="search" placeholder="Search request ID or UID">
+      <select id="requestFilter"><option value="all">All statuses</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
+      <button class="btn secondary" id="clearFilters">Clear filters</button>
+    </div>
+    <p id="requestsMessage" class="message">Loading…</p>
+    <div class="table-wrap"><table><thead><tr><th>Request ID</th><th>User UID</th><th>Amount</th><th>Status</th><th>Created</th><th>Action</th></tr></thead><tbody id="requestsTable"></tbody></table></div>
   </section>
 
   <section class="panel" id="walletReport">
-   <div class="panel-head"><div><h2>Wallet report</h2><p class="muted">Read-only wallet document summary.</p></div><button class="btn secondary" id="exportWallets">Export CSV</button></div>
-   <div class="report-grid">
-    <div class="report-box"><span class="muted">Wallet documents</span><strong id="walletCount">—</strong></div>
-    <div class="report-box"><span class="muted">Known recorded balance total</span><strong id="walletTotal">—</strong></div>
-   </div>
-   <div class="notice">Only numeric <code>balance</code> fields are included. Missing data is shown as unavailable, not assumed to be zero.</div>
-   <p id="walletMessage" class="message" role="status">Loading wallet records…</p>
-   <div class="table-wrap"><table><thead><tr><th>User UID / document ID</th><th>Recorded balance</th><th>Record status</th></tr></thead><tbody id="walletTable"><tr><td colspan="3">Loading…</td></tr></tbody></table></div>
+    <div class="panel-head"><div><h2>Wallet report</h2><p class="muted">Read-only wallet summary.</p></div><button class="btn secondary" id="exportWallets">Export CSV</button></div>
+    <div class="report-grid"><div class="report-box"><span class="muted">Wallet documents</span><strong id="walletCount">—</strong></div><div class="report-box"><span class="muted">Recorded balances total</span><strong id="walletTotal">—</strong></div></div>
+    <p id="walletMessage" class="message">Loading…</p>
+    <div class="table-wrap"><table><thead><tr><th>User UID / document</th><th>Balance</th><th>Status</th></tr></thead><tbody id="walletTable"></tbody></table></div>
   </section>
 
   <section class="panel" id="transactionReport">
-   <div class="panel-head"><div><h2>Transaction history</h2><p class="muted">Read-only recorded transaction list.</p></div><button class="btn secondary" id="exportTransactions">Export CSV</button></div>
-   <div class="report-grid">
-    <div class="report-box"><span class="muted">Records</span><strong id="transactionCount">—</strong></div>
-    <div class="report-box"><span class="muted">Recognized deposits</span><strong id="depositTotal">—</strong></div>
-    <div class="report-box"><span class="muted">Recognized tool charges</span><strong id="toolChargeTotal">—</strong></div>
-    <div class="report-box"><span class="muted">Recognized expenses</span><strong id="expenseTotal">—</strong></div>
-   </div>
-   <p id="transactionMessage" class="message" role="status">Loading transactions…</p>
-   <div class="table-wrap"><table><thead><tr><th>Transaction ID</th><th>User UID</th><th>Type</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead><tbody id="transactionsTable"><tr><td colspan="6">Loading…</td></tr></tbody></table></div>
+    <div class="panel-head"><div><h2>Transaction history</h2><p class="muted">Read-only records.</p></div><button class="btn secondary" id="exportTransactions">Export CSV</button></div>
+    <div class="report-grid">
+      <div class="report-box"><span class="muted">Records</span><strong id="transactionCount">—</strong></div>
+      <div class="report-box"><span class="muted">Deposits</span><strong id="depositTotal">—</strong></div>
+      <div class="report-box"><span class="muted">Tool charges</span><strong id="toolChargeTotal">—</strong></div>
+      <div class="report-box"><span class="muted">Expenses</span><strong id="expenseTotal">—</strong></div>
+    </div>
+    <p id="transactionMessage" class="message">Loading…</p>
+    <div class="table-wrap"><table><thead><tr><th>ID</th><th>UID</th><th>Type</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead><tbody id="transactionsTable"></tbody></table></div>
   </section>
 
   <section class="panel" id="earningsReport">
-   <div class="panel-head"><div><h2>Earnings report</h2><p class="muted">Provisional figures from recognized transaction records.</p></div></div>
-   <div class="report-grid">
-    <div class="report-box"><span class="muted">Recorded tool revenue</span><strong id="earningsRevenue">—</strong></div>
-    <div class="report-box"><span class="muted">Recorded expenses</span><strong id="earningsExpenses">—</strong></div>
-    <div class="report-box"><span class="muted">Recorded refunds</span><strong id="earningsRefunds">—</strong></div>
-    <div class="report-box"><span class="muted">Recorded net</span><strong id="earningsNet">—</strong></div>
-   </div>
-   <div class="notice warning">This is not certified accounting profit. Taxes, gateway fees, unrecorded costs and other liabilities are excluded. Unknown transaction types are not silently counted.</div>
-   <p id="earningsMessage" class="message">Waiting for records…</p>
+    <h2>Earnings report</h2>
+    <div class="report-grid">
+      <div class="report-box"><span class="muted">Tool revenue</span><strong id="earningsRevenue">—</strong></div>
+      <div class="report-box"><span class="muted">Expenses</span><strong id="earningsExpenses">—</strong></div>
+      <div class="report-box"><span class="muted">Refunds</span><strong id="earningsRefunds">—</strong></div>
+      <div class="report-box"><span class="muted">Recorded net</span><strong id="earningsNet">—</strong></div>
+    </div>
+    <div class="notice warning">Provisional totals only; gateway fees, taxes and unrecorded expenses may be excluded.</div>
+    <p id="earningsMessage" class="message">Waiting for records…</p>
   </section>
-  <div class="footer">Kisan Seva Tools · Admin Pro · Secure records workspace</div>
- </main>
+
+  <section class="panel" id="toolProgress">
+    <div class="panel-head"><div><h2>Tool progress tracker</h2><p class="muted">Progress checklist for every tool in Firestore.</p></div><button class="btn secondary" id="exportToolProgress">Export CSV</button></div>
+    <div class="report-grid">
+      <div class="report-box"><span class="muted">Tools listed</span><strong id="progressTotal">—</strong></div>
+      <div class="report-box"><span class="muted">Passed</span><strong id="progressPassed">—</strong></div>
+      <div class="report-box"><span class="muted">In progress</span><strong id="progressWorking">—</strong></div>
+      <div class="report-box"><span class="muted">Not started / blocked</span><strong id="progressPending">—</strong></div>
+    </div>
+    <div class="notice">A checklist is not an automatic test. Mark Passed only after you test the tool yourself.</div>
+    <div class="controls">
+      <input id="progressSearch" type="search" placeholder="Search tool name">
+      <select id="progressFilter"><option value="all">All statuses</option><option value="not_started">Not started</option><option value="in_progress">In progress</option><option value="passed">Passed</option><option value="blocked">Blocked</option></select>
+      <button class="btn secondary" id="refreshProgress">Refresh</button>
+    </div>
+    <p id="progressMessage" class="message">Loading tools…</p>
+    <div class="table-wrap"><table><thead><tr><th>Tool</th><th>Progress %</th><th>Status</th><th>Functionality</th><th>Mobile</th><th>Download / print</th><th>Next task</th><th>Save</th></tr></thead><tbody id="progressTable"></tbody></table></div>
+  </section>
+
+  <section class="panel" id="toolAnalytics">
+    <div class="panel-head"><div><h2>Customer usage analytics</h2><p class="muted">Based on recorded events, not historical estimates.</p></div><button class="btn secondary" id="exportToolUsage">Export CSV</button></div>
+    <div class="report-grid">
+      <div class="report-box"><span class="muted">Recorded uses</span><strong id="usageTotal">—</strong></div>
+      <div class="report-box"><span class="muted">Unique user IDs</span><strong id="usageUsers">—</strong></div>
+      <div class="report-box"><span class="muted">Uses today</span><strong id="usageToday">—</strong></div>
+      <div class="report-box"><span class="muted">Uses last 30 days</span><strong id="usage30Days">—</strong></div>
+    </div>
+    <div class="controls">
+      <input id="usageSearch" type="search" placeholder="Search tool name">
+      <select id="usagePeriod"><option value="all">All recorded time</option><option value="today">Today</option><option value="30">Last 30 days</option></select>
+      <button class="btn secondary" id="refreshUsage">Refresh</button>
+    </div>
+    <p id="usageMessage" class="message">Waiting for usage records…</p>
+    <div class="table-wrap"><table><thead><tr><th>Tool</th><th>Total uses</th><th>Unique users</th><th>Last recorded use</th></tr></thead><tbody id="usageTable"></tbody></table></div>
+  </section>
+
+  <div class="footer">Kisan Seva Tools · Admin Pro</div>
+</main>
 </div>
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-import {getFirestore,doc,getDoc,collection,query,orderBy,onSnapshot,updateDoc} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+import {
+ getFirestore,doc,getDoc,collection,query,orderBy,onSnapshot,
+ updateDoc,setDoc,serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
 const firebaseConfig={
  apiKey:"AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
@@ -220,83 +212,87 @@ const firebaseConfig={
  projectId:"kisan-seva-tools",
  appId:"1:900938868284:web:5a5b278506955fc0f48539"
 };
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app),db=getFirestore(app);
 const $=id=>document.getElementById(id);
-let user=null,stops=[],requests=[],wallets=[],transactions=[],busy=false;
+
+let user=null,stops=[],requests=[],wallets=[],transactions=[];
+let tools=[],progress=[],usage=[],busy=false;
+let toolsLoaded=false,progressLoaded=false,usageLoaded=false;
 
 const money=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:2}).format(n);
+const safe=v=>String(v??"").trim();
+const statusOf=x=>String(x||"unknown").toLowerCase();
 const amountOf=x=>typeof x.amount==="number"&&Number.isFinite(x.amount)&&x.amount>=0?x.amount:null;
-const textStatus=x=>String(x||"unknown").toLowerCase();
-const completed=x=>["success","successful","completed","approved","paid"].includes(textStatus(x.status));
+const completed=x=>["success","successful","completed","approved","paid"].includes(statusOf(x.status));
 const typeOf=x=>String(x.type||x.category||x.transactionType||"").trim().toLowerCase().replace(/[\s-]+/g,"_");
-const dateOf=v=>{try{let d=v?.toDate?v.toDate():new Date(v);return Number.isNaN(d.getTime())?"—":d.toLocaleString("en-IN")}catch{return "—"}};
+const dateValue=v=>{try{const d=v?.toDate?v.toDate():new Date(v);return Number.isNaN(d.getTime())?null:d}catch{return null}};
+const dateText=v=>dateValue(v)?.toLocaleString("en-IN")||"—";
 
+function message(id,text,error=false){$(id).textContent=text;$(id).className="message"+(error?" error":"")}
+function td(value){const e=document.createElement("td");e.textContent=String(value??"—");return e}
+function empty(id,cols,text){const tr=document.createElement("tr"),c=td(text);c.colSpan=cols;tr.append(c);$(id).replaceChildren(tr)}
+function badge(value){const e=document.createElement("span");e.className="badge "+statusOf(value);e.textContent=statusOf(value);return e}
 function stopAll(){stops.forEach(fn=>{try{fn()}catch{}});stops=[]}
-function td(value){let e=document.createElement("td");e.textContent=String(value??"—");return e}
-function empty(id,cols,msg){let tr=document.createElement("tr"),c=td(msg);c.colSpan=cols;tr.append(c);$(id).replaceChildren(tr)}
-function badge(status){let s=document.createElement("span");s.className="badge "+(["pending","approved","rejected","success","failed"].includes(textStatus(status))?textStatus(status):"");s.textContent=textStatus(status);return s}
-function setMessage(id,msg,cls="message"){$(id).className=cls;$(id).textContent=msg}
+function exportCSV(name,headers,rows){
+ const cell=v=>{let s=String(v??"");if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'};
+ const blob=new Blob(["\uFEFF"+[headers,...rows].map(r=>r.map(cell).join(",")).join("\r\n")],{type:"text/csv;charset=utf-8"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function listen(name,cb,err){return onSnapshot(collection(db,name),s=>cb(s.docs.map(d=>({id:d.id,...d.data()}))),err)}
 
 function filteredRequests(){
- const q=$("requestSearch").value.trim().toLowerCase(),filter=$("requestFilter").value;
- return requests.filter(x=>{
-  const status=textStatus(x.status);
-  const matchStatus=filter==="all"||status===filter;
-  const matchText=!q||String(x.id).toLowerCase().includes(q)||String(x.uid||"").toLowerCase().includes(q);
-  return matchStatus&&matchText;
- });
+ const q=$("requestSearch").value.trim().toLowerCase(),f=$("requestFilter").value;
+ return requests.filter(x=>(f==="all"||statusOf(x.status)===f)&&(!q||x.id.toLowerCase().includes(q)||safe(x.uid).toLowerCase().includes(q)));
 }
 function renderRequests(){
  $("totalRequests").textContent=requests.length;
- $("pendingRequests").textContent=requests.filter(x=>textStatus(x.status)==="pending").length;
- $("approvedRequests").textContent=requests.filter(x=>textStatus(x.status)==="approved").length;
- $("rejectedRequests").textContent=requests.filter(x=>textStatus(x.status)==="rejected").length;
+ $("pendingRequests").textContent=requests.filter(x=>statusOf(x.status)==="pending").length;
+ $("approvedRequests").textContent=requests.filter(x=>statusOf(x.status)==="approved").length;
+ $("rejectedRequests").textContent=requests.filter(x=>statusOf(x.status)==="rejected").length;
  const list=filteredRequests();
- if(!list.length){empty("requestsTable",6,"No requests match this filter.");setMessage("requestsMessage",`${requests.length} total request(s).`);return}
+ if(!list.length){empty("requestsTable",6,"No matching requests.");message("requestsMessage",`${requests.length} request(s) recorded.`);return}
  const frag=document.createDocumentFragment();
  for(const x of list){
-  const tr=document.createElement("tr");
-  tr.append(td(x.id),td(x.uid));
-  const amount=amountOf(x);tr.append(td(amount===null?"Invalid amount":money(amount)));
-  const st=td("");st.append(badge(x.status));tr.append(st,td(dateOf(x.createdAt)));
-  const ac=td("");ac.className="action-cell";
-  if(textStatus(x.status)==="pending"){
+  const tr=document.createElement("tr");tr.append(td(x.id),td(x.uid));
+  const a=amountOf(x);tr.append(td(a===null?"Invalid amount":money(a)));
+  const s=td("");s.append(badge(x.status));tr.append(s,td(dateText(x.createdAt)));
+  const c=td("");c.className="action-cell";
+  if(statusOf(x.status)==="pending"){
    for(const next of ["approved","rejected"]){
-    const b=document.createElement("button");b.className="btn "+(next==="rejected"?"reject":"");
-    b.textContent=next==="approved"?"Approve":"Reject";
-    b.addEventListener("click",()=>changeRequest(x.id,next,b));ac.append(b);
+    const b=document.createElement("button");b.className="btn "+(next==="rejected"?"reject":"");b.textContent=next==="approved"?"Approve":"Reject";
+    b.addEventListener("click",()=>changeRequest(x.id,next,b));c.append(b);
    }
-  }else ac.textContent="Reviewed";
-  tr.append(ac);frag.append(tr);
+  }else c.textContent="Reviewed";
+  tr.append(c);frag.append(tr);
  }
- $("requestsTable").replaceChildren(frag);
- setMessage("requestsMessage",`Showing ${list.length} of ${requests.length} request(s).`);
+ $("requestsTable").replaceChildren(frag);message("requestsMessage",`Showing ${list.length} of ${requests.length}.`);
 }
-async function changeRequest(id,next,button){
+async function changeRequest(id,next,b){
  if(busy||!user)return;
- if(!confirm(`Change this request to ${next}?\nThis will NOT credit the user's wallet.`))return;
- busy=true;button.disabled=true;
+ if(!confirm(`Change request status to ${next}? This does not credit a wallet.`))return;
+ busy=true;b.disabled=true;
  try{
-  const admin=await getDoc(doc(db,"admins",user.uid));
-  if(!admin.exists()||admin.data().role!=="admin")throw Error("Admin permission is not valid.");
-  const ref=doc(db,"paymentRequests",id),snap=await getDoc(ref);
-  if(!snap.exists()||textStatus(snap.data().status)!=="pending"){alert("Request is no longer pending. Refresh and check.");return}
+  const a=await getDoc(doc(db,"admins",user.uid));
+  if(!a.exists()||a.data().role!=="admin")throw Error("Admin permission denied");
+  const ref=doc(db,"paymentRequests",id),s=await getDoc(ref);
+  if(!s.exists()||statusOf(s.data().status)!=="pending")throw Error("Request is no longer pending");
   await updateDoc(ref,{status:next});
-  alert(`Request status updated to ${next}. No wallet balance was changed.`);
+  alert("Request status updated. Wallet balance was not changed.");
  }catch(e){console.error(e);alert("Update failed. Check Firestore Rules and connection.")}
- finally{busy=false;button.disabled=false}
+ finally{busy=false;b.disabled=false}
 }
+
 function renderWallets(){
  $("walletCount").textContent=wallets.length;
- if(!wallets.length){$("walletTotal").textContent="No data yet";empty("walletTable",3,"No wallet documents found.");setMessage("walletMessage","No wallet records found.");return}
+ if(!wallets.length){$("walletTotal").textContent="No data yet";empty("walletTable",3,"No wallet documents.");message("walletMessage","No wallet records found.");return}
  let total=0,count=0;const frag=document.createDocumentFragment();
  for(const x of wallets){
-  const tr=document.createElement("tr"),has=typeof x.balance==="number"&&Number.isFinite(x.balance);
-  tr.append(td(x.uid||x.id),td(has?money(x.balance):"Not recorded"),td(has?"Balance recorded":"Missing numeric balance"));
-  if(has){total+=x.balance;count++}frag.append(tr);
+  const valid=typeof x.balance==="number"&&Number.isFinite(x.balance),tr=document.createElement("tr");
+  tr.append(td(x.uid||x.id),td(valid?money(x.balance):"Not recorded"),td(valid?"Recorded":"Missing balance"));
+  if(valid){total+=x.balance;count++}frag.append(tr);
  }
- $("walletTotal").textContent=count?money(total):"No data yet";
- $("walletTable").replaceChildren(frag);setMessage("walletMessage",`${wallets.length} wallet record(s); ${count} numeric balance(s).`);
+ $("walletTotal").textContent=count?money(total):"No data yet";$("walletTable").replaceChildren(frag);message("walletMessage",`${wallets.length} wallet record(s).`);
 }
 function renderTransactions(){
  $("transactionCount").textContent=transactions.length;
@@ -316,80 +312,153 @@ function renderTransactions(){
  $("earningsExpenses").textContent=ec?money(expense):"No data yet";
  $("earningsRefunds").textContent=rc?money(refund):"No data yet";
  $("earningsNet").textContent=(cc||ec||rc)?money(charge-expense-refund):"No data yet";
- $("earningsMessage").textContent=(cc||ec||rc)?"Recorded net = recognized tool charges − recognized expenses − recognized refunds. Deposits are not earnings.":"No recognized earnings, expense or refund records.";
- if(!transactions.length){empty("transactionsTable",6,"No transaction records found.");setMessage("transactionMessage","No transactions recorded.");return}
- const sorted=[...transactions].sort((a,b)=>new Date(b.createdAt?.toDate?b.createdAt.toDate():b.createdAt||0)-new Date(a.createdAt?.toDate?a.createdAt.toDate():a.createdAt||0));
+ message("earningsMessage",(cc||ec||rc)?"Recorded net = recognized charges − expenses − refunds. Deposits are not earnings.":"No recognized revenue, expense or refund records.");
+ if(!transactions.length){empty("transactionsTable",6,"No transactions found.");message("transactionMessage","No transaction records.");return}
  const frag=document.createDocumentFragment();
- for(const x of sorted){
-  const tr=document.createElement("tr"),a=amountOf(x),s=td("");s.append(badge(x.status));
-  tr.append(td(x.id),td(x.uid||x.userId),td(typeOf(x)||"Unknown"),td(a===null?"Not recorded":money(a)),s,td(dateOf(x.createdAt)));frag.append(tr);
+ for(const x of [...transactions].sort((a,b)=>(dateValue(b.createdAt)?.getTime()||0)-(dateValue(a.createdAt)?.getTime()||0))){
+  const a=amountOf(x),s=td("");s.append(badge(x.status));const tr=document.createElement("tr");
+  tr.append(td(x.id),td(x.uid||x.userId),td(typeOf(x)||"Unknown"),td(a===null?"Not recorded":money(a)),s,td(dateText(x.createdAt)));frag.append(tr);
  }
- $("transactionsTable").replaceChildren(frag);setMessage("transactionMessage",`${transactions.length} transaction record(s). Unknown types are excluded from summaries.`);
+ $("transactionsTable").replaceChildren(frag);message("transactionMessage",`${transactions.length} transaction record(s).`);
 }
-function csvCell(v){let s=String(v??"");if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'}
-function exportCSV(name,headers,rows){
- const csv=[headers,...rows].map(r=>r.map(csvCell).join(",")).join("\r\n");
- const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
- const url=URL.createObjectURL(blob),a=document.createElement("a");
- a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-$("exportRequests").addEventListener("click",()=>exportCSV("payment-requests.csv",
- ["Request ID","User UID","Amount","Status","Created At"],
- filteredRequests().map(x=>[x.id,x.uid,amountOf(x),x.status,dateOf(x.createdAt)])));
-$("exportWallets").addEventListener("click",()=>exportCSV("wallet-report.csv",
- ["Document ID","UID","Balance","Status"],wallets.map(x=>[x.id,x.uid,x.balance,typeof x.balance==="number"?"Recorded":"Missing"])));
-$("exportTransactions").addEventListener("click",()=>exportCSV("transactions.csv",
- ["Transaction ID","UID","Type","Amount","Status","Date"],transactions.map(x=>[x.id,x.uid||x.userId,typeOf(x),amountOf(x),x.status,dateOf(x.createdAt)])));
+
 $("requestSearch").addEventListener("input",renderRequests);
 $("requestFilter").addEventListener("change",renderRequests);
 $("clearFilters").addEventListener("click",()=>{$("requestSearch").value="";$("requestFilter").value="all";renderRequests()});
+$("exportRequests").addEventListener("click",()=>exportCSV("payment-requests.csv",["ID","UID","Amount","Status","Created"],filteredRequests().map(x=>[x.id,x.uid,amountOf(x),x.status,dateText(x.createdAt)])));
+$("exportWallets").addEventListener("click",()=>exportCSV("wallets.csv",["ID","UID","Balance"],wallets.map(x=>[x.id,x.uid,x.balance])));
+$("exportTransactions").addEventListener("click",()=>exportCSV("transactions.csv",["ID","UID","Type","Amount","Status","Date"],transactions.map(x=>[x.id,x.uid||x.userId,typeOf(x),amountOf(x),x.status,dateText(x.createdAt)])));
 
-function listen(name,cb,onError){
- return onSnapshot(collection(db,name),snap=>cb(snap.docs.map(d=>({id:d.id,...d.data()}))),onError);
-}
-function startDashboard(u){
- stopAll();user=u;$("loginSection").hidden=true;$("dashboard").hidden=false;
- $("adminEmail").textContent="Signed in as "+(u.email||"administrator");
- setMessage("connectionMessage","Connected; loading reports…");
- const errors=[];
- function failed(name,id,table,cols,ids=[]){
-  return e=>{
-   console.error(name,e);errors.push(name);
-   setMessage(id,`Could not read ${name}. Check Firestore Rules.`,`message error`);
-   empty(table,cols,"Data unavailable: permission or connection error.");
-   ids.forEach(i=>$(i).textContent="Unavailable");
-   setMessage("connectionMessage","Some reports are unavailable: "+[...new Set(errors)].join(", ")+".");
-  }
+// ---------- TOOL PROGRESS ----------
+const statuses={not_started:"Not started",in_progress:"In progress",passed:"Passed",blocked:"Blocked"};
+function getProgress(tool){const p=progress.find(x=>x.id===tool.id)||{};const n=Number(p.progress);return {
+ progress:Number.isFinite(n)?Math.max(0,Math.min(100,Math.round(n))):0,
+ status:statuses[p.status]?p.status:"not_started",
+ functionality:p.functionality===true,mobile:p.mobile===true,
+ downloadPrint:p.downloadPrint===true,nextTask:safe(p.nextTask)
+}}
+function renderProgress(){
+ if(!toolsLoaded||!progressLoaded)return;
+ const search=$("progressSearch").value.trim().toLowerCase(),filter=$("progressFilter").value;
+ const list=tools.filter(t=>safe(t.name||t.title||t.id).toLowerCase().includes(search)&&
+ (filter==="all"||getProgress(t).status===filter));
+ const all=tools.map(getProgress);
+ $("progressTotal").textContent=tools.length;
+ $("progressPassed").textContent=all.filter(p=>p.status==="passed").length;
+ $("progressWorking").textContent=all.filter(p=>p.status==="in_progress").length;
+ $("progressPending").textContent=all.filter(p=>["not_started","blocked"].includes(p.status)).length;
+ if(!list.length){empty("progressTable",8,"No tools match.");message("progressMessage","No matching tools.");return}
+ const frag=document.createDocumentFragment();
+ for(const t of list){
+  const p=getProgress(t),name=safe(t.name||t.title||t.id),tr=document.createElement("tr");tr.append(td(name));
+  const pc=td(""),num=document.createElement("input");num.type="number";num.min="0";num.max="100";num.step="5";num.value=p.progress;num.setAttribute("aria-label",name+" progress");pc.append(num);tr.append(pc);
+  const sc=td(""),sel=document.createElement("select");
+  for(const [v,label] of Object.entries(statuses)){const o=document.createElement("option");o.value=v;o.textContent=label;sel.append(o)}
+  sel.value=p.status;sc.append(sel);tr.append(sc);
+  function check(value,label){const c=td(""),i=document.createElement("input");i.type="checkbox";i.checked=value;i.setAttribute("aria-label",name+" "+label);c.append(i);tr.append(c);return i}
+  const func=check(p.functionality,"functionality tested"),mobile=check(p.mobile,"mobile tested"),dp=check(p.downloadPrint,"download print tested");
+  const tc=td(""),task=document.createElement("input");task.maxLength=300;task.value=p.nextTask;task.placeholder="Next task";tc.append(task);tr.append(tc);
+  const ac=td(""),save=document.createElement("button");save.className="btn";save.textContent="Save";
+  save.addEventListener("click",async()=>{
+   if(!user||save.disabled)return;
+   const percent=Number(num.value);
+   if(!Number.isFinite(percent)||percent<0||percent>100){alert("Progress must be between 0 and 100.");return}
+   save.disabled=true;save.textContent="Saving…";
+   try{
+    const a=await getDoc(doc(db,"admins",user.uid));
+    if(!a.exists()||a.data().role!=="admin")throw Error("Admin permission denied");
+    const data={toolId:t.id,toolName:name,progress:Math.round(percent),status:sel.value,
+     functionality:func.checked,mobile:mobile.checked,downloadPrint:dp.checked,
+     nextTask:task.value.trim().slice(0,300),updatedAt:serverTimestamp(),updatedBy:user.uid};
+    await setDoc(doc(db,"toolProgress",t.id),data,{merge:true});
+    const idx=progress.findIndex(x=>x.id===t.id),record={id:t.id,...data};
+    if(idx>=0)progress[idx]=record;else progress.push(record);
+    message("progressMessage","Saved progress for "+name+".");renderProgress();
+   }catch(e){console.error(e);alert("Save failed. Check Firestore Rules and connection.")}
+   finally{save.disabled=false;save.textContent="Save"}
+  });
+  ac.append(save);tr.append(ac);frag.append(tr);
  }
- stops.push(onSnapshot(query(collection(db,"paymentRequests"),orderBy("createdAt","desc")),s=>{
-  requests=s.docs.map(d=>({id:d.id,...d.data()}));renderRequests();
-  if(!errors.length)setMessage("connectionMessage","Connected. Live report data loaded.");
- },failed("paymentRequests","requestsMessage","requestsTable",6)));
- stops.push(listen("wallets",x=>{wallets=x;renderWallets()},failed("wallets","walletMessage","walletTable",3,["walletCount","walletTotal"])));
- stops.push(listen("transactions",x=>{transactions=x;renderTransactions()},failed("transactions","transactionMessage","transactionsTable",6,["transactionCount","depositTotal","toolChargeTotal","expenseTotal","earningsRevenue","earningsExpenses","earningsRefunds","earningsNet"])));
+ $("progressTable").replaceChildren(frag);message("progressMessage",`Showing ${list.length} of ${tools.length} tools.`);
 }
+function startProgress(){
+ stops.push(listen("tools",x=>{tools=x.sort((a,b)=>safe(a.name||a.title||a.id).localeCompare(safe(b.name||b.title||b.id)));toolsLoaded=true;renderProgress()},e=>{console.error(e);message("progressMessage","Cannot read tools collection. Check rules.",true)}));
+ stops.push(listen("toolProgress",x=>{progress=x;progressLoaded=true;renderProgress()},e=>{console.error(e);message("progressMessage","Cannot read toolProgress. Check rules.",true)}));
+}
+$("progressSearch").addEventListener("input",renderProgress);
+$("progressFilter").addEventListener("change",renderProgress);
+$("refreshProgress").addEventListener("click",renderProgress);
+$("exportToolProgress").addEventListener("click",()=>exportCSV("tool-progress.csv",
+ ["Tool ID","Tool Name","Progress","Status","Functionality","Mobile","DownloadPrint","Next Task"],
+ tools.map(t=>{const p=getProgress(t);return[t.id,t.name||t.title||t.id,p.progress,p.status,p.functionality,p.mobile,p.downloadPrint,p.nextTask]})));
+
+// ---------- USAGE ANALYTICS ----------
+function eventDate(e){return dateValue(e.createdAt)}
+function renderUsage(){
+ if(!usageLoaded)return;
+ const now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+ const start30=new Date(now.getTime()-30*86400000),search=$("usageSearch").value.trim().toLowerCase(),period=$("usagePeriod").value;
+ const valid=usage.filter(e=>eventDate(e));
+ const todayEvents=valid.filter(e=>eventDate(e)>=today),recent=valid.filter(e=>eventDate(e)>=start30);
+ $("usageTotal").textContent=valid.length;
+ $("usageUsers").textContent=new Set(valid.map(e=>safe(e.uid)).filter(Boolean)).size;
+ $("usageToday").textContent=todayEvents.length;$("usage30Days").textContent=recent.length;
+ const filtered=valid.filter(e=>{
+  const d=eventDate(e),name=safe(e.toolName||e.toolId||"Unknown");
+  return name.toLowerCase().includes(search)&&(period==="all"||(period==="today"&&d>=today)||(period==="30"&&d>=start30));
+ });
+ const groups=new Map();
+ for(const e of filtered){
+  const id=safe(e.toolId||e.toolName||"unknown");
+  if(!groups.has(id))groups.set(id,{id,name:safe(e.toolName||e.toolId||"Unknown"),count:0,users:new Set(),latest:null});
+  const g=groups.get(id);g.count++;if(e.uid)g.users.add(String(e.uid));
+  const d=eventDate(e);if(!g.latest||d>g.latest)g.latest=d;
+ }
+ const rows=[...groups.values()].sort((a,b)=>b.count-a.count);
+ if(!rows.length){empty("usageTable",4,"No recorded events for this filter.");message("usageMessage","No usage events yet. Tracking must be added to tool pages.");return}
+ const frag=document.createDocumentFragment();
+ for(const g of rows){const tr=document.createElement("tr");tr.append(td(g.name),td(g.count),td(g.users.size),td(g.latest?.toLocaleString("en-IN")||"—"));frag.append(tr)}
+ $("usageTable").replaceChildren(frag);message("usageMessage",`${rows.length} tools have recorded usage. Unique users count only events containing a UID.`);
+}
+function startUsage(){
+ stops.push(listen("toolUsage",x=>{usage=x;usageLoaded=true;renderUsage()},e=>{console.error(e);message("usageMessage","Cannot read toolUsage. Check Firestore Rules.",true)}));
+}
+$("usageSearch").addEventListener("input",renderUsage);
+$("usagePeriod").addEventListener("change",renderUsage);
+$("refreshUsage").addEventListener("click",renderUsage);
+$("exportToolUsage").addEventListener("click",()=>exportCSV("tool-usage.csv",["Event ID","Tool ID","Tool Name","UID","Date"],usage.map(e=>[e.id,e.toolId,e.toolName,e.uid,dateText(e.createdAt)])));
+
+function startDashboard(u){
+ stopAll();user=u;
+ tools=[];progress=[];usage=[];toolsLoaded=false;progressLoaded=false;usageLoaded=false;
+ $("dashboard").hidden=false;$("loginSection").hidden=true;
+ $("adminEmail").textContent="Signed in as "+(u.email||"administrator");
+ message("connectionMessage","Loading records…");
+
+ stops.push(onSnapshot(query(collection(db,"paymentRequests"),orderBy("createdAt","desc")),s=>{
+  requests=s.docs.map(d=>({id:d.id,...d.data()}));renderRequests();message("connectionMessage","Connected. Reports are updating live.");
+ },e=>{console.error(e);message("requestsMessage","Cannot read paymentRequests. Check Firestore Rules.",true)}));
+
+ stops.push(listen("wallets",x=>{wallets=x;renderWallets()},e=>{console.error(e);message("walletMessage","Cannot read wallets. Check Firestore Rules.",true)}));
+ stops.push(listen("transactions",x=>{transactions=x;renderTransactions()},e=>{console.error(e);message("transactionMessage","Cannot read transactions. Check Firestore Rules.",true)}));
+ startProgress();startUsage();
+}
+
 $("loginForm").addEventListener("submit",async e=>{
- e.preventDefault();setMessage("loginMessage","Signing in…");
+ e.preventDefault();message("loginMessage","Signing in…");
  try{await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value)}
- catch(err){console.error(err);setMessage("loginMessage","Login failed. Check email, password and Firebase settings.","message error")}
+ catch(err){console.error(err);message("loginMessage","Login failed. Check email/password and Firebase settings.",true)}
 });
-$("logoutButton").addEventListener("click",async()=>{
- stopAll();try{await signOut(auth)}catch(e){console.error(e);setMessage("connectionMessage","Logout failed.","message error")}
-});
+$("logoutButton").addEventListener("click",async()=>{stopAll();try{await signOut(auth)}catch(e){console.error(e);message("connectionMessage","Logout failed.",true)}});
+
 onAuthStateChanged(auth,async u=>{
  stopAll();user=null;
  if(!u){$("dashboard").hidden=true;$("loginSection").hidden=false;return}
  try{
-  const snap=await getDoc(doc(db,"admins",u.uid));
-  if(!snap.exists()||snap.data().role!=="admin"){
-   setMessage("loginMessage","Access denied: this account is not an administrator.","message error");
-   await signOut(auth);return;
-  }
+  const s=await getDoc(doc(db,"admins",u.uid));
+  if(!s.exists()||s.data().role!=="admin"){message("loginMessage","Access denied: this account is not an administrator.",true);await signOut(auth);return}
   startDashboard(u);
- }catch(e){
-  console.error(e);$("dashboard").hidden=true;$("loginSection").hidden=false;
-  setMessage("loginMessage","Could not verify admin access. Check Firestore Rules.","message error");
- }
+ }catch(e){console.error(e);$("dashboard").hidden=true;$("loginSection").hidden=false;message("loginMessage","Could not verify admin access. Check Firestore Rules.",true)}
 });
 </script>
 </body>
