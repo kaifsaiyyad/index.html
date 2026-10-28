@@ -1,885 +1,396 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#176b3a">
-<title>Kisan Seva Tools | Admin Dashboard</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b4b2b">
+<title>Kisan Seva Tools | Admin Pro</title>
 <style>
 :root{
-  --green:#176b3a;
-  --dark:#10552d;
-  --light:#e8f5ec;
-  --bg:#f5f7f6;
-  --text:#17231b;
-  --muted:#69766d;
-  --border:#e3e9e5;
-  --red:#b3261e;
-  --amber:#865d00;
+ --green:#176b3a;--dark:#0b4327;--mint:#e5f5e9;--bg:#f3f7f4;
+ --ink:#19271e;--muted:#6c7b70;--line:#dfe8e1;--white:#fff;
+ --amber:#8a5a00;--red:#b42318;--shadow:0 8px 28px #123b1d0b
 }
 *{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,sans-serif;line-height:1.5
-}
-button,input{font:inherit}
-button{
-  padding:10px 14px;border:0;border-radius:8px;
-  background:var(--green);color:white;font-weight:700;
-  cursor:pointer
-}
-button:hover{background:var(--dark)}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px system-ui,Arial,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
 button:disabled{opacity:.5;cursor:not-allowed}
-a{color:inherit;text-decoration:none}
-input{
-  width:100%;padding:12px;border:1px solid var(--border);
-  border-radius:8px;background:white
-}
-[hidden]{display:none!important}
-.layout{min-height:100vh;display:grid;grid-template-columns:230px 1fr}
-.sidebar{
-  background:white;border-right:1px solid var(--border);
-  padding:20px 14px;display:flex;flex-direction:column;gap:20px
-}
-.brand{font-weight:800;font-size:17px;padding:8px}
-.brand small{display:block;color:var(--muted);font-size:12px;font-weight:400}
+a{text-decoration:none;color:inherit}
+.layout{min-height:100vh;display:grid;grid-template-columns:245px minmax(0,1fr)}
+.sidebar{background:#fff;border-right:1px solid var(--line);padding:20px 14px;display:flex;flex-direction:column;gap:24px}
+.brand{display:flex;align-items:center;gap:10px;padding:5px 8px;font-weight:900;font-size:16px}
+.logo{width:42px;height:42px;border-radius:13px;background:var(--mint);display:grid;place-items:center;font-size:22px}
+.brand small{display:block;font-size:11px;font-weight:500;color:var(--muted)}
+.nav-label{padding:0 10px;font-size:10px;font-weight:900;letter-spacing:1.5px;color:#91a096}
 .nav{display:grid;gap:5px}
-.nav a{padding:11px;border-radius:8px;color:#526057;font-size:14px;font-weight:700}
-.nav a:hover,.nav a.active{background:var(--light);color:var(--green)}
+.nav a{padding:11px 12px;border-radius:10px;font-weight:700;color:#59675d;display:flex;gap:10px;align-items:center}
+.nav a:hover,.nav a.active{background:var(--mint);color:var(--green)}
+.security{background:#f4f8f4;border:1px solid var(--line);border-radius:12px;padding:13px;font-size:12px;line-height:1.6}
 .main{padding:25px;min-width:0}
-.topbar,.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-h1{font-size:29px;margin:3px 0}
-h2{font-size:18px;margin:0 0 5px}
-h3{font-size:13px;color:var(--muted);margin:10px 0 4px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.eyebrow{color:var(--green);font-size:10px;font-weight:900;letter-spacing:1.7px}
+h1{font-size:28px;letter-spacing:-.5px;margin:4px 0}
+h2{font-size:17px;margin:0 0 5px}
+h3{font-size:12px;color:var(--muted);margin:0 0 9px}
 p{margin:5px 0}
-.muted,.small{color:var(--muted);font-size:13px}
-.card,.stat{
-  background:white;border:1px solid var(--border);
-  border-radius:13px;padding:18px;margin:17px 0
-}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.stat{margin:0;min-width:0}
-.stat strong{display:block;font-size:25px;overflow-wrap:anywhere}
-.eyebrow{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--green)}
-.notice{
-  background:#f5f8f5;border:1px solid var(--border);
-  border-radius:9px;padding:12px;margin:12px 0;font-size:13px
-}
-.warning{background:#fff4d8;color:var(--amber)}
-.error{color:var(--red)}
-.status{
-  display:inline-block;padding:4px 8px;border-radius:20px;
-  background:#eee;font-size:11px;font-weight:800
-}
-.pending{background:#fff4d8;color:var(--amber)}
-.approved,.success{background:#e5f7ec;color:var(--green)}
-.rejected,.failed{background:#ffebea;color:var(--red)}
-.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:9px}
-table{width:100%;border-collapse:collapse;min-width:700px;background:white}
-th,td{padding:11px;text-align:left;border-bottom:1px solid var(--border);font-size:13px}
-th{background:#f7faf7;color:#56645a;font-size:11px;text-transform:uppercase}
+.muted{color:var(--muted);font-size:12px;line-height:1.6}
+.btn{border:0;border-radius:9px;padding:10px 13px;background:var(--green);color:white;font-weight:800}
+.btn:hover{background:var(--dark)}
+.btn.secondary{background:white;color:var(--green);border:1px solid var(--line)}
+.btn.reject{background:#fff0ee;color:var(--red);border:1px solid #f2d0cc}
+.btn.logout{background:#fff0ee;color:var(--red)}
+.panel,.stat{background:white;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}
+.panel{padding:18px;margin:16px 0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:14px 0}
+.stat{padding:15px;min-width:0}
+.stat-icon{width:35px;height:35px;display:grid;place-items:center;background:var(--mint);border-radius:10px;font-size:17px;margin-bottom:12px}
+.stat strong{display:block;font-size:26px;overflow-wrap:anywhere;letter-spacing:-.5px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.badge{display:inline-block;padding:4px 8px;border-radius:30px;font-size:10px;font-weight:900;background:#edf1ee;color:#526257}
+.pending{background:#fff3d5;color:#865800}
+.approved,.success{background:#e2f5e8;color:#126b3b}
+.rejected,.failed{background:#ffebea;color:#b42318}
+.notice{padding:12px;border-radius:10px;background:#f3f8f4;border:1px solid var(--line);font-size:12px;line-height:1.6;margin:12px 0}
+.warning{background:#fff7df;border-color:#f0dfa5;color:#73500a}
+.controls{display:grid;grid-template-columns:minmax(180px,1fr) 190px auto;gap:9px;margin:13px 0}
+input,select{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink);min-height:42px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{width:100%;min-width:720px;border-collapse:collapse}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);font-size:12px;vertical-align:middle}
+th{background:#f7faf7;color:#637267;text-transform:uppercase;letter-spacing:.4px;font-size:10px}
 tbody tr:last-child td{border-bottom:0}
-.action-cell button{font-size:12px;padding:7px;margin:2px}
-.reject{background:#fff1f0;color:var(--red);border:1px solid #f4d1cf}
-.secondary{background:white;color:var(--green);border:1px solid var(--border)}
-.logout{background:#fff1f0;color:var(--red)}
-#loginSection{max-width:430px;margin:7vh auto}
-.field{margin:13px 0}
-.field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}
-#loginForm button{width:100%;margin-top:10px}
-.footer{text-align:center;color:#8a958d;font-size:12px;padding:15px}
-section[id]{scroll-margin-top:15px}
-@media(max-width:900px){
-  .layout{grid-template-columns:1fr}
-  .sidebar{padding:12px;border-right:0;border-bottom:1px solid var(--border)}
-  .nav{display:flex;overflow-x:auto}
-  .nav a{white-space:nowrap}
-  .main{padding:16px}
-  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+tbody tr:hover{background:#fbfdfb}
+.action-cell{white-space:nowrap}
+.action-cell .btn{font-size:11px;padding:7px 9px;margin:2px}
+.report-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.report-box{padding:14px;border:1px solid var(--line);border-radius:12px;min-width:0}
+.report-box strong{font-size:19px;display:block;overflow-wrap:anywhere;margin-top:6px}
+.message{font-size:12px;color:var(--muted);line-height:1.6}
+.error{color:var(--red)}
+.ok{color:var(--green)}
+#loginSection{max-width:430px;margin:8vh auto;padding:24px}
+.field{margin:14px 0}
+.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}
+#loginForm .btn{width:100%;margin-top:8px}
+.footer{text-align:center;color:#89968c;font-size:11px;padding:20px}
+[hidden]{display:none!important}
+@media(max-width:1000px){
+ .layout{grid-template-columns:1fr}
+ .sidebar{border-right:0;border-bottom:1px solid var(--line);padding:12px}
+ .nav{display:flex;overflow-x:auto}
+ .nav a{white-space:nowrap}
+ .nav-label,.security{display:none}
+ .main{padding:16px}
+ .report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media(max-width:480px){
-  .main{padding:10px}
-  .card,.stat{padding:13px}
-  h1{font-size:24px}
-  .stats{gap:8px}
-  .stat strong{font-size:21px}
+@media(max-width:600px){
+ .main{padding:10px}
+ h1{font-size:24px}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .stat{padding:12px}
+ .stat strong{font-size:22px}
+ .panel{padding:13px}
+ .controls{grid-template-columns:1fr}
+ .report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 </style>
 </head>
-
 <body>
 
-<section class="card" id="loginSection">
-  <div style="text-align:center;margin-bottom:20px">
-    <div style="font-size:38px">🌾</div>
-    <div class="eyebrow">KISAN SEVA TOOLS</div>
-    <h1>Admin Portal</h1>
-    <p class="muted">Sign in with your authorized administrator account.</p>
-  </div>
-
-  <form id="loginForm">
-    <div class="field">
-      <label for="email">Admin Email</label>
-      <input id="email" type="email" autocomplete="username" required>
-    </div>
-    <div class="field">
-      <label for="password">Password</label>
-      <input id="password" type="password" autocomplete="current-password" required>
-    </div>
-    <button type="submit">Sign in securely</button>
-  </form>
-  <p id="loginMessage" class="small" role="status"></p>
+<section class="panel" id="loginSection">
+ <div style="text-align:center;margin-bottom:20px">
+  <div style="font-size:42px">🌾</div>
+  <div class="eyebrow">KISAN SEVA TOOLS</div>
+  <h1>Admin Pro</h1>
+  <p class="muted">Secure administrator sign-in</p>
+ </div>
+ <form id="loginForm">
+  <div class="field"><label for="email">Admin email</label><input id="email" type="email" autocomplete="username" required></div>
+  <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required></div>
+  <button class="btn" type="submit">Sign in securely</button>
+ </form>
+ <p id="loginMessage" class="message" role="status"></p>
 </section>
 
 <div class="layout" id="dashboard" hidden>
-  <aside class="sidebar">
-    <a class="brand" href="Home.html">
-      🌾 Kisan Seva Tools
-      <small>Admin workspace</small>
-    </a>
+ <aside class="sidebar">
+  <a href="Home.html" class="brand"><span class="logo">🌾</span><span>Kisan Seva Tools<small>Admin Pro Workspace</small></span></a>
+  <div>
+   <div class="nav-label">WORKSPACE</div>
+   <nav class="nav">
+    <a class="active" href="#overview">▦ Dashboard</a>
+    <a href="#paymentRequests">₹ Payments</a>
+    <a href="#walletReport">◉ Wallet report</a>
+    <a href="#transactionReport">▤ Transactions</a>
+    <a href="#earningsReport">↗ Earnings</a>
+    <a href="ToolsManagement.html">⚙ Tools management</a>
+    <a href="Home.html">⌂ View website</a>
+   </nav>
+  </div>
+  <div class="security"><b>🔐 Security note</b><br>Approving a request changes its status only. Wallet credit requires a separately verified payment workflow.</div>
+ </aside>
 
-    <nav class="nav" aria-label="Admin navigation">
-      <a class="active" href="#overview">▦ Dashboard</a>
-      <a href="#paymentRequests">₹ Payment Requests</a>
-      <a href="#walletReport">◉ Wallet Report</a>
-      <a href="#transactionReport">▤ Transactions</a>
-      <a href="#earningsReport">↗ Earnings Report</a>
-      <a href="ToolsManagement.html">⚙ Tools Management</a>
-      <a href="Home.html">⌂ View Website</a>
-    </nav>
+ <main class="main">
+  <div class="topbar" id="overview">
+   <div><div class="eyebrow">ADMIN WORKSPACE / OVERVIEW</div><h1>Dashboard</h1><p class="muted">Your recorded activity at a glance.</p></div>
+   <button class="btn logout" id="logoutButton">Logout</button>
+  </div>
 
-    <div class="notice">
-      <strong>Security</strong>
-      <p class="small">This dashboard does not verify payments or add wallet funds. Never treat a request as a completed payment without independent verification.</p>
-    </div>
-  </aside>
+  <section class="panel">
+   <div class="panel-head">
+    <div><h2>Account status</h2><p class="muted" id="adminEmail"></p></div>
+    <span class="badge success">Authenticated</span>
+   </div>
+   <p id="connectionMessage" class="message" role="status">Connecting to records…</p>
+  </section>
 
-  <main class="main">
-    <div class="topbar" id="overview">
-      <div>
-        <div class="eyebrow">ADMIN WORKSPACE</div>
-        <h1>Admin Dashboard</h1>
-        <p class="muted">Payment requests and available financial records.</p>
-      </div>
-      <button class="logout" id="logoutButton" type="button">Logout</button>
-    </div>
+  <section class="stats">
+   <div class="stat"><div class="stat-icon">📨</div><h3>Total requests</h3><strong id="totalRequests">—</strong><p class="muted">Recorded requests</p></div>
+   <div class="stat"><div class="stat-icon">⏳</div><h3>Pending requests</h3><strong id="pendingRequests">—</strong><p class="muted">Awaiting review</p></div>
+   <div class="stat"><div class="stat-icon">✓</div><h3>Approved requests</h3><strong id="approvedRequests">—</strong><p class="muted">Status approved</p></div>
+   <div class="stat"><div class="stat-icon">↩</div><h3>Rejected requests</h3><strong id="rejectedRequests">—</strong><p class="muted">Status rejected</p></div>
+  </section>
 
-    <section class="card">
-      <div class="card-head">
-        <div>
-          <h2>Account status</h2>
-          <p id="adminEmail" class="muted"></p>
-        </div>
-        <span class="status success">Admin session</span>
-      </div>
-      <p id="connectionMessage" class="muted" role="status">Connecting...</p>
-    </section>
+  <section class="panel" id="paymentRequests">
+   <div class="panel-head">
+    <div><h2>Payment requests</h2><p class="muted">Search and filter requests before reviewing.</p></div>
+    <button class="btn secondary" id="exportRequests">Export CSV</button>
+   </div>
+   <div class="notice warning"><b>Important:</b> Approval here does not confirm receipt of money and does not credit the wallet. Verify payments independently through the payment provider.</div>
+   <div class="controls">
+    <input id="requestSearch" type="search" placeholder="Search request ID or user UID…">
+    <select id="requestFilter"><option value="all">All statuses</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
+    <button class="btn secondary" id="clearFilters">Clear filters</button>
+   </div>
+   <p id="requestsMessage" class="message" role="status">Loading requests…</p>
+   <div class="table-wrap"><table>
+    <thead><tr><th>Request ID</th><th>User UID</th><th>Amount</th><th>Status</th><th>Created at</th><th>Action</th></tr></thead>
+    <tbody id="requestsTable"><tr><td colspan="6">Loading…</td></tr></tbody>
+   </table></div>
+  </section>
 
-    <!-- PAYMENT REQUEST STATISTICS -->
-    <section class="stats" aria-label="Payment request statistics">
-      <div class="stat">
-        <h3>Total Requests</h3>
-        <strong id="totalRequests">0</strong>
-      </div>
-      <div class="stat">
-        <h3>Pending Requests</h3>
-        <strong id="pendingRequests">0</strong>
-      </div>
-      <div class="stat">
-        <h3>Approved Requests</h3>
-        <strong id="approvedRequests">0</strong>
-      </div>
-      <div class="stat">
-        <h3>Rejected Requests</h3>
-        <strong id="rejectedRequests">0</strong>
-      </div>
-    </section>
+  <section class="panel" id="walletReport">
+   <div class="panel-head"><div><h2>Wallet report</h2><p class="muted">Read-only wallet document summary.</p></div><button class="btn secondary" id="exportWallets">Export CSV</button></div>
+   <div class="report-grid">
+    <div class="report-box"><span class="muted">Wallet documents</span><strong id="walletCount">—</strong></div>
+    <div class="report-box"><span class="muted">Known recorded balance total</span><strong id="walletTotal">—</strong></div>
+   </div>
+   <div class="notice">Only numeric <code>balance</code> fields are included. Missing data is shown as unavailable, not assumed to be zero.</div>
+   <p id="walletMessage" class="message" role="status">Loading wallet records…</p>
+   <div class="table-wrap"><table><thead><tr><th>User UID / document ID</th><th>Recorded balance</th><th>Record status</th></tr></thead><tbody id="walletTable"><tr><td colspan="3">Loading…</td></tr></tbody></table></div>
+  </section>
 
-    <!-- PAYMENT REQUESTS -->
-    <section class="card" id="paymentRequests">
-      <div class="card-head">
-        <div>
-          <h2>Payment Requests</h2>
-          <p class="muted">Requests submitted by signed-in users.</p>
-        </div>
-        <span class="status" id="requestCount">Loading</span>
-      </div>
+  <section class="panel" id="transactionReport">
+   <div class="panel-head"><div><h2>Transaction history</h2><p class="muted">Read-only recorded transaction list.</p></div><button class="btn secondary" id="exportTransactions">Export CSV</button></div>
+   <div class="report-grid">
+    <div class="report-box"><span class="muted">Records</span><strong id="transactionCount">—</strong></div>
+    <div class="report-box"><span class="muted">Recognized deposits</span><strong id="depositTotal">—</strong></div>
+    <div class="report-box"><span class="muted">Recognized tool charges</span><strong id="toolChargeTotal">—</strong></div>
+    <div class="report-box"><span class="muted">Recognized expenses</span><strong id="expenseTotal">—</strong></div>
+   </div>
+   <p id="transactionMessage" class="message" role="status">Loading transactions…</p>
+   <div class="table-wrap"><table><thead><tr><th>Transaction ID</th><th>User UID</th><th>Type</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead><tbody id="transactionsTable"><tr><td colspan="6">Loading…</td></tr></tbody></table></div>
+  </section>
 
-      <div class="notice warning">
-        Approve/Reject only changes the request status. It does not verify a payment or credit the user's wallet.
-      </div>
-
-      <p id="requestsMessage" class="small" role="status">Loading requests...</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Request ID</th>
-              <th>User UID</th>
-              <th>Amount</th>
-              <th>Status</th>
-              <th>Created At</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="requestsTable">
-            <tr><td colspan="6">Loading requests...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- WALLET REPORT -->
-    <section class="card" id="walletReport">
-      <h2>Wallet Report</h2>
-      <p class="muted">Read-only summary of documents in the wallets collection.</p>
-
-      <div class="stats">
-        <div class="stat">
-          <h3>Wallet Documents</h3>
-          <strong id="walletCount">—</strong>
-        </div>
-        <div class="stat">
-          <h3>Recorded Balances Total</h3>
-          <strong id="walletTotal">—</strong>
-        </div>
-      </div>
-
-      <div class="notice">
-        Only numeric <code>balance</code> fields are included in the total. A missing collection or balance field is not treated as proof that a user has zero funds.
-      </div>
-
-      <p id="walletMessage" class="small" role="status">Checking wallet records...</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>User UID / Document ID</th>
-              <th>Recorded Balance</th>
-              <th>Record Status</th>
-            </tr>
-          </thead>
-          <tbody id="walletTable">
-            <tr><td colspan="3">Loading wallet records...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- TRANSACTION REPORT -->
-    <section class="card" id="transactionReport">
-      <h2>Transaction History</h2>
-      <p class="muted">Read-only list of recorded transaction documents.</p>
-
-      <div class="stats">
-        <div class="stat">
-          <h3>Transaction Records</h3>
-          <strong id="transactionCount">—</strong>
-        </div>
-        <div class="stat">
-          <h3>Recognized Deposits</h3>
-          <strong id="depositTotal">—</strong>
-        </div>
-        <div class="stat">
-          <h3>Recognized Tool Charges</h3>
-          <strong id="toolChargeTotal">—</strong>
-        </div>
-        <div class="stat">
-          <h3>Recognized Expenses</h3>
-          <strong id="expenseTotal">—</strong>
-        </div>
-      </div>
-
-      <p id="transactionMessage" class="small" role="status">Checking transaction records...</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Transaction ID</th>
-              <th>User UID</th>
-              <th>Type</th>
-              <th>Amount</th>
-              <th>Status</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody id="transactionsTable">
-            <tr><td colspan="6">Loading transaction records...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- EARNINGS REPORT -->
-    <section class="card" id="earningsReport">
-      <h2>Earnings Report</h2>
-      <p class="muted">Calculated only from recognized transaction records.</p>
-
-      <div class="stats">
-        <div class="stat">
-          <h3>Recorded Tool Revenue</h3>
-          <strong id="earningsRevenue">—</strong>
-        </div>
-        <div class="stat">
-          <h3>Recorded Expenses</h3>
-          <strong id="earningsExpenses">—</strong>
-        </div>
-        <div class="stat">
-          <h3>Recorded Refunds</h3>
-          <strong id="earningsRefunds">—</strong>
-        </div>
-        <div class="stat">
-          <h3>Recorded Net</h3>
-          <strong id="earningsNet">—</strong>
-        </div>
-      </div>
-
-      <div class="notice warning">
-        This is not verified accounting profit. It is a provisional calculation from records that match the recognized transaction types and statuses below. Taxes, gateway fees, unrecorded costs and other liabilities are not included.
-      </div>
-      <p id="earningsMessage" class="small">Waiting for transaction data...</p>
-    </section>
-
-    <div class="footer">Kisan Seva Tools · Admin workspace</div>
-  </main>
+  <section class="panel" id="earningsReport">
+   <div class="panel-head"><div><h2>Earnings report</h2><p class="muted">Provisional figures from recognized transaction records.</p></div></div>
+   <div class="report-grid">
+    <div class="report-box"><span class="muted">Recorded tool revenue</span><strong id="earningsRevenue">—</strong></div>
+    <div class="report-box"><span class="muted">Recorded expenses</span><strong id="earningsExpenses">—</strong></div>
+    <div class="report-box"><span class="muted">Recorded refunds</span><strong id="earningsRefunds">—</strong></div>
+    <div class="report-box"><span class="muted">Recorded net</span><strong id="earningsNet">—</strong></div>
+   </div>
+   <div class="notice warning">This is not certified accounting profit. Taxes, gateway fees, unrecorded costs and other liabilities are excluded. Unknown transaction types are not silently counted.</div>
+   <p id="earningsMessage" class="message">Waiting for records…</p>
+  </section>
+  <div class="footer">Kisan Seva Tools · Admin Pro · Secure records workspace</div>
+ </main>
 </div>
 
 <script type="module">
-import {initializeApp}
-  from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+import {getFirestore,doc,getDoc,collection,query,orderBy,onSnapshot,updateDoc} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  updateDoc
-} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-
-const config = {
-  apiKey: "AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
-  authDomain: "kisan-seva-tools.firebaseapp.com",
-  projectId: "kisan-seva-tools",
-  appId: "1:900938868284:web:5a5b278506955fc0f48539"
+const firebaseConfig={
+ apiKey:"AIzaSyBTb8imcHpQdP90ntoawVJGXN72Tbmmi-s",
+ authDomain:"kisan-seva-tools.firebaseapp.com",
+ projectId:"kisan-seva-tools",
+ appId:"1:900938868284:web:5a5b278506955fc0f48539"
 };
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const $=id=>document.getElementById(id);
+let user=null,stops=[],requests=[],wallets=[],transactions=[],busy=false;
 
-const app = initializeApp(config);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const $ = id => document.getElementById(id);
+const money=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:2}).format(n);
+const amountOf=x=>typeof x.amount==="number"&&Number.isFinite(x.amount)&&x.amount>=0?x.amount:null;
+const textStatus=x=>String(x||"unknown").toLowerCase();
+const completed=x=>["success","successful","completed","approved","paid"].includes(textStatus(x.status));
+const typeOf=x=>String(x.type||x.category||x.transactionType||"").trim().toLowerCase().replace(/[\s-]+/g,"_");
+const dateOf=v=>{try{let d=v?.toDate?v.toDate():new Date(v);return Number.isNaN(d.getTime())?"—":d.toLocaleString("en-IN")}catch{return "—"}};
 
-let stopListeners = [];
-let busy = false;
-let currentUser = null;
-let requestItems = [];
-let walletItems = [];
-let transactionItems = [];
+function stopAll(){stops.forEach(fn=>{try{fn()}catch{}});stops=[]}
+function td(value){let e=document.createElement("td");e.textContent=String(value??"—");return e}
+function empty(id,cols,msg){let tr=document.createElement("tr"),c=td(msg);c.colSpan=cols;tr.append(c);$(id).replaceChildren(tr)}
+function badge(status){let s=document.createElement("span");s.className="badge "+(["pending","approved","rejected","success","failed"].includes(textStatus(status))?textStatus(status):"");s.textContent=textStatus(status);return s}
+function setMessage(id,msg,cls="message"){$(id).className=cls;$(id).textContent=msg}
 
-const money = value =>
-  new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 2
-  }).format(value);
+function filteredRequests(){
+ const q=$("requestSearch").value.trim().toLowerCase(),filter=$("requestFilter").value;
+ return requests.filter(x=>{
+  const status=textStatus(x.status);
+  const matchStatus=filter==="all"||status===filter;
+  const matchText=!q||String(x.id).toLowerCase().includes(q)||String(x.uid||"").toLowerCase().includes(q);
+  return matchStatus&&matchText;
+ });
+}
+function renderRequests(){
+ $("totalRequests").textContent=requests.length;
+ $("pendingRequests").textContent=requests.filter(x=>textStatus(x.status)==="pending").length;
+ $("approvedRequests").textContent=requests.filter(x=>textStatus(x.status)==="approved").length;
+ $("rejectedRequests").textContent=requests.filter(x=>textStatus(x.status)==="rejected").length;
+ const list=filteredRequests();
+ if(!list.length){empty("requestsTable",6,"No requests match this filter.");setMessage("requestsMessage",`${requests.length} total request(s).`);return}
+ const frag=document.createDocumentFragment();
+ for(const x of list){
+  const tr=document.createElement("tr");
+  tr.append(td(x.id),td(x.uid));
+  const amount=amountOf(x);tr.append(td(amount===null?"Invalid amount":money(amount)));
+  const st=td("");st.append(badge(x.status));tr.append(st,td(dateOf(x.createdAt)));
+  const ac=td("");ac.className="action-cell";
+  if(textStatus(x.status)==="pending"){
+   for(const next of ["approved","rejected"]){
+    const b=document.createElement("button");b.className="btn "+(next==="rejected"?"reject":"");
+    b.textContent=next==="approved"?"Approve":"Reject";
+    b.addEventListener("click",()=>changeRequest(x.id,next,b));ac.append(b);
+   }
+  }else ac.textContent="Reviewed";
+  tr.append(ac);frag.append(tr);
+ }
+ $("requestsTable").replaceChildren(frag);
+ setMessage("requestsMessage",`Showing ${list.length} of ${requests.length} request(s).`);
+}
+async function changeRequest(id,next,button){
+ if(busy||!user)return;
+ if(!confirm(`Change this request to ${next}?\nThis will NOT credit the user's wallet.`))return;
+ busy=true;button.disabled=true;
+ try{
+  const admin=await getDoc(doc(db,"admins",user.uid));
+  if(!admin.exists()||admin.data().role!=="admin")throw Error("Admin permission is not valid.");
+  const ref=doc(db,"paymentRequests",id),snap=await getDoc(ref);
+  if(!snap.exists()||textStatus(snap.data().status)!=="pending"){alert("Request is no longer pending. Refresh and check.");return}
+  await updateDoc(ref,{status:next});
+  alert(`Request status updated to ${next}. No wallet balance was changed.`);
+ }catch(e){console.error(e);alert("Update failed. Check Firestore Rules and connection.")}
+ finally{busy=false;button.disabled=false}
+}
+function renderWallets(){
+ $("walletCount").textContent=wallets.length;
+ if(!wallets.length){$("walletTotal").textContent="No data yet";empty("walletTable",3,"No wallet documents found.");setMessage("walletMessage","No wallet records found.");return}
+ let total=0,count=0;const frag=document.createDocumentFragment();
+ for(const x of wallets){
+  const tr=document.createElement("tr"),has=typeof x.balance==="number"&&Number.isFinite(x.balance);
+  tr.append(td(x.uid||x.id),td(has?money(x.balance):"Not recorded"),td(has?"Balance recorded":"Missing numeric balance"));
+  if(has){total+=x.balance;count++}frag.append(tr);
+ }
+ $("walletTotal").textContent=count?money(total):"No data yet";
+ $("walletTable").replaceChildren(frag);setMessage("walletMessage",`${wallets.length} wallet record(s); ${count} numeric balance(s).`);
+}
+function renderTransactions(){
+ $("transactionCount").textContent=transactions.length;
+ let dep=0,charge=0,expense=0,refund=0,dc=0,cc=0,ec=0,rc=0;
+ for(const x of transactions){
+  const a=amountOf(x);if(a===null||!completed(x))continue;
+  const t=typeOf(x);
+  if(["deposit","wallet_deposit","topup","top_up"].includes(t)){dep+=a;dc++}
+  else if(["tool_charge","service_charge","tool_revenue","service_revenue","earning"].includes(t)){charge+=a;cc++}
+  else if(["expense","business_expense","operating_expense"].includes(t)){expense+=a;ec++}
+  else if(["refund","wallet_refund","reversal"].includes(t)){refund+=a;rc++}
+ }
+ $("depositTotal").textContent=dc?money(dep):"No data yet";
+ $("toolChargeTotal").textContent=cc?money(charge):"No data yet";
+ $("expenseTotal").textContent=ec?money(expense):"No data yet";
+ $("earningsRevenue").textContent=cc?money(charge):"No data yet";
+ $("earningsExpenses").textContent=ec?money(expense):"No data yet";
+ $("earningsRefunds").textContent=rc?money(refund):"No data yet";
+ $("earningsNet").textContent=(cc||ec||rc)?money(charge-expense-refund):"No data yet";
+ $("earningsMessage").textContent=(cc||ec||rc)?"Recorded net = recognized tool charges − recognized expenses − recognized refunds. Deposits are not earnings.":"No recognized earnings, expense or refund records.";
+ if(!transactions.length){empty("transactionsTable",6,"No transaction records found.");setMessage("transactionMessage","No transactions recorded.");return}
+ const sorted=[...transactions].sort((a,b)=>new Date(b.createdAt?.toDate?b.createdAt.toDate():b.createdAt||0)-new Date(a.createdAt?.toDate?a.createdAt.toDate():a.createdAt||0));
+ const frag=document.createDocumentFragment();
+ for(const x of sorted){
+  const tr=document.createElement("tr"),a=amountOf(x),s=td("");s.append(badge(x.status));
+  tr.append(td(x.id),td(x.uid||x.userId),td(typeOf(x)||"Unknown"),td(a===null?"Not recorded":money(a)),s,td(dateOf(x.createdAt)));frag.append(tr);
+ }
+ $("transactionsTable").replaceChildren(frag);setMessage("transactionMessage",`${transactions.length} transaction record(s). Unknown types are excluded from summaries.`);
+}
+function csvCell(v){let s=String(v??"");if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'}
+function exportCSV(name,headers,rows){
+ const csv=[headers,...rows].map(r=>r.map(csvCell).join(",")).join("\r\n");
+ const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+$("exportRequests").addEventListener("click",()=>exportCSV("payment-requests.csv",
+ ["Request ID","User UID","Amount","Status","Created At"],
+ filteredRequests().map(x=>[x.id,x.uid,amountOf(x),x.status,dateOf(x.createdAt)])));
+$("exportWallets").addEventListener("click",()=>exportCSV("wallet-report.csv",
+ ["Document ID","UID","Balance","Status"],wallets.map(x=>[x.id,x.uid,x.balance,typeof x.balance==="number"?"Recorded":"Missing"])));
+$("exportTransactions").addEventListener("click",()=>exportCSV("transactions.csv",
+ ["Transaction ID","UID","Type","Amount","Status","Date"],transactions.map(x=>[x.id,x.uid||x.userId,typeOf(x),amountOf(x),x.status,dateOf(x.createdAt)])));
+$("requestSearch").addEventListener("input",renderRequests);
+$("requestFilter").addEventListener("change",renderRequests);
+$("clearFilters").addEventListener("click",()=>{$("requestSearch").value="";$("requestFilter").value="all";renderRequests()});
 
-function dateText(value) {
-  try {
-    const date = value?.toDate
-      ? value.toDate()
-      : value instanceof Date
-        ? value
-        : new Date(value);
-
-    return Number.isNaN(date.getTime())
-      ? "—"
-      : date.toLocaleString("en-IN");
-  } catch {
-    return "—";
+function listen(name,cb,onError){
+ return onSnapshot(collection(db,name),snap=>cb(snap.docs.map(d=>({id:d.id,...d.data()}))),onError);
+}
+function startDashboard(u){
+ stopAll();user=u;$("loginSection").hidden=true;$("dashboard").hidden=false;
+ $("adminEmail").textContent="Signed in as "+(u.email||"administrator");
+ setMessage("connectionMessage","Connected; loading reports…");
+ const errors=[];
+ function failed(name,id,table,cols,ids=[]){
+  return e=>{
+   console.error(name,e);errors.push(name);
+   setMessage(id,`Could not read ${name}. Check Firestore Rules.`,`message error`);
+   empty(table,cols,"Data unavailable: permission or connection error.");
+   ids.forEach(i=>$(i).textContent="Unavailable");
+   setMessage("connectionMessage","Some reports are unavailable: "+[...new Set(errors)].join(", ")+".");
   }
+ }
+ stops.push(onSnapshot(query(collection(db,"paymentRequests"),orderBy("createdAt","desc")),s=>{
+  requests=s.docs.map(d=>({id:d.id,...d.data()}));renderRequests();
+  if(!errors.length)setMessage("connectionMessage","Connected. Live report data loaded.");
+ },failed("paymentRequests","requestsMessage","requestsTable",6)));
+ stops.push(listen("wallets",x=>{wallets=x;renderWallets()},failed("wallets","walletMessage","walletTable",3,["walletCount","walletTotal"])));
+ stops.push(listen("transactions",x=>{transactions=x;renderTransactions()},failed("transactions","transactionMessage","transactionsTable",6,["transactionCount","depositTotal","toolChargeTotal","expenseTotal","earningsRevenue","earningsExpenses","earningsRefunds","earningsNet"])));
 }
-
-function cell(value) {
-  const td = document.createElement("td");
-  td.textContent = String(value ?? "—");
-  return td;
-}
-
-function emptyRow(tbodyId, columns, message) {
-  const tr = document.createElement("tr");
-  const td = cell(message);
-  td.colSpan = columns;
-  tr.appendChild(td);
-  $(tbodyId).replaceChildren(tr);
-}
-
-function statusBadge(value) {
-  const span = document.createElement("span");
-  const status = String(value || "unknown").toLowerCase();
-  span.className = "status " +
-    (["pending", "approved", "rejected", "success", "failed"].includes(status)
-      ? status
-      : "");
-  span.textContent = status;
-  return span;
-}
-
-function stopAllListeners() {
-  stopListeners.forEach(stop => {
-    try { stop(); } catch {}
-  });
-  stopListeners = [];
-}
-
-function isCompleted(item) {
-  return ["success", "successful", "completed", "approved", "paid"]
-    .includes(String(item.status || "").toLowerCase());
-}
-
-function normalizedType(item) {
-  return String(item.type || item.category || item.transactionType || "")
-    .trim()
-    .toLowerCase()
-    .replace(/[\s-]+/g, "_");
-}
-
-function amountOf(item) {
-  return typeof item.amount === "number" &&
-         Number.isFinite(item.amount) &&
-         item.amount >= 0
-    ? item.amount
-    : null;
-}
-
-function renderRequests() {
-  const items = requestItems;
-
-  $("totalRequests").textContent = items.length;
-  $("pendingRequests").textContent =
-    items.filter(x => x.status === "pending").length;
-  $("approvedRequests").textContent =
-    items.filter(x => x.status === "approved").length;
-  $("rejectedRequests").textContent =
-    items.filter(x => x.status === "rejected").length;
-
-  $("requestCount").textContent = items.length + " requests";
-
-  if (!items.length) {
-    emptyRow("requestsTable", 6, "No payment requests found.");
-    $("requestsMessage").textContent = "No requests recorded yet.";
-    return;
-  }
-
-  const fragment = document.createDocumentFragment();
-
-  for (const item of items) {
-    const tr = document.createElement("tr");
-    tr.appendChild(cell(item.id));
-    tr.appendChild(cell(item.uid));
-
-    const amount = amountOf(item);
-    tr.appendChild(cell(amount === null ? "Invalid amount" : money(amount)));
-
-    const tdStatus = cell("");
-    tdStatus.appendChild(statusBadge(item.status));
-    tr.appendChild(tdStatus);
-
-    tr.appendChild(cell(dateText(item.createdAt)));
-
-    const action = cell("");
-    action.className = "action-cell";
-
-    if (item.status === "pending") {
-      const approve = document.createElement("button");
-      approve.textContent = "Approve";
-      approve.addEventListener("click", () =>
-        changeStatus(item.id, "approved", approve)
-      );
-
-      const reject = document.createElement("button");
-      reject.textContent = "Reject";
-      reject.className = "reject";
-      reject.addEventListener("click", () =>
-        changeStatus(item.id, "rejected", reject)
-      );
-
-      action.append(approve, reject);
-    } else {
-      action.textContent = "Reviewed";
-      action.className = "action-cell muted";
-    }
-
-    tr.appendChild(action);
-    fragment.appendChild(tr);
-  }
-
-  $("requestsTable").replaceChildren(fragment);
-  $("requestsMessage").textContent =
-    "Loaded " + items.length + " payment request(s).";
-}
-
-async function changeStatus(id, status, button) {
-  if (busy || !currentUser) return;
-
-  const verb = status === "approved" ? "approve" : "reject";
-
-  if (!confirm(
-    "Change this request to " + status +
-    "?\nThis will NOT add money to the user's wallet."
-  )) return;
-
-  busy = true;
-  button.disabled = true;
-
-  try {
-    // Recheck admin permission immediately before the action.
-    const adminSnap = await getDoc(doc(db, "admins", currentUser.uid));
-
-    if (!adminSnap.exists() || adminSnap.data().role !== "admin") {
-      throw new Error("Admin permission is no longer valid.");
-    }
-
-    const ref = doc(db, "paymentRequests", id);
-    const current = await getDoc(ref);
-
-    if (!current.exists() || current.data().status !== "pending") {
-      alert("This request is no longer pending. Refresh and check again.");
-      return;
-    }
-
-    await updateDoc(ref, { status });
-
-    alert(
-      "Request status changed to " + status +
-      ". Wallet balance has NOT changed."
-    );
-  } catch (error) {
-    console.error(error);
-    alert("Could not update the request. Check your login and Firestore Rules.");
-  } finally {
-    busy = false;
-    button.disabled = false;
-  }
-}
-
-function renderWallets() {
-  $("walletCount").textContent = walletItems.length;
-
-  if (!walletItems.length) {
-    $("walletTotal").textContent = "No data yet";
-    emptyRow("walletTable", 3, "No wallet documents found.");
-    $("walletMessage").textContent =
-      "No wallet records are available. No balances have been invented.";
-    return;
-  }
-
-  let total = 0;
-  let knownBalanceCount = 0;
-  const fragment = document.createDocumentFragment();
-
-  for (const item of walletItems) {
-    const tr = document.createElement("tr");
-    tr.appendChild(cell(item.uid || item.id));
-
-    const hasBalance =
-      typeof item.balance === "number" &&
-      Number.isFinite(item.balance);
-
-    if (hasBalance) {
-      total += item.balance;
-      knownBalanceCount++;
-      tr.appendChild(cell(money(item.balance)));
-      tr.appendChild(cell("Balance recorded"));
-    } else {
-      tr.appendChild(cell("Not recorded"));
-      tr.appendChild(cell("Missing numeric balance field"));
-    }
-
-    fragment.appendChild(tr);
-  }
-
-  $("walletTotal").textContent =
-    knownBalanceCount ? money(total) : "No data yet";
-
-  $("walletTable").replaceChildren(fragment);
-  $("walletMessage").textContent =
-    walletItems.length + " wallet document(s); " +
-    knownBalanceCount + " have a numeric balance field.";
-}
-
-function renderTransactions() {
-  $("transactionCount").textContent = transactionItems.length;
-
-  let deposits = 0;
-  let toolCharges = 0;
-  let expenses = 0;
-  let refunds = 0;
-  let knownDepositCount = 0;
-  let knownChargeCount = 0;
-  let knownExpenseCount = 0;
-  let knownRefundCount = 0;
-
-  for (const item of transactionItems) {
-    const amount = amountOf(item);
-    if (amount === null || !isCompleted(item)) continue;
-
-    const type = normalizedType(item);
-
-    if (["deposit", "wallet_deposit", "topup", "top_up"]
-      .includes(type)) {
-      deposits += amount;
-      knownDepositCount++;
-    } else if ([
-      "tool_charge", "service_charge", "tool_revenue",
-      "service_revenue", "earning"
-    ].includes(type)) {
-      toolCharges += amount;
-      knownChargeCount++;
-    } else if (["expense", "business_expense", "operating_expense"]
-      .includes(type)) {
-      expenses += amount;
-      knownExpenseCount++;
-    } else if (["refund", "wallet_refund", "reversal"]
-      .includes(type)) {
-      refunds += amount;
-      knownRefundCount++;
-    }
-  }
-
-  $("depositTotal").textContent =
-    knownDepositCount ? money(deposits) : "No data yet";
-  $("toolChargeTotal").textContent =
-    knownChargeCount ? money(toolCharges) : "No data yet";
-  $("expenseTotal").textContent =
-    knownExpenseCount ? money(expenses) : "No data yet";
-
-  if (!transactionItems.length) {
-    emptyRow("transactionsTable", 6, "No transaction records found.");
-    $("transactionMessage").textContent =
-      "No transaction records yet. These totals are not assumed to be zero.";
-  } else {
-    const sorted = [...transactionItems].sort((a, b) => {
-      const toMs = v => {
-        try {
-          return v?.toDate ? v.toDate().getTime() : new Date(v).getTime();
-        } catch {
-          return 0;
-        }
-      };
-      return toMs(b.createdAt) - toMs(a.createdAt);
-    });
-
-    const fragment = document.createDocumentFragment();
-
-    for (const item of sorted) {
-      const tr = document.createElement("tr");
-      tr.appendChild(cell(item.id));
-      tr.appendChild(cell(item.uid || item.userId || "—"));
-      tr.appendChild(cell(normalizedType(item) || "Unknown"));
-
-      const amount = amountOf(item);
-      tr.appendChild(cell(amount === null ? "Not recorded" : money(amount)));
-
-      const tdStatus = cell("");
-      tdStatus.appendChild(statusBadge(item.status));
-      tr.appendChild(tdStatus);
-
-      tr.appendChild(cell(dateText(item.createdAt)));
-      fragment.appendChild(tr);
-    }
-
-    $("transactionsTable").replaceChildren(fragment);
-    $("transactionMessage").textContent =
-      "Loaded " + transactionItems.length +
-      " record(s). Only recognized completed transactions contribute to summaries.";
-  }
-
-  // This is a provisional recorded net, not certified accounting profit.
-  const hasAnyNetInputs =
-    knownChargeCount > 0 || knownExpenseCount > 0 || knownRefundCount > 0;
-
-  $("earningsRevenue").textContent =
-    knownChargeCount ? money(toolCharges) : "No data yet";
-  $("earningsExpenses").textContent =
-    knownExpenseCount ? money(expenses) : "No data yet";
-  $("earningsRefunds").textContent =
-    knownRefundCount ? money(refunds) : "No data yet";
-
-  $("earningsNet").textContent = hasAnyNetInputs
-    ? money(toolCharges - expenses - refunds)
-    : "No data yet";
-
-  $("earningsMessage").textContent = hasAnyNetInputs
-    ? "Provisional recorded net = recognized tool charges − recognized expenses − recognized refunds. Deposits are not counted as earnings."
-    : "No recognized earnings, expense or refund records yet. No profit estimate has been invented.";
-}
-
-function listenToCollection(name, callback, errorCallback) {
-  return onSnapshot(
-    collection(db, name),
-    snapshot => {
-      const items = [];
-      snapshot.forEach(s => items.push({ id: s.id, ...s.data() }));
-      callback(items);
-    },
-    errorCallback
-  );
-}
-
-function startDashboard(user) {
-  stopAllListeners();
-  currentUser = user;
-
-  $("loginSection").hidden = true;
-  $("dashboard").hidden = false;
-  $("adminEmail").textContent = "Logged in: " + (user.email || "Admin");
-  $("connectionMessage").textContent = "Connecting to Firestore...";
-
-  let successfulListeners = 0;
-  let failedCollections = [];
-
-  const connectionUpdate = () => {
-    if (failedCollections.length) {
-      $("connectionMessage").textContent =
-        "Some reports could not load: " + failedCollections.join(", ") +
-        ". Check Firestore Rules.";
-    } else {
-      $("connectionMessage").textContent =
-        "Connected. Reports show recorded data only.";
-    }
-  };
-
-  function errorFor(name, messageId, tbodyId, columns, reset) {
-    return error => {
-      console.error(name, error);
-      failedCollections.push(name);
-      $(messageId).textContent =
-        "Could not read " + name + ". Check Firestore Rules.";
-      emptyRow(tbodyId, columns, "Data unavailable: permission or connection error.");
-      if (reset) reset();
-      connectionUpdate();
-    };
-  }
-
-  stopListeners.push(onSnapshot(
-    query(collection(db, "paymentRequests"), orderBy("createdAt", "desc")),
-    snapshot => {
-      requestItems = [];
-      snapshot.forEach(s => requestItems.push({ id: s.id, ...s.data() }));
-      renderRequests();
-      successfulListeners++;
-      connectionUpdate();
-    },
-    errorFor("paymentRequests", "requestsMessage", "requestsTable", 6)
-  ));
-
-  stopListeners.push(listenToCollection(
-    "wallets",
-    items => {
-      walletItems = items;
-      renderWallets();
-      successfulListeners++;
-      connectionUpdate();
-    },
-    errorFor("wallets", "walletMessage", "walletTable", 3, () => {
-      $("walletCount").textContent = "Unavailable";
-      $("walletTotal").textContent = "Unavailable";
-    })
-  ));
-
-  stopListeners.push(listenToCollection(
-    "transactions",
-    items => {
-      transactionItems = items;
-      renderTransactions();
-      successfulListeners++;
-      connectionUpdate();
-    },
-    errorFor("transactions", "transactionMessage", "transactionsTable", 6, () => {
-      $("transactionCount").textContent = "Unavailable";
-      $("depositTotal").textContent = "Unavailable";
-      $("toolChargeTotal").textContent = "Unavailable";
-      $("expenseTotal").textContent = "Unavailable";
-      $("earningsRevenue").textContent = "Unavailable";
-      $("earningsExpenses").textContent = "Unavailable";
-      $("earningsRefunds").textContent = "Unavailable";
-      $("earningsNet").textContent = "Unavailable";
-      $("earningsMessage").textContent = "Earnings data unavailable.";
-    })
-  ));
-}
-
-$("loginForm").addEventListener("submit", async event => {
-  event.preventDefault();
-  $("loginMessage").textContent = "Checking login...";
-
-  try {
-    await signInWithEmailAndPassword(
-      auth,
-      $("email").value.trim(),
-      $("password").value
-    );
-  } catch (error) {
-    console.error(error);
-    $("loginMessage").textContent =
-      "Login failed. Check your email, password and Firebase settings.";
-  }
+$("loginForm").addEventListener("submit",async e=>{
+ e.preventDefault();setMessage("loginMessage","Signing in…");
+ try{await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value)}
+ catch(err){console.error(err);setMessage("loginMessage","Login failed. Check email, password and Firebase settings.","message error")}
 });
-
-$("logoutButton").addEventListener("click", async () => {
-  stopAllListeners();
-  try {
-    await signOut(auth);
-  } catch (error) {
-    console.error(error);
-    $("connectionMessage").textContent = "Logout failed.";
-  }
+$("logoutButton").addEventListener("click",async()=>{
+ stopAll();try{await signOut(auth)}catch(e){console.error(e);setMessage("connectionMessage","Logout failed.","message error")}
 });
-
-onAuthStateChanged(auth, async user => {
-  stopAllListeners();
-  currentUser = null;
-
-  if (!user) {
-    $("dashboard").hidden = true;
-    $("loginSection").hidden = false;
-    return;
+onAuthStateChanged(auth,async u=>{
+ stopAll();user=null;
+ if(!u){$("dashboard").hidden=true;$("loginSection").hidden=false;return}
+ try{
+  const snap=await getDoc(doc(db,"admins",u.uid));
+  if(!snap.exists()||snap.data().role!=="admin"){
+   setMessage("loginMessage","Access denied: this account is not an administrator.","message error");
+   await signOut(auth);return;
   }
-
-  try {
-    const adminSnap = await getDoc(doc(db, "admins", user.uid));
-
-    if (!adminSnap.exists() || adminSnap.data().role !== "admin") {
-      $("loginMessage").textContent =
-        "Access denied: this account is not an administrator.";
-      await signOut(auth);
-      return;
-    }
-
-    startDashboard(user);
-  } catch (error) {
-    console.error(error);
-    $("loginMessage").textContent =
-      "Could not verify admin access. Check Firestore Rules.";
-    $("dashboard").hidden = true;
-    $("loginSection").hidden = false;
-  }
+  startDashboard(u);
+ }catch(e){
+  console.error(e);$("dashboard").hidden=true;$("loginSection").hidden=false;
+  setMessage("loginMessage","Could not verify admin access. Check Firestore Rules.","message error");
+ }
 });
 </script>
 </body>
 </html>
-```
