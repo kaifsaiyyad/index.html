@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
+<!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9KJQZLRKCZ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -10,887 +9,218 @@
   gtag('js', new Date());
   gtag('config', 'G-9KJQZLRKCZ');
 </script>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#14532d">
-<meta name="description" content="CSC Seva Tools - Digital services, document tools and online utilities.">
+<meta name="theme-color" content="#176b3a">
+<meta name="description" content="CSC Seva Tools - Digital services, document tools and PDF utilities.">
 <title>CSC Seva Tools | Home</title>
 
 <style>
-:root {
-  --green: #176b3a;
-  --dark-green: #104b2a;
-  --deep-green: #0b301b;
-  --light-green: #eaf5ed;
-  --gold: #e9bd55;
-  --background: #f4f8f5;
-  --ink: #183b28;
-  --muted: #617066;
-  --line: #dce8df;
-  --white: #ffffff;
-}
-
-* { box-sizing: border-box; }
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 16px;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--background);
-  color: var(--ink);
-  line-height: 1.5;
-  overflow-wrap: break-word;
-}
-
-button, input, a { font: inherit; }
-button, a { -webkit-tap-highlight-color: transparent; }
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-  outline: 3px solid #8bc69d;
-  outline-offset: 3px;
-}
-
-.topbar {
-  background: var(--deep-green);
-  color: #f6e5b4;
-  text-align: center;
-  padding: 9px 12px;
-  font-size: 12px;
-  letter-spacing: .25px;
-}
-
-.header {
-  color: white;
-  padding: 24px 18px 48px;
-  background:
-    radial-gradient(ellipse at top right, #3d9860 0%, transparent 42%),
-    linear-gradient(125deg, #0b301b, #176b3a 58%, #21854b);
-}
-
-.nav, .hero, .container {
-  max-width: 1120px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.brand-icon {
-  display: grid;
-  place-items: center;
-  width: 52px;
-  height: 52px;
-  border: 1px solid #ffffff38;
-  border-radius: 16px;
-  background: #ffffff17;
-  font-size: 29px;
-  box-shadow: inset 0 0 18px #ffffff10;
-}
-
-.brand h1 {
-  font-size: 22px;
-  line-height: 1.25;
-  margin: 0;
-}
-
-.brand p {
-  margin: 3px 0 0;
-  color: #d7efdf;
-  font-size: 13px;
-}
-
-.nav-links, .account-area {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.nav-links a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 40px;
-  font-size: 13px;
-  text-decoration: none;
-  padding: 9px 12px;
-  border: 1px solid #ffffff48;
-  border-radius: 10px;
-  color: white;
-  background: #ffffff0a;
-}
-
-.nav-links a:hover {
-  background: #ffffff20;
-}
-
-.account-status {
-  font-size: 12px;
-  color: #e0f1e5;
-  overflow-wrap: anywhere;
-}
-
-.hero {
-  margin-top: 34px;
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(240px, .8fr);
-  align-items: center;
-  gap: 24px;
-}
-
-.hero h2 {
-  font-size: clamp(30px, 4vw, 46px);
-  line-height: 1.12;
-  letter-spacing: -.8px;
-  margin: 0 0 14px;
-}
-
-.hero p {
-  max-width: 620px;
-  color: #e0f1e5;
-  margin: 0;
-  font-size: 15px;
-}
-
-.hero-side {
-  background: #ffffff12;
-  border: 1px solid #ffffff35;
-  padding: 22px;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px #001b0d15;
-}
-
-.hero-side strong {
-  display: block;
-  margin-bottom: 8px;
-  color: #ffe8a6;
-}
-
-.hero-side span {
-  font-size: 13px;
-  color: #e0f1e5;
-}
-
-.container {
-  margin-top: -20px;
-  padding: 0 18px 40px;
-  position: relative;
-}
-
-.welcome, .wallet {
-  background: white;
-  border: 1px solid var(--line);
-  padding: 22px;
-  border-radius: 18px;
-  box-shadow: 0 8px 26px #173d2509;
-  min-width: 0;
-}
-
-.welcome {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 18px;
-}
-
-.welcome h2 {
-  font-size: 19px;
-  margin: 0 0 4px;
-  color: var(--green);
-}
-
-.welcome p {
-  margin: 0;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.wallet {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  margin-top: 16px;
-  background: linear-gradient(110deg, #ffffff, #f0faf3);
-}
-
-.wallet-label {
-  font-size: 13px;
-  color: var(--muted);
-  font-weight: bold;
-}
-
-.balance {
-  font-size: 31px;
-  font-weight: 800;
-  color: var(--green);
-  margin: 2px 0;
-}
-
-.wallet-info {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  min-height: 42px;
-  max-width: 100%;
-  border: 0;
-  background: var(--green);
-  color: white;
-  text-decoration: none;
-  padding: 11px 15px;
-  border-radius: 11px;
-  font-weight: bold;
-  font-size: 13px;
-  cursor: pointer;
-  text-align: center;
-  overflow-wrap: anywhere;
-  transition: background .2s ease, transform .2s ease;
-}
-
-.button:hover {
-  background: var(--dark-green);
-}
-
-.button.light {
-  background: #edf7ef;
-  color: var(--green);
-}
-
-.button.light:hover {
-  background: #d8ecde;
-}
-
-.button:disabled {
-  background: #9ca8a0;
-  cursor: not-allowed;
-}
-
-.section-head {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 15px;
-  margin: 32px 0 15px;
-}
-
-.section-head h2 {
-  font-size: 22px;
-  line-height: 1.3;
-  margin: 0;
-}
-
-.section-head p {
-  font-size: 12px;
-  color: var(--muted);
-  margin: 4px 0 0;
-}
-
-.services {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 17px;
-  min-width: 0;
-}
-
-.service {
-  position: relative;
-  overflow: hidden;
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 19px;
-  padding: 18px;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 5px 18px #173d2507;
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-
-.service:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 13px 28px #173d2515;
-}
-
-.service-art {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  height: 135px;
-  flex: 0 0 135px;
-  margin-bottom: 16px;
-  border-radius: 15px;
-  color: white;
-  background: linear-gradient(135deg, #14532d, #369b55);
-}
-
-.service-art .service-emoji {
-  font-size: 43px;
-  line-height: 1;
-}
-
-.service-art small {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-}
-
-.service-art.farmer-services {
-  background: linear-gradient(135deg, #075985, #22a6a1);
-}
-
-.service-art.all-photo {
-  background: linear-gradient(135deg, #6d28d9, #b453c5);
-}
-
-.service h3 {
-  font-size: 17px;
-  line-height: 1.35;
-  margin: 0 0 8px;
-  overflow-wrap: anywhere;
-}
-
-.service p {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 0 0 14px;
-  flex: 1;
-  overflow-wrap: anywhere;
-}
-
-.service .button {
-  width: 100%;
-  align-self: stretch;
-  margin-top: auto;
-}
-
-.icon {
-  display: grid;
-  place-items: center;
-  flex: 0 0 52px;
-  width: 52px;
-  height: 52px;
-  background: var(--light-green);
-  border-radius: 14px;
-  font-size: 28px;
-  margin-bottom: 13px;
-}
-
-.tool-thumbnail {
-  display: block;
-  width: 100%;
-  max-width: 180px;
-  height: 120px;
-  flex: 0 0 120px;
-  object-fit: cover;
-  background: var(--light-green);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  margin-bottom: 13px;
-}
-
-.paid {
-  font-weight: 800;
-  color: #a85a00;
-}
-
-.free {
-  font-weight: 800;
-  color: #16833b;
-}
-
-.status-message {
-  background: white;
-  border: 1px dashed #cddbd0;
-  padding: 17px;
-  border-radius: 12px;
-  color: var(--muted);
-  font-size: 13px;
-  grid-column: 1 / -1;
-}
-
-.tool-controls {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 17px;
-  margin-bottom: 16px;
-}
-
-.tool-search {
-  display: block;
-  width: 100%;
-  min-height: 46px;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  background: white;
-  color: var(--ink);
-  font-size: 16px;
-}
-
-.tool-categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 13px;
-}
-
-.category-chip {
-  border: 1px solid var(--line);
-  background: white;
-  color: var(--green);
-  padding: 9px 13px;
-  min-height: 38px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.category-chip.active {
-  background: var(--green);
-  border-color: var(--green);
-  color: white;
-}
-
-.tool-count {
-  color: var(--muted);
-  font-size: 12px;
-  margin: 12px 2px 0;
-}
-
-.charges {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 17px;
-  padding: 20px;
-  margin-top: 25px;
-}
-
-.charges h3 {
-  margin: 0 0 10px;
-  font-size: 18px;
-}
-
-.charge-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 24px;
-}
-
-.charge-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 11px 0;
-  border-bottom: 1px solid #edf1ee;
-  font-size: 13px;
-}
-
-.notice {
-  margin-top: 18px;
-  background: #fff8e5;
-  border: 1px solid #f2dfaa;
-  border-left: 4px solid #d19b00;
-  border-radius: 12px;
-  padding: 15px;
-  font-size: 12px;
-  color: #6d561c;
-}
-
-.footer {
-  background: #103e24;
-  color: #dceee1;
-  text-align: center;
-  padding: 25px 18px;
-  font-size: 12px;
-}
-
-.footer strong {
-  display: block;
-  font-size: 15px;
-  color: white;
-  margin-bottom: 4px;
-}
-
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: #071b10b8;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 14px;
-  overflow-y: auto;
-}
-
-.modal-backdrop.open {
-  display: flex;
-}
-
-.auth-modal {
-  background: white;
-  width: 100%;
-  max-width: 460px;
-  max-height: 94vh;
-  overflow-y: auto;
-  border-radius: 18px;
-  padding: 22px;
-  box-shadow: 0 20px 70px #0004;
-}
-
-.auth-modal h2 {
-  margin: 0 0 5px;
-  font-size: 23px;
-  color: var(--green);
-}
-
-.auth-subtitle {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 0 0 18px;
-}
-
-.field-label {
-  display: block;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 12px 0 5px;
-}
-
-.auth-input {
-  width: 100%;
-  min-height: 44px;
-  border: 1px solid #cfded2;
-  border-radius: 9px;
-  padding: 11px 12px;
-  font-size: 16px;
-  background: white;
-  color: var(--ink);
-}
-
-.auth-actions {
-  display: grid;
-  gap: 9px;
-  margin-top: 15px;
-}
-
-.auth-actions .button { width: 100%; }
-
-.auth-message {
-  display: none;
-  margin: 12px 0 0;
-  border-radius: 9px;
-  padding: 10px;
-  font-size: 12px;
-  overflow-wrap: anywhere;
-}
-
-.auth-message.show { display: block; }
-
-.auth-message.error {
-  background: #fff0ef;
-  color: #a1251c;
-  border: 1px solid #f0c5c1;
-}
-
-.auth-message.success {
-  background: #edf8ef;
-  color: #176b3a;
-  border: 1px solid #c9e6d0;
-}
-
-.auth-message.info {
-  background: #f2f5ff;
-  color: #274b8b;
-  border: 1px solid #d3defa;
-}
-
-.close-modal {
-  float: right;
-  border: 0;
-  background: #edf3ee;
-  border-radius: 8px;
-  padding: 7px 11px;
-  cursor: pointer;
-}
-
-.auth-small {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 12px;
-}
-
-.hidden { display: none !important; }
-
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-side { display: none; }
-  .services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 600px) {
-  .header { padding: 18px 14px 36px; }
-  .nav { align-items: stretch; flex-direction: column; gap: 14px; }
-  .brand-icon { width: 44px; height: 44px; font-size: 25px; }
-  .brand h1 { font-size: 20px; }
-
-  .nav-links {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    width: 100%;
-  }
-
-  .nav-links a {
-    min-width: 0;
-    padding: 8px 5px;
-    font-size: 12px;
-    text-align: center;
-  }
-
-  .account-area { align-items: stretch; }
-  .account-area .button { flex: 1; }
-  .hero { margin-top: 24px; }
-  .hero h2 { font-size: clamp(27px, 7vw, 35px); }
-  .container { padding: 0 12px 28px; }
-
-  .welcome, .wallet {
-    padding: 16px;
-    align-items: stretch;
-    flex-direction: column;
-    gap: 13px;
-  }
-
-  .welcome .button, .wallet .button { width: 100%; }
-
-  .section-head {
-    margin: 25px 0 12px;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .services { gap: 11px; }
-  .service { padding: 12px; border-radius: 16px; }
-  .service-art { height: 105px; flex-basis: 105px; margin-bottom: 12px; }
-  .service-art .service-emoji { font-size: 35px; }
-  .service-art small { font-size: 9px; letter-spacing: 1px; }
-  .service h3 { font-size: 14px; }
-  .service p { font-size: 12px; }
-  .service .button { padding: 10px 7px; font-size: 12px; }
-  .icon { width: 43px; height: 43px; flex-basis: 43px; font-size: 24px; }
-  .tool-thumbnail { max-width: 100%; height: 100px; flex-basis: 100px; }
-  .tool-controls { padding: 12px; }
-  .charge-grid { grid-template-columns: 1fr; }
-  .auth-modal { padding: 18px; }
-}
-
-@media (max-width: 360px) {
-  .nav-links, .services { grid-template-columns: 1fr; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { transition: none !important; animation: none !important; }
-}
-
-.footer-links { margin: 10px 0; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
-.footer-links a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+:root{--g:#176b3a;--gd:#104b2a;--p:#eaf5ed;--bg:#f4f8f5;--ink:#183b28;--muted:#617066;--line:#dce8df}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;overflow-wrap:break-word}
+button,input,a{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8bc69d;outline-offset:3px}
+.topbar{background:var(--gd);color:#e8f6ec;text-align:center;padding:9px 12px;font-size:12px}
+.header{background:linear-gradient(120deg,#176b3a,#21854b);color:white;padding:24px 18px 42px}
+.nav,.hero,.container{max-width:1120px;margin:auto}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{display:grid;place-items:center;width:50px;height:50px;border-radius:15px;background:#ffffff20;font-size:29px}
+.brand h1{font-size:22px;line-height:1.25;margin:0}
+.brand p{margin:3px 0 0;color:#d7efdf;font-size:13px}
+.nav-links,.account-area{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nav-links a{display:inline-flex;align-items:center;justify-content:center;min-height:40px;font-size:13px;text-decoration:none;padding:9px 12px;border:1px solid #ffffff55;border-radius:9px;color:white}
+.hero{margin-top:28px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(240px,.8fr);align-items:center;gap:24px}
+.hero h2{font-size:clamp(28px,4vw,42px);line-height:1.12;margin:0 0 12px}
+.hero p{max-width:620px;color:#e0f1e5;margin:0;font-size:15px}
+.hero-side{background:#ffffff17;border:1px solid #ffffff35;padding:20px;border-radius:18px}
+.hero-side strong{display:block;margin-bottom:5px}
+.hero-side span{font-size:13px;color:#e0f1e5}
+.container{margin-top:-18px;padding:0 18px 40px;position:relative}
+.welcome,.wallet{background:white;border:1px solid var(--line);padding:20px 22px;border-radius:16px;box-shadow:0 6px 24px #173d250b;min-width:0}
+.welcome{display:flex;justify-content:space-between;align-items:center;gap:18px}
+.welcome h2{font-size:18px;margin:0 0 4px;color:var(--g)}
+.welcome p{margin:0;font-size:13px;color:var(--muted)}
+.wallet{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:16px}
+.wallet-label{font-size:13px;color:var(--muted);font-weight:bold}
+.balance{font-size:29px;font-weight:800;color:var(--g);margin:2px 0}
+.wallet-info{font-size:12px;color:var(--muted)}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;max-width:100%;border:0;background:var(--g);color:white;text-decoration:none;padding:11px 15px;border-radius:9px;font-weight:bold;font-size:13px;cursor:pointer;text-align:center;overflow-wrap:anywhere}
+.button:hover{background:var(--gd)}
+.button.light{background:var(--p);color:var(--g)}
+.button.light:hover{background:#d8ecde}
+.button:disabled{background:#9ca8a0;cursor:not-allowed}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:30px 0 14px}
+.section-head h2{font-size:21px;line-height:1.3;margin:0}
+.section-head p{font-size:12px;color:var(--muted);margin:4px 0 0}
+.services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;min-width:0}
+.service{background:white;border:1px solid var(--line);border-radius:15px;padding:19px;min-width:0;display:flex;flex-direction:column;box-shadow:0 2px 8px #173d2505}
+.icon{display:grid;place-items:center;flex:0 0 52px;width:52px;height:52px;background:var(--p);border-radius:14px;font-size:28px;margin-bottom:13px}
+.tool-thumbnail{display:block;width:100%;max-width:180px;height:120px;flex:0 0 120px;object-fit:cover;background:var(--p);border:1px solid var(--line);border-radius:12px;margin-bottom:13px}
+.service h3{font-size:16px;line-height:1.35;margin:0 0 7px;overflow-wrap:anywhere}
+.service p{font-size:13px;color:var(--muted);margin:0 0 14px;flex:1;overflow-wrap:anywhere}
+.service .button{align-self:flex-start;margin-top:auto}
+.paid{font-weight:800;color:#a85a00}
+.free{font-weight:800;color:#16833b}
+.status-message{background:white;border:1px dashed #cddbd0;padding:17px;border-radius:12px;color:var(--muted);font-size:13px;grid-column:1/-1}
+.tool-controls{background:white;border:1px solid var(--line);border-radius:15px;padding:16px;margin-bottom:16px}
+.tool-search{display:block;width:100%;min-height:46px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:white;color:var(--ink);font-size:16px}
+.tool-categories{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.category-chip{border:1px solid var(--line);background:white;color:var(--g);padding:9px 13px;min-height:38px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
+.category-chip.active{background:var(--g);border-color:var(--g);color:white}
+.tool-count{color:var(--muted);font-size:12px;margin:12px 2px 0}
+.charges{background:white;border:1px solid var(--line);border-radius:15px;padding:20px;margin-top:24px}
+.charges h3{margin:0 0 10px;font-size:17px}
+.charge-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.charge-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #edf1ee;font-size:13px}
+.notice{margin-top:18px;background:#fff8e5;border:1px solid #f2dfaa;border-left:4px solid #d19b00;border-radius:12px;padding:15px;font-size:12px;color:#6d561c}
+.footer{background:#103e24;color:#dceee1;text-align:center;padding:24px 18px;font-size:12px}
+.footer strong{display:block;font-size:14px;color:white;margin-bottom:4px}
+.account-status{font-size:12px;color:#e0f1e5;overflow-wrap:anywhere}
+.modal-backdrop{position:fixed;inset:0;z-index:1000;background:#071b10b8;display:none;align-items:center;justify-content:center;padding:14px;overflow-y:auto}
+.modal-backdrop.open{display:flex}
+.auth-modal{background:white;width:100%;max-width:460px;max-height:94vh;overflow-y:auto;border-radius:18px;padding:22px;box-shadow:0 20px 70px #0004}
+.auth-modal h2{margin:0 0 5px;font-size:23px;color:var(--g)}
+.auth-subtitle{font-size:13px;color:var(--muted);margin:0 0 18px}
+.field-label{display:block;font-size:12px;font-weight:bold;margin:12px 0 5px}
+.auth-input{width:100%;min-height:44px;border:1px solid #cfded2;border-radius:9px;padding:11px 12px;font-size:16px;background:white;color:var(--ink)}
+.auth-actions{display:grid;gap:9px;margin-top:15px}
+.auth-actions .button{width:100%}
+.auth-message{display:none;margin:12px 0 0;border-radius:9px;padding:10px;font-size:12px;overflow-wrap:anywhere}
+.auth-message.show{display:block}
+.auth-message.error{background:#fff0ef;color:#a1251c;border:1px solid #f0c5c1}
+.auth-message.success{background:#edf8ef;color:#176b3a;border:1px solid #c9e6d0}
+.auth-message.info{background:#f2f5ff;color:#274b8b;border:1px solid #d3defa}
+.close-modal{float:right;border:0;background:#edf3ee;border-radius:8px;padding:7px 11px;cursor:pointer}
+.auth-small{font-size:12px;color:var(--muted);margin-top:12px}
+.hidden{display:none!important}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-side{display:none}.services{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+.header{padding:18px 14px 34px}.nav{align-items:stretch;flex-direction:column;gap:14px}
+.brand-icon{width:44px;height:44px;font-size:25px}.brand h1{font-size:20px}
+.nav-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+.nav-links a{min-width:0;padding:8px 5px;font-size:12px;text-align:center}
+.account-area{align-items:stretch}.account-area .button{flex:1}
+.hero{margin-top:23px}.hero h2{font-size:clamp(27px,7vw,35px)}
+.container{padding:0 12px 28px}.welcome,.wallet{padding:16px;align-items:stretch;flex-direction:column;gap:13px}
+.welcome .button,.wallet .button{width:100%}
+.section-head{margin:25px 0 12px;align-items:flex-start;flex-direction:column;gap:5px}
+.services{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.service{padding:13px}
+.icon{width:43px;height:43px;flex-basis:43px;font-size:24px}
+.tool-thumbnail{max-width:100%;height:100px;flex-basis:100px}
+.service h3{font-size:14px}.service p{font-size:12px}
+.service .button{width:100%;padding:9px 7px;font-size:12px;align-self:stretch}
+.tool-controls{padding:12px}.charge-grid{grid-template-columns:1fr}
+.auth-modal{padding:18px}
+}
+@media(max-width:360px){.nav-links,.services{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
 </head>
 
 <body>
-<div class="topbar">🌐 CSC Seva Tools • Digital tools and useful services in one place</div>
+<div class="topbar">ðŸŒ CSC Seva Tools â€¢ Digital tools and useful services in one place</div>
 
 <header class="header">
 <nav class="nav">
   <div class="brand">
-    <div class="brand-icon">🌐</div>
-    <div>
-      <h1>CSC Seva Tools</h1>
-      <p>Digital Services &amp; Online Tools</p>
-    </div>
+    <div class="brand-icon">ðŸŒ</div>
+    <div><h1>CSC Seva Tools</h1><p>Digital Services &amp; Online Tools</p></div>
   </div>
-
   <div class="nav-links">
     <a href="Home.html">Home</a>
     <a href="Admin.html">Admin</a>
     <a href="ToolsManagement.html">Tools Management</a>
   </div>
-
   <div class="account-area">
     <span class="account-status" id="accountStatus">Not logged in</span>
     <button class="button light" id="accountButton" type="button">Login / Sign up</button>
     <button class="button light hidden" id="logoutButton" type="button">Logout</button>
   </div>
 </nav>
-
 <div class="hero">
-  <div>
-    <h2>Smart digital services<br>for everyday needs.</h2>
-    <p>Explore document tools, photo services, farmer services and useful online utilities from one easy-to-use page.</p>
-  </div>
-  <div class="hero-side">
-    <strong>🌿 Welcome to CSC Seva Tools</strong>
-    <span>Search for a service below and open the tool you need. Available digital tools load from the connected database.</span>
-  </div>
+  <div><h2>Simple digital services<br>for everyday needs.</h2>
+  <p>Explore document tools, PDF utilities, farmer services and moreâ€”all from one easy-to-use page.</p></div>
+  <div class="hero-side"><strong>ðŸŒ Welcome to CSC Seva Tools</strong>
+  <span>Search for a service below and open the tool you need. Available tools load from the connected database.</span></div>
 </div>
 </header>
 
 <main class="container">
 <section class="welcome">
-  <div>
-    <h2>Welcome to CSC Seva Tools</h2>
-    <p>Simple digital tools and services for everyday users.</p>
-  </div>
-  <a class="button light" href="#digital-tools">Explore tools ↓</a>
+  <div><h2>Welcome to CSC Seva Tools</h2><p>Simple digital tools and services for everyday users.</p></div>
+  <a class="button light" href="#digital-tools">Explore tools â†“</a>
 </section>
 
 <section class="wallet">
   <div>
-    <div class="wallet-label">💰 MY DISPLAYED BALANCE</div>
-    <div class="balance" id="balance">₹0</div>
+    <div class="wallet-label">ðŸ’° MY DISPLAYED BALANCE</div>
+    <div class="balance" id="balance">â‚¹0</div>
     <div class="wallet-info">For reference only. Pending payment requests do not add money automatically.</div>
   </div>
-  <button class="button" id="walletButton" type="button">View Wallet →</button>
+  <button class="button" id="walletButton" type="button">View Wallet â†’</button>
 </section>
 
-<div class="section-head">
-  <div>
-    <h2>🧰 Quick Services</h2>
-    <p>Choose one of the main services below</p>
-  </div>
-</div>
-
-<section class="services" id="quickServices">
-  <article class="service">
-    <div class="service-art farmer-id">
-      <span class="service-emoji">🌾</span>
-      <small>FARMER ID CARD</small>
-    </div>
-    <h3>Farmer ID Card</h3>
-    <p>Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.<br><br><b class="paid">Download charge: ₹10</b></p>
-    <button class="button" data-page="index.html" type="button">Open Farmer Card →</button>
-  </article>
-
-  <article class="service">
-    <div class="service-art farmer-services">
-      <span class="service-emoji">🚜</span>
-      <small>FARMER SERVICES</small>
-    </div>
-    <h3>Farmer Services</h3>
-    <p>Useful farmer-related digital services and tools.<br><br><b class="free">FREE</b></p>
-    <button class="button" data-page="Farmer-Services.html" type="button">Open Service →</button>
-  </article>
-
-  <article class="service">
-    <div class="service-art all-photo">
-      <span class="service-emoji">📸</span>
-      <small>ALL PHOTO</small>
-    </div>
-    <h3>All Photo</h3>
-    <p>Photo printing and related photo service information.<br><br><b class="paid">Photo Print: ₹5</b><br><span class="free">Other services: FREE</span></p>
-    <button class="button" data-page="Print.html" type="button">Open All Photo →</button>
-  </article>
+<div class="section-head"><div><h2>ðŸ§° Services</h2><p>Quick access to common service pages</p></div></div>
+<section class="services">
+  <article class="service"><div class="icon">ðŸŒ¾</div><h3>Farmer ID Card</h3><p>Create a personal-use Farmer ID Card with photo, QR code and A4 PDF.<br><br><b class="paid">Download charge: â‚¹10</b></p><button class="button" data-page="index.html" type="button">Open Farmer Card â†’</button></article>
+  <article class="service"><div class="icon">ðŸ“</div><h3>Farmer Registration</h3><p>Register farmer details and save registration information.<br><br><b class="free">FREE</b></p><button class="button" data-page="index.html" type="button">Register Now â†’</button></article>
+  <article class="service"><div class="icon">ðŸ–¨ï¸</div><h3>Print / Xerox</h3><p>Printing and Xerox service information.<br><br><b class="paid">Photo Print: â‚¹5</b><br><span class="free">Other services: FREE</span></p><button class="button" data-page="Print.html" type="button">Open Service â†’</button></article>
+  <article class="service"><div class="icon">ðŸ“„</div><h3>PDF Services</h3><p>Useful PDF and document services.<br><br><b class="free">FREE</b></p><button class="button" data-page="PDF.html" type="button">Open Service â†’</button></article>
+  <article class="service"><div class="icon">ðŸŒ±</div><h3>Farmer Services</h3><p>Useful farmer-related digital services and tools.<br><br><b class="free">FREE</b></p><button class="button" data-page="Farmer-Services.html" type="button">Open Service â†’</button></article>
+  <article class="service"><div class="icon">ðŸ“ž</div><h3>Contact / Help</h3><p>Contact information and help section.<br><br><b class="free">FREE</b></p><button class="button" data-page="Contact.html" type="button">Contact â†’</button></article>
 </section>
 
-<div class="section-head" id="digital-tools">
-  <div>
-    <h2>🧰 Available Digital Tools</h2>
-    <p>Search, filter and open active tools from Firebase</p>
-  </div>
-</div>
-
+<div class="section-head" id="digital-tools"><div><h2>ðŸ§° Available Digital Tools</h2><p>Search, filter and open active tools from Firebase</p></div></div>
 <div class="tool-controls">
-  <input type="search" id="toolSearch" class="tool-search" placeholder="🔍 Search tools by name, PDF, photo, AI..." aria-label="Search digital tools" autocomplete="off">
+  <input type="search" id="toolSearch" class="tool-search" placeholder="ðŸ” Search tools by name, PDF, photo, AI..." aria-label="Search digital tools" autocomplete="off">
   <div id="toolCategories" class="tool-categories" aria-label="Filter tools by category"></div>
   <p id="toolCount" class="tool-count" aria-live="polite">Loading tools...</p>
 </div>
-
-<section class="services" id="dynamicTools" aria-live="polite">
-  <div class="status-message">Loading available tools…</div>
-</section>
+<section class="services" id="dynamicTools" aria-live="polite"><div class="status-message">Loading available toolsâ€¦</div></section>
 
 <section class="charges">
-  <h3>💳 Service Charges</h3>
+  <h3>ðŸ’³ Service Charges</h3>
   <div class="charge-grid">
-    <div class="charge-row"><span>🌾 Farmer Card Download</span><span class="paid">₹10</span></div>
-    <div class="charge-row"><span>📸 Photo Print</span><span class="paid">₹5</span></div>
-    <div class="charge-row"><span>📑 Xerox</span><span class="free">FREE</span></div>
-    <div class="charge-row"><span>🌱 Farmer Services</span><span class="free">FREE</span></div>
+    <div class="charge-row"><span>ðŸŒ¾ Farmer Card Download</span><span class="paid">â‚¹10</span></div>
+    <div class="charge-row"><span>ðŸ–¨ï¸ Photo Print</span><span class="paid">â‚¹5</span></div>
+    <div class="charge-row"><span>ðŸ“‹ Farmer Registration</span><span class="free">FREE</span></div>
+    <div class="charge-row"><span>ðŸ“„ PDF Services</span><span class="free">FREE</span></div>
+    <div class="charge-row"><span>ðŸ“‘ Xerox</span><span class="free">FREE</span></div>
+    <div class="charge-row"><span>ðŸŒ± Farmer Services</span><span class="free">FREE</span></div>
+    <div class="charge-row"><span>ðŸ“ž Contact / Help</span><span class="free">FREE</span></div>
   </div>
 </section>
 
-<aside class="notice">
-  <b>Important:</b> CSC Seva Tools is a personal digital service website. Farmer ID Cards created here are <b>not government-issued documents</b>.
-  <br><br>
-  <b>Payment note:</b> Prices are informational. A listed price does not mean payment processing or wallet credit is active.
-</aside>
+<aside class="notice"><b>Important:</b> CSC Seva Tools is a personal digital service website. Farmer ID Cards created here are <b>not government-issued documents</b>.<br><br><b>Payment note:</b> Prices are informational. A listed price does not mean payment processing or wallet credit is active.</aside>
 </main>
 
-<footer class="footer">
-  <strong>🌐 CSC Seva Tools</strong>
-  <nav class="footer-links" aria-label="Pricing and policy links">
-    <a href="Pricing.html">Pricing &amp; Trust Policy</a>
-  </nav>
-  <p>© 2026 CSC Seva Tools • Digital Services</p>
-</footer>
+<footer class="footer"><strong>ðŸŒ CSC Seva Tools</strong>Â© 2026 CSC Seva Tools â€¢ Digital Services</footer>
 
 <div class="modal-backdrop" id="authBackdrop" role="dialog" aria-modal="true" aria-labelledby="authTitle">
   <div class="auth-modal">
-    <button class="close-modal" id="closeAuth" type="button" aria-label="Close">✕</button>
+    <button class="close-modal" id="closeAuth" type="button" aria-label="Close">âœ•</button>
     <h2 id="authTitle">Your CSC Seva Account</h2>
     <p class="auth-subtitle">Create an account or log in using your email address and password. Email verification is required.</p>
 
     <div id="emailPanel">
       <label class="field-label" for="fullName">Full name (signup only)</label>
       <input class="auth-input" id="fullName" type="text" maxlength="80" autocomplete="name" placeholder="Enter your full name">
-
       <label class="field-label" for="email">Email address</label>
       <input class="auth-input" id="email" type="email" autocomplete="email" placeholder="you@example.com">
-
       <label class="field-label" for="password">Password</label>
       <input class="auth-input" id="password" type="password" minlength="6" autocomplete="current-password" placeholder="At least 6 characters">
-
       <div class="auth-actions">
         <button class="button" id="signupButton" type="button">Create Account</button>
         <button class="button light" id="emailLoginButton" type="button">Login with Email</button>
         <button class="button light" id="googleLoginButton" type="button">Continue with Google</button>
         <button class="button light" id="resetPasswordButton" type="button">Forgot Password?</button>
       </div>
-
       <p class="auth-small">For email/password accounts, open the verification email and click its link before logging in.</p>
     </div>
-
     <div id="authMessage" class="auth-message" role="status" aria-live="polite"></div>
   </div>
 </div>
@@ -918,10 +248,9 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: "select_account" });
-
 const TOOLS_FOLDER = "KisanSevaTools_Full_47_Tools%20%282%29/";
-const $ = id => document.getElementById(id);
 
+const $ = id => document.getElementById(id);
 let allTools = [];
 let activeCategory = "All Tools";
 let busy = false;
@@ -931,46 +260,40 @@ function setMessage(message, type = "info") {
   el.textContent = message;
   el.className = "auth-message show " + type;
 }
-
 function clearMessage() {
   $("authMessage").textContent = "";
   $("authMessage").className = "auth-message";
 }
-
 function setBusy(value) {
   busy = value;
-  ["signupButton", "emailLoginButton", "googleLoginButton", "resetPasswordButton"].forEach(id => {
+  ["signupButton","emailLoginButton","googleLoginButton","resetPasswordButton"].forEach(id => {
     $(id).disabled = value;
   });
 }
-
 function friendlyError(error) {
   const code = error?.code || "";
   const messages = {
-    "auth/email-already-in-use": "This email already has an account. Please log in instead.",
-    "auth/invalid-email": "Please enter a valid email address.",
-    "auth/weak-password": "Choose a stronger password with at least 6 characters.",
-    "auth/invalid-credential": "Email/password is incorrect or the account does not exist.",
-    "auth/user-not-found": "No account was found. Create an account first.",
-    "auth/wrong-password": "Email/password is incorrect.",
-    "auth/too-many-requests": "Too many attempts. Please wait and try again later.",
-    "auth/operation-not-allowed": "Enable the required provider in Firebase Authentication settings.",
-    "auth/network-request-failed": "Network error. Check your internet connection.",
-    "auth/unauthorized-domain": "Add kaifsaiyyad.github.io in Firebase Authentication → Settings → Authorized domains.",
-    "auth/popup-closed-by-user": "Google sign-in was closed before finishing. Please try again.",
-    "auth/popup-blocked": "Your browser blocked the Google sign-in popup. Allow popups for this website and try again.",
-    "auth/cancelled-popup-request": "A Google sign-in window is already opening. Please wait.",
-    "auth/account-exists-with-different-credential": "This email already uses another sign-in method. Sign in with that method first."
+    "auth/email-already-in-use":"This email already has an account. Please log in instead.",
+    "auth/invalid-email":"Please enter a valid email address.",
+    "auth/weak-password":"Choose a stronger password with at least 6 characters.",
+    "auth/invalid-credential":"Email/password is incorrect or the account does not exist.",
+    "auth/user-not-found":"No account was found. Create an account first.",
+    "auth/wrong-password":"Email/password is incorrect.",
+    "auth/too-many-requests":"Too many attempts. Please wait and try again later.",
+    "auth/operation-not-allowed":"Enable the required provider in Firebase Authentication settings.",
+    "auth/network-request-failed":"Network error. Check your internet connection.",
+    "auth/unauthorized-domain":"Add kaifsaiyyad.github.io in Firebase Authentication â†’ Settings â†’ Authorized domains.",
+    "auth/popup-closed-by-user":"Google sign-in was closed before finishing. Please try again.",
+    "auth/popup-blocked":"Your browser blocked the Google sign-in popup. Allow popups for this website and try again.",
+    "auth/cancelled-popup-request":"A Google sign-in window is already opening. Please wait.",
+    "auth/account-exists-with-different-credential":"This email already uses another sign-in method. Sign in with that method first."
   };
-
   return messages[code] || error?.message || "Something went wrong. Please try again.";
 }
-
 function showAuth() {
   $("authBackdrop").classList.add("open");
   clearMessage();
 }
-
 function closeAuth() {
   $("authBackdrop").classList.remove("open");
   clearMessage();
@@ -978,11 +301,9 @@ function closeAuth() {
 
 $("accountButton").addEventListener("click", showAuth);
 $("closeAuth").addEventListener("click", closeAuth);
-
 $("authBackdrop").addEventListener("click", event => {
   if (event.target === $("authBackdrop")) closeAuth();
 });
-
 $("logoutButton").addEventListener("click", async () => {
   try {
     await signOut(auth);
@@ -999,11 +320,7 @@ async function ensureProfile(user, name) {
       email: user.email || "",
       updatedAt: serverTimestamp()
     };
-
-    if (name || user.displayName) {
-      profile.displayName = name || user.displayName;
-    }
-
+    if (name || user.displayName) profile.displayName = name || user.displayName;
     await setDoc(doc(db, "users", user.uid), profile, { merge: true });
   } catch (error) {
     console.warn("Optional profile write failed; authentication remains active.", error);
@@ -1022,9 +339,8 @@ $("signupButton").addEventListener("click", async () => {
   if (password.length < 6) return setMessage("Password must be at least 6 characters.", "error");
 
   setBusy(true);
-
   try {
-    setMessage("Creating account and sending verification email…", "info");
+    setMessage("Creating account and sending verification emailâ€¦", "info");
 
     const credential = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(credential.user, { displayName: name });
@@ -1049,12 +365,9 @@ $("emailLoginButton").addEventListener("click", async () => {
   const email = $("email").value.trim();
   const password = $("password").value;
 
-  if (!email || !password) {
-    return setMessage("Enter your email and password.", "error");
-  }
+  if (!email || !password) return setMessage("Enter your email and password.", "error");
 
   setBusy(true);
-
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
     await result.user.reload();
@@ -1078,9 +391,8 @@ $("emailLoginButton").addEventListener("click", async () => {
 
 $("googleLoginButton").addEventListener("click", async () => {
   if (busy) return;
-
   setBusy(true);
-  setMessage("Opening Google sign-in…", "info");
+  setMessage("Opening Google sign-inâ€¦", "info");
 
   try {
     const result = await signInWithPopup(auth, googleProvider);
@@ -1097,10 +409,7 @@ $("googleLoginButton").addEventListener("click", async () => {
 
 $("resetPasswordButton").addEventListener("click", async () => {
   const email = $("email").value.trim();
-
-  if (!email) {
-    return setMessage("Enter your email address first.", "error");
-  }
+  if (!email) return setMessage("Enter your email address first.", "error");
 
   try {
     await sendPasswordResetEmail(auth, email);
@@ -1114,6 +423,7 @@ onAuthStateChanged(auth, async user => {
   if (user && user.providerData.some(provider => provider.providerId === "password")) {
     await user.reload();
 
+    // During signup/login, the active handler checks email verification itself.
     if (!busy && (!auth.currentUser || !auth.currentUser.emailVerified)) {
       await signOut(auth);
       $("accountStatus").textContent = "Verify your email to log in";
@@ -1126,12 +436,9 @@ onAuthStateChanged(auth, async user => {
   }
 
   if (user) {
-    $("accountStatus").textContent =
-      "Logged in: " + (user.displayName || user.email || "User");
-
+    $("accountStatus").textContent = "Logged in: " + (user.displayName || user.email || "User");
     $("accountButton").classList.add("hidden");
     $("logoutButton").classList.remove("hidden");
-
     await ensureProfile(user);
   } else {
     $("accountStatus").textContent = "Not logged in";
@@ -1142,29 +449,24 @@ onAuthStateChanged(auth, async user => {
 
 function toolUrl(filename) {
   const page = String(filename || "").trim();
-
   if (!page) return null;
   if (/^https?:\/\//i.test(page)) return page;
-
   if (/^[A-Za-z0-9_-]+\.html$/i.test(page)) {
     return TOOLS_FOLDER + encodeURIComponent(page);
   }
 
   const normalized = page.replace(/\\/g, "/").replace(/^\/+/, "");
-
   for (const folder of [
     "KisanSevaTools_Full_47_Tools (2)/",
     "KisanSevaTools_Full_47_Tools%20%282%29/"
   ]) {
     if (normalized.startsWith(folder)) {
       const file = normalized.slice(folder.length);
-
       if (/^[A-Za-z0-9_-]+\.html$/i.test(file)) {
         return TOOLS_FOLDER + encodeURIComponent(file);
       }
     }
   }
-
   return null;
 }
 
@@ -1179,17 +481,13 @@ document.querySelectorAll("[data-page]").forEach(button => {
 });
 
 let savedBalance = 0;
-
 try {
   const storedBalance = Number(localStorage.getItem("kst_balance") || 0);
-  savedBalance = Number.isFinite(storedBalance) && storedBalance >= 0
-    ? storedBalance
-    : 0;
+  savedBalance = Number.isFinite(storedBalance) && storedBalance >= 0 ? storedBalance : 0;
 } catch (error) {
   console.warn("Local wallet balance is unavailable.", error);
 }
-
-$("balance").textContent = "₹" + savedBalance.toLocaleString("en-IN");
+$("balance").textContent = "â‚¹" + savedBalance.toLocaleString("en-IN");
 
 const container = $("dynamicTools");
 const searchInput = $("toolSearch");
@@ -1198,59 +496,43 @@ const countLabel = $("toolCount");
 
 function showToolMessage(message) {
   container.replaceChildren();
-
   const box = document.createElement("div");
   box.className = "status-message";
   box.textContent = message;
-
   container.appendChild(box);
 }
-
 function addText(parent, tag, text) {
   const el = document.createElement(tag);
   el.textContent = text;
   parent.appendChild(el);
   return el;
 }
-
 function getCategory(tool) {
   return String(tool.category || "General").trim() || "General";
 }
-
 function getThumbnailUrl(tool) {
   for (const field of [
-    "thumbnailUrl", "thumbnailURL", "thumbnail_url", "thumbnail",
-    "imageUrl", "imageURL", "image_url", "image", "photoUrl", "photoURL"
+    "thumbnailUrl","thumbnailURL","thumbnail_url","thumbnail",
+    "imageUrl","imageURL","image_url","image","photoUrl","photoURL"
   ]) {
     const value = tool[field];
-
-    if (
-      typeof value === "string" &&
-      value.trim() &&
-      /^https?:\/\//i.test(value.trim())
-    ) {
+    if (typeof value === "string" && value.trim() && /^https?:\/\//i.test(value.trim())) {
       return value.trim();
     }
   }
-
   return "";
 }
-
 function renderCategories() {
   categoryBar.replaceChildren();
-
   const categories = [
     "All Tools",
-    ...Array.from(new Set(allTools.map(getCategory))).sort((a, b) =>
-      a.localeCompare(b)
-    )
+    ...Array.from(new Set(allTools.map(getCategory))).sort((a,b) => a.localeCompare(b))
   ];
 
   categories.forEach(category => {
     const button = document.createElement("button");
     button.type = "button";
-    button.className =
-      "category-chip" + (activeCategory === category ? " active" : "");
+    button.className = "category-chip" + (activeCategory === category ? " active" : "");
     button.textContent = category;
     button.setAttribute("aria-pressed", String(activeCategory === category));
 
@@ -1263,27 +545,17 @@ function renderCategories() {
     categoryBar.appendChild(button);
   });
 }
-
 function renderTools() {
   const query = searchInput.value.trim().toLowerCase();
-
   const filtered = allTools.filter(tool => {
     const category = getCategory(tool);
-    const matchesCategory =
-      activeCategory === "All Tools" || category === activeCategory;
-
-    const searchableText = [
-      tool.name || "",
-      tool.description || "",
-      category
-    ].join(" ").toLowerCase();
-
+    const matchesCategory = activeCategory === "All Tools" || category === activeCategory;
+    const searchableText = [tool.name || "", tool.description || "", category].join(" ").toLowerCase();
     return matchesCategory && searchableText.includes(query);
   });
 
   container.replaceChildren();
-  countLabel.textContent =
-    `Showing ${filtered.length} of ${allTools.length} active tools`;
+  countLabel.textContent = `Showing ${filtered.length} of ${allTools.length} active tools`;
 
   if (!filtered.length) {
     showToolMessage("Koi matching tool nahi mila. Search ya category change karke dekhein.");
@@ -1293,7 +565,6 @@ function renderTools() {
   filtered.forEach(tool => {
     const card = document.createElement("article");
     card.className = "service";
-
     const thumbnailUrl = getThumbnailUrl(tool);
 
     if (thumbnailUrl) {
@@ -1307,29 +578,23 @@ function renderTools() {
       image.onerror = () => {
         const fallback = document.createElement("div");
         fallback.className = "icon";
-        fallback.textContent = tool.icon || "🧰";
+        fallback.textContent = tool.icon || "ðŸ§°";
         image.replaceWith(fallback);
       };
 
       card.appendChild(image);
     } else {
-      addText(card, "div", tool.icon || "🧰").className = "icon";
+      addText(card, "div", tool.icon || "ðŸ§°").className = "icon";
     }
 
     addText(card, "h3", String(tool.name || "Digital Tool"));
     addText(card, "p", String(tool.description || "Digital service"));
 
-    const categoryLabel = addText(
-      card,
-      "p",
-      "Category: " + getCategory(tool)
-    );
+    const categoryLabel = addText(card, "p", "Category: " + getCategory(tool));
     categoryLabel.style.fontWeight = "bold";
 
     const price = Number(tool.price);
-
-    const validPrice =
-      tool.price !== null &&
+    const validPrice = tool.price !== null &&
       tool.price !== undefined &&
       String(tool.price).trim() !== "" &&
       Number.isFinite(price) &&
@@ -1339,24 +604,42 @@ function renderTools() {
       card,
       "p",
       validPrice
-        ? (price === 0
-          ? "FREE"
-          : "Price: ₹" + price.toLocaleString("en-IN"))
+        ? (price === 0 ? "FREE" : "Price: â‚¹" + price.toLocaleString("en-IN"))
         : "Price: Contact for details"
     );
-
     priceEl.className = validPrice && price === 0 ? "free" : "paid";
 
     const button = document.createElement("button");
     button.type = "button";
     button.className = "button";
-    button.textContent = "Open Tool →";
+    button.textContent = "Open Tool â†’";
 
     const destination = toolUrl(tool.page || tool.file);
-
     if (destination) {
       button.addEventListener("click", () => {
-        location.href = destination;
+        const openTool = () => {
+          location.href = destination;
+        };
+
+        // Record tool opens in GA4, then navigate even if analytics is blocked.
+        if (typeof window.gtag === "function") {
+          let opened = false;
+          const openOnce = () => {
+            if (opened) return;
+            opened = true;
+            openTool();
+          };
+
+          window.gtag("event", "tool_open", {
+            tool_name: String(tool.name || "Digital Tool"),
+            tool_category: getCategory(tool),
+            event_callback: openOnce,
+            event_timeout: 1000
+          });
+          setTimeout(openOnce, 1100);
+        } else {
+          openTool();
+        }
       });
     } else {
       button.disabled = true;
@@ -1378,9 +661,7 @@ onSnapshot(collection(db, "tools"), snapshot => {
       ...documentSnapshot.data()
     }))
     .filter(tool => tool.active === true)
-    .sort((a, b) =>
-      String(a.name || "").localeCompare(String(b.name || ""))
-    );
+    .sort((a,b) => String(a.name || "").localeCompare(String(b.name || "")));
 
   if (!allTools.length) {
     categoryBar.replaceChildren();
@@ -1402,9 +683,7 @@ onSnapshot(collection(db, "tools"), snapshot => {
   console.error("Firebase tools error:", error);
   categoryBar.replaceChildren();
   countLabel.textContent = "Tools load nahi ho sake";
-  showToolMessage(
-    "Tools load nahi ho rahe. Internet, Firebase configuration aur Firestore rules check karein."
-  );
+  showToolMessage("Tools load nahi ho rahe. Internet, Firebase configuration aur Firestore rules check karein.");
 });
 </script>
 </body>
