@@ -1256,15 +1256,6 @@ function renderCategories() {
   });
 }
   
-      activeCategory = category;
-      renderCategories();
-      renderTools();
-    });
-
-    categoryBar.appendChild(button);
-  });
-}
-
 function renderTools() {
   const query = searchInput.value.trim().toLowerCase();
 
