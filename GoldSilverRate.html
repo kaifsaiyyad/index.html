@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b15">
+<title>Gold & Silver Rate | Kisan Seva Tools</title>
+<style>
+:root{--bg:#080b15;--panel:#11182a;--line:#29364d;--gold:#f5cc72;--silver:#b8d5f6;--cyan:#56e7ff;--text:#f3f6ff;--muted:#9ba9c3}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 15% 0%,#46331355,transparent 36%),radial-gradient(ellipse at 90% 15%,#163d5555,transparent 32%),var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(#91b7df0b 1px,transparent 1px),linear-gradient(90deg,#91b7df0b 1px,transparent 1px);background-size:34px 34px}
+.wrap{width:min(1080px,92%);margin:auto;position:relative}
+nav{padding:22px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff14;gap:12px}
+.brand{font-weight:900;letter-spacing:1.5px}.brand span{color:var(--cyan)}
+.live{font-size:11px;color:#8affc6;border:1px solid #8affc644;padding:8px 11px;border-radius:30px;background:#8affc60b}
+.hero{text-align:center;padding:43px 0 28px}
+.kicker{font-size:11px;color:var(--gold);letter-spacing:3px;font-weight:800}
+h1{font-size:clamp(34px,7vw,62px);line-height:1.05;margin:15px 0;background:linear-gradient(95deg,#fff,var(--gold),var(--silver));color:transparent;background-clip:text;letter-spacing:-1.8px}
+.hero p{max-width:650px;margin:auto;color:var(--muted);font-size:14px;line-height:1.7}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0 18px}
+.toolbar small{color:var(--muted);font-size:12px}
+button,select,input{font:inherit}
+.btn{cursor:pointer;border:1px solid var(--line);border-radius:11px;padding:11px 14px;background:#182238;color:var(--text);font-size:12px;font-weight:750}
+.btn:hover{border-color:var(--cyan)}
+.btn:disabled{opacity:.55;cursor:wait}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:linear-gradient(145deg,#151e31f5,#0e1424f5);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 18px 55px #0003;min-width:0}
+.metaltop{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.coin{width:47px;height:47px;border-radius:15px;display:grid;place-items:center;font-size:25px}
+.gold .coin{background:#f5cc7218;border:1px solid #f5cc7255}
+.silver .coin{background:#b8d5f618;border:1px solid #b8d5f655}
+.metaltop h2{font-size:18px;margin:0 0 5px}
+.metaltop p{font-size:11px;color:var(--muted);margin:0}
+.tag{margin-left:auto;font-size:10px;border:1px solid var(--line);padding:6px 8px;border-radius:30px;color:var(--muted)}
+.pricebox{padding:18px;border:1px solid #ffffff12;border-radius:15px;background:#080d18;margin-bottom:12px}
+.price-label{font-size:11px;color:var(--muted);margin-bottom:8px}
+.price{font-size:clamp(25px,4vw,35px);font-weight:850;letter-spacing:-1px;overflow-wrap:anywhere}
+.gold .price{color:var(--gold)}.silver .price{color:var(--silver)}
+.unit{font-size:11px;color:var(--muted);margin-top:6px}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini{background:#ffffff04;border:1px solid #ffffff12;border-radius:13px;padding:13px;min-width:0}
+.mini span{font-size:10px;color:var(--muted);display:block;margin-bottom:7px}
+.mini b{font-size:15px;overflow-wrap:anywhere}
+.positive{color:#8affc6}.negative{color:#ff9ba9}
+.section{margin-top:20px}
+.section h3{font-size:17px;margin:0 0 7px}
+.section .desc{font-size:12px;color:var(--muted);line-height:1.6;margin:0 0 15px}
+.calcgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:8px}
+.field input,.field select{width:100%;padding:13px;background:#090f1d;border:1px solid #31415c;border-radius:11px;color:var(--text);outline:none}
+.field input:focus,.field select:focus{border-color:var(--cyan)}
+.result{margin-top:15px;padding:18px;border:1px solid #56e7ff38;border-radius:15px;background:linear-gradient(110deg,#56e7ff0c,#b48cff0b)}
+.result small{color:var(--muted);font-size:11px}
+.total{font-size:clamp(25px,5vw,36px);font-weight:850;color:var(--cyan);margin:7px 0;overflow-wrap:anywhere}
+.breakdown{font-size:12px;color:var(--muted);line-height:1.9}
+.status{margin-top:15px;padding:13px;border-radius:12px;font-size:12px;line-height:1.65;overflow-wrap:anywhere;display:none}
+.status.ok{display:block;color:#a5ffdc;background:#7affc40c;border:1px solid #7affc433}
+.status.err{display:block;color:#ffb9c4;background:#ff82900c;border:1px solid #ff829033}
+.status.info{display:block;color:#a9eefa;background:#56e7ff0c;border:1px solid #56e7ff33}
+.note{margin-top:18px;border:1px solid #f5cc7233;background:#f5cc7208;border-radius:13px;padding:15px;color:#d8cba8;font-size:11px;line-height:1.8}
+footer{text-align:center;border-top:1px solid #ffffff12;margin-top:28px;padding:22px 0 30px;color:#8190aa;font-size:11px;line-height:1.8}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.card{padding:18px}.hero{padding-top:32px}.calcgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.calcgrid{grid-template-columns:1fr}.live{font-size:10px}.card{padding:15px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <div class="brand">KISAN <span>SEVA</span> TOOLS</div>
+  <div class="live">● RATE CONNECTION</div>
+</nav>
+
+<header class="hero">
+  <div class="kicker">PRECIOUS METALS INTELLIGENCE</div>
+  <h1>Gold & Silver Rate</h1>
+  <p>Check current gold and silver buy/sell quotes in Indian rupees, compare rates per gram, and estimate your purchase value with a live-rate calculator.</p>
+</header>
+
+<div class="toolbar">
+  <small id="updated">Waiting for rate provider…</small>
+  <button class="btn" id="refresh">↻ Refresh rates</button>
+</div>
+
+<div class="grid">
+  <section class="card gold">
+    <div class="metaltop">
+      <div class="coin">✦</div>
+      <div><h2>Gold</h2><p>24K quote · INR per gram</p></div>
+      <div class="tag">AU / 999*</div>
+    </div>
+    <div class="pricebox">
+      <div class="price-label">BUY RATE · PER GRAM</div>
+      <div class="price" id="goldBuy">—</div>
+      <div class="unit">GST shown separately by provider</div>
+    </div>
+    <div class="twocol">
+      <div class="mini"><span>SELL RATE / g</span><b id="goldSell">—</b></div>
+      <div class="mini"><span>BUY GST / g</span><b id="goldGst">—</b></div>
+      <div class="mini"><span>24H BUY CHANGE</span><b id="goldChange">—</b></div>
+      <div class="mini"><span>BUY + GST / g</span><b id="goldWithGst">—</b></div>
+    </div>
+  </section>
+
+  <section class="card silver">
+    <div class="metaltop">
+      <div class="coin">◇</div>
+      <div><h2>Silver</h2><p>Provider quote · INR per gram</p></div>
+      <div class="tag">AG / 999*</div>
+    </div>
+    <div class="pricebox">
+      <div class="price-label">BUY RATE · PER GRAM</div>
+      <div class="price" id="silverBuy">—</div>
+      <div class="unit">GST shown separately by provider</div>
+    </div>
+    <div class="twocol">
+      <div class="mini"><span>SELL RATE / g</span><b id="silverSell">—</b></div>
+      <div class="mini"><span>BUY GST / g</span><b id="silverGst">—</b></div>
+      <div class="mini"><span>24H BUY CHANGE</span><b id="silverChange">—</b></div>
+      <div class="mini"><span>BUY + GST / g</span><b id="silverWithGst">—</b></div>
+    </div>
+  </section>
+</div>
+
+<section class="card section">
+  <h3>Metal Value Calculator</h3>
+  <p class="desc">Estimate a purchase using the displayed provider buy rate. This is an estimate, not a jeweller's final bill.</p>
+  <div class="calcgrid">
+    <div class="field">
+      <label for="metal">SELECT METAL</label>
+      <select id="metal"><option value="gold">Gold</option><option value="silver">Silver</option></select>
+    </div>
+    <div class="field">
+      <label for="grams">WEIGHT (GRAMS)</label>
+      <input id="grams" type="number" min="0.01" max="100000" step="0.01" value="10">
+    </div>
+  </div>
+  <div class="result">
+    <small>ESTIMATED TOTAL · BUY RATE + PROVIDER GST</small>
+    <div class="total" id="estimate">Waiting for rates</div>
+    <div class="breakdown" id="breakdown">Fetch the latest rates to calculate an estimate.</div>
+  </div>
+  <button class="btn" id="copyEstimate" style="margin-top:13px">Copy estimate</button>
+  <div id="calcStatus" class="status"></div>
+</section>
+
+<div id="status" class="status info" role="status" aria-live="polite">Connecting to the rate provider…</div>
+
+<div class="note">
+  <b>Important:</b> These are OroPocket buy/sell quotes, not official IBJA, MCX, or universal city jewellery-shop rates. GST shown is the provider's per-gram component. Jewellery making charges, wastage, shop premiums and other invoice adjustments may differ. *Purity labels are indicative only; verify exact purity with the seller. Rates require internet access and may be temporarily unavailable.
+</div>
+
+<footer>
+  Kisan Seva Tools · Gold & Silver Rate<br>
+  Rate source: OroPocket public price endpoint · Always verify before a transaction.
+</footer>
+</div>
+
+<script>
+const API = 'https://api.oropocket.com/public/prices';
+const $ = id => document.getElementById(id);
+let prices = null;
+let lastEstimate = '';
+
+const money = value => new Intl.NumberFormat('en-IN',{
+  style:'currency',currency:'INR',minimumFractionDigits:2,maximumFractionDigits:2
+}).format(value);
+
+function showStatus(message,type='info'){
+  $('status').className='status '+type;
+  $('status').textContent=message;
+}
+function safeNumber(value){
+  const n=Number(value);
+  return Number.isFinite(n) && n >= 0 ? n : null;
+}
+function changeText(value){
+  const n=safeNumber(Math.abs(Number(value)));
+  if(n===null) return '—';
+  const signed=Number(value)>0?'+':Number(value)<0?'−':'';
+  return signed+n.toFixed(2)+'%';
+}
+function setChange(id,value){
+  const el=$(id);
+  if(value===null || value===undefined || !Number.isFinite(Number(value))){
+    el.textContent='—';el.className='';return;
+  }
+  el.textContent=changeText(value);
+  el.className=Number(value)>0?'positive':Number(value)<0?'negative':'';
+}
+function renderMetal(name,data){
+  const buy=safeNumber(data.buy);
+  const sell=safeNumber(data.sell);
+  const gst=safeNumber(data.gst);
+  if(buy===null || sell===null || gst===null) throw new Error('The provider returned an unexpected '+name+' rate.');
+  const prefix=name==='gold'?'gold':'silver';
+  $(prefix+'Buy').textContent=money(buy);
+  $(prefix+'Sell').textContent=money(sell);
+  $(prefix+'Gst').textContent=money(gst);
+  $(prefix+'WithGst').textContent=money(buy+gst);
+  setChange(prefix+'Change',data.change24h?.buy);
+}
+function renderEstimate(){
+  if(!prices){
+    $('estimate').textContent='Waiting for rates';
+    $('breakdown').textContent='Fetch the latest rates to calculate an estimate.';
+    return;
+  }
+  const grams=Number($('grams').value);
+  if(!Number.isFinite(grams)||grams<=0||grams>100000){
+    $('estimate').textContent='Enter valid weight';
+    $('breakdown').textContent='Weight must be above 0 and no more than 100,000 grams.';
+    lastEstimate='';
+    return;
+  }
+  const metal=$('metal').value;
+  const d=prices.data[metal];
+  const buy=safeNumber(d.buy),gst=safeNumber(d.gst);
+  if(buy===null||gst===null){
+    $('estimate').textContent='Rate unavailable';
+    $('breakdown').textContent='A valid provider rate is not available.';
+    lastEstimate='';
+    return;
+  }
+  const base=buy*grams, tax=gst*grams, total=base+tax;
+  $('estimate').textContent=money(total);
+  $('breakdown').textContent='Metal value: '+money(base)+' · Provider GST estimate: '+money(tax)+' · Weight: '+grams+' g';
+  lastEstimate='Metal: '+metal.toUpperCase()+'\nWeight: '+grams+' g\nBuy rate: '+money(buy)+'/g\nMetal value: '+money(base)+'\nProvider GST estimate: '+money(tax)+'\nEstimated total: '+money(total)+'\nRate timestamp: '+prices.data.timestamp;
+}
+async function loadRates(){
+  const button=$('refresh');
+  button.disabled=true;button.textContent='↻ Loading…';
+  showStatus('Fetching the latest quote. Please wait…','info');
+  try{
+    const controller=new AbortController();
+    const timeout=setTimeout(()=>controller.abort(),12000);
+    let response;
+    try{
+      response=await fetch(API,{method:'GET',headers:{'Accept':'application/json'},cache:'no-store',signal:controller.signal});
+    }finally{clearTimeout(timeout);}
+    if(response.status===429) throw new Error('The rate provider limit has been reached. Wait at least one minute before refreshing.');
+    if(!response.ok) throw new Error('The rate provider returned HTTP '+response.status+'.');
+    const json=await response.json();
+    if(!json || !json.data || !json.data.gold || !json.data.silver || !json.data.timestamp){
+      throw new Error('The rate provider response is incomplete.');
+    }
+    const stamp=new Date(json.data.timestamp);
+    if(Number.isNaN(stamp.getTime())) throw new Error('The provider timestamp is invalid.');
+    prices=json;
+    renderMetal('gold',json.data.gold);
+    renderMetal('silver',json.data.silver);
+    renderEstimate();
+    $('updated').textContent='Quote timestamp: '+stamp.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'});
+    showStatus('Rates loaded successfully. Values are provider buy/sell quotes, not a universal market benchmark.','ok');
+  }catch(error){
+    console.error(error);
+    showStatus((error.name==='AbortError'?'The request timed out. ': '')+
+      (error.message||'Unable to retrieve rates.')+
+      ' Check your internet connection and try again later. No sample rates have been substituted.','err');
+    $('updated').textContent='Rates unavailable — last successful display is not refreshed.';
+  }finally{
+    button.disabled=false;button.textContent='↻ Refresh rates';
+  }
+}
+$('refresh').addEventListener('click',loadRates);
+$('metal').addEventListener('change',renderEstimate);
+$('grams').addEventListener('input',renderEstimate);
+$('copyEstimate').addEventListener('click',async()=>{
+  if(!lastEstimate){
+    $('calcStatus').className='status err';
+    $('calcStatus').textContent='Load rates and enter a valid weight first.';
+    return;
+  }
+  try{
+    await navigator.clipboard.writeText(lastEstimate);
+    $('calcStatus').className='status ok';
+    $('calcStatus').textContent='Estimate copied.';
+  }catch{
+    $('calcStatus').className='status err';
+    $('calcStatus').textContent='Copy is unavailable in this browser. Select the displayed estimate and copy it manually.';
+  }
+});
+loadRates();
+</script>
+
+<!-- CSC Seva Tool: customer usage tracking -->
+<script type="module" src="../usage-tracker.js"></script>
+<script>
+(function () {
+  if (window.__CSC_ACTION_TRACKING_INSTALLED__) return;
+  window.__CSC_ACTION_TRACKING_INSTALLED__ = true;
+  document.addEventListener("click", function (event) {
+    const el = event.target && event.target.closest ? event.target.closest("button, input[type=button], input[type=submit]") : null;
+    if (!el || el.disabled || !window.CSCUsage || typeof window.CSCUsage.trackAction !== "function") return;
+    const label = (el.getAttribute("aria-label") || el.innerText || el.value || el.title || "Button click").trim().replace(/\s+/g, " ").slice(0, 80);
+    if (!label || /^(cancel|close|back)$/i.test(label)) return;
+    window.CSCUsage.trackAction(label);
+  }, true);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#182433">
+<title>ID Card Print Studio | CSC Seva Tools</title>
+<style>
+:root{--bg:#edf2f6;--ink:#182433;--muted:#738194;--line:#dbe3eb;--navy:#182433;--teal:#16a085;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,Segoe UI,sans-serif}button,input,select{font:inherit}button{cursor:pointer}
+header{background:var(--navy);color:#fff}.top{max-width:1450px;margin:auto;padding:15px 23px;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:900;letter-spacing:.5px}.brand small{display:block;font-size:10px;color:#b7c8d8;letter-spacing:1.3px}.mark{display:inline-grid;place-items:center;width:35px;height:35px;margin-right:9px;vertical-align:middle;border-radius:10px;background:var(--teal);color:white}
+main{max-width:1450px;margin:auto;padding:27px 23px 45px}.hero{margin-bottom:22px}.kicker{color:var(--teal);font-size:10px;font-weight:900;letter-spacing:1.7px}h1{font-size:clamp(28px,4vw,40px);letter-spacing:-1.2px;margin:7px 0}.sub{color:var(--muted);margin:0;max-width:750px}
+.layout{display:grid;grid-template-columns:320px minmax(0,1fr);gap:18px;align-items:start}.sidebar{display:grid;gap:14px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 4px 18px #203d5c08}.head{padding:15px 16px;border-bottom:1px solid var(--line)}.head h2{font-size:13px;margin:0}.head p{font-size:10px;color:var(--muted);margin:3px 0 0}.body{padding:16px}.field{margin-bottom:13px}.field label{display:block;font-size:10px;font-weight:850;color:#5b6a7b;margin-bottom:5px}.field input,.field select{width:100%;height:40px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;color:var(--ink);background:#fff}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.btn{border:1px solid var(--line);border-radius:8px;background:white;padding:10px 12px;font-size:11px;font-weight:850;color:var(--ink)}.primary{background:var(--teal);color:white;border-color:var(--teal)}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.btnrow .btn{flex:1}.help{font-size:10px;color:var(--muted);line-height:1.6}.upload{border:1px dashed #9fb2c2;background:#f6f9fc;border-radius:10px;padding:12px}.upload input{height:auto;padding:7px;font-size:10px}.workspace{min-width:0}.workspacehead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:15px 17px}.workspacehead h2{font-size:13px;margin:0}.workspacehead span{font-size:10px;color:var(--muted)}.paperstage{padding:20px;background:#d5dce5;overflow:auto;min-height:600px}.paper{position:relative;background:white;margin:auto;box-shadow:0 5px 25px #26394c25;overflow:hidden}.gridcards{display:grid;align-content:start;justify-content:start;gap:8px;padding:12px}.idcard{position:relative;border:1px solid #b8c4d0;border-radius:3px;background:#fff;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:9px;color:#334155}.idcard img{width:100%;height:100%;object-fit:contain}.idcard .cardnumber{position:absolute;bottom:3px;right:4px;font-size:7px;color:#788695}.empty{height:100%;min-height:350px;display:grid;place-items:center;text-align:center;padding:25px;color:#778697}.empty strong{display:block;color:#25364a;font-size:17px;margin-bottom:7px}.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:13px}.stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px}.stat span{font-size:9px;color:var(--muted)}.stat strong{display:block;font-size:17px;margin-top:4px}.notice{background:#eef8f5;border:1px solid #cdebe1;color:#4d7468;padding:11px;border-radius:9px;font-size:10px;line-height:1.6}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}.paperstage{min-height:400px}}
+@media(max-width:550px){main,.top{padding-left:12px;padding-right:12px}.sidebar{grid-template-columns:1fr}.body{padding:13px}.paperstage{padding:9px;min-height:300px}.statrow{gap:5px}.stat{padding:8px}}
+@media print{
+ @page{size:A4;margin:0}
+ body{background:white!important}
+ header,.hero,.sidebar,.workspacehead,.statrow,.notice,.no-print{display:none!important}
+ main{padding:0!important;margin:0!important;max-width:none!important}
+ .layout,.workspace{display:block!important}
+ .card{border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
+ .paperstage{padding:0!important;min-height:0!important;overflow:visible!important;background:white!important}
+ .paper{margin:0!important;box-shadow:none!important;overflow:hidden!important}
+}
+</style>
+</head>
+<body>
+<header><div class="top"><div><span class="mark">▦</span>CSC SEVA TOOLS<small>ID CARD PRINT PRODUCTION</small></div><span style="font-size:10px;color:#c5d6e4">LAYOUT · SHEET · PRINT</span></div></header>
+<main>
+<section class="hero"><div class="kicker">Print preparation workspace</div><h1>ID Card Print Studio<span style="color:var(--teal)">.</span></h1><p class="sub">Arrange card images on a printable sheet. Set card dimensions, number of copies, margins and spacing, then check the page layout before printing.</p></section>
+<div class="layout">
+<aside class="sidebar">
+<section class="card"><div class="head"><h2>01 / Upload card images</h2><p>Select one or more existing card images.</p></div><div class="body">
+<div class="upload"><div class="field"><label for="files">IMAGE FILES</label><input id="files" type="file" accept="image/png,image/jpeg,image/webp" multiple></div><p class="help">JPG, PNG or WebP. Images are arranged as card fronts; this tool does not create or verify identity documents.</p></div>
+<div class="field" style="margin-top:13px"><label for="copies">COPIES PER IMAGE</label><input id="copies" type="number" min="1" max="100" value="1"></div>
+<div class="field"><label for="paperSize">PAPER SIZE</label><select id="paperSize"><option value="a4">A4 · 210 × 297 mm</option><option value="a5">A5 · 148 × 210 mm</option><option value="letter">Letter · 8.5 × 11 in</option></select></div>
+</div></section>
+<section class="card"><div class="head"><h2>02 / Card dimensions</h2><p>Enter dimensions in millimetres.</p></div><div class="body">
+<div class="grid">
+<div class="field"><label for="cardW">WIDTH (mm)</label><input id="cardW" type="number" min="10" max="200" value="86"></div>
+<div class="field"><label for="cardH">HEIGHT (mm)</label><input id="cardH" type="number" min="10" max="200" value="54"></div>
+</div>
+<div class="field"><label for="fit">IMAGE FIT</label><select id="fit"><option value="contain">Contain · Show entire image</option><option value="cover">Cover · Fill card area</option><option value="fill">Stretch · Fill dimensions</option></select></div>
+<div class="field"><label for="gap">GAP BETWEEN CARDS (mm)</label><input id="gap" type="number" min="0" max="30" step=".5" value="3"></div>
+<div class="grid">
+<div class="field"><label for="marginX">LEFT / RIGHT MARGIN</label><input id="marginX" type="number" min="0" max="40" step=".5" value="5"></div>
+<div class="field"><label for="marginY">TOP / BOTTOM MARGIN</label><input id="marginY" type="number" min="0" max="40" step=".5" value="5"></div>
+</div>
+<div class="field"><label for="orientation">PAGE ORIENTATION</label><select id="orientation"><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></div>
+<div class="field"><label for="border">CARD BORDER</label><select id="border"><option value="1px solid #b8c4d0">Thin grey border</option><option value="1px dashed #8b98a8">Dashed cut guide</option><option value="none">No border</option></select></div>
+<button class="btn primary" id="update" style="width:100%">Update print layout ↗</button>
+</div></section>
+<section class="card"><div class="head"><h2>03 / Output</h2></div><div class="body">
+<div class="btnrow"><button class="btn primary" id="print">Print / Save PDF</button><button class="btn" id="reset">Reset</button></div>
+<p class="help">For accurate physical size, print at 100% / Actual Size and disable “Fit to page” in the print dialog.</p>
+</div></section>
+</aside>
+<div class="workspace">
+<section class="card">
+<div class="workspacehead"><h2>Printable sheet preview</h2><span id="pageInfo">Upload images to begin</span></div>
+<div class="paperstage" id="stage"><div class="paper" id="paper" style="width:210mm;height:297mm"><div class="empty"><div><strong>Your print sheet is ready</strong>Upload card images to arrange them on the page.</div></div></div></div>
+<div class="body no-print"><div class="statrow"><div class="stat"><span>CARDS ON SHEET</span><strong id="count">0</strong></div><div class="stat"><span>CARDS PER ROW</span><strong id="cols">0</strong></div><div class="stat"><span>ESTIMATED PAGES</span><strong id="pages">0</strong></div></div><div class="notice">Print size depends on printer margins and scaling. Check the print preview and measure one test sheet before printing a large batch.</div></div>
+</section>
+</div>
+</div>
+</main>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+let images=[],objectUrls=[];
+const paperSizes={a4:[210,297],a5:[148,210],letter:[215.9,279.4]};
+function val(id){return Number($(id).value)}
+function valid(id,min,max){const v=val(id);return Number.isFinite(v)&&v>=min&&v<=max}
+function revokeUrls(){objectUrls.forEach(u=>URL.revokeObjectURL(u));objectUrls=[]}
+function update(){
+ const w=val('cardW'),h=val('cardH'),gap=val('gap'),mx=val('marginX'),my=val('marginY');
+ if(!valid('cardW',10,200)||!valid('cardH',10,200)||!valid('gap',0,30)||!valid('marginX',0,40)||!valid('marginY',0,40)){
+  alert('Check card dimensions, gap and margins.');return;
+ }
+ const base=paperSizes[$('paperSize').value].slice();
+ const landscape=$('orientation').value==='landscape';
+ const pw=landscape?base[1]:base[0],ph=landscape?base[0]:base[1];
+ if(w+2*mx>pw||h+2*my>ph){alert('The card is larger than the usable paper area. Reduce card dimensions or margins.');return;}
+ const cols=Math.max(1,Math.floor((pw-2*mx+gap)/(w+gap)));
+ const rows=Math.max(1,Math.floor((ph-2*my+gap)/(h+gap)));
+ const perPage=cols*rows;
+ const copies=Math.max(1,Math.min(100,Math.floor(val('copies')||1)));
+ const total=images.reduce((s,im)=>s+copies,0);
+ const pageCount=images.length?Math.ceil(total/perPage):0;
+ const paper=$('paper');
+ paper.style.width=pw+'mm';paper.style.height=ph+'mm';
+ paper.innerHTML='';
+ paper.style.background='#fff';
+ const grid=document.createElement('div');grid.className='gridcards';
+ grid.style.padding=`${my}mm ${mx}mm`;
+ grid.style.gridTemplateColumns=`repeat(${cols},${w}mm)`;
+ grid.style.gridAutoRows=h+'mm';
+ grid.style.gap=gap+'mm';
+ const border=$('border').value,fit=$('fit').value;
+ if(images.length){
+  const repeated=[];
+  images.forEach(im=>{for(let i=0;i<copies;i++)repeated.push(im)});
+  const current=repeated.slice(0,perPage);
+  current.forEach((im,i)=>{
+   const card=document.createElement('div');card.className='idcard';
+   card.style.width=w+'mm';card.style.height=h+'mm';card.style.border=border;
+   const img=document.createElement('img');img.src=im.url;img.alt=im.name;img.style.objectFit=fit;
+   card.appendChild(img);
+   const num=document.createElement('span');num.className='cardnumber';num.textContent=String(i+1);card.appendChild(num);
+   grid.appendChild(card);
+  });
+  paper.appendChild(grid);
+ }else{
+  paper.innerHTML='<div class="empty"><div><strong>Your print sheet is ready</strong>Upload card images to arrange them on the page.</div></div>';
+ }
+ $('count').textContent=total;
+ $('cols').textContent=images.length?cols:0;
+ $('pages').textContent=pageCount;
+ $('pageInfo').textContent=images.length?`${pw} × ${ph} mm · ${cols} columns × ${rows} rows · ${total} card copies`:'Upload images to begin';
+}
+$('files').addEventListener('change',e=>{
+ const selected=[...e.target.files];
+ if(selected.length>30){alert('Choose up to 30 image files at a time.');e.target.value='';return;}
+ if(selected.some(f=>f.size>15*1024*1024)){alert('Each image must be smaller than 15 MB.');e.target.value='';return;}
+ const validFiles=selected.filter(f=>/^image\/(png|jpeg|webp)$/.test(f.type));
+ if(validFiles.length!==selected.length){alert('Some files were skipped. Choose JPG, PNG or WebP images only.');}
+ revokeUrls();images=validFiles.map(f=>({name:f.name,url:URL.createObjectURL(f)}));objectUrls=images.map(x=>x.url);update();
+});
+['copies','paperSize','cardW','cardH','fit','gap','marginX','marginY','orientation','border'].forEach(id=>$(id).addEventListener('change',update));
+$('update').addEventListener('click',update);
+$('print').addEventListener('click',()=>{
+ if(!images.length){alert('Upload at least one card image first.');return;}
+ update();
+ window.print();
+});
+$('reset').addEventListener('click',()=>{
+ if(!confirm('Clear the selected images and restore default print settings?'))return;
+ revokeUrls();images=[];$('files').value='';$('copies').value=1;$('paperSize').value='a4';$('cardW').value=86;$('cardH').value=54;$('fit').value='contain';$('gap').value=3;$('marginX').value=5;$('marginY').value=5;$('orientation').value='portrait';$('border').value='1px solid #b8c4d0';update();
+});
+update();
+})();
+</script>
+
+<!-- CSC Seva Tool: customer usage tracking -->
+<script type="module" src="../usage-tracker.js"></script>
+<script>
+(function () {
+  if (window.__CSC_ACTION_TRACKING_INSTALLED__) return;
+  window.__CSC_ACTION_TRACKING_INSTALLED__ = true;
+  document.addEventListener("click", function (event) {
+    const el = event.target && event.target.closest ? event.target.closest("button, input[type=button], input[type=submit]") : null;
+    if (!el || el.disabled || !window.CSCUsage || typeof window.CSCUsage.trackAction !== "function") return;
+    const label = (el.getAttribute("aria-label") || el.innerText || el.value || el.title || "Button click").trim().replace(/\s+/g, " ").slice(0, 80);
+    if (!label || /^(cancel|close|back)$/i.test(label)) return;
+    window.CSCUsage.trackAction(label);
+  }, true);
+})();
+</script>
+</body>
+</html>

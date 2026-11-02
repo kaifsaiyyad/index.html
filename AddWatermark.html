@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f766e">
+<title>Image Watermark Tool | CSC Seva Tools</title>
+<style>
+:root{--p:#0f766e;--dark:#123e42;--bg:#f2f9f8;--line:#d7e9e6;--muted:#657c7a}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#183638}
+header{background:#fff;padding:16px 5%;border-bottom:1px solid var(--line);font-weight:800;font-size:20px;color:var(--p)}header span{color:var(--dark)}
+.hero{background:linear-gradient(120deg,#123e42,#0f766e,#38a89c);color:white;padding:30px 5%}.hero>div{max-width:1100px;margin:auto}.hero small{letter-spacing:2px;text-transform:uppercase;color:#baf4e9}
+h1{font-size:clamp(27px,4vw,40px);margin:12px 0}.hero p{max-width:650px;font-size:13px;line-height:1.7;color:#e0fbf6}
+main{max-width:1100px;margin:22px auto;padding:0 14px 35px}.grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px;align-items:start}
+.card{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 6px 24px #123e4208}
+.head{padding:18px;border-bottom:1px solid var(--line)}.head h2{font-size:17px;margin:0 0 5px}.head p{font-size:11px;color:var(--muted);line-height:1.5;margin:0}
+.body{padding:17px}.field{margin-bottom:14px}label{display:block;font-size:11px;font-weight:700;margin-bottom:7px}
+input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:12px Arial,sans-serif;background:#fff;color:#183638}
+input[type=range]{padding:0;accent-color:var(--p)}input:focus,select:focus{outline:2px solid #b7e9df}
+.range{display:flex;align-items:center;gap:10px}.range input{flex:1}.range strong{font-size:11px;min-width:40px;text-align:right;color:var(--p)}
+.btn{border:0;border-radius:8px;padding:11px 14px;font-size:12px;font-weight:700;cursor:pointer}.primary{background:var(--p);color:white}.secondary{background:#e7f6f2;color:var(--p);border:1px solid var(--line)}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{flex:1}
+.upload{padding:20px 12px;text-align:center;border:2px dashed #acd9d0;border-radius:10px;background:#f7fcfa}
+.upload p{font-size:11px;color:var(--muted);line-height:1.5}
+.preview{padding:16px;background:#eaf2f0;min-height:320px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.canvas-wrap{max-width:100%;position:relative;line-height:0}
+#sourceImage{display:none;max-width:100%;max-height:560px;object-fit:contain}
+#previewCanvas{display:block;max-width:100%;max-height:560px;width:auto;height:auto}
+.status{font-size:11px;line-height:1.6;color:var(--muted);margin-top:10px}
+footer{text-align:center;padding:20px;background:white;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+@media(max-width:750px){.grid{grid-template-columns:1fr}.hero{padding:25px 17px}main{padding:0 10px 25px}.body{padding:14px}.preview{padding:10px;min-height:220px}#previewCanvas{max-height:420px}}
+</style>
+</head>
+<body>
+<header>CSC <span>Seva Tools</span></header>
+<section class="hero"><div><small>Image utilities · Tool 10</small><h1>Add Watermark to Image</h1><p>Protect your images with custom text. Adjust placement, size, opacity and colour, then export a watermarked image.</p></div></section>
+<main><div class="grid">
+<section class="card">
+<div class="head"><h2>Watermark settings</h2><p>Upload an image and customise your text.</p></div>
+<div class="body">
+<div class="upload"><strong>Choose an image</strong><p>JPG, PNG or WebP · Maximum 15 MB</p><input id="file" type="file" accept="image/jpeg,image/png,image/webp"></div>
+<div class="field"><label for="text">Watermark text</label><input id="text" maxlength="100" value="CSC Seva Tools" placeholder="Enter watermark text"></div>
+<div class="field"><label for="position">Position</label><select id="position"><option value="center">Center</option><option value="bottom-right">Bottom right</option><option value="bottom-left">Bottom left</option><option value="top-right">Top right</option><option value="top-left">Top left</option><option value="repeat">Repeat across image</option></select></div>
+<div class="field"><label for="size">Text size</label><div class="range"><input id="size" type="range" min="12" max="100" value="36"><strong id="sizeVal">36 px</strong></div></div>
+<div class="field"><label for="opacity">Opacity</label><div class="range"><input id="opacity" type="range" min="5" max="100" value="45"><strong id="opacityVal">45%</strong></div></div>
+<div class="field"><label for="rotation">Rotation</label><div class="range"><input id="rotation" type="range" min="-60" max="60" value="-20"><strong id="rotationVal">-20°</strong></div></div>
+<div class="field"><label for="color">Watermark colour</label><select id="color"><option value="#ffffff">White</option><option value="#000000">Black</option><option value="#ffcc00">Gold</option><option value="#0f766e">Teal</option><option value="#ff3030">Red</option></select></div>
+<div class="field"><label for="quality">Export format</label><select id="quality"><option value="image/png">PNG — best for transparency</option><option value="image/jpeg">JPG — smaller file</option></select></div>
+<div class="actions"><button class="btn primary" id="download" type="button">Download image</button><button class="btn secondary" id="reset" type="button">Reset</button></div>
+<div id="status" class="status" role="status" aria-live="polite">The original image is not changed. Processing takes place in this browser.</div>
+</div>
+</section>
+<section class="card">
+<div class="head"><h2>Live preview</h2><p>Review your watermark before downloading.</p></div>
+<div class="preview"><div class="canvas-wrap"><canvas id="previewCanvas" width="640" height="420"></canvas></div></div>
+<div class="body"><div class="status" id="dimensions">Upload an image to see its dimensions.</div></div>
+</section>
+</div></main>
+<footer>Image utilities · CSC Seva Tools</footer>
+<script>
+(function(){
+const $=id=>document.getElementById(id),canvas=$("previewCanvas"),ctx=canvas.getContext("2d");
+let image=null,sourceURL=null;
+function status(t){$("status").textContent=t;}
+function render(){
+$("sizeVal").textContent=$("size").value+" px";
+$("opacityVal").textContent=$("opacity").value+"%";
+$("rotationVal").textContent=$("rotation").value+"°";
+if(!image){
+canvas.width=640;canvas.height=420;ctx.fillStyle="#dfeeea";ctx.fillRect(0,0,640,420);
+ctx.fillStyle="#48716a";ctx.textAlign="center";ctx.font="bold 19px Arial";ctx.fillText("Upload an image to begin",320,205);
+ctx.font="13px Arial";ctx.fillText("Your watermark preview appears here",320,232);
+return;
+}
+const maxW=1000,maxH=800,scale=Math.min(1,maxW/image.width,maxH/image.height);
+canvas.width=Math.max(1,Math.round(image.width*scale));canvas.height=Math.max(1,Math.round(image.height*scale));
+ctx.drawImage(image,0,0,canvas.width,canvas.height);
+const text=$("text").value.trim();if(!text)return;
+const fontSize=Math.max(8,Number($("size").value)*scale);
+ctx.save();ctx.globalAlpha=Number($("opacity").value)/100;ctx.fillStyle=$("color").value;
+ctx.font="bold "+fontSize+"px Arial";ctx.textAlign="center";ctx.textBaseline="middle";
+const angle=Number($("rotation").value)*Math.PI/180;
+const margin=fontSize;
+const pos=$("position").value;
+if(pos==="repeat"){
+for(let y=fontSize*2;y<canvas.height+fontSize;y+=fontSize*3){
+for(let x=fontSize*3;x<canvas.width+fontSize;x+=fontSize*5){
+ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.fillText(text,0,0);ctx.restore();
+}}
+}else{
+let x=canvas.width/2,y=canvas.height/2;
+if(pos.includes("left"))x=margin+ctx.measureText(text).width/2;
+if(pos.includes("right"))x=canvas.width-margin-ctx.measureText(text).width/2;
+if(pos.includes("top"))y=margin;
+if(pos.includes("bottom"))y=canvas.height-margin;
+ctx.translate(x,y);ctx.rotate(angle);ctx.fillText(text,0,0);
+}
+ctx.restore();
+}
+$("file").addEventListener("change",e=>{
+const f=e.target.files[0];if(!f)return;
+if(!["image/jpeg","image/png","image/webp"].includes(f.type)){status("Please choose a JPG, PNG or WebP image.");return;}
+if(f.size>15*1024*1024){status("Image is larger than 15 MB.");return;}
+const url=URL.createObjectURL(f),img=new Image();
+img.onload=()=>{if(sourceURL)URL.revokeObjectURL(sourceURL);sourceURL=url;image=img;$("dimensions").textContent=img.width+" × "+img.height+" pixels";status("Image loaded. Customise your watermark and download.");render();};
+img.onerror=()=>{URL.revokeObjectURL(url);status("Could not open this image.");};
+img.src=url;
+});
+["text","position","size","opacity","rotation","color"].forEach(id=>$(id).addEventListener("input",render));
+$("download").addEventListener("click",()=>{
+if(!image){status("Upload an image first.");return;}
+try{render();const mime=$("quality").value;
+const out=document.createElement("canvas");out.width=image.width;out.height=image.height;
+const c=out.getContext("2d");c.drawImage(image,0,0);
+const scale=image.width/canvas.width;
+c.save();c.globalAlpha=Number($("opacity").value)/100;c.fillStyle=$("color").value;
+c.font="bold "+Math.max(8,Number($("size").value)*scale)+"px Arial";c.textAlign="center";c.textBaseline="middle";
+const text=$("text").value.trim();
+if(text){
+const size=Number($("size").value)*scale,margin=size;
+if($("position").value==="repeat"){
+for(let y=size*2;y<out.height+size;y+=size*3)for(let x=size*3;x<out.width+size;x+=size*5){c.save();c.translate(x,y);c.rotate(Number($("rotation").value)*Math.PI/180);c.fillText(text,0,0);c.restore();}
+}else{
+let x=out.width/2,y=out.height/2;
+if($("position").value.includes("left"))x=margin+c.measureText(text).width/2;
+if($("position").value.includes("right"))x=out.width-margin-c.measureText(text).width/2;
+if($("position").value.includes("top"))y=margin;
+if($("position").value.includes("bottom"))y=out.height-margin;
+c.translate(x,y);c.rotate(Number($("rotation").value)*Math.PI/180);c.fillText(text,0,0);
+}}
+c.restore();
+if(mime==="image/jpeg"){const bg=document.createElement("canvas");bg.width=out.width;bg.height=out.height;const b=bg.getContext("2d");b.fillStyle="#fff";b.fillRect(0,0,bg.width,bg.height);b.drawImage(out,0,0);downloadCanvas(bg,mime);}
+else downloadCanvas(out,mime);
+}catch(err){status("Unable to export image. Try another browser or smaller image.");}
+});
+function downloadCanvas(c,mime){const a=document.createElement("a");a.download="watermarked-image."+(mime==="image/jpeg"?"jpg":"png");a.href=c.toDataURL(mime,.94);a.click();status("Download started. Check your Downloads folder.");}
+$("reset").addEventListener("click",()=>{$("text").value="CSC Seva Tools";$("position").value="center";$("size").value=36;$("opacity").value=45;$("rotation").value=-20;$("color").value="#ffffff";$("quality").value="image/png";render();status("Settings reset.");});
+render();
+})();
+</script>
+
+<!-- CSC Seva Tool: customer usage tracking -->
+<script type="module" src="../usage-tracker.js"></script>
+<script>
+(function () {
+  if (window.__CSC_ACTION_TRACKING_INSTALLED__) return;
+  window.__CSC_ACTION_TRACKING_INSTALLED__ = true;
+  document.addEventListener("click", function (event) {
+    const el = event.target && event.target.closest ? event.target.closest("button, input[type=button], input[type=submit]") : null;
+    if (!el || el.disabled || !window.CSCUsage || typeof window.CSCUsage.trackAction !== "function") return;
+    const label = (el.getAttribute("aria-label") || el.innerText || el.value || el.title || "Button click").trim().replace(/\s+/g, " ").slice(0, 80);
+    if (!label || /^(cancel|close|back)$/i.test(label)) return;
+    window.CSCUsage.trackAction(label);
+  }, true);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="Create a professional personal or marriage biodata with photo, education, family details, live preview and PDF printing.">
+<title>Biodata Maker Pro | Kisan Seva Tools</title>
+<style>
+:root{--bg:#07111f;--panel:#101f33;--panel2:#142841;--line:#293e55;--text:#edf6ff;--muted:#9db1c9;--green:#46efad;--cyan:#55d8ff;--red:#ff788b;--gold:#d5a65b;--radius:18px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 8% 0%,#164a3c66,transparent 35%),radial-gradient(ellipse at 95% 8%,#123d7055,transparent 35%),var(--bg);color:var(--text);font-family:Inter,"Segoe UI",system-ui,Arial,sans-serif;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(#9bbad00a 1px,transparent 1px),linear-gradient(90deg,#9bbad00a 1px,transparent 1px);background-size:32px 32px}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px clamp(14px,4vw,42px);background:#07111feF;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{display:grid;place-items:center;width:43px;height:43px;border-radius:14px;color:#04170f;font-weight:950;font-size:23px;background:linear-gradient(135deg,var(--green),var(--cyan));box-shadow:0 0 25px #46efad22}
+.brand strong{display:block;font-size:14px}
+.brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:10px 14px;min-height:41px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);color:var(--text);font-weight:750;transition:.18s}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.13)}
+.primary{color:#04170f;background:linear-gradient(110deg,var(--green),#6adfd3);border-color:#46efad77}
+.danger{color:#ffc0c9;background:#ff788b0c;border-color:#ff788b55}
+.hero{max-width:1450px;margin:auto;padding:35px clamp(14px,4vw,42px) 24px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 11px;border:1px solid #46efad44;border-radius:50px;color:#a9f9d7;background:#46efad0c;font-size:10px;font-weight:850;letter-spacing:.13em}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+.hero h1{font-size:clamp(32px,5vw,57px);line-height:1.04;letter-spacing:-.055em;margin:18px 0 12px}
+.gradient{color:transparent;background:linear-gradient(95deg,#fff,var(--green),var(--cyan));background-clip:text;-webkit-background-clip:text}
+.hero p{max-width:750px;color:var(--muted);font-size:14px;line-height:1.8;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:19px}
+.chip{padding:8px 10px;border:1px solid var(--line);border-radius:9px;color:#cbd9e8;background:#ffffff04;font-size:11px}
+.layout{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(330px,.97fr);align-items:start;gap:19px;max-width:1450px;margin:auto;padding:0 clamp(14px,4vw,42px) 40px}
+.panel{min-width:0;border:1px solid var(--line);border-radius:var(--radius);background:#101f33e8;box-shadow:0 20px 60px #0003;overflow:hidden;backdrop-filter:blur(15px)}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px 19px;border-bottom:1px solid var(--line)}
+.panel-head h2{font-size:16px;margin:0}
+.panel-head p{font-size:11px;color:var(--muted);margin:5px 0 0;line-height:1.5}
+.badge{padding:6px 9px;border-radius:8px;background:#46efad12;color:var(--green);font-size:10px;font-weight:850;white-space:nowrap}
+.form-body{padding:19px}
+.section-title{display:flex;align-items:center;gap:10px;margin:27px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line);font-size:13px;font-weight:850}
+.section-title:first-child{margin-top:0}
+.num{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;color:#04170f;background:linear-gradient(135deg,var(--green),var(--cyan));font-size:11px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.field{min-width:0}
+.full{grid-column:1/-1}
+label{display:block;font-size:11px;color:#d2e1f1;font-weight:750;margin-bottom:7px}
+.optional{font-weight:450;color:#8197b0}
+input,select,textarea{width:100%;min-width:0;min-height:43px;border:1px solid #344961;border-radius:10px;padding:10px 11px;background:#081626;color:var(--text)}
+input::placeholder,textarea::placeholder{color:#657c96}
+textarea{min-height:80px;resize:vertical;line-height:1.6}
+input[type=color]{padding:4px;height:43px}
+input[type=file]{font-size:11px;padding:8px}
+.hint{color:#8298b0;font-size:10px;line-height:1.5;margin-top:6px}
+.photo-box{display:flex;align-items:center;gap:14px;padding:13px;border:1px dashed #55d8ff55;border-radius:13px;background:#55d8ff08}
+.photo-thumb{display:grid;place-items:center;width:75px;height:91px;flex-shrink:0;overflow:hidden;border:1px solid var(--line);border-radius:9px;background:#081626;color:var(--muted);font-size:10px;text-align:center}
+.photo-thumb img{width:100%;height:100%;object-fit:cover}
+.photo-meta{min-width:0;flex:1}
+.photo-meta strong{display:block;font-size:12px;margin-bottom:5px}
+.photo-meta p{font-size:10px;line-height:1.5;color:var(--muted);margin:0 0 9px}
+.repeat-list{display:grid;gap:10px}
+.repeat-card{padding:12px;border:1px solid var(--line);border-radius:12px;background:#ffffff03}
+.repeat-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;font-size:11px;font-weight:850}
+.remove{padding:6px 9px;border:1px solid #ff788b55;border-radius:8px;color:#ffabb8;background:#ff788b0a;font-size:10px}
+.add{width:100%;margin-top:10px;padding:11px;border:1px dashed #46efad55;border-radius:10px;color:var(--green);background:#46efad08;font-weight:800}
+.form-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:23px;padding-top:17px;border-top:1px solid var(--line)}
+.form-actions .btn{flex:1}
+.status{display:none;margin-top:12px;padding:11px 12px;border-radius:10px;font-size:11px;line-height:1.6}
+.status.show{display:block}
+.status.ok{color:#b6f8d9;background:#46efad0d;border:1px solid #46efad44}
+.status.error{color:#ffc3cc;background:#ff788b0c;border:1px solid #ff788b44}
+.preview-panel{position:sticky;top:83px}
+.preview-tools{display:flex;flex-wrap:wrap;gap:7px;padding:12px;border-bottom:1px solid var(--line)}
+.preview-tools select{flex:1;min-width:130px;width:auto}
+.preview-tools .btn{padding:8px 10px;min-height:38px;font-size:11px}
+.stage{padding:15px;background:#091523;overflow:auto;min-height:400px}
+.paper{width:100%;max-width:650px;min-height:660px;margin:auto;padding:30px 28px;background:#fff;color:#1d2a39;box-shadow:0 15px 42px #0005;overflow-wrap:anywhere}
+.paper-header{display:flex;align-items:center;gap:16px;padding-bottom:17px;border-bottom:2px solid var(--accent,#1d8b66)}
+.paper-photo{display:grid;place-items:center;width:88px;height:105px;flex-shrink:0;overflow:hidden;border:1px solid #d8e4dc;border-radius:6px;background:#f1f5f2;color:#708076;font-size:10px;text-align:center}
+.paper-photo img{width:100%;height:100%;object-fit:cover}
+.paper-person{min-width:0}
+.paper-person h2{font-size:23px;line-height:1.2;margin:0 0 7px;color:var(--accent,#176b4e);overflow-wrap:anywhere}
+.paper-person p{font-size:10px;line-height:1.5;color:#667384;margin:3px 0}
+.paper-section{margin-top:20px}
+.paper-section h3{margin:0 0 9px;padding:7px 9px;background:#edf7f1;color:var(--accent,#176b4e);border-left:3px solid var(--accent,#1d8b66);font-size:11px;letter-spacing:.035em;text-transform:uppercase}
+.paper-table{width:100%;border-collapse:collapse;font-size:10px}
+.paper-table td{padding:7px 5px;border-bottom:1px solid #e8eeea;vertical-align:top;white-space:pre-wrap}
+.paper-table td:first-child{width:38%;color:#657386}
+.paper-table td:last-child{color:#1d2a39;font-weight:600}
+.paper-paragraph{font-size:10px;line-height:1.7;white-space:pre-wrap;margin:0;color:#39485a}
+.paper-footer{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-top:28px;padding-top:12px;border-top:1px solid #e0e8e2;color:#6e7d70;font-size:9px;white-space:pre-wrap}
+.template-classic{font-family:Georgia,serif}
+.template-classic .paper-section h3{background:#f0f0e8;color:#304739;border-left-color:#687e6c}
+.template-minimal .paper-header{border-color:#23364a}
+.template-minimal .paper-person h2{color:#20344a}
+.template-minimal .paper-section h3{background:#f0f3f7;color:#20344a;border-left-color:#23364a}
+.template-elegant{border-top:7px solid var(--gold)}
+.template-elegant .paper-person h2{color:#87612c}
+.template-elegant .paper-section h3{background:#fbf3e5;color:#87612c;border-left-color:var(--gold)}
+.completion{display:flex;align-items:center;gap:12px;padding:12px;margin:13px;border:1px solid var(--line);border-radius:12px;background:#ffffff03}
+.percent{display:grid;place-items:center;width:44px;height:44px;border:2px solid #46efad66;border-radius:50%;color:var(--green);font-size:11px;font-weight:900;flex-shrink:0}
+.completion strong{font-size:11px}
+.completion p{font-size:10px;color:var(--muted);margin:4px 0 0;line-height:1.5}
+.footer{text-align:center;padding:22px 14px 32px;color:#8194aa;font-size:10px;line-height:1.8}
+.toast{position:fixed;right:16px;bottom:16px;z-index:99;max-width:calc(100vw - 32px);padding:13px 15px;border:1px solid #46efad66;border-radius:12px;background:#102b3b;color:#efffff;box-shadow:0 12px 35px #0005;opacity:0;transform:translateY(10px);pointer-events:none;transition:.2s}
+.toast.show{opacity:1;transform:translateY(0)}
+[hidden]{display:none!important}
+@media(max-width:960px){.layout{grid-template-columns:1fr}.preview-panel{position:static}.stage{min-height:0}}
+@media(max-width:600px){.topbar{align-items:flex-start}.brand small{max-width:155px}.actions .btn{font-size:10px;padding:8px}.hero{padding-top:26px}.form-body{padding:14px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.paper{padding:20px 16px;min-height:0}.paper-person h2{font-size:19px}.paper-photo{width:70px;height:87px}.stage{padding:9px}.form-actions .btn{flex-basis:100%}}
+@media print{@page{size:A4;margin:12mm}body{background:#fff!important;color:#111!important}body:before,.topbar,.hero,.form-panel,.preview-tools,.completion,.footer,.toast,.no-print{display:none!important}.layout{display:block;max-width:none;margin:0;padding:0}.preview-panel{position:static;border:0;background:#fff;box-shadow:none;overflow:visible}.preview-panel>.panel-head{display:none}.stage{padding:0;background:#fff;overflow:visible}.paper{width:100%;max-width:none;min-height:0;padding:0;box-shadow:none}.paper-section{break-inside:avoid}.paper-table tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">K</div>
+    <div><strong>Kisan Seva Tools</strong><small>FutureTech Biodata Studio · Tool #30</small></div>
+  </div>
+  <div class="actions">
+    <button class="btn" id="topReset" type="button">Reset</button>
+    <button class="btn primary" id="topPrint" type="button">Print / PDF ↗</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow"><span class="dot"></span> FUTURETECH DOCUMENT STUDIO</div>
+  <h1>Create your biodata.<br><span class="gradient">Present yourself professionally.</span></h1>
+  <p>Design a personal, family, student or marriage biodata with a live document preview, profile photo, education records and print-ready output. You control which details you include.</p>
+  <div class="chips">
+    <span class="chip">✦ Live preview</span><span class="chip">✦ Four templates</span>
+    <span class="chip">✦ Photo support</span><span class="chip">✦ PDF via print</span>
+    <span class="chip">✦ Local draft storage</span><span class="chip">✦ Mobile responsive</span>
+  </div>
+</section>
+
+<main class="layout">
+<section class="panel form-panel">
+  <div class="panel-head">
+    <div><h2>Biodata details</h2><p>Fill the fields you need. The preview updates automatically.</p></div>
+    <span class="badge">EDIT MODE</span>
+  </div>
+  <div class="form-body">
+  <form id="bioForm" novalidate>
+    <div class="section-title"><span class="num">01</span> Document setup</div>
+    <div class="grid">
+      <div class="field"><label for="docType">Biodata type</label>
+        <select id="docType" name="docType"><option>Personal Biodata</option><option>Marriage Biodata</option><option>Professional Biodata</option><option>Student Biodata</option></select>
+      </div>
+      <div class="field"><label for="template">Design template</label>
+        <select id="template" name="template"><option value="modern">Modern Emerald</option><option value="classic">Classic</option><option value="minimal">Minimal Professional</option><option value="elegant">Elegant Gold</option></select>
+      </div>
+      <div class="field"><label for="accent">Accent colour</label><input id="accent" name="accent" type="color" value="#1d8b66"></div>
+      <div class="field"><label for="fontScale">Text size</label><select id="fontScale" name="fontScale"><option value="small">Compact</option><option value="normal" selected>Normal</option><option value="large">Large</option></select></div>
+    </div>
+
+    <div class="section-title"><span class="num">02</span> Profile photo</div>
+    <div class="photo-box">
+      <div class="photo-thumb" id="photoThumb">PHOTO<br>PREVIEW</div>
+      <div class="photo-meta"><strong>Choose a profile image</strong><p>JPG, PNG or WebP. The selected photo is displayed in your browser.</p><input id="photo" type="file" accept="image/jpeg,image/png,image/webp"><button class="btn" id="removePhoto" type="button" style="margin-top:8px">Remove photo</button></div>
+    </div>
+
+    <div class="section-title"><span class="num">03</span> Personal information</div>
+    <div class="grid">
+      <div class="field full"><label for="fullName">Full name <span class="optional">· required</span></label><input id="fullName" name="fullName" required maxlength="100" placeholder="Enter full name"></div>
+      <div class="field"><label for="dob">Date of birth</label><input id="dob" name="dob" type="date"></div>
+      <div class="field"><label for="gender">Gender</label><select id="gender" name="gender"><option value="">Not specified</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+      <div class="field"><label for="height">Height</label><input id="height" name="height" maxlength="35" placeholder="e.g. 5 ft 7 in"></div>
+      <div class="field"><label for="marital">Marital status</label><select id="marital" name="marital"><option value="">Not specified</option><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select></div>
+      <div class="field"><label for="nationality">Nationality</label><input id="nationality" name="nationality" maxlength="60" placeholder="e.g. Indian"></div>
+      <div class="field"><label for="religion">Religion / community <span class="optional">· optional</span></label><input id="religion" name="religion" maxlength="100"></div>
+      <div class="field"><label for="motherTongue">Mother tongue</label><input id="motherTongue" name="motherTongue" maxlength="60" placeholder="e.g. Marathi"></div>
+      <div class="field"><label for="blood">Blood group</label><select id="blood" name="blood"><option value="">Not specified</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+      <div class="field"><label for="city">City / district</label><input id="city" name="city" maxlength="100"></div>
+    </div>
+
+    <div class="section-title"><span class="num">04</span> Contact details</div>
+    <div class="grid">
+      <div class="field"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" maxlength="25" placeholder="Contact number"></div>
+      <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" maxlength="120" placeholder="name@example.com"></div>
+      <div class="field full"><label for="address">Address <span class="optional">· optional</span></label><textarea id="address" name="address" maxlength="500" placeholder="Village, post, district, state or address you want to show"></textarea></div>
+    </div>
+
+    <div class="section-title"><span class="num">05</span> Education records</div>
+    <div class="repeat-list" id="educationList"></div>
+    <button class="add" id="addEducation" type="button">＋ Add education record</button>
+
+    <div class="section-title"><span class="num">06</span> Occupation</div>
+    <div class="grid">
+      <div class="field"><label for="occupation">Occupation / profession</label><input id="occupation" name="occupation" maxlength="120" placeholder="Job, business or profession"></div>
+      <div class="field"><label for="employer">Employer / organisation</label><input id="employer" name="employer" maxlength="120"></div>
+      <div class="field"><label for="workLocation">Work location</label><input id="workLocation" name="workLocation" maxlength="120"></div>
+      <div class="field"><label for="income">Income <span class="optional">· optional</span></label><input id="income" name="income" maxlength="80" placeholder="Include only if needed"></div>
+    </div>
+
+    <div class="section-title"><span class="num">07</span> Family details</div>
+    <div class="grid">
+      <div class="field"><label for="father">Father's name</label><input id="father" name="father" maxlength="100"></div>
+      <div class="field"><label for="fatherJob">Father's occupation</label><input id="fatherJob" name="fatherJob" maxlength="120"></div>
+      <div class="field"><label for="mother">Mother's name</label><input id="mother" name="mother" maxlength="100"></div>
+      <div class="field"><label for="motherJob">Mother's occupation</label><input id="motherJob" name="motherJob" maxlength="120"></div>
+      <div class="field"><label for="siblings">Brothers / sisters</label><input id="siblings" name="siblings" maxlength="150" placeholder="e.g. 1 brother, 1 sister"></div>
+      <div class="field"><label for="familyType">Family type</label><select id="familyType" name="familyType"><option value="">Not specified</option><option>Joint family</option><option>Nuclear family</option></select></div>
+      <div class="field full"><label for="familyBackground">Family background</label><textarea id="familyBackground" name="familyBackground" maxlength="700"></textarea></div>
+    </div>
+
+    <div class="section-title"><span class="num">08</span> Skills and interests</div>
+    <div class="grid">
+      <div class="field full"><label for="skills">Skills</label><textarea id="skills" name="skills" maxlength="700" placeholder="Separate multiple skills with commas"></textarea></div>
+      <div class="field full"><label for="hobbies">Hobbies / interests</label><textarea id="hobbies" name="hobbies" maxlength="700" placeholder="Reading, music, sports..."></textarea></div>
+      <div class="field full"><label for="about">Personal introduction</label><textarea id="about" name="about" maxlength="1200" placeholder="Write a short introduction"></textarea></div>
+      <div class="field full"><label for="notes">Additional notes / preferences</label><textarea id="notes" name="notes" maxlength="1000"></textarea></div>
+    </div>
+
+    <div class="section-title"><span class="num">09</span> Declaration and signature</div>
+    <div class="grid">
+      <div class="field full"><label for="declaration">Declaration</label><textarea id="declaration" name="declaration" maxlength="800">I declare that the information provided above is true to the best of my knowledge.</textarea></div>
+      <div class="field"><label for="place">Place</label><input id="place" name="place" maxlength="100"></div>
+      <div class="field"><label for="datePrepared">Date</label><input id="datePrepared" name="datePrepared" type="date"></div>
+      <div class="field full"><label for="signature">Signature name</label><input id="signature" name="signature" maxlength="100" placeholder="Name for signature line"></div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn primary" id="update" type="button">Update preview</button>
+      <button class="btn" id="save" type="button">Save draft</button>
+      <button class="btn" id="load" type="button">Load draft</button>
+      <button class="btn danger" id="clear" type="button">Clear form</button>
+    </div>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+  </form>
+  </div>
+</section>
+
+<section class="panel preview-panel">
+  <div class="panel-head"><div><h2>Live document preview</h2><p>Check the document before printing or saving to PDF.</p></div><span class="badge">LIVE</span></div>
+  <div class="preview-tools">
+    <select id="previewTemplate" aria-label="Preview template"><option value="modern">Modern Emerald</option><option value="classic">Classic</option><option value="minimal">Minimal Professional</option><option value="elegant">Elegant Gold</option></select>
+    <button class="btn" id="refresh" type="button">Refresh</button>
+    <button class="btn primary" id="print" type="button">Print / PDF</button>
+  </div>
+  <div class="stage">
+    <article id="paper" class="paper">
+      <header class="paper-header">
+        <div class="paper-photo" id="previewPhoto">PHOTO</div>
+        <div class="paper-person"><h2 id="pName">Your Full Name</h2><p id="pType">Personal Biodata</p><p id="pLocation"></p></div>
+      </header>
+      <section class="paper-section"><h3>Personal Information</h3><table class="paper-table"><tbody id="pPersonal"></tbody></table></section>
+      <section class="paper-section"><h3>Contact Information</h3><table class="paper-table"><tbody id="pContact"></tbody></table></section>
+      <section class="paper-section" id="eduSection"><h3>Education</h3><table class="paper-table"><tbody id="pEducation"></tbody></table></section>
+      <section class="paper-section" id="jobSection"><h3>Occupation</h3><table class="paper-table"><tbody id="pJob"></tbody></table></section>
+      <section class="paper-section" id="familySection"><h3>Family Details</h3><table class="paper-table"><tbody id="pFamily"></tbody></table></section>
+      <section class="paper-section" id="skillsSection"><h3>Skills and Interests</h3><table class="paper-table"><tbody id="pSkills"></tbody></table></section>
+      <section class="paper-section" id="aboutSection"><h3>About Me</h3><p class="paper-paragraph" id="pAbout"></p></section>
+      <section class="paper-section" id="notesSection"><h3>Additional Notes</h3><p class="paper-paragraph" id="pNotes"></p></section>
+      <section class="paper-section" id="declarationSection"><h3>Declaration</h3><p class="paper-paragraph" id="pDeclaration"></p></section>
+      <footer class="paper-footer"><div id="pDate"></div><div id="pSignature"></div></footer>
+    </article>
+  </div>
+  <div class="completion"><div class="percent" id="percent">0%</div><div><strong>Document completeness</strong><p id="completionText">Enter your details to prepare the preview.</p></div></div>
+</section>
+</main>
+
+<footer class="footer">Kisan Seva Tools · Biodata Maker Pro · Tool #30<br>Your biodata is prepared in this browser. Review personal information before sharing it.</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const form=$("bioForm");
+const STORAGE_KEY="kst_biodata_maker_draft_v1";
+let photoData="";
+let educationCount=0;
+let toastTimer=null;
+
+function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,char=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[char]);
+}
+function fieldValue(id){
+  const el=$(id);
+  return el?String(el.value||"").trim():"";
+}
+function showToast(message){
+  const el=$("toast");
+  el.textContent=message;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>el.classList.remove("show"),2800);
+}
+function setStatus(message,type="ok"){
+  const el=$("status");
+  el.textContent=message;
+  el.className="status show "+(type==="error"?"error":"ok");
+}
+function hideStatus(){
+  $("status").className="status";
+  $("status").textContent="";
+}
+function safeImage(file){
+  return new Promise((resolve,reject)=>{
+    if(!file) return resolve("");
+    if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
+      return reject(new Error("Choose a JPG, PNG or WebP image."));
+    }
+    if(file.size>5*1024*1024){
+      return reject(new Error("Photo must be 5 MB or smaller."));
+    }
+    const reader=new FileReader();
+    reader.onload=()=>{
+      const img=new Image();
+      img.onload=()=>{
+        try{
+          const canvas=document.createElement("canvas");
+          const maxSide=1000;
+          const scale=Math.min(1,maxSide/Math.max(img.width,img.height));
+          canvas.width=Math.max(1,Math.round(img.width*scale));
+          canvas.height=Math.max(1,Math.round(img.height*scale));
+          const ctx=canvas.getContext("2d");
+          ctx.drawImage(img,0,0,canvas.width,canvas.height);
+          resolve(canvas.toDataURL("image/jpeg",.88));
+        }catch(error){reject(new Error("Could not process this photo."));}
+      };
+      img.onerror=()=>reject(new Error("Could not read this image."));
+      img.src=reader.result;
+    };
+    reader.onerror=()=>reject(new Error("Could not read the selected file."));
+    reader.readAsDataURL(file);
+  });
+}
+function renderPhoto(){
+  const html=photoData?'<img alt="Profile photo" src="'+photoData+'">':"PHOTO";
+  $("photoThumb").innerHTML=html;
+  $("previewPhoto").innerHTML=html;
+}
+function addRow(tbody,label,value){
+  if(!String(value||"").trim())return;
+  const tr=document.createElement("tr");
+  const td1=document.createElement("td");
+  const td2=document.createElement("td");
+  td1.textContent=label;
+  td2.textContent=String(value).trim();
+  tr.append(td1,td2);
+  tbody.appendChild(tr);
+}
+function setRows(id,rows){
+  const tbody=$(id);
+  tbody.replaceChildren();
+  rows.forEach(row=>addRow(tbody,row[0],row[1]));
+  const section=tbody.closest(".paper-section");
+  if(section)section.hidden=tbody.children.length===0;
+}
+function setParagraph(id,sectionId,value){
+  $(id).textContent=value||"";
+  $(sectionId).hidden=!String(value||"").trim();
+}
+function formatDate(value){
+  if(!value)return "";
+  const date=new Date(value+"T12:00:00");
+  if(Number.isNaN(date.getTime()))return value;
+  return new Intl.DateTimeFormat("en-IN",{day:"2-digit",month:"short",year:"numeric"}).format(date);
+}
+function readEducation(){
+  return [...$("educationList").querySelectorAll(".repeat-card")].map(card=>({
+    qualification:card.querySelector('[data-field="qualification"]').value.trim(),
+    institute:card.querySelector('[data-field="institute"]').value.trim(),
+    year:card.querySelector('[data-field="year"]').value.trim(),
+    grade:card.querySelector('[data-field="grade"]').value.trim()
+  })).filter(item=>Object.values(item).some(Boolean));
+}
+function renderEducation(){
+  const tbody=$("pEducation");
+  tbody.replaceChildren();
+  readEducation().forEach(item=>{
+    const parts=[item.institute,item.year,item.grade].filter(Boolean);
+    addRow(tbody,item.qualification||"Education",parts.join(" · "));
+  });
+  $("eduSection").hidden=tbody.children.length===0;
+}
+function renderPreview(){
+  const name=fieldValue("fullName")||"Your Full Name";
+  $("pName").textContent=name;
+  $("pType").textContent=fieldValue("docType")||"Biodata";
+  $("pLocation").textContent=fieldValue("city");
+  $("paper").className="paper template-"+fieldValue("template");
+  $("paper").style.setProperty("--accent",fieldValue("accent")||"#1d8b66");
+  const scale=fieldValue("fontScale");
+  $("paper").style.fontSize=scale==="large"?"1.08em":scale==="small"?".94em":"1em";
+  renderPhoto();
+
+  setRows("pPersonal",[
+    ["Date of birth",formatDate(fieldValue("dob"))],
+    ["Gender",fieldValue("gender")],
+    ["Height",fieldValue("height")],
+    ["Marital status",fieldValue("marital")],
+    ["Nationality",fieldValue("nationality")],
+    ["Religion / community",fieldValue("religion")],
+    ["Mother tongue",fieldValue("motherTongue")],
+    ["Blood group",fieldValue("blood")]
+  ]);
+  setRows("pContact",[
+    ["Phone",fieldValue("phone")],
+    ["Email",fieldValue("email")],
+    ["Address",fieldValue("address")]
+  ]);
+  renderEducation();
+  setRows("pJob",[
+    ["Occupation",fieldValue("occupation")],
+    ["Employer",fieldValue("employer")],
+    ["Work location",fieldValue("workLocation")],
+    ["Income",fieldValue("income")]
+  ]);
+  setRows("pFamily",[
+    ["Father's name",fieldValue("father")],
+    ["Father's occupation",fieldValue("fatherJob")],
+    ["Mother's name",fieldValue("mother")],
+    ["Mother's occupation",fieldValue("motherJob")],
+    ["Siblings",fieldValue("siblings")],
+    ["Family type",fieldValue("familyType")],
+    ["Family background",fieldValue("familyBackground")]
+  ]);
+  setRows("pSkills",[
+    ["Skills",fieldValue("skills")],
+    ["Hobbies / interests",fieldValue("hobbies")]
+  ]);
+  setParagraph("pAbout","aboutSection",fieldValue("about"));
+  setParagraph("pNotes","notesSection",fieldValue("notes"));
+  setParagraph("pDeclaration","declarationSection",fieldValue("declaration"));
+  $("pDate").textContent=[
+    fieldValue("place")?"Place: "+fieldValue("place"):"",
+    fieldValue("datePrepared")?"Date: "+formatDate(fieldValue("datePrepared")):""
+  ].filter(Boolean).join("\n");
+  $("pSignature").textContent=fieldValue("signature")?"Signature: "+fieldValue("signature"):"";
+  updateCompleteness();
+}
+function updateCompleteness(){
+  const required=["fullName"];
+  const recommended=["dob","phone","city","occupation","father","educationList"];
+  let total=required.length+recommended.length;
+  let complete=required.filter(id=>id==="educationList"?readEducation().length>0:fieldValue(id)).length;
+  complete+=recommended.filter(id=>id==="educationList"?readEducation().length>0:fieldValue(id)).length;
+  const percent=Math.round(complete/total*100);
+  $("percent").textContent=percent+"%";
+  $("completionText").textContent=percent===100?"Key details are filled. Review before printing.":percent>=60?"Good progress. Fill any remaining details you want to include.":"Add your name and relevant details. Optional fields can stay blank.";
+}
+function addEducation(data={}){
+  if($("educationList").children.length>=12){
+    showToast("You can add up to 12 education records.");
+    return;
+  }
+  educationCount++;
+  const card=document.createElement("div");
+  card.className="repeat-card";
+  card.innerHTML=`
+    <div class="repeat-head"><span>Education record ${educationCount}</span><button class="remove" type="button">Remove</button></div>
+    <div class="grid">
+      <div class="field"><label>Qualification</label><input data-field="qualification" maxlength="100" placeholder="e.g. B.Com"></div>
+      <div class="field"><label>Institute / board</label><input data-field="institute" maxlength="150" placeholder="School, college or board"></div>
+      <div class="field"><label>Year</label><input data-field="year" maxlength="20" placeholder="e.g. 2025"></div>
+      <div class="field"><label>Grade / percentage</label><input data-field="grade" maxlength="40" placeholder="Optional"></div>
+    </div>`;
+  card.querySelector('[data-field="qualification"]').value=data.qualification||"";
+  card.querySelector('[data-field="institute"]').value=data.institute||"";
+  card.querySelector('[data-field="year"]').value=data.year||"";
+  card.querySelector('[data-field="grade"]').value=data.grade||"";
+  card.querySelector(".remove").addEventListener("click",()=>{
+    card.remove();
+    renumberEducation();
+    renderPreview();
+  });
+  card.querySelectorAll("input").forEach(input=>input.addEventListener("input",renderPreview));
+  $("educationList").appendChild(card);
+  renumberEducation();
+}
+function renumberEducation(){
+  [...$("educationList").querySelectorAll(".repeat-card")].forEach((card,index)=>{
+    card.querySelector(".repeat-head span").textContent="Education record "+(index+1);
+  });
+}
+function collectDraft(){
+  const values={};
+  [...form.querySelectorAll("input:not([type=file]),select,textarea")].forEach(el=>{
+    if(el.id)values[el.id]=el.value;
+  });
+  return {version:1,values,education:readEducation(),photo:photoData,savedAt:new Date().toISOString()};
+}
+function applyDraft(data){
+  if(!data||typeof data!=="object"||!data.values)throw new Error("Draft format is not valid.");
+  Object.entries(data.values).forEach(([id,value])=>{
+    const el=$(id);
+    if(el&&typeof value==="string"&&el.type!=="file")el.value=value;
+  });
+  $("educationList").replaceChildren();
+  educationCount=0;
+  (Array.isArray(data.education)?data.education:[]).slice(0,12).forEach(addEducation);
+  photoData=typeof data.photo==="string"&&data.photo.startsWith("data:image/")?data.photo:"";
+  $("previewTemplate").value=fieldValue("template")||"modern";
+  renderPreview();
+}
+function saveDraft(){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(collectDraft()));
+    setStatus("Draft saved on this device in this browser.");
+    showToast("Draft saved on this device.");
+  }catch(error){
+    setStatus("Could not save draft. Browser storage may be full or unavailable.","error");
+  }
+}
+function loadDraft(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw){showToast("No saved draft was found on this device.");return;}
+    applyDraft(JSON.parse(raw));
+    setStatus("Saved draft loaded.");
+    showToast("Draft loaded.");
+  }catch(error){
+    setStatus("Could not load this draft. It may be damaged or unavailable.","error");
+  }
+}
+function resetForm(){
+  if(!confirm("Clear the current biodata form? Unsaved details will be lost."))return;
+  form.reset();
+  $("educationList").replaceChildren();
+  educationCount=0;
+  photoData="";
+  addEducation();
+  $("previewTemplate").value="modern";
+  $("accent").value="#1d8b66";
+  $("datePrepared").value=new Date().toISOString().slice(0,10);
+  renderPreview();
+  hideStatus();
+  showToast("Form cleared.");
+}
+function printDocument(){
+  const name=fieldValue("fullName");
+  if(!name){
+    setStatus("Please enter your full name before printing.","error");
+    $("fullName").focus();
+    return;
+  }
+  renderPreview();
+  window.print();
+}
+function validateForm(){
+  const name=fieldValue("fullName");
+  if(!name){
+    setStatus("Full name is required.","error");
+    $("fullName").focus();
+    return false;
+  }
+  const email=fieldValue("email");
+  if(email&&!$("email").checkValidity()){
+    setStatus("Enter a valid email address or leave the field blank.","error");
+    $("email").focus();
+    return false;
+  }
+  const dob=fieldValue("dob");
+  if(dob&&new Date(dob+"T00:00:00")>new Date()){
+    setStatus("Date of birth cannot be in the future.","error");
+    $("dob").focus();
+    return false;
+  }
+  hideStatus();
+  return true;
+}
+
+$("addEducation").addEventListener("click",()=>addEducation());
+$("update").addEventListener("click",()=>{
+  if(validateForm()){renderPreview();setStatus("Preview updated.");}
+});
+$("refresh").addEventListener("click",()=>{renderPreview();showToast("Preview refreshed.");});
+$("save").addEventListener("click",saveDraft);
+$("load").addEventListener("click",loadDraft);
+$("clear").addEventListener("click",resetForm);
+$("topReset").addEventListener("click",resetForm);
+$("print").addEventListener("click",printDocument);
+$("topPrint").addEventListener("click",printDocument);
+$("removePhoto").addEventListener("click",()=>{
+  photoData="";
+  $("photo").value="";
+  renderPhoto();
+  renderPreview();
+  showToast("Photo removed.");
+});
+$("photo").addEventListener("change",async event=>{
+  const file=event.target.files&&event.target.files[0];
+  if(!file)return;
+  try{
+    photoData=await safeImage(file);
+    renderPhoto();
+    renderPreview();
+    showToast("Photo loaded into the preview.");
+  }catch(error){
+    event.target.value="";
+    photoData="";
+    renderPhoto();
+    setStatus(error.message,"error");
+  }
+});
+$("template").addEventListener("change",()=>{
+  $("previewTemplate").value=$("template").value;
+  renderPreview();
+});
+$("previewTemplate").addEventListener("change",()=>{
+  $("template").value=$("previewTemplate").value;
+  renderPreview();
+});
+$("accent").addEventListener("input",renderPreview);
+$("fontScale").addEventListener("change",renderPreview);
+form.addEventListener("input",event=>{
+  if(event.target.id==="photo")return;
+  renderPreview();
+});
+form.addEventListener("change",renderPreview);
+form.addEventListener("submit",event=>event.preventDefault());
+
+addEducation();
+$("datePrepared").value=new Date().toISOString().slice(0,10);
+renderPreview();
+</script>
+
+<!-- CSC Seva Tool: customer usage tracking -->
+<script type="module" src="../usage-tracker.js"></script>
+<script>
+(function () {
+  if (window.__CSC_ACTION_TRACKING_INSTALLED__) return;
+  window.__CSC_ACTION_TRACKING_INSTALLED__ = true;
+  document.addEventListener("click", function (event) {
+    const el = event.target && event.target.closest ? event.target.closest("button, input[type=button], input[type=submit]") : null;
+    if (!el || el.disabled || !window.CSCUsage || typeof window.CSCUsage.trackAction !== "function") return;
+    const label = (el.getAttribute("aria-label") || el.innerText || el.value || el.title || "Button click").trim().replace(/\s+/g, " ").slice(0, 80);
+    if (!label || /^(cancel|close|back)$/i.test(label)) return;
+    window.CSCUsage.trackAction(label);
+  }, true);
+})();
+</script>
+</body>
+</html>

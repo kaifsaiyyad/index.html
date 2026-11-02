@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<title>Percentage Calculator Pro | Kisan Seva Tools</title>
+<style>
+:root{--bg:#0b1220;--panel:#121d30;--panel2:#18273c;--line:#2b3b53;--text:#f3f7ff;--muted:#9babc1;--mint:#68ebc9;--blue:#84adff;--gold:#ffd18a;--red:#ff9caa}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% -20%,#244c5b 0,transparent 48%),var(--bg);font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--text)}
+button,input{font:inherit}
+button{cursor:pointer}
+header{padding:13px 20px;border-bottom:1px solid #ffffff12;background:#0b1220df;backdrop-filter:blur(16px)}
+.nav{max-width:1150px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:950;letter-spacing:.7px}
+.logo{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--mint));color:#071521;font-size:24px}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.8px;margin-top:4px}
+.badge{color:var(--mint);border:1px solid #68ebc955;border-radius:30px;padding:8px 11px;font-size:9px;font-weight:900}
+main{max-width:1150px;margin:auto;padding:27px 16px 45px}
+.hero{margin:8px 0 23px}
+.eyebrow{color:var(--mint);font-size:10px;font-weight:900;letter-spacing:2px}
+h1{font-size:clamp(30px,5vw,47px);letter-spacing:-1.4px;line-height:1.1;margin:11px 0}
+.hero p{font-size:13px;line-height:1.7;color:var(--muted);max-width:680px;margin:0}
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:16px;align-items:start}
+.panel{min-width:0;background:linear-gradient(145deg,#152238,#101a2a);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 20px 60px #0002}
+.panel-head{padding:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.panel-head h2{font-size:13px;margin:0}
+.kicker{color:var(--mint);font-size:9px;letter-spacing:1.4px;font-weight:900}
+.pad{padding:15px}
+.mode-list{display:grid;gap:8px}
+.mode{width:100%;text-align:left;border:1px solid transparent;border-radius:12px;padding:12px;background:#0c1727;color:var(--text);display:flex;align-items:center;gap:11px}
+.mode.active{border-color:var(--mint);background:#193044}
+.mode-icon{width:35px;height:35px;flex-shrink:0;display:grid;place-items:center;border-radius:10px;background:#23364d;color:var(--mint);font-size:17px}
+.mode strong{display:block;font-size:11px}
+.mode small{display:block;color:var(--muted);font-size:9px;margin-top:4px;line-height:1.4}
+.label{display:block;color:#c6d2e4;font-size:10px;font-weight:800;margin:0 0 7px}
+.field{margin-bottom:15px}
+.field:last-child{margin-bottom:0}
+input{width:100%;min-width:0;background:#0a1423;border:1px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font-size:14px;outline:none}
+input:focus{border-color:var(--mint);box-shadow:0 0 0 3px #68ebc911}
+input::placeholder{color:#60738d}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.btn{border:1px solid var(--line);border-radius:10px;background:#203149;color:var(--text);padding:11px 13px;font-size:11px;font-weight:850;transition:.15s}
+.btn:hover{border-color:var(--mint);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(120deg,var(--blue),var(--mint));border:0;color:#081521}
+.btn.full{width:100%}
+.form-title{font-size:15px;font-weight:900;margin:0 0 6px}
+.form-sub{font-size:11px;color:var(--muted);line-height:1.6;margin:0 0 20px}
+.result{position:relative;overflow:hidden;border-radius:15px;padding:20px;background:linear-gradient(120deg,#19364a,#17283c);border:1px solid #68ebc933;margin-top:18px}
+.result:after{content:"%";position:absolute;right:12px;top:-25px;font-size:115px;font-weight:950;color:#ffffff08;pointer-events:none}
+.result-label{font-size:10px;letter-spacing:1px;font-weight:850;color:#b8c8dc}
+.result-value{font-size:clamp(29px,5vw,43px);letter-spacing:-1px;font-weight:950;margin:11px 0 7px;overflow-wrap:anywhere}
+.result-note{font-size:11px;color:#b4c8da;line-height:1.6}
+.result-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:12px}
+.stat{border:1px solid var(--line);background:#ffffff04;border-radius:11px;padding:12px;min-width:0}
+.stat small{display:block;font-size:9px;color:var(--muted);margin-bottom:7px}
+.stat strong{font-size:13px;overflow-wrap:anywhere}
+.stat em{display:block;font-size:9px;color:var(--muted);font-style:normal;margin-top:5px}
+.history-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:23px 0 10px}
+.history-head h3{font-size:13px;margin:0}
+.history{display:grid;gap:8px}
+.history-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;border:1px solid var(--line);background:#ffffff03;border-radius:10px}
+.history-row .desc{font-size:10px;color:var(--muted);line-height:1.6}
+.history-row strong{font-size:12px;text-align:right;overflow-wrap:anywhere}
+.empty-history{font-size:11px;color:var(--muted);padding:17px;border:1px dashed var(--line);border-radius:10px;text-align:center}
+.tip{font-size:10px;line-height:1.7;color:var(--muted);background:#ffffff04;border:1px solid #ffffff10;padding:12px;border-radius:10px;margin-top:15px}
+footer{text-align:center;color:#7f91aa;font-size:10px;line-height:1.7;padding:0 15px 25px}
+.toast{position:fixed;bottom:18px;left:50%;transform:translate(-50%,15px);opacity:0;transition:.2s;pointer-events:none;background:#20334b;border:1px solid #49647e;border-radius:11px;padding:12px 16px;font-size:12px;z-index:20;max-width:90vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.hidden{display:none!important}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.layout>aside{order:1}.layout>section{order:2}.mode-list{grid-template-columns:1fr 1fr}.mode{padding:9px;gap:8px}.mode-icon{width:30px;height:30px}}
+@media(max-width:450px){main{padding:20px 10px 30px}.mode-list{grid-template-columns:1fr 1fr}.mode{align-items:flex-start}.summary{gap:6px}.stat{padding:9px}.stat strong{font-size:11px}.pad{padding:12px}.badge{font-size:8px;padding:7px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="nav">
+  <div class="brand"><div class="logo">%</div><div>KISAN SEVA TOOLS<small>PERCENTAGE CALCULATOR PRO</small></div></div>
+  <span class="badge">✦ FREE TOOL</span>
+ </div>
+</header>
+<main>
+ <div class="hero">
+  <div class="eyebrow">SMART CALCULATIONS / TOOL 22</div>
+  <h1>Numbers made <span style="color:var(--mint)">simple.</span></h1>
+  <p>Calculate percentages, exam marks, percentage changes and reverse percentages in seconds. Clear results, useful breakdowns and one-tap copying.</p>
+ </div>
+ <div class="layout">
+  <aside class="panel">
+   <div class="panel-head"><h2>Calculation modes</h2><span class="kicker">01 / MODE</span></div>
+   <div class="pad">
+    <div class="mode-list">
+     <button class="mode active" data-mode="of">
+      <span class="mode-icon">%</span><span><strong>Percent of a number</strong><small>Find X% of Y</small></span>
+     </button>
+     <button class="mode" data-mode="is">
+      <span class="mode-icon">÷</span><span><strong>What percent?</strong><small>X is what % of Y?</small></span>
+     </button>
+     <button class="mode" data-mode="change">
+      <span class="mode-icon">↗</span><span><strong>Percentage change</strong><small>Increase or decrease</small></span>
+     </button>
+     <button class="mode" data-mode="marks">
+      <span class="mode-icon">✓</span><span><strong>Marks percentage</strong><small>Marks obtained / total</small></span>
+     </button>
+     <button class="mode" data-mode="reverse">
+      <span class="mode-icon">↩</span><span><strong>Reverse percentage</strong><small>Find the original value</small></span>
+     </button>
+    </div>
+    <div class="tip">Tip: Enter numbers without the % sign. Decimal values are supported.</div>
+   </div>
+  </aside>
+  <section class="panel">
+   <div class="panel-head"><h2 id="panelTitle">Percent of a number</h2><span class="kicker">02 / CALCULATE</span></div>
+   <div class="pad">
+    <h3 class="form-title" id="formTitle">Find a percentage</h3>
+    <p class="form-sub" id="formSub">Calculate a percentage of any number, price or amount.</p>
+    <div id="fields">
+     <div class="grid2">
+      <div class="field"><label class="label" for="a" id="labelA">Percentage (%)</label><input id="a" type="number" step="any" placeholder="e.g. 25"></div>
+      <div class="field"><label class="label" for="b" id="labelB">Number</label><input id="b" type="number" step="any" placeholder="e.g. 800"></div>
+     </div>
+    </div>
+    <button class="btn primary full" id="calculate">Calculate result ↗</button>
+    <div class="result" aria-live="polite">
+     <div class="result-label" id="resultLabel">YOUR RESULT</div>
+     <div class="result-value" id="resultValue">—</div>
+     <div class="result-note" id="resultNote">Enter your values and calculate to see the result.</div>
+     <div class="result-actions">
+      <button class="btn" id="copyResult">Copy result</button>
+      <button class="btn" id="copyDetails">Copy details</button>
+     </div>
+    </div>
+    <div class="summary">
+     <div class="stat"><small>INPUT A</small><strong id="statA">—</strong><em id="statALabel">First value</em></div>
+     <div class="stat"><small>INPUT B</small><strong id="statB">—</strong><em id="statBLabel">Second value</em></div>
+     <div class="stat"><small>MODE</small><strong id="statMode">Percent</strong><em>Calculation type</em></div>
+    </div>
+    <div class="history-head"><h3>Recent calculations</h3><button class="btn" id="clearHistory">Clear history</button></div>
+    <div class="history" id="history"><div class="empty-history">Your recent calculations will appear here.</div></div>
+    <div class="tip">This calculator is for general mathematical use. For exams, confirm the official maximum marks and passing criteria with your school or board.</div>
+   </div>
+  </section>
+ </div>
+</main>
+<footer>Kisan Seva Tools · Percentage Calculator Pro · Free browser-based calculator</footer>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+let mode="of",lastResult=null,history=[];
+const configs={
+ of:{title:"Percent of a number",heading:"Find a percentage",sub:"Calculate a percentage of any number, price or amount.",a:"Percentage (%)",b:"Number",pa:"e.g. 25",pb:"e.g. 800",sa:"Percentage",sb:"Number",stat:"Percent"},
+ is:{title:"What percent is X of Y?",heading:"Find the percentage share",sub:"See what percentage one number represents of another.",a:"Part (X)",b:"Total (Y)",pa:"e.g. 45",pb:"e.g. 180",sa:"Part",sb:"Total",stat:"Share"},
+ change:{title:"Percentage change",heading:"Compare old and new values",sub:"Measure the percentage increase or decrease between two values.",a:"Original value",b:"New value",pa:"e.g. 100",pb:"e.g. 125",sa:"Original",sb:"New value",stat:"Change"},
+ marks:{title:"Marks percentage",heading:"Calculate exam percentage",sub:"Enter your obtained marks and maximum possible marks.",a:"Marks obtained",b:"Total marks",pa:"e.g. 420",pb:"e.g. 500",sa:"Obtained",sb:"Total marks",stat:"Marks"},
+ reverse:{title:"Reverse percentage",heading:"Find the original amount",sub:"Recover the original value when you know a percentage and its result.",a:"Known result",b:"Percentage (%)",pa:"e.g. 200",pb:"e.g. 25",sa:"Known result",sb:"Percentage",stat:"Reverse"}
+};
+function fmt(n){
+ if(!Number.isFinite(n))return "Not defined";
+ return n.toLocaleString("en-IN",{maximumFractionDigits:6});
+}
+function toast(msg){
+ const t=$("toast");t.textContent=msg;t.classList.add("show");
+ clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove("show"),2300);
+}
+function values(){
+ const a=Number($("a").value),b=Number($("b").value);
+ if($("a").value.trim()===""||$("b").value.trim()===""||!Number.isFinite(a)||!Number.isFinite(b))throw Error("Enter both numbers first.");
+ return {a,b};
+}
+function calculate(){
+ let a,b,result,note,details;
+ try{({a,b}=values());}
+ catch(e){toast(e.message);return;}
+ if(mode==="of"){
+  result=a*b/100;
+  note=fmt(a)+"% of "+fmt(b)+" = "+fmt(result);
+  details=fmt(a)+"% × "+fmt(b)+" = "+fmt(result);
+ }else if(mode==="is"){
+  if(b===0){toast("Total cannot be zero.");return;}
+  result=a/b*100;
+  note=fmt(a)+" is "+fmt(result)+"% of "+fmt(b)+".";
+  details=fmt(a)+" ÷ "+fmt(b)+" × 100 = "+fmt(result)+"%";
+ }else if(mode==="change"){
+  if(a===0){toast("Original value cannot be zero for percentage change.");return;}
+  result=(b-a)/Math.abs(a)*100;
+  const kind=b>a?"increase":b<a?"decrease":"no change";
+  note="The value shows a "+kind+" of "+fmt(Math.abs(result))+"%.";
+  details="Change: "+fmt(b-a)+"; percentage change: "+fmt(result)+"%";
+ }else if(mode==="marks"){
+  if(b===0){toast("Total marks cannot be zero.");return;}
+  result=a/b*100;
+  note="You scored "+fmt(result)+"% of the total marks.";
+  details=fmt(a)+" ÷ "+fmt(b)+" × 100 = "+fmt(result)+"%";
+ }else{
+  if(b===0){toast("Percentage cannot be zero.");return;}
+  result=a/(b/100);
+  note=fmt(a)+" represents "+fmt(b)+"% of "+fmt(result)+".";
+  details=fmt(a)+" ÷ ("+fmt(b)+" ÷ 100) = "+fmt(result);
+ }
+ if(!Number.isFinite(result)){toast("Result is outside the supported numeric range.");return;}
+ const display=fmt(result)+(mode==="is"||mode==="marks"||mode==="change"?"%":"");
+ $("resultValue").textContent=display;
+ $("resultNote").textContent=note;
+ $("statA").textContent=fmt(a);$("statB").textContent=fmt(b);
+ $("statALabel").textContent=configs[mode].sa;
+ $("statBLabel").textContent=configs[mode].sb;
+ $("statMode").textContent=configs[mode].stat;
+ lastResult={display,note,details,mode,a,b,result};
+ history.unshift({title:configs[mode].title,display,details});
+ history=history.slice(0,5);
+ renderHistory();
+}
+function setMode(next){
+ mode=next;const c=configs[mode];
+ document.querySelectorAll(".mode").forEach(btn=>btn.classList.toggle("active",btn.dataset.mode===mode));
+ $("panelTitle").textContent=c.title;$("formTitle").textContent=c.heading;$("formSub").textContent=c.sub;
+ $("labelA").textContent=c.a;$("labelB").textContent=c.b;
+ $("a").placeholder=c.pa;$("b").placeholder=c.pb;
+ $("a").value="";$("b").value="";
+ $("resultValue").textContent="—";
+ $("resultLabel").textContent="YOUR RESULT";
+ $("resultNote").textContent="Enter your values and calculate to see the result.";
+ $("statA").textContent="—";$("statB").textContent="—";
+ $("statALabel").textContent=c.sa;$("statBLabel").textContent=c.sb;
+ $("statMode").textContent=c.stat;
+ lastResult=null;
+}
+function renderHistory(){
+ const box=$("history");box.innerHTML="";
+ if(!history.length){box.innerHTML='<div class="empty-history">Your recent calculations will appear here.</div>';return;}
+ history.forEach(item=>{
+  const row=document.createElement("div");row.className="history-row";
+  const desc=document.createElement("div");desc.className="desc";desc.textContent=item.title;
+  const value=document.createElement("strong");value.textContent=item.display;
+  row.append(desc,value);box.append(row);
+ });
+}
+document.querySelectorAll(".mode").forEach(btn=>btn.addEventListener("click",()=>setMode(btn.dataset.mode)));
+$("calculate").addEventListener("click",calculate);
+["a","b"].forEach(id=>$(id).addEventListener("keydown",e=>{if(e.key==="Enter")calculate();}));
+$("copyResult").addEventListener("click",()=>{
+ if(!lastResult){toast("Calculate a result first.");return;}
+ copy(lastResult.display);
+});
+$("copyDetails").addEventListener("click",()=>{
+ if(!lastResult){toast("Calculate a result first.");return;}
+ copy(lastResult.details);
+});
+function copy(text){
+ if(navigator.clipboard&&window.isSecureContext){
+  navigator.clipboard.writeText(text).then(()=>toast("Copied to clipboard.")).catch(()=>fallbackCopy(text));
+ }else fallbackCopy(text);
+}
+function fallbackCopy(text){
+ const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";
+ document.body.appendChild(ta);ta.select();
+ try{document.execCommand("copy");toast("Copied to clipboard.");}
+ catch(e){toast("Copy unavailable. Select and copy the result manually.");}
+ ta.remove();
+}
+$("clearHistory").addEventListener("click",()=>{history=[];renderHistory();toast("Recent calculations cleared.");});
+})();
+</script>
+
+<!-- CSC Seva Tool: customer usage tracking -->
+<script type="module" src="../usage-tracker.js"></script>
+<script>
+(function () {
+  if (window.__CSC_ACTION_TRACKING_INSTALLED__) return;
+  window.__CSC_ACTION_TRACKING_INSTALLED__ = true;
+  document.addEventListener("click", function (event) {
+    const el = event.target && event.target.closest ? event.target.closest("button, input[type=button], input[type=submit]") : null;
+    if (!el || el.disabled || !window.CSCUsage || typeof window.CSCUsage.trackAction !== "function") return;
+    const label = (el.getAttribute("aria-label") || el.innerText || el.value || el.title || "Button click").trim().replace(/\s+/g, " ").slice(0, 80);
+    if (!label || /^(cancel|close|back)$/i.test(label)) return;
+    window.CSCUsage.trackAction(label);
+  }, true);
+})();
+</script>
+</body>
+</html>

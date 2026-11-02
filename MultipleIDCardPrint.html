@@ -1,0 +1,497 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a1120">
+<title>Multiple ID Card Print Pro | Kisan Seva Tools</title>
+<style>
+:root{--bg:#0a1120;--panel:#121e31;--panel2:#192a40;--line:#2b4058;--text:#f3f7ff;--muted:#9aadc4;--mint:#68ebc9;--blue:#86adff;--gold:#f5cd89;--red:#ff9aa8}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 30% -20%,#234b5b,transparent 50%),var(--bg);font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--text)}
+button,input,select{font:inherit}button{cursor:pointer}
+header{position:sticky;top:0;z-index:10;background:#0a1120e8;backdrop-filter:blur(15px);border-bottom:1px solid #ffffff12;padding:12px 18px}
+.nav{max-width:1500px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:950;letter-spacing:.5px}
+.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--mint));display:grid;place-items:center;color:#071521;font-size:22px}
+.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:1.7px;margin-top:4px}
+.badge{font-size:9px;color:var(--mint);font-weight:900;border:1px solid #68ebc955;border-radius:30px;padding:8px 11px}
+main{max-width:1500px;margin:auto;padding:24px 16px 40px}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:8px 0 22px}
+.eyebrow{font-size:10px;letter-spacing:2px;color:var(--mint);font-weight:900}
+h1{font-size:clamp(28px,4vw,43px);line-height:1.1;letter-spacing:-1px;margin:10px 0}
+.hero p{font-size:12px;line-height:1.7;color:var(--muted);max-width:760px;margin:0}
+.layout{display:grid;grid-template-columns:320px minmax(0,1fr);gap:15px;align-items:start}
+.panel{min-width:0;background:linear-gradient(145deg,#152339,#101a2b);border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 18px 55px #0002}
+.panelhead{padding:15px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.panelhead h2{font-size:13px;margin:0}
+.kicker{font-size:9px;font-weight:900;letter-spacing:1.3px;color:var(--mint)}
+.pad{padding:14px}
+.section{padding:14px 0;border-bottom:1px solid #ffffff10}
+.section:first-child{padding-top:0}
+.section:last-child{border-bottom:0;padding-bottom:0}
+.sectitle{font-size:11px;font-weight:900;margin:0 0 12px;display:flex;justify-content:space-between;gap:8px}
+.field{margin-bottom:12px}.field:last-child{margin-bottom:0}
+label{display:block;font-size:10px;color:#c4d1e3;font-weight:850;margin-bottom:6px}
+input,select{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;background:#091421;padding:10px;color:var(--text);font-size:12px;outline:none}
+input:focus,select:focus{border-color:var(--mint)}
+input[type=checkbox]{width:auto;accent-color:var(--mint)}
+input[type=file]{font-size:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.btn{border:1px solid var(--line);border-radius:10px;background:#1c2c42;color:var(--text);padding:10px 12px;font-size:10px;font-weight:900;transition:.15s}
+.btn:hover{border-color:var(--mint);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(120deg,var(--blue),var(--mint));border:0;color:#081521}
+.btn.gold{background:linear-gradient(120deg,#ffe1a5,#edb76e);border:0;color:#271b0b}
+.btn.danger{color:var(--red);border-color:#ff9aa833}
+.btn.full{width:100%}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.drop{border:1px dashed #59728d;border-radius:12px;background:#0b1727;padding:17px 11px;text-align:center}
+.drop .big{font-size:30px;margin-bottom:7px}
+.drop p{font-size:10px;color:var(--muted);line-height:1.6;margin:7px 0 12px}
+.preset-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.preset{border:1px solid var(--line);border-radius:10px;background:#0b1626;color:var(--text);padding:9px 4px;font-size:10px;font-weight:850}
+.preset.active{border-color:var(--mint);background:#193347}
+.preset small{display:block;color:var(--muted);font-size:9px;margin-top:4px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.topbar h2{font-size:14px;margin:0}
+.tabs{display:flex;gap:4px;border:1px solid var(--line);background:#091421;padding:4px;border-radius:10px}
+.tab{border:0;border-radius:7px;background:transparent;color:var(--muted);font-size:10px;font-weight:900;padding:8px 10px}
+.tab.active{background:#273d55;color:#fff}
+.stage{margin-top:14px;min-height:480px;display:flex;align-items:center;justify-content:center;padding:15px;border:1px solid var(--line);border-radius:13px;background:#08111e;background-image:radial-gradient(#ffffff0b 1px,transparent 1px);background-size:17px 17px;overflow:auto}
+#sheet{display:block;max-width:100%;max-height:72vh;height:auto;background:white;box-shadow:0 15px 40px #0008}
+.empty{text-align:center;color:var(--muted);max-width:300px}
+.empty .big{font-size:46px}
+.empty h3{font-size:15px;color:var(--text);margin:10px 0}
+.empty p{font-size:11px;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}
+.stat{border:1px solid var(--line);background:#ffffff04;border-radius:10px;padding:10px;min-width:0}
+.stat small{display:block;color:var(--muted);font-size:9px;margin-bottom:6px}
+.stat strong{font-size:12px;overflow-wrap:anywhere}
+.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.list-head{font-size:11px;font-weight:900;display:flex;justify-content:space-between;margin-top:18px;margin-bottom:10px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:9px}
+.card{position:relative;border:1px solid var(--line);border-radius:10px;background:#0b1626;padding:7px;min-width:0}
+.card.active{border-color:var(--mint)}
+.card img{width:100%;aspect-ratio:1.586;object-fit:contain;background:white;border-radius:5px;display:block}
+.card .name{font-size:9px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:7px 0}
+.card .remove{position:absolute;right:11px;top:11px;width:23px;height:23px;border:0;border-radius:50%;background:#ff8797;color:#290710;font-weight:900}
+.card .rowbtn{display:flex;gap:4px}
+.card .rowbtn .btn{padding:7px 4px;flex:1}
+.note{font-size:10px;color:var(--muted);line-height:1.7;background:#ffffff04;border:1px solid #ffffff12;border-radius:10px;padding:11px;margin-top:13px}
+.status{font-size:10px;line-height:1.7;color:var(--muted);margin-top:10px}
+.toast{position:fixed;z-index:30;bottom:18px;left:50%;transform:translate(-50%,16px);opacity:0;pointer-events:none;transition:.2s;background:#20344b;border:1px solid #49647e;border-radius:11px;padding:12px 16px;font-size:12px;max-width:92vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.hidden{display:none!important}
+footer{text-align:center;color:#8091a8;font-size:10px;line-height:1.8;padding:0 15px 25px}
+@media(max-width:1050px){.layout{grid-template-columns:285px minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){main{padding:18px 10px 30px}.layout{grid-template-columns:1fr}.layout>aside{order:1}.layout>section{order:2}.stage{min-height:280px;padding:8px}.actions{grid-template-columns:1fr 1fr}.actions .btn:last-child{grid-column:1/-1}}
+@media(max-width:420px){.pad{padding:11px}.brand{font-size:11px}.badge{font-size:8px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{gap:6px}.stat{padding:8px}}
+@media print{
+ body{background:white!important}
+ header,.hero,aside,.topbar,.stats,.actions,.list-head,.cards,.note,.status,footer,.no-print{display:none!important}
+ main{padding:0!important;margin:0!important}
+ .layout{display:block!important}
+ .panel{background:white!important;border:0!important;box-shadow:none!important}
+ .panelhead{display:none!important}
+ .pad{padding:0!important}
+ .stage{display:block!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;background:white!important;overflow:visible!important}
+ #sheet{width:100%!important;max-width:none!important;max-height:none!important;height:auto!important;box-shadow:none!important}
+ @page{margin:5mm}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="nav">
+  <div class="brand"><div class="logo">▤</div><div>KISAN SEVA TOOLS<small>MULTIPLE ID CARD PRINT PRO</small></div></div>
+  <span class="badge">✦ PRINT STUDIO</span>
+ </div>
+</header>
+
+<main>
+ <div class="hero">
+  <div>
+   <div class="eyebrow">CARD LAYOUT / PRINT WORKFLOW</div>
+   <h1>Many cards.<br><span style="color:var(--mint)">One perfect sheet.</span></h1>
+   <p>Arrange multiple ID card images on a print sheet, set exact card dimensions, copies, gaps and margins. Preview the layout, export PNG sheets and print or save as PDF.</p>
+  </div>
+ </div>
+
+ <div class="layout">
+  <aside class="panel">
+   <div class="panelhead"><h2>Print configuration</h2><span class="kicker">01 / SETUP</span></div>
+   <div class="pad">
+    <div class="section">
+     <div class="sectitle">Import card images <span class="kicker">UPLOAD</span></div>
+     <div class="drop">
+      <div class="big">▧</div>
+      <strong style="font-size:12px">Add ID card images</strong>
+      <p>Choose front/back images or multiple card scans. JPG, PNG and WebP are supported.</p>
+      <input id="files" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+     </div>
+     <div class="grid2" style="margin-top:9px">
+      <button class="btn" id="addMore">＋ Add more</button>
+      <button class="btn danger" id="clear">Clear all</button>
+     </div>
+     <div class="status" id="photoCount">No cards added yet.</div>
+    </div>
+
+    <div class="section">
+     <div class="sectitle">Card size <span class="kicker">02</span></div>
+     <div class="preset-grid">
+      <button class="preset active" data-size="standard">Standard<small>85.6×54 mm</small></button>
+      <button class="preset" data-size="small">Small ID<small>80×50 mm</small></button>
+      <button class="preset" data-size="custom">Custom<small>Your size</small></button>
+     </div>
+     <div class="grid2" style="margin-top:11px">
+      <div class="field"><label for="cw">Width (mm)</label><input id="cw" type="number" min="20" max="210" step="0.1" value="85.6"></div>
+      <div class="field"><label for="ch">Height (mm)</label><input id="ch" type="number" min="20" max="297" step="0.1" value="54"></div>
+     </div>
+     <div class="field"><label for="fit">Image fitting</label><select id="fit"><option value="contain">Fit entire card</option><option value="cover">Fill card frame (crop edges)</option></select></div>
+     <div class="field"><label for="copies">Copies per image</label><input id="copies" type="number" min="1" max="100" value="1"></div>
+     <div class="field"><label for="order">Card order</label><select id="order"><option value="round">Round-robin: mix all cards</option><option value="group">Group: repeat each card together</option></select></div>
+    </div>
+
+    <div class="section">
+     <div class="sectitle">Paper & arrangement <span class="kicker">03</span></div>
+     <div class="field"><label for="paper">Paper size</label><select id="paper"><option value="a4">A4 — 210×297 mm</option><option value="a5">A5 — 148×210 mm</option><option value="4x6">4×6 inch photo paper</option><option value="letter">Letter — 216×279 mm</option><option value="custom">Custom sheet</option></select></div>
+     <div class="grid2">
+      <div class="field"><label for="sw">Sheet width (mm)</label><input id="sw" type="number" min="50" max="500" value="210"></div>
+      <div class="field"><label for="sh">Sheet height (mm)</label><input id="sh" type="number" min="50" max="500" value="297"></div>
+     </div>
+     <div class="field"><label for="orientation">Orientation</label><select id="orientation"><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></div>
+     <div class="grid2">
+      <div class="field"><label for="margin">Margin (mm)</label><input id="margin" type="number" min="0" max="30" step="0.5" value="5"></div>
+      <div class="field"><label for="gap">Gap (mm)</label><input id="gap" type="number" min="0" max="20" step="0.5" value="3"></div>
+     </div>
+     <div class="field"><label for="alignment">Grid alignment</label><select id="alignment"><option value="center">Center the grid</option><option value="top">Start from top-left</option></select></div>
+    </div>
+
+    <div class="section">
+     <div class="sectitle">Finishing options <span class="kicker">04</span></div>
+     <div class="field"><label for="dpi">Export resolution</label><select id="dpi"><option value="150">150 DPI · Standard</option><option value="200">200 DPI · High</option><option value="300" selected>300 DPI · Print quality</option></select></div>
+     <div class="field"><label for="background">Sheet background</label><input id="background" type="color" value="#ffffff"></div>
+     <label style="display:flex;align-items:center;gap:8px;margin-bottom:11px"><input type="checkbox" id="cut" checked> Show cut guides</label>
+     <label style="display:flex;align-items:center;gap:8px;margin-bottom:11px"><input type="checkbox" id="border" checked> Draw card border</label>
+     <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="labels"> Print card numbers</label>
+     <button class="btn full" style="margin-top:13px" id="reset">↺ Reset settings</button>
+    </div>
+   </div>
+  </aside>
+
+  <section class="panel">
+   <div class="panelhead"><h2>Live sheet preview</h2><span class="kicker">02 / PREVIEW</span></div>
+   <div class="pad">
+    <div class="topbar">
+     <div><h2>Print sheet studio</h2><div style="font-size:10px;color:var(--muted);margin-top:5px">Real dimensions · Adjustable layout</div></div>
+     <div class="tabs"><button class="tab active" id="tabSheet">Sheet</button><button class="tab" id="tabCards">Card library</button></div>
+    </div>
+    <div class="stage">
+     <div class="empty" id="empty">
+      <div class="big">▤</div><h3>Your sheet is waiting</h3>
+      <p>Upload ID card images to calculate the best-fit layout and preview the print sheet.</p>
+      <button class="btn primary" id="emptyUpload">Upload card images</button>
+     </div>
+     <canvas id="canvas" class="hidden"></canvas>
+    </div>
+    <div class="stats">
+     <div class="stat"><small>PAPER</small><strong id="paperStat">A4 Portrait</strong></div>
+     <div class="stat"><small>CARDS / SHEET</small><strong id="countStat">0</strong></div>
+     <div class="stat"><small>GRID</small><strong id="gridStat">0 × 0</strong></div>
+     <div class="stat"><small>RESOLUTION</small><strong id="dpiStat">300 DPI</strong></div>
+    </div>
+    <div class="actions">
+     <button class="btn primary" id="download">↓ Download PNG</button>
+     <button class="btn gold" id="print">⎙ Print / Save PDF</button>
+     <button class="btn" id="exportSheets">Export card sheets</button>
+    </div>
+    <div class="status" id="status" aria-live="polite">Upload images to start.</div>
+    <div class="list-head"><span>Card image library</span><span class="kicker" id="libraryCount">0 IMAGES</span></div>
+    <div class="cards" id="cards"></div>
+    <div class="note">Print guidance: the browser's print dialog controls the physical output. Choose the matching paper, disable unwanted scaling, and select Actual size / 100% when available. This tool arranges uploaded images; it does not verify card authenticity or create official credentials.</div>
+   </div>
+  </section>
+ </div>
+</main>
+<footer>Kisan Seva Tools · Multiple ID Card Print Pro<br>Local browser processing · Always check the print preview before printing.</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const canvas=$("canvas");
+let cards=[],active=0,toastTimer=null;
+const presets={standard:[85.6,54],small:[80,50],custom:[85.6,54]};
+function toast(msg){
+ const t=$("toast");t.textContent=msg;t.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2600);
+}
+function num(id,min,max,fallback){
+ let n=Number($(id).value);
+ if(!Number.isFinite(n))n=fallback;
+ return Math.max(min,Math.min(max,n));
+}
+function paperSize(){
+ let w,h,name;
+ const p=$("paper").value;
+ if(p==="a5"){w=148;h=210;name="A5";}
+ else if(p==="4x6"){w=101.6;h=152.4;name="4 × 6 inch";}
+ else if(p==="letter"){w=215.9;h=279.4;name="Letter";}
+ else if(p==="custom"){w=num("sw",50,500,210);h=num("sh",50,500,297);name="Custom";}
+ else{w=210;h=297;name="A4";}
+ if($("orientation").value==="landscape"){[w,h]=[h,w];name+=" Landscape";}
+ else name+=" Portrait";
+ return {w,h,name,dpi:num("dpi",72,300,300)};
+}
+function layout(){
+ const p=paperSize(),dpi=p.dpi;
+ const W=Math.round(p.w/25.4*dpi),H=Math.round(p.h/25.4*dpi);
+ const margin=num("margin",0,30,5)/25.4*dpi;
+ const gap=num("gap",0,20,3)/25.4*dpi;
+ const cw=num("cw",20,210,85.6)/25.4*dpi;
+ const ch=num("ch",20,297,54)/25.4*dpi;
+ const cols=Math.max(0,Math.floor((W-2*margin+gap)/(cw+gap)));
+ const rows=Math.max(0,Math.floor((H-2*margin+gap)/(ch+gap)));
+ const gridW=cols*cw+Math.max(0,cols-1)*gap;
+ const gridH=rows*ch+Math.max(0,rows-1)*gap;
+ const x0=margin+($("alignment").value==="center"?Math.max(0,(W-2*margin-gridW)/2):0);
+ const y0=margin+($("alignment").value==="center"?Math.max(0,(H-2*margin-gridH)/2):0);
+ let sequence=[];
+ const copies=num("copies",1,100,1);
+ if($("order").value==="group"){
+  cards.forEach((c,i)=>{for(let j=0;j<copies;j++)sequence.push(i);});
+ }else{
+  for(let j=0;j<copies;j++)cards.forEach((c,i)=>sequence.push(i));
+ }
+ const capacity=cols*rows;
+ const slots=[];
+ for(let i=0;i<Math.min(sequence.length,capacity);i++){
+  const col=i%cols,row=Math.floor(i/cols);
+  slots.push({x:x0+col*(cw+gap),y:y0+row*(ch+gap),w:cw,h:ch,index:sequence[i],number:i+1});
+ }
+ return {...p,W,H,margin,gap,cw,ch,cols,rows,capacity,slots,sequence};
+}
+function draw(target){
+ const d=layout();
+ target.width=d.W;target.height=d.H;
+ const ctx=target.getContext("2d");
+ ctx.fillStyle=$("background").value;ctx.fillRect(0,0,d.W,d.H);
+ ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality="high";
+ d.slots.forEach(s=>{
+  const c=cards[s.index];if(!c)return;
+  ctx.save();
+  ctx.fillStyle="#fff";ctx.fillRect(s.x,s.y,s.w,s.h);
+  ctx.save();ctx.beginPath();ctx.rect(s.x,s.y,s.w,s.h);ctx.clip();
+  const ir=c.image.width/c.image.height,fr=s.w/s.h;
+  let x=s.x,y=s.y,w=s.w,h=s.h;
+  if($("fit").value==="cover"){
+   if(ir>fr){w=s.h*ir;x=s.x-(w-s.w)/2;}
+   else{h=s.w/ir;y=s.y-(h-s.h)/2;}
+  }else{
+   if(ir>fr){h=s.w/ir;y=s.y+(s.h-h)/2;}
+   else{w=s.h*ir;x=s.x+(s.w-w)/2;}
+  }
+  ctx.drawImage(c.image,x,y,w,h);
+  ctx.restore();
+  if($("border").checked){
+   ctx.strokeStyle="#68768a";ctx.lineWidth=Math.max(1,d.dpi/200);
+   ctx.strokeRect(s.x,s.y,s.w,s.h);
+  }
+  if($("cut").checked){
+   const mark=Math.max(2,d.dpi/30);
+   const lw=Math.max(1,d.dpi/250);
+   ctx.strokeStyle="#737d8b";ctx.lineWidth=lw;
+   ctx.beginPath();
+   ctx.moveTo(s.x-mark,s.y);ctx.lineTo(s.x-1,s.y);
+   ctx.moveTo(s.x,s.y-mark);ctx.lineTo(s.x,s.y-1);
+   ctx.moveTo(s.x+s.w+1,s.y);ctx.lineTo(s.x+s.w+mark,s.y);
+   ctx.moveTo(s.x+s.w,s.y-mark);ctx.lineTo(s.x+s.w,s.y-1);
+   ctx.moveTo(s.x-mark,s.y+s.h);ctx.lineTo(s.x-1,s.y+s.h);
+   ctx.moveTo(s.x,s.y+s.h+1);ctx.lineTo(s.x,s.y+s.h+mark);
+   ctx.moveTo(s.x+s.w+1,s.y+s.h);ctx.lineTo(s.x+s.w+mark,s.y+s.h);
+   ctx.moveTo(s.x+s.w,s.y+s.h+1);ctx.lineTo(s.x+s.w,s.y+s.h+mark);
+   ctx.stroke();
+  }
+  if($("labels").checked){
+   const bh=Math.max(13,d.dpi*.11);
+   ctx.fillStyle="#ffffffdd";ctx.fillRect(s.x,s.y,s.w,bh);
+   ctx.fillStyle="#111827";ctx.font="bold "+Math.max(8,d.dpi*.065)+"px Arial";
+   ctx.textBaseline="middle";ctx.fillText("CARD "+s.number,s.x+3,s.y+bh/2,s.w-6);
+  }
+  ctx.restore();
+ });
+ return d;
+}
+function render(){
+ const d=draw(canvas),has=cards.length>0;
+ canvas.classList.toggle("hidden",!has);
+ $("empty").classList.toggle("hidden",has);
+ $("paperStat").textContent=d.name;
+ $("countStat").textContent=d.slots.length;
+ $("gridStat").textContent=d.cols+" × "+d.rows;
+ $("dpiStat").textContent=d.dpi+" DPI";
+ $("photoCount").textContent=cards.length+" image"+(cards.length===1?"":"s")+" loaded";
+ $("libraryCount").textContent=cards.length+" IMAGES";
+ $("status").textContent=has?
+  d.slots.length+" cards fit on this sheet. "+Math.max(0,d.sequence.length-d.capacity)+" additional card copies need another sheet.":
+  "Upload images to start.";
+ $("download").disabled=!has||!d.slots.length;
+ $("print").disabled=!has||!d.slots.length;
+ renderCards();
+}
+function renderCards(){
+ const box=$("cards");box.innerHTML="";
+ cards.forEach((c,i)=>{
+  const el=document.createElement("div");el.className="card"+(i===active?" active":"");
+  const img=document.createElement("img");img.src=c.url;img.alt=c.name;
+  const name=document.createElement("div");name.className="name";name.textContent=c.name;
+  const del=document.createElement("button");del.className="remove";del.textContent="×";del.title="Remove image";
+  del.addEventListener("click",e=>{e.stopPropagation();removeCard(i);});
+  const buttons=document.createElement("div");buttons.className="rowbtn";
+  const use=document.createElement("button");use.className="btn";use.textContent=i===active?"Selected":"Select";
+  use.addEventListener("click",()=>{active=i;render();});
+  const front=buttons;
+  front.append(use);
+  el.append(img,del,name,front);box.append(el);
+ });
+}
+function addFiles(files){
+ const all=Array.from(files||[]);
+ const valid=all.filter(f=>/^image\/(jpeg|png|webp)$/.test(f.type)&&f.size>0&&f.size<=20*1024*1024);
+ if(valid.length!==all.length)toast("Some files skipped. Use JPG, PNG or WebP up to 20 MB each.");
+ valid.forEach(file=>{
+  const url=URL.createObjectURL(file),image=new Image();
+  image.onload=()=>{cards.push({name:file.name,image,url});if(cards.length===1)active=0;render();};
+  image.onerror=()=>{URL.revokeObjectURL(url);toast("Could not open "+file.name);};
+  image.src=url;
+ });
+}
+function removeCard(i){
+ URL.revokeObjectURL(cards[i].url);cards.splice(i,1);
+ active=cards.length?Math.min(active,cards.length-1):0;render();toast("Card image removed.");
+}
+function downloadCanvas(c,name){
+ c.toBlob(blob=>{
+  if(!blob){toast("Export failed. Try lower resolution.");return;}
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;document.body.append(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);toast("PNG download started.");
+ },"image/png");
+}
+function printSheet(){
+ if(!cards.length){toast("Upload card images first.");return;}
+ const d=layout();
+ const out=document.createElement("canvas");draw(out);
+ const win=window.open("","_blank");
+ if(!win){toast("Allow pop-ups to print or save PDF.");return;}
+ win.document.open();
+ win.document.write("<!doctype html><html><head><meta charset='utf-8'><title>ID Card Print Sheet</title><style>@page{size:"+d.w+"mm "+d.h+"mm;margin:0}html,body{margin:0;padding:0;width:100%;height:100%}img{display:block;width:100%;height:100%;object-fit:fill}@media screen{body{display:flex;justify-content:center}img{width:auto;max-width:100%;height:auto;max-height:95vh}}</style></head><body></body></html>");
+ win.document.close();
+ const img=win.document.createElement("img");img.src=out.toDataURL("image/png");img.alt="ID card print sheet";
+ win.document.body.appendChild(img);img.onload=()=>win.setTimeout(()=>win.print(),350);
+}
+function exportSheets(){
+ if(!cards.length){toast("Upload card images first.");return;}
+ const d=layout();
+ if(!d.slots.length){toast("The selected card size does not fit on this paper.");return;}
+ const total=Math.ceil(d.sequence.length/d.capacity);
+ if(total>50){toast("Too many sheets for one export. Reduce copies or export smaller groups.");return;}
+ let page=0;
+ function next(){
+  if(page>=total){toast("All sheet downloads requested.");return;}
+  const start=page*d.capacity;
+  const indices=d.sequence.slice(start,start+d.capacity);
+  const out=document.createElement("canvas");out.width=d.W;out.height=d.H;
+  const ctx=out.getContext("2d");ctx.fillStyle=$("background").value;ctx.fillRect(0,0,d.W,d.H);
+  const slots=d.slots;
+  slots.forEach((s,i)=>{
+   if(i>=indices.length)return;
+   const c=cards[indices[i]];if(!c)return;
+   ctx.save();ctx.beginPath();ctx.rect(s.x,s.y,s.w,s.h);ctx.clip();
+   const ir=c.image.width/c.image.height,fr=s.w/s.h;
+   let x=s.x,y=s.y,w=s.w,h=s.h;
+   if($("fit").value==="cover"){if(ir>fr){w=s.h*ir;x=s.x-(w-s.w)/2;}else{h=s.w/ir;y=s.y-(h-s.h)/2;}}
+   else{if(ir>fr){h=s.w/ir;y=s.y+(s.h-h)/2;}else{w=s.h*ir;x=s.x+(s.w-w)/2;}}
+   ctx.drawImage(c.image,x,y,w,h);ctx.restore();
+   if($("border").checked){ctx.strokeStyle="#68768a";ctx.lineWidth=Math.max(1,d.dpi/200);ctx.strokeRect(s.x,s.y,s.w,s.h);}
+   if($("cut").checked){ctx.strokeStyle="#737d8b";ctx.lineWidth=Math.max(1,d.dpi/250);ctx.strokeRect(s.x,s.y,s.w,s.h);}
+   if($("labels").checked){const bh=Math.max(13,d.dpi*.11);ctx.fillStyle="#ffffffdd";ctx.fillRect(s.x,s.y,s.w,bh);ctx.fillStyle="#111827";ctx.font="bold "+Math.max(8,d.dpi*.065)+"px Arial";ctx.fillText("CARD "+(start+i+1),s.x+3,s.y+bh/2,s.w-6);}
+  });
+  page++;downloadCanvas(out,"KisanSeva-ID-Cards-Sheet-"+String(page).padStart(2,"0")+".png");
+  setTimeout(next,450);
+ }
+ next();
+}
+$("files").addEventListener("change",e=>{addFiles(e.target.files);e.target.value="";});
+$("addMore").addEventListener("click",()=>$("files").click());
+$("emptyUpload").addEventListener("click",()=>$("files").click());
+$("clear").addEventListener("click",()=>{
+ if(!cards.length)return;
+ if(!confirm("Remove all uploaded card images?"))return;
+ cards.forEach(c=>URL.revokeObjectURL(c.url));cards=[];active=0;render();toast("All images cleared.");
+});
+document.querySelectorAll("[data-size]").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll("[data-size]").forEach(x=>x.classList.toggle("active",x===b));
+ const v=presets[b.dataset.size];$("cw").value=v[0];$("ch").value=v[1];render();
+}));
+$("paper").addEventListener("change",()=>{
+ const p=$("paper").value;
+ if(p==="a4"){$("sw").value=210;$("sh").value=297;}
+ if(p==="a5"){$("sw").value=148;$("sh").value=210;}
+ if(p==="4x6"){$("sw").value=101.6;$("sh").value=152.4;}
+ if(p==="letter"){$("sw").value=215.9;$("sh").value=279.4;}
+ render();
+});
+["cw","ch","copies","fit","order","sw","sh","orientation","margin","gap","alignment","dpi","background","cut","border","labels"].forEach(id=>{
+ $(id).addEventListener("input",render);$(id).addEventListener("change",render);
+});
+$("reset").addEventListener("click",()=>{
+ $("paper").value="a4";$("sw").value=210;$("sh").value=297;
+ $("orientation").value="portrait";$("cw").value=85.6;$("ch").value=54;
+ $("copies").value=1;$("fit").value="contain";$("order").value="round";
+ $("margin").value=5;$("gap").value=3;$("alignment").value="center";
+ $("dpi").value=300;$("background").value="#ffffff";
+ $("cut").checked=true;$("border").checked=true;$("labels").checked=false;
+ document.querySelectorAll("[data-size]").forEach(b=>b.classList.toggle("active",b.dataset.size==="standard"));
+ render();toast("Settings reset.");
+});
+$("download").addEventListener("click",()=>{
+ if(!cards.length)return;
+ const out=document.createElement("canvas");draw(out);
+ downloadCanvas(out,"KisanSeva-Multiple-ID-Card-Sheet.png");
+});
+$("print").addEventListener("click",printSheet);
+$("exportSheets").addEventListener("click",exportSheets);
+$("tabSheet").addEventListener("click",()=>{
+ $("tabSheet").classList.add("active");$("tabCards").classList.remove("active");
+ $("canvas").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+$("tabCards").addEventListener("click",()=>{
+ $("tabCards").classList.add("active");$("tabSheet").classList.remove("active");
+ $("cards").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+window.addEventListener("beforeunload",()=>cards.forEach(c=>URL.revokeObjectURL(c.url)));
+render();
+})();
+</script>
+
+<!-- CSC Seva Tool: customer usage tracking -->
+<script type="module" src="../usage-tracker.js"></script>
+<script>
+(function () {
+  if (window.__CSC_ACTION_TRACKING_INSTALLED__) return;
+  window.__CSC_ACTION_TRACKING_INSTALLED__ = true;
+  document.addEventListener("click", function (event) {
+    const el = event.target && event.target.closest ? event.target.closest("button, input[type=button], input[type=submit]") : null;
+    if (!el || el.disabled || !window.CSCUsage || typeof window.CSCUsage.trackAction !== "function") return;
+    const label = (el.getAttribute("aria-label") || el.innerText || el.value || el.title || "Button click").trim().replace(/\s+/g, " ").slice(0, 80);
+    if (!label || /^(cancel|close|back)$/i.test(label)) return;
+    window.CSCUsage.trackAction(label);
+  }, true);
+})();
+</script>
+</body>
+</html>

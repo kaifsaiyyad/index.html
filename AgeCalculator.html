@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#087f8c">
+<title>Age Calculator | CSC Seva Tools</title>
+<style>
+:root{--teal:#087f8c;--navy:#102a43;--pale:#e9f9f8;--bg:#f3f8fa;--line:#d9e7eb;--muted:#637783}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#172b3a;font-family:Arial,sans-serif}
+header{padding:16px 5%;background:#fff;border-bottom:1px solid var(--line);font-weight:800;color:var(--teal);font-size:20px}
+header span{color:var(--navy)}
+.hero{background:linear-gradient(125deg,#102a43,#087f8c);color:white;padding:34px 5%}
+.hero>div{max-width:1050px;margin:auto}
+.hero small{letter-spacing:2px;text-transform:uppercase;color:#b8f4ed}
+h1{font-size:clamp(28px,5vw,42px);margin:12px 0}
+.hero p{max-width:600px;line-height:1.7;color:#e0f5f5}
+main{max-width:1050px;margin:24px auto;padding:0 15px 35px}
+.layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px;align-items:start}
+.card{background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 28px #102a4308}
+.head{padding:19px;border-bottom:1px solid var(--line)}
+.head h2{font-size:18px;margin:0 0 6px}
+.head p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}
+.body{padding:20px}
+label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}
+input,select,button{font:inherit}
+input[type=date]{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:#172b3a}
+.field{margin-bottom:18px}
+.btn{border:0;border-radius:9px;padding:12px 15px;font-weight:700;cursor:pointer}
+.primary{background:var(--teal);color:#fff}
+.primary:hover{background:#066b75}
+.secondary{background:var(--pale);color:var(--teal);border:1px solid #c9efec}
+.row{display:flex;gap:9px}.row>*{flex:1}
+.result-hero{background:var(--pale);padding:23px}
+.result-hero small{color:var(--muted);font-weight:700}
+.age{font-size:clamp(26px,4vw,37px);font-weight:800;color:var(--navy);margin:10px 0}
+.age-sub{font-size:13px;color:#45616b;line-height:1.7}
+.metrics{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.metric{border:1px solid var(--line);padding:15px;border-radius:11px}
+.metric span{display:block;font-size:11px;color:var(--muted);margin-bottom:8px}
+.metric strong{font-size:19px;color:var(--navy);overflow-wrap:anywhere}
+.metric em{font-size:11px;color:var(--muted);font-style:normal}
+.next{margin:0 16px 17px;padding:16px;border-radius:11px;background:#f5fbff;border:1px solid #dbeaf2}
+.next h3{font-size:14px;margin:0 0 8px}
+.next p{font-size:12px;line-height:1.6;color:var(--muted);margin:0}
+.status{font-size:12px;line-height:1.5;margin-top:12px;color:#a12626}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.tip{background:white;border:1px solid var(--line);border-radius:12px;padding:16px}
+.tip b{font-size:13px}.tip p{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:0}
+footer{text-align:center;padding:20px;background:white;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
+@media(max-width:700px){.layout{grid-template-columns:1fr}.hero{padding:28px 18px}main{margin-top:16px;padding:0 12px 25px}.body{padding:16px}.tips{grid-template-columns:1fr}.metrics{padding:12px}.metric{padding:12px}}
+@media print{header,.hero,.input-card,.tips,footer{display:none!important}main{margin:0;padding:0}.layout{display:block}.card{box-shadow:none;border:0}}
+</style>
+</head>
+<body>
+<header>CSC <span>Seva Tools</span></header>
+<section class="hero"><div>
+<small>Everyday calculator · Tool 03</small>
+<h1>Age Calculator</h1>
+<p>Calculate your exact age from your date of birth, see how many days you've lived, and find the date and weekday of your next birthday.</p>
+</div></section>
+<main>
+<div class="layout">
+<section class="card input-card">
+<div class="head"><h2>Your details</h2><p>Choose your birth date and the date you want to calculate your age on.</p></div>
+<div class="body">
+<div class="field"><label for="dob">Date of birth</label><input type="date" id="dob" required></div>
+<div class="field"><label for="asof">Calculate age on</label><input type="date" id="asof" required></div>
+<div class="row">
+<button class="btn primary" id="calculate" type="button">Calculate age</button>
+<button class="btn secondary" id="today" type="button">Use today</button>
+</div>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+</div>
+</section>
+<section class="card">
+<div class="head"><h2>Your age result</h2><p>Calendar-based age breakdown.</p></div>
+<div class="result-hero">
+<small>YOUR EXACT AGE</small>
+<div class="age" id="age">— years, — months</div>
+<div class="age-sub" id="ageSub">Enter your date of birth to calculate your age.</div>
+</div>
+<div class="metrics">
+<div class="metric"><span>Total days lived</span><strong id="days">—</strong><br><em>calendar days</em></div>
+<div class="metric"><span>Total weeks lived</span><strong id="weeks">—</strong><br><em>completed weeks</em></div>
+<div class="metric"><span>Next birthday in</span><strong id="until">—</strong><br><em>days remaining</em></div>
+<div class="metric"><span>Birth weekday</span><strong id="weekday">—</strong><br><em>day of the week</em></div>
+</div>
+<div class="next"><h3 id="nextTitle">Next birthday</h3><p id="nextInfo">Your next birthday date will appear here.</p></div>
+</section>
+</div>
+<div class="tips">
+<div class="tip"><b>Calendar accurate</b><p>Age is calculated using calendar years and months, including leap years.</p></div>
+<div class="tip"><b>Flexible date</b><p>Calculate your age as of today or any past date after your birth date.</p></div>
+<div class="tip"><b>Privacy first</b><p>Your date calculations happen locally in this browser. No account is required.</p></div>
+</div>
+</main>
+<footer>Useful everyday tools · CSC Seva Tools</footer>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const today=new Date();
+function isoDate(d){
+return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function parseDate(value){
+if(!value)return null;
+const p=value.split("-").map(Number);
+const d=new Date(p[0],p[1]-1,p[2]);
+if(d.getFullYear()!==p[0]||d.getMonth()!==p[1]-1||d.getDate()!==p[2])return null;
+d.setHours(0,0,0,0);
+return d;
+}
+function addYearsClamped(date,years){
+const target=new Date(date.getFullYear()+years,date.getMonth(),1);
+const last=new Date(target.getFullYear(),target.getMonth()+1,0).getDate();
+target.setDate(Math.min(date.getDate(),last));
+return target;
+}
+function ageParts(birth,end){
+let years=end.getFullYear()-birth.getFullYear();
+let anchor=addYearsClamped(birth,years);
+if(anchor>end){years--;anchor=addYearsClamped(birth,years);}
+let months=(end.getFullYear()-anchor.getFullYear())*12+end.getMonth()-anchor.getMonth();
+let monthAnchor=new Date(anchor.getFullYear(),anchor.getMonth()+months,1);
+const last=new Date(monthAnchor.getFullYear(),monthAnchor.getMonth()+1,0).getDate();
+monthAnchor.setDate(Math.min(anchor.getDate(),last));
+if(monthAnchor>end){months--;monthAnchor=new Date(anchor.getFullYear(),anchor.getMonth()+months,1);monthAnchor.setDate(Math.min(anchor.getDate(),new Date(monthAnchor.getFullYear(),monthAnchor.getMonth()+1,0).getDate()));}
+const days=Math.round((end-monthAnchor)/86400000);
+return {years,months,days};
+}
+function formatDate(d){
+return d.toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"});
+}
+function calculate(){
+const birth=parseDate($("dob").value);
+const end=parseDate($("asof").value);
+$("status").textContent="";
+if(!birth||!end){$("status").textContent="Please select both dates.";return;}
+if(birth>end){$("status").textContent="Date of birth cannot be after the calculation date.";return;}
+const totalDays=Math.round((end-birth)/86400000);
+const parts=ageParts(birth,end);
+$("age").textContent=parts.years+" years, "+parts.months+" months";
+$("ageSub").textContent=parts.days+" additional days · Calculated as of "+formatDate(end);
+$("days").textContent=totalDays.toLocaleString("en-IN");
+$("weeks").textContent=Math.floor(totalDays/7).toLocaleString("en-IN");
+$("weekday").textContent=birth.toLocaleDateString("en-IN",{weekday:"long"});
+let next=new Date(end.getFullYear(),birth.getMonth(),1);
+const last=new Date(next.getFullYear(),next.getMonth()+1,0).getDate();
+next.setDate(Math.min(birth.getDate(),last));
+if(next<=end){
+next=new Date(end.getFullYear()+1,birth.getMonth(),1);
+const lastNext=new Date(next.getFullYear(),next.getMonth()+1,0).getDate();
+next.setDate(Math.min(birth.getDate(),lastNext));
+}
+const remaining=Math.round((next-end)/86400000);
+$("until").textContent=remaining.toLocaleString("en-IN");
+$("nextTitle").textContent="Next birthday · "+formatDate(next);
+$("nextInfo").textContent="Falls on a "+next.toLocaleDateString("en-IN",{weekday:"long"})+". "+(remaining===0?"Happy birthday!":remaining+" day"+(remaining===1?"":"s")+" remaining from the selected date.");
+}
+$("dob").max=isoDate(today);
+$("asof").max=isoDate(today);
+$("asof").value=isoDate(today);
+$("calculate").addEventListener("click",calculate);
+$("today").addEventListener("click",()=>{$("asof").value=isoDate(today);calculate();});
+$("dob").addEventListener("change",calculate);
+$("asof").addEventListener("change",calculate);
+})();
+</script>
+
+<!-- CSC Seva Tool: customer usage tracking -->
+<script type="module" src="../usage-tracker.js"></script>
+<script>
+(function () {
+  if (window.__CSC_ACTION_TRACKING_INSTALLED__) return;
+  window.__CSC_ACTION_TRACKING_INSTALLED__ = true;
+  document.addEventListener("click", function (event) {
+    const el = event.target && event.target.closest ? event.target.closest("button, input[type=button], input[type=submit]") : null;
+    if (!el || el.disabled || !window.CSCUsage || typeof window.CSCUsage.trackAction !== "function") return;
+    const label = (el.getAttribute("aria-label") || el.innerText || el.value || el.title || "Button click").trim().replace(/\s+/g, " ").slice(0, 80);
+    if (!label || /^(cancel|close|back)$/i.test(label)) return;
+    window.CSCUsage.trackAction(label);
+  }, true);
+})();
+</script>
+</body>
+</html>

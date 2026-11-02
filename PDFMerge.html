@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070914">
+<title>PDF Merger Nexus | Kisan Seva Tools</title>
+<meta name="description" content="Merge multiple PDF documents into one file in your browser. Reorder files, preview document details and download the merged PDF.">
+<style>
+:root{
+ --bg:#070914;--panel:#11152a;--panel2:#0b1021;--line:#272d4a;
+ --text:#f4f6ff;--muted:#969fbd;--cyan:#62ffe2;--blue:#8194ff;
+ --purple:#ce8bff;--red:#ff809e;--green:#7cf5bd;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;color:var(--text);min-height:100vh;
+ font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+ background:radial-gradient(ellipse at 10% 0%,#5951ff29,transparent 35%),
+ radial-gradient(ellipse at 90% 15%,#00f5cf14,transparent 32%),var(--bg)
+}
+button,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.topbar{position:sticky;top:0;z-index:5;background:#070914dc;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{max-width:1220px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:.3px}
+.logo{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;color:#06121b;background:linear-gradient(135deg,var(--cyan),var(--blue));box-shadow:0 0 28px #62ffe225;font-size:20px}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.7px;margin-top:3px}
+.navpill{font-size:11px;padding:8px 11px;border:1px solid var(--line);border-radius:30px;color:#d4dcf8}
+.navpill span{color:var(--cyan)}
+main{max-width:1220px;margin:auto;padding:38px 22px 55px}
+.kicker{font-size:11px;letter-spacing:2.4px;text-transform:uppercase;color:var(--cyan);font-weight:850}
+h1{font-size:clamp(35px,5vw,58px);letter-spacing:-2.5px;line-height:1.04;margin:14px 0}
+.gradient{background:linear-gradient(100deg,#fff 4%,var(--cyan) 53%,var(--purple));color:transparent;background-clip:text;-webkit-background-clip:text}
+.intro{font-size:14px;color:var(--muted);line-height:1.8;max-width:720px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:25px 0}
+.stat{padding:15px;border:1px solid var(--line);border-radius:15px;background:#11152a99}
+.stat strong{display:block;font-size:22px;letter-spacing:-.7px}
+.stat span{font-size:11px;color:var(--muted);display:block;margin-top:5px}
+.stat .accent{color:var(--cyan)}
+.layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(285px,.8fr);gap:19px;align-items:start}
+.panel{min-width:0;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#151a32f5,#0d1124f5);box-shadow:0 24px 70px #0003;overflow:hidden}
+.panelhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px;border-bottom:1px solid var(--line)}
+.panelhead h2{font-size:15px;margin:0}
+.muted{font-size:11px;color:var(--muted);line-height:1.65;margin-top:5px}
+.badge{font-size:10px;color:var(--cyan);background:#62ffe20d;border:1px solid #62ffe22e;padding:7px 9px;border-radius:9px;white-space:nowrap}
+.body{padding:20px}
+.drop{
+ min-height:192px;padding:24px;border:1px dashed #777eac;border-radius:18px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+ background:linear-gradient(140deg,#8b7bff0d,#62ffe20b);transition:.2s
+}
+.drop.over{border-color:var(--cyan);background:#62ffe219;transform:scale(1.005)}
+.uploadicon{width:53px;height:53px;display:grid;place-items:center;border-radius:17px;color:var(--cyan);font-size:25px;background:#62ffe213;border:1px solid #62ffe22b;margin-bottom:12px}
+.drop strong{font-size:15px}
+.drop p{font-size:12px;color:var(--muted);line-height:1.7;margin:8px 0 15px}
+.btn{padding:10px 13px;border:1px solid var(--line);border-radius:11px;color:var(--text);background:#ffffff08;font-size:12px;font-weight:750;transition:.2s}
+.btn:hover{border-color:#62ffe277;transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn.primary{color:#06131b;background:linear-gradient(105deg,var(--cyan),#a1ffe8);border:0;box-shadow:0 8px 24px #62ffe21c}
+.btn.small{font-size:11px;padding:7px 9px;border-radius:9px}
+.btn.danger{color:#ff9eb5;border-color:#ff809e38}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:19px 0 12px}
+.row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.queue{display:flex;flex-direction:column;gap:10px}
+.file{
+ display:grid;grid-template-columns:49px minmax(0,1fr) auto;align-items:center;gap:12px;
+ padding:12px;border:1px solid var(--line);border-radius:15px;background:#070b1a85;
+ transition:border-color .2s
+}
+.file:hover{border-color:#8194ff75}
+.file.dragging{opacity:.45}
+.file.dragtarget{border-color:var(--cyan);background:#62ffe20c}
+.pdficon{width:49px;height:56px;display:grid;place-items:center;border:1px solid #ff809e38;border-radius:11px;color:#ff9cb2;background:#ff809e0c;font-size:11px;font-weight:900}
+.fileinfo{min-width:0}
+.order{font-size:10px;color:var(--cyan);letter-spacing:1px;margin-bottom:5px}
+.filename{font-size:13px;font-weight:750;overflow-wrap:anywhere}
+.filemeta{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6}
+.fileactions{display:flex;justify-content:flex-end;gap:5px;flex-wrap:wrap;max-width:90px}
+.empty{padding:28px 14px;text-align:center;border:1px solid var(--line);border-radius:14px;color:var(--muted);font-size:12px;line-height:1.8}
+.settings{display:flex;flex-direction:column;gap:18px}
+.group{border-bottom:1px solid var(--line);padding-bottom:17px}
+.group:last-child{border:0;padding:0}
+.group h3{font-size:12px;letter-spacing:.8px;margin:0 0 12px}
+.field{margin-bottom:13px}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:11px;color:var(--muted);margin-bottom:7px}
+input[type=text]{width:100%;min-width:0;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:#080c1d;color:var(--text);font-size:13px}
+.check{display:flex;gap:9px;align-items:center;color:#dce4ff;font-size:12px;line-height:1.6}
+.check input{accent-color:var(--cyan)}
+.summary{padding:13px;border:1px solid var(--line);border-radius:14px;background:#070a197d}
+.srow{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;font-size:12px;margin:9px 0;color:var(--muted)}
+.srow strong{color:var(--text);text-align:right;overflow-wrap:anywhere}
+.srow.total{border-top:1px solid var(--line);padding-top:11px;color:var(--text)}
+.srow.total strong{color:var(--cyan)}
+.generate{width:100%;padding:15px;font-size:14px}
+.status{display:none;font-size:12px;line-height:1.7;padding:11px 12px;border-radius:11px;margin-top:12px;overflow-wrap:anywhere}
+.status.show{display:block}
+.status.error{color:#ffb4c2;border:1px solid #ff809e40;background:#ff809e0d}
+.status.success{color:#9effe2;border:1px solid #62ffe23a;background:#62ffe20c}
+.status.info{color:#c7d2ff;border:1px solid #8194ff40;background:#8194ff0c}
+.progress{display:none;height:5px;background:#ffffff0c;border-radius:8px;overflow:hidden;margin-top:12px}
+.progress.show{display:block}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--purple));transition:width .2s}
+.privacy{display:flex;gap:9px;color:var(--muted);font-size:11px;line-height:1.7;margin-top:13px}
+.privacy b{color:var(--cyan)}
+.result{margin-top:20px}
+footer{max-width:1220px;margin:auto;padding:0 22px 28px;color:#7e88a8;font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:#bac7f5;text-decoration:none}
+@media(max-width:830px){.layout{grid-template-columns:1fr}}
+@media(max-width:520px){
+ .nav{padding:12px 14px}.navpill{font-size:10px}
+ main{padding:27px 13px 42px}h1{letter-spacing:-1.5px}
+ .stats{gap:7px}.stat{padding:11px}.stat strong{font-size:19px}.stat span{font-size:10px}
+ .panelhead{padding:16px}.body{padding:14px}
+ .file{grid-template-columns:43px minmax(0,1fr);gap:10px}
+ .pdficon{width:43px;height:51px}.fileactions{grid-column:2;justify-content:flex-start;max-width:none}
+ footer{padding:0 14px 24px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+ <div class="nav">
+  <div class="brand"><div class="logo">K</div><div>KISAN SEVA TOOLS<small>FUTURE DOCUMENT LAB</small></div></div>
+  <div class="navpill"><span>●</span> PDF MERGER / 026</div>
+ </div>
+</header>
+
+<main>
+ <section>
+  <div class="kicker">✦ Tool 026 / Document fusion engine</div>
+  <h1>One workspace.<br><span class="gradient">One powerful PDF.</span></h1>
+  <p class="intro">Bring documents together in the exact order you need. Arrange your queue, inspect page counts, choose your output name and merge everything into one downloadable PDF.</p>
+ </section>
+
+ <div class="stats">
+  <div class="stat"><strong class="accent" id="statFiles">00</strong><span>Documents queued</span></div>
+  <div class="stat"><strong id="statPages">00</strong><span>Total PDF pages</span></div>
+  <div class="stat"><strong id="statSize">0 MB</strong><span>Input file size</span></div>
+ </div>
+
+ <div class="layout">
+  <section class="panel">
+   <div class="panelhead">
+    <div><h2>01 / Document fusion queue</h2><div class="muted">Add PDFs and put them in the desired order.</div></div>
+    <span class="badge" id="queueBadge">0 FILES</span>
+   </div>
+   <div class="body">
+    <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose or drop PDF files">
+     <div class="uploadicon">⇧</div>
+     <strong>Drop your PDF documents here</strong>
+     <p>Select multiple PDFs at once · Up to 25 files<br>Maximum 30 MB per file</p>
+     <button class="btn primary" id="choose" type="button">＋ Choose PDF files</button>
+     <input id="fileInput" type="file" accept="application/pdf,.pdf" multiple hidden>
+    </div>
+
+    <div class="toolbar">
+     <div class="row"><span class="muted">MERGE SEQUENCE</span></div>
+     <div class="row">
+      <button class="btn small" id="addMore" type="button">＋ Add more</button>
+      <button class="btn small danger" id="clear" type="button" disabled>Clear all</button>
+     </div>
+    </div>
+    <div class="queue" id="queue"><div class="empty">Your document queue is empty.<br>Upload two or more PDFs to merge them.</div></div>
+    <div class="status" id="inputStatus" role="status" aria-live="polite"></div>
+   </div>
+  </section>
+
+  <aside class="panel">
+   <div class="panelhead">
+    <div><h2>02 / Output controls</h2><div class="muted">Configure your final document.</div></div>
+    <span class="badge">EXPORT</span>
+   </div>
+   <div class="body">
+    <div class="settings">
+     <section class="group">
+      <h3>OUTPUT IDENTITY</h3>
+      <div class="field">
+       <label for="filename">Merged PDF filename</label>
+       <input id="filename" type="text" maxlength="80" value="KisanSeva-Merged-Document" placeholder="My-Combined-PDF">
+      </div>
+      <label class="check"><input id="metadata" type="checkbox" checked> Add document title metadata</label>
+      <div class="muted">The source page content and original page sizes are preserved during merging.</div>
+     </section>
+
+     <section class="group">
+      <h3>MERGE SUMMARY</h3>
+      <div class="summary">
+       <div class="srow"><span>Documents</span><strong id="sumFiles">0</strong></div>
+       <div class="srow"><span>Total pages</span><strong id="sumPages">0</strong></div>
+       <div class="srow"><span>Input size</span><strong id="sumSize">0 MB</strong></div>
+       <div class="srow total"><span>Output type</span><strong>PDF document</strong></div>
+      </div>
+     </section>
+
+     <section>
+      <button class="btn primary generate" id="merge" type="button" disabled>✦ Merge PDFs</button>
+      <div class="progress" id="progress"><div class="bar" id="bar"></div></div>
+      <div class="status" id="mergeStatus" role="status" aria-live="polite"></div>
+      <div class="privacy"><b>◆</b><span>Files are processed in this browser. No file is sent to a Kisan Seva Tools server. The PDF library loads from a CDN, so internet access is needed.</span></div>
+     </section>
+    </div>
+   </div>
+  </aside>
+ </div>
+</main>
+
+<footer>
+ <span>© Kisan Seva Tools · PDF Merger Nexus</span>
+ <span><a href="../Home.html">Back to all tools</a></span>
+</footer>
+
+<script>
+(() => {
+ "use strict";
+ const $ = id => document.getElementById(id);
+ const MAX_FILES = 25;
+ const MAX_FILE_SIZE = 30 * 1024 * 1024;
+ const MAX_TOTAL_SIZE = 100 * 1024 * 1024;
+ let items = [];
+ let busy = false;
+ let nextId = 1;
+ let pdfLibPromise = null;
+
+ function fmtBytes(n){
+  if(n < 1024) return n + " B";
+  if(n < 1048576) return (n/1024).toFixed(1) + " KB";
+  return (n/1048576).toFixed(2) + " MB";
+ }
+ function pad(n){return String(n).padStart(2,"0")}
+ function esc(s){
+  return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ }
+ function showStatus(id,msg,type="info"){
+  $(id).textContent=msg;
+  $(id).className="status show "+type;
+ }
+ function hideStatus(id){$(id).textContent="";$(id).className="status"}
+ function safeFilename(){
+  return ($("filename").value.trim()
+   .replace(/\.pdf$/i,"")
+   .replace(/[<>:"/\\|?*\x00-\x1f]/g,"_")
+   .replace(/\s+/g,"-").slice(0,80)||"KisanSeva-Merged-Document")+".pdf";
+ }
+ function totalSize(){return items.reduce((sum,x)=>sum+x.file.size,0)}
+ function totalPages(){return items.reduce((sum,x)=>sum+(x.pages||0),0)}
+
+ function updateStats(){
+  const size=totalSize(),pages=totalPages();
+  $("statFiles").textContent=pad(items.length);
+  $("statPages").textContent=pad(pages);
+  $("statSize").textContent=(size/1048576).toFixed(2)+" MB";
+  $("queueBadge").textContent=items.length+" FILE"+(items.length===1?"":"S");
+  $("sumFiles").textContent=items.length;
+  $("sumPages").textContent=pages;
+  $("sumSize").textContent=fmtBytes(size);
+  $("merge").disabled=busy||items.length<2||items.some(x=>!x.pages);
+  $("clear").disabled=busy||!items.length;
+  $("choose").disabled=busy;
+  $("addMore").disabled=busy;
+  renderQueue();
+ }
+ function renderQueue(){
+  if(!items.length){
+   $("queue").innerHTML='<div class="empty">Your document queue is empty.<br>Upload two or more PDFs to merge them.</div>';
+   return;
+  }
+  $("queue").innerHTML=items.map((x,i)=>`
+   <article class="file" draggable="${!busy}" data-id="${x.id}">
+    <div class="pdficon">PDF</div>
+    <div class="fileinfo">
+     <div class="order">DOCUMENT ${pad(i+1)}</div>
+     <div class="filename">${esc(x.file.name)}</div>
+     <div class="filemeta">${x.pages===null?"Reading page count…":x.pages+" page"+(x.pages===1?"":"s")} · ${fmtBytes(x.file.size)}</div>
+    </div>
+    <div class="fileactions">
+     <button class="btn small" type="button" data-action="up" data-id="${x.id}" aria-label="Move ${esc(x.file.name)} up" ${i===0||busy?"disabled":""}>↑</button>
+     <button class="btn small" type="button" data-action="down" data-id="${x.id}" aria-label="Move ${esc(x.file.name)} down" ${i===items.length-1||busy?"disabled":""}>↓</button>
+     <button class="btn small danger" type="button" data-action="remove" data-id="${x.id}" aria-label="Remove ${esc(x.file.name)}" ${busy?"disabled":""}>×</button>
+    </div>
+   </article>`).join("");
+ }
+ async function getPdfLib(){
+  if(window.PDFLib)return window.PDFLib;
+  if(pdfLibPromise)return pdfLibPromise;
+  pdfLibPromise=new Promise((resolve,reject)=>{
+   const s=document.createElement("script");
+   s.src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js";
+   s.onload=()=>window.PDFLib?resolve(window.PDFLib):reject(new Error("PDF library loaded incorrectly."));
+   s.onerror=()=>reject(new Error("Could not load the PDF library. Check your internet connection and refresh."));
+   document.head.appendChild(s);
+  });
+  try{return await pdfLibPromise}catch(err){pdfLibPromise=null;throw err}
+ }
+ async function inspectPdf(file){
+  const lib=await getPdfLib();
+  const bytes=await file.arrayBuffer();
+  const doc=await lib.PDFDocument.load(bytes,{ignoreEncryption:false});
+  return doc.getPageCount();
+ }
+ async function addFiles(fileList){
+  if(busy)return;
+  hideStatus("inputStatus");
+  const selected=Array.from(fileList||[]);
+  if(!selected.length)return;
+  const errors=[];
+  const additions=[];
+  let projected=totalSize();
+
+  for(const file of selected){
+   if(!(file.type==="application/pdf"||/\.pdf$/i.test(file.name))){
+    errors.push(file.name+": not a PDF");continue;
+   }
+   if(file.size===0){errors.push(file.name+": empty file");continue}
+   if(file.size>MAX_FILE_SIZE){errors.push(file.name+": exceeds 30 MB");continue}
+   if(items.some(x=>x.file.name===file.name&&x.file.size===file.size)||
+      additions.some(x=>x.name===file.name&&x.size===file.size)){
+    errors.push(file.name+": duplicate skipped");continue;
+   }
+   if(items.length+additions.length>=MAX_FILES){
+    errors.push("Maximum "+MAX_FILES+" files reached");break;
+   }
+   if(projected+file.size>MAX_TOTAL_SIZE){
+    errors.push(file.name+": total upload limit is 100 MB");continue;
+   }
+   additions.push(file);projected+=file.size;
+  }
+
+  if(additions.length){
+   for(const file of additions){
+    items.push({id:nextId++,file,pages:null});
+   }
+   updateStats();
+   showStatus("inputStatus","Reading PDF information for "+additions.length+" file(s)…","info");
+   for(const file of additions){
+    const item=items.find(x=>x.file===file);
+    if(!item)continue;
+    try{item.pages=await inspectPdf(file)}
+    catch(err){
+     items=items.filter(x=>x!==item);
+     errors.push(file.name+": "+(err.message||"Unable to read PDF"));
+    }
+   }
+   updateStats();
+  }
+  if(errors.length){
+   showStatus("inputStatus",errors.slice(0,5).join(" · ")+(errors.length>5?" · and "+(errors.length-5)+" more":""),"error");
+  }else if(additions.length){
+   showStatus("inputStatus","Documents ready. Arrange their order and merge when you're ready.","success");
+  }
+ }
+ $("choose").addEventListener("click",e=>{e.stopPropagation();if(!busy)$("fileInput").click()});
+ $("addMore").addEventListener("click",()=>{if(!busy)$("fileInput").click()});
+ $("drop").addEventListener("click",e=>{if(!e.target.closest("button")&&!busy)$("fileInput").click()});
+ $("drop").addEventListener("keydown",e=>{
+  if((e.key==="Enter"||e.key===" ")&&e.target===$("drop")){
+   e.preventDefault();if(!busy)$("fileInput").click();
+  }
+ });
+ $("fileInput").addEventListener("change",e=>{addFiles(e.target.files);e.target.value=""});
+ ["dragenter","dragover"].forEach(ev=>$("drop").addEventListener(ev,e=>{
+  e.preventDefault();if(!busy)$("drop").classList.add("over");
+ }));
+ ["dragleave","drop"].forEach(ev=>$("drop").addEventListener(ev,e=>{
+  e.preventDefault();$("drop").classList.remove("over");
+ }));
+ $("drop").addEventListener("drop",e=>{if(!busy&&e.dataTransfer)addFiles(e.dataTransfer.files)});
+
+ let dragId=null;
+ $("queue").addEventListener("dragstart",e=>{
+  const card=e.target.closest(".file");
+  if(!card||busy)return;
+  dragId=Number(card.dataset.id);
+  card.classList.add("dragging");
+  if(e.dataTransfer){e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain",String(dragId))}
+ });
+ $("queue").addEventListener("dragover",e=>{
+  e.preventDefault();
+  const card=e.target.closest(".file");
+  $("queue").querySelectorAll(".file").forEach(el=>el.classList.toggle("dragtarget",el===card));
+ });
+ $("queue").addEventListener("drop",e=>{
+  e.preventDefault();
+  if(busy)return;
+  const card=e.target.closest(".file");
+  const from=items.findIndex(x=>x.id===dragId);
+  const to=card?items.findIndex(x=>x.id===Number(card.dataset.id)):-1;
+  if(from>=0&&to>=0&&from!==to){
+   const [moved]=items.splice(from,1);items.splice(to,0,moved);updateStats();
+  }
+  dragId=null;
+ });
+ $("queue").addEventListener("dragend",()=>{
+  dragId=null;
+  $("queue").querySelectorAll(".file").forEach(el=>el.classList.remove("dragging","dragtarget"));
+ });
+ $("queue").addEventListener("click",e=>{
+  const btn=e.target.closest("button[data-action]");
+  if(!btn||busy)return;
+  const idx=items.findIndex(x=>x.id===Number(btn.dataset.id));
+  if(idx<0)return;
+  if(btn.dataset.action==="remove")items.splice(idx,1);
+  if(btn.dataset.action==="up"&&idx>0)[items[idx-1],items[idx]]=[items[idx],items[idx-1]];
+  if(btn.dataset.action==="down"&&idx<items.length-1)[items[idx+1],items[idx]]=[items[idx],items[idx+1]];
+  updateStats();hideStatus("mergeStatus");
+ });
+ $("clear").addEventListener("click",()=>{
+  if(busy)return;
+  items=[];updateStats();hideStatus("inputStatus");hideStatus("mergeStatus");
+ });
+ $("filename").addEventListener("input",()=>{});
+
+ async function mergePdfs(){
+  if(busy||items.length<2)return;
+  hideStatus("mergeStatus");
+  if(items.some(x=>!x.pages)){
+   showStatus("mergeStatus","Wait until every PDF has finished loading.","error");return;
+  }
+  busy=true;updateStats();
+  $("progress").classList.add("show");$("bar").style.width="0%";
+  let outputUrl=null;
+  try{
+   const {PDFDocument}=await getPdfLib();
+   const merged=await PDFDocument.create();
+   if($("metadata").checked){
+    merged.setTitle($("filename").value.trim()||"KisanSeva Merged Document");
+    merged.setCreator("Kisan Seva Tools — PDF Merger Nexus");
+    merged.setProducer("PDF Merger Nexus");
+    merged.setCreationDate(new Date());
+   }
+   const total=items.length;
+   for(let i=0;i<total;i++){
+    const item=items[i];
+    showStatus("mergeStatus","Merging document "+(i+1)+" of "+total+": "+item.file.name,"info");
+    const bytes=await item.file.arrayBuffer();
+    const source=await PDFDocument.load(bytes);
+    const copied=await merged.copyPages(source,source.getPageIndices());
+    copied.forEach(page=>merged.addPage(page));
+    $("bar").style.width=Math.round((i+1)/total*90)+"%";
+    await new Promise(resolve=>setTimeout(resolve,0));
+   }
+   showStatus("mergeStatus","Preparing the final PDF for download…","info");
+   const output=await merged.save({useObjectStreams:true});
+   const blob=new Blob([output],{type:"application/pdf"});
+   outputUrl=URL.createObjectURL(blob);
+   const a=document.createElement("a");
+   a.href=outputUrl;a.download=safeFilename();
+   document.body.appendChild(a);a.click();a.remove();
+   $("bar").style.width="100%";
+   showStatus("mergeStatus","Success! "+merged.getPageCount()+" pages merged into one PDF ("+fmtBytes(blob.size)+"). Check your browser Downloads folder.","success");
+   setTimeout(()=>{if(outputUrl)URL.revokeObjectURL(outputUrl)},60000);
+  }catch(err){
+   if(outputUrl)URL.revokeObjectURL(outputUrl);
+   console.error(err);
+   showStatus("mergeStatus","Could not merge these PDFs. A file may be encrypted, damaged or use unsupported features. Details: "+(err.message||"Unknown error"),"error");
+  }finally{
+   busy=false;$("progress").classList.remove("show");updateStats();
+  }
+ }
+ $("merge").addEventListener("click",mergePdfs);
+ updateStats();
+})();
+</script>
+
+<!-- CSC Seva Tool: customer usage tracking -->
+<script type="module" src="../usage-tracker.js"></script>
+<script>
+(function () {
+  if (window.__CSC_ACTION_TRACKING_INSTALLED__) return;
+  window.__CSC_ACTION_TRACKING_INSTALLED__ = true;
+  document.addEventListener("click", function (event) {
+    const el = event.target && event.target.closest ? event.target.closest("button, input[type=button], input[type=submit]") : null;
+    if (!el || el.disabled || !window.CSCUsage || typeof window.CSCUsage.trackAction !== "function") return;
+    const label = (el.getAttribute("aria-label") || el.innerText || el.value || el.title || "Button click").trim().replace(/\s+/g, " ").slice(0, 80);
+    if (!label || /^(cancel|close|back)$/i.test(label)) return;
+    window.CSCUsage.trackAction(label);
+  }, true);
+})();
+</script>
+</body>
+</html>
