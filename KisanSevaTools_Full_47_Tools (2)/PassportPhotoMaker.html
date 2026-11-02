@@ -52,4 +52,20 @@ function joinImages(){loadImgs().then(ims=>{let w=Math.max(...ims.map(i=>i.natur
  bar.append(clear,print); if(first&&first.parentElement){first.parentElement.appendChild(bar)}else host.prepend(bar);
  const foot=document.createElement('div');foot.className='kist-foot';foot.textContent='Privacy note: this tool runs in your browser. Review the result before printing or sharing. Keep sensitive personal information secure.';host.appendChild(foot);
 })();
-</script></body></html>
+</script>
+<!-- CSC Seva Tool: customer usage tracking -->
+<script type="module" src="../usage-tracker.js"></script>
+<script>
+(function () {
+  if (window.__CSC_ACTION_TRACKING_INSTALLED__) return;
+  window.__CSC_ACTION_TRACKING_INSTALLED__ = true;
+  document.addEventListener("click", function (event) {
+    const el = event.target && event.target.closest ? event.target.closest("button, input[type=button], input[type=submit]") : null;
+    if (!el || el.disabled || !window.CSCUsage || typeof window.CSCUsage.trackAction !== "function") return;
+    const label = (el.getAttribute("aria-label") || el.innerText || el.value || el.title || "Button click").trim().replace(/\s+/g, " ").slice(0, 80);
+    if (!label || /^(cancel|close|back)$/i.test(label)) return;
+    window.CSCUsage.trackAction(label);
+  }, true);
+})();
+</script>
+</body></html>

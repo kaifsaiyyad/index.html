@@ -389,5 +389,21 @@ $('printReport').addEventListener('click',()=>window.print());
 renderRows();
 })();
 </script>
+
+<!-- CSC Seva Tool: customer usage tracking -->
+<script type="module" src="../usage-tracker.js"></script>
+<script>
+(function () {
+  if (window.__CSC_ACTION_TRACKING_INSTALLED__) return;
+  window.__CSC_ACTION_TRACKING_INSTALLED__ = true;
+  document.addEventListener("click", function (event) {
+    const el = event.target && event.target.closest ? event.target.closest("button, input[type=button], input[type=submit]") : null;
+    if (!el || el.disabled || !window.CSCUsage || typeof window.CSCUsage.trackAction !== "function") return;
+    const label = (el.getAttribute("aria-label") || el.innerText || el.value || el.title || "Button click").trim().replace(/\s+/g, " ").slice(0, 80);
+    if (!label || /^(cancel|close|back)$/i.test(label)) return;
+    window.CSCUsage.trackAction(label);
+  }, true);
+})();
+</script>
 </body>
 </html>
