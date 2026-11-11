@@ -1,330 +1,892 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#073d27">
-<title>Photo Studio Pro | Kisan Seva Tools</title>
+<title>All Photo Studio Pro | CSC Seva Tool</title>
+
 <style>
-:root{--bg:#f1f6f2;--card:#fff;--green:#126b3b;--dark:#073d27;--mint:#b8f2ca;--ink:#17281e;--muted:#64766a;--line:#d9e6dc}
+:root{
+ --green:#176b3a;
+ --dark:#073d27;
+ --light:#eff8f1;
+ --bg:#f3f7f4;
+ --ink:#17281e;
+ --muted:#68796e;
+ --line:#dce8df;
+ --white:#fff;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px system-ui,Arial,sans-serif}
-header{padding:25px 16px;color:#fff;background:radial-gradient(circle at 90% 10%,#268953,transparent 35%),linear-gradient(125deg,#052e1d,#126b3b);border-bottom:4px solid var(--mint)}
-.brand{text-align:center;color:#c7f7d5;font-size:11px;letter-spacing:3px;font-weight:900}
-header h1{text-align:center;font-size:clamp(25px,5vw,38px);margin:10px 0}
-header p{text-align:center;color:#e1f5e7;margin:0}
-main{max-width:1200px;margin:22px auto;padding:0 14px 32px}
-a.back{display:inline-block;text-decoration:none;background:#fff;color:var(--green);padding:10px 14px;border:1px solid var(--line);border-radius:10px;font-weight:800}
-.intro{margin:22px 0}.intro h2{margin:0 0 5px}.intro p,.muted{color:var(--muted);line-height:1.6}
-.workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 26px #153d2010;min-width:0}
-.panel h3{margin:0 0 6px}.muted{font-size:13px;margin:0 0 15px}
-.section-title{font-size:12px;font-weight:900;letter-spacing:1px;color:var(--green);margin:22px 0 10px}
+body{
+ margin:0;background:var(--bg);color:var(--ink);
+ font:15px system-ui,Arial,sans-serif;
+}
+header{
+ padding:25px 15px;color:white;text-align:center;
+ background:radial-gradient(circle at 90% 10%,#268953,transparent 35%),
+ linear-gradient(125deg,#052e1d,#176b3a);
+ border-bottom:4px solid #b8f2ca;
+}
+.brand{font-size:11px;letter-spacing:3px;font-weight:900;color:#c7f7d5}
+header h1{font-size:clamp(25px,5vw,38px);margin:10px 0}
+header p{margin:0;color:#e1f5e7}
+main{max-width:1250px;margin:22px auto;padding:0 14px 35px}
+.back{
+ display:inline-block;text-decoration:none;color:var(--green);
+ background:white;border:1px solid var(--line);
+ border-radius:10px;padding:10px 14px;font-weight:800;
+}
+.intro{margin:22px 0}
+.intro h2{margin-bottom:5px}
+.intro p,.muted{color:var(--muted);line-height:1.6}
+.muted{font-size:13px}
+.section-title{
+ color:var(--green);font-size:12px;font-weight:900;
+ letter-spacing:1px;margin:22px 0 10px;
+}
+.tools-grid{
+ display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+ gap:12px;margin:15px 0 20px;
+}
+.tool-card{
+ border:1px solid var(--line);background:white;border-radius:14px;
+ padding:12px 8px;text-align:center;cursor:pointer;
+ min-width:0;transition:.15s;
+}
+.tool-card:hover{transform:translateY(-2px);border-color:var(--green)}
+.tool-card.active{
+ border:2px solid var(--green);background:#effaf2;
+ box-shadow:0 0 0 2px #d4efdc;
+}
+.tool-art{
+ width:54px;height:48px;margin:0 auto 8px;
+ border-radius:12px;background:#e8f5eb;
+ display:flex;align-items:center;justify-content:center;
+ font-size:29px;
+}
+.tool-card strong{display:block;font-size:12px}
+.tool-card small{display:block;font-size:10px;color:var(--muted);margin-top:4px}
+.workspace{
+ display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+ gap:16px;align-items:start;
+}
+.panel{
+ background:white;border:1px solid var(--line);border-radius:17px;
+ padding:18px;box-shadow:0 7px 24px #153d2010;min-width:0;
+}
+.panel h3{margin:0 0 6px}
 label{display:block;font-size:12px;font-weight:800;margin:12px 0 6px}
 input,select,button{font:inherit}
-input[type=file],input[type=number],select{width:100%;min-height:43px;padding:10px;border:1px solid #c9d8cc;border-radius:10px;background:white;color:var(--ink)}
+input[type=file],input[type=number],select{
+ width:100%;min-height:43px;padding:9px;
+ border:1px solid #c9d8cc;border-radius:9px;background:white;color:var(--ink);
+}
 input[type=range]{width:100%;accent-color:var(--green)}
-input[type=color]{width:100%;height:42px;padding:3px;background:white;border:1px solid var(--line);border-radius:9px}
+input[type=color]{
+ width:100%;height:42px;padding:3px;
+ background:white;border:1px solid var(--line);border-radius:9px;
+}
 input[type=checkbox]{accent-color:var(--green)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.upload{border:2px dashed #9cc9a9;border-radius:14px;background:#f4fbf6;padding:15px}
-.btn{border:0;border-radius:10px;padding:12px 14px;background:var(--green);color:white;font-weight:800;min-height:43px}
+.upload{
+ border:2px dashed #9cc9a9;border-radius:13px;
+ background:#f4fbf6;padding:14px;
+}
+.btn{
+ border:0;border-radius:10px;padding:12px 14px;
+ background:var(--green);color:white;font-weight:800;min-height:43px;
+ cursor:pointer;
+}
 .btn.secondary{background:#e8f4eb;color:var(--dark);border:1px solid #c9e3d0}
 .btn.dark{background:var(--dark)}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.choice{border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px 5px;text-align:center;cursor:pointer;min-width:0}
+.choice{
+ border:1px solid var(--line);background:white;border-radius:10px;
+ padding:10px 5px;text-align:center;cursor:pointer;min-width:0;
+}
 .choice strong{display:block;font-size:12px;margin-top:5px}
 .choice small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
-.choice.active{border:2px solid var(--green);background:#f0faf3;box-shadow:0 0 0 2px #d4efdc}
-.preview{background:#e8eee9;border:1px solid var(--line);border-radius:14px;min-height:270px;padding:12px;display:flex;align-items:center;justify-content:center;overflow:auto}
-canvas{display:block;max-width:100%;height:auto;background:white;box-shadow:0 4px 18px #0002}
-.placeholder{text-align:center;color:var(--muted);max-width:220px}
-.placeholder b{font-size:42px;display:block}
-.statgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:12px}
-.stat{padding:10px;background:#f4f8f5;border:1px solid var(--line);border-radius:10px;min-width:0}
+.choice.active{border:2px solid var(--green);background:#f0faf3}
+.preview{
+ background:#e8eee9;border:1px solid var(--line);border-radius:13px;
+ min-height:280px;padding:12px;display:flex;
+ align-items:center;justify-content:center;overflow:auto;
+}
+canvas{
+ display:block;max-width:100%;height:auto;background:white;
+ box-shadow:0 4px 18px #0002;
+}
+.placeholder{text-align:center;color:var(--muted);max-width:230px}
+.placeholder b{font-size:45px;display:block}
+.statgrid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:7px;margin-top:12px;
+}
+.stat{padding:10px;background:#f4f8f5;border:1px solid var(--line);border-radius:9px;min-width:0}
 .stat small{display:block;color:var(--muted);font-size:10px}
 .stat strong{font-size:12px;overflow-wrap:anywhere}
-.note{margin-top:14px;padding:12px;border-radius:10px;background:#fff7dd;border-left:4px solid #d7a91f;font-size:12px;line-height:1.6}
+.note{
+ margin-top:14px;padding:12px;border-radius:10px;
+ background:#fff7dd;border-left:4px solid #d7a91f;
+ font-size:12px;line-height:1.6;
+}
 #message{font-size:13px;margin-top:12px;line-height:1.5}
 .good{color:#087a3b}.bad{color:#b42318}
+.hidden{display:none!important}
 footer{text-align:center;padding:18px;background:var(--dark);color:#d8f1df;font-size:12px}
-@media(max-width:800px){.workspace{grid-template-columns:1fr}.preview{min-height:220px}}
-@media(max-width:430px){main{padding-left:9px;padding-right:9px}.panel{padding:13px}.grid3{gap:5px}.choice{padding:9px 3px}.stat{padding:7px}}
+@media(max-width:900px){
+ .tools-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .workspace{grid-template-columns:1fr}
+}
+@media(max-width:450px){
+ main{padding-left:9px;padding-right:9px}
+ .panel{padding:13px}
+ .tools-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .grid3{gap:5px}
+ .choice{padding:8px 3px}
+ .stat{padding:7px}
+}
 </style>
 </head>
+
 <body>
 <header>
- <div class="brand">KISAN SEVA TOOLS • PHOTO LAB</div>
- <h1>📸 Photo Studio Pro</h1>
- <p>Actual-size layouts · Crop · Enhance · Background · Print</p>
+ <div class="brand">CSC SEVA TOOL • PHOTO LAB</div>
+ <h1>📸 All Photo Studio Pro</h1>
+ <p>Photo Editing · Passport · Signature · Resize · Print</p>
 </header>
 
 <main>
  <a class="back" href="../Home.html">← Back to Home</a>
+
  <section class="intro">
-  <h2>Professional Photo Maker</h2>
-  <p>Choose the photo frame and paper size separately. Preview your layout before downloading or printing.</p>
+  <h2>Professional Photo Studio</h2>
+  <p>Choose your photo service, upload an image, edit it and download your result.</p>
  </section>
+
+ <div class="section-title">SELECT YOUR PHOTO SERVICE</div>
+
+ <div class="tools-grid" id="toolCards">
+  <button class="tool-card active" data-mode="passport">
+   <div class="tool-art">🛂</div><strong>Passport Photo</strong><small>35 × 45 mm</small>
+  </button>
+  <button class="tool-card" data-mode="visa">
+   <div class="tool-art">🌎</div><strong>Visa Photo</strong><small>Visa sizes</small>
+  </button>
+  <button class="tool-card" data-mode="stamp">
+   <div class="tool-art">📷</div><strong>Stamp Photo</strong><small>Small size</small>
+  </button>
+  <button class="tool-card" data-mode="signature">
+   <div class="tool-art">✍️</div><strong>Signature Maker</strong><small>Signature image</small>
+  </button>
+  <button class="tool-card" data-mode="id">
+   <div class="tool-art">🪪</div><strong>ID Card Photo</strong><small>ID size</small>
+  </button>
+  <button class="tool-card" data-mode="crop">
+   <div class="tool-art">✂️</div><strong>Crop & Resize</strong><small>Custom dimensions</small>
+  </button>
+  <button class="tool-card" data-mode="enhance">
+   <div class="tool-art">✨</div><strong>Photo Enhance</strong><small>Colour & light</small>
+  </button>
+  <button class="tool-card" data-mode="print">
+   <div class="tool-art">🖨️</div><strong>Multiple Photo Print</strong><small>4×6 / A4</small>
+  </button>
+  <button class="tool-card" data-mode="compress">
+   <div class="tool-art">📦</div><strong>Photo Compressor</strong><small>Reduce file size</small>
+  </button>
+  <button class="tool-card" data-mode="convert">
+   <div class="tool-art">🔄</div><strong>Image Converter</strong><small>JPG / PNG / WebP</small>
+  </button>
+ </div>
 
  <div class="workspace">
   <section class="panel">
-   <h3>1. Upload & frame</h3>
-   <p class="muted">Photo file stays in your browser while you edit it.</p>
+   <h3 id="modeTitle">Passport Photo Maker</h3>
+   <p class="muted" id="modeDescription">Create passport-size photos and print multiple copies.</p>
+
    <div class="upload">
-    <label for="upload">Choose photo (JPG, PNG, WebP)</label>
+    <label for="upload">Upload Photo (JPG, PNG, WebP)</label>
     <input id="upload" type="file" accept="image/jpeg,image/png,image/webp">
+    <p class="muted">Maximum upload size: 15 MB. Your image is processed in your browser.</p>
    </div>
 
-   <div class="section-title">PHOTO FRAME SIZE</div>
+   <div class="section-title">PHOTO SIZE</div>
    <div class="grid3" id="frames">
-    <button class="choice active" data-frame="passport"><span>🛂</span><strong>Passport</strong><small>35 × 45 mm</small></button>
-    <button class="choice" data-frame="usvisa"><span>🌎</span><strong>US Visa</strong><small>2 × 2 inch</small></button>
-    <button class="choice" data-frame="visa"><span>🧳</span><strong>Visa</strong><small>35 × 45 mm</small></button>
-    <button class="choice" data-frame="id"><span>🪪</span><strong>ID Card</strong><small>25 × 30 mm</small></button>
-    <button class="choice" data-frame="stamp"><span>📷</span><strong>Stamp</strong><small>25 × 25 mm</small></button>
-    <button class="choice" data-frame="square"><span>⬜</span><strong>Square</strong><small>35 × 35 mm</small></button>
-    <button class="choice" data-frame="small"><span>🖼️</span><strong>Small</strong><small>30 × 40 mm</small></button>
-    <button class="choice" data-frame="custom"><span>📐</span><strong>Custom</strong><small>Your dimensions</small></button>
+    <button class="choice active" data-frame="passport"><strong>Passport</strong><small>35 × 45 mm</small></button>
+    <button class="choice" data-frame="usvisa"><strong>US Visa</strong><small>2 × 2 inch</small></button>
+    <button class="choice" data-frame="visa"><strong>Visa</strong><small>35 × 45 mm</small></button>
+    <button class="choice" data-frame="id"><strong>ID Card</strong><small>25 × 30 mm</small></button>
+    <button class="choice" data-frame="stamp"><strong>Stamp</strong><small>25 × 25 mm</small></button>
+    <button class="choice" data-frame="square"><strong>Square</strong><small>35 × 35 mm</small></button>
+    <button class="choice" data-frame="small"><strong>Small</strong><small>30 × 40 mm</small></button>
+    <button class="choice" data-frame="custom"><strong>Custom</strong><small>Your size</small></button>
    </div>
 
    <div class="grid2" id="customSize" hidden>
-    <div><label for="fw">Frame width (mm)</label><input id="fw" type="number" min="10" max="100" value="35"></div>
-    <div><label for="fh">Frame height (mm)</label><input id="fh" type="number" min="10" max="100" value="45"></div>
+    <div><label for="fw">Width (mm)</label><input id="fw" type="number" min="5" max="200" value="35"></div>
+    <div><label for="fh">Height (mm)</label><input id="fh" type="number" min="5" max="200" value="45"></div>
    </div>
 
-   <div class="section-title">PAPER / SHEET SIZE</div>
+   <div class="section-title">PAPER / OUTPUT SIZE</div>
    <div class="grid3" id="papers">
-    <button class="choice active" data-paper="4x6"><strong>4 × 6 inch</strong><small>101.6 × 152.4 mm</small></button>
+    <button class="choice active" data-paper="4x6"><strong>4 × 6 inch</strong><small>Photo paper</small></button>
     <button class="choice" data-paper="a4"><strong>A4 Sheet</strong><small>210 × 297 mm</small></button>
-    <button class="choice" data-paper="single"><strong>Single Photo</strong><small>Frame dimensions</small></button>
+    <button class="choice" data-paper="single"><strong>Single Photo</strong><small>One photo</small></button>
    </div>
 
    <div class="grid2">
-    <div><label for="copies">Number of copies</label><input id="copies" type="number" min="1" max="60" value="8"></div>
-    <div><label for="dpi">Output resolution</label><select id="dpi"><option value="300">300 DPI (print)</option><option value="200">200 DPI</option><option value="150">150 DPI</option></select></div>
+    <div><label for="copies">Number of Copies</label><input id="copies" type="number" min="1" max="60" value="8"></div>
+    <div><label for="dpi">Resolution</label>
+     <select id="dpi">
+      <option value="300">300 DPI</option>
+      <option value="200">200 DPI</option>
+      <option value="150">150 DPI</option>
+     </select>
+    </div>
    </div>
 
-   <div class="section-title">2. CROP & POSITION</div>
+   <div class="section-title">CROP & POSITION</div>
    <label for="zoom">Zoom: <span id="zoomVal">1.00×</span></label>
    <input id="zoom" type="range" min="1" max="3" value="1" step=".01">
-   <div class="grid2">
-    <div><label for="moveX">Move left / right</label><input id="moveX" type="range" min="-100" max="100" value="0"></div>
-    <div><label for="moveY">Move up / down</label><input id="moveY" type="range" min="-100" max="100" value="0"></div>
-   </div>
-   <label for="fit">Image fit</label>
-   <select id="fit"><option value="cover">Fill frame / crop edges</option><option value="contain">Fit entire photo</option></select>
 
-   <div class="section-title">3. PHOTO ENHANCEMENT</div>
+   <div class="grid2">
+    <div><label for="moveX">Move Left / Right</label><input id="moveX" type="range" min="-100" max="100" value="0"></div>
+    <div><label for="moveY">Move Up / Down</label><input id="moveY" type="range" min="-100" max="100" value="0"></div>
+   </div>
+
+   <label for="fit">Image Fit</label>
+   <select id="fit">
+    <option value="cover">Fill frame / Crop edges</option>
+    <option value="contain">Fit entire photo</option>
+   </select>
+
+   <div class="section-title">PHOTO ENHANCEMENT</div>
    <label for="brightness">Brightness: <span id="brightnessVal">100%</span></label>
    <input id="brightness" type="range" min="50" max="150" value="100">
+
    <label for="contrast">Contrast: <span id="contrastVal">100%</span></label>
    <input id="contrast" type="range" min="50" max="150" value="100">
+
    <label for="saturation">Saturation: <span id="saturationVal">100%</span></label>
    <input id="saturation" type="range" min="0" max="150" value="100">
 
-   <div class="section-title">4. BACKGROUND COLOUR</div>
+   <div class="section-title">BACKGROUND COLOUR</div>
    <div class="grid2">
-    <div><label for="bg">Preset colour</label>
+    <div>
+     <label for="bg">Preset Colour</label>
      <select id="bg">
       <option value="#ffffff">White</option>
-      <option value="#e8f2ff">Light blue</option>
-      <option value="#e8f5e9">Light green</option>
-      <option value="#eeeeee">Light grey</option>
+      <option value="#e8f2ff">Light Blue</option>
+      <option value="#e8f5e9">Light Green</option>
+      <option value="#eeeeee">Light Grey</option>
       <option value="#fff0dc">Cream</option>
       <option value="#000000">Black</option>
-      <option value="custom">Custom colour</option>
+      <option value="custom">Custom Colour</option>
      </select>
     </div>
-    <div><label for="customBg">Custom colour</label><input type="color" id="customBg" value="#ffffff"></div>
+    <div><label for="customBg">Custom Colour</label><input type="color" id="customBg" value="#ffffff"></div>
    </div>
-   <label class="checkline"><input type="checkbox" id="border" checked> Show cut-line borders</label>
+
+   <label><input type="checkbox" id="border" checked> Show cut-line borders</label>
+
+   <div class="section-title">DOWNLOAD SETTINGS</div>
+   <div class="grid2">
+    <div>
+     <label for="format">Image Format</label>
+     <select id="format">
+      <option value="image/jpeg">JPG</option>
+      <option value="image/png">PNG</option>
+      <option value="image/webp">WebP</option>
+     </select>
+    </div>
+    <div>
+     <label for="quality">Image Quality: <span id="qualityVal">92%</span></label>
+     <input id="quality" type="range" min="40" max="100" value="92">
+    </div>
+   </div>
+
    <div class="actions">
     <button class="btn" id="generate">✨ Update Preview</button>
-    <button class="btn secondary" id="reset">Reset adjustments</button>
+    <button class="btn secondary" id="reset">Reset Adjustments</button>
    </div>
+
    <div id="message" role="status" aria-live="polite">Upload a photo to begin.</div>
-   <div class="note"><b>Note:</b> Colour selection paints the frame background; it does not automatically isolate a person from the original background. Official passport and visa specifications vary. Confirm the required rules before submission.</div>
+
+   <div class="note">
+    <b>Important:</b> Background colour selection only paints the frame behind the photo. It does not remove the original background. Official passport and visa requirements vary by country and application. Confirm the required dimensions before printing.
+   </div>
   </section>
 
   <section class="panel">
-   <h3>Live print preview</h3>
-   <p class="muted">The paper preview represents the selected physical sheet. It is not a passport-only canvas when 4×6 or A4 is selected.</p>
+   <h3>Live Photo Preview</h3>
+   <p class="muted">Preview the final photo or print sheet before downloading.</p>
+
    <div class="preview" id="preview">
-    <div class="placeholder" id="placeholder"><b>🖼️</b>Upload a photo, choose a frame and tap Update Preview.</div>
+    <div class="placeholder" id="placeholder">
+     <b>🖼️</b>
+     Upload a photo, select an option and tap Update Preview.
+    </div>
     <canvas id="canvas" hidden></canvas>
    </div>
+
    <div class="statgrid">
     <div class="stat"><small>Paper</small><strong id="paperStat">4 × 6 inch</strong></div>
-    <div class="stat"><small>Photo frame</small><strong id="frameStat">35 × 45 mm</strong></div>
-    <div class="stat"><small>Copies placed</small><strong id="placedStat">0</strong></div>
+    <div class="stat"><small>Photo Frame</small><strong id="frameStat">35 × 45 mm</strong></div>
+    <div class="stat"><small>Copies Placed</small><strong id="placedStat">0</strong></div>
    </div>
+
+   <div class="statgrid">
+    <div class="stat"><small>Output Width</small><strong id="widthStat">—</strong></div>
+    <div class="stat"><small>Output Height</small><strong id="heightStat">—</strong></div>
+    <div class="stat"><small>File Size</small><strong id="sizeStat">—</strong></div>
+   </div>
+
    <div class="actions">
-    <button class="btn" id="jpg" disabled>⬇ Download JPG</button>
-    <button class="btn secondary" id="png" disabled>⬇ Download PNG</button>
-    <button class="btn dark" id="print" disabled>🖨️ Print at actual size</button>
+    <button class="btn" id="download" disabled>⬇ Download Photo</button>
+    <button class="btn secondary" id="print" disabled>🖨️ Print</button>
    </div>
+
    <div class="note">
-    <b>Actual-size print settings</b><br>
-    4×6: select 4×6 inch paper in the printer dialog. A4: select A4 paper. Set scale to 100% / Actual Size and disable “Fit to page” if the driver allows it. Borderless printing depends on the printer.
+    <b>Actual-size print settings:</b><br>
+    4×6: Select 4×6 inch paper in the printer dialog. A4: Select A4 paper. Set scale to 100% / Actual Size and disable Fit to Page where available. Borderless printing depends on your printer.
    </div>
-   <p class="muted" style="margin-top:14px">Suggested service price: ₹5 per design. This page does not collect payment.</p>
   </section>
  </div>
 </main>
-<footer>© 2026 Kisan Seva Tools • Photo Studio Pro</footer>
+
+<footer>© 2026 CSC Seva Tool • All Photo Studio Pro</footer>
 
 <script>
 (() => {
 "use strict";
-const $=id=>document.getElementById(id);
-const frames={
- passport:{w:35,h:45},visa:{w:35,h:45},usvisa:{w:50.8,h:50.8},
- id:{w:25,h:30},stamp:{w:25,h:25},square:{w:35,h:35},small:{w:30,h:40},custom:{w:35,h:45}
+
+const $ = id => document.getElementById(id);
+
+const frames = {
+ passport:{w:35,h:45},
+ visa:{w:35,h:45},
+ usvisa:{w:50.8,h:50.8},
+ id:{w:25,h:30},
+ stamp:{w:25,h:25},
+ square:{w:35,h:35},
+ small:{w:30,h:40},
+ custom:{w:35,h:45}
 };
-const papers={
+
+const papers = {
  "4x6":{w:101.6,h:152.4,label:"4 × 6 inch"},
  a4:{w:210,h:297,label:"A4 Sheet"},
  single:{w:0,h:0,label:"Single Photo"}
 };
-let frame="passport",paper="4x6",img=null,ready=false;
+
+const modes = {
+ passport:{
+  title:"Passport Photo Maker",
+  description:"Create passport-size photos and print multiple copies.",
+  frame:"passport"
+ },
+ visa:{
+  title:"Visa Photo Maker",
+  description:"Prepare visa photos. Check the exact country-specific requirements before submission.",
+  frame:"visa"
+ },
+ stamp:{
+  title:"Stamp Size Photo Maker",
+  description:"Create small stamp-size and custom-size photos.",
+  frame:"stamp"
+ },
+ signature:{
+  title:"Signature Maker",
+  description:"Crop and prepare a signature image on a clean background.",
+  frame:"custom"
+ },
+ id:{
+  title:"ID Card Photo Maker",
+  description:"Prepare a portrait photo for ID cards and document use.",
+  frame:"id"
+ },
+ crop:{
+  title:"Crop & Resize",
+  description:"Crop your image into standard or custom dimensions.",
+  frame:"custom"
+ },
+ enhance:{
+  title:"Photo Enhancement",
+  description:"Adjust brightness, contrast, saturation and framing.",
+  frame:"passport"
+ },
+ print:{
+  title:"Multiple Photo Print",
+  description:"Arrange multiple copies on 4×6 or A4 photo paper.",
+  frame:"passport"
+ },
+ compress:{
+  title:"Photo Compressor",
+  description:"Export your photo with adjustable output quality and format.",
+  frame:"custom"
+ },
+ convert:{
+  title:"Image Converter",
+  description:"Convert your uploaded image into JPG, PNG or WebP.",
+  frame:"custom"
+ }
+};
+
+let mode = "passport";
+let frame = "passport";
+let paper = "4x6";
+let img = null;
+let ready = false;
+let outputBlob = null;
+
+function clamp(n,min,max){
+ return Math.max(min,Math.min(max,n));
+}
 
 function dims(){
- if(frame==="custom")return {w:clamp(+$("fw").value||35,10,100),h:clamp(+$("fh").value||45,10,100)};
+ if(frame==="custom"){
+  return {
+   w:clamp(Number($("fw").value)||35,5,200),
+   h:clamp(Number($("fh").value)||45,5,200)
+  };
+ }
  return frames[frame];
 }
-function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
-function dpi(){return +$("dpi").value}
-function px(mm){return Math.round(mm*dpi()/25.4)}
+
+function dpi(){
+ return Number($("dpi").value);
+}
+
+function px(mm){
+ return Math.round(mm*dpi()/25.4);
+}
+
 function background(){
- return $("bg").value==="custom"?$("customBg").value:$("bg").value;
+ return $("bg").value==="custom"
+  ? $("customBg").value
+  : $("bg").value;
 }
-function setMsg(t,good=true){$("message").textContent=t;$("message").className=good?"good":"bad"}
-function markChoices(selector,attr,value){
- document.querySelectorAll(selector+" .choice").forEach(b=>b.classList.toggle("active",b.dataset[attr]===value));
+
+function setMsg(message,good=true){
+ $("message").textContent=message;
+ $("message").className=good?"good":"bad";
 }
-function setFrame(v){
- frame=v;markChoices("#frames","frame",v);
- $("customSize").hidden=v!=="custom";
+
+function markChoices(selector,attribute,value){
+ document.querySelectorAll(selector+" .choice").forEach(button=>{
+  button.classList.toggle("active",button.dataset[attribute]===value);
+ });
+}
+
+function updateStats(){
+ const d=dims();
+ const p=papers[paper];
+
+ $("paperStat").textContent=paper==="single"
+  ? `${d.w} × ${d.h} mm`
+  : p.label;
+
+ $("frameStat").textContent=`${d.w} × ${d.h} mm`;
+ $("zoomVal").textContent=Number($("zoom").value).toFixed(2)+"×";
+
+ ["brightness","contrast","saturation"].forEach(key=>{
+  $(key+"Val").textContent=$(key).value+"%";
+ });
+
+ $("qualityVal").textContent=$("quality").value+"%";
+}
+
+function setFrame(value){
+ frame=value;
+ markChoices("#frames","frame",value);
+ $("customSize").hidden=value!=="custom";
  updateStats();
  if(img)render();
 }
-function setPaper(v){
- paper=v;markChoices("#papers","paper",v);updateStats();
+
+function setPaper(value){
+ paper=value;
+ markChoices("#papers","paper",value);
+ updateStats();
  if(img)render();
 }
-function updateStats(){
- const d=dims(),p=papers[paper];
- $("paperStat").textContent=paper==="single"?`${d.w} × ${d.h} mm`:p.label;
- $("frameStat").textContent=`${d.w} × ${d.h} mm`;
- $("zoomVal").textContent=(+$("zoom").value).toFixed(2)+"×";
- ["brightness","contrast","saturation"].forEach(k=>$(k+"Val").textContent=$ (k).value+"%");
+
+function setMode(value){
+ mode=value;
+ const data=modes[mode];
+
+ document.querySelectorAll(".tool-card").forEach(card=>{
+  card.classList.toggle("active",card.dataset.mode===mode);
+ });
+
+ $("modeTitle").textContent=data.title;
+ $("modeDescription").textContent=data.description;
+
+ if(mode==="signature"){
+  setFrame("custom");
+  $("fw").value=60;
+  $("fh").value=25;
+  $("fit").value="contain";
+  $("bg").value="#ffffff";
+  setPaper("single");
+ }else if(mode==="crop" || mode==="compress" || mode==="convert"){
+  setFrame("custom");
+  $("fw").value=60;
+  $("fh").value=60;
+  setPaper("single");
+ }else{
+  setFrame(data.frame);
+  if(mode==="print")setPaper("a4");
+  else setPaper("4x6");
+ }
+
+ if(img)render();
 }
+
 function drawPhoto(ctx,x,y,w,h){
  const d=dims();
  const bg=background();
- ctx.fillStyle=bg;ctx.fillRect(x,y,w,h);
- const base=$("fit").value==="cover"?Math.max(w/img.naturalWidth,h/img.naturalHeight):Math.min(w/img.naturalWidth,h/img.naturalHeight);
- const scale=base*(+$("zoom").value);
- const dw=img.naturalWidth*scale,dh=img.naturalHeight*scale;
- const ox=(+$("moveX").value)/100*(dw-w)/2;
- const oy=(+$("moveY").value)/100*(dh-h)/2;
- const dx=x+(w-dw)/2+ox,dy=y+(h-dh)/2+oy;
- ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
- ctx.filter=`brightness(${$("brightness").value}%) contrast(${$("contrast").value}%) saturate(${$("saturation").value}%)`;
- ctx.drawImage(img,dx,dy,dw,dh);ctx.filter="none";ctx.restore();
+
+ ctx.fillStyle=bg;
+ ctx.fillRect(x,y,w,h);
+
+ const fit=$("fit").value;
+ const base=fit==="cover"
+  ? Math.max(w/img.naturalWidth,h/img.naturalHeight)
+  : Math.min(w/img.naturalWidth,h/img.naturalHeight);
+
+ const scale=base*Number($("zoom").value);
+ const dw=img.naturalWidth*scale;
+ const dh=img.naturalHeight*scale;
+
+ const ox=Number($("moveX").value)/100*(dw-w)/2;
+ const oy=Number($("moveY").value)/100*(dh-h)/2;
+
+ const dx=x+(w-dw)/2+ox;
+ const dy=y+(h-dh)/2+oy;
+
+ ctx.save();
+ ctx.beginPath();
+ ctx.rect(x,y,w,h);
+ ctx.clip();
+
+ ctx.filter=
+  `brightness(${$("brightness").value}%) `+
+  `contrast(${$("contrast").value}%) `+
+  `saturate(${$("saturation").value}%)`;
+
+ ctx.drawImage(img,dx,dy,dw,dh);
+ ctx.filter="none";
+ ctx.restore();
+
  if($("border").checked){
-  ctx.save();ctx.strokeStyle="#87978c";ctx.lineWidth=Math.max(1,dpi()/100);
-  ctx.strokeRect(x+.5,y+.5,w-1,h-1);ctx.restore();
+  ctx.save();
+  ctx.strokeStyle="#87978c";
+  ctx.lineWidth=Math.max(1,dpi()/100);
+  ctx.strokeRect(x+.5,y+.5,w-1,h-1);
+  ctx.restore();
  }
 }
+
 function render(){
- if(!img){setMsg("Pehle photo upload karo.",false);return}
- const d=dims(),fw=px(d.w),fh=px(d.h);
- let sw=paper==="single"?d.w:papers[paper].w;
- let sh=paper==="single"?d.h:papers[paper].h;
- const cw=px(sw),ch=px(sh),canvas=$("canvas");
- // Guard against accidental huge canvas memory allocations.
- if(cw*ch>45000000){setMsg("Resolution bahut badi hai. 150 ya 200 DPI choose karo.",false);return}
- canvas.width=cw;canvas.height=ch;
+ if(!img){
+  setMsg("Pehle photo upload karo.",false);
+  return;
+ }
+
+ const d=dims();
+ const fw=px(d.w);
+ const fh=px(d.h);
+
+ let sheetW=paper==="single"?d.w:papers[paper].w;
+ let sheetH=paper==="single"?d.h:papers[paper].h;
+
+ const canvas=$("canvas");
+ const cw=px(sheetW);
+ const ch=px(sheetH);
+
+ if(!cw || !ch || cw*ch>45000000){
+  setMsg("Output size bahut bada hai. 150 ya 200 DPI choose karo.",false);
+  return;
+ }
+
+ canvas.width=cw;
+ canvas.height=ch;
+
  const ctx=canvas.getContext("2d");
- ctx.fillStyle="#ffffff";ctx.fillRect(0,0,cw,ch);
- const requested=paper==="single"?1:clamp(+$("copies").value||1,1,60);
+ ctx.fillStyle="#ffffff";
+ ctx.fillRect(0,0,cw,ch);
+
+ const requested=paper==="single"
+  ? 1
+  : clamp(Number($("copies").value)||1,1,60);
+
  const margin=paper==="a4"?5:2.5;
- const mx=px(margin),my=px(margin);
+ const mx=px(margin);
+ const my=px(margin);
+
  const cols=Math.max(0,Math.floor((cw-2*mx)/fw));
  const rows=Math.max(0,Math.floor((ch-2*my)/fh));
+
  const capacity=paper==="single"?1:cols*rows;
  const count=Math.min(requested,capacity);
- if(count<1){setMsg("Is frame size ke liye selected sheet par jagah nahi hai. A4 ya chhota frame choose karo.",false);return}
- for(let i=0;i<count;i++){
-  const x=paper==="single"?0:mx+(i%cols)*fw;
-  const y=paper==="single"?0:my+Math.floor(i/cols)*fh;
-  drawPhoto(ctx,x,y,fw,fh);
+
+ if(count<1){
+  setMsg("Is frame size ke liye selected sheet par jagah nahi hai. A4 ya chhota frame choose karo.",false);
+  return;
  }
- canvas.hidden=false;$("placeholder").hidden=true;
- $("jpg").disabled=false;$("png").disabled=false;$("print").disabled=false;
+
+ const gap=paper==="a4"?px(2):px(1);
+
+ for(let i=0;i<count;i++){
+  let x,y;
+
+  if(paper==="single"){
+   x=0;
+   y=0;
+  }else{
+   const col=i%cols;
+   const row=Math.floor(i/cols);
+   x=mx+col*(fw+gap);
+   y=my+row*(fh+gap);
+  }
+
+  if(x+fw<=cw && y+fh<=ch){
+   drawPhoto(ctx,x,y,fw,fh);
+  }
+ }
+
+ canvas.hidden=false;
+ $("placeholder").hidden=true;
+
+ $("download").disabled=false;
+ $("print").disabled=false;
+
  $("placedStat").textContent=count;
+ $("widthStat").textContent=cw+" px";
+ $("heightStat").textContent=ch+" px";
+
  ready=true;
+ outputBlob=null;
+ $("sizeStat").textContent="Ready";
  updateStats();
- const sheetText=paper==="single"?"single photo":papers[paper].label;
- setMsg(`${sheetText} preview ready: ${count} photo(s) placed at ${dpi()} DPI.${count<requested?" Requested copies exceed available space; showing the copies that fit.":""}`);
+
+ setMsg(
+  `${paper==="single"?"Single photo":papers[paper].label} preview ready: ${count} photo(s) at ${dpi()} DPI.`+
+  (count<requested?" Some requested copies did not fit.":"")
+ );
 }
-function download(type){
+
+function getMime(){
+ return $("format").value;
+}
+
+function extension(mime){
+ if(mime==="image/png")return "png";
+ if(mime==="image/webp")return "webp";
+ return "jpg";
+}
+
+function makeBlob(){
+ return new Promise(resolve=>{
+  $("canvas").toBlob(resolve,getMime(),Number($("quality").value)/100);
+ });
+}
+
+async function download(){
  if(!ready)return;
- const c=$("canvas"),mime=type==="jpg"?"image/jpeg":"image/png";
- // JPG cannot retain transparency; sheet is white.
+
+ setMsg("Preparing your download...");
+
+ const blob=await makeBlob();
+
+ if(!blob){
+  setMsg("Download create nahi hua. Dusri format try karo.",false);
+  return;
+ }
+
+ outputBlob=blob;
+ $("sizeStat").textContent=(blob.size/1024).toFixed(1)+" KB";
+
+ const url=URL.createObjectURL(blob);
  const a=document.createElement("a");
- a.href=c.toDataURL(mime,type==="jpg"?.94:undefined);
- a.download=`kisan-${paper}-${frame}.${type}`;
- document.body.appendChild(a);a.click();a.remove();
+
+ a.href=url;
+ a.download=`csc-photo-${mode}-${Date.now()}.${extension(getMime())}`;
+
+ document.body.appendChild(a);
+ a.click();
+ a.remove();
+
+ setTimeout(()=>URL.revokeObjectURL(url),1500);
+ setMsg("Download ready. File saved.");
 }
+
 function printCanvas(){
  if(!ready)return;
- const c=$("canvas");
- const w=papers[paper].w||dims().w,h=papers[paper].h||dims().h;
- const page=paper==="a4"?"A4":paper==="4x6"?"4in 6in":`${w}mm ${h}mm`;
+
+ const canvas=$("canvas");
+ const w=papers[paper].w||dims().w;
+ const h=papers[paper].h||dims().h;
+
+ const page=paper==="a4"
+  ?"A4"
+  :paper==="4x6"
+   ?"4in 6in"
+   :`${w}mm ${h}mm`;
+
  const win=window.open("","_blank");
- if(!win){setMsg("Print window blocked. Allow pop-ups and try again.",false);return}
- const url=c.toDataURL("image/png");
- win.document.write(`<!doctype html><html><head><title>Photo Print</title>
- <style>@page{size:${page};margin:0}*{box-sizing:border-box}html,body{margin:0;padding:0;width:100%;height:100%}
- img{display:block;width:100%;height:100%;object-fit:fill}</style></head>
- <body><img src="${url}" onload="setTimeout(()=>window.print(),250)"></body></html>`);
+
+ if(!win){
+  setMsg("Print window blocked. Allow pop-ups and try again.",false);
+  return;
+ }
+
+ const url=canvas.toDataURL("image/png");
+
+ win.document.write(`
+ <!doctype html>
+ <html>
+ <head>
+ <title>CSC Photo Print</title>
+ <style>
+ @page{size:${page};margin:0}
+ *{box-sizing:border-box}
+ html,body{margin:0;padding:0;width:100%;height:100%}
+ img{display:block;width:100%;height:100%;object-fit:fill}
+ </style>
+ </head>
+ <body>
+ <img src="${url}" onload="setTimeout(()=>window.print(),300)">
+ </body>
+ </html>
+ `);
+
  win.document.close();
 }
-$("frames").addEventListener("click",e=>{
- const b=e.target.closest("[data-frame]");if(b)setFrame(b.dataset.frame);
+
+function resetAdjustments(){
+ $("zoom").value=1;
+ $("moveX").value=0;
+ $("moveY").value=0;
+ $("fit").value="cover";
+
+ $("brightness").value=100;
+ $("contrast").value=100;
+ $("saturation").value=100;
+
+ $("bg").value="#ffffff";
+ $("customBg").value="#ffffff";
+
+ $("border").checked=true;
+ $("dpi").value=300;
+ $("quality").value=92;
+
+ updateStats();
+
+ if(img)render();
+ else setMsg("Adjustments reset.");
+}
+
+function loadImage(file){
+ if(!file)return;
+
+ const allowed=["image/jpeg","image/png","image/webp"];
+
+ if(!allowed.includes(file.type)){
+  setMsg("JPG, PNG ya WebP image choose karo.",false);
+  return;
+ }
+
+ if(file.size>15*1024*1024){
+  setMsg("Image 15 MB se chhoti honi chahiye.",false);
+  return;
+ }
+
+ const url=URL.createObjectURL(file);
+ const image=new Image();
+
+ image.onload=()=>{
+  img=image;
+  ready=false;
+  outputBlob=null;
+
+  setMsg(`Photo loaded: ${image.naturalWidth} × ${image.naturalHeight} px.`);
+  render();
+
+  URL.revokeObjectURL(url);
+ };
+
+ image.onerror=()=>{
+  setMsg("Image load nahi hui. Dusri image try karo.",false);
+  URL.revokeObjectURL(url);
+ };
+
+ image.src=url;
+}
+
+$("toolCards").addEventListener("click",event=>{
+ const card=event.target.closest("[data-mode]");
+ if(card)setMode(card.dataset.mode);
 });
-$("papers").addEventListener("click",e=>{
- const b=e.target.closest("[data-paper]");if(b)setPaper(b.dataset.paper);
+
+$("frames").addEventListener("click",event=>{
+ const button=event.target.closest("[data-frame]");
+ if(button)setFrame(button.dataset.frame);
 });
-$("upload").addEventListener("change",e=>{
- const f=e.target.files&&e.target.files[0];if(!f)return;
- if(!["image/jpeg","image/png","image/webp"].includes(f.type)){setMsg("JPG, PNG ya WebP image choose karo.",false);return}
- if(f.size>15*1024*1024){setMsg("Image 15 MB se chhoti honi chahiye.",false);return}
- const url=URL.createObjectURL(f),im=new Image();
- im.onload=()=>{img=im;ready=false;setMsg(`Photo loaded: ${im.naturalWidth} × ${im.naturalHeight} px. Update Preview dabao.`);render();URL.revokeObjectURL(url)};
- im.onerror=()=>{setMsg("Image load nahi hui. Dusri image try karo.",false);URL.revokeObjectURL(url)};
- im.src=url;
+
+$("papers").addEventListener("click",event=>{
+ const button=event.target.closest("[data-paper]");
+ if(button)setPaper(button.dataset.paper);
 });
+
+$("upload").addEventListener("change",event=>{
+ loadImage(event.target.files&&event.target.files[0]);
+});
+
 $("generate").addEventListener("click",render);
-$("jpg").addEventListener("click",()=>download("jpg"));
-$("png").addEventListener("click",()=>download("png"));
+$("download").addEventListener("click",download);
 $("print").addEventListener("click",printCanvas);
-["fw","fh","dpi","copies","zoom","moveX","moveY","fit","bg","customBg","brightness","contrast","saturation","border"].forEach(id=>{
- $(id).addEventListener("input",()=>{updateStats();if(img)render()});
- $(id).addEventListener("change",()=>{updateStats();if(img)render()});
+$("reset").addEventListener("click",resetAdjustments);
+
+[
+ "fw","fh","dpi","copies","zoom","moveX","moveY",
+ "fit","bg","customBg","brightness","contrast",
+ "saturation","border","quality","format"
+].forEach(id=>{
+ $(id).addEventListener("input",()=>{
+  updateStats();
+  if(img)render();
+ });
+
+ $(id).addEventListener("change",()=>{
+  updateStats();
+  if(img)render();
+ });
 });
-$("reset").addEventListener("click",()=>{
- $("zoom").value=1;$("moveX").value=0;$("moveY").value=0;
- $("fit").value="cover";$("brightness").value=100;$("contrast").value=100;
- $("saturation").value=100;$("bg").value="#ffffff";$("customBg").value="#ffffff";
- $("border").checked=true;$("dpi").value=300;
- updateStats();if(img)render();else setMsg("Adjustments reset.");
+
+const uploadBox=document.querySelector(".upload");
+
+uploadBox.addEventListener("dragover",event=>{
+ event.preventDefault();
+ uploadBox.style.background="#e4f6e9";
 });
+
+uploadBox.addEventListener("dragleave",()=>{
+ uploadBox.style.background="";
+});
+
+uploadBox.addEventListener("drop",event=>{
+ event.preventDefault();
+ uploadBox.style.background="";
+ const file=event.dataTransfer.files[0];
+ if(file)loadImage(file);
+});
+
 updateStats();
 })();
 </script>
