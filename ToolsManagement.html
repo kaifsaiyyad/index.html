@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#176b3a">
 <title>Tools Management | CSC Seva Tool</title>
-
 <style>
 :root{
   --green:#176b3a;--dark:#104b2a;--light:#eaf5ed;
@@ -28,7 +27,7 @@ header{background:linear-gradient(120deg,#176b3a,#21854b);color:white;padding:25
 .container{max-width:1200px;margin:auto;padding:25px 18px 45px}
 .panel{background:white;border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:18px;box-shadow:0 5px 20px #173d2508}
 .panel h2{font-size:19px;margin:0 0 7px}
-.subtext{font-size:13px;color:var(--muted);margin:0 0 18px}
+.subtext{font-size:13px;color:var(--muted);margin:0 0 18px;line-height:1.5}
 label{display:block;font-size:13px;font-weight:bold;margin-bottom:6px}
 input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cedbd1;border-radius:9px;background:white;color:var(--text);outline:none}
 input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px #176b3a18}
@@ -88,10 +87,8 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
 }
 </style>
 </head>
-
 <body>
 <div class="topbar">🌱 CSC Seva Tool · Administration</div>
-
 <header>
   <div class="header-inner">
     <div class="brand">
@@ -173,8 +170,8 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:12px}
           </div>
           <div class="field full">
             <label for="toolPage">HTML filename *</label>
-            <input id="toolPage" maxlength="180" required placeholder="Example: AIBiodata.html">
-            <small class="thumbnail-help">Enter the exact HTML filename or relative path from the tools folder.</small>
+            <input id="toolPage" maxlength="300" required placeholder="Example: ToolsFolder/AIBiodata.html">
+            <small class="thumbnail-help">Enter the exact HTML filename or safe relative folder path.</small>
           </div>
           <div class="field">
             <label for="toolActive">Availability</label>
@@ -291,14 +288,32 @@ function setBusy(value){
   $("loginButton").disabled=value;
   $("importButton").disabled=value;
 }
+
+/* SAFE RELATIVE PATH VALIDATION */
 function validPage(page){
-  return /^[A-Za-z0-9_-]+\.html$/i.test(String(page||"").trim());
+  const value=String(page||"").trim().replace(/\\/g,"/");
+  if(!value||value.startsWith("/")||/^[A-Za-z]:/.test(value)){
+    return false;
+  }
+  const parts=value.split("/");
+  if(parts.some(part=>
+    !part||part==="."||part===".."||
+    !/^[A-Za-z0-9 _().-]+$/.test(part)
+  )){
+    return false;
+  }
+  return /\.html$/i.test(parts[parts.length-1]);
 }
+
+/* NORMALIZE FULL PATH, NOT JUST THE BASENAME */
 function pageKey(value){
   let name=String(value||"").trim().replace(/\\/g,"/");
-  name=name.split("/").pop()||"";
   try{name=decodeURIComponent(name)}catch{}
-  return name.toLowerCase();
+  return name.replace(/^\.\/+/,"").replace(/\/+/g,"/").toLowerCase();
+}
+function basePageKey(value){
+  const key=pageKey(value);
+  return key.split("/").pop()||"";
 }
 function validThumbnail(value){
   if(!value)return true;
@@ -555,7 +570,7 @@ $("exportToolsButton").addEventListener("click",()=>{
       " currently loaded tools? This does not back up other Firebase collections."))return;
 
     const backup={
-      backupType:"CSC Seva Tools - Tools Collection",
+      backupType:"CSC Seva Tool - Tools Collection",
       collection:"tools",
       exportedAt:new Date().toISOString(),
       documentCount:tools.length,
@@ -567,7 +582,7 @@ $("exportToolsButton").addEventListener("click",()=>{
     const url=URL.createObjectURL(blob);
     const link=document.createElement("a");
     link.href=url;
-    link.download="CSC_Seva_Tools_Firestore_Backup_"+
+    link.download="CSC_Seva_Tool_Firestore_Backup_"+
       new Date().toISOString().slice(0,10)+".json";
     document.body.appendChild(link);
     link.click();
@@ -598,7 +613,7 @@ $("toolForm").addEventListener("submit",async event=>{
 
   if(!name){showMessage("Enter a tool name.","error");return;}
   if(!validPage(page)){
-    showMessage("Enter a simple HTML filename, for example AIBiodata.html. Do not enter a folder path.","error");
+    showMessage("Enter a valid HTML filename or safe relative folder path.","error");
     return;
   }
   if(!Number.isInteger(price)||price<0||price>10){
@@ -651,18 +666,17 @@ $("logoutButton").addEventListener("click",async()=>{
   }
 });
 
-/* SAFE CATALOG + PRICE SYNC */
+/* ATOMIC CATALOG + PRICE SYNC */
 $("importButton").addEventListener("click",async()=>{
   if(busy)return;
-
   if(!auth.currentUser){
     showMessage("Please sign in as an administrator first.","error");
     return;
   }
 
   if(!confirm(
-    "Update all 47 catalog tools in Firestore, INCLUDING their prices? " +
-    "Existing thumbnails and active/inactive settings will be preserved. " +
+    "Update all 47 catalog tools in Firestore, INCLUDING their prices? "+
+    "Existing thumbnails and active/inactive settings will be preserved. "+
     "Missing catalog tools will be added. Tools outside this catalog will not be changed."
   ))return;
 
@@ -670,7 +684,6 @@ $("importButton").addEventListener("click",async()=>{
   clearMessage();
 
   try{
-    // Read the latest catalog published in the repository.
     const response=await fetch("tools-catalog.json?sync="+Date.now(),{
       cache:"no-store"
     });
@@ -680,7 +693,6 @@ $("importButton").addEventListener("click",async()=>{
 
     const catalog=await response.json();
 
-    // Validate the entire catalog before preparing any Firestore write.
     if(!Array.isArray(catalog)||catalog.length!==47){
       throw new Error(
         "Expected exactly 47 catalog entries; received "+
@@ -688,90 +700,101 @@ $("importButton").addEventListener("click",async()=>{
       );
     }
 
-    const seenPages=new Set();
+    // Validate every catalog item before any database write.
+    const catalogByPath=new Map();
+    const catalogByBase=new Map();
 
     catalog.forEach((item,index)=>{
       const name=String(item.name||"").trim();
       const page=String(item.page||item.file||"").trim();
       const price=Number(item.price);
 
-      if(!name){
-        throw new Error("Missing tool name at catalog entry "+(index+1)+".");
-      }
-
+      if(!name)throw new Error("Missing name at catalog entry "+(index+1)+".");
       if(!validPage(page)){
-        throw new Error("Invalid HTML filename at catalog entry "+(index+1)+": "+page);
+        throw new Error("Invalid relative HTML path at entry "+(index+1)+": "+page);
       }
-
-      const key=pageKey(page);
-      if(seenPages.has(key)){
-        throw new Error("Duplicate filename in catalog: "+page);
-      }
-      seenPages.add(key);
-
       if(item.price===undefined||item.price===null||
          !Number.isInteger(price)||price<0||price>10){
-        throw new Error(
-          "Invalid or missing price for "+name+
-          ". Every catalog price must be a whole number from ₹0 to ₹10."
-        );
+        throw new Error("Invalid price for "+name+". Allowed: ₹0–₹10 whole numbers.");
       }
-
-      if(item.active!==undefined&&typeof item.active!=="boolean"){
-        throw new Error("Invalid active setting for "+name+".");
-      }
-
-      if(item.thumbnail!==undefined&&
-         item.thumbnail!==""&&
+      if(item.thumbnail!==undefined&&item.thumbnail!==""&&
          !validThumbnail(String(item.thumbnail))){
         throw new Error("Invalid thumbnail URL for "+name+".");
       }
+
+      const fullKey=pageKey(page);
+      const baseKey=basePageKey(page);
+
+      if(catalogByPath.has(fullKey)){
+        throw new Error("Duplicate catalog path: "+page);
+      }
+
+      catalogByPath.set(fullKey,item);
+
+      if(!catalogByBase.has(baseKey))catalogByBase.set(baseKey,[]);
+      catalogByBase.get(baseKey).push(item);
     });
 
-    // Match Firestore records by exact normalized HTML filename.
-    // Refuse to continue if existing Firestore data contains duplicate matches.
-    const firestoreByPage=new Map();
+    // Index current Firestore tools by their full path and filename.
+    const firestoreByPath=new Map();
+    const firestoreByBase=new Map();
 
     tools.forEach(tool=>{
-      const key=pageKey(tool.page||tool.file);
-      if(!key)return;
+      const rawPage=tool.page||tool.file||"";
+      const fullKey=pageKey(rawPage);
+      const baseKey=basePageKey(rawPage);
+      if(!fullKey)return;
 
-      if(!firestoreByPage.has(key)){
-        firestoreByPage.set(key,[]);
-      }
-      firestoreByPage.get(key).push(tool);
+      if(!firestoreByPath.has(fullKey))firestoreByPath.set(fullKey,[]);
+      firestoreByPath.get(fullKey).push(tool);
+
+      if(!firestoreByBase.has(baseKey))firestoreByBase.set(baseKey,[]);
+      firestoreByBase.get(baseKey).push(tool);
     });
 
-    const duplicateFirestorePages=[];
-    for(const [key,matches] of firestoreByPage.entries()){
-      if(matches.length>1&&seenPages.has(key)){
-        duplicateFirestorePages.push(
-          String(matches[0].page||matches[0].file||key)
-        );
+    const matches=new Map();
+    const usedFirestoreIds=new Set();
+
+    // Prefer full path. If only basename matches, it must be unique
+    // on both sides to avoid accidentally updating the wrong tool.
+    for(const [fullKey,item] of catalogByPath.entries()){
+      let found=firestoreByPath.get(fullKey)||[];
+
+      if(found.length>1){
+        throw new Error("Multiple Firestore tools have the same path: "+item.page);
+      }
+
+      if(found.length===0){
+        const baseKey=basePageKey(item.page);
+        const catalogBaseMatches=catalogByBase.get(baseKey)||[];
+        const firestoreBaseMatches=firestoreByBase.get(baseKey)||[];
+
+        if(catalogBaseMatches.length===1&&firestoreBaseMatches.length===1){
+          found=firestoreBaseMatches;
+        }
+      }
+
+      if(found.length===1){
+        const existing=found[0];
+        if(usedFirestoreIds.has(existing.id)){
+          throw new Error("One Firestore tool matched more than one catalog entry: "+item.name);
+        }
+        usedFirestoreIds.add(existing.id);
+        matches.set(fullKey,existing);
       }
     }
 
-    if(duplicateFirestorePages.length){
-      throw new Error(
-        "Duplicate matching filenames already exist in Firestore: "+
-        duplicateFirestorePages.join(", ")+
-        ". Resolve these duplicates before syncing."
-      );
-    }
-
-    // One atomic batch: either all 47 catalog writes succeed or none do.
-    // Existing thumbnails and active flags are deliberately not overwritten.
+    // A single atomic Firestore batch handles all 47 writes.
     const batch=writeBatch(db);
     let updated=0;
     let added=0;
     let priceChanges=0;
 
-    catalog.forEach(item=>{
+    for(const [fullKey,item] of catalogByPath.entries()){
       const name=String(item.name).trim();
       const page=String(item.page||item.file).trim();
-      const key=pageKey(page);
       const price=Number(item.price);
-      const matches=firestoreByPage.get(key)||[];
+      const existing=matches.get(fullKey);
 
       const metadata={
         name,
@@ -784,16 +807,13 @@ $("importButton").addEventListener("click",async()=>{
         updatedAt:serverTimestamp()
       };
 
-      if(matches.length===1){
-        const existing=matches[0];
-        if(Number(existing.price)!==price){
-          priceChanges++;
-        }
+      if(existing){
+        if(Number(existing.price)!==price)priceChanges++;
         batch.update(doc(db,"tools",existing.id),metadata);
         updated++;
       }else{
-        const newToolRef=doc(collection(db,"tools"));
-        batch.set(newToolRef,{
+        const newRef=doc(collection(db,"tools"));
+        batch.set(newRef,{
           ...metadata,
           active:item.active===false?false:true,
           thumbnail:String(item.thumbnail||"").trim(),
@@ -801,13 +821,12 @@ $("importButton").addEventListener("click",async()=>{
         });
         added++;
       }
-    });
+    }
 
     await batch.commit();
 
     showMessage(
-      "Catalog and price sync completed successfully. "+
-      "Updated: "+updated+
+      "Catalog and price sync completed. Updated: "+updated+
       "; added: "+added+
       "; price changes: "+priceChanges+
       "; catalog entries: "+catalog.length+
@@ -818,9 +837,8 @@ $("importButton").addEventListener("click",async()=>{
   }catch(error){
     console.error("Catalog and price sync error:",error);
     showMessage(
-      "Sync failed. No catalog batch changes were committed. "+
-      (error.message||"Unknown error")+
-      " Check the catalog and Firestore permissions before trying again.",
+      "Sync failed: "+(error.message||"Unknown error")+
+      ". No catalog batch writes were committed. Check catalog paths, prices and Firestore permissions.",
       "error"
     );
   }finally{
