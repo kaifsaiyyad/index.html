@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,147 +58,190 @@ tbody tr:last-child td{border-bottom:0}
 [hidden]{display:none!important}
 @media(max-width:1000px){.layout{grid-template-columns:1fr}.sidebar{border-right:0;border-bottom:1px solid var(--line);padding:10px}.nav{display:flex;overflow-x:auto}.nav a{white-space:nowrap}.nav-label,.security{display:none}.main{padding:12px}}
 @media(max-width:600px){h1{font-size:23px}.stats,.report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr}.panel{padding:12px}.main{padding:9px}}
+.master-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+.master-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px;min-width:0}
+.master-card h3{font-size:15px;color:var(--ink);margin:5px 0 7px}
+.master-card p{font-size:12px;color:var(--muted);line-height:1.6}
+.master-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.master-actions .btn{display:inline-flex;align-items:center;justify-content:center;font-size:11px;padding:8px 10px}
+.master-status{display:inline-block;border-radius:20px;padding:4px 8px;font-size:10px;font-weight:900;background:#fff3d5;color:#865800}
+.master-note{background:#fff7df;border:1px solid #f0dfa5;border-radius:10px;padding:12px;font-size:12px;line-height:1.6;margin:12px 0}
 </style>
 </head>
 <body>
 
 <section class="panel" id="loginSection">
-<div style="text-align:center">
-<div style="font-size:40px">🌾</div>
-<div class="eyebrow">CSC SEVA TOOL</div>
-<h1>Admin Pro</h1>
-<p class="muted">Secure administrator sign-in</p>
-</div>
-<form id="loginForm">
-<div class="field"><label for="email">Admin email</label><input id="email" type="email" autocomplete="username" required></div>
-<div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required></div>
-<button class="btn" type="submit">Sign in securely</button>
-</form>
-<p id="loginMessage" class="message" role="status"></p>
+  <div style="text-align:center">
+    <div style="font-size:40px">🌾</div>
+    <div class="eyebrow">CSC SEVA TOOL</div>
+    <h1>Admin Pro</h1>
+    <p class="muted">Secure administrator sign-in</p>
+  </div>
+  <form id="loginForm">
+    <div class="field"><label for="email">Admin email</label><input id="email" type="email" autocomplete="username" required></div>
+    <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required></div>
+    <button class="btn" type="submit">Sign in securely</button>
+  </form>
+  <p id="loginMessage" class="message" role="status"></p>
 </section>
 
 <div class="layout" id="dashboard" hidden>
 <aside class="sidebar">
-<a href="Home.html" class="brand"><span class="logo">🌾</span><span>CSC Seva Tool<small>Admin Pro Workspace</small></span></a>
-<div>
-<div class="nav-label">WORKSPACE</div>
-<nav class="nav">
-<a href="#overview">▦ Dashboard</a>
-<a href="#paymentRequests">₹ Payments</a>
-<a href="#walletReport">◉ Wallets</a>
-<a href="#transactionReport">▤ Transactions</a>
-<a href="#earningsReport">↗ Earnings</a>
-<a href="#toolProgress">🧰 Tools progress</a>
-<a href="#toolAnalytics">📊 Usage analytics</a>
-<a href="ToolsManagement.html">⚙ Tools management</a>
-<a href="Home.html">⌂ Website</a>
-</nav>
-</div>
-<div class="security"><b>🔐 Security</b><br>Payment approval does not credit a wallet. Verify payments using the trusted payment backend.</div>
+  <a href="Home.html" class="brand"><span class="logo">🌾</span><span>CSC Seva Tool<small>Admin Pro Workspace</small></span></a>
+  <div>
+    <div class="nav-label">WORKSPACE</div>
+    <nav class="nav">
+      <a href="#overview">▦ Dashboard</a>
+      <a href="#masterControl">🚀 Master Workspace</a>
+      <a href="#paymentRequests">₹ Payments</a>
+      <a href="#walletReport">◉ Wallets</a>
+      <a href="#transactionReport">▤ Transactions</a>
+      <a href="#earningsReport">↗ Earnings</a>
+      <a href="#toolProgress">🧰 Tools progress</a>
+      <a href="#toolAnalytics">📊 Usage analytics</a>
+      <a href="ToolsManagement.html">⚙ Tools management</a>
+      <a href="Home.html">⌂ Website</a>
+    </nav>
+  </div>
+  <div class="security"><b>🔐 Security</b><br>Payment approval does not credit a wallet. Verify payments using the trusted payment backend.</div>
 </aside>
 
 <main class="main">
-<div class="topbar" id="overview">
-<div><div class="eyebrow">ADMIN WORKSPACE</div><h1>Dashboard</h1><p class="muted">Tools, customers and recorded activity.</p></div>
-<button class="btn logout" id="logoutButton">Logout</button>
-</div>
+  <div class="topbar" id="overview">
+    <div><div class="eyebrow">ADMIN WORKSPACE</div><h1>Dashboard</h1><p class="muted">Tools, customers and recorded activity.</p></div>
+    <button class="btn logout" id="logoutButton">Logout</button>
+  </div>
 
-<section class="panel">
-<div class="panel-head"><div><h2>Account status</h2><p class="muted" id="adminEmail"></p></div><span class="badge success">Authenticated</span></div>
-<p id="connectionMessage" class="message">Connecting…</p>
-</section>
+  <section class="panel">
+    <div class="panel-head"><div><h2>Account status</h2><p class="muted" id="adminEmail"></p></div><span class="badge success">Authenticated</span></div>
+    <p id="connectionMessage" class="message">Connecting…</p>
+  </section>
 
-<section class="stats">
-<div class="stat"><div class="stat-icon">📨</div><h3>Total requests</h3><strong id="totalRequests">—</strong></div>
-<div class="stat"><div class="stat-icon">⏳</div><h3>Pending requests</h3><strong id="pendingRequests">—</strong></div>
-<div class="stat"><div class="stat-icon">✓</div><h3>Approved</h3><strong id="approvedRequests">—</strong></div>
-<div class="stat"><div class="stat-icon">↩</div><h3>Rejected</h3><strong id="rejectedRequests">—</strong></div>
-</section>
+  <section class="stats">
+    <div class="stat"><div class="stat-icon">📨</div><h3>Total requests</h3><strong id="totalRequests">—</strong></div>
+    <div class="stat"><div class="stat-icon">⏳</div><h3>Pending requests</h3><strong id="pendingRequests">—</strong></div>
+    <div class="stat"><div class="stat-icon">✓</div><h3>Approved</h3><strong id="approvedRequests">—</strong></div>
+    <div class="stat"><div class="stat-icon">↩</div><h3>Rejected</h3><strong id="rejectedRequests">—</strong></div>
+  </section>
 
-<section class="panel" id="paymentRequests">
-<div class="panel-head"><div><h2>Payment requests</h2><p class="muted">Review recorded requests.</p></div><button class="btn secondary" id="exportRequests">Export CSV</button></div>
-<div class="notice warning">Approval changes request status only. It does not confirm receipt of money or credit a wallet.</div>
-<div class="controls">
-<input id="requestSearch" type="search" placeholder="Search request ID or UID">
-<select id="requestFilter"><option value="all">All statuses</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
-<button class="btn secondary" id="clearFilters">Clear filters</button>
-</div>
-<p id="requestsMessage" class="message">Loading…</p>
-<div class="table-wrap"><table><thead><tr><th>Request ID</th><th>User UID</th><th>Amount</th><th>Status</th><th>Created</th><th>Action</th></tr></thead><tbody id="requestsTable"></tbody></table></div>
-</section>
+  <section class="panel" id="paymentRequests">
+    <div class="panel-head"><div><h2>Payment requests</h2><p class="muted">Review recorded requests.</p></div><button class="btn secondary" id="exportRequests">Export CSV</button></div>
+    <div class="notice warning">Approval changes request status only. It does not confirm receipt of money or credit a wallet.</div>
+    <div class="controls">
+      <input id="requestSearch" type="search" placeholder="Search request ID or UID">
+      <select id="requestFilter"><option value="all">All statuses</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
+      <button class="btn secondary" id="clearFilters">Clear filters</button>
+    </div>
+    <p id="requestsMessage" class="message">Loading…</p>
+    <div class="table-wrap"><table><thead><tr><th>Request ID</th><th>User UID</th><th>Amount</th><th>Status</th><th>Created</th><th>Action</th></tr></thead><tbody id="requestsTable"></tbody></table></div>
+  </section>
 
-<section class="panel" id="walletReport">
-<div class="panel-head"><div><h2>Wallet report</h2><p class="muted">Read-only wallet summary.</p></div><button class="btn secondary" id="exportWallets">Export CSV</button></div>
-<div class="report-grid"><div class="report-box"><span class="muted">Wallet documents</span><strong id="walletCount">—</strong></div><div class="report-box"><span class="muted">Recorded balances total</span><strong id="walletTotal">—</strong></div></div>
-<p id="walletMessage" class="message">Loading…</p>
-<div class="table-wrap"><table><thead><tr><th>User UID / document</th><th>Balance</th><th>Status</th></tr></thead><tbody id="walletTable"></tbody></table></div>
-</section>
+  <section class="panel" id="walletReport">
+    <div class="panel-head"><div><h2>Wallet report</h2><p class="muted">Read-only wallet summary.</p></div><button class="btn secondary" id="exportWallets">Export CSV</button></div>
+    <div class="report-grid"><div class="report-box"><span class="muted">Wallet documents</span><strong id="walletCount">—</strong></div><div class="report-box"><span class="muted">Recorded balances total</span><strong id="walletTotal">—</strong></div></div>
+    <p id="walletMessage" class="message">Loading…</p>
+    <div class="table-wrap"><table><thead><tr><th>User UID / document</th><th>Balance</th><th>Status</th></tr></thead><tbody id="walletTable"></tbody></table></div>
+  </section>
 
-<section class="panel" id="transactionReport">
-<div class="panel-head"><div><h2>Transaction history</h2><p class="muted">Read-only records.</p></div><button class="btn secondary" id="exportTransactions">Export CSV</button></div>
-<div class="report-grid">
-<div class="report-box"><span class="muted">Records</span><strong id="transactionCount">—</strong></div>
-<div class="report-box"><span class="muted">Deposits</span><strong id="depositTotal">—</strong></div>
-<div class="report-box"><span class="muted">Tool charges</span><strong id="toolChargeTotal">—</strong></div>
-<div class="report-box"><span class="muted">Expenses</span><strong id="expenseTotal">—</strong></div>
-</div>
-<p id="transactionMessage" class="message">Loading…</p>
-<div class="table-wrap"><table><thead><tr><th>ID</th><th>UID</th><th>Type</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead><tbody id="transactionsTable"></tbody></table></div>
-</section>
+  <section class="panel" id="transactionReport">
+    <div class="panel-head"><div><h2>Transaction history</h2><p class="muted">Read-only records.</p></div><button class="btn secondary" id="exportTransactions">Export CSV</button></div>
+    <div class="report-grid">
+      <div class="report-box"><span class="muted">Records</span><strong id="transactionCount">—</strong></div>
+      <div class="report-box"><span class="muted">Deposits</span><strong id="depositTotal">—</strong></div>
+      <div class="report-box"><span class="muted">Tool charges</span><strong id="toolChargeTotal">—</strong></div>
+      <div class="report-box"><span class="muted">Expenses</span><strong id="expenseTotal">—</strong></div>
+    </div>
+    <p id="transactionMessage" class="message">Loading…</p>
+    <div class="table-wrap"><table><thead><tr><th>ID</th><th>UID</th><th>Type</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead><tbody id="transactionsTable"></tbody></table></div>
+  </section>
 
-<section class="panel" id="earningsReport">
-<h2>Earnings report</h2>
-<div class="report-grid">
-<div class="report-box"><span class="muted">Tool revenue</span><strong id="earningsRevenue">—</strong></div>
-<div class="report-box"><span class="muted">Expenses</span><strong id="earningsExpenses">—</strong></div>
-<div class="report-box"><span class="muted">Refunds</span><strong id="earningsRefunds">—</strong></div>
-<div class="report-box"><span class="muted">Recorded net</span><strong id="earningsNet">—</strong></div>
-</div>
-<div class="notice warning">Provisional totals only; gateway fees, taxes and unrecorded expenses may be excluded.</div>
-<p id="earningsMessage" class="message">Waiting for records…</p>
-</section>
+  <section class="panel" id="earningsReport">
+    <h2>Earnings report</h2>
+    <div class="report-grid">
+      <div class="report-box"><span class="muted">Tool revenue</span><strong id="earningsRevenue">—</strong></div>
+      <div class="report-box"><span class="muted">Expenses</span><strong id="earningsExpenses">—</strong></div>
+      <div class="report-box"><span class="muted">Refunds</span><strong id="earningsRefunds">—</strong></div>
+      <div class="report-box"><span class="muted">Recorded net</span><strong id="earningsNet">—</strong></div>
+    </div>
+    <div class="notice warning">Provisional totals only; gateway fees, taxes and unrecorded expenses may be excluded.</div>
+    <p id="earningsMessage" class="message">Waiting for records…</p>
+  </section>
 
-<section class="panel" id="toolProgress">
-<div class="panel-head"><div><h2>Tool progress tracker</h2><p class="muted">Progress checklist for every tool in Firestore.</p></div><button class="btn secondary" id="exportToolProgress">Export CSV</button></div>
-<div class="report-grid">
-<div class="report-box"><span class="muted">Tools listed</span><strong id="progressTotal">—</strong></div>
-<div class="report-box"><span class="muted">Passed</span><strong id="progressPassed">—</strong></div>
-<div class="report-box"><span class="muted">In progress</span><strong id="progressWorking">—</strong></div>
-<div class="report-box"><span class="muted">Not started / blocked</span><strong id="progressPending">—</strong></div>
-</div>
-<div class="notice">A checklist is not an automatic test. Mark Passed only after you test the tool yourself.</div>
-<div class="controls">
-<input id="progressSearch" type="search" placeholder="Search tool name">
-<select id="progressFilter"><option value="all">All statuses</option><option value="not_started">Not started</option><option value="in_progress">In progress</option><option value="passed">Passed</option><option value="blocked">Blocked</option></select>
-<button class="btn secondary" id="refreshProgress">Refresh</button>
-</div>
-<p id="progressMessage" class="message">Loading tools…</p>
-<div class="table-wrap"><table><thead><tr><th>Tool</th><th>Progress %</th><th>Status</th><th>Functionality</th><th>Mobile</th><th>Download / print</th><th>Next task</th><th>Save</th></tr></thead><tbody id="progressTable"></tbody></table></div>
-</section>
+  <section class="panel" id="toolProgress">
+    <div class="panel-head"><div><h2>Tool progress tracker</h2><p class="muted">Progress checklist for every tool in Firestore.</p></div><button class="btn secondary" id="exportToolProgress">Export CSV</button></div>
+    <div class="report-grid">
+      <div class="report-box"><span class="muted">Tools listed</span><strong id="progressTotal">—</strong></div>
+      <div class="report-box"><span class="muted">Passed</span><strong id="progressPassed">—</strong></div>
+      <div class="report-box"><span class="muted">In progress</span><strong id="progressWorking">—</strong></div>
+      <div class="report-box"><span class="muted">Not started / blocked</span><strong id="progressPending">—</strong></div>
+    </div>
+    <div class="notice">A checklist is not an automatic test. Mark Passed only after you test the tool yourself.</div>
+    <div class="controls">
+      <input id="progressSearch" type="search" placeholder="Search tool name">
+      <select id="progressFilter"><option value="all">All statuses</option><option value="not_started">Not started</option><option value="in_progress">In progress</option><option value="passed">Passed</option><option value="blocked">Blocked</option></select>
+      <button class="btn secondary" id="refreshProgress">Refresh</button>
+    </div>
+    <p id="progressMessage" class="message">Loading tools…</p>
+    <div class="table-wrap"><table><thead><tr><th>Tool</th><th>Progress %</th><th>Status</th><th>Functionality</th><th>Mobile</th><th>Download / print</th><th>Next task</th><th>Save</th></tr></thead><tbody id="progressTable"></tbody></table></div>
+  </section>
 
-<section class="panel" id="toolAnalytics">
-<div class="panel-head"><div><h2>Customer usage analytics</h2><p class="muted">Recorded activity from signed-in customers.</p></div><button class="btn secondary" id="exportToolUsage">Export CSV</button></div>
-<div class="report-grid">
-<div class="report-box"><span class="muted">Recorded events</span><strong id="usageTotal">—</strong></div>
-<div class="report-box"><span class="muted">Unique customers</span><strong id="usageUsers">—</strong></div>
-<div class="report-box"><span class="muted">Events today</span><strong id="usageToday">—</strong></div>
-<div class="report-box"><span class="muted">Events last 30 days</span><strong id="usage30Days">—</strong></div>
-</div>
-<div class="controls">
-<input id="usageSearch" type="search" placeholder="Search tool name or customer UID">
-<select id="usagePeriod"><option value="all">All recorded time</option><option value="today">Today</option><option value="30">Last 30 days</option></select>
-<button class="btn secondary" id="refreshUsage">Refresh</button>
-</div>
-<p id="usageMessage" class="message">Waiting for usage records…</p>
-<h3>Tool-wise usage</h3>
-<div class="table-wrap"><table><thead><tr><th>Tool</th><th>Total events</th><th>Unique customers</th><th>Last activity</th></tr></thead><tbody id="usageTable"></tbody></table></div>
-<h3 style="margin-top:20px">Customer-wise activity</h3>
-<div class="table-wrap"><table><thead><tr><th>Customer UID</th><th>Total events</th><th>Tools used</th><th>Last activity</th></tr></thead><tbody id="customerTable"></tbody></table></div>
-<h3 style="margin-top:20px">Individual activity history</h3>
-<div class="table-wrap"><table><thead><tr><th>Date</th><th>Customer UID</th><th>Tool</th><th>Event</th><th>Action</th></tr></thead><tbody id="activityTable"></tbody></table></div>
-</section>
+  <section class="panel" id="toolAnalytics">
+    <div class="panel-head"><div><h2>Customer usage analytics</h2><p class="muted">Based on recorded events, not historical estimates.</p></div><button class="btn secondary" id="exportToolUsage">Export CSV</button></div>
+    <div class="report-grid">
+      <div class="report-box"><span class="muted">Recorded uses</span><strong id="usageTotal">—</strong></div>
+      <div class="report-box"><span class="muted">Unique user IDs</span><strong id="usageUsers">—</strong></div>
+      <div class="report-box"><span class="muted">Uses today</span><strong id="usageToday">—</strong></div>
+      <div class="report-box"><span class="muted">Uses last 30 days</span><strong id="usage30Days">—</strong></div>
+    </div>
+    <div class="controls">
+      <input id="usageSearch" type="search" placeholder="Search tool name">
+      <select id="usagePeriod"><option value="all">All recorded time</option><option value="today">Today</option><option value="30">Last 30 days</option></select>
+      <button class="btn secondary" id="refreshUsage">Refresh</button>
+    </div>
+    <p id="usageMessage" class="message">Waiting for usage records…</p>
+    <div class="table-wrap"><table><thead><tr><th>Tool</th><th>Total events</th><th>Unique users</th><th>Last recorded use</th></tr></thead><tbody id="usageTable"></tbody></table></div>
+    <h2 style="margin-top:22px">Customer activity history</h2>
+    <p class="muted">Each row is a recorded event. Customer identity is shown by Firebase UID.</p>
+    <div class="controls">
+      <input id="customerUsageSearch" type="search" placeholder="Search customer UID or tool">
+      <select id="customerEventFilter"><option value="all">All events</option><option value="tool_open">Tool opened</option><option value="tool_action">Tool actions</option></select>
+      <button class="btn secondary" id="exportCustomerUsage">Export customer history</button>
+    </div>
+    <p id="customerUsageMessage" class="message">Waiting for usage records…</p>
+    <div class="table-wrap"><table><thead><tr><th>Customer UID</th><th>Tool</th><th>Event</th><th>Action</th><th>Date</th></tr></thead><tbody id="customerUsageTable"></tbody></table></div>
+  </section>
 
-<div class="footer">CSC Seva Tool · Admin Pro</div>
+  <section class="panel" id="masterControl">
+    <div class="panel-head">
+      <div><div class="eyebrow">CENTRAL MANAGEMENT</div><h2>🚀 CSC Seva Tool Master Workspace</h2><p class="muted">One place for website operations, code, database, payments and reports.</p></div>
+      <span class="badge success">Admin workspace</span>
+    </div>
+    <div class="master-note"><b>Security:</b> This workspace provides authorized navigation to external services. It does not pretend to control their accounts or verify their live status. Sign in only on official service pages. Never enter passwords, OTPs, UPI PINs or API secrets here.</div>
+    <div class="master-grid">
+      <article class="master-card"><div class="stat-icon">🌐</div><h3>Website & Tools</h3><p>Open the live site, homepage and tool catalog management.</p><div class="master-actions"><a class="btn" href="https://kaifsaiyyad.github.io/index.html/" target="_blank" rel="noopener noreferrer">Live Website ↗</a><a class="btn secondary" href="Home.html">Home</a><a class="btn secondary" href="ToolsManagement.html">Manage Tools</a></div></article>
+      <article class="master-card"><div class="stat-icon">💻</div><h3>GitHub</h3><p>Review source files, commits and GitHub Pages deployment workflow.</p><div class="master-actions"><a class="btn" href="https://github.com/kaifsaiyyad/index.html" target="_blank" rel="noopener noreferrer">Repository ↗</a><a class="btn secondary" href="https://github.com/kaifsaiyyad/index.html/actions" target="_blank" rel="noopener noreferrer">Actions ↗</a></div></article>
+      <article class="master-card"><div class="stat-icon">🔥</div><h3>Firebase</h3><p>Open the project console, Firestore and Functions pages.</p><div class="master-actions"><a class="btn" href="https://console.firebase.google.com/project/kisan-seva-tools/overview" target="_blank" rel="noopener noreferrer">Project ↗</a><a class="btn secondary" href="https://console.firebase.google.com/project/kisan-seva-tools/firestore" target="_blank" rel="noopener noreferrer">Firestore ↗</a><a class="btn secondary" href="https://console.firebase.google.com/project/kisan-seva-tools/functions" target="_blank" rel="noopener noreferrer">Functions ↗</a></div></article>
+      <article class="master-card"><div class="stat-icon">💳</div><h3>Razorpay</h3><p>Merchant account onboarding, KYC, payment settings and webhook configuration.</p><span class="master-status">Activation not yet verified</span><div class="master-actions"><a class="btn" href="https://dashboard.razorpay.com/" target="_blank" rel="noopener noreferrer">Razorpay Dashboard ↗</a></div></article>
+      <article class="master-card"><div class="stat-icon">📊</div><h3>Business Reports</h3><p>Open records already loaded in this Admin dashboard.</p><div class="master-actions"><a class="btn secondary" href="#paymentRequests">Payment Requests</a><a class="btn secondary" href="#walletReport">Wallets</a><a class="btn secondary" href="#transactionReport">Transactions</a><a class="btn secondary" href="#earningsReport">Earnings</a><a class="btn secondary" href="#toolAnalytics">Analytics</a></div></article>
+      <article class="master-card"><div class="stat-icon">🔐</div><h3>Security & Launch</h3><p>Review tool testing progress and launch checklist. These are manual checks, not automated security scans.</p><div class="master-actions"><a class="btn secondary" href="#toolProgress">Tool Progress</a><a class="btn secondary" href="#toolAnalytics">Usage Audit</a></div></article>
+    </div>
+    <div class="panel" style="margin:16px 0 0">
+      <h2>Launch Readiness Checklist</h2>
+      <p class="muted">A reminder list only. Items must be verified before marking the site production-ready.</p>
+      <ul style="line-height:1.9;padding-left:20px">
+        <li>Razorpay merchant KYC and live activation completed by the account holder</li>
+        <li>Backend hosting selected and deployed</li>
+        <li>Payment webhook signature and duplicate-event protection tested</li>
+        <li>Wallet credit and paid-tool debit performed only on the server</li>
+        <li>All 47 tools tested for functionality, mobile layout and output</li>
+        <li>Firestore security rules and administrator access tested</li>
+        <li>Backup and restore process tested</li>
+        <li>GitHub deployment and live website verified</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="footer">CSC Seva Tool · Admin Pro</div>
 </main>
 </div>
 
@@ -217,14 +259,13 @@ const firebaseConfig={
  projectId:"kisan-seva-tools",
  appId:"1:900938868284:web:5a5b278506955fc0f48539"
 };
-
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app),db=getFirestore(app);
 const $=id=>document.getElementById(id);
 
 let user=null,stops=[],requests=[],wallets=[],transactions=[];
-let tools=[],progress=[],usage=[];
-let toolsLoaded=false,progressLoaded=false,usageLoaded=false,busy=false;
+let tools=[],progress=[],usage=[],busy=false;
+let toolsLoaded=false,progressLoaded=false,usageLoaded=false;
 
 const money=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:2}).format(n);
 const safe=v=>String(v??"").trim();
@@ -237,11 +278,11 @@ const dateText=v=>dateValue(v)?.toLocaleString("en-IN")||"—";
 
 function message(id,text,error=false){$(id).textContent=text;$(id).className="message"+(error?" error":"")}
 function td(value){const e=document.createElement("td");e.textContent=String(value??"—");return e}
-function empty(id,cols,text){const tr=document.createElement("tr"),c=td(text);c.colSpan=cols;tr.append(c);$(id).replaceChildren(tr)}
+function empty(id,cols,text){const tr=document.createElement("tr"),c=td(text);c.colSpan=cols;$(id).replaceChildren(tr);tr.append(c);$(id).replaceChildren(tr)}
 function badge(value){const e=document.createElement("span");e.className="badge "+statusOf(value);e.textContent=statusOf(value);return e}
 function stopAll(){stops.forEach(fn=>{try{fn()}catch{}});stops=[]}
 function exportCSV(name,headers,rows){
- const cell=v=>{let s=String(v??"");if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';};
+ const cell=v=>{let s=String(v??"");if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'};
  const blob=new Blob(["\uFEFF"+[headers,...rows].map(r=>r.map(cell).join(",")).join("\r\n")],{type:"text/csv;charset=utf-8"});
  const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
@@ -335,7 +376,7 @@ $("exportRequests").addEventListener("click",()=>exportCSV("payment-requests.csv
 $("exportWallets").addEventListener("click",()=>exportCSV("wallets.csv",["ID","UID","Balance"],wallets.map(x=>[x.id,x.uid,x.balance])));
 $("exportTransactions").addEventListener("click",()=>exportCSV("transactions.csv",["ID","UID","Type","Amount","Status","Date"],transactions.map(x=>[x.id,x.uid||x.userId,typeOf(x),amountOf(x),x.status,dateText(x.createdAt)])));
 
-// TOOL PROGRESS
+// ---------- TOOL PROGRESS ----------
 const statuses={not_started:"Not started",in_progress:"In progress",passed:"Passed",blocked:"Blocked"};
 function getProgress(tool){const p=progress.find(x=>x.id===tool.id)||{};const n=Number(p.progress);return {
  progress:Number.isFinite(n)?Math.max(0,Math.min(100,Math.round(n))):0,
@@ -346,7 +387,8 @@ function getProgress(tool){const p=progress.find(x=>x.id===tool.id)||{};const n=
 function renderProgress(){
  if(!toolsLoaded||!progressLoaded)return;
  const search=$("progressSearch").value.trim().toLowerCase(),filter=$("progressFilter").value;
- const list=tools.filter(t=>safe(t.name||t.title||t.id).toLowerCase().includes(search)&&(filter==="all"||getProgress(t).status===filter));
+ const list=tools.filter(t=>safe(t.name||t.title||t.id).toLowerCase().includes(search)&&
+ (filter==="all"||getProgress(t).status===filter));
  const all=tools.map(getProgress);
  $("progressTotal").textContent=tools.length;
  $("progressPassed").textContent=all.filter(p=>p.status==="passed").length;
@@ -356,7 +398,7 @@ function renderProgress(){
  const frag=document.createDocumentFragment();
  for(const t of list){
   const p=getProgress(t),name=safe(t.name||t.title||t.id),tr=document.createElement("tr");tr.append(td(name));
-  const pc=td(""),num=document.createElement("input");num.type="number";num.min="0";num.max="100";num.step="5";num.value=p.progress;pc.append(num);tr.append(pc);
+  const pc=td(""),num=document.createElement("input");num.type="number";num.min="0";num.max="100";num.step="5";num.value=p.progress;num.setAttribute("aria-label",name+" progress");pc.append(num);tr.append(pc);
   const sc=td(""),sel=document.createElement("select");
   for(const [v,label] of Object.entries(statuses)){const o=document.createElement("option");o.value=v;o.textContent=label;sel.append(o)}
   sel.value=p.status;sc.append(sel);tr.append(sc);
@@ -372,7 +414,9 @@ function renderProgress(){
    try{
     const a=await getDoc(doc(db,"admins",user.uid));
     if(!a.exists()||a.data().role!=="admin")throw Error("Admin permission denied");
-    const data={toolId:t.id,toolName:name,progress:Math.round(percent),status:sel.value,functionality:func.checked,mobile:mobile.checked,downloadPrint:dp.checked,nextTask:task.value.trim().slice(0,300),updatedAt:serverTimestamp(),updatedBy:user.uid};
+    const data={toolId:t.id,toolName:name,progress:Math.round(percent),status:sel.value,
+     functionality:func.checked,mobile:mobile.checked,downloadPrint:dp.checked,
+     nextTask:task.value.trim().slice(0,300),updatedAt:serverTimestamp(),updatedBy:user.uid};
     await setDoc(doc(db,"toolProgress",t.id),data,{merge:true});
     const idx=progress.findIndex(x=>x.id===t.id),record={id:t.id,...data};
     if(idx>=0)progress[idx]=record;else progress.push(record);
@@ -391,97 +435,75 @@ function startProgress(){
 $("progressSearch").addEventListener("input",renderProgress);
 $("progressFilter").addEventListener("change",renderProgress);
 $("refreshProgress").addEventListener("click",renderProgress);
-$("exportToolProgress").addEventListener("click",()=>exportCSV("tool-progress.csv",["Tool ID","Tool Name","Progress","Status","Functionality","Mobile","DownloadPrint","Next Task"],tools.map(t=>{const p=getProgress(t);return[t.id,t.name||t.title||t.id,p.progress,p.status,p.functionality,p.mobile,p.downloadPrint,p.nextTask]})));
+$("exportToolProgress").addEventListener("click",()=>exportCSV("tool-progress.csv",
+ ["Tool ID","Tool Name","Progress","Status","Functionality","Mobile","DownloadPrint","Next Task"],
+ tools.map(t=>{const p=getProgress(t);return[t.id,t.name||t.title||t.id,p.progress,p.status,p.functionality,p.mobile,p.downloadPrint,p.nextTask]})));
 
-// CUSTOMER USAGE ANALYTICS
+// ---------- USAGE ANALYTICS ----------
 function eventDate(e){return dateValue(e.createdAt)}
-function getFilteredUsage(){
- const now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
- const start30=new Date(now.getTime()-30*86400000);
- const search=$("usageSearch").value.trim().toLowerCase();
- const period=$("usagePeriod").value;
- return usage.filter(e=>{
-  const d=eventDate(e);
-  if(!d)return false;
-  const searchable=[e.toolName,e.toolId,e.uid,e.actionLabel,e.eventType].map(safe).join(" ").toLowerCase();
-  if(search&&!searchable.includes(search))return false;
-  if(period==="today"&&d<today)return false;
-  if(period==="30"&&d<start30)return false;
-  return true;
- });
-}
 function renderUsage(){
  if(!usageLoaded)return;
  const now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
- const start30=new Date(now.getTime()-30*86400000);
+ const start30=new Date(now.getTime()-30*86400000),search=$("usageSearch").value.trim().toLowerCase(),period=$("usagePeriod").value;
  const valid=usage.filter(e=>eventDate(e));
- const todayEvents=valid.filter(e=>eventDate(e)>=today);
- const recent=valid.filter(e=>eventDate(e)>=start30);
+ const todayEvents=valid.filter(e=>eventDate(e)>=today),recent=valid.filter(e=>eventDate(e)>=start30);
  $("usageTotal").textContent=valid.length;
  $("usageUsers").textContent=new Set(valid.map(e=>safe(e.uid)).filter(Boolean)).size;
- $("usageToday").textContent=todayEvents.length;
- $("usage30Days").textContent=recent.length;
-
- const filtered=getFilteredUsage();
- const groups=new Map(),customers=new Map();
-
+ $("usageToday").textContent=todayEvents.length;$("usage30Days").textContent=recent.length;
+ const filtered=valid.filter(e=>{
+  const d=eventDate(e),name=safe(e.toolName||e.toolId||"Unknown");
+  return name.toLowerCase().includes(search)&&(period==="all"||(period==="today"&&d>=today)||(period==="30"&&d>=start30));
+ });
+ const groups=new Map();
  for(const e of filtered){
   const id=safe(e.toolId||e.toolName||"unknown");
   if(!groups.has(id))groups.set(id,{id,name:safe(e.toolName||e.toolId||"Unknown"),count:0,users:new Set(),latest:null});
-  const g=groups.get(id);g.count++;
-  if(e.uid)g.users.add(String(e.uid));
+  const g=groups.get(id);g.count++;if(e.uid)g.users.add(String(e.uid));
   const d=eventDate(e);if(!g.latest||d>g.latest)g.latest=d;
-
-  const uid=safe(e.uid||"Unknown");
-  if(!customers.has(uid))customers.set(uid,{uid,count:0,tools:new Set(),latest:null});
-  const c=customers.get(uid);c.count++;
-  c.tools.add(safe(e.toolName||e.toolId||"Unknown"));
-  if(!c.latest||d>c.latest)c.latest=d;
  }
-
- const toolRows=[...groups.values()].sort((a,b)=>b.count-a.count);
- if(!toolRows.length)empty("usageTable",4,"No recorded events for this filter.");
- else{
-  const frag=document.createDocumentFragment();
-  for(const g of toolRows){const tr=document.createElement("tr");tr.append(td(g.name),td(g.count),td(g.users.size),td(g.latest?.toLocaleString("en-IN")||"—"));frag.append(tr)}
-  $("usageTable").replaceChildren(frag);
+ const rows=[...groups.values()].sort((a,b)=>b.count-a.count);
+ if(!rows.length){empty("usageTable",4,"No recorded events for this filter.");message("usageMessage","No usage events yet. Tracking must be added to tool pages.");return}
+ const frag=document.createDocumentFragment();
+ for(const g of rows){const tr=document.createElement("tr");tr.append(td(g.name),td(g.count),td(g.users.size),td(g.latest?.toLocaleString("en-IN")||"—"));frag.append(tr)}
+ $("usageTable").replaceChildren(frag);message("usageMessage",`${rows.length} tools have recorded usage. Unique users count only events containing a UID.`);
+}
+function renderCustomerUsage(){
+ if(!usageLoaded)return;
+ const search=$("customerUsageSearch").value.trim().toLowerCase();
+ const filter=$("customerEventFilter").value;
+ const list=usage.filter(e=>{
+  const uid=safe(e.uid),tool=safe(e.toolName||e.toolId),type=safe(e.eventType);
+  return (filter==="all"||type===filter) &&
+   (!search||uid.toLowerCase().includes(search)||tool.toLowerCase().includes(search));
+ }).sort((a,b)=>(eventDate(b)?.getTime()||0)-(eventDate(a)?.getTime()||0));
+ if(!list.length){empty("customerUsageTable",5,"No customer events match this filter.");message("customerUsageMessage","No matching customer activity.");return;}
+ const frag=document.createDocumentFragment();
+ for(const e of list){
+  const tr=document.createElement("tr");
+  tr.append(td(e.uid||"Unknown UID"),td(e.toolName||e.toolId||"Unknown"),td(e.eventType||"Unknown"),td(e.actionLabel||"—"),td(dateText(e.createdAt)));
+  frag.append(tr);
  }
-
- const customerRows=[...customers.values()].sort((a,b)=>b.count-a.count);
- if(!customerRows.length)empty("customerTable",4,"No customer records for this filter.");
- else{
-  const frag=document.createDocumentFragment();
-  for(const c of customerRows){const tr=document.createElement("tr");tr.append(td(c.uid),td(c.count),td(c.tools.size),td(c.latest?.toLocaleString("en-IN")||"—"));frag.append(tr)}
-  $("customerTable").replaceChildren(frag);
- }
-
- const history=[...filtered].sort((a,b)=>(eventDate(b)?.getTime()||0)-(eventDate(a)?.getTime()||0));
- if(!history.length)empty("activityTable",5,"No activity records.");
- else{
-  const frag=document.createDocumentFragment();
-  for(const e of history.slice(0,500)){
-   const tr=document.createElement("tr");
-   tr.append(td(dateText(e.createdAt)),td(e.uid||"Unknown"),td(e.toolName||e.toolId||"Unknown"),td(e.eventType||"—"),td(e.actionLabel||"—"));
-   frag.append(tr);
-  }
-  $("activityTable").replaceChildren(frag);
- }
- message("usageMessage",`${filtered.length} event(s) shown. Activity history is limited to the latest 500 rows in this view.`);
+ $("customerUsageTable").replaceChildren(frag);
+ message("customerUsageMessage",`Showing ${list.length} of ${usage.length} recorded events.`);
 }
 function startUsage(){
- stops.push(listen("toolUsage",x=>{usage=x;usageLoaded=true;renderUsage()},e=>{console.error(e);message("usageMessage","Cannot read toolUsage. Check Firestore Rules.",true)}));
+ stops.push(listen("toolUsage",x=>{usage=x;usageLoaded=true;renderUsage();renderCustomerUsage()},e=>{console.error(e);message("usageMessage","Cannot read toolUsage. Check Firestore Rules.",true);message("customerUsageMessage","Cannot read toolUsage. Check Firestore Rules.",true)}));
 }
+$("customerUsageSearch").addEventListener("input",renderCustomerUsage);
+$("customerEventFilter").addEventListener("change",renderCustomerUsage);
+$("exportCustomerUsage").addEventListener("click",()=>{
+ const search=$("customerUsageSearch").value.trim().toLowerCase(),filter=$("customerEventFilter").value;
+ const list=usage.filter(e=>{const uid=safe(e.uid),tool=safe(e.toolName||e.toolId),type=safe(e.eventType);return(filter==="all"||type===filter)&&(!search||uid.toLowerCase().includes(search)||tool.toLowerCase().includes(search));});
+ exportCSV("csc-customer-usage-history.csv",["Customer UID","Tool ID","Tool Name","Event Type","Action","Date","Page"],list.map(e=>[e.uid,e.toolId,e.toolName,e.eventType,e.actionLabel,dateText(e.createdAt),e.page]));
+});
 $("usageSearch").addEventListener("input",renderUsage);
 $("usagePeriod").addEventListener("change",renderUsage);
-$("refreshUsage").addEventListener("click",renderUsage);
-$("exportToolUsage").addEventListener("click",()=>{
- const rows=getFilteredUsage().map(e=>[e.id,e.toolId,e.toolName,e.uid,e.eventType,e.actionLabel,dateText(e.createdAt)]);
- exportCSV("csc-seva-tool-usage.csv",["Event ID","Tool ID","Tool Name","Customer UID","Event Type","Action","Date"],rows);
-});
+$("refreshUsage").addEventListener("click",()=>{renderUsage();renderCustomerUsage()});
+$("exportToolUsage").addEventListener("click",()=>exportCSV("tool-usage.csv",["Event ID","Tool ID","Tool Name","UID","Date"],usage.map(e=>[e.id,e.toolId,e.toolName,e.uid,dateText(e.createdAt)])));
 
 function startDashboard(u){
- stopAll();user=u;tools=[];progress=[];usage=[];
- toolsLoaded=false;progressLoaded=false;usageLoaded=false;
+ stopAll();user=u;
+ tools=[];progress=[];usage=[];toolsLoaded=false;progressLoaded=false;usageLoaded=false;
  $("dashboard").hidden=false;$("loginSection").hidden=true;
  $("adminEmail").textContent="Signed in as "+(u.email||"administrator");
  message("connectionMessage","Loading records…");
